@@ -1,0 +1,7 @@
+{
+  "name": "@twirload/backend-mix",
+  "version": "2.0.1",
+  "main": "src/main.js",
+  "author": "notadd",
+  "license": "Apache-2.0"
+}
