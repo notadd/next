@@ -1,0 +1,17 @@
+.idea/
+# Node modules
+node_modules
+
+# Adonis directory for storing tmp files
+tmp
+
+# Environment variables, never commit this file
+.env
+
+# Lock files
+package-lock.json
+yarn.lock
+yarn-error.log
+
+# The development sqlite file
+database/development.sqlite
