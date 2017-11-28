@@ -1,17 +1,13 @@
+.DS_Store
 .idea/
-# Node modules
-node_modules
-
-# Adonis directory for storing tmp files
-tmp
-
-# Environment variables, never commit this file
-.env
+node_modules/
+dist/
+npm-debug.log
+selenium-debug.log
+test/unit/coverage
+test/e2e/reports
 
 # Lock files
 package-lock.json
 yarn.lock
 yarn-error.log
-
-# The development sqlite file
-database/development.sqlite
