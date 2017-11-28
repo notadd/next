@@ -1,5 +1,5 @@
-import configureStore from './configureStore'
+import configureStore from './configureStore';
 
-const store = configureStore()
+const store = configureStore();
 
-export default store
+export default store;

@@ -1,23 +1,24 @@
-import { createStore, compose } from 'redux'
-import rootReducer from '../reducers/index'
-import middlewares from './middlewares'
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+import { createStore, compose } from 'redux';
+import rootReducer from '../reducers/index';
+import middlewares from './middlewares';
 
-const enhancer = composeEnhancers(middlewares)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore (initialState) {
-  const store = createStore(
-    rootReducer,
-    initialState,
-    enhancer
-  )
+const enhancer = composeEnhancers(middlewares);
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers/index').default
-      store.replaceReducer(nextRootReducer)
-    })
-  }
+export default function configureStore(initialState) {
+    const store = createStore(
+        rootReducer,
+        initialState,
+        enhancer
+    );
 
-  return store
-}
+    if (module.hot) {
+        module.hot.accept('../reducers', () => {
+            const nextRootReducer = require('../reducers/index').default;
+            store.replaceReducer(nextRootReducer);
+        });
+    }
+
+    return store;
+};

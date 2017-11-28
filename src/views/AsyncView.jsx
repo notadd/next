@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const AsyncView = () => (
-  <p>
-    I'm Async View.
-  </p>
-)
+    <p>
+        I'm Async View.
+    </p>
+);
 
-export default AsyncView
+export default AsyncView;
