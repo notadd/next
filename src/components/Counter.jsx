@@ -15,11 +15,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Counter = ({ count, increment }) => (
-    <a className='counter'
-       href='javascript: void(0)'
-       onClick={ increment }>
-        { count }
-    </a>
+    <a className='counter' href='javascript: void(0)' onClick={ increment }>{ count }</a>
 );
 
 Counter.prototype.propTypes = {
