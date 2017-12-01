@@ -24,18 +24,13 @@ module.exports = {
             resolve('node_modules')
         ],
         alias: {
-            'src': resolve('src'),
-            'assets': resolve('src/assets'),
-            'components': resolve('src/components'),
-            'routes': resolve('src/routes'),
-            'views': resolve('src/views'),
-            '$redux': resolve('src/redux')
+            'src': resolve('src')
         }
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)?$/,
                 loader: 'eslint-loader',
                 enforce: 'pre',
                 include: [resolve('src'), resolve('test')],
@@ -44,7 +39,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)?$/,
                 loader: 'babel-loader',
                 include: [resolve('src'), resolve('test')],
                 options: {
