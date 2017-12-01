@@ -31,10 +31,10 @@ module.exports = {
         // allow paren-less arrow functions
         'arrow-parens': 0,
         'comma-dangle': ['error', {
-            'arrays': 'always',
-            'objects': 'always',
-            'imports': 'always',
-            'exports': 'always',
+            'arrays': 'always-multiline',
+            'objects': 'always-multiline',
+            'imports': 'never',
+            'exports': 'never',
             'functions': 'ignore'
         }],
         // allow async-await
@@ -46,8 +46,11 @@ module.exports = {
                 SwitchCase: 1,
             }
         ],
+        'object-curly-spacing': ["error", "always"],
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'prefer-promise-reject-errors': 'off',
+        'react/prop-types': 'off',
         'react/jsx-tag-spacing': [
             2,
             {
@@ -57,7 +60,8 @@ module.exports = {
             }
         ],
         'react/jsx-curly-spacing': [2, { 'when': 'always', 'allowMultiline': true }],
-        'react/jsx-indent': [0, 4],
+        'react/jsx-indent': ['error', 4],
+        'react/jsx-indent-props': ['error', 4],
         'semi': 0,
         'space-before-function-paren': ['error', {
             'anonymous': 'never',
