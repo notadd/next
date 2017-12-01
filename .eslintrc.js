@@ -30,6 +30,13 @@ module.exports = {
     'rules': {
         // allow paren-less arrow functions
         'arrow-parens': 0,
+        'comma-dangle': ['error', {
+            'arrays': 'always',
+            'objects': 'always',
+            'imports': 'always',
+            'exports': 'always',
+            'functions': 'ignore'
+        }],
         // allow async-await
         'generator-star-spacing': 0,
         'indent': [
@@ -49,7 +56,13 @@ module.exports = {
                 'afterOpening': 'never'
             }
         ],
+        'react/jsx-curly-spacing': [2, { 'when': 'always', 'allowMultiline': true }],
         'react/jsx-indent': [0, 4],
         'semi': 0,
+        'space-before-function-paren': ['error', {
+            'anonymous': 'never',
+            'named': 'never',
+            'asyncArrow': 'never'
+        }],
     }
 };
