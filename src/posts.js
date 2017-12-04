@@ -42,7 +42,7 @@ import {
     minValue,
     number,
     required,
-    translate
+    translate,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 import RichTextInput from 'ra-input-rich-text';
 import Chip from 'material-ui/Chip';
@@ -81,7 +81,10 @@ export const PostList = ({ ...props }) => (
     <List
         { ...props }
         filters={ <PostFilter/> }
-        sort={ { field: 'published_at', order: 'DESC' } }
+        sort={ {
+            field: 'published_at',
+            order: 'DESC',
+        } }
     >
         <Responsive
             small={
@@ -186,9 +189,18 @@ export const PostEdit = ({ ...props }) => (
                 <CheckboxGroupInput
                     source='notifications'
                     choices={ [
-                        { id: 12, name: 'Ray Hakt' },
-                        { id: 31, name: 'Ann Gullar' },
-                        { id: 42, name: 'Sean Phonee' },
+                        {
+                            id: 12,
+                            name: 'Ray Hakt',
+                        },
+                        {
+                            id: 31,
+                            name: 'Ann Gullar',
+                        },
+                        {
+                            id: 42,
+                            name: 'Sean Phonee',
+                        },
                     ] }
                 />
                 <LongTextInput source='teaser' validate={ required }/>
@@ -218,8 +230,14 @@ export const PostEdit = ({ ...props }) => (
                 <SelectInput
                     source='category'
                     choices={ [
-                        { name: 'Tech', id: 'tech' },
-                        { name: 'Lifestyle', id: 'lifestyle' },
+                        {
+                            name: 'Tech',
+                            id: 'tech',
+                        },
+                        {
+                            name: 'Lifestyle',
+                            id: 'lifestyle',
+                        },
                     ] }
                 />
                 <NumberInput
@@ -273,8 +291,14 @@ export const PostShow = ({ ...props }) => (
                 <SelectField
                     source='category'
                     choices={ [
-                        { name: 'Tech', id: 'tech' },
-                        { name: 'Lifestyle', id: 'lifestyle' },
+                        {
+                            name: 'Tech',
+                            id: 'tech',
+                        },
+                        {
+                            name: 'Lifestyle',
+                            id: 'lifestyle',
+                        },
                     ] }
                 />
                 <NumberField source='average_note' style={ {} }/>
@@ -286,7 +310,10 @@ export const PostShow = ({ ...props }) => (
                     addLabel={ false }
                     reference='comments'
                     target='post_id'
-                    sort={ { field: 'created_at', order: 'DESC' } }
+                    sort={ {
+                        field: 'created_at',
+                        order: 'DESC',
+                    } }
                 >
                     <Datagrid selectable={ false }>
                         <DateField source='created_at'/>

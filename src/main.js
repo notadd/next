@@ -2,13 +2,13 @@
 import 'babel-polyfill';
 import React from 'react';
 import {
-    render
+    render,
 } from 'react-dom';
 
 import {
     Admin,
     Resource,
-    Delete
+    Delete,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 import jsonRestDataProvider from 'ra-data-fakerest';
 import englishMessages from 'ra-language-english';
@@ -21,21 +21,21 @@ import {
     PostCreate,
     PostEdit,
     PostShow,
-    PostIcon
+    PostIcon,
 } from './posts';
 import {
     CommentList,
     CommentEdit,
     CommentCreate,
     CommentShow,
-    CommentIcon
+    CommentIcon,
 } from './comments';
 import {
     UserList,
     UserEdit,
     UserCreate,
     UserIcon,
-    UserShow
+    UserShow,
 } from './users';
 
 import data from './data';
@@ -43,8 +43,9 @@ import * as customMessages from './i18n';
 import authClient from './authClient';
 
 const messages = {
-    fr: { ...frenchMessages, ...customMessages.fr },
+    cn: { ...customMessages.cn },
     en: { ...englishMessages, ...customMessages.en },
+    fr: { ...frenchMessages, ...customMessages.fr },
 };
 
 const dataProvider = jsonRestDataProvider(data, true);
@@ -53,8 +54,8 @@ const delayedDataProvider = (type, resource, params) =>
     new Promise(resolve =>
         setTimeout(
             () => resolve(uploadCapableDataProvider(type, resource, params)),
-            1000
-        )
+            1000,
+        ),
     );
 
 render(
@@ -65,7 +66,7 @@ render(
         locale='cn'
         messages={ messages }
     >
-        {permissions => [
+        { permissions => [
             <Resource
                 name='posts'
                 list={ PostList }
@@ -96,7 +97,7 @@ render(
                 />
             ) : null,
             <Resource name='tags'/>,
-        ]}
+        ] }
     </Admin>,
-    document.getElementById('root')
+    document.getElementById('root'),
 );

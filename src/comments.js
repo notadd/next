@@ -22,7 +22,7 @@ import {
     translate,
     Show,
     ShowButton,
-    SimpleShowLayout
+    SimpleShowLayout,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 
 import PersonIcon from 'material-ui-icons/Person';
@@ -30,7 +30,7 @@ import Avatar from 'material-ui/Avatar';
 import Card, {
     CardActions,
     CardHeader,
-    CardContent
+    CardContent,
 } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
@@ -78,7 +78,7 @@ const CommentPagination = translate(
                 </Toolbar>
             )
         );
-    }
+    },
 );
 
 const listStyles = theme => ({
@@ -106,13 +106,13 @@ const CommentGrid = withStyles(listStyles)(
                         <CardHeader
                             title={
                                 <TextField
-                                    record={ data[id] }
+                                    record={ data[ id ] }
                                     source='author.name'
                                 />
                             }
                             subheader={
                                 <DateField
-                                    record={ data[id] }
+                                    record={ data[ id ] }
                                     source='created_at'
                                 />
                             }
@@ -123,13 +123,13 @@ const CommentGrid = withStyles(listStyles)(
                             }
                         />
                         <CardContent className={ classes.cardContent }>
-                            <TextField record={ data[id] } source='body'/>
+                            <TextField record={ data[ id ] } source='body'/>
                         </CardContent>
                         <CardContent className={ classes.cardLink }>
                             { translate('comment.list.about') }&nbsp;
                             <ReferenceField
                                 resource='comments'
-                                record={ data[id] }
+                                record={ data[ id ] }
                                 source='post_id'
                                 reference='posts'
                                 basePath={ basePath }
@@ -141,19 +141,19 @@ const CommentGrid = withStyles(listStyles)(
                             <EditButton
                                 resource='posts'
                                 basePath={ basePath }
-                                record={ data[id] }
+                                record={ data[ id ] }
                             />
                             <ShowButton
                                 resource='posts'
                                 basePath={ basePath }
-                                record={ data[id] }
+                                record={ data[ id ] }
                             />
                         </CardActions>
                     </Card>
                 </Grid>
             )) }
         </Grid>
-    ))
+    )),
 );
 
 CommentGrid.defaultProps = {
@@ -192,7 +192,10 @@ export const CommentEdit = ({ ...props }) => (
                 source='post_id'
                 reference='posts'
                 perPage={ 15 }
-                sort={ { field: 'title', order: 'ASC' } }
+                sort={ {
+                    field: 'title',
+                    order: 'ASC',
+                } }
             >
                 <AutocompleteInput optionText='title'/>
             </ReferenceInput>

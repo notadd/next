@@ -22,7 +22,7 @@ import {
     TextInput,
     Toolbar,
     required,
-    translate
+    translate,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 
 export UserIcon from 'material-ui-icons/People';
@@ -47,7 +47,10 @@ export const UserList = ({ ...props }) => (
     <List
         { ...props }
         filters={ <UserFilter/> }
-        sort={ { field: 'name', order: 'ASC' } }
+        sort={ {
+            field: 'name',
+            order: 'ASC',
+        } }
     >
         { permissions => (
             <Responsive
@@ -103,9 +106,9 @@ export const UserCreate = ({ ...props }) => (
                 toolbar={ <UserCreateToolbar permissions={ permissions }/> }
                 defaultValue={ { role: 'user' } }
             >
-                <TextInput source='name' validate={ [required] }/>
+                <TextInput source='name' validate={ [ required ] }/>
                 { permissions === 'admin' && (
-                    <TextInput source='role' validate={ [required] }/>
+                    <TextInput source='role' validate={ [ required ] }/>
                 ) }
             </SimpleForm>
         ) }
