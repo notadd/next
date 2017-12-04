@@ -62,9 +62,9 @@ render(
     <Admin
         authClient={ authClient }
         dataProvider={ delayedDataProvider }
-        title='Notadd Administration'
         locale='cn'
         messages={ messages }
+        title='Notadd Administration'
     >
         { permissions => [
             <Resource
