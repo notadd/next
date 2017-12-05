@@ -9,10 +9,9 @@ import {
     Admin,
     Resource,
     Delete,
-} from 'react-admin'; // eslint-disable-line import/no-unresolved
+} from 'react-admin';
 import jsonRestDataProvider from 'ra-data-fakerest';
 import englishMessages from 'ra-language-english';
-import frenchMessages from 'ra-language-french';
 
 import addUploadFeature from './addUploadFeature';
 
@@ -45,7 +44,6 @@ import authClient from './authClient';
 const messages = {
     cn: { ...customMessages.cn },
     en: { ...englishMessages, ...customMessages.en },
-    fr: { ...frenchMessages, ...customMessages.fr },
 };
 
 const dataProvider = jsonRestDataProvider(data, true);
