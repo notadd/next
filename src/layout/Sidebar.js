@@ -7,12 +7,25 @@ import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import logo from '../assets/images/logo.svg';
 import sides from '../api/side.json';
+import { MenuItemLink } from 'react-admin';
 
 const styles = theme => ({
     root: {
         width: '100%',
-        maxWidth: 360,
-        background: theme.palette.background.paper,
+        maxWidth: 236,
+        background: '#fff',
+        boxShadow: '1px 0 4px 0 rgba(0, 0, 0, 0.3)',
+        height: '100%',
+        position: 'fixed',
+    },
+    logoStyle: {
+        alignItems: 'center',
+        display: 'flex',
+        height: 64,
+        justifyContent: 'center',
+    },
+    text: {
+        fontSize: '14px',
     },
     nested: {
         paddingLeft: theme.spacing.unit * 4,
@@ -31,7 +44,7 @@ class Sidebar extends PureComponent {
     handleClick(index) {
         const self = this;
         Object.keys(this.state.navs).forEach(item => {
-            if (item === index.toString()) {
+            if (item.toString() === index.toString()) {
                 self.state.navs[item].open = !self.state.navs[item].open;
             } else {
                 self.state.navs[item].open = false;
@@ -41,30 +54,34 @@ class Sidebar extends PureComponent {
     };
     render() {
         return (
-            <div className='sideBar'>
-                <div className='logo'>
+            <div className={ this.props.classes.root }>
+                <div className={ this.props.classes.logoStyle }>
                     <img src={ logo } alt=''/>
                 </div>
                 {
                     this.state.navs.map((item, index) => {
                         return (
-                            <List className={ this.props.classes.root } key={ index }>
-                                <ListItem button onClick={ () => this.handleClick(index) }>
-                                    <ListItemText inset primary={ item.name }/>
+                            <List key={ index }>
+                                <ListItem button onClick={ () => this.handleClick(index) }
+                                    style={ { height: '60px', padding: '0 16px' } }>
+                                    <ListItemText inset primary={ item.name } classes={ { text: this.props.classes.text } }/>
                                     {item.open ? <ExpandLess/> : <ExpandMore/>}
                                 </ListItem>
                                 <Collapse component='li' in={ item.open } transitionDuration='auto' unmountOnExit>
-                                    <List disablePadding>
-                                        {
-                                            item.children.map((child, childIndex) => {
-                                                return (
-                                                    <ListItem button key={ index.toString() + childIndex }>
-                                                        <ListItemText inset primary={ child.name }/>
-                                                    </ListItem>
-                                                );
-                                            })
-                                        }
-                                    </List>
+                                    {
+                                        item.children.map((child, childIndex) => {
+                                            return (
+                                                <ListItem button
+                                                    key={ index.toString() + childIndex }
+                                                    style={ { height: '48px', padding: '0' } }>
+                                                    <MenuItemLink
+                                                        to={ child.path }
+                                                        style={ { width: '100%', display: 'flex', justifyContent: 'center', fontSize: '14px' } }
+                                                        primaryText={ child.name }/>
+                                                </ListItem>
+                                            );
+                                        })
+                                    }
                                 </Collapse>
                             </List>
                         );
