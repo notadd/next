@@ -13,7 +13,7 @@ exports.cssLoaders = function (options) {
     options = options || {};
 
     const cssLoader = {
-        loader: 'less-loader',
+        loader: 'css-loader',
         options: {
             minimize: process.env.NODE_ENV === 'production',
             sourceMap: options.sourceMap

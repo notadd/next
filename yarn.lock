@@ -4514,6 +4514,10 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+normalize.css@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-7.0.0.tgz#abfb1dd82470674e0322b53ceb1aaf412938e4bf"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -5322,10 +5326,6 @@ ra-language-english@2.0.0-alpha1:
 ra-language-english@^2.0.0-alpha3:
   version "2.0.0-alpha3"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-2.0.0-alpha3.tgz#876f64470abff6793283d32a55614af8ca788d80"
-
-ra-language-french@2.0.0-alpha1:
-  version "2.0.0-alpha1"
-  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-2.0.0-alpha1.tgz#b1605f4858caa26d8d6084640269c27697a68c88"
 
 raf@^3.4.0:
   version "3.4.0"
