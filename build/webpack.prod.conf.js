@@ -35,7 +35,7 @@ let webpackConfig = merge(baseWebpackConfig, {
         }),
         // extract css into its own file
         new ExtractTextPlugin({
-            filename: utils.assetsPath('css/[name].[contenthash].css'),
+            filename: utils.assetsPath('less/[name].[contenthash].css'),
             allChunks: true
         }),
         // generate dist index.html with correct asset hash for caching.
