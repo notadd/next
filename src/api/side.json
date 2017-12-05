@@ -1,0 +1,72 @@
+[
+    {
+        "name": "全局设置",
+        "open": false,
+        "index": 0,
+        "children": [
+            {
+                "name": "参数配置",
+                "path": "/configurations"
+            }
+        ]
+    },
+    {
+        "name": "附件设置",
+        "open": false,
+        "index": 1,
+        "children": [
+            {
+                "name": "上传设置",
+                "path": "/upload"
+            }
+        ]
+    },
+    {
+        "name": "应用管理",
+        "open": false,
+        "index": 2,
+        "children": [
+            {
+                "name": "拓展配置",
+                "path": "/extension"
+            },
+            {
+                "name": "模块配置",
+                "path": "/module"
+            },
+            {
+                "name": "插件配置",
+                "path": "/addon"
+            }
+        ]
+    },
+    {
+        "name": "全局插件",
+        "open": false,
+        "index": 3,
+        "children": []
+    },
+    {
+        "name": "系统插件",
+        "open": false,
+        "index": 4,
+        "children": [
+            {
+                "name": "菜单管理",
+                "path": "/menu"
+            },
+            {
+                "name": "SEO管理",
+                "path": "/seo"
+            },
+            {
+                "name": "邮件设置",
+                "path": "/mail"
+            },
+            {
+                "name": "调试工具",
+                "path": "/debug"
+            }
+        ]
+    }
+]
