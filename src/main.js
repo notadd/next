@@ -37,6 +37,7 @@ import {
     UserIcon,
     UserShow,
 } from './users';
+import Layout from 'layout/Layout';
 
 import data from './data';
 import * as customMessages from './i18n';
@@ -63,6 +64,7 @@ render(
         authClient={ authClient }
         dataProvider={ delayedDataProvider }
         locale='cn'
+        appLayout={ Layout }
         messages={ messages }
         title='Notadd Administration'
     >
