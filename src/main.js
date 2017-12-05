@@ -35,7 +35,7 @@ import {
     UserIcon,
     UserShow,
 } from './users';
-import Layout from 'layout/Layout';
+import Sidebar from 'layout/Sidebar';
 import 'assets/styles/main.less';
 
 import data from './data';
@@ -62,7 +62,7 @@ ReactDom.render(
         authClient={ authClient }
         dataProvider={ delayedDataProvider }
         locale='cn'
-        appLayout={ Layout }
+        menu={ Sidebar }
         messages={ messages }
         title='Notadd Administration'
     >

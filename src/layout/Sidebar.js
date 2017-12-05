@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import logo from '../assets/images/logo.svg';
 import sides from '../api/side.json';
 import { MenuItemLink } from 'react-admin';
+import Icon from 'material-ui/Icon';
 
 const styles = theme => ({
     root: {
@@ -44,7 +45,7 @@ class Sidebar extends PureComponent {
     handleClick(index) {
         const self = this;
         Object.keys(this.state.navs).forEach(item => {
-            if (item.toString() === index.toString()) {
+            if (item === index.toString()) {
                 self.state.navs[item].open = !self.state.navs[item].open;
             } else {
                 self.state.navs[item].open = false;
@@ -64,6 +65,9 @@ class Sidebar extends PureComponent {
                             <List key={ index }>
                                 <ListItem button onClick={ () => this.handleClick(index) }
                                     style={ { height: '60px', padding: '0 16px' } }>
+                                    <ListItemIcon>
+                                        <Icon>{ item.icon }</Icon>
+                                    </ListItemIcon>
                                     <ListItemText inset primary={ item.name } classes={ { text: this.props.classes.text } }/>
                                     {item.open ? <ExpandLess/> : <ExpandMore/>}
                                 </ListItem>
@@ -71,14 +75,11 @@ class Sidebar extends PureComponent {
                                     {
                                         item.children.map((child, childIndex) => {
                                             return (
-                                                <ListItem button
+                                                <MenuItemLink
+                                                    to={ child.path }
                                                     key={ index.toString() + childIndex }
-                                                    style={ { height: '48px', padding: '0' } }>
-                                                    <MenuItemLink
-                                                        to={ child.path }
-                                                        style={ { width: '100%', display: 'flex', justifyContent: 'center', fontSize: '14px' } }
-                                                        primaryText={ child.name }/>
-                                                </ListItem>
+                                                    style={ { height: '48px', padding: 0, width: '100%', display: 'flex', justifyContent: 'center', fontSize: '14px' } }
+                                                    primaryText={ child.name }/>
                                             );
                                         })
                                     }
@@ -95,4 +96,5 @@ class Sidebar extends PureComponent {
 Sidebar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
+
 export default withStyles(styles)(Sidebar);

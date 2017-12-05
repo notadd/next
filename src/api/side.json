@@ -53,7 +53,7 @@
     {
         "name": "系统插件",
         "open": false,
-        "icon": "layers",
+        "icon": "bookmark",
         "index": 4,
         "children": [
             {
