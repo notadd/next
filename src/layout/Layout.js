@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 
 import Sidebar from './Sidebar';
-import defaultTheme from '../defaultTheme';
+import defaultTheme from '../themes/default/defaultTheme';
 
 const styles = theme => ({
     root: {
