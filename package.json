@@ -10,7 +10,7 @@
         "spa"
     ],
     "author": "notadd",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "scripts": {
         "dev": "node build/dev-server",
         "build": "node build/build.js",
