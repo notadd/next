@@ -1,42 +1,55 @@
-import React, { createElement, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import autoprefixer from 'material-ui/utils/autoprefixer';
-import withWidth from 'material-ui/utils/withWidth';
+import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 
 import Sidebar from './Sidebar';
+import defaultTheme from '../defaultTheme';
 
-const styles = {
-    wrapper: {
-        // Avoid IE bug with Flexbox, see #467
-        display: 'flex',
-        flexDirection: 'column',
+const styles = theme => ({
+    root: {
+        width: '100%',
+        zIndex: 1,
+        overflow: 'hidden',
     },
-    main: {
+    appFrame: {
+        position: 'relative',
         display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-    },
-    body: {
-        backgroundColor: '#edecec',
-        display: 'flex',
-        flex: 1,
-        overflowY: 'hidden',
-        overflowX: 'scroll',
-    },
-    bodySmall: {
-        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%',
     },
     content: {
-        flex: 1,
-        padding: '2em',
+        width: '100%',
+        marginLeft: 0,
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        height: 'calc(100% - 56px)',
+        [theme.breakpoints.up('sm')]: {
+            content: {
+                height: 'calc(100% - 64px)',
+                marginTop: 64,
+            },
+        },
+        [theme.breakpoints.up('xs')]: {
+            marginTop: '4em',
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '3em',
+            padding: 0,
+        },
     },
-    contentSmall: {
-        flex: 1,
-        paddingTop: '3em',
+    contentShift: {
+        [theme.breakpoints.up('sm')]: {
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+        },
     },
     loader: {
         position: 'absolute',
@@ -44,102 +57,36 @@ const styles = {
         right: 0,
         margin: 16,
         zIndex: 1200,
+        color: 'white',
     },
-};
-
-const prefixedStyles = {};
+});
 
 class Layout extends Component {
-    componentWillMount() {
-        if (this.props.width !== 1) {
-            this.props.setSidebarVisibility(true);
-        }
-    }
-
     render() {
         const {
-            theme,
-            width,
+            classes,
         } = this.props;
 
-        const muiTheme = getMuiTheme(theme);
-        if (!prefixedStyles.main) {
-            // do this once because user agent never changes
-            const prefix = autoprefixer(muiTheme);
-            prefixedStyles.wrapper = prefix(styles.wrapper);
-            prefixedStyles.main = prefix(styles.main);
-            prefixedStyles.body = prefix(styles.body);
-            prefixedStyles.bodySmall = prefix(styles.bodySmall);
-            prefixedStyles.content = prefix(styles.content);
-            prefixedStyles.contentSmall = prefix(styles.contentSmall);
-        }
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <div style={prefixedStyles.wrapper}>
-                    <div style={prefixedStyles.main}>
-                        <div
-                            className='body'
-                            style={
-                                width === 1 ? (
-                                    prefixedStyles.bodySmall
-                                ) : (
-                                    prefixedStyles.body
-                                )
-                            }
-                        >
-                            <div
-                                style={
-                                    width === 1 ? (
-                                        prefixedStyles.contentSmall
-                                    ) : (
-                                        prefixedStyles.content
-                                    )
-                                }
-                            />
-                        </div>
-                    </div>
+            <div className={ classes.root }>
+                <div className={ classes.appFrame }>
+                    <Sidebar/>
                 </div>
-            </MuiThemeProvider>
+            </div>
         );
     }
 }
 
-const componentPropType = PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string,
-]);
-
 Layout.propTypes = {
-    children: PropTypes.oneOfType([ PropTypes.func, PropTypes.node ]),
-    catchAll: componentPropType,
-    customRoutes: PropTypes.array,
-    dashboard: componentPropType,
-    logout: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.func,
-        PropTypes.string,
-    ]),
-    menu: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
-    setSidebarVisibility: PropTypes.func.isRequired,
-    theme: PropTypes.object.isRequired,
-    width: PropTypes.number,
+    classes: PropTypes.object,
 };
 
 Layout.defaultProps = {
     theme: defaultTheme,
 };
 
-function mapStateToProps(state) {
-    return {
-        isLoading: state.admin.loading > 0,
-    };
-}
-
 const enhance = compose(
-    connect(mapStateToProps, {
-        setSidebarVisibility: setSidebarVisibilityAction,
-    }),
-    withWidth()
+    withStyles(styles),
 );
 
 export default enhance(Layout);
