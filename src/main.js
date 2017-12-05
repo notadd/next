@@ -1,9 +1,6 @@
-/* eslint react/jsx-key: off */
 import 'babel-polyfill';
 import React from 'react';
-import {
-    render,
-} from 'react-dom';
+import ReactDom from 'react-dom';
 
 import {
     Admin,
@@ -56,7 +53,7 @@ const delayedDataProvider = (type, resource, params) =>
         ),
     );
 
-render(
+ReactDom.render(
     <Admin
         authClient={ authClient }
         dataProvider={ delayedDataProvider }
