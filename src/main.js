@@ -34,6 +34,7 @@ import {
     UserShow,
 } from './users';
 import Layout from 'layout/Layout';
+import 'assets/less/main.less';
 
 import data from './data';
 import * as customMessages from './i18n';
