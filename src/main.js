@@ -10,6 +10,8 @@ import {
 import jsonRestDataProvider from 'ra-data-fakerest';
 import englishMessages from 'ra-language-english';
 
+import './assets/styles/main.less';
+
 import addUploadFeature from './addUploadFeature';
 
 import {
