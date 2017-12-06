@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -33,68 +33,62 @@ const styles = theme => ({
     },
 });
 
+// const handleClick = (index) => {
+//     const self = this;
+//     Object.keys(this.state.navs).forEach(item => {
+//         if (item === index.toString()) {
+//             self.state.navs[item].open = !self.state.navs[item].open;
+//         } else {
+//             self.state.navs[item].open = false;
+//         }
+//     });
+//     self.setState({ sides });
+// };
+
 // We shouldn't need PureComponent here as it's connected
 // but for some reason it keeps rendering even though mapStateToProps returns the same object
-class Sidebar extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            navs: sides,
-        };
-    }
-    handleClick(index) {
-        const self = this;
-        Object.keys(this.state.navs).forEach(item => {
-            if (item === index.toString()) {
-                self.state.navs[item].open = !self.state.navs[item].open;
-            } else {
-                self.state.navs[item].open = false;
-            }
-        });
-        self.setState({ sides });
-    };
-    render() {
-        return (
-            <div className={ this.props.classes.root }>
-                <div className={ this.props.classes.logoStyle }>
-                    <img src={ logo } alt=''/>
-                </div>
-                {
-                    this.state.navs.map((item, index) => {
-                        return (
-                            <List key={ index }>
-                                <ListItem button onClick={ () => this.handleClick(index) }
-                                    style={ { height: '60px', padding: '0 16px' } }>
-                                    <ListItemIcon>
-                                        <Icon>{ item.icon }</Icon>
-                                    </ListItemIcon>
-                                    <ListItemText inset primary={ item.name } classes={ { text: this.props.classes.text } }/>
-                                    {item.open ? <ExpandLess/> : <ExpandMore/>}
-                                </ListItem>
-                                <Collapse component='li' in={ item.open } transitionDuration='auto' unmountOnExit>
-                                    {
-                                        item.children.map((child, childIndex) => {
-                                            return (
-                                                <MenuItemLink
-                                                    to={ child.path }
-                                                    key={ index.toString() + childIndex }
-                                                    style={ { height: '48px', padding: 0, width: '100%', display: 'flex', justifyContent: 'center', fontSize: '14px' } }
-                                                    primaryText={ child.name }/>
-                                            );
-                                        })
-                                    }
-                                </Collapse>
+const Sidebar = ({ classes, toggleExpand }) =>
+    <div className={ classes.root }>
+        <div className={ classes.logoStyle }>
+            <img src={ logo } alt=''/>
+        </div>
+        {
+            sides.map((item, index) => {
+                return (
+                    <List key={ index }>
+                        <ListItem button onClick={ () => this.handleClick(index) }
+                            style={ { height: '60px', padding: '0 16px' } }>
+                            <ListItemIcon>
+                                <Icon>{item.icon}</Icon>
+                            </ListItemIcon>
+                            <ListItemText inset primary={ item.name } classes={ { text: classes.text } }/>
+                            {item.open ? <ExpandLess/> : <ExpandMore/>}
+                        </ListItem>
+                        <Collapse component='li' in={ item.open } transitionDuration='auto' unmountOnExit>
+                            <List disablePadding>
+                                {
+                                    item.children.map((child, childIndex) => {
+                                        return (
+                                            <MenuItemLink
+                                                to={ child.path }
+                                                key={ index.toString() + childIndex }
+                                                onClick={ toggleExpand }
+                                                style={ { height: '48px', padding: 0, width: '100%', display: 'flex', justifyContent: 'center', fontSize: '14px' } }
+                                                primaryText={ child.name }/>
+                                        );
+                                    })
+                                }
                             </List>
-                        );
-                    })
-                }
-            </div>
-        );
-    }
-}
+                        </Collapse>
+                    </List>
+                );
+            })
+        }
+    </div>
 
 Sidebar.propTypes = {
     classes: PropTypes.object.isRequired,
+    toggleExpand: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Sidebar);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
+import sides from '../api/side.json';
 
 import Sidebar from './Sidebar';
 import defaultTheme from '../themes/default/defaultTheme';
@@ -60,7 +61,17 @@ const styles = theme => ({
         color: 'white',
     },
 });
-
+const handleClick = (index) => {
+    const self = this;
+    Object.keys(this.state.navs).forEach(item => {
+        if (item === index.toString()) {
+            self.state.navs[item].open = !self.state.navs[item].open;
+        } else {
+            self.state.navs[item].open = false;
+        }
+    });
+    self.setState({ sides });
+};
 class Layout extends Component {
     render() {
         const {
