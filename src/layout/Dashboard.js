@@ -4,7 +4,7 @@ import { ViewTitle } from 'react-admin/lib/mui';
 
 export default () => (
     <Card>
-        <ViewTitle title='Dashboard'/>
-        <CardText>Lorem ipsum sic dolor amet...</CardText>
+        <ViewTitle title='仪表盘'/>
+        <CardText>开发中，尽情期待......</CardText>
     </Card>
 );
