@@ -5,15 +5,15 @@ export const messages = {
             fields: {
                 allow_comments: '允许评论?',
                 average_note: '平均注',
-                body: 'Body',
+                body: '内容',
                 comments: '评论',
-                commentable: 'Commentable',
+                commentable: '可评论',
                 commentable_short: 'Com.',
                 created_at: '创建于',
                 notifications: 'Notifications recipients',
                 nb_view: 'Nb views',
-                password: 'Password (if protected post)',
-                pictures: 'Related Pictures',
+                password: '密码 (保护内容)',
+                pictures: '相关照片',
                 published_at: '发布于',
                 teaser: 'Teaser',
                 tags: '标签',
@@ -22,18 +22,18 @@ export const messages = {
             },
         },
         comments: {
-            name: 'Comment |||| Comments',
+            name: '评论 |||| 评论',
             fields: {
-                body: 'Body',
-                created_at: 'Created at',
-                post_id: 'Posts',
+                body: '内容',
+                created_at: '创建于',
+                post_id: '提交',
                 author: {
                     name: '作者',
                 },
             },
         },
         users: {
-            name: 'User |||| Users',
+            name: '用户 |||| 用户',
             fields: {
                 name: '名称',
                 role: '角色',
