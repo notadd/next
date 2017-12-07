@@ -56,7 +56,7 @@ const Sidebar = ({ classes, toggleExpand }) =>
             sides.map((item, index) => {
                 return (
                     <List key={ index }>
-                        <ListItem button onClick={ () => this.handleClick(index) }
+                        <ListItem button onClick={ () => toggleExpand(index) }
                             style={ { height: '60px', padding: '0 16px' } }>
                             <ListItemIcon>
                                 <Icon>{item.icon}</Icon>
