@@ -13,7 +13,7 @@ import Icon from 'material-ui/Icon';
 const styles = theme => ({
     root: {
         width: '100%',
-        maxWidth: 236,
+        maxWidth: 240,
         background: '#fff',
         boxShadow: '1px 0 4px 0 rgba(0, 0, 0, 0.3)',
         height: '100%',
