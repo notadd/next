@@ -1,1 +1,1 @@
-export * from './SideExpand';
+export { default as SideExpand } from './SideExpand';

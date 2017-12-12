@@ -88,7 +88,7 @@ const Sidebar = ({ classes, toggleExpand }) =>
 
 Sidebar.propTypes = {
     classes: PropTypes.object.isRequired,
-    toggleExpand: PropTypes.func.isRequired,
+    toggleExpand: PropTypes.func,
 };
 
 export default withStyles(styles)(Sidebar);

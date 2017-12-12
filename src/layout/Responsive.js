@@ -6,15 +6,15 @@ export const Responsive = ({ small, medium, large, width, ...rest }) => {
     let component;
     switch (width) {
         case 'xs':
-            component = small ? small : medium ? medium : large;
+            component = small || (medium || large);
             break;
         case 'sm':
         case 'md':
-            component = medium ? medium : large ? large : small;
+            component = medium || (large || small);
             break;
         case 'lg':
         case 'xl':
-            component = large ? large : medium ? medium : small;
+            component = large || (medium || small);
             break;
         default:
             throw new Error(`Unknown width ${width}`);
