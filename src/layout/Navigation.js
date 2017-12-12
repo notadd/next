@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import MuiAppBar from 'material-ui/AppBar';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import compose from 'recompose/compose';
-import { toggleSidebar as toggleSidebarAction } from '../../actions';
+import { toggleSidebar as toggleSidebarAction } from '../action';
 
 const Navigation = ({ title, toggleSidebar }) => (
-    <MuiAppBar title={ title } onLeftIconButtonTouchTap={ toggleSidebar }/>
+    <MuiAppBar title={ title } onLeftIconButtonTouchTap={ toggleSidebarAction }/>
 );
 
 Navigation.propTypes = {
