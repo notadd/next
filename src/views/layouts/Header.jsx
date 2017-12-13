@@ -2,36 +2,54 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import Person from 'material-ui-icons/Person';
-import ArrowDropDown from 'material-ui-icons/ArrowDropDown';
+import Setting from 'material-ui-icons/Settings';
+import MenuIcon from 'material-ui-icons/Menu';
+import FullScreen from 'material-ui-icons/Fullscreen';
+import Search from 'material-ui-icons/Search';
+import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import logo from '../../assets/image/logo.svg';
+import logo from '../../assets/image/notadd_logo.png';
 
 const styles = {
     header: {
+        alignItems: 'center',
         background: '#3f51b5',
         boxShadow: '0px 1px 4px 0 rgba(0, 0, 0, 0.3)',
         display: 'flex',
         justifyContent: 'space-between',
     },
+    headerLeft: {
+        alignItems: 'center',
+        display: 'flex',
+    },
+    logo: {
+        marginLeft: '30px',
+        width: '88px',
+    },
     root: {
         background: '#3f51b5',
-        color: '#657180',
-        paddingLeft: '104px',
+        color: '#fff',
+        paddingLeft: '15px',
         height: '70px',
         justifyContent: 'flex-start',
     },
+    menuBtn: {
+        alignSelf: 'stretch',
+        background: '#3949a3',
+        borderRadius: 0,
+        height: 'auto',
+        fontSize: '24px',
+        marginLeft: '60px',
+    },
     navBtn: {
         flex: 'none',
-        padding: '0 38px',
+        padding: '0 3px',
         width: 'auto',
         fontSize: '14px',
     },
     btnLabel: {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: '#fff',
         fontSize: '14px',
-        fontWeight: 'bold',
     },
     selectedLabel: {
         color: '#ffffff',
@@ -87,7 +105,6 @@ class HeaderLayout extends Component {
                 name: '后台管理员',
             },
             anchorEl: null,
-            open: false,
         };
     }
 
@@ -97,47 +114,71 @@ class HeaderLayout extends Component {
     handleClick = event => {
         this.setState({ open: true, anchorEl: event.currentTarget });
     };
-    handleRequestClose = () => {
-        this.setState({ open: false });
-    };
-
     render() {
         const { value } = this.state;
         return (
             <div className={ this.props.classes.header }>
-                <div className='logo'>
-                    <img src={ logo } alt=''/>
+                <div className={ this.props.classes.headerLeft }>
+                    <img className={ this.props.classes.logo } src={ logo } alt=''/>
+                    <IconButton
+                        aria-owns={ open ? 'menu-appbar' : null }
+                        aria-haspopup='true'
+                        className={ this.props.classes.menuBtn }
+                        onClick={ this.handleMenu }
+                        color='contrast'
+                    >
+                        <MenuIcon/>
+                    </IconButton>
+                    <IconButton
+                        aria-owns={ open ? 'menu-appbar' : null }
+                        aria-haspopup='true'
+                        style={ { background: 'none', marginLeft: '0' } }
+                        className={ this.props.classes.menuBtn }
+                        onClick={ this.handleMenu }
+                        color='contrast'
+                    >
+                        <FullScreen/>
+                    </IconButton>
+                    <IconButton
+                        aria-owns={ open ? 'menu-appbar' : null }
+                        aria-haspopup='true'
+                        style={ { background: 'none', marginLeft: '0' } }
+                        className={ this.props.classes.menuBtn }
+                        color='contrast'
+                    >
+                        <Search/>
+                    </IconButton>
+                    <BottomNavigation
+                        value={ value }
+                        onChange={ this.handleChange }
+                        showLabels
+                        className={ this.props.classes.root }
+                    >
+                        {
+                            this.state.navs.map((item, index) => {
+                                return (
+                                    <BottomNavigationButton classes={ {
+                                        root: this.props.classes.navBtn,
+                                        label: this.props.classes.btnLabel,
+                                        selected: this.props.classes.selectRoot,
+                                        selectedLabel: this.props.classes.selectedLabel,
+                                    } } key={ index } label={ item.name }/>
+                                );
+                            })
+                        }
+                    </BottomNavigation>
                 </div>
-                <BottomNavigation
-                    value={ value }
-                    onChange={ this.handleChange }
-                    showLabels
-                    className={ this.props.classes.root }
-                >
-                    {
-                        this.state.navs.map((item, index) => {
-                            return (
-                                <BottomNavigationButton classes={ {
-                                    root: this.props.classes.navBtn,
-                                    label: this.props.classes.btnLabel,
-                                    selected: this.props.classes.selectRoot,
-                                    selectedLabel: this.props.classes.selectedLabel,
-                                } } key={ index } label={ item.name }/>
-                            );
-                        })
-                    }
-                </BottomNavigation>
                 <div className={ this.props.classes.navUser }>
                     <IconButton
                         aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup='true'
                         className={ this.props.classes.iconBtn }
+                        style={ { marginRight: '30px' } }
                         onClick={ this.handleMenu }
                         color='contrast'
                     >
-                        <Person/>
+                        <Tv/>
                     </IconButton>
-                    <span style={ { color: '#fff', marginRight: '16px' } }>{ this.state.user.name }</span>
                     <IconButton
                         aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup='true'
@@ -145,17 +186,9 @@ class HeaderLayout extends Component {
                         color='contrast'
                         onClick={ this.handleClick }
                     >
-                        <ArrowDropDown/>
+                        <Setting/>
                     </IconButton>
                 </div>
-                <Menu
-                    id='simple-menu'
-                    anchorEl={ this.state.anchorEl }
-                    open={ this.state.open }
-                    onRequestClose={ this.handleRequestClose }
-                >
-                    <MenuItem onClick={ this.handleRequestClose }>退出登陆</MenuItem>
-                </Menu>
             </div>
         );
     }
