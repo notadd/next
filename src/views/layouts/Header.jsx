@@ -105,6 +105,7 @@ class HeaderLayout extends Component {
                 name: '后台管理员',
             },
             anchorEl: null,
+            fullScreen: true,
         };
     }
 
@@ -115,35 +116,34 @@ class HeaderLayout extends Component {
         this.setState({ open: true, anchorEl: event.currentTarget });
     };
     handleFullScreen = () => {
-        const el = document.documentElement;
-        const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
-        let wscript;
+        this.setState({ fullScreen: !this.state.fullScreen });
         if (this.state.fullScreen) {
-
-        }
-        if (typeof rfs !== 'undefined' && rfs) {
-            rfs.call(el);
-            return;
-        }
-        if (typeof window.ActiveXObject !== 'undefined') {
-            wscript = new window.ActiveXObject('WScript.Shell');
-            if (wscript) {
-                wscript.SendKeys('{F11}');
+            const el = document;
+            const cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+            let wscript;
+            if (typeof cfs !== 'undefined' && cfs) {
+                cfs.call(el);
+                return;
             }
-        }
-    };
-    handelExitFullScreen = () => {
-        const el = document.documentElement;
-        const cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
-        let wscript;
-        if (typeof cfs !== 'undefined' && cfs) {
-            cfs.call(el);
-            return;
-        }
-        if (typeof window.ActiveXObject !== 'undefined') {
-            wscript = new window.ActiveXObject('WScript.Shell');
-            if (wscript !== null) {
-                wscript.SendKeys('{F11}');
+            if (typeof window.ActiveXObject !== 'undefined') {
+                wscript = new window.ActiveXObject('WScript.Shell');
+                if (wscript !== null) {
+                    wscript.SendKeys('{F11}');
+                }
+            }
+        } else {
+            const el = document.documentElement;
+            const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+            let wscript;
+            if (typeof rfs !== 'undefined' && rfs) {
+                rfs.call(el);
+                return;
+            }
+            if (typeof window.ActiveXObject !== 'undefined') {
+                wscript = new window.ActiveXObject('WScript.Shell');
+                if (wscript) {
+                    wscript.SendKeys('{F11}');
+                }
             }
         }
     };
