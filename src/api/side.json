@@ -2,7 +2,6 @@
     {
         "name": "全局设置",
         "open": false,
-        "icon": "settings",
         "index": 0,
         "children": [
             {
@@ -14,7 +13,6 @@
     {
         "name": "附件设置",
         "open": false,
-        "icon": "insert_driveFile",
         "index": 1,
         "children": [
             {
@@ -26,7 +24,6 @@
     {
         "name": "应用管理",
         "open": false,
-        "icon": "dashboard",
         "index": 2,
         "children": [
             {
@@ -46,14 +43,12 @@
     {
         "name": "全局插件",
         "open": false,
-        "icon": "bookmark",
         "index": 3,
         "children": []
     },
     {
         "name": "系统插件",
         "open": false,
-        "icon": "bookmark",
         "index": 4,
         "children": [
             {
