@@ -9,7 +9,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 import ChatBubble from 'material-ui-icons/ChatBubble';
 import Notifications from 'material-ui-icons/Notifications';
 import sides from '../../api/side.json';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import Badge from 'material-ui/Badge';
 import MailIcon from 'material-ui-icons/Mail';
 import user from '../../assets/image/user.jpg';
@@ -80,7 +80,7 @@ class SideBar extends React.Component {
                             <p>{ this.state.user.name }</p>
                             <p>{ this.state.user.email }</p>
                             <div>
-                                <Badge className={ classes.badge }
+                                <Badge className={ classNames(classes.badge, 'badgeIcon') }
                                     classes={ {
                                         colorAccent: classes.badge,
                                     } }
@@ -88,7 +88,7 @@ class SideBar extends React.Component {
                                     badgeContent={ 4 } color='accent'>
                                     <Notifications/>
                                 </Badge>
-                                <Badge className={ classes.badge }
+                                <Badge className={ classNames(classes.badge, 'badgeIcon') }
                                     classes={ {
                                         colorAccent: classes.badge,
                                     } }
@@ -96,7 +96,7 @@ class SideBar extends React.Component {
                                     badgeContent={ 4 } color='accent'>
                                     <MailIcon/>
                                 </Badge>
-                                <Badge className={ classes.badge }
+                                <Badge className={ classNames(classes.badge, 'badgeIcon') }
                                     classes={ {
                                         colorAccent: classes.badge,
                                     } }
@@ -111,8 +111,8 @@ class SideBar extends React.Component {
                 {
                     this.state.navs.map((item, index) => {
                         return (
-                            <List className={ classes.root } key={ index }>
-                                <ListItem button onClick={ () => this.handleClick(index) }>
+                            <List className={ classes.root } key={ index } style={ { paddingTop: 0, paddingBottom: 0 } }>
+                                <ListItem button onClick={ () => this.handleClick(index) } style={ { paddingTop: 0, paddingBottom: 0, height: 52 } }>
                                     <ListItemIcon>
                                         <InboxIcon/>
                                     </ListItemIcon>
