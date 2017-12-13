@@ -114,6 +114,39 @@ class HeaderLayout extends Component {
     handleClick = event => {
         this.setState({ open: true, anchorEl: event.currentTarget });
     };
+    handleFullScreen = () => {
+        const el = document.documentElement;
+        const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+        let wscript;
+        if (this.state.fullScreen) {
+
+        }
+        if (typeof rfs !== 'undefined' && rfs) {
+            rfs.call(el);
+            return;
+        }
+        if (typeof window.ActiveXObject !== 'undefined') {
+            wscript = new window.ActiveXObject('WScript.Shell');
+            if (wscript) {
+                wscript.SendKeys('{F11}');
+            }
+        }
+    };
+    handelExitFullScreen = () => {
+        const el = document.documentElement;
+        const cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+        let wscript;
+        if (typeof cfs !== 'undefined' && cfs) {
+            cfs.call(el);
+            return;
+        }
+        if (typeof window.ActiveXObject !== 'undefined') {
+            wscript = new window.ActiveXObject('WScript.Shell');
+            if (wscript !== null) {
+                wscript.SendKeys('{F11}');
+            }
+        }
+    };
     render() {
         const { value } = this.state;
         return (
@@ -134,7 +167,7 @@ class HeaderLayout extends Component {
                         aria-haspopup='true'
                         style={ { background: 'none', marginLeft: '0' } }
                         className={ this.props.classes.menuBtn }
-                        onClick={ this.handleMenu }
+                        onClick={ this.handleFullScreen }
                         color='contrast'
                     >
                         <FullScreen/>
