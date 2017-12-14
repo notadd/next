@@ -75,6 +75,18 @@ class SideBar extends React.Component {
         self.setState({ sides });
     };
 
+    handleSelected(father) {
+        let select = false;
+        const arr = father.children;
+        for (let i = 0; i < arr.length; i += 1) {
+            if (arr[i].path === location.pathname) {
+                select = true;
+                break;
+            }
+        }
+        return select;
+    };
+
     render() {
         const { classes } = this.props;
         return (
@@ -123,6 +135,7 @@ class SideBar extends React.Component {
                         return (
                             <List className={ classes.root } key={ index } style={ { paddingTop: 0, paddingBottom: 0 } }>
                                 <ListItem button onClick={ () => this.handleClick(index) }
+                                    className={ this.handleSelected(item) ? classes.selectFather : null }
                                     style={ { paddingTop: 0, paddingBottom: 0, paddingLeft: 23, height: 52 } }>
                                     <ListItemIcon>
                                         <InboxIcon/>
