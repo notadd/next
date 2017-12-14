@@ -8,12 +8,16 @@
     box-shadow: 3px 0 15px 0 rgba(0, 0, 0, 0.1);
     a {
         display: block;
-        height: 48px;
-        width: inherit;
-        color: #9ea7b4;
-        line-height: 48px;
-        padding-left: 86px;
+        width: 100%;
+        height: inherit;
         font-size: 14px;
+        > div {
+            height: inherit;
+            h3 {
+                line-height: 40px;
+                color: #808080;
+            }
+        }
     }
     .userBox {
         background: url("../image/userbg.png") #000000 no-repeat center center;
@@ -48,5 +52,10 @@
     }
     h3 {
         font-size: 14px;
+    }
+
+    .selectBtn {
+        background: #ededed;
+        color: #333333;
     }
 }

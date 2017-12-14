@@ -14,6 +14,7 @@ import Badge from 'material-ui/Badge';
 import MailIcon from 'material-ui-icons/Mail';
 import user from '../../assets/image/user.jpg';
 import Avatar from 'material-ui/Avatar';
+import { NavLink } from 'react-router-dom';
 
 const styles = theme => ({
     bigAvatar: {
@@ -39,6 +40,8 @@ const styles = theme => ({
     },
     childItem: {
         background: '#f2f2f2',
+        padding: 0,
+        height: 40,
     },
 });
 
@@ -115,7 +118,7 @@ class SideBar extends React.Component {
                     this.state.navs.map((item, index) => {
                         return (
                             <List className={ classes.root } key={ index } style={ { paddingTop: 0, paddingBottom: 0 } }>
-                                <ListItem button onClick={ () => this.handleClick(index) } style={ { paddingTop: 0, paddingBottom: 0, height: 52 } }>
+                                <ListItem button onClick={ () => this.handleClick(index) } style={ { paddingTop: 0, paddingBottom: 0, paddingLeft: 23, height: 52 } }>
                                     <ListItemIcon>
                                         <InboxIcon/>
                                     </ListItemIcon>
@@ -128,7 +131,9 @@ class SideBar extends React.Component {
                                             item.children.map((child, childIndex) => {
                                                 return (
                                                     <ListItem button className={ classes.childItem } key={ index.toString() + childIndex }>
-                                                        <ListItemText inset primary={ child.name }/>
+                                                        <NavLink to={ child.path } activeClassName='selectBtn' >
+                                                            <ListItemText style={ { paddingLeft: 78 } } inset primary={ child.name }/>
+                                                        </NavLink>
                                                     </ListItem>
                                                 );
                                             })
