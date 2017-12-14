@@ -43,6 +43,9 @@ const styles = theme => ({
         padding: 0,
         height: 40,
     },
+    selectFather: {
+        background: '#f7f7f7',
+    },
 });
 
 class SideBar extends React.Component {
@@ -60,6 +63,7 @@ class SideBar extends React.Component {
     }
 
     handleClick(index) {
+        window.console.log(location.pathname);
         const self = this;
         Object.keys(this.state.navs).forEach(item => {
             if (item === index.toString()) {
@@ -118,7 +122,8 @@ class SideBar extends React.Component {
                     this.state.navs.map((item, index) => {
                         return (
                             <List className={ classes.root } key={ index } style={ { paddingTop: 0, paddingBottom: 0 } }>
-                                <ListItem button onClick={ () => this.handleClick(index) } style={ { paddingTop: 0, paddingBottom: 0, paddingLeft: 23, height: 52 } }>
+                                <ListItem button onClick={ () => this.handleClick(index) }
+                                    style={ { paddingTop: 0, paddingBottom: 0, paddingLeft: 23, height: 52 } }>
                                     <ListItemIcon>
                                         <InboxIcon/>
                                     </ListItemIcon>
