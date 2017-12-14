@@ -105,7 +105,7 @@ class HeaderLayout extends Component {
                 name: '后台管理员',
             },
             anchorEl: null,
-            fullScreen: true,
+            fullScreen: false,
         };
     }
 
@@ -216,6 +216,7 @@ class HeaderLayout extends Component {
                         aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup='true'
                         className={ this.props.classes.iconBtn }
+                        style={ { marginRight: '10px' } }
                         color='contrast'
                         onClick={ this.handleClick }
                     >

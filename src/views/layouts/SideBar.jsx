@@ -37,6 +37,9 @@ const styles = theme => ({
     nested: {
         paddingLeft: theme.spacing.unit * 4,
     },
+    childItem: {
+        background: '#f2f2f2',
+    },
 });
 
 class SideBar extends React.Component {
@@ -120,11 +123,11 @@ class SideBar extends React.Component {
                                     {item.open ? <ExpandLess/> : <ExpandMore/>}
                                 </ListItem>
                                 <Collapse component='li' in={ item.open } transitionDuration='auto' unmountOnExit>
-                                    <List disablePadding>
+                                    <List disablePadding style={ { borderBottom: '1px solid #e0e0e0' } }>
                                         {
                                             item.children.map((child, childIndex) => {
                                                 return (
-                                                    <ListItem button key={ index.toString() + childIndex }>
+                                                    <ListItem button className={ classes.childItem } key={ index.toString() + childIndex }>
                                                         <ListItemText inset primary={ child.name }/>
                                                     </ListItem>
                                                 );
