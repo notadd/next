@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Replay from 'material-ui-icons/Replay';
-import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
@@ -10,7 +8,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 
 const styles = {
     root: {
-        padding: '32px 20px',
+        padding: '40px 30px',
     },
     container: {
         display: 'flex',
@@ -57,13 +55,9 @@ class Configurations extends React.Component {
         return (
             <div className='configurations'>
                 <p className='crumbs'>
-                    全局 <b>></b> 全局设置 <b>></b> 参数设置
-                    <IconButton className='back'>
-                        <Replay/>
-                        返回
-                    </IconButton>
+                    全局 <b>/</b> 全局设置
                 </p>
-                <p className='title'>参数设置</p>
+                <h4 className='title'>参数设置</h4>
                 <Paper className={ this.props.classes.root }>
                     <form className={ this.props.classes.container } noValidate autoComplete='off'>
                         <FormControl fullWidth required>
