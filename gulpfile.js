@@ -12,7 +12,6 @@ const source = 'src';
 const distId = process.argv.indexOf('--dist');
 const dist = distId < 0 ? 'node_modules/@notadd' : process.argv[distId + 1];
 
-
 gulp.task('default', function() {
     modules.forEach(module => {
         gulp.watch(

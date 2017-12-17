@@ -5,6 +5,12 @@
 	"description": "Modern, fast, powerful node.js web framework",
 	"main": "index.js",
 	"license": "Apache-2.0",
+	"scripts": {
+		"build": "gulp build && gulp move",
+		"build:packages": "gulp build --dist packages",
+		"prepublish": "npm run build:packages",
+		"publish": "./node_modules/.bin/lerna publish -m \"chore(release) publish %s\""
+	},
 	"devDependencies": {
 		"@nestjs/common": "^4.0.0",
 		"@nestjs/core": "^4.0.0",
