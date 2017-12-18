@@ -5,6 +5,7 @@ const gulpSequence = require('gulp-sequence');
 const packages = {
     backend: ts.createProject('src/backend/tsconfig.json'),
     common: ts.createProject('src/common/tsconfig.json'),
+    core: ts.createProject('src/core/tsconfig.json'),
 };
 
 const modules = Object.keys(packages);

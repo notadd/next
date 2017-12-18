@@ -9,7 +9,7 @@
         "noImplicitAny": false,
         "noLib": false,
         "noUnusedLocals": false,
-        "outDir": "../../node_modules/@notadd/common",
+        "outDir": "../../node_modules/@notadd/core",
         "removeComments": false,
         "strict": true,
         "target": "ES2017"
