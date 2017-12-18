@@ -18,7 +18,9 @@ gulp.task('default', function() {
         gulp.watch(
             [`${source}/${module}/**/*.ts`, `${source}/${module}/*.ts`],
             [module]
-        );
+        ).on('change', function(event) {
+            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        });
     });
 });
 
@@ -33,10 +35,4 @@ modules.forEach(module => {
 
 gulp.task('build', function(cb) {
     gulpSequence('common', modules.filter((module) => module !== 'common'), cb);
-});
-
-gulp.task('move', function() {
-    gulp.src(['node_modules/@notadd/**/*']).pipe(
-        gulp.dest('examples/01-cats-app/node_modules/@notadd')
-    );
 });

@@ -6,12 +6,14 @@
     "main": "index.js",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "gulp build && gulp move",
+        "build": "gulp build",
         "build:packages": "gulp build --dist packages",
+        "dev": "gulp --dist packages",
         "prepublish": "npm run build:packages",
         "publish": "./node_modules/.bin/lerna publish -m \"chore(release) publish %s\""
     },
     "dependencies": {
+        "rxjs": "^5.4.2",
         "typescript": "^2.4.1"
     },
     "devDependencies": {
