@@ -1,6 +1,6 @@
 {
     "name": "notadd-src",
-    "version": "2.1.0",
+    "version": "2.1.2",
     "author": "notadd",
     "description": "Modern, fast, powerful node.js web framework",
     "main": "index.js",
@@ -10,7 +10,7 @@
         "build:packages": "gulp build --dist packages",
         "dev": "gulp --dist packages",
         "prepublish": "npm run build:packages",
-        "publish": "./node_modules/.bin/lerna publish -m \"chore(release) publish %s\""
+        "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\""
     },
     "dependencies": {
         "class-transformer": "^0.1.8",
@@ -76,7 +76,6 @@
     "engines": {
         "node": ">=6.11.0"
     },
-    "private": true,
     "workspaces": [
         "packages/backend",
         "packages/common",
