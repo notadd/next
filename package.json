@@ -39,6 +39,7 @@
         "@notadd/common": "^2.1.1",
         "@notadd/core": "^2.1.1",
         "@notadd/server": "^2.1.1",
+        "@notadd/user": "^2.1.1",
         "@types/chai": "^3.5.2",
         "@types/chai-as-promised": "0.0.31",
         "@types/express": "^4.0.39",
@@ -81,6 +82,7 @@
         "packages/backend",
         "packages/common",
         "packages/core",
-        "packages/server"
+        "packages/server",
+        "packages/user"
     ]
 }

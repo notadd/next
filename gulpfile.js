@@ -8,6 +8,7 @@ const packages = {
     common: ts.createProject('src/common/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
     server: ts.createProject('src/server/tsconfig.json'),
+    user: ts.createProject('src/user/tsconfig.json'),
 };
 
 const modules = Object.keys(packages);
