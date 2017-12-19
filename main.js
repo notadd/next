@@ -1,3 +1,3 @@
-import { bootstrap } from '@notadd/server';
+const { bootstrap } = require('@notadd/server');
 
 bootstrap();

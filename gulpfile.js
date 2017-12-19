@@ -24,15 +24,14 @@ gulp.task('default', function () {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         });
     });
-    // nodemon({
-    //     script: 'services/server.js',
-    //     watch: [
-    //         "packages/",
-    //         "server.js",
-    //         "services/",
-    //     ],
-    //     ext: 'js'
-    // })
+    nodemon({
+        script: 'main.js',
+        watch: [
+            "packages/",
+            "main.js",
+        ],
+        ext: 'js'
+    })
 });
 
 modules.forEach(module => {
