@@ -1,5 +1,5 @@
 {
-    "name": "notadd",
+    "name": "notadd-src",
     "version": "2.1.0",
     "author": "notadd",
     "description": "Modern, fast, powerful node.js web framework",
@@ -25,6 +25,7 @@
         "@notadd/backend": "^2.1.1",
         "@notadd/common": "^2.1.1",
         "@notadd/core": "^2.1.1",
+        "@notadd/server": "^2.1.1",
         "@types/chai": "^3.5.2",
         "@types/chai-as-promised": "0.0.31",
         "@types/express": "^4.0.39",
@@ -44,6 +45,7 @@
         "coveralls": "^2.11.16",
         "gulp": "^3.9.1",
         "gulp-clang-format": "^1.0.23",
+        "gulp-nodemon": "^2.2.1",
         "gulp-sequence": "^0.4.6",
         "gulp-typescript": "^3.1.6",
         "gulp-watch": "^4.3.11",
@@ -65,6 +67,7 @@
     "workspaces": [
         "packages/backend",
         "packages/common",
-        "packages/core"
+        "packages/core",
+        "packages/server"
     ]
 }
