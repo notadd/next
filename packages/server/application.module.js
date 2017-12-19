@@ -6,15 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
-const backend_1 = require("@notadd/backend");
 const application_controller_1 = require("./application.controller");
+const backend_1 = require("@notadd/backend");
+const common_1 = require("@nestjs/common");
+const user_1 = require("@notadd/user");
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
     common_1.Module({
         modules: [
             backend_1.BackendModule,
+            user_1.UserModule
         ],
         controllers: [
             application_controller_1.ApplicationController,
