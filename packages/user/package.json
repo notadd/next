@@ -1,5 +1,5 @@
 {
-    "name": "@notadd/core",
+    "name": "@notadd/user",
     "version": "2.1.6",
     "description": "Notadd Core Logic.",
     "main": "main.js",
