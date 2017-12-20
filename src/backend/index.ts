@@ -1,1 +1,1 @@
-export * from './backend.module';
+export * from './modules/backend.module';

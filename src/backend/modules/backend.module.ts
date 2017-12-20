@@ -1,5 +1,5 @@
 import { Logger, Module } from '@nestjs/common';
-import { BackendController } from './backend.controller';
+import { BackendController } from '../controllers/backend.controller';
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 
 @Module({

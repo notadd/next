@@ -1,5 +1,5 @@
 import { NotaddFactory } from '@notadd/core';
-import { ApplicationModule } from './application.module';
+import { ApplicationModule } from './modules/application.module';
 import { Logger } from "@nestjs/common";
 import * as ip from "ip";
 

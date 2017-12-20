@@ -5,23 +5,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const application_controller_1 = require("./application.controller");
-const backend_1 = require("@notadd/backend");
-const common_1 = require("@nestjs/common");
-const user_1 = require("@notadd/user");
-let ApplicationModule = class ApplicationModule {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-ApplicationModule = __decorate([
+Object.defineProperty(exports, "__esModule", { value: true });
+const common_1 = require("@nestjs/common");
+const backend_controller_1 = require("../controllers/backend.controller");
+let BackendModule = class BackendModule {
+    constructor() {
+        this.logger = new common_1.Logger('NotaddApplication', true);
+    }
+    onModuleInit() {
+    }
+};
+BackendModule = __decorate([
     common_1.Module({
-        modules: [
-            backend_1.BackendModule,
-            user_1.UserModule
-        ],
         controllers: [
-            application_controller_1.ApplicationController,
+            backend_controller_1.BackendController,
         ],
-        components: [],
-    })
-], ApplicationModule);
-exports.ApplicationModule = ApplicationModule;
+    }),
+    __metadata("design:paramtypes", [])
+], BackendModule);
+exports.BackendModule = BackendModule;

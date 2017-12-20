@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@notadd/core");
-const application_module_1 = require("./application.module");
+const application_module_1 = require("./modules/application.module");
 const common_1 = require("@nestjs/common");
 const ip = require("ip");
 async function bootstrap() {

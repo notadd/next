@@ -1,4 +1,4 @@
-import { ApplicationController } from './application.controller';
+import { ApplicationController } from '../controllers/application.controller';
 import { BackendModule } from '@notadd/backend';
 import { Module } from '@nestjs/common';
 import { UserModule } from '@notadd/user';
