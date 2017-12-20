@@ -1,7 +1,7 @@
 {
     "name": "@notadd/user",
     "version": "2.1.9",
-    "description": "Notadd Core Logic.",
+    "description": "Notadd User Package.",
     "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

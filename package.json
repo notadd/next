@@ -14,12 +14,15 @@
         "server": "node main.js"
     },
     "dependencies": {
+        "apollo-server-express": "^1.2.0",
         "class-transformer": "^0.1.8",
         "class-validator": "^0.7.3",
         "cli-color": "^1.1.0",
         "engine.io-client": "^3.1.1",
         "express": "^4.16.2",
         "fast-safe-stringify": "^1.2.0",
+        "graphql": "^0.11.7",
+        "graphql-tools": "^2.11.0",
         "iterare": "0.0.8",
         "json-socket": "^0.2.1",
         "opencollective": "^1.0.3",
@@ -28,13 +31,17 @@
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.4.2",
         "socket.io": "^2.0.3",
+        "typeorm": "^0.1.9",
         "typescript": "^2.4.1"
     },
     "devDependencies": {
         "@nestjs/common": "^4.0.0",
         "@nestjs/core": "^4.0.0",
+        "@nestjs/graphql": "^1.0.0",
         "@nestjs/microservices": "^4.0.0",
+        "@nestjs/swagger": "^1.1.2",
         "@nestjs/testing": "^4.0.0",
+        "@nestjs/typeorm": "^1.0.0",
         "@nestjs/websockets": "^4.0.0",
         "@notadd/backend": "^2.1.1",
         "@notadd/common": "^2.1.1",

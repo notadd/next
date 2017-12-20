@@ -1,7 +1,7 @@
 {
     "name": "@notadd/backend",
     "version": "2.1.9",
-    "description": "Notadd Administration Package.",
+    "description": "Notadd Backend Package.",
     "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
