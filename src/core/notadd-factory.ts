@@ -10,15 +10,6 @@ export class NotaddFactoryStatic extends NestFactoryStatic {
      * @returns { Promise<INestApplication> }
      */
     public async create(module, express = ExpressAdapter.create()): Promise<INestApplication> {
-        console.log(`
-                         _            _     _
-             _ __   ___ | |_ __ _  __| | __| |
-            | '_ \\ / _ \\| __/ _\` |/ _\` |/ _\` |
-            | | | | (_) | || (_| | (_| | (_| |
-            |_| |_|\\___/ \\__\\__,_|\\__,_|\\__,_|
-
-        `);
-
         return super.create(module, express);
     }
 }

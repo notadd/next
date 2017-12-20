@@ -10,7 +10,8 @@
         "build:packages": "gulp build --dist packages",
         "dev": "gulp --dist packages",
         "prepublish": "npm run build:packages",
-        "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\""
+        "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
+        "server": "node main.js"
     },
     "dependencies": {
         "class-transformer": "^0.1.8",
