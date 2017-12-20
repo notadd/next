@@ -1,6 +1,6 @@
 {
     "name": "@notadd/backend",
-    "version": "2.1.6",
+    "version": "2.1.9",
     "description": "Notadd Administration Package.",
     "main": "main.js",
     "scripts": {
