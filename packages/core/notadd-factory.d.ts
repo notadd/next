@@ -11,4 +11,4 @@ export declare class NotaddFactoryStatic extends NestFactoryStatic {
      */
     create(module: any, express?: any): Promise<INestApplication>;
 }
-export declare const NotaddFactory: NestFactoryStatic;
+export declare const NotaddFactory: NotaddFactoryStatic;

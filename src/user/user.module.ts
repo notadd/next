@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { UserController } from './user.controller';
 
 @Module({
@@ -7,4 +7,9 @@ import { UserController } from './user.controller';
     ],
 })
 export class UserModule {
+    private logger: Logger;
+
+    constructor() {
+        this.logger = new Logger('NotaddApplication', true);
+    }
 }
