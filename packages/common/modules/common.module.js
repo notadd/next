@@ -11,12 +11,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const setting_entity_1 = require("../entities/setting.entity");
 const setting_service_1 = require("../services/setting.service");
 const configuration_service_1 = require("../services/configuration.service");
+const log_service_1 = require("../services/log.service");
 let CommonModule = class CommonModule {
 };
 CommonModule = __decorate([
     common_1.Module({
         components: [
             configuration_service_1.ConfigurationService,
+            log_service_1.LogService,
             setting_service_1.SettingService,
         ],
         modules: [
