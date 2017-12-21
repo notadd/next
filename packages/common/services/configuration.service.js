@@ -7,23 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const setting_entity_1 = require("../entities/setting.entity");
-const setting_service_1 = require("../services/setting.service");
-const configuration_service_1 = require("../services/configuration.service");
-let CommonModule = class CommonModule {
+let ConfigurationService = class ConfigurationService {
 };
-CommonModule = __decorate([
-    common_1.Module({
-        components: [
-            configuration_service_1.ConfigurationService,
-            setting_service_1.SettingService,
-        ],
-        modules: [
-            typeorm_1.TypeOrmModule.forRoot([
-                setting_entity_1.Setting,
-            ]),
-        ],
-    })
-], CommonModule);
-exports.CommonModule = CommonModule;
+ConfigurationService = __decorate([
+    common_1.Component()
+], ConfigurationService);
+exports.ConfigurationService = ConfigurationService;
