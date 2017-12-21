@@ -14,6 +14,7 @@
         "server": "node main.js"
     },
     "dependencies": {
+        "apollo-link": "^1.0.7",
         "apollo-server-express": "^1.2.0",
         "class-transformer": "^0.1.8",
         "class-validator": "^0.7.3",
