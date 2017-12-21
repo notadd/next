@@ -25,7 +25,7 @@ UserModule = __decorate([
         ],
         modules: [
             typeorm_1.TypeOrmModule.forRoot([
-                user_entity_1.UserEntity,
+                user_entity_1.User,
             ]),
         ],
     }),

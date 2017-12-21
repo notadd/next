@@ -11,17 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Entity_1 = require("typeorm/decorator/entity/Entity");
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity {
+let User = class User {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], UserEntity.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], UserEntity.prototype, "name", void 0);
-UserEntity = __decorate([
+], User.prototype, "name", void 0);
+User = __decorate([
     Entity_1.Entity()
-], UserEntity);
-exports.UserEntity = UserEntity;
+], User);
+exports.User = User;
