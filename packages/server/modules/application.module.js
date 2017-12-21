@@ -17,6 +17,7 @@ const graphql_1 = require("@nestjs/graphql");
 const graphql_tools_1 = require("graphql-tools");
 const mergeSchemas_1 = require("graphql-tools/dist/stitching/mergeSchemas");
 const apollo_server_express_1 = require("apollo-server-express");
+const common_2 = require("@notadd/common");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -63,6 +64,7 @@ ApplicationModule = __decorate([
     common_1.Module({
         modules: [
             backend_1.BackendModule,
+            common_2.CommonModule,
             graphql_1.GraphQLModule,
             user_1.UserModule
         ],
