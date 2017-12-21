@@ -1,14 +1,14 @@
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
 export const databaseProviders = [
     {
         provide: 'DbConnectionToken',
-        useFactory: async () => await createConnection({
+        useFactory: async (): Promise<Connection> => createConnection({
             type: 'postgres',
-            host: 'localhost',
+            host: '192.168.109.120',
             port: 5432,
             username: 'postgres',
-            password: '123qwe',
+            password: '22222',
             database: 'new',
         }),
     },

@@ -4,12 +4,12 @@ const typeorm_1 = require("typeorm");
 exports.databaseProviders = [
     {
         provide: 'DbConnectionToken',
-        useFactory: async () => await typeorm_1.createConnection({
+        useFactory: async () => typeorm_1.createConnection({
             type: 'postgres',
-            host: 'localhost',
+            host: '192.168.109.120',
             port: 5432,
             username: 'postgres',
-            password: '123qwe',
+            password: '22222',
             database: 'new',
         }),
     },
