@@ -13,6 +13,7 @@ const common_1 = require("@nestjs/common");
 const user_controller_1 = require("../controllers/user.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entities/user.entity");
+const user_service_1 = require("../services/user.service");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -20,6 +21,9 @@ let UserModule = class UserModule {
 };
 UserModule = __decorate([
     common_1.Module({
+        components: [
+            user_service_1.UserService,
+        ],
         controllers: [
             user_controller_1.UserController,
         ],
