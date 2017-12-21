@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Entity_1 = require("typeorm/decorator/entity/Entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
 };
@@ -22,6 +21,6 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 User = __decorate([
-    Entity_1.Entity()
+    typeorm_1.Entity()
 ], User);
 exports.User = User;
