@@ -9,26 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
-const user_controller_1 = require("../controllers/user.controller");
-const typeorm_1 = require("@nestjs/typeorm");
-const user_entity_1 = require("../entities/user.entity");
-let UserModule = class UserModule {
-    constructor() {
-        this.logger = new common_1.Logger('NotaddApplication', true);
-    }
+const Entity_1 = require("typeorm/decorator/entity/Entity");
+const typeorm_1 = require("typeorm");
+let UserEntity = class UserEntity {
 };
-UserModule = __decorate([
-    common_1.Module({
-        controllers: [
-            user_controller_1.UserController,
-        ],
-        modules: [
-            typeorm_1.TypeOrmModule.forRoot([
-                user_entity_1.UserEntity,
-            ]),
-        ],
-    }),
-    __metadata("design:paramtypes", [])
-], UserModule);
-exports.UserModule = UserModule;
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], UserEntity.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], UserEntity.prototype, "name", void 0);
+UserEntity = __decorate([
+    Entity_1.Entity()
+], UserEntity);
+exports.UserEntity = UserEntity;

@@ -42,7 +42,7 @@ let ApplicationModule = class ApplicationModule {
     createDelegatedSchema() {
         const linkTypeDefs = `
             extend type Cat {
-            human: Human
+                human: Human
             }
         `;
         const humanSchema = graphql_tools_1.makeExecutableSchema({
