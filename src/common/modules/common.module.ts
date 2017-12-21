@@ -5,6 +5,7 @@ import { SettingService } from "../services/setting.service";
 import { ConfigurationService } from "../services/configuration.service";
 import { LogService } from "../services/log.service";
 import { Log } from "../entities/log.entity";
+import { DatabaseModule } from "./database.module";
 
 @Module({
     components: [
@@ -13,6 +14,7 @@ import { Log } from "../entities/log.entity";
         SettingService,
     ],
     modules: [
+        DatabaseModule,
         TypeOrmModule.forRoot([
             Log,
             Setting,

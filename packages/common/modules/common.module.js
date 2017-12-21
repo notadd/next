@@ -13,6 +13,7 @@ const setting_service_1 = require("../services/setting.service");
 const configuration_service_1 = require("../services/configuration.service");
 const log_service_1 = require("../services/log.service");
 const log_entity_1 = require("../entities/log.entity");
+const database_module_1 = require("./database.module");
 let CommonModule = class CommonModule {
 };
 CommonModule = __decorate([
@@ -23,6 +24,7 @@ CommonModule = __decorate([
             setting_service_1.SettingService,
         ],
         modules: [
+            database_module_1.DatabaseModule,
             typeorm_1.TypeOrmModule.forRoot([
                 log_entity_1.Log,
                 setting_entity_1.Setting,
