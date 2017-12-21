@@ -6,12 +6,11 @@ exports.databaseProviders = [
         provide: 'DbConnectionToken',
         useFactory: async () => await typeorm_1.createConnection({
             type: 'postgres',
-            host: '127.0.0.1',
+            host: 'localhost',
             port: 5432,
-            username: 'root',
-            password: 'root',
-            database: 'notadd',
-            autoSchemaSync: true,
+            username: 'postgres',
+            password: '123qwe',
+            database: 'new',
         }),
     },
 ];
