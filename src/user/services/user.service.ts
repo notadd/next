@@ -1,5 +1,4 @@
 import { Component, Inject } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../entities/user.entity";
 import { Repository } from "typeorm";
 
@@ -9,7 +8,7 @@ export class UserService {
      * @param { Repository<User> } repository
      */
     constructor(
-        @InjectRepository(User)
+        @Inject('UserRepositoryToken')
         private readonly repository: Repository<User>,
     ) {
     }

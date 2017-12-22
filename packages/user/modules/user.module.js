@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const user_controller_1 = require("../controllers/user.controller");
 const user_service_1 = require("../services/user.service");
+const database_module_1 = require("@notadd/common/modules/database.module");
+const repository_provider_1 = require("../providers/repository.provider");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -20,10 +22,14 @@ let UserModule = class UserModule {
 UserModule = __decorate([
     common_1.Module({
         components: [
+            ...repository_provider_1.repositoryProvider,
             user_service_1.UserService,
         ],
         controllers: [
             user_controller_1.UserController,
+        ],
+        modules: [
+            database_module_1.DatabaseModule
         ],
     }),
     __metadata("design:paramtypes", [])

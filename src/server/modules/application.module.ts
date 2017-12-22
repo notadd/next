@@ -7,11 +7,10 @@ import { addMockFunctionsToSchema, makeExecutableSchema } from "graphql-tools";
 import mergeSchemas from "graphql-tools/dist/stitching/mergeSchemas";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
-import { CommonModule, DatabaseModule } from "@notadd/common";
+import { CommonModule } from "@notadd/common";
 
 @Module({
     modules: [
-        DatabaseModule,
         BackendModule,
         CommonModule,
         GraphQLModule,

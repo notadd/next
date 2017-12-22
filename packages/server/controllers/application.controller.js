@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 let ApplicationController = class ApplicationController {
-    root() {
+    handle() {
         return 'Hello Notadd!';
     }
 };
@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
-], ApplicationController.prototype, "root", null);
+], ApplicationController.prototype, "handle", null);
 ApplicationController = __decorate([
     common_1.Controller()
 ], ApplicationController);

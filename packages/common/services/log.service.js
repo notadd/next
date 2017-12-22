@@ -11,11 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const log_entity_1 = require("../entities/log.entity");
+const typeorm_1 = require("typeorm");
 let LogService = class LogService {
     /**
      * @param { Repository<Log> } repository
@@ -26,13 +32,15 @@ let LogService = class LogService {
     /**
      * @returns { Promise<Log[]> }
      */
-    async findAll() {
-        return await this.repository.find();
+    findAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository.find();
+        });
     }
 };
 LogService = __decorate([
     common_1.Component(),
-    __param(0, typeorm_1.InjectRepository(log_entity_1.Log)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(0, common_1.Inject('LogRepositoryToken')),
+    __metadata("design:paramtypes", [typeorm_1.Repository])
 ], LogService);
 exports.LogService = LogService;
