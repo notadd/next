@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity('settings')
 export class Setting {
     @PrimaryGeneratedColumn()
     key: string;
