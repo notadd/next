@@ -15,7 +15,6 @@ let CommonModule = class CommonModule {
 CommonModule = __decorate([
     common_1.Module({
         components: [
-            // ...repositoryProvider,
             configuration_service_1.ConfigurationService,
             log_service_1.LogService,
             setting_service_1.SettingService,
