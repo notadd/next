@@ -20,7 +20,15 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Setting.prototype, "value", void 0);
+__decorate([
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", String)
+], Setting.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", String)
+], Setting.prototype, "updatedAt", void 0);
 Setting = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity('settings')
 ], Setting);
 exports.Setting = Setting;

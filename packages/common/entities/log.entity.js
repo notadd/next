@@ -20,7 +20,15 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Log.prototype, "value", void 0);
+__decorate([
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", String)
+], Log.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", String)
+], Log.prototype, "updatedAt", void 0);
 Log = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity('logs')
 ], Log);
 exports.Log = Log;
