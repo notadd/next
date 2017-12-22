@@ -20,7 +20,15 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
+__decorate([
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", String)
+], User.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", String)
+], User.prototype, "updatedAt", void 0);
 User = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity('users')
 ], User);
 exports.User = User;

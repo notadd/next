@@ -3,6 +3,7 @@ import { ApplicationModule } from './modules/application.module';
 import { Logger } from "@nestjs/common";
 import * as ip from "ip";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { FlubErrorHandler } from "nestjs-flub/packages";
 
 export async function bootstrap() {
     const port = 3000;
@@ -11,6 +12,7 @@ export async function bootstrap() {
      * @type { INestApplication }
      */
     const application = await NotaddFactory.create(ApplicationModule);
+    application.useGlobalFilters(new FlubErrorHandler());
     /**
      * @type { Logger }
      */

@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_adapter_1 = require("@nestjs/core/adapters/express-adapter");
 const common_1 = require("@nestjs/common");
@@ -14,8 +22,10 @@ class NotaddFactoryStatic extends core_1.NestFactoryStatic {
      *
      * @returns { Promise<INestApplication> }
      */
-    async create(module, express = express_adapter_1.ExpressAdapter.create()) {
-        console.log(`
+    create(module, express = express_adapter_1.ExpressAdapter.create()) {
+        const _super = name => super[name];
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(`
                  _            _     _
      _ __   ___ | |_ __ _  __| | __| |
     | '_ \\ / _ \\| __/ _\` |/ _\` |/ _\` |
@@ -23,10 +33,11 @@ class NotaddFactoryStatic extends core_1.NestFactoryStatic {
     |_| |_|\\___/ \\__\\__,_|\\__,_|\\__,_|
 
 `);
-        this._logger.log('Starting Notadd...');
-        let created = await super.create(module, express);
-        this._logger.log('Notadd successfully started');
-        return created;
+            this._logger.log('Starting Notadd...');
+            let created = yield _super("create").call(this, module, express);
+            this._logger.log('Notadd successfully started');
+            return created;
+        });
     }
 }
 exports.NotaddFactoryStatic = NotaddFactoryStatic;
