@@ -13,7 +13,7 @@ const typeorm_1 = require("typeorm");
 let Setting = class Setting {
 };
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", String)
 ], Setting.prototype, "key", void 0);
 __decorate([

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": false,
         "baseUrl": "./../../",
-        "declaration": true,
+        "declaration": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",

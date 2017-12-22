@@ -7,13 +7,10 @@ import { repositoryProvider } from "../providers/repository.provider";
 
 @Module({
     components: [
-        ...repositoryProvider,
+        // ...repositoryProvider,
         ConfigurationService,
         LogService,
         SettingService,
-    ],
-    modules: [
-        DatabaseModule,
     ],
 })
 export class CommonModule {

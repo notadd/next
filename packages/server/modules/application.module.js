@@ -63,6 +63,7 @@ let ApplicationModule = class ApplicationModule {
 ApplicationModule = __decorate([
     common_1.Module({
         modules: [
+            common_2.DatabaseModule,
             backend_1.BackendModule,
             common_2.CommonModule,
             graphql_1.GraphQLModule,

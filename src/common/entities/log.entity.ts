@@ -1,8 +1,8 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Log {
-    @Column()
+    @PrimaryGeneratedColumn()
     key: string;
 
     @Column()
