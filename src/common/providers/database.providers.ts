@@ -13,6 +13,7 @@ export const databaseProviders = [
             entities: [
                 process.cwd() + '/**/*.entity.js',
             ],
+            autoSchemaSync: true,
         }),
     },
 ];

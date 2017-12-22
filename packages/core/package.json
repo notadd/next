@@ -44,7 +44,7 @@
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.4.2",
         "socket.io": "^2.0.3",
-        "typeorm": "^0.1.9",
+        "typeorm": "0.1.0-alpha.40",
         "typescript": "^2.4.1"
     },
     "bugs": {
