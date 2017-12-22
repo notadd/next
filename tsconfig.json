@@ -10,7 +10,7 @@
         "noUnusedLocals": false,
         "removeComments": false,
         "strict": true,
-        "target": "ES2017"
+        "target": "ES2015"
     },
     "include": [
         "src/**/*.ts"
