@@ -23,7 +23,11 @@ exports.databaseProviders = [
                 entities: [
                     process.cwd() + '/**/*.entity.js',
                 ],
-                autoSchemaSync: true,
+                migrations: [
+                    process.cwd() + '/**/*.migration.js',
+                ],
+                logging: true,
+                migrationsRun: true,
             });
         }),
     },
