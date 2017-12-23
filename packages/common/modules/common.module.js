@@ -12,6 +12,7 @@ const configuration_service_1 = require("../services/configuration.service");
 const log_service_1 = require("../services/log.service");
 const database_module_1 = require("./database.module");
 const repository_provider_1 = require("../providers/repository.provider");
+const auth_module_1 = require("./auth.module");
 let CommonModule = class CommonModule {
 };
 CommonModule = __decorate([
@@ -23,6 +24,7 @@ CommonModule = __decorate([
             setting_service_1.SettingService,
         ],
         modules: [
+            auth_module_1.AuthModule,
             database_module_1.DatabaseModule,
         ],
     })
