@@ -366,11 +366,11 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                                 child.hasOwnProperty('children')
                                                                     && child.children.length > 0
                                                                     && child.open ?  (
-                                                                    <ExpandMore/>
+                                                                    <ExpandLess/>
                                                                 ) : child.hasOwnProperty('children')
                                                                     && child.children.length > 0
                                                                     && child.open === false ? (
-                                                                    <ExpandLess/>
+                                                                    <ExpandMore/>
                                                                 ) : null
                                                             }
                                                         </ListItem>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Switch } from "react-router";
 import Header from '../layouts/Header';
 import Side from '../layouts/SideBar';
 import withRoot from '../components/withRoot';
@@ -10,7 +11,7 @@ import Extension from '../pages/Extension';
 import Debug from '../pages/Debug';
 import Hello from '../pages/Hello';
 import {
-    Route
+    Route,
 } from 'react-router-dom';
 
 class Index extends React.Component {
@@ -21,13 +22,15 @@ class Index extends React.Component {
                 <div className="right-view">
                     <Side/>
                     <div className="view">
-                        <Route path="/configurations" component={Configurations}/>
-                        <Route path="/seo" component={Seo}/>
-                        <Route path="/upload" component={Upload}/>
-                        <Route path="/mail" component={Mail}/>
-                        <Route path="/debug" component={Debug}/>
-                        <Route path="/extension" component={Extension}/>
-                        <Route path="/hello" component={Hello}/>
+                        <Switch>
+                            <Route exact  path="configurations" component={Configurations}/>
+                            <Route exact  path="seo" component={Seo}/>
+                            <Route exact  path="upload" component={Upload}/>
+                            <Route exact  path="mail" component={Mail}/>
+                            <Route exact  path="debug" component={Debug}/>
+                            <Route exact  path="extension" component={Extension}/>
+                            <Route exact  path="hello" component={Hello}/>
+                        </Switch>
                     </div>
                 </div>
             </div>
