@@ -3,6 +3,8 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { withStyles, MuiThemeProvider } from 'material-ui/styles';
 import { wrapDisplayName } from 'recompose';
 import createContext from '../styles/createContext';
+import { Provider } from 'react-redux';
+import configureStore from '../store/configureStore';
 
 // Apply some reset
 const decorate = withStyles(theme => ({
@@ -18,6 +20,7 @@ const decorate = withStyles(theme => ({
   },
 }));
 
+const store = configureStore();
 const AppWrapper = decorate<{ children: JSX.Element }>(props => props.children);
 
 const context = createContext();
@@ -34,13 +37,15 @@ function withRoot(BaseComponent: React.ComponentType) {
 
     render() {
       return (
-        <JssProvider registry={context.sheetsRegistry} jss={context.jss}>
-          <MuiThemeProvider theme={context.theme} sheetsManager={context.sheetsManager}>
-            <AppWrapper>
-              <BaseComponent />
-            </AppWrapper>
-          </MuiThemeProvider>
-        </JssProvider>
+          <Provider store={store}>
+              <JssProvider registry={context.sheetsRegistry} jss={context.jss}>
+                  <MuiThemeProvider theme={context.theme} sheetsManager={context.sheetsManager}>
+                      <AppWrapper>
+                          <BaseComponent />
+                      </AppWrapper>
+                  </MuiThemeProvider>
+              </JssProvider>
+          </Provider>
       );
     }
   }
