@@ -28,6 +28,7 @@ exports.databaseProviders = [
                 ],
                 logging: true,
                 migrationsRun: true,
+                synchronize: false,
             });
         }),
     },
