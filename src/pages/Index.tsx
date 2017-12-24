@@ -9,7 +9,6 @@ import Upload from '../pages/Upload';
 import Mail from '../pages/Mail';
 import Extension from '../pages/Extension';
 import Debug from '../pages/Debug';
-import Hello from '../pages/Hello';
 import {
     Route,
 } from 'react-router-dom';
@@ -29,7 +28,6 @@ class Index extends React.Component {
                             <Route exact  path="mail" component={Mail}/>
                             <Route exact  path="debug" component={Debug}/>
                             <Route exact  path="extension" component={Extension}/>
-                            <Route exact  path="hello" component={Hello}/>
                         </Switch>
                     </div>
                 </div>

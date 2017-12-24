@@ -294,7 +294,8 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <ListItem
                                     button
                                     onClick={() => this.handleClick(index, null)}
-                                    className={classNames(item.open ? this.props.classes.selectFirstLevelMenu : ''
+                                    className={
+                                        classNames(item.open ? this.props.classes.selectFirstLevelMenu : ''
                                         , item.open ? 'selectFirstLevelMenu' : '')}
                                     style={{
                                         paddingTop: 0,

@@ -5,7 +5,6 @@ import Header from "../layouts/Header";
 import Configurations from "./Configurations";
 import Debug from "./Debug";
 import Extension from "./Extension";
-import Hello from "./Hello";
 import Login from './Login';
 import Mail from "./Mail";
 import Seo from "./Seo";
@@ -36,7 +35,6 @@ class App extends React.Component<Props, {}> {
                                     <Route exact path="/mail" component={Mail}/>
                                     <Route exact path="/debug" component={Debug}/>
                                     <Route exact path="/extension" component={Extension}/>
-                                    <Route exact path="/hello" component={Hello}/>
                                 </div>
                             </div>
                         </div>
