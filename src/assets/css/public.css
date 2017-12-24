@@ -1,0 +1,14 @@
+.crumbs {
+    color: #333;
+    font-size: 12px;
+    padding-top: 30px;
+}
+.title {
+    font-size: 16px;
+    margin-bottom: 27px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+#root {
+    height: inherit;
+}
