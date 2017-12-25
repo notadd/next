@@ -1,6 +1,6 @@
 {
     "name": "@notadd/backend",
-    "version": "2.1.9",
+    "version": "2.1.10",
     "description": "Notadd Backend Package.",
     "main": "main.js",
     "scripts": {
@@ -18,7 +18,7 @@
     "author": "notadd",
     "license": "Apache-2.0",
     "dependencies": {
-        "@notadd/backend": "^2.1.1"
+        "@notadd/backend": "^2.1.10"
     },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"
