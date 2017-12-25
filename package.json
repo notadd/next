@@ -17,6 +17,7 @@
     "@types/react-router-config": "^1.0.5",
     "@types/react-router-dom": "^4.2.3",
     "@types/react-router-redux": "^5.0.10",
+    "axios": "^0.17.1",
     "material-ui": "1.0.0-beta.22",
     "material-ui-icons": "^1.0.0-beta.17",
     "normalize.css": "^7.0.0",

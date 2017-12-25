@@ -6,7 +6,9 @@ import Tooltip from 'material-ui/Tooltip';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
+import { CircularProgress } from 'material-ui/Progress';
 import { History } from 'history';
+import axios from 'axios';
 
 const styles = {
     card: {
@@ -24,6 +26,7 @@ const styles = {
 type State = {
     userName: string,
     password: string
+    loading: boolean,
 };
 
 interface Props extends WithStyles<keyof typeof styles> {
@@ -33,7 +36,8 @@ interface Props extends WithStyles<keyof typeof styles> {
 class Login extends React.Component<Props, State> {
     state = {
         userName: '',
-        password: ''
+        password: '',
+        loading: false
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -41,9 +45,20 @@ class Login extends React.Component<Props, State> {
             [name]: val,
         });
     };
-    handleSubmit = () => {
-        window.console.log(history);
-        this.props.history.push('/index');
+    handleSubmit = (event: any) => {
+        event.preventDefault();
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        axios.post('localhost:3000/auth/token', {
+            username: this.state.userName,
+            password: this.state.password,
+        }).then(request => {
+            window.console.log(request);
+            this.props.history.push('/index');
+        });
     };
     render() {
         return (
@@ -89,7 +104,9 @@ class Login extends React.Component<Props, State> {
                         <CardActions style={{marginTop: 30, padding: 0}}>
                             <Button
                                 raised
-                                disabled={this.state.userName === '' || this.state.password === ''}
+                                disabled={
+                                    this.state.userName === '' || this.state.password === '' || this.state.loading
+                                }
                                 color="primary"
                                 style={{
                                     width: '100%',
@@ -105,7 +122,7 @@ class Login extends React.Component<Props, State> {
                                 }
                                 onClick={this.handleSubmit}
                             >
-                                登录
+                                {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
                             </Button>
                         </CardActions>
                     </Card>
