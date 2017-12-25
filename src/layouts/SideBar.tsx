@@ -12,6 +12,7 @@ import Badge from 'material-ui/Badge';
 import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
+import { History } from 'history';
 
 const styles = {
     bigAvatar: {
@@ -56,7 +57,11 @@ type State = {
     user: object
 };
 
-class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
+interface Props extends WithStyles<keyof typeof styles> {
+    history: History;
+}
+
+class SideBar extends React.Component<Props, State> {
     state = {
         navs: [
             {
@@ -185,7 +190,16 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
             message: 5,
         },
     };
-
+    componentDidMount() {
+        const user = localStorage.getItem('notadd_user');
+        if (user === null) {
+            this.props.history.push('/login');
+        } else {
+            const userState = Object.assign(this.state.user);
+            userState.name = JSON.parse(user)['username'];
+            this.setState({user: userState})
+        }
+    }
     handleClick(index: number, subIndex: any) {
         const sides = Object.assign({}, this.state.navs);
         if (subIndex === null) {
@@ -212,19 +226,6 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
         this.setState({ navs: arr });
     }
-
-    handleSelected(father: any) {
-        let select = false;
-        const arr = father.children;
-        for (let i = 0; i < arr.length; i += 1) {
-            if (arr[i].path === location.pathname) {
-                select = true;
-                break;
-            }
-        }
-        return select;
-    }
-
     render() {
         return (
             <div className="sideBar">
@@ -247,7 +248,7 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
                             <p>{this.state.user.email}</p>
                             <div>
                                 <Badge
-                                    className={this.props.classes.badge}
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={{
                                         colorAccent: this.props.classes.badge,
                                     }}
@@ -258,7 +259,7 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Notifications/>
                                 </Badge>
                                 <Badge
-                                    className={this.props.classes.badge}
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={ {
                                         colorAccent: this.props.classes.badge,
                                     } }
@@ -269,7 +270,7 @@ class SideBar extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <MailIcon/>
                                 </Badge>
                                 <Badge
-                                    className={this.props.classes.badge}
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={{
                                         colorAccent: this.props.classes.badge,
                                     }}

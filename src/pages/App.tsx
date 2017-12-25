@@ -6,10 +6,10 @@ import Configurations from "./Configurations";
 import Debug from "./Debug";
 import Extension from "./Extension";
 import Login from './Login';
-import Mail from "./Mail";
-import Seo from "./Seo";
+import Mail from './Mail';
+import Seo from './Seo';
 import Side from '../layouts/SideBar';
-import Upload from "./Upload";
+import Upload from './Upload';
 
 type Props = RouteProps;
 
@@ -39,7 +39,6 @@ class App extends React.Component<Props, {}> {
                             </div>
                         </div>
                     }}/>
-                    <Route exact path="/asdsfsfsf" component={Login} />
                 </Switch>
             </Router>
         );

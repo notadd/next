@@ -62,8 +62,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     control={
                                         <Button color="primary" className={this.props.classes.smallBtn} raised dense>
                                             清除
-                                        </Button>
-                                    }
+                                        </Button>}
                                 />
                             </Grid>
                         </Grid>
