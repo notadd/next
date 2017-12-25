@@ -96,6 +96,7 @@
     "private": true,
     "workspaces": [
         "packages/backend",
+        "packages/backend-mix",
         "packages/common",
         "packages/core",
         "packages/server",
