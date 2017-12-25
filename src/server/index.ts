@@ -1,17 +1,20 @@
 import { NotaddFactory } from '@notadd/core';
 import { ApplicationModule } from './modules/application.module';
-import { Logger } from "@nestjs/common";
-import * as ip from "ip";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { FlubErrorHandler } from "nestjs-flub/packages";
+import { Logger } from '@nestjs/common';
+import * as ip from 'ip';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { FlubErrorHandler } from 'nestjs-flub/packages';
+import * as express from 'express';
 
 export async function bootstrap() {
     const port = 3000;
     const address = `http://${ip.address()}:${port}`;
+    const server = express();
+    server.use(express.static(process.cwd() + '/public/'));
     /**
      * @type { INestApplication }
      */
-    const application = await NotaddFactory.create(ApplicationModule);
+    const application = await NotaddFactory.create(ApplicationModule, server);
     application.useGlobalFilters(new FlubErrorHandler());
     /**
      * @type { Logger }

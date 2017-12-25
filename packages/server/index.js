@@ -14,14 +14,17 @@ const common_1 = require("@nestjs/common");
 const ip = require("ip");
 const swagger_1 = require("@nestjs/swagger");
 const packages_1 = require("nestjs-flub/packages");
+const express = require("express");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const port = 3000;
         const address = `http://${ip.address()}:${port}`;
+        const server = express();
+        server.use(express.static(process.cwd() + '/public/'));
         /**
          * @type { INestApplication }
          */
-        const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule);
+        const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule, server);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
         /**
          * @type { Logger }
