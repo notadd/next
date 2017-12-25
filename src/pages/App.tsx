@@ -1,10 +1,10 @@
-import createBrowserHistory from 'history/createBrowserHistory';
+import createBrowserHistory from "history/createBrowserHistory";
 import * as React from 'react';
-import { Route, RouteProps, Router, Switch } from 'react-router';
-import Header from '../layouts/Header';
-import Configurations from './Configurations';
-import Debug from './Debug';
-import Extension from './Extension';
+import { Route, RouteProps, Router, Switch } from "react-router";
+import Header from "../layouts/Header";
+import Configurations from "./Configurations";
+import Debug from "./Debug";
+import Extension from "./Extension";
 import Login from './Login';
 import Mail from './Mail';
 import Seo from './Seo';
@@ -35,9 +35,11 @@ class App extends React.Component<Props, {}> {
                                     <Route exact path="/mail" component={Mail}/>
                                     <Route exact path="/debug" component={Debug}/>
                                     <Route exact path="/extension" component={Extension}/>
+                                    <Route exact path="/module/open-module" component={ModuleOpen}/>
+                                    <Route exact path="/module/domain-config" component={ModuleDomain}/>
                                 </div>
                             </div>
-                        </div>;
+                        </div>
                     }}/>
                 </Switch>
             </Router>
