@@ -10,6 +10,8 @@ import Mail from './Mail';
 import Seo from './Seo';
 import Side from '../layouts/SideBar';
 import Upload from './Upload';
+import ModuleOpen from './ModuleOpen';
+import ModuleDomain from './ModuleDomain';
 
 type Props = RouteProps;
 
