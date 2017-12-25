@@ -20,9 +20,6 @@ import Dialog, {
 } from 'material-ui/Dialog';
 
 const styles = {
-    clearBtn: {
-
-    },
     evenRow: {
         'background': '#f7f7f7',
     },
@@ -40,16 +37,10 @@ const styles = {
         'border-top': '1px solid rgba(235, 235, 235, 1)',
         'border-collapse': 'inherit',
     },
-    tableHead: {
-        'font-size': '12px',
-        'color': '#808080',
-    },
-    tableBody: {
-        'font-size': '12px',
-        'color': '#808080',
-    },
     tableCell: {
         'text-align': 'left',
+        'padding-top': '1px',
+        'padding-bottom': '0',
     },
     tableCellStatus: {
         'text-align': 'left',
@@ -108,7 +99,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                 <h4 className="title">开启拓展</h4>
                 <Paper className={this.props.classes.root}>
                     <Table className={this.props.classes.table}>
-                        <TableHead className={this.props.classes.tableHead}>
+                        <TableHead className="table-head">
                             <TableRow>
                                 <TableCell>拓展名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
@@ -117,7 +108,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                 <TableCell numeric></TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody className={this.props.classes.tableBody}>
+                        <TableBody className="table-body">
                             {list.map((n, index) => {
                                 return (
                                     <TableRow
@@ -165,7 +156,6 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                     >
                         <IconButton
                             onClick={this.handleClose}
-                            className={this.props.classes.clearBtn}
                         >
                             <ClearIcon />
                         </IconButton>
