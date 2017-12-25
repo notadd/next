@@ -13,3 +13,7 @@
     font-size: 12px !important;
     color: #808080 !important;
 }
+.table-body .table-check-box{
+    width: inherit;
+    height: inherit;
+}

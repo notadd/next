@@ -1,9 +1,8 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui-icons/Delete';
 import Switch from 'material-ui/Switch';
+import Checkbox from 'material-ui/Checkbox';
 import Table, {
     TableBody,
     TableCell,
@@ -43,17 +42,17 @@ type State = {
 };
 
 let id = 0;
-function createData(name: any, author: any, descri: any, status: boolean,) {
+function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean,) {
     id += 1;
-    return { id, name, author, descri, status };
+    return { id, name, domain, defaul, other, use };
 }
 
 const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
+    createData('notadd', '多域名功能未开启', true, '/', true),
+    createData('商城', '多域名功能未开启', false, '无', false),
+    createData('商家', '多域名功能未开启', false, '无', false),
+    createData('CMS', '多域名功能未开启', false, '无', false),
+    createData('Notadd2', '多域名功能未开启', false, '无', false),
 ];
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -62,12 +61,22 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     };
     handleChange = (pro: any) => (event: any, checked: any,) => {
         if (checked) {
-            pro.status = true;
+            pro.use = true;
         } else {
-            pro.status = false;
+            pro.use = false;
         }
         this.setState({
             [pro]: checked,
+        });
+    };
+    changeCheckBox = (pro: any) => (event: any) => {
+        if (event.target.checked) {
+            pro.defaul = true;
+        } else {
+            pro.defaul = false;
+        }
+        this.setState({
+            [name]: event.target.checked,
         });
     };
     render() {
@@ -82,10 +91,10 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                         <TableHead className="table-head">
                             <TableRow>
                                 <TableCell>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
+                                <TableCell numeric>使用域名</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
@@ -98,24 +107,25 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                     >
                                         <TableCell>{n.name}</TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
+                                            {n.domain}
                                         </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            <Switch
-                                                checked={n.status}
-                                                onChange={this.handleChange(n)}
-                                                aria-label="n.status"
+                                            <Checkbox
+                                                className="table-check-box"
+                                                checked={n.defaul}
+                                                onChange={this.changeCheckBox(n)}
+                                                value="n.defaul"
                                             />
                                         </TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.other}
+                                        </TableCell>
                                         <TableCell numeric>
-                                            <IconButton
-                                                className={this.props.classes.menuBtn}
-                                            >
-                                                <DeleteIcon />
-                                            </IconButton>
+                                            <Switch
+                                                checked={n.use}
+                                                onChange={this.handleChange(n)}
+                                                aria-label="n.use"
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 );
