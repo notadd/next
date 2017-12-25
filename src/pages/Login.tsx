@@ -8,7 +8,7 @@ import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import { CircularProgress } from 'material-ui/Progress';
 import { History } from 'history';
-import axios from 'axios';
+// import axios from 'axios';
 
 const styles = {
     card: {
@@ -52,13 +52,20 @@ class Login extends React.Component<Props, State> {
                 loading: true,
             },
         );
-        axios.post('localhost:3000/auth/token', {
+        // axios.post('localhost:3000/auth/token', {
+        //     username: this.state.userName,
+        //     password: this.state.password,
+        // }).then(response => {
+        //     if (response.status === 200) {
+        const user = {
             username: this.state.userName,
-            password: this.state.password,
-        }).then(request => {
-            window.console.log(request);
-            this.props.history.push('/index');
-        });
+            password: this.state.password
+        };
+        localStorage.setItem('notadd_user', JSON.stringify(user));
+        // localStorage.setItem('notadd_token', response.data.data.access_token);
+        this.props.history.push('/index');
+            // }
+        // });
     };
     render() {
         return (
@@ -96,6 +103,7 @@ class Login extends React.Component<Props, State> {
                                 <Input
                                     className={this.props.classes.formLabelFont}
                                     id="name-simple"
+                                    type="password"
                                     onChange={this.handleChange('password')}
                                     value={this.state.password}
                                 />
