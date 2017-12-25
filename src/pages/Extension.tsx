@@ -1,8 +1,10 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import ClearIcon from 'material-ui-icons/Clear';
 import Switch from 'material-ui/Switch';
 import Table, {
     TableBody,
@@ -10,8 +12,27 @@ import Table, {
     TableHead,
     TableRow,
 } from 'material-ui/Table';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from 'material-ui/Dialog';
 
 const styles = {
+    clearBtn: {
+
+    },
+    evenRow: {
+        'background': '#f7f7f7',
+    },
+    menuBtn: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#ffffff',
+        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+    },
     root: {
         'padding': '40px 30px',
     },
@@ -34,13 +55,6 @@ const styles = {
         'text-align': 'left',
         'padding-left': '34px',
     },
-    menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
-    },
 };
 type State = {
 };
@@ -61,6 +75,9 @@ const list = [
 
 class Extension extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
+        open: false,
+        modalId: '',
+        modalName: '',
     };
     handleChange = (pro: any) => (event: any, checked: any,) => {
         if (checked) {
@@ -71,6 +88,16 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         this.setState({
             [pro]: checked,
         });
+    };
+    handleClickOpen = (pro: any) => {
+        this.state.modalName = pro.name;
+        this.state.modalId = pro.id;
+        this.setState({
+            open: true,
+        });
+    };
+    handleClose = () => {
+        this.setState({ open: false });
     };
     render() {
         return (
@@ -91,10 +118,11 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                             </TableRow>
                         </TableHead>
                         <TableBody className={this.props.classes.tableBody}>
-                            {list.map(n => {
+                            {list.map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
                                         <TableCell>{n.name}</TableCell>
@@ -112,7 +140,10 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                             />
                                         </TableCell>
                                         <TableCell numeric>
-                                            <IconButton className={this.props.classes.menuBtn}>
+                                            <IconButton
+                                                className={this.props.classes.menuBtn}
+                                                onClick={() => this.handleClickOpen(n)}
+                                            >
                                                 <DeleteIcon />
                                             </IconButton>
                                         </TableCell>
@@ -122,6 +153,37 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                         </TableBody>
                     </Table>
                 </Paper>
+                <Dialog
+                    open={this.state.open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={this.handleClose}
+                            className={this.props.classes.clearBtn}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        <h4>确定要删除拓展名称"{this.state.modalName}"吗?</h4>
+                        <DialogContentText id="alert-dialog-description">
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={this.handleClose}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleClose} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }

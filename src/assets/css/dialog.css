@@ -1,0 +1,50 @@
+.dialog-content > div:nth-child(2) {
+    min-width: 640px;
+    min-height: 200px;
+    border-radius: 0;
+}
+.dialog-content .dialog-title {
+    padding: 0;
+    text-align: right;
+}
+.dialog-content .dialog-title button{
+    height: 34px;
+    font-size: 20px;
+}
+.dialog-content .dialog-title button > span{
+    padding-top: 10px;
+}
+.dialog-content .dialog-content {
+    padding: 0 20px;
+}
+.dialog-content .dialog-content h4{
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    letter-spacing: 0.9px;
+}
+.dialog-content .dialog-actions{
+    margin: 20px 10px 20px 20px;
+}
+.dialog-content .dialog-actions > div{
+    margin-right: 10px;
+}
+.dialog-content .dialog-actions div button{
+    width: 88px;
+    height: 36px;
+    border-radius: 4px;
+}
+.dialog-content .dialog-actions div:first-child button{
+    background-color: #e3e6ea;
+}
+.dialog-content .dialog-actions div:first-child button span{
+    color: #333;
+    font-size: 12px;
+}
+.dialog-content .dialog-actions div:last-child button{
+    background-color: #3f51b5;
+}
+.dialog-content .dialog-actions div:last-child button span{
+    color: #fff;
+    font-size: 12px;
+}
