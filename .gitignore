@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+.idea/
+yarn.lock
 
 # testing
 /coverage
