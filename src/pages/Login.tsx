@@ -7,6 +7,7 @@ import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import { CircularProgress } from 'material-ui/Progress';
+// import Prompt from '../components/Prompt';
 import { History } from 'history';
 import axios from 'axios';
 
@@ -37,7 +38,7 @@ class Login extends React.Component<Props, State> {
     state = {
         userName: '',
         password: '',
-        loading: false
+        loading: false,
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Route, RouteProps, Switch } from 'react-router';
 import Header from '../layouts/Header';
-import Home from './Home';
 import Configurations from './Configurations';
 import Debug from './Debug';
 import Extension from './Extension';
@@ -22,8 +21,6 @@ import { HashRouter } from 'react-router-dom';
 type Props = RouteProps;
 
 class App extends React.Component<Props, {}> {
-    state = {
-    };
     render() {
         return (
             <HashRouter  basename="/">
@@ -33,28 +30,29 @@ class App extends React.Component<Props, {}> {
                         strict
                         path="/"
                         children={() => {
-                            return <div className="main-view">
-                                <Header/>
-                                <div className="right-view">
-                                    <Side/>
-                                    <div className="view">
-                                        <Route exact path="/home" component={Home}/>
-                                        <Route exact path="/configurations" component={Configurations}/>
-                                        <Route exact path="/seo" component={Seo}/>
-                                        <Route exact path="/upload" component={Upload}/>
-                                        <Route exact path="/mail" component={Mail}/>
-                                        <Route exact path="/debug" component={Debug}/>
-                                        <Route exact path="/extension" component={Extension}/>
-                                        <Route exact path="/module/open-module" component={ModuleOpen}/>
-                                        <Route exact path="/module/domain-config" component={ModuleDomain}/>
-                                        <Route exact path="/module/import-export" component={ModuleImport}/>
-                                        <Route exact path="/module/install" component={ModuleInstall}/>
-                                        <Route exact path="/addon/openAddon" component={AddonOpen}/>
-                                        <Route exact path="/addon/import-export" component={AddonImport}/>
-                                        <Route exact path="/addon/install" component={AddonInstall}/>
+                            return (
+                                <div className="main-view">
+                                    <Header/>
+                                    <div className="right-view">
+                                        <Side/>
+                                        <div className="view">
+                                            <Route exact path="/configurations" component={Configurations}/>
+                                            <Route exact path="/seo" component={Seo}/>
+                                            <Route exact path="/upload" component={Upload}/>
+                                            <Route exact path="/mail" component={Mail}/>
+                                            <Route exact path="/debug" component={Debug}/>
+                                            <Route exact path="/extension" component={Extension}/>
+                                            <Route exact path="/module/open-module" component={ModuleOpen}/>
+                                            <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                                            <Route exact path="/module/import-export" component={ModuleImport}/>
+                                            <Route exact path="/module/install" component={ModuleInstall}/>
+                                            <Route exact path="/addon/openAddon" component={AddonOpen}/>
+                                            <Route exact path="/addon/import-export" component={AddonImport}/>
+                                            <Route exact path="/addon/install" component={AddonInstall}/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>;
+                            );
                         }}
                     />
                 </Switch>
