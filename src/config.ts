@@ -1,8 +1,10 @@
 import yaml from 'js-yaml';
 import fs from 'fs';
 
-const notaddYamlFilePath = __dirname+'/../.notadd.yml';
-let config = yaml.load(fs.readFileSync(notaddYamlFilePath));
+const ormConfigFilePath = __dirname+'/../ormconfig.yml';
+let config = {
+  database: yaml.load(fs.readFileSync(ormConfigFilePath))
+};
 
 export config;
 export default config;
