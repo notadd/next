@@ -9,27 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const config_1 = require("../config");
 exports.databaseProviders = [
     {
         provide: 'DbConnectionToken',
-        useFactory: () => __awaiter(this, void 0, void 0, function* () {
-            return typeorm_1.createConnection({
-                type: 'postgres',
-                host: '192.168.109.120',
-                port: 5432,
-                username: 'postgres',
-                password: '123qwe',
-                database: 'new',
-                entities: [
-                    process.cwd() + '/**/*.entity.js',
-                ],
-                migrations: [
-                    process.cwd() + '/**/*.migration.js',
-                ],
-                logging: true,
-                migrationsRun: true,
-                synchronize: false,
-            });
-        }),
+        useFactory: () => __awaiter(this, void 0, void 0, function* () { return typeorm_1.createConnection(config_1.database.default); }),
     },
 ];
