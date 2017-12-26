@@ -12,6 +12,18 @@
 #root {
     height: inherit;
 }
+.header-search {
+    position: inherit !important;
+}
+.header-search > div {
+    top: 0 !important;
+    left: 0 !important;
+    width: 330px;
+    height: 70px;
+}
+.header-search > div > ul {
+
+}
 .top-action-module {
     position: relative;
 }

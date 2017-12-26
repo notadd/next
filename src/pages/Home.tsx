@@ -1,6 +1,8 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import Add from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 
 const styles = {
@@ -159,6 +161,9 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             </div>
                                         )
                                     })}
+                                    <Button fab color="accent" className="absolute">
+                                        <Add />
+                                    </Button>
                                 </div>
                             </div>
                             <ul>

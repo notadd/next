@@ -18,6 +18,14 @@
 .home .bottom-content .home-bg > div{
     background: rgba(60, 141, 209, .8);
     height: 250px;
+    position: relative;
+}
+.home .bottom-content .home-bg > div > button{
+    position: absolute;
+    right: 30px;
+    bottom: -30px;
+    width: 60px;
+    height: 60px;
 }
 .home .bottom-content .home-bg > div > h4{
     color: rgb(255, 255, 255);

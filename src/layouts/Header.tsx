@@ -6,6 +6,7 @@ import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
@@ -77,6 +78,7 @@ type State = {
     value: number,
     user: object,
     fullScreen: boolean,
+    openSearch: boolean,
 };
 
 class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -113,9 +115,13 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
             name: '后台管理员',
         },
         fullScreen: false,
+        openSearch: false,
     };
     handleChange = (event: any, value: any) => {
         this.setState({ value });
+    };
+    handleOpenSearch = () => {
+        this.setState({ openSearch: true });
     };
     handleFullScreen = () => {
         this.setState({ fullScreen: !this.state.fullScreen });
@@ -191,10 +197,18 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         aria-haspopup="true"
                         style={{background: 'none', marginLeft: '0'}}
                         className={this.props.classes.menuBtn}
+                        onClick={this.handleOpenSearch}
                         color="contrast"
                     >
                         <Search/>
                     </IconButton>
+                    <Menu
+                        className="header-search"
+                        id="lock-menu"
+                        open={this.state.openSearch}
+                    >
+                        <MenuItem>eyrur</MenuItem>
+                    </Menu>
                     <BottomNavigation
                         value={value}
                         onChange={this.handleChange}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, RouteProps, Switch } from 'react-router';
 import Header from '../layouts/Header';
+import Home from './Home';
 import Configurations from './Configurations';
 import Debug from './Debug';
 import Extension from './Extension';
@@ -36,6 +37,7 @@ class App extends React.Component<Props, {}> {
                                     <div className="right-view">
                                         <Side/>
                                         <div className="view">
+                                            <Route exact path="/home" component={Home}/>
                                             <Route exact path="/configurations" component={Configurations}/>
                                             <Route exact path="/seo" component={Seo}/>
                                             <Route exact path="/upload" component={Upload}/>
