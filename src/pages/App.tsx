@@ -12,6 +12,7 @@ import Upload from './Upload';
 import ModuleOpen from './ModuleOpen';
 import ModuleDomain from './ModuleDomain';
 import ModuleImport from './ModuleImport';
+import ModuleInstall from './ModuleInstall';
 import { HashRouter } from 'react-router-dom';
 
 type Props = RouteProps;
@@ -42,6 +43,7 @@ class App extends React.Component<Props, {}> {
                                         <Route exact path="/module/open-module" component={ModuleOpen}/>
                                         <Route exact path="/module/domain-config" component={ModuleDomain}/>
                                         <Route exact path="/module/import-export" component={ModuleImport}/>
+                                        <Route exact path="/module/install" component={ModuleInstall}/>
                                     </div>
                                 </div>
                             </div>;
