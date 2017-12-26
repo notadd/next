@@ -4,8 +4,8 @@ import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import FileDownload from 'material-ui-icons/FileDownload';
 import ClearIcon from 'material-ui-icons/Clear';
-import Switch from 'material-ui/Switch';
 import Table, {
     TableBody,
     TableCell,
@@ -21,6 +21,15 @@ import Dialog, {
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
+    },
+    downBtn: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#3f51b5',
+        'color': '#fff',
+        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        'font-size': '16px',
     },
     menuBtn: {
         'width': '32px',
@@ -41,10 +50,6 @@ const styles = {
         'padding-top': '1px',
         'padding-bottom': '0',
     },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
-    },
 };
 type State = {
 };
@@ -58,26 +63,16 @@ function createData(name: any, author: any, descri: any, status: boolean) {
 const list = [
     createData('用户中心', 'Mark', '142513233', true),
     createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
+    createData('商家', 'eref', '142513233', true),
     createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
+    createData('Notadd2', 'eref', '142513233', true),
 ];
 
-class Extension extends React.Component<WithStyles<keyof typeof styles>, State> {
+class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
         modalId: '',
         modalName: '',
-    };
-    handleChange = (pro: any) => (event: any, checked: any) => {
-        if (checked) {
-            pro.status = true;
-        } else {
-            pro.status = false;
-        }
-        this.setState({
-            [pro]: checked,
-        });
     };
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
@@ -86,6 +81,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
             open: true,
         });
     };
+    handleDownLoad = () => {};
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -93,17 +89,16 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         return (
             <div>
                 <p className="crumbs">
-                    全局 / 应用管理 / 拓展配置
+                    全局 / 应用管理 / 模块配置
                 </p>
-                <h4 className="title">开启拓展</h4>
+                <h4 className="title">本地安装</h4>
                 <Paper className={this.props.classes.root}>
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>拓展名称</TableCell>
+                                <TableCell>模块名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
                                 <TableCell numeric></TableCell>
                             </TableRow>
                         </TableHead>
@@ -118,24 +113,24 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                         <TableCell>{n.name}</TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.author}
-                                            </TableCell>
+                                        </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.descri}
-                                            </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            <Switch
-                                                checked={n.status}
-                                                onChange={this.handleChange(n)}
-                                                aria-label="n.status"
-                                            />
                                         </TableCell>
                                         <TableCell numeric>
-                                            <IconButton
-                                                className={this.props.classes.menuBtn}
-                                                onClick={() => this.handleClickOpen(n)}
-                                            >
-                                                <DeleteIcon />
-                                            </IconButton>
+                                            {
+                                                n.status ? <IconButton
+                                                    className={this.props.classes.menuBtn}
+                                                    onClick={() => this.handleClickOpen(n)}
+                                                >
+                                                    <DeleteIcon />
+                                                </IconButton> : <IconButton
+                                                    className={this.props.classes.downBtn}
+                                                    onClick={() => this.handleDownLoad()}
+                                                >
+                                                    <FileDownload />
+                                                </IconButton>
+                                            }
                                         </TableCell>
                                     </TableRow>
                                 );
@@ -160,7 +155,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除拓展名称"{this.state.modalName}"吗?</h4>
+                        <h4>确定要删除模块名称"{this.state.modalName}"吗?</h4>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
                         <Button onClick={this.handleClose}>
@@ -175,4 +170,4 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         );
     }
 }
-export default withStyles(styles)(Extension);
+export default withStyles(styles)(ModuleInstall);

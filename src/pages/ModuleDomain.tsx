@@ -42,7 +42,7 @@ type State = {
 };
 
 let id = 0;
-function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean,) {
+function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean) {
     id += 1;
     return { id, name, domain, defaul, other, use };
 }
@@ -59,7 +59,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     state = {
         open: false,
     };
-    handleChange = (pro: any) => (event: any, checked: any,) => {
+    handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.use = true;
         } else {

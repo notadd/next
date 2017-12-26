@@ -63,7 +63,7 @@ const list = [
     createData('Notadd2', 'eref', '142513233', false),
 ];
 
-class Extension extends React.Component<WithStyles<keyof typeof styles>, State> {
+class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
         modalId: '',
@@ -93,14 +93,14 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         return (
             <div>
                 <p className="crumbs">
-                    全局 / 应用管理 / 拓展配置
+                    全局 / 应用管理 / 插件配置
                 </p>
-                <h4 className="title">开启拓展</h4>
+                <h4 className="title">开启插件</h4>
                 <Paper className={this.props.classes.root}>
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>拓展名称</TableCell>
+                                <TableCell>插件名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
                                 <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
@@ -118,10 +118,10 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                         <TableCell>{n.name}</TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.author}
-                                            </TableCell>
+                                        </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.descri}
-                                            </TableCell>
+                                        </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             <Switch
                                                 checked={n.status}
@@ -160,7 +160,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除拓展名称"{this.state.modalName}"吗?</h4>
+                        <h4>确定要删除插件名称"{this.state.modalName}"吗?</h4>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
                         <Button onClick={this.handleClose}>
@@ -175,4 +175,4 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         );
     }
 }
-export default withStyles(styles)(Extension);
+export default withStyles(styles)(AddonOpen);
