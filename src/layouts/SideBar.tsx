@@ -1,5 +1,5 @@
 import * as React from 'react';
-import createBrowserHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
 import InboxIcon from 'material-ui-icons/MoveToInbox';
@@ -194,7 +194,7 @@ class SideBar extends React.Component<Props, State> {
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
         if (user === null) {
-            createBrowserHistory().push('/login');
+            createHashHistory().push('/login');
             window.location.reload();
         } else {
             const userState = Object.assign(this.state.user);
@@ -298,8 +298,12 @@ class SideBar extends React.Component<Props, State> {
                                     button
                                     onClick={() => this.handleClick(index, null)}
                                     className={
-                                        classNames(item.open ? this.props.classes.selectFirstLevelMenu : ''
-                                        , item.open ? 'selectFirstLevelMenu' : '')}
+                                        classNames(
+                                            item.open ?
+                                            this.props.classes.selectFirstLevelMenu : '',
+                                            item.open ? 'selectFirstLevelMenu' : ''
+                                        )
+                                    }
                                     style={{
                                         paddingTop: 0,
                                         paddingBottom: 0,
@@ -335,10 +339,13 @@ class SideBar extends React.Component<Props, State> {
                                                     >
                                                         <ListItem
                                                             button
-                                                            className={classNames(this.props.classes.childItem,
-                                                                child.open ? this.props.classes.innerRoot : '',
-                                                                child.open ? 'innerRootSelect' : '',
-                                                            )}
+                                                            className={
+                                                                classNames(
+                                                                    this.props.classes.childItem,
+                                                                    child.open ? this.props.classes.innerRoot : '',
+                                                                    child.open ? 'innerRootSelect' : '',
+                                                                )
+                                                            }
                                                             style={{
                                                                 paddingRight: 25,
                                                             }}
