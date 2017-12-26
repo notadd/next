@@ -9,13 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const fs_1 = require("fs");
-const js_yaml_1 = require("js-yaml");
-const ormConfigFilePath = process.cwd() + '/ormconfig.yml';
-console.log(js_yaml_1.load(fs_1.readFileSync(ormConfigFilePath).toString()).default);
+const config_1 = require("../../config");
 exports.databaseProviders = [
     {
         provide: 'DbConnectionToken',
-        useFactory: () => __awaiter(this, void 0, void 0, function* () { return typeorm_1.createConnection(js_yaml_1.load(fs_1.readFileSync(ormConfigFilePath).toString()).default); }),
+        useFactory: () => __awaiter(this, void 0, void 0, function* () { return typeorm_1.createConnection(config_1.database.default); }),
     },
 ];

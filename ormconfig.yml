@@ -6,9 +6,9 @@ default:
     password: "123qwe"
     database: "new"
     entities:
-        - '/**/*.entity.js'
+        - '**/*.entity.js'
     migrations:
-        - '/**/*.migration.js'
+        - '**/*.migration.js'
     logging: true
     migrationsRun: true
-    synchronize: true
+    synchronize: false
