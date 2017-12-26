@@ -1,25 +1,32 @@
 {
     "compilerOptions": {
-        "allowJs": false,
+        "allowJs": true,
         "baseUrl": "./../../",
         "declaration": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
         "jsx": "react",
         "lib": ["es6", "dom"],
-        "module": "commonjs",
+        "module": "ESNext",
+        "moduleResolution": "node",
         "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
         "noLib": false,
-        "noUnusedLocals": false,
+        "noUnusedLocals": true,
         "outDir": "../../node_modules/@notadd/backend-mix",
         "removeComments": true,
-        "sourceMap": true,
         "strict": true,
-        "target": "ES5"
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "ES2015"
     },
     "include": [
         "*.ts",
-        "**/*.ts"
+        "*.tsx",
+        "**/*.ts",
+        "**/*.tsx"
     ],
     "exclude": [
         "./**/*.spec.ts"

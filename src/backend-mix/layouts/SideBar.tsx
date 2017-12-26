@@ -443,4 +443,4 @@ class SideBar extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)<{}>(SideBar);
+export default withStyles(styles)<any>(SideBar);
