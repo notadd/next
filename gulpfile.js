@@ -26,7 +26,7 @@ gulp.task('default', function () {
         });
     });
     nodemon({
-        script: 'main.js',
+        script: 'node_modules/@notadd/server/bootstrap.js',
         watch: [
             "packages/",
             "main.js",
