@@ -2,6 +2,9 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
+import FileDownload from 'material-ui-icons/FileDownload';
+import FileUpload from 'material-ui-icons/FileUpload';
 import Table, {
     TableBody,
     TableCell,
@@ -17,8 +20,9 @@ const styles = {
         'width': '32px',
         'height': '32px',
         'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        'background-color': '#3f51b5',
+        'color': '#fff',
+        'margin-left': '10px',
     },
     root: {
         'padding': '40px 30px',
@@ -93,11 +97,23 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
 
     render() {
         return (
-            <div>
+            <div className="top-action-module">
                 <p className="crumbs">
                     全局 / 应用管理 / 模块配置
                 </p>
                 <h4 className="title">导入/导出</h4>
+                <div className="btn-group">
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <FileUpload />
+                    </IconButton>
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <FileDownload />
+                    </IconButton>
+                </div>
                 <Paper className={this.props.classes.root}>
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">

@@ -12,3 +12,11 @@
 #root {
     height: inherit;
 }
+.top-action-module {
+    position: relative;
+}
+.top-action-module .btn-group {
+    position: absolute;
+    right: 0;
+    top: 36px;
+}
