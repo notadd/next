@@ -12,7 +12,6 @@ const typeorm_1 = require("typeorm");
 const fs_1 = require("fs");
 const js_yaml_1 = require("js-yaml");
 const ormConfigFilePath = process.cwd() + '/ormconfig.yml';
-console.log(js_yaml_1.load(fs_1.readFileSync(ormConfigFilePath).toString()).default);
 exports.databaseProviders = [
     {
         provide: 'DbConnectionToken',

@@ -23,15 +23,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 let SettingService = class SettingService {
-    /**
-     * @param { Repository<Setting> } repository
-     */
     constructor(repository) {
         this.repository = repository;
     }
-    /**
-     * @returns { Promise<Setting[]> }
-     */
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.find();

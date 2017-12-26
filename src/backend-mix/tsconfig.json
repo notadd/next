@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "baseUrl": "./../../",
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "lib": ["es6", "dom"],
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "noLib": false,
+        "noUnusedLocals": false,
+        "outDir": "../../node_modules/@notadd/backend-mix",
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "ES5"
+    },
+    "include": [
+        "*.ts",
+        "**/*.ts"
+    ],
+    "exclude": [
+        "./**/*.spec.ts"
+    ]
+}

@@ -21,27 +21,15 @@ function bootstrap() {
         const address = `http://${ip.address()}:${port}`;
         const server = express();
         server.use(express.static(process.cwd() + '/public/'));
-        /**
-         * @type { INestApplication }
-         */
         const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule, server);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
-        /**
-         * @type { Logger }
-         */
         const logger = new common_1.Logger('NotaddFactory', true);
-        /**
-         * @type { SwaggerBaseConfig }
-         */
         const options = new swagger_1.DocumentBuilder()
             .setTitle('Notadd')
             .setDescription('API document for Notadd.')
             .setVersion('2.0')
             .addBearerAuth()
             .build();
-        /**
-         * @type {SwaggerDocument}
-         */
         const document = swagger_1.SwaggerModule.createDocument(application, options);
         swagger_1.SwaggerModule.setup('/api-doc', application, document);
         yield application.listen(port, () => {

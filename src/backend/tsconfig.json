@@ -10,7 +10,7 @@
         "noLib": false,
         "noUnusedLocals": false,
         "outDir": "../../node_modules/@notadd/backend",
-        "removeComments": false,
+        "removeComments": true,
         "strict": true,
         "target": "ES2015"
     },

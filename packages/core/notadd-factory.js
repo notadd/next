@@ -16,12 +16,6 @@ class NotaddFactoryStatic extends core_1.NestFactoryStatic {
         super();
         this._logger = new common_1.Logger('NotaddFactory', true);
     }
-    /**
-     * @param module
-     * @param { any } express
-     *
-     * @returns { Promise<INestApplication> }
-     */
     create(module, express = express_adapter_1.ExpressAdapter.create()) {
         const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {

@@ -4,8 +4,6 @@ import { load } from "js-yaml";
 
 const ormConfigFilePath = process.cwd() + '/ormconfig.yml';
 
-console.log(load(readFileSync(ormConfigFilePath).toString()).default);
-
 export const databaseProviders = [
     {
         provide: 'DbConnectionToken',

@@ -31,8 +31,6 @@ let AuthService = class AuthService {
     }
     validateUser(signedUser) {
         return __awaiter(this, void 0, void 0, function* () {
-            // put some validation logic here
-            // for example query user by id / email / username
             return true;
         });
     }
