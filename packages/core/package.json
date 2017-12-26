@@ -1,6 +1,6 @@
 {
     "name": "@notadd/core",
-    "version": "2.1.9",
+    "version": "2.1.10",
     "description": "Notadd Core Package.",
     "main": "main.js",
     "scripts": {
