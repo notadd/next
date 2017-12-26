@@ -23,24 +23,28 @@ class App extends React.Component<Props, {}> {
             <HashRouter  basename="/">
                 <Switch>
                     <Route exact path="/login" component={Login} />
-                    <Route strict path="/" children={() => {
-                        return <div className="main-view">
-                            <Header/>
-                            <div className="right-view">
-                                <Side/>
-                                <div className="view">
-                                    <Route exact path="/configurations" component={Configurations}/>
-                                    <Route exact path="/seo" component={Seo}/>
-                                    <Route exact path="/upload" component={Upload}/>
-                                    <Route exact path="/mail" component={Mail}/>
-                                    <Route exact path="/debug" component={Debug}/>
-                                    <Route exact path="/extension" component={Extension}/>
-                                    <Route exact path="/module/open-module" component={ModuleOpen}/>
-                                    <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                    <Route
+                        strict
+                        path="/"
+                        children={() => {
+                            return <div className="main-view">
+                                <Header/>
+                                <div className="right-view">
+                                    <Side/>
+                                    <div className="view">
+                                        <Route exact path="/configurations" component={Configurations}/>
+                                        <Route exact path="/seo" component={Seo}/>
+                                        <Route exact path="/upload" component={Upload}/>
+                                        <Route exact path="/mail" component={Mail}/>
+                                        <Route exact path="/debug" component={Debug}/>
+                                        <Route exact path="/extension" component={Extension}/>
+                                        <Route exact path="/module/open-module" component={ModuleOpen}/>
+                                        <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    }}/>
+                                </div>;
+                        }}
+                    />
                 </Switch>
             </HashRouter>
         );

@@ -298,8 +298,12 @@ class SideBar extends React.Component<Props, State> {
                                     button
                                     onClick={() => this.handleClick(index, null)}
                                     className={
-                                        classNames(item.open ? this.props.classes.selectFirstLevelMenu : ''
-                                        , item.open ? 'selectFirstLevelMenu' : '')}
+                                        classNames(
+                                            item.open ?
+                                            this.props.classes.selectFirstLevelMenu : '',
+                                            item.open ? 'selectFirstLevelMenu' : ''
+                                        )
+                                    }
                                     style={{
                                         paddingTop: 0,
                                         paddingBottom: 0,
@@ -335,10 +339,13 @@ class SideBar extends React.Component<Props, State> {
                                                     >
                                                         <ListItem
                                                             button
-                                                            className={classNames(this.props.classes.childItem,
-                                                                child.open ? this.props.classes.innerRoot : '',
-                                                                child.open ? 'innerRootSelect' : '',
-                                                            )}
+                                                            className={
+                                                                classNames(
+                                                                    this.props.classes.childItem,
+                                                                    child.open ? this.props.classes.innerRoot : '',
+                                                                    child.open ? 'innerRootSelect' : '',
+                                                                )
+                                                            }
                                                             style={{
                                                                 paddingRight: 25,
                                                             }}

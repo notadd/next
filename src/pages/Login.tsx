@@ -57,13 +57,13 @@ class Login extends React.Component<Props, State> {
             password: this.state.password,
         }).then(response => {
             if (response.status === 200) {
-            const user = {
-                username: this.state.userName,
-                password: this.state.password
-            };
-            localStorage.setItem('notadd_user', JSON.stringify(user));
-            localStorage.setItem('notadd_token', response.data.data.access_token);
-        this.props.history.push('/index');
+                const user = {
+                    username: this.state.userName,
+                    password: this.state.password
+                };
+                localStorage.setItem('notadd_user', JSON.stringify(user));
+                localStorage.setItem('notadd_token', response.data.data.access_token);
+                this.props.history.push('/index');
             }
         });
     };
@@ -74,7 +74,7 @@ class Login extends React.Component<Props, State> {
                     <Card className="innerBox">
                         <CardContent style={{padding: 0}}>
                             <h3 className="boxTitle">登录</h3>
-                            <Tooltip placement="bottom" title="Position absolute">
+                            <Tooltip placement="bottom" title="Login" onClick={this.handleSubmit}>
                                 <Button fab color="accent" className="absolute">
                                     <KeyboardArrowRight />
                                 </Button>
@@ -101,6 +101,13 @@ class Login extends React.Component<Props, State> {
                                     密码
                                 </InputLabel>
                                 <Input
+                                    onKeyUp={
+                                        (event) => {
+                                            if (event.keyCode === 13) {
+                                                this.handleSubmit(event);
+                                            }
+                                        }
+                                    }
                                     className={this.props.classes.formLabelFont}
                                     id="name-simple"
                                     type="password"
