@@ -1,10 +1,9 @@
-import createBrowserHistory from "history/createBrowserHistory";
 import * as React from 'react';
-import { Route, RouteProps, Router, Switch } from "react-router";
-import Header from "../layouts/Header";
-import Configurations from "./Configurations";
-import Debug from "./Debug";
-import Extension from "./Extension";
+import { Route, RouteProps, Switch } from 'react-router';
+import Header from '../layouts/Header';
+import Configurations from './Configurations';
+import Debug from './Debug';
+import Extension from './Extension';
 import Login from './Login';
 import Mail from './Mail';
 import Seo from './Seo';
@@ -12,17 +11,16 @@ import Side from '../layouts/SideBar';
 import Upload from './Upload';
 import ModuleOpen from './ModuleOpen';
 import ModuleDomain from './ModuleDomain';
+import { HashRouter } from 'react-router-dom';
 
 type Props = RouteProps;
-
-const history = createBrowserHistory();
 
 class App extends React.Component<Props, {}> {
     state = {
     };
     render() {
         return (
-            <Router history={ history }>
+            <HashRouter  basename="/">
                 <Switch>
                     <Route exact path="/login" component={Login} />
                     <Route strict path="/" children={() => {
@@ -44,7 +42,7 @@ class App extends React.Component<Props, {}> {
                         </div>
                     }}/>
                 </Switch>
-            </Router>
+            </HashRouter>
         );
     }
 }

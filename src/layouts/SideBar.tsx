@@ -1,5 +1,5 @@
 import * as React from 'react';
-import createBrowserHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
 import InboxIcon from 'material-ui-icons/MoveToInbox';
@@ -194,7 +194,7 @@ class SideBar extends React.Component<Props, State> {
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
         if (user === null) {
-            createBrowserHistory().push('/login');
+            createHashHistory().push('/login');
             window.location.reload();
         } else {
             const userState = Object.assign(this.state.user);
