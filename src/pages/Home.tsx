@@ -2,7 +2,6 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-import Tabs, { Tab } from 'material-ui/Tabs';
 
 const styles = {
     evenRow: {
@@ -23,10 +22,13 @@ const styles = {
         'padding': '0',
     },
     rightPaper: {
-        'padding': '0',
+        'padding': '0 30px',
     },
     root: {
         'padding': '40px 30px',
+    },
+    spanActive: {
+        'color': '#3f51b5 !important',
     },
 };
 type State = {
@@ -34,7 +36,7 @@ type State = {
 
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        value: 0,
+        value: 1,
         list: [
             {
                 img: require('../assets/images/user.jpg'),
@@ -77,8 +79,45 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                 name: 'YUcap',
             },
         ],
+        version: [
+            {
+                name: 'PHP版本',
+                intro: '3.0.1',
+            },
+            {
+                name: '系统版本',
+                intro: 'hdai nkwja hjwi',
+            },
+            {
+                name: 'CPU',
+                intro: 'x86_64',
+            },
+            {
+                name: '服务器架构',
+                intro: 'Caddy/（nwaknhfkaf）nnk',
+            },
+            {
+                name: '内存大小',
+                intro: '2654657654 Bytes',
+            },
+            {
+                name: '数据库版本',
+                intro: 'whauifhi 10.0',
+            },
+            {
+                name: 'Redis 版本',
+                intro: '3.0',
+            },
+            {
+                name: '当前时区',
+                intro: 'PRC',
+            },
+        ],
     };
     handleChange = (event: any, value: any) => {
+        this.setState({ value });
+    };
+    handleClickOpen = (value: any) => {
         this.setState({ value });
     };
     render() {
@@ -107,41 +146,70 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     {this.state.list.map((item, index) => {
                                         return (
                                             this.state.value === index &&
-                                            <div>
+                                            <div key={index}>
                                                 <div className="img">
                                                     <img src={item.img} />
                                                 </div>
                                                 <div className="intro">
                                                     <h3>{item.name}</h3>
-                                                    <p>{item.link}</p>
+                                                    <p>
+                                                        <a href={item.link} target="_blank">{item.link}</a>
+                                                    </p>
                                                 </div>
                                             </div>
                                         )
                                     })}
                                 </div>
                             </div>
-                            <Tabs
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                scrollable
-                                scrollButtons="auto"
-                            >
-                                <Tab label="Item One" />
-                                <Tab label="Item Two" />
-                                <Tab label="Item Three" />
-                                <Tab label="Item Four" />
-                                <Tab label="Item Five" />
-                                <Tab label="Item Six" />
-                                <Tab label="Item Seven" />
-                                <Tab label="Item 8" />
-                            </Tabs>
+                            <ul>
+                                {this.state.list.map((item, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <span
+                                                className={
+                                                    index === this.state.value ? this.props.classes.spanActive : ''
+                                                }
+                                                onClick={() => this.handleClickOpen(index)}
+                                            >
+                                                {item.name}
+                                            </span>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                            <div className="thank-content">
+                                感谢：
+                                <span>
+                                    <a href="" target="_blank">半缕阳光、</a>
+                                </span>
+                                <span>
+                                    <a href="" target="_blank">加菲猫</a>
+                                </span>
+                                <span className="line">/</span>
+                                <span>
+                                    <a href="" target="_blank">捐赠名单</a>
+                                </span>
+                            </div>
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper className={this.props.classes.rightPaper}>
-                            xs=6
+                            <div className="version-information">
+                                <p>
+                                    Notadd版本
+                                    <span>1.16.30</span>
+                                </p>
+                                <div>
+                                    {this.state.version.map((item, index) => {
+                                        return (
+                                            <p key={index}>
+                                                <span>{item.name}</span>
+                                                <span>{item.intro}</span>
+                                            </p>
+                                        )
+                                    })}
+                                </div>
+                            </div>
                         </Paper>
                     </Grid>
                 </Grid>

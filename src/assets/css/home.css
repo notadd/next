@@ -1,5 +1,5 @@
 .home .top-statistics{
-    margin-top: 84px;
+    margin-top: 0;
     margin-bottom: 30px;
 }
 .home .top-statistics > div {
@@ -54,9 +54,70 @@
     padding-top: 14px;
     padding-bottom: 8px;
 }
-.home .bottom-content .home-bg > div .intro p{
+.home .bottom-content .home-bg > div .intro p a{
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
+}
+.home .bottom-content ul {
+    height: 72px;
+    padding-top: 28px;
+    line-height: 20px;
+    margin: 0 10px;
+}
+.home .bottom-content ul li{
+    float: left;
+}
+.home .bottom-content ul li:last-child span{
+    border-right: 0;
+}
+.home .bottom-content ul li span {
+    padding: 0 20px;
+    border-right: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #808080;
+    min-height: inherit;
+    min-width: inherit;
+    border-radius: 0;
+    line-height: 12px;
+    cursor: pointer;
+}
+.home .bottom-content ul li span:hover {
+    color: #3f51b5;
+}
+.home .bottom-content .thank-content {
+    height: 62px;
+    line-height: 62px;
+    font-size: 12px;
+    margin: 0 30px;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+.home .bottom-content .thank-content a {
+    color: #3f51b5;
+}
+.home .bottom-content .thank-content .line {
+    padding: 0 6px;
+}
+.home .version-information > p {
+    font-size: 24px;
+    height: 82px;
+    line-height: 82px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.home .version-information > p span {
+    color: #3f51b5;
+    float: right;
+}
+.home .version-information > div {
+    padding-top: 20px;
+}
+.home .version-information > div p{
+    line-height: 32px;
+    color: #808080;
+    font-size: 12px;
+}
+.home .version-information > div p span:first-child{
+    width: 29.1%;
+    display: inline-block;
 }
 .home .bottom-content > div:last-child {
     max-width: 37.3333%;
