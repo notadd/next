@@ -13,6 +13,9 @@ import ModuleOpen from './ModuleOpen';
 import ModuleDomain from './ModuleDomain';
 import ModuleImport from './ModuleImport';
 import ModuleInstall from './ModuleInstall';
+import AddonOpen from './AddonOpen';
+import AddonImport from './AddonImport';
+import AddonInstall from './AddonInstall';
 import { HashRouter } from 'react-router-dom';
 
 type Props = RouteProps;
@@ -44,6 +47,9 @@ class App extends React.Component<Props, {}> {
                                         <Route exact path="/module/domain-config" component={ModuleDomain}/>
                                         <Route exact path="/module/import-export" component={ModuleImport}/>
                                         <Route exact path="/module/install" component={ModuleInstall}/>
+                                        <Route exact path="/addon/openAddon" component={AddonOpen}/>
+                                        <Route exact path="/addon/import-export" component={AddonImport}/>
+                                        <Route exact path="/addon/install" component={AddonInstall}/>
                                     </div>
                                 </div>
                             </div>;
