@@ -12,6 +12,7 @@ import Side from '../layouts/SideBar';
 import Upload from './Upload';
 import ModuleOpen from './ModuleOpen';
 import ModuleDomain from './ModuleDomain';
+import ModuleImport from './ModuleImport';
 
 type Props = RouteProps;
 
@@ -39,6 +40,7 @@ class App extends React.Component<Props, {}> {
                                     <Route exact path="/extension" component={Extension}/>
                                     <Route exact path="/module/open-module" component={ModuleOpen}/>
                                     <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                                    <Route exact path="/module/import-export" component={ModuleImport}/>
                                 </div>
                             </div>
                         </div>
