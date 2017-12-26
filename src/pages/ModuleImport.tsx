@@ -44,7 +44,7 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: any, description: any, version: any,) {
+function createData(check: boolean, name: any, description: any, version: any) {
     id += 1;
     return { id, check, name, description, version };
 }

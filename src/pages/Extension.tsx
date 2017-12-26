@@ -15,7 +15,6 @@ import Table, {
 import Dialog, {
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
 } from 'material-ui/Dialog';
 
@@ -51,7 +50,7 @@ type State = {
 };
 
 let id = 0;
-function createData(name: any, author: any, descri: any, status: boolean,) {
+function createData(name: any, author: any, descri: any, status: boolean) {
     id += 1;
     return { id, name, author, descri, status };
 }
@@ -70,7 +69,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         modalId: '',
         modalName: '',
     };
-    handleChange = (pro: any) => (event: any, checked: any,) => {
+    handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.status = true;
         } else {
@@ -162,8 +161,6 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         <h4>确定要删除拓展名称"{this.state.modalName}"吗?</h4>
-                        <DialogContentText id="alert-dialog-description">
-                        </DialogContentText>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
                         <Button onClick={this.handleClose}>
