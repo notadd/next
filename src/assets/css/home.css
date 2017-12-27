@@ -1,13 +1,10 @@
 .home .top-statistics{
     margin-top: 0;
-    margin-bottom: 30px;
 }
 .home .top-statistics > div {
     padding: 14px;
 }
 .home .bottom-content > div:first-child {
-    max-width: 62.6667%;
-    flex-basis: 62.6667%;
     padding: 0 16px 0 14px;
 }
 .home .bottom-content .home-bg {
@@ -26,6 +23,7 @@
     bottom: -30px;
     width: 60px;
     height: 60px;
+    z-index: 5;
 }
 .home .bottom-content .home-bg > div > h4{
     color: rgb(255, 255, 255);
@@ -66,21 +64,31 @@
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
 }
-.home .bottom-content ul {
-    height: 72px;
-    padding-top: 28px;
-    line-height: 20px;
-    margin: 0 10px;
+.home .bottom-content .teamBox {
+    min-height: 72px;
+    padding: 0 30px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
-.home .bottom-content ul li{
-    float: left;
+.home .bottom-content .teamBox div {
+    padding: 10px 20px;
+    width: auto;
+    max-width: none;
+    flex-basis: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
 }
-.home .bottom-content ul li:last-child span{
-    border-right: 0;
+.home .bottom-content .teamBox div:after {
+    content: '|';
+    position: absolute;
+    right: 0;
+}
+.home .bottom-content .teamBox div:last-child:after {
+    content: '';
 }
 .home .bottom-content ul li span {
-    padding: 0 20px;
-    border-right: 1px solid #e0e0e0;
     font-size: 12px;
     color: #808080;
     min-height: inherit;
@@ -88,6 +96,7 @@
     border-radius: 0;
     line-height: 12px;
     cursor: pointer;
+    margin-right: 19px;
 }
 .home .bottom-content ul li span:hover {
     color: #3f51b5;
@@ -128,10 +137,8 @@
     display: inline-block;
 }
 .home .bottom-content > div:last-child {
-    max-width: 37.3333%;
-    flex-basis: 37.3333%;
     padding: 0 12px 0 14px;
 }
 .home .bottom-content > div > div {
-    height: 385px;
+    min-height: 385px;
 }
