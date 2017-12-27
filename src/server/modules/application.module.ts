@@ -14,7 +14,7 @@ import { CommonModule } from "@notadd/common";
         BackendModule,
         CommonModule,
         GraphQLModule,
-        UserModule
+        UserModule,
     ],
     controllers: [
         ApplicationController,

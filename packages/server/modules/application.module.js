@@ -66,7 +66,7 @@ ApplicationModule = __decorate([
             backend_1.BackendModule,
             common_2.CommonModule,
             graphql_1.GraphQLModule,
-            user_1.UserModule
+            user_1.UserModule,
         ],
         controllers: [
             application_controller_1.ApplicationController,

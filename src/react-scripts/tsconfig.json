@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "baseUrl": "./../../",
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "noLib": false,
+        "noUnusedLocals": false,
+        "outDir": "../../node_modules/@notadd/react-scripts",
+        "removeComments": true,
+        "strict": true,
+        "target": "ES2015"
+    },
+    "include": [
+        "*.ts",
+        "**/*.ts"
+    ],
+    "exclude": [
+        "./**/*.spec.ts"
+    ]
+}
