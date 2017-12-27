@@ -105,7 +105,8 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                         className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
-                                        <TableCell>{n.name}</TableCell>
+                                        <TableCell>
+                                            {n.name}</TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.domain}
                                         </TableCell>
