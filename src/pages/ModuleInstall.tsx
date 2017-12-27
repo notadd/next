@@ -81,7 +81,8 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
             open: true,
         });
     };
-    handleDownLoad = () => {};
+    handleDownLoad = () => {
+    };
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -99,7 +100,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                 <TableCell>模块名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell numeric/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">

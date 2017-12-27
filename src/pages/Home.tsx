@@ -159,7 +159,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     </p>
                                                 </div>
                                             </div>
-                                        )
+                                        );
                                     })}
                                     <Button fab color="accent" className="absolute">
                                         <Add />
@@ -179,7 +179,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 {item.name}
                                             </span>
                                         </li>
-                                    )
+                                    );
                                 })}
                             </ul>
                             <div className="thank-content">
@@ -211,7 +211,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 <span>{item.name}</span>
                                                 <span>{item.intro}</span>
                                             </p>
-                                        )
+                                        );
                                     })}
                                 </div>
                             </div>

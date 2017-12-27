@@ -104,7 +104,7 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
                                 <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell numeric/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">

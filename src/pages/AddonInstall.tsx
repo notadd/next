@@ -81,7 +81,8 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             open: true,
         });
     };
-    handleDownLoad = () => {};
+    handleDownLoad = () => {
+    };
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -99,7 +100,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                                 <TableCell>插件名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell numeric/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
