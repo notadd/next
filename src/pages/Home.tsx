@@ -78,7 +78,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
             {
                 img: require('../assets/images/user.jpg'),
                 link: 'https://www.zuohuadong.cn/',
-                name: 'YUcap',
+                name: 'Ycap',
             },
         ],
         version: [
@@ -126,21 +126,21 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
         return (
             <div className="home">
                 <Grid container spacing={24} className="top-statistics">
-                    <Grid item xs={3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <Paper className={this.props.classes.paper}>xs=3</Paper>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <Paper className={this.props.classes.paper}>xs=3</Paper>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <Paper className={this.props.classes.paper}>xs=3</Paper>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <Paper className={this.props.classes.paper}>xs=3</Paper>
                     </Grid>
                 </Grid>
                 <Grid container spacing={24} className="bottom-content">
-                    <Grid item xs={8}>
+                    <Grid item xs={12} md={8} sm={12} style={{marginTop: 30}}>
                         <Paper className={this.props.classes.leftPaper}>
                             <div className="home-bg">
                                 <div>
@@ -166,22 +166,25 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     </Button>
                                 </div>
                             </div>
-                            <ul>
+                            <Grid className="teamBox" container spacing={40}>
                                 {this.state.list.map((item, index) => {
                                     return (
-                                        <li key={index}>
-                                            <span
-                                                className={
-                                                    index === this.state.value ? this.props.classes.spanActive : ''
-                                                }
-                                                onClick={() => this.handleClickOpen(index)}
-                                            >
-                                                {item.name}
-                                            </span>
-                                        </li>
+                                        <Grid
+                                            item
+                                            xs={1}
+                                            md={1}
+                                            sm={1}
+                                            key={index}
+                                            className={
+                                                index === this.state.value ? this.props.classes.spanActive : ''
+                                            }
+                                            onClick={() => this.handleClickOpen(index)}
+                                        >
+                                            {item.name}
+                                        </Grid>
                                     );
                                 })}
-                            </ul>
+                            </Grid>
                             <div className="thank-content">
                                 感谢：
                                 <span>
@@ -197,7 +200,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </div>
                         </Paper>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={12} md={4} style={{marginTop: 30, paddingBottom: 29}}>
                         <Paper className={this.props.classes.rightPaper}>
                             <div className="version-information">
                                 <p>
