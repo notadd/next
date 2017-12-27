@@ -200,11 +200,11 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </div>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={4} style={{marginTop: 30, paddingBottom: 29}}>
+                    <Grid item xs={12} sm={12} md={4} style={{marginTop: 30}}>
                         <Paper className={this.props.classes.rightPaper}>
-                            <div className="version-information">
+                            <div className="version-information" style={{paddingBottom: 25}}>
                                 <p>
-                                    Notadd版本
+                                    <span>Notadd版本</span>
                                     <span>1.16.30</span>
                                 </p>
                                 <div>

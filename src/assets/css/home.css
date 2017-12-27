@@ -117,12 +117,14 @@
 .home .version-information > p {
     font-size: 24px;
     height: 82px;
-    line-height: 82px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .home .version-information > p span {
-    color: #3f51b5;
-    float: right;
+    display: flex;
+    flex-wrap: nowrap;
 }
 .home .version-information > div {
     padding-top: 20px;
@@ -131,10 +133,15 @@
     line-height: 32px;
     color: #808080;
     font-size: 12px;
+    display: flex;
 }
 .home .version-information > div p span:first-child{
-    width: 29.1%;
     display: inline-block;
+    min-width: 60px;
+    margin-right: 40px;
+}
+.home .version-information > div p span {
+    word-break: break-all;
 }
 .home .bottom-content > div:last-child {
     padding: 0 12px 0 14px;
