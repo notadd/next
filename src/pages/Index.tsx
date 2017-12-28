@@ -40,16 +40,19 @@ class Index extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     render() {
         const { open } = this.state;
-        // const { classes } = this.props;
+        const { classes } = this.props;
         return (
             <div className="main-view">
                 <Header/>
                 <div className="right-view">
                     <Drawer
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
                         type="persistent"
                         open={open}
                     >
-                        <Side/>
+                    <Side/>
                     </Drawer>
                     <div className="view">
                         <Switch>

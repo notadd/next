@@ -30,7 +30,7 @@ const styles = {
         'width': '100%',
     },
     formLabelFont: {
-        'font-size': '12px',
+        'font-size': '16px',
     },
     subLabel: {
         'font-size': '12px',
