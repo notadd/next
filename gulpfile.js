@@ -56,3 +56,21 @@ modules.forEach(module => {
 gulp.task('build', function (cb) {
     sequence('common', modules.filter((module) => module !== 'common'), cb);
 });
+
+gulp.task('watch', function () {
+    modules.forEach(module => {
+        gulp.watch(
+            [
+                `${source}/${module}/**/*.ts`,
+                `${source}/${module}/**/*.tsx`,
+                `${source}/${module}/*.ts`,
+                `${source}/${module}/*.tsx`,
+            ],
+            [
+                module,
+            ]
+        ).on('change', function (event) {
+            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        });
+    });
+});
