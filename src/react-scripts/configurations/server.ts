@@ -1,4 +1,4 @@
-import * as config from './develop';
+import config from "./develop";
 
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
@@ -8,7 +8,7 @@ const paths = require('./paths');
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
 
-module.exports = function(proxy, allowedHost) {
+function server(proxy, allowedHost) {
     return {
         disableHostCheck:
         !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
@@ -40,4 +40,6 @@ module.exports = function(proxy, allowedHost) {
             app.use(noopServiceWorkerMiddleware());
         },
     };
-};
+}
+
+export default server;

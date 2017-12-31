@@ -14,7 +14,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const publicPath = '/';
 const publicUrl = '';
 const env = environment_1.getClientEnvironment(publicUrl);
-exports.default = {
+const config = {
     devtool: 'cheap-module-source-map',
     entry: [
         require.resolve('./polyfills'),
@@ -146,3 +146,4 @@ exports.default = {
         hints: false,
     },
 };
+exports.default = config;

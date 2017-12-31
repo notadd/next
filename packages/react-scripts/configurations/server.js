@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const config = require("./develop");
+const develop_1 = require("./develop");
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
 const path = require('path');
 const paths = require('./paths');
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
-module.exports = function (proxy, allowedHost) {
+function server(proxy, allowedHost) {
     return {
         disableHostCheck: !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
         compress: true,
@@ -15,7 +15,7 @@ module.exports = function (proxy, allowedHost) {
         contentBase: paths.appPublic,
         watchContentBase: true,
         hot: true,
-        publicPath: config.output.publicPath,
+        publicPath: develop_1.default.output.publicPath,
         quiet: true,
         watchOptions: {
             ignored: new RegExp(`^(?!${path
@@ -31,8 +31,9 @@ module.exports = function (proxy, allowedHost) {
         public: allowedHost,
         proxy,
         before(app) {
-            app.use(errorOverlayMiddleware());
             app.use(noopServiceWorkerMiddleware());
+            app.use(errorOverlayMiddleware());
         },
     };
-};
+}
+exports.default = server;

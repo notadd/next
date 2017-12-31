@@ -17,7 +17,7 @@ const publicUrl = '';
 
 const env = getClientEnvironment(publicUrl);
 
-export default {
+const config = {
     devtool: 'cheap-module-source-map',
     entry: [
         require.resolve('./polyfills'),
@@ -154,3 +154,5 @@ export default {
         hints: false,
     },
 };
+
+export default config;
