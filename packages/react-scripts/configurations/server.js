@@ -31,8 +31,8 @@ function server(proxy, allowedHost) {
         public: allowedHost,
         proxy,
         before(app) {
-            app.use(noopServiceWorkerMiddleware());
             app.use(errorOverlayMiddleware());
+            app.use(noopServiceWorkerMiddleware());
         },
     };
 }
