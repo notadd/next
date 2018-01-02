@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const autoprefixer = require("autoprefixer");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const path = require("path");
-const paths_1 = require("./paths");
-const environment_1 = require("./environment");
-const CaseSensitivePathsWebpackPlugin = require("case-sensitive-paths-webpack-plugin");
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const publicPath = '/';
-const publicUrl = '';
-const env = environment_1.getClientEnvironment(publicUrl);
-const config = {
+var autoprefixer = require("autoprefixer");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var webpack = require("webpack");
+var path = require("path");
+var paths_1 = require("./paths");
+var environment_1 = require("./environment");
+var CaseSensitivePathsWebpackPlugin = require("case-sensitive-paths-webpack-plugin");
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+var eslintFormatter = require('react-dev-utils/eslintFormatter');
+var ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+var publicPath = '/';
+var publicUrl = '';
+var env = environment_1.getClientEnvironment(publicUrl);
+var config = {
     devtool: 'cheap-module-source-map',
     entry: [
         require.resolve('./polyfills'),
@@ -26,7 +26,9 @@ const config = {
         filename: 'static/js/bundle.js',
         chunkFilename: 'static/js/[name].chunk.js',
         publicPath: publicPath,
-        devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+        devtoolModuleFilenameTemplate: function (info) {
+            return path.resolve(info.absoluteResourcePath).replace(/\\/g, '/');
+        },
     },
     resolve: {
         modules: ['node_modules', paths_1.default.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
@@ -95,7 +97,7 @@ const config = {
                                 loader: require.resolve('postcss-loader'),
                                 options: {
                                     ident: 'postcss',
-                                    plugins: () => [
+                                    plugins: function () { return [
                                         require('postcss-flexbugs-fixes'),
                                         autoprefixer({
                                             browsers: [
@@ -106,7 +108,7 @@ const config = {
                                             ],
                                             flexbox: 'no-2009',
                                         }),
-                                    ],
+                                    ]; },
                                 },
                             },
                         ],

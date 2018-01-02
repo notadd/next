@@ -1,27 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const paths_1 = require("./paths");
-const path_1 = require("path");
-const autoprefixer = require("autoprefixer");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const WebpackManifestPlugin = require("webpack-manifest-plugin");
-const environment_1 = require("./environment");
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const publicPath = paths_1.default.servedPath;
-const shouldUseRelativeAssetPaths = publicPath === './';
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-const publicUrl = publicPath.slice(0, -1);
-const env = environment_1.getClientEnvironment(publicUrl);
+var paths_1 = require("./paths");
+var path_1 = require("path");
+var autoprefixer = require("autoprefixer");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var WebpackManifestPlugin = require("webpack-manifest-plugin");
+var environment_1 = require("./environment");
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+var eslintFormatter = require('react-dev-utils/eslintFormatter');
+var ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+var publicPath = paths_1.default.servedPath;
+var shouldUseRelativeAssetPaths = publicPath === './';
+var shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+var publicUrl = publicPath.slice(0, -1);
+var env = environment_1.getClientEnvironment(publicUrl);
 if (env.stringified['process.env']['NODE_ENV'] !== '"production"') {
     throw new Error('Production builds must have NODE_ENV=production.');
 }
-const cssFilename = 'static/css/[name].[contenthash:8].css';
-const extractTextPluginOptions = shouldUseRelativeAssetPaths
+var cssFilename = 'static/css/[name].[contenthash:8].css';
+var extractTextPluginOptions = shouldUseRelativeAssetPaths
     ?
         { publicPath: Array(cssFilename.split('/').length).join('../') }
     : {};
@@ -34,8 +34,10 @@ exports.default = {
         filename: 'static/js/[name].[chunkhash:8].js',
         chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
         publicPath: publicPath,
-        devtoolModuleFilenameTemplate: info => path_1.relative(paths_1.default.appSrc, info.absoluteResourcePath)
-            .replace(/\\/g, '/'),
+        devtoolModuleFilenameTemplate: function (info) {
+            return path_1.relative(paths_1.default.appSrc, info.absoluteResourcePath)
+                .replace(/\\/g, '/');
+        },
     },
     resolve: {
         modules: ['node_modules', paths_1.default.appNodeModules].concat(process.env.NODE_PATH.split(path_1.delimiter).filter(Boolean)),
@@ -112,7 +114,7 @@ exports.default = {
                                     loader: require.resolve('postcss-loader'),
                                     options: {
                                         ident: 'postcss',
-                                        plugins: () => [
+                                        plugins: function () { return [
                                             require('postcss-flexbugs-fixes'),
                                             autoprefixer({
                                                 browsers: [
@@ -123,7 +125,7 @@ exports.default = {
                                                 ],
                                                 flexbox: 'no-2009',
                                             }),
-                                        ],
+                                        ]; },
                                     },
                                 },
                             ],
@@ -178,7 +180,7 @@ exports.default = {
         new SWPrecacheWebpackPlugin({
             dontCacheBustUrlsMatching: /\.\w{8}\./,
             filename: 'service-worker.js',
-            logger(message) {
+            logger: function (message) {
                 if (message.indexOf('Total precache size is') === 0) {
                     return;
                 }

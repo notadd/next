@@ -13,9 +13,6 @@ if (!NODE_ENV) {
 const dotenvFiles = [
     `${paths.dotenv}.${NODE_ENV}.local`,
     `${paths.dotenv}.${NODE_ENV}`,
-    // Don't include `.env.local` for `test` environment
-    // since normally you expect tests to produce the same
-    // results for everyone
     NODE_ENV !== 'test' && `${paths.dotenv}.local`,
     paths.dotenv,
 ].filter(Boolean);

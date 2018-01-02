@@ -108,7 +108,7 @@ export default {
                     {
                         test: /\.css$/,
                         loader: ExtractTextPlugin.extract(
-                            Object.assign(
+                            (<any>Object).assign(
                                 {
                                     fallback: {
                                         loader: require.resolve('style-loader'),
