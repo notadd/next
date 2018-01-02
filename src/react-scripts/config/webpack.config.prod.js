@@ -1,53 +1,58 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var paths_1 = require("./paths");
-var path_1 = require("path");
-var autoprefixer = require("autoprefixer");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var WebpackManifestPlugin = require("webpack-manifest-plugin");
-var environment_1 = require("./environment");
-var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-var eslintFormatter = require('react-dev-utils/eslintFormatter');
-var ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-var publicPath = paths_1.default.servedPath;
-var shouldUseRelativeAssetPaths = publicPath === './';
-var shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-var publicUrl = publicPath.slice(0, -1);
-var env = environment_1.getClientEnvironment(publicUrl);
-if (env.stringified['process.env']['NODE_ENV'] !== '"production"') {
+'use strict';
+
+const autoprefixer = require('autoprefixer');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const eslintFormatter = require('react-dev-utils/eslintFormatter');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const paths = require('./paths');
+const getClientEnvironment = require('./env');
+const publicPath = paths.servedPath;
+const shouldUseRelativeAssetPaths = publicPath === './';
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const publicUrl = publicPath.slice(0, -1);
+const env = getClientEnvironment(publicUrl);
+if (env.stringified['process.env'].NODE_ENV !== '"production"') {
     throw new Error('Production builds must have NODE_ENV=production.');
 }
-var cssFilename = 'static/css/[name].[contenthash:8].css';
-var extractTextPluginOptions = shouldUseRelativeAssetPaths
+
+const cssFilename = 'static/css/[name].[contenthash:8].css';
+const extractTextPluginOptions = shouldUseRelativeAssetPaths
     ?
-        { publicPath: Array(cssFilename.split('/').length).join('../') }
+    { publicPath: Array(cssFilename.split('/').length).join('../') }
     : {};
-exports.default = {
+module.exports = {
     bail: true,
     devtool: shouldUseSourceMap ? 'source-map' : false,
-    entry: [require.resolve('./polyfills'), paths_1.default.appIndexJs],
+    entry: [require.resolve('./polyfills'), paths.appIndexJs],
     output: {
-        path: paths_1.default.appBuild,
+        path: paths.appBuild,
         filename: 'static/js/[name].[chunkhash:8].js',
         chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
         publicPath: publicPath,
-        devtoolModuleFilenameTemplate: function (info) {
-            return path_1.relative(paths_1.default.appSrc, info.absoluteResourcePath)
-                .replace(/\\/g, '/');
-        },
+        devtoolModuleFilenameTemplate: info =>
+            path
+                .relative(paths.appSrc, info.absoluteResourcePath)
+                .replace(/\\/g, '/'),
     },
     resolve: {
-        modules: ['node_modules', paths_1.default.appNodeModules].concat(process.env.NODE_PATH.split(path_1.delimiter).filter(Boolean)),
+        modules: ['node_modules', paths.appNodeModules].concat(
+            process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
+        ),
         extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
         alias: {
-            'babel-runtime': path_1.dirname(require.resolve('babel-runtime/package.json')),
+            'babel-runtime': path.dirname(
+                require.resolve('babel-runtime/package.json')
+            ),
             'react-native': 'react-native-web',
         },
         plugins: [
-            new ModuleScopePlugin(paths_1.default.appSrc, [paths_1.default.appPackageJson]),
+            new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
         ],
     },
     module: {
@@ -70,7 +75,7 @@ exports.default = {
                         loader: require.resolve('eslint-loader'),
                     },
                 ],
-                include: paths_1.default.appSrc,
+                include: paths.appSrc,
             },
             {
                 oneOf: [
@@ -84,7 +89,7 @@ exports.default = {
                     },
                     {
                         test: /\.(js|jsx|mjs)$/,
-                        include: paths_1.default.appSrc,
+                        include: paths.appSrc,
                         loader: require.resolve('babel-loader'),
                         options: {
                             babelrc: false,
@@ -94,46 +99,51 @@ exports.default = {
                     },
                     {
                         test: /\.css$/,
-                        loader: ExtractTextPlugin.extract(Object.assign({
-                            fallback: {
-                                loader: require.resolve('style-loader'),
-                                options: {
-                                    hmr: false,
-                                },
-                            },
-                            use: [
+                        loader: ExtractTextPlugin.extract(
+                            Object.assign(
                                 {
-                                    loader: require.resolve('css-loader'),
-                                    options: {
-                                        importLoaders: 1,
-                                        minimize: true,
-                                        sourceMap: shouldUseSourceMap,
+                                    fallback: {
+                                        loader: require.resolve('style-loader'),
+                                        options: {
+                                            hmr: false,
+                                        },
                                     },
-                                },
-                                {
-                                    loader: require.resolve('postcss-loader'),
-                                    options: {
-                                        ident: 'postcss',
-                                        plugins: function () { return [
-                                            require('postcss-flexbugs-fixes'),
-                                            autoprefixer({
-                                                browsers: [
-                                                    '>1%',
-                                                    'last 4 versions',
-                                                    'Firefox ESR',
-                                                    'not ie < 9',
+                                    use: [
+                                        {
+                                            loader: require.resolve('css-loader'),
+                                            options: {
+                                                importLoaders: 1,
+                                                minimize: true,
+                                                sourceMap: shouldUseSourceMap,
+                                            },
+                                        },
+                                        {
+                                            loader: require.resolve('postcss-loader'),
+                                            options: {
+                                                ident: 'postcss',
+                                                plugins: () => [
+                                                    require('postcss-flexbugs-fixes'),
+                                                    autoprefixer({
+                                                        browsers: [
+                                                            '>1%',
+                                                            'last 4 versions',
+                                                            'Firefox ESR',
+                                                            'not ie < 9', // React doesn't support IE8 anyway
+                                                        ],
+                                                        flexbox: 'no-2009',
+                                                    }),
                                                 ],
-                                                flexbox: 'no-2009',
-                                            }),
-                                        ]; },
-                                    },
+                                            },
+                                        },
+                                    ],
                                 },
-                            ],
-                        }, extractTextPluginOptions)),
+                                extractTextPluginOptions
+                            )
+                        ),
                     },
                     {
                         loader: require.resolve('file-loader'),
-                        exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+                        exclude: [/\.js$/, /\.html$/, /\.json$/],
                         options: {
                             name: 'static/media/[name].[hash:8].[ext]',
                         },
@@ -146,7 +156,7 @@ exports.default = {
         new InterpolateHtmlPlugin(env.raw),
         new HtmlWebpackPlugin({
             inject: true,
-            template: paths_1.default.appHtml,
+            template: paths.appHtml,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -169,18 +179,22 @@ exports.default = {
             mangle: {
                 safari10: true,
             },
+            output: {
+                comments: false,
+                ascii_only: true,
+            },
             sourceMap: shouldUseSourceMap,
         }),
         new ExtractTextPlugin({
             filename: cssFilename,
         }),
-        new WebpackManifestPlugin({
+        new ManifestPlugin({
             fileName: 'asset-manifest.json',
         }),
         new SWPrecacheWebpackPlugin({
             dontCacheBustUrlsMatching: /\.\w{8}\./,
             filename: 'service-worker.js',
-            logger: function (message) {
+            logger(message) {
                 if (message.indexOf('Total precache size is') === 0) {
                     return;
                 }

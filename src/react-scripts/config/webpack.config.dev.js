@@ -1,23 +1,21 @@
-import * as autoprefixer from 'autoprefixer';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as webpack from 'webpack';
-import * as path from "path";
-import paths from "./paths";
-import { getClientEnvironment } from "./environment";
-import * as CaseSensitivePathsWebpackPlugin from "case-sensitive-paths-webpack-plugin";
+'use strict';
 
+const autoprefixer = require('autoprefixer');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-
+const getClientEnvironment = require('./env');
+const paths = require('./paths');
 const publicPath = '/';
-
 const publicUrl = '';
-
 const env = getClientEnvironment(publicUrl);
 
-const config = {
+module.exports = {
     devtool: 'cheap-module-source-map',
     entry: [
         require.resolve('./polyfills'),
@@ -139,7 +137,7 @@ const config = {
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin(env.stringified),
         new webpack.HotModuleReplacementPlugin(),
-        new CaseSensitivePathsWebpackPlugin(),
+        new CaseSensitivePathsPlugin(),
         new WatchMissingNodeModulesPlugin(paths.appNodeModules),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
@@ -154,5 +152,3 @@ const config = {
         hints: false,
     },
 };
-
-export default config;

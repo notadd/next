@@ -1,44 +1,48 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var autoprefixer = require("autoprefixer");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var webpack = require("webpack");
-var path = require("path");
-var paths_1 = require("./paths");
-var environment_1 = require("./environment");
-var CaseSensitivePathsWebpackPlugin = require("case-sensitive-paths-webpack-plugin");
-var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-var eslintFormatter = require('react-dev-utils/eslintFormatter');
-var ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-var publicPath = '/';
-var publicUrl = '';
-var env = environment_1.getClientEnvironment(publicUrl);
-var config = {
+'use strict';
+
+const autoprefixer = require('autoprefixer');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const eslintFormatter = require('react-dev-utils/eslintFormatter');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const getClientEnvironment = require('./env');
+const paths = require('./paths');
+const publicPath = '/';
+const publicUrl = '';
+const env = getClientEnvironment(publicUrl);
+
+module.exports = {
     devtool: 'cheap-module-source-map',
     entry: [
         require.resolve('./polyfills'),
         require.resolve('react-dev-utils/webpackHotDevClient'),
-        paths_1.default.appIndexJs,
+        paths.appIndexJs,
     ],
     output: {
         pathinfo: true,
         filename: 'static/js/bundle.js',
         chunkFilename: 'static/js/[name].chunk.js',
         publicPath: publicPath,
-        devtoolModuleFilenameTemplate: function (info) {
-            return path.resolve(info.absoluteResourcePath).replace(/\\/g, '/');
-        },
+        devtoolModuleFilenameTemplate: info =>
+            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
     },
     resolve: {
-        modules: ['node_modules', paths_1.default.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
+        modules: ['node_modules', paths.appNodeModules].concat(
+            process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
+        ),
         extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
         alias: {
-            'babel-runtime': path.dirname(require.resolve('babel-runtime/package.json')),
+            'babel-runtime': path.dirname(
+                require.resolve('babel-runtime/package.json')
+            ),
             'react-native': 'react-native-web',
         },
         plugins: [
-            new ModuleScopePlugin(paths_1.default.appSrc, [paths_1.default.appPackageJson]),
+            new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
         ],
     },
     module: {
@@ -61,7 +65,7 @@ var config = {
                         loader: require.resolve('eslint-loader'),
                     },
                 ],
-                include: paths_1.default.appSrc,
+                include: paths.appSrc,
             },
             {
                 oneOf: [
@@ -75,7 +79,7 @@ var config = {
                     },
                     {
                         test: /\.(js|jsx|mjs)$/,
-                        include: paths_1.default.appSrc,
+                        include: paths.appSrc,
                         loader: require.resolve('babel-loader'),
                         options: {
                             babelrc: false,
@@ -97,7 +101,7 @@ var config = {
                                 loader: require.resolve('postcss-loader'),
                                 options: {
                                     ident: 'postcss',
-                                    plugins: function () { return [
+                                    plugins: () => [
                                         require('postcss-flexbugs-fixes'),
                                         autoprefixer({
                                             browsers: [
@@ -108,7 +112,7 @@ var config = {
                                             ],
                                             flexbox: 'no-2009',
                                         }),
-                                    ]; },
+                                    ],
                                 },
                             },
                         ],
@@ -128,13 +132,13 @@ var config = {
         new InterpolateHtmlPlugin(env.raw),
         new HtmlWebpackPlugin({
             inject: true,
-            template: paths_1.default.appHtml,
+            template: paths.appHtml,
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin(env.stringified),
         new webpack.HotModuleReplacementPlugin(),
-        new CaseSensitivePathsWebpackPlugin(),
-        new WatchMissingNodeModulesPlugin(paths_1.default.appNodeModules),
+        new CaseSensitivePathsPlugin(),
+        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
     node: {
@@ -148,4 +152,3 @@ var config = {
         hints: false,
     },
 };
-exports.default = config;

@@ -1,16 +1,19 @@
-import paths from './paths';
-import { existsSync, realpathSync } from "fs";
-import { delimiter, isAbsolute, resolve } from "path";
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const paths = require('./paths');
+
+delete require.cache[require.resolve('./paths')];
 
 const NODE_ENV = process.env.NODE_ENV;
-
 if (!NODE_ENV) {
     throw new Error(
         'The NODE_ENV environment variable is required but was not specified.'
     );
 }
 
-const dotenvFiles = [
+var dotenvFiles = [
     `${paths.dotenv}.${NODE_ENV}.local`,
     `${paths.dotenv}.${NODE_ENV}`,
     NODE_ENV !== 'test' && `${paths.dotenv}.local`,
@@ -18,24 +21,23 @@ const dotenvFiles = [
 ].filter(Boolean);
 
 dotenvFiles.forEach(dotenvFile => {
-    if (existsSync(dotenvFile.toString())) {
+    if (fs.existsSync(dotenvFile)) {
         require('dotenv').config({
             path: dotenvFile,
         });
     }
 });
 
-const appDirectory = realpathSync(process.cwd());
-
+const appDirectory = fs.realpathSync(process.cwd());
 process.env.NODE_PATH = (process.env.NODE_PATH || '')
-    .split(delimiter)
-    .filter(folder => folder && !isAbsolute(folder))
-    .map(folder => resolve(appDirectory, folder))
-    .join(delimiter);
+    .split(path.delimiter)
+    .filter(folder => folder && !path.isAbsolute(folder))
+    .map(folder => path.resolve(appDirectory, folder))
+    .join(path.delimiter);
 
 const REACT_APP = /^REACT_APP_/i;
 
-export function getClientEnvironment(publicUrl) {
+function getClientEnvironment(publicUrl) {
     const raw = Object.keys(process.env)
         .filter(key => REACT_APP.test(key))
         .reduce(
@@ -51,10 +53,11 @@ export function getClientEnvironment(publicUrl) {
     const stringified = {
         'process.env': Object.keys(raw).reduce((env, key) => {
             env[key] = JSON.stringify(raw[key]);
-
             return env;
         }, {}),
     };
 
     return { raw, stringified };
 }
+
+module.exports = getClientEnvironment;
