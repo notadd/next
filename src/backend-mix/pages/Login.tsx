@@ -63,7 +63,7 @@ class Login extends React.Component<Props, State> {
                     password: this.state.password
                 };
                 localStorage.setItem('notadd_user', JSON.stringify(user));
-                localStorage.setItem('notadd_token', response.data.data.access_token);
+                localStorage.setItem('notadd_token', response.data.access_token);
                 this.props.history.push('/index');
             }
         });
