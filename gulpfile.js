@@ -20,21 +20,7 @@ const distId = process.argv.indexOf('--dist');
 const dist = distId < 0 ? 'node_modules/@notadd' : process.argv[distId + 1];
 
 gulp.task('default', function () {
-    modules.forEach(module => {
-        gulp.watch(
-            [
-                `${source}/${module}/**/*.ts`,
-                `${source}/${module}/**/*.tsx`,
-                `${source}/${module}/*.ts`,
-                `${source}/${module}/*.tsx`,
-            ],
-            [
-                module,
-            ]
-        ).on('change', function (event) {
-            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-        });
-    });
+    tasks();
     nodemon({
         script: 'node_modules/@notadd/server/bootstrap.js',
         watch: [
@@ -42,7 +28,7 @@ gulp.task('default', function () {
             "main.js",
         ],
         ext: 'js'
-    })
+    });
 });
 
 modules.forEach(module => {
@@ -66,37 +52,77 @@ gulp.task('build', function (cb) {
 });
 
 gulp.task('watch', function () {
+    tasks();
+});
+
+function tasks() {
     modules.forEach(module => {
         if (module === 'react-scripts') {
-            gulp.watch(
-                [
-                    `${source}/${module}/**/*.*`,
-                    `${source}/${module}/*.*`,
-                ],
-                [
-                    module,
-                ]
-            ).on('change', function (event) {
-                console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-                gulp.src([
-                    `${source}/${module}/**/*.*`,
-                    `${source}/${module}/*.*`,
-                ]).pipe(gulp.dest(`${dist}/${module}`));
-            });
+            watchAny(source, module);
+        } else if (module === 'backend-mix') {
+            watchTypescript(source, module);
         } else {
-            gulp.watch(
-                [
-                    `${source}/${module}/**/*.ts`,
-                    `${source}/${module}/**/*.tsx`,
-                    `${source}/${module}/*.ts`,
-                    `${source}/${module}/*.tsx`,
-                ],
-                [
-                    module,
-                ]
-            ).on('change', function (event) {
-                console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-            });
+            watchTypescript(source, module);
         }
     });
-});
+}
+
+function watchAny(source, module) {
+    gulp.watch(
+        [
+            `${source}/${module}/**/*.*`,
+            `${source}/${module}/*.*`,
+        ],
+        [
+            module,
+        ]
+    ).on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        gulp.src([
+            `${source}/${module}/**/*.*`,
+            `${source}/${module}/*.*`,
+        ]).pipe(gulp.dest(`${dist}/${module}`));
+    });
+}
+
+function watchTypescript(source, module) {
+    gulp.watch(
+        [
+            `${source}/${module}/**/*.ts`,
+            `${source}/${module}/**/*.tsx`,
+            `${source}/${module}/*.ts`,
+            `${source}/${module}/*.tsx`,
+        ],
+        [
+            module,
+        ]
+    ).on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+}
+
+function watchMedia(source, module) {
+    gulp.watch(
+        [
+            `${source}/${module}/**/*.css`,
+            `${source}/${module}/*.css`,
+            `${source}/${module}/**/*.jpg`,
+            `${source}/${module}/*.jpg`,
+            `${source}/${module}/**/*.jpeg`,
+            `${source}/${module}/*.jpeg`,
+            `${source}/${module}/**/*.png`,
+            `${source}/${module}/*.png`,
+            `${source}/${module}/**/*.svg`,
+            `${source}/${module}/*.svg`,
+        ],
+        [
+            module,
+        ]
+    ).on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        gulp.src([
+            `${source}/${module}/**/*.*`,
+            `${source}/${module}/*.*`,
+        ]).pipe(gulp.dest(`${dist}/${module}`));
+    });
+}

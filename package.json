@@ -13,7 +13,7 @@
         "prepublish": "npm run build:packages",
         "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
         "server": "node main.js",
-        "server:react": "./node_modules/.bin/react-scripts"
+        "react-scripts": "./node_modules/.bin/react-scripts"
     },
     "dependencies": {
         "apollo-link": "^1.0.7",
