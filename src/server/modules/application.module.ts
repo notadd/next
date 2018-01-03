@@ -11,9 +11,9 @@ import { CommonModule } from "@notadd/common";
 
 @Module({
     modules: [
-        BackendModule,
         CommonModule,
         GraphQLModule,
+        BackendModule,
         UserModule,
     ],
     controllers: [

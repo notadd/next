@@ -24,8 +24,8 @@ CommonModule = __decorate([
             setting_service_1.SettingService,
         ],
         modules: [
-            auth_module_1.AuthModule,
             database_module_1.DatabaseModule,
+            auth_module_1.AuthModule,
         ],
     })
 ], CommonModule);

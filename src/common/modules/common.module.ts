@@ -14,8 +14,8 @@ import { AuthModule } from "./auth.module";
         SettingService,
     ],
     modules: [
-        AuthModule,
         DatabaseModule,
+        AuthModule,
     ],
 })
 export class CommonModule {

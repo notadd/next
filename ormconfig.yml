@@ -10,5 +10,5 @@ default:
     migrations:
         - '**/*.migration.js'
     logging: true
-    migrationsRun: true
-    synchronize: false
+    migrationsRun: false
+    synchronize: true
