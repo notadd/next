@@ -60,6 +60,7 @@ function tasks() {
         if (module === 'react-scripts') {
             watchAny(source, module);
         } else if (module === 'backend-mix') {
+            watchMedia(source, module);
             watchTypescript(source, module);
         } else {
             watchTypescript(source, module);
@@ -121,8 +122,16 @@ function watchMedia(source, module) {
     ).on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         gulp.src([
-            `${source}/${module}/**/*.*`,
-            `${source}/${module}/*.*`,
+            `${source}/${module}/**/*.css`,
+            `${source}/${module}/*.css`,
+            `${source}/${module}/**/*.jpg`,
+            `${source}/${module}/*.jpg`,
+            `${source}/${module}/**/*.jpeg`,
+            `${source}/${module}/*.jpeg`,
+            `${source}/${module}/**/*.png`,
+            `${source}/${module}/*.png`,
+            `${source}/${module}/**/*.svg`,
+            `${source}/${module}/*.svg`,
         ]).pipe(gulp.dest(`${dist}/${module}`));
     });
 }
