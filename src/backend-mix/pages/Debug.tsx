@@ -42,6 +42,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
         debug: false,
         test: false,
     };
+
     render() {
         return (
             <div className="configurations">
@@ -49,10 +50,10 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                     全局 <b>/</b> 系统插件
                 </p>
                 <h4 className="title">调试工具</h4>
-                <Paper className={this.props.classes.root}>
-                    <form className={this.props.classes.container} noValidate autoComplete="off">
-                        <Grid container spacing={40}>
-                            <Grid item xs={12} sm={6}>
+                <Paper className={ this.props.classes.root }>
+                    <form className={ this.props.classes.container } noValidate autoComplete="off">
+                        <Grid container spacing={ 40 }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControlLabel
                                     label="缓存清除"
                                     classes={ {
@@ -60,14 +61,14 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         label: this.props.classes.formLabel
                                     } }
                                     control={
-                                        <Button color="primary" className={this.props.classes.smallBtn} raised dense>
+                                        <Button color="primary" className={ this.props.classes.smallBtn } raised dense>
                                             清除
-                                        </Button>}
+                                        </Button> }
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid container spacing={ 40 } style={ { marginTop: '-10px' } }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControlLabel
                                     label="Debug模式"
                                     classes={ {
@@ -76,15 +77,15 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     } }
                                     control={
                                         <Switch
-                                            onChange={(event, checked) => this.setState({ debug: checked })}
-                                            checked={this.state.debug}
+                                            onChange={ (event, checked) => this.setState({ debug: checked }) }
+                                            checked={ this.state.debug }
                                         />
                                     }
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid container spacing={ 40 } style={ { marginTop: '-10px' } }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControlLabel
                                     label="测试模式"
                                     classes={ {
@@ -93,14 +94,14 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     } }
                                     control={
                                         <Switch
-                                            onChange={(event, checked) => this.setState({ test: checked })}
-                                            checked={this.state.test}
+                                            onChange={ (event, checked) => this.setState({ test: checked }) }
+                                            checked={ this.state.test }
                                         />
                                     }
                                 />
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button raised color="primary" style={ { marginTop: 34, fontSize: 12, borderRadius: 4 } }>
                             确认提交
                         </Button>
                     </form>
@@ -109,4 +110,5 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
         );
     }
 }
+
 export default withStyles(styles)(Seo);

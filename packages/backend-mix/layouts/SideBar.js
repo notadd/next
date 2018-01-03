@@ -287,9 +287,7 @@ class SideBar extends React.Component {
                                 child.hasOwnProperty('children') && child.children.length
                                     ? (React.createElement(Collapse, { component: "li", in: child.open, unmountOnExit: true },
                                         React.createElement(List, { disablePadding: true, style: { borderBottom: '1px solid #e0e0e0' } }, child.children.map((inner, innertIndex) => {
-                                            return (React.createElement(NavLink, { to: inner.path, className: this.props.classes.innerRoot, activeClassName: classNames(this.
-                                                    props.
-                                                    classes.innerSelectBtn, 'innerSelectBtn'), key: index.toString()
+                                            return (React.createElement(NavLink, { to: inner.path, className: this.props.classes.innerRoot, activeClassName: classNames(this.props.classes.innerSelectBtn, 'innerSelectBtn'), key: index.toString()
                                                     + childIndex
                                                     + innertIndex },
                                                 React.createElement(ListItemText, { style: { paddingLeft: 78 }, inset: true, primary: inner.name })));

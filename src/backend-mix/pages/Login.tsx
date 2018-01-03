@@ -40,12 +40,14 @@ class Login extends React.Component<Props, State> {
         password: '',
         loading: false,
     };
+
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
     };
+
     handleSubmit = (event: any) => {
         event.preventDefault();
         this.setState(
@@ -68,35 +70,36 @@ class Login extends React.Component<Props, State> {
             }
         });
     };
+
     render() {
         return (
             <div className="login">
                 <div className="wrapBox">
                     <Card className="innerBox">
-                        <CardContent style={{padding: 0}}>
+                        <CardContent style={ { padding: 0 } }>
                             <h3 className="boxTitle">登录</h3>
-                            <Tooltip placement="bottom" title="Login" onClick={this.handleSubmit}>
+                            <Tooltip placement="bottom" title="Login" onClick={ this.handleSubmit }>
                                 <Button fab color="accent" className="absolute">
-                                    <KeyboardArrowRight />
+                                    <KeyboardArrowRight/>
                                 </Button>
                             </Tooltip>
-                            <FormControl fullWidth style={{marginTop: 65}}>
+                            <FormControl fullWidth style={ { marginTop: 65 } }>
                                 <InputLabel
                                     htmlFor="user-name"
-                                    className={this.props.classes.formLabelFont}
+                                    className={ this.props.classes.formLabelFont }
                                 >
                                     用户名
                                 </InputLabel>
                                 <Input
                                     id="user-name"
-                                    className={this.props.classes.formLabelFont}
-                                    onChange={this.handleChange('userName')}
-                                    value={this.state.userName}
+                                    className={ this.props.classes.formLabelFont }
+                                    onChange={ this.handleChange('userName') }
+                                    value={ this.state.userName }
                                 />
                             </FormControl>
-                            <FormControl fullWidth style={{marginTop: 35}}>
+                            <FormControl fullWidth style={ { marginTop: 35 } }>
                                 <InputLabel
-                                    className={this.props.classes.formLabelFont}
+                                    className={ this.props.classes.formLabelFont }
                                     htmlFor="user-password"
                                 >
                                     密码
@@ -109,36 +112,36 @@ class Login extends React.Component<Props, State> {
                                             }
                                         }
                                     }
-                                    className={this.props.classes.formLabelFont}
+                                    className={ this.props.classes.formLabelFont }
                                     id="user-password"
                                     type="password"
-                                    onChange={this.handleChange('password')}
-                                    value={this.state.password}
+                                    onChange={ this.handleChange('password') }
+                                    value={ this.state.password }
                                 />
                             </FormControl>
                         </CardContent>
-                        <CardActions style={{marginTop: 30, padding: 0}}>
+                        <CardActions style={ { marginTop: 30, padding: 0 } }>
                             <Button
                                 raised
                                 disabled={
                                     this.state.userName === '' || this.state.password === '' || this.state.loading
                                 }
                                 color="primary"
-                                style={{
+                                style={ {
                                     width: '100%',
                                     height: 48,
                                     fontSize: 14,
                                     borderRadius: 4,
                                     margin: 0
-                                }}
+                                } }
                                 className={
                                     this.state.userName === ''
                                     || this.state.password === '' ?
                                         this.props.classes.disabled : ''
                                 }
-                                onClick={this.handleSubmit}
+                                onClick={ this.handleSubmit }
                             >
-                                {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
+                                { this.state.loading ? <div><CircularProgress size={ 24 }/></div> : <span> 登录</span> }
                             </Button>
                         </CardActions>
                     </Card>
@@ -147,4 +150,5 @@ class Login extends React.Component<Props, State> {
         );
     }
 }
+
 export default withStyles(styles)(Login);

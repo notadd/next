@@ -46,10 +46,10 @@ const styles = {
         'padding-left': '34px',
     },
 };
-type State = {
-};
+type State = {};
 
 let id = 0;
+
 function createData(name: any, author: any, descri: any, status: boolean) {
     id += 1;
     return { id, name, author, descri, status };
@@ -69,6 +69,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         modalId: '',
         modalName: '',
     };
+
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.status = true;
@@ -79,6 +80,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
             [pro]: checked,
         });
     };
+
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
         this.state.modalId = pro.id;
@@ -86,9 +88,11 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
             open: true,
         });
     };
+
     handleClose = () => {
         this.setState({ open: false });
     };
+
     render() {
         return (
             <div>
@@ -96,55 +100,55 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                     全局 / 应用管理 / 拓展配置
                 </p>
                 <h4 className="title">开启拓展</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
+                <Paper className={ this.props.classes.root }>
+                    <Table className={ this.props.classes.table }>
                         <TableHead className="table-head">
                             <TableRow>
                                 <TableCell>拓展名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>作者</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>描述</TableCell>
+                                <TableCell className={ this.props.classes.tableCellStatus } numeric>状态</TableCell>
                                 <TableCell numeric></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            { list.map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
+                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
+                                        key={ n.id }
                                     >
-                                        <TableCell>{n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
-                                            </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
-                                            </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                        <TableCell>{ n.name }</TableCell>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.author }
+                                        </TableCell>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.descri }
+                                        </TableCell>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
                                             <Switch
-                                                checked={n.status}
-                                                onChange={this.handleChange(n)}
+                                                checked={ n.status }
+                                                onChange={ this.handleChange(n) }
                                                 aria-label="n.status"
                                             />
                                         </TableCell>
                                         <TableCell numeric>
                                             <IconButton
-                                                className={this.props.classes.menuBtn}
-                                                onClick={() => this.handleClickOpen(n)}
+                                                className={ this.props.classes.menuBtn }
+                                                onClick={ () => this.handleClickOpen(n) }
                                             >
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            }) }
                         </TableBody>
                     </Table>
                 </Paper>
                 <Dialog
-                    open={this.state.open}
+                    open={ this.state.open }
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                     className="dialog-content"
@@ -154,19 +158,19 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={ this.handleClose }
                         >
-                            <ClearIcon />
+                            <ClearIcon/>
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除拓展名称"{this.state.modalName}"吗?</h4>
+                        <h4>确定要删除拓展名称"{ this.state.modalName }"吗?</h4>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
-                        <Button onClick={this.handleClose}>
+                        <Button onClick={ this.handleClose }>
                             取消
                         </Button>
-                        <Button onClick={this.handleClose} autoFocus>
+                        <Button onClick={ this.handleClose } autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>
@@ -175,4 +179,5 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
         );
     }
 }
+
 export default withStyles(styles)(Extension);

@@ -38,10 +38,10 @@ const styles = {
         'padding-left': '34px',
     },
 };
-type State = {
-};
+type State = {};
 
 let id = 0;
+
 function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean) {
     id += 1;
     return { id, name, domain, defaul, other, use };
@@ -59,6 +59,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     state = {
         open: false,
     };
+
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.use = true;
@@ -69,6 +70,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             [pro]: checked,
         });
     };
+
     changeCheckBox = (pro: any) => (event: any) => {
         if (event.target.checked) {
             pro.defaul = true;
@@ -79,6 +81,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             [name]: event.target.checked,
         });
     };
+
     render() {
         return (
             <div>
@@ -86,50 +89,50 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                     全局 / 应用管理 / 模块配置
                 </p>
                 <h4 className="title">域名配置</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
+                <Paper className={ this.props.classes.root }>
+                    <Table className={ this.props.classes.table }>
                         <TableHead className="table-head">
                             <TableRow>
                                 <TableCell>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>域名</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>默认</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>别名</TableCell>
                                 <TableCell numeric>使用域名</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            { list.map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
+                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
+                                        key={ n.id }
                                     >
-                                        <TableCell>{n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.domain}
+                                        <TableCell>{ n.name }</TableCell>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.domain }
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
                                             <Checkbox
                                                 className="table-check-box"
-                                                checked={n.defaul}
-                                                onChange={this.changeCheckBox(n)}
+                                                checked={ n.defaul }
+                                                onChange={ this.changeCheckBox(n) }
                                                 value="n.defaul"
                                             />
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.other}
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.other }
                                         </TableCell>
                                         <TableCell numeric>
                                             <Switch
-                                                checked={n.use}
-                                                onChange={this.handleChange(n)}
+                                                checked={ n.use }
+                                                onChange={ this.handleChange(n) }
                                                 aria-label="n.use"
                                             />
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            }) }
                         </TableBody>
                     </Table>
                 </Paper>
@@ -137,4 +140,5 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         );
     }
 }
+
 export default withStyles(styles)(ModuleOpen);

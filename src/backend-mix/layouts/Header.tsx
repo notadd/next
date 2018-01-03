@@ -114,9 +114,11 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
         },
         fullScreen: false,
     };
+
     handleChange = (event: any, value: any) => {
         this.setState({ value });
     };
+
     handleFullScreen = () => {
         this.setState({ fullScreen: !this.state.fullScreen });
         if (this.state.fullScreen) {
@@ -125,20 +127,20 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
 
             if (el.webkitCancelFullScreen) {
                 cfs = el.webkitCancelFullScreen;
-            } else if (el['mozCancelFullScreen']) {
-                cfs = el['mozCancelFullScreen'];
-            } else if (el['exitFullScreen']) {
-                cfs = el['exitFullScreen'];
-            } else if (el['cancelFullScreen']) {
-                cfs = el['cancelFullScreen'];
+            } else if (el[ 'mozCancelFullScreen' ]) {
+                cfs = el[ 'mozCancelFullScreen' ];
+            } else if (el[ 'exitFullScreen' ]) {
+                cfs = el[ 'exitFullScreen' ];
+            } else if (el[ 'cancelFullScreen' ]) {
+                cfs = el[ 'cancelFullScreen' ];
             }
             let wscript;
             if (typeof cfs !== 'undefined' && cfs) {
                 cfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            if (typeof window[ 'ActiveXObject' ] !== 'undefined') {
+                wscript = new window[ 'ActiveXObject' ]('WScript.Shell');
                 if (wscript !== null) {
                     wscript.SendKeys('{F11}');
                 }
@@ -146,94 +148,95 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
         } else {
             const el = document.documentElement;
             const rfs = el.webkitRequestFullScreen
-                || el['mozRequestFullScreen']
-                || el['msRequestFullScreen']
-                || el['requestFullScreen'];
+                || el[ 'mozRequestFullScreen' ]
+                || el[ 'msRequestFullScreen' ]
+                || el[ 'requestFullScreen' ];
             let wscript;
             if (typeof rfs !== 'undefined' && rfs) {
                 rfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            if (typeof window[ 'ActiveXObject' ] !== 'undefined') {
+                wscript = new window[ 'ActiveXObject' ]('WScript.Shell');
                 if (wscript) {
                     wscript.SendKeys('{F11}');
                 }
             }
         }
     };
+
     render() {
         const { value } = this.state;
         return (
-            <div className={this.props.classes.header}>
-                <div className={this.props.classes.headerLeft}>
-                    <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
+            <div className={ this.props.classes.header }>
+                <div className={ this.props.classes.headerLeft }>
+                    <img className={ this.props.classes.logo } src={ require('../assets/images/notadd_logo.png') }/>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup="true"
-                        className={this.props.classes.menuBtn}
+                        className={ this.props.classes.menuBtn }
                         color="contrast"
                     >
                         <MenuIcon/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup="true"
-                        style={{background: 'none', marginLeft: '0'}}
-                        className={this.props.classes.menuBtn}
-                        onClick={this.handleFullScreen}
+                        style={ { background: 'none', marginLeft: '0' } }
+                        className={ this.props.classes.menuBtn }
+                        onClick={ this.handleFullScreen }
                         color="contrast"
                     >
                         <FullScreen/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup="true"
-                        style={{background: 'none', marginLeft: '0'}}
-                        className={this.props.classes.menuBtn}
+                        style={ { background: 'none', marginLeft: '0' } }
+                        className={ this.props.classes.menuBtn }
                         color="contrast"
                     >
                         <Search/>
                     </IconButton>
                     <BottomNavigation
-                        value={value}
-                        onChange={this.handleChange}
+                        value={ value }
+                        onChange={ this.handleChange }
                         showLabels
-                        className={this.props.classes.root}
+                        className={ this.props.classes.root }
                     >
                         {
                             this.state.navs.map((item, index) => {
                                 return (
                                     <BottomNavigationButton
-                                        classes={{
+                                        classes={ {
                                             root: this.props.classes.navBtn,
                                             label: this.props.classes.btnLabel,
                                             selected: this.props.classes.selectRoot,
                                             selectedLabel: this.props.classes.selectedLabel,
-                                        }}
-                                        key={index}
-                                        label={item.name}
+                                        } }
+                                        key={ index }
+                                        label={ item.name }
                                     />
                                 );
                             })
                         }
                     </BottomNavigation>
                 </div>
-                <div className={this.props.classes.navUser}>
+                <div className={ this.props.classes.navUser }>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup="true"
-                        className={this.props.classes.iconBtn}
-                        style={{marginRight: '30px'}}
+                        className={ this.props.classes.iconBtn }
+                        style={ { marginRight: '30px' } }
                         color="contrast"
                     >
                         <Tv/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
+                        aria-owns={ open ? 'menu-appbar' : null }
                         aria-haspopup="true"
-                        className={this.props.classes.iconBtn}
-                        style={{marginRight: '10px'}}
+                        className={ this.props.classes.iconBtn }
+                        style={ { marginRight: '10px' } }
                         color="contrast"
                     >
                         <Setting/>

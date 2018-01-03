@@ -43,7 +43,7 @@ export async function bootstrap() {
         .addBearerAuth()
         .build();
     /**
-     * @type {SwaggerDocument}
+     * @type { SwaggerDocument }
      */
     const document = SwaggerModule.createDocument(application, options);
 

@@ -73,10 +73,7 @@ class AddonImport extends React.Component {
         };
         this.handleChange = (pro) => (event) => {
             this.state.checkedAll = true;
-            pro.check = true;
-            if (!event.target.checked) {
-                pro.check = false;
-            }
+            pro.check = event.target.checked;
             list.map(item => {
                 if (item.check === false) {
                     this.state.checkedAll = false;

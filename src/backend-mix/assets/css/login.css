@@ -1,8 +1,9 @@
 .login {
-background: #3f51b5;
-width: 100%;
-height: 100%;
+    background: #3f51b5;
+    width: 100%;
+    height: 100%;
 }
+
 .login .wrapBox {
     background: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
@@ -13,6 +14,7 @@ height: 100%;
     width: 388px;
     margin-left: -199px;
 }
+
 .login .innerBox {
     position: absolute;
     top: 8px;
@@ -22,11 +24,13 @@ height: 100%;
     border-radius: 10px;
     padding: 40px;
 }
+
 .login .boxTitle {
     color: #e91e63;
     font-size: 24px;
     position: relative;
 }
+
 .login .boxTitle:before {
     background: #e91e63;
     content: '';
@@ -36,6 +40,7 @@ height: 100%;
     width: 4px;
     height: 24px;
 }
+
 .login .absolute {
     flip: false;
     top: 56px;

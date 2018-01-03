@@ -3,23 +3,28 @@
     font-size: 12px;
     padding-top: 30px;
 }
+
 .title {
     font-size: 16px;
     margin-bottom: 27px;
     margin-top: 10px;
     font-weight: 600;
 }
+
 #root {
     height: inherit;
 }
+
 .top-action-module {
     position: relative;
 }
+
 .top-action-module .btn-group {
     position: absolute;
     right: 0;
     top: 36px;
 }
-.top-action-module .btn-group button{
+
+.top-action-module .btn-group button {
     font-size: 16px;
 }

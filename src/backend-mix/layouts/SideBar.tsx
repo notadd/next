@@ -40,7 +40,7 @@ const styles = {
         'height': '40px',
     },
     innerRoot: {
-        'background': '#ededed' ,
+        'background': '#ededed',
     },
     innerSelectBtn: {
         'background': '#e0e0e0',
@@ -191,6 +191,7 @@ class SideBar extends React.Component<Props, State> {
             message: 5,
         },
     };
+
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
         if (user === null) {
@@ -198,10 +199,11 @@ class SideBar extends React.Component<Props, State> {
             window.location.reload();
         } else {
             const userState = Object.assign(this.state.user);
-            userState.name = JSON.parse(user)['username'];
-            this.setState({user: userState});
+            userState.name = JSON.parse(user)[ 'username' ];
+            this.setState({ user: userState });
         }
     }
+
     handleClick(index: number, subIndex: any) {
         const sides = Object.assign({}, this.state.navs);
         if (subIndex === null) {
@@ -213,71 +215,72 @@ class SideBar extends React.Component<Props, State> {
                 }
             });
         } else {
-            const childArr = sides[index].children;
+            const childArr = sides[ index ].children;
             Object.keys(childArr).forEach(item => {
                 if (item === subIndex.toString()) {
-                    childArr[Number(item)].open = ! childArr[Number(item)].open;
+                    childArr[ Number(item) ].open = !childArr[ Number(item) ].open;
                 } else {
-                    childArr[Number(item)].open = false;
+                    childArr[ Number(item) ].open = false;
                 }
             });
         }
         const arr = new Array();
         Object.keys(sides).forEach(item => {
-            arr.push(sides[item]);
+            arr.push(sides[ item ]);
         });
         this.setState({ navs: arr });
     }
+
     render() {
         return (
             <div className="sideBar">
                 <div className="userBox">
                     <div
-                        style={{
+                        style={ {
                             background: 'rgba(0, 0, 0, 0.5)',
                             height: 'inherit',
                             display: 'flex',
                             justifyContent: 'center'
-                        }}
+                        } }
                     >
                         <Avatar
-                            alt={this.state.user.name}
-                            src={this.state.user.user_img}
-                            className={this.props.classes.bigAvatar}
+                            alt={ this.state.user.name }
+                            src={ this.state.user.user_img }
+                            className={ this.props.classes.bigAvatar }
                         />
                         <div className="user-right">
-                            <p>{this.state.user.name}</p>
-                            <p>{this.state.user.email}</p>
+                            <p>{ this.state.user.name }</p>
+                            <p>{ this.state.user.email }</p>
                             <div>
                                 <Badge
-                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
-                                    classes={{
+                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
+                                    classes={ {
                                         colorAccent: this.props.classes.badge,
-                                    }}
-                                    style={{border: 0}}
-                                    badgeContent={4}
+                                    } }
+                                    style={ { border: 0 } }
+                                    badgeContent={ 4 }
                                     color="accent"
                                 >
                                     <Notifications/>
                                 </Badge>
                                 <Badge
-                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
+                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
                                     classes={ {
                                         colorAccent: this.props.classes.badge,
                                     } }
-                                    style={{border: 0, marginLeft: 30}}
-                                    badgeContent={4}
+                                    style={ { border: 0, marginLeft: 30 } }
+                                    badgeContent={ 4 }
                                     color="accent"
                                 >
                                     <MailIcon/>
                                 </Badge>
                                 <Badge
-                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
-                                    classes={{
+                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
+                                    classes={ {
                                         colorAccent: this.props.classes.badge,
-                                    }}
-                                    style={{border: 0, marginLeft: 30}}
-                                    badgeContent={4}
+                                    } }
+                                    style={ { border: 0, marginLeft: 30 } }
+                                    badgeContent={ 4 }
                                     color="accent"
                                 >
                                     <ChatBubble/>
@@ -290,52 +293,52 @@ class SideBar extends React.Component<Props, State> {
                     this.state.navs.map((item, index) => {
                         return (
                             <List
-                                className={this.props.classes.root}
-                                key={index}
-                                style={{paddingTop: 0, paddingBottom: 0}}
+                                className={ this.props.classes.root }
+                                key={ index }
+                                style={ { paddingTop: 0, paddingBottom: 0 } }
                             >
                                 <ListItem
                                     button
-                                    onClick={() => this.handleClick(index, null)}
+                                    onClick={ () => this.handleClick(index, null) }
                                     className={
                                         classNames(
                                             item.open ?
-                                            this.props.classes.selectFirstLevelMenu : '',
+                                                this.props.classes.selectFirstLevelMenu : '',
                                             item.open ? 'selectFirstLevelMenu' : ''
                                         )
                                     }
-                                    style={{
+                                    style={ {
                                         paddingTop: 0,
                                         paddingBottom: 0,
                                         paddingLeft: 23,
                                         paddingRight: 25,
                                         height: 52
-                                    }}
+                                    } }
                                 >
                                     <ListItemIcon>
                                         <InboxIcon/>
                                     </ListItemIcon>
-                                    <ListItemText inset primary={item.name}/>
-                                    {item.open ? <ExpandLess/> : <ExpandMore/>}
+                                    <ListItemText inset primary={ item.name }/>
+                                    { item.open ? <ExpandLess/> : <ExpandMore/> }
                                 </ListItem>
-                                <Collapse component="li" in={item.open} unmountOnExit>
+                                <Collapse component="li" in={ item.open } unmountOnExit>
                                     <List
                                         disablePadding
-                                        style={{
+                                        style={ {
                                             paddingTop: 0,
                                             paddingBottom: 0,
                                             borderBottom: '1px solid #e0e0e0'
-                                        }}
+                                        } }
                                     >
                                         {
                                             item.children.map((child, childIndex) => {
                                                 return (
                                                     <List
-                                                        style={{
+                                                        style={ {
                                                             paddingTop: 0,
                                                             paddingBottom: 0,
-                                                        }}
-                                                        key={index.toString() + childIndex}
+                                                        } }
+                                                        key={ index.toString() + childIndex }
                                                     >
                                                         <ListItem
                                                             button
@@ -346,41 +349,41 @@ class SideBar extends React.Component<Props, State> {
                                                                     child.open ? 'innerRootSelect' : '',
                                                                 )
                                                             }
-                                                            style={{
+                                                            style={ {
                                                                 paddingRight: 25,
-                                                            }}
+                                                            } }
                                                         >
                                                             {
                                                                 child.hasOwnProperty('children')
                                                                 && child.children.length ? (
                                                                     <ListItemText
-                                                                        onClick={() =>
-                                                                            this.handleClick(index, childIndex)}
-                                                                        style={{paddingLeft: 78}}
+                                                                        onClick={ () =>
+                                                                            this.handleClick(index, childIndex) }
+                                                                        style={ { paddingLeft: 78 } }
                                                                         inset
-                                                                        primary={child.name}
+                                                                        primary={ child.name }
                                                                     />
                                                                 ) : (
                                                                     <NavLink
-                                                                        to={child.path}
+                                                                        to={ child.path }
                                                                         activeClassName="selectBtn"
                                                                     >
                                                                         <ListItemText
-                                                                            style={{paddingLeft: 78}}
+                                                                            style={ { paddingLeft: 78 } }
                                                                             inset
-                                                                            primary={child.name}
+                                                                            primary={ child.name }
                                                                         />
                                                                     </NavLink>
                                                                 )
                                                             }
                                                             {
                                                                 child.hasOwnProperty('children')
-                                                                    && child.children.length > 0
-                                                                    && child.open ?  (
+                                                                && child.children.length > 0
+                                                                && child.open ? (
                                                                     <ExpandLess/>
                                                                 ) : child.hasOwnProperty('children')
-                                                                    && child.children.length > 0
-                                                                    && child.open === false ? (
+                                                                && child.children.length > 0
+                                                                && child.open === false ? (
                                                                     <ExpandMore/>
                                                                 ) : null
                                                             }
@@ -388,45 +391,44 @@ class SideBar extends React.Component<Props, State> {
                                                         {
                                                             child.hasOwnProperty('children') && child.children.length
                                                                 ? (
-                                                                <Collapse component="li" in={child.open} unmountOnExit>
-                                                                    <List
-                                                                        disablePadding
-                                                                        style={{borderBottom: '1px solid #e0e0e0'}}
-                                                                    >
-                                                                        {
-                                                                            child.children.map((inner, innertIndex) => {
-                                                                                return (
-                                                                                    <NavLink
-                                                                                        to={inner.path}
-                                                                                        className={
-                                                                                            this.props.classes.innerRoot
-                                                                                        }
-                                                                                        activeClassName={
-                                                                                            classNames(
-                                                                                                this.
-                                                                                                props.
-                                                                                                classes.innerSelectBtn,
-                                                                                                'innerSelectBtn'
-                                                                                            )
-                                                                                        }
-                                                                                        key={
-                                                                                            index.toString()
-                                                                                            + childIndex
-                                                                                            + innertIndex
-                                                                                        }
-                                                                                    >
-                                                                                        <ListItemText
-                                                                                            style={{paddingLeft: 78}}
-                                                                                            inset
-                                                                                            primary={inner.name}
-                                                                                        />
-                                                                                    </NavLink>
-                                                                                );
-                                                                            })
-                                                                        }
-                                                                    </List>
-                                                                </Collapse>
-                                                            ) : null
+                                                                    <Collapse component="li" in={ child.open }
+                                                                              unmountOnExit>
+                                                                        <List
+                                                                            disablePadding
+                                                                            style={ { borderBottom: '1px solid #e0e0e0' } }
+                                                                        >
+                                                                            {
+                                                                                child.children.map((inner, innertIndex) => {
+                                                                                    return (
+                                                                                        <NavLink
+                                                                                            to={ inner.path }
+                                                                                            className={
+                                                                                                this.props.classes.innerRoot
+                                                                                            }
+                                                                                            activeClassName={
+                                                                                                classNames(
+                                                                                                    this.props.classes.innerSelectBtn,
+                                                                                                    'innerSelectBtn'
+                                                                                                )
+                                                                                            }
+                                                                                            key={
+                                                                                                index.toString()
+                                                                                                + childIndex
+                                                                                                + innertIndex
+                                                                                            }
+                                                                                        >
+                                                                                            <ListItemText
+                                                                                                style={ { paddingLeft: 78 } }
+                                                                                                inset
+                                                                                                primary={ inner.name }
+                                                                                            />
+                                                                                        </NavLink>
+                                                                                    );
+                                                                                })
+                                                                            }
+                                                                        </List>
+                                                                    </Collapse>
+                                                                ) : null
                                                         }
                                                     </List>
                                                 );

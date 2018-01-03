@@ -66,12 +66,14 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
         copyright: '',
         statisticalCode: '',
     };
+
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
     };
+
     render() {
         return (
             <div className="configurations">
@@ -79,44 +81,44 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                     全局 <b>/</b> 全局设置
                 </p>
                 <h4 className="title">参数设置</h4>
-                <Paper className={this.props.classes.root}>
-                    <form className={this.props.classes.container} noValidate autoComplete="off">
-                        <Grid container spacing={40}>
-                            <Grid item xs={12} sm={6}>
+                <Paper className={ this.props.classes.root }>
+                    <form className={ this.props.classes.container } noValidate autoComplete="off">
+                        <Grid container spacing={ 40 }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth required>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         网站名称
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('webName')}
-                                        value={this.state.webName}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('webName') }
+                                        value={ this.state.webName }
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         网站域名
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('domainName')}
-                                        value={this.state.domainName}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('domainName') }
+                                        value={ this.state.domainName }
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '10px'}}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid container spacing={ 40 } style={ { marginTop: '10px' } }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControlLabel
                                     label="站点开启"
                                     classes={ {
@@ -125,20 +127,20 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     } }
                                     control={
                                         <Switch
-                                            classes={{
+                                            classes={ {
                                                 root: this.props.classes.switchHeight,
                                                 default: this.props.classes.switchDefault,
-                                            }}
-                                            onChange={(event, checked) => this.setState({ siteOpen: checked })}
-                                            checked={this.state.siteOpen}
+                                            } }
+                                            onChange={ (event, checked) => this.setState({ siteOpen: checked }) }
+                                            checked={ this.state.siteOpen }
                                         />
                                     }
                                 />
-                                <FormHelperText className={this.props.classes.subLabel}>
+                                <FormHelperText className={ this.props.classes.subLabel }>
                                     关闭后网站将不能访问
                                 </FormHelperText>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControlLabel
                                     label="开启多域名"
                                     classes={ {
@@ -147,89 +149,89 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     } }
                                     control={
                                         <Switch
-                                            classes={{
+                                            classes={ {
                                                 root: this.props.classes.switchHeight,
                                                 default: this.props.classes.switchDefault,
-                                            }}
-                                            onChange={(event, checked) => this.setState({ multiDomainOpen: checked })}
-                                            checked={this.state.multiDomainOpen}
+                                            } }
+                                            onChange={ (event, checked) => this.setState({ multiDomainOpen: checked }) }
+                                            checked={ this.state.multiDomainOpen }
                                         />
                                     }
                                 />
-                                <FormHelperText className={this.props.classes.subLabel}>
+                                <FormHelperText className={ this.props.classes.subLabel }>
                                     由于前后端分离机制，官方不对多域名做特殊支持，可能导致其他未知问题
                                 </FormHelperText>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid container spacing={ 40 } style={ { marginTop: '-10px' } }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         备案信息
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('keepRecord')}
-                                        value={this.state.keepRecord}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('keepRecord') }
+                                        value={ this.state.keepRecord }
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         公司名称
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('companyName')}
-                                        value={this.state.companyName}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('companyName') }
+                                        value={ this.state.companyName }
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid container spacing={ 40 } style={ { marginTop: '-10px' } }>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         统计代码
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('statisticalCode')}
-                                        value={this.state.statisticalCode}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('statisticalCode') }
+                                        value={ this.state.statisticalCode }
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={ 12 } sm={ 6 }>
                                 <FormControl fullWidth>
                                     <InputLabel
                                         htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
+                                        className={ this.props.classes.formLabelFont }
                                     >
                                         版权信息
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('copyright')}
-                                        value={this.state.copyright}
+                                        className={ this.props.classes.formLabelFont }
+                                        onChange={ this.handleChange('copyright') }
+                                        value={ this.state.copyright }
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button raised color="primary" style={ { marginTop: 34, fontSize: 12, borderRadius: 4 } }>
                             确认提交
                         </Button>
                     </form>
@@ -238,4 +240,5 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
         );
     }
 }
+
 export default withStyles(styles)(Configurations);

@@ -22,12 +22,12 @@ class Index extends React.Component {
                     <Side/>
                     <div className="view">
                         <Switch>
-                            <Route exact  path="configurations" component={Configurations}/>
-                            <Route exact  path="seo" component={Seo}/>
-                            <Route exact  path="upload" component={Upload}/>
-                            <Route exact  path="mail" component={Mail}/>
-                            <Route exact  path="debug" component={Debug}/>
-                            <Route exact  path="extension" component={Extension}/>
+                            <Route exact path="configurations" component={ Configurations }/>
+                            <Route exact path="seo" component={ Seo }/>
+                            <Route exact path="upload" component={ Upload }/>
+                            <Route exact path="mail" component={ Mail }/>
+                            <Route exact path="debug" component={ Debug }/>
+                            <Route exact path="extension" component={ Extension }/>
                         </Switch>
                     </div>
                 </div>

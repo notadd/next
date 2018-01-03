@@ -51,10 +51,10 @@ const styles = {
         'padding-bottom': '0',
     },
 };
-type State = {
-};
+type State = {};
 
 let id = 0;
+
 function createData(name: any, author: any, descri: any, status: boolean) {
     id += 1;
     return { id, name, author, descri, status };
@@ -74,6 +74,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         modalId: '',
         modalName: '',
     };
+
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
         this.state.modalId = pro.id;
@@ -81,10 +82,14 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             open: true,
         });
     };
-    handleDownLoad = () => {};
+
+    handleDownLoad = () => {
+    };
+
     handleClose = () => {
         this.setState({ open: false });
     };
+
     render() {
         return (
             <div>
@@ -92,54 +97,54 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                     全局 / 应用管理 / 插件配置
                 </p>
                 <h4 className="title">本地安装</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
+                <Paper className={ this.props.classes.root }>
+                    <Table className={ this.props.classes.table }>
                         <TableHead className="table-head">
                             <TableRow>
                                 <TableCell>插件名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>作者</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>描述</TableCell>
+                                <TableCell numeric/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            { list.map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
+                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
+                                        key={ n.id }
                                     >
-                                        <TableCell>{n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
+                                        <TableCell>{ n.name }</TableCell>
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.author }
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.descri }
                                         </TableCell>
                                         <TableCell numeric>
                                             {
                                                 n.status ? <IconButton
-                                                    className={this.props.classes.menuBtn}
-                                                    onClick={() => this.handleClickOpen(n)}
+                                                    className={ this.props.classes.menuBtn }
+                                                    onClick={ () => this.handleClickOpen(n) }
                                                 >
-                                                    <DeleteIcon />
+                                                    <DeleteIcon/>
                                                 </IconButton> : <IconButton
-                                                    className={this.props.classes.downBtn}
-                                                    onClick={() => this.handleDownLoad()}
+                                                    className={ this.props.classes.downBtn }
+                                                    onClick={ () => this.handleDownLoad() }
                                                 >
-                                                    <FileDownload />
+                                                    <FileDownload/>
                                                 </IconButton>
                                             }
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            }) }
                         </TableBody>
                     </Table>
                 </Paper>
                 <Dialog
-                    open={this.state.open}
+                    open={ this.state.open }
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                     className="dialog-content"
@@ -149,19 +154,19 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={ this.handleClose }
                         >
-                            <ClearIcon />
+                            <ClearIcon/>
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除插件名称"{this.state.modalName}"吗?</h4>
+                        <h4>确定要删除插件名称"{ this.state.modalName }"吗?</h4>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
-                        <Button onClick={this.handleClose}>
+                        <Button onClick={ this.handleClose }>
                             取消
                         </Button>
-                        <Button onClick={this.handleClose} autoFocus>
+                        <Button onClick={ this.handleClose } autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>
@@ -170,4 +175,5 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         );
     }
 }
+
 export default withStyles(styles)(AddonInstall);

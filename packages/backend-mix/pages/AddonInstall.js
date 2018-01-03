@@ -68,7 +68,8 @@ class AddonInstall extends React.Component {
                 open: true,
             });
         };
-        this.handleDownLoad = () => { };
+        this.handleDownLoad = () => {
+        };
         this.handleClose = () => {
             this.setState({ open: false });
         };

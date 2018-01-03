@@ -44,10 +44,10 @@ const styles = {
         'width': '40px',
     },
 };
-type State = {
-};
+type State = {};
 
 let id = 0;
+
 function createData(check: boolean, name: any, description: any, version: any) {
     id += 1;
     return { id, check, name, description, version };
@@ -65,6 +65,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
     state = {
         checkedAll: false,
     };
+
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
             list.map(item => {
@@ -79,6 +80,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
             [name]: event.target.checked,
         });
     };
+
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
         pro.check = true;
@@ -104,59 +106,59 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                 <h4 className="title">导入/导出</h4>
                 <div className="btn-group">
                     <IconButton
-                        className={this.props.classes.menuBtn}
+                        className={ this.props.classes.menuBtn }
                     >
-                        <FileUpload />
+                        <FileUpload/>
                     </IconButton>
                     <IconButton
-                        className={this.props.classes.menuBtn}
+                        className={ this.props.classes.menuBtn }
                     >
-                        <FileDownload />
+                        <FileDownload/>
                     </IconButton>
                 </div>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
+                <Paper className={ this.props.classes.root }>
+                    <Table className={ this.props.classes.table }>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus}>
+                                <TableCell className={ this.props.classes.tableCellStatus }>
                                     <Checkbox
-                                        checked={this.state.checkedAll}
-                                        onChange={this.handleChangeAll('checkedAll')}
+                                        checked={ this.state.checkedAll }
+                                        onChange={ this.handleChangeAll('checkedAll') }
                                         value="checkedAll"
                                     />
                                 </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>模块名称</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>描述</TableCell>
+                                <TableCell className={ this.props.classes.tableCell } numeric>版本</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            { list.map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
+                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
+                                        key={ n.id }
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
-                                                checked={n.check}
-                                                onChange={this.handleChange(n)}
+                                                checked={ n.check }
+                                                onChange={ this.handleChange(n) }
                                                 value="n.check"
                                             />
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.name}
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.name }
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.description}
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.description }
                                         </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.version}
+                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                            { n.version }
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            }) }
                         </TableBody>
                     </Table>
                 </Paper>
@@ -164,4 +166,5 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
         );
     }
 }
+
 export default withStyles(styles)(ModuleImport);
