@@ -1,5 +1,6 @@
 'use strict';
 
+const commander = require('commander');
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
@@ -30,12 +31,16 @@ function getServedPath(appPackageJson) {
     return ensureSlash(servedUrl, true);
 }
 
+commander.version('0.1.0')
+    .option('-i, --index [index]', 'Application Index JS', 'src/index.js')
+    .parse(process.argv);
+
 module.exports = {
     dotenv: resolveApp('.env'),
     appBuild: resolveApp('build'),
     appPublic: resolveApp('public'),
     appHtml: resolveApp('public/index.html'),
-    appIndexJs: resolveApp('src/index.js'),
+    appIndexJs: commander.index ? resolveApp(commander.index) : resolveApp('src/index.js'),
     appPackageJson: resolveApp('package.json'),
     appSrc: resolveApp('src'),
     yarnLockFile: resolveApp('yarn.lock'),
@@ -44,52 +49,3 @@ module.exports = {
     publicUrl: getPublicUrl(resolveApp('package.json')),
     servedPath: getServedPath(resolveApp('package.json')),
 };
-
-const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
-
-module.exports = {
-    dotenv: resolveApp('.env'),
-    appPath: resolveApp('.'),
-    appBuild: resolveApp('build'),
-    appPublic: resolveApp('public'),
-    appHtml: resolveApp('public/index.html'),
-    appIndexJs: resolveApp('src/index.js'),
-    appPackageJson: resolveApp('package.json'),
-    appSrc: resolveApp('src'),
-    yarnLockFile: resolveApp('yarn.lock'),
-    testsSetup: resolveApp('src/setupTests.js'),
-    appNodeModules: resolveApp('node_modules'),
-    publicUrl: getPublicUrl(resolveApp('package.json')),
-    servedPath: getServedPath(resolveApp('package.json')),
-    ownPath: resolveOwn('.'),
-    ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
-};
-
-const ownPackageJson = require('../package.json');
-const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
-const reactScriptsLinked =
-    fs.existsSync(reactScriptsPath) &&
-    fs.lstatSync(reactScriptsPath).isSymbolicLink();
-
-if (
-    !reactScriptsLinked &&
-    __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
-) {
-    module.exports = {
-        dotenv: resolveOwn('template/.env'),
-        appPath: resolveApp('.'),
-        appBuild: resolveOwn('../../build'),
-        appPublic: resolveOwn('template/public'),
-        appHtml: resolveOwn('template/public/index.html'),
-        appIndexJs: resolveOwn('template/src/index.js'),
-        appPackageJson: resolveOwn('package.json'),
-        appSrc: resolveOwn('template/src'),
-        yarnLockFile: resolveOwn('template/yarn.lock'),
-        testsSetup: resolveOwn('template/src/setupTests.js'),
-        appNodeModules: resolveOwn('node_modules'),
-        publicUrl: getPublicUrl(resolveOwn('package.json')),
-        servedPath: getServedPath(resolveOwn('package.json')),
-        ownPath: resolveOwn('.'),
-        ownNodeModules: resolveOwn('node_modules'),
-    };
-}
