@@ -15,6 +15,17 @@ const ip = require("ip");
 const swagger_1 = require("@nestjs/swagger");
 const packages_1 = require("nestjs-flub/packages");
 const express = require("express");
+const cross = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const port = 3000;
@@ -22,6 +33,7 @@ function bootstrap() {
         const server = express();
         server.use(express.static(process.cwd() + '/public/'));
         const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule, server);
+        application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
         const logger = new common_1.Logger('NotaddFactory', true);
         const options = new swagger_1.DocumentBuilder()

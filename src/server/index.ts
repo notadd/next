@@ -6,6 +6,18 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { FlubErrorHandler } from 'nestjs-flub/packages';
 import * as express from 'express';
 
+const cross = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    } else {
+        next();
+    }
+};
+
 export async function bootstrap() {
     const port = 3000;
     const address = `http://${ip.address()}:${port}`;
@@ -15,6 +27,7 @@ export async function bootstrap() {
      * @type { INestApplication }
      */
     const application = await NotaddFactory.create(ApplicationModule, server);
+    application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
     /**
      * @type { Logger }
