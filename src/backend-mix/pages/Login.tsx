@@ -53,7 +53,7 @@ class Login extends React.Component<Props, State> {
                 loading: true,
             },
         );
-        axios.post('http://192.168.109.120:3000/auth/token', {
+        axios.post('http://192.168.149.120:3000/auth/token', {
             username: this.state.userName,
             password: this.state.password,
         }).then(response => {
@@ -82,13 +82,13 @@ class Login extends React.Component<Props, State> {
                             </Tooltip>
                             <FormControl fullWidth style={{marginTop: 65}}>
                                 <InputLabel
-                                    htmlFor="name-simple"
+                                    htmlFor="user-name"
                                     className={this.props.classes.formLabelFont}
                                 >
                                     用户名
                                 </InputLabel>
                                 <Input
-                                    id="name-simple"
+                                    id="user-name"
                                     className={this.props.classes.formLabelFont}
                                     onChange={this.handleChange('userName')}
                                     value={this.state.userName}
@@ -97,7 +97,7 @@ class Login extends React.Component<Props, State> {
                             <FormControl fullWidth style={{marginTop: 35}}>
                                 <InputLabel
                                     className={this.props.classes.formLabelFont}
-                                    htmlFor="name-simple"
+                                    htmlFor="user-password"
                                 >
                                     密码
                                 </InputLabel>
@@ -110,7 +110,7 @@ class Login extends React.Component<Props, State> {
                                         }
                                     }
                                     className={this.props.classes.formLabelFont}
-                                    id="name-simple"
+                                    id="user-password"
                                     type="password"
                                     onChange={this.handleChange('password')}
                                     value={this.state.password}

@@ -39,7 +39,7 @@ class Login extends React.Component {
             this.setState({
                 loading: true,
             });
-            axios.post('http://192.168.109.120:3000/auth/token', {
+            axios.post('http://192.168.149.120:3000/auth/token', {
                 username: this.state.userName,
                 password: this.state.password,
             }).then(response => {
@@ -65,15 +65,15 @@ class Login extends React.Component {
                             React.createElement(Button, { fab: true, color: "accent", className: "absolute" },
                                 React.createElement(KeyboardArrowRight, null))),
                         React.createElement(FormControl, { fullWidth: true, style: { marginTop: 65 } },
-                            React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u7528\u6237\u540D"),
-                            React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, onChange: this.handleChange('userName'), value: this.state.userName })),
+                            React.createElement(InputLabel, { htmlFor: "user-name", className: this.props.classes.formLabelFont }, "\u7528\u6237\u540D"),
+                            React.createElement(Input, { id: "user-name", className: this.props.classes.formLabelFont, onChange: this.handleChange('userName'), value: this.state.userName })),
                         React.createElement(FormControl, { fullWidth: true, style: { marginTop: 35 } },
-                            React.createElement(InputLabel, { className: this.props.classes.formLabelFont, htmlFor: "name-simple" }, "\u5BC6\u7801"),
+                            React.createElement(InputLabel, { className: this.props.classes.formLabelFont, htmlFor: "user-password" }, "\u5BC6\u7801"),
                             React.createElement(Input, { onKeyUp: (event) => {
                                     if (event.keyCode === 13) {
                                         this.handleSubmit(event);
                                     }
-                                }, className: this.props.classes.formLabelFont, id: "name-simple", type: "password", onChange: this.handleChange('password'), value: this.state.password }))),
+                                }, className: this.props.classes.formLabelFont, id: "user-password", type: "password", onChange: this.handleChange('password'), value: this.state.password }))),
                     React.createElement(CardActions, { style: { marginTop: 30, padding: 0 } },
                         React.createElement(Button, { raised: true, disabled: this.state.userName === '' || this.state.password === '' || this.state.loading, color: "primary", style: {
                                 width: '100%',
