@@ -1,6 +1,6 @@
 default:
     type: "postgres"
-    host: "192.168.109.120"
+    host: "192.168.149.120"
     port: 5432
     username: "postgres"
     password: "123qwe"
