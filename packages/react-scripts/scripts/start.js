@@ -28,7 +28,7 @@ const isInteractive = process.stdout.isTTY;
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
     process.exit(1);
 }
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 4000;
 const HOST = process.env.HOST || '0.0.0.0';
 choosePort(HOST, DEFAULT_PORT)
     .then(port => {
