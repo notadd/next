@@ -30,6 +30,7 @@ let AuthController = class AuthController {
     }
     getToken(userInfo) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(userInfo);
             return yield this.authService.createToken();
         });
     }

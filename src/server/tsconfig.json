@@ -9,7 +9,6 @@
         "noImplicitAny": false,
         "noLib": false,
         "noUnusedLocals": false,
-        "outDir": "../../packages/server",
         "removeComments": true,
         "strict": true,
         "target": "ES2015"

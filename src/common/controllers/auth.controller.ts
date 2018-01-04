@@ -25,6 +25,8 @@ export class AuthController {
     })
     @Post('token')
     public async getToken(@Body() userInfo: AuthLogin) {
+        console.log(userInfo);
+
         return await this.authService.createToken();
     }
 

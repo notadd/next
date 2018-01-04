@@ -9,7 +9,6 @@
         "noImplicitAny": false,
         "noLib": false,
         "noUnusedLocals": false,
-        "outDir": "../../packages/core",
         "removeComments": true,
         "strict": true,
         "target": "ES2015"

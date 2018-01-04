@@ -57,8 +57,8 @@ modules.forEach(module => {
         } else {
             return packages[module]
                 .src()
-                .pipe(packages[module]());
-            //     .pipe(gulp.dest(`${dist}/${module}`));
+                .pipe(packages[module]())
+                .pipe(gulp.dest(`${dist}/${module}`));
         }
     });
 });
