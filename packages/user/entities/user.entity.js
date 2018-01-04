@@ -17,9 +17,22 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({
+        length: 20,
+    }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column(),
+    typeorm_1.Index({
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", String)
