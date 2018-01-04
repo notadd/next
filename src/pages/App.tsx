@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Route, RouteProps, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import Header from '../layouts/Header';
+import Side from '../layouts/SideBar';
 import Home from './Home';
 import Configurations from './Configurations';
 import Debug from './Debug';
@@ -8,7 +9,6 @@ import Extension from './Extension';
 import Login from './Login';
 import Mail from './Mail';
 import Seo from './Seo';
-import Side from '../layouts/SideBar';
 import Upload from './Upload';
 import ModuleOpen from './ModuleOpen';
 import ModuleDomain from './ModuleDomain';
@@ -20,10 +20,17 @@ import AddonInstall from './AddonInstall';
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import Hidden from 'material-ui/Hidden';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
-type Props = RouteProps;
-
-class App extends React.Component<Props, {}> {
+type State = {
+    open: boolean,
+};
+const styles = {
+    drawerPaper: {
+        'margin-top': 70,
+    },
+};
+class App extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: true,
     };
@@ -33,6 +40,7 @@ class App extends React.Component<Props, {}> {
         });
     };
     render() {
+        const { classes } = this.props;
         return (
             <HashRouter  basename="/">
                 <Switch>
@@ -62,6 +70,9 @@ class App extends React.Component<Props, {}> {
                                     <Hidden smDown implementation="css">
                                         <Drawer
                                             type="permanent"
+                                            classes={{
+                                                paper: classes.drawerPaper,
+                                            }}
                                             open={this.state.open}
                                         >
                                             <Side/>
@@ -92,4 +103,4 @@ class App extends React.Component<Props, {}> {
         );
     }
 }
-export default App;
+export default withStyles(styles)(App);
