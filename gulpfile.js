@@ -40,6 +40,10 @@ gulp.task('backend-mix-server', function () {
             '--index',
             'node_modules/@notadd/backend-mix/index.js',
         ],
+        watch: [
+            'node_modules/@notadd/react-scripts/bin/react-scripts.js',
+            'node_modules/@notadd/backend-mix/package.json',
+        ],
     });
 });
 
