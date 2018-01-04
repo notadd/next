@@ -31,6 +31,18 @@ gulp.task('default', function () {
     });
 });
 
+gulp.task('backend-mix-server', function () {
+    tasks();
+    nodemon({
+        script: 'node_modules/@notadd/react-scripts/bin/react-scripts.js',
+        args: [
+            'start',
+            '--index',
+            'node_modules/@notadd/backend-mix/index.js',
+        ],
+    });
+});
+
 modules.forEach(module => {
     gulp.task(module, () => {
         if (module === 'react-scripts') {

@@ -10,6 +10,7 @@
         "build:packages": "gulp build --dist packages",
         "build:watch": "gulp watch --dist packages",
         "dev": "gulp --dist packages",
+        "dev:backend-mix": "gulp backend-mix-server --dist packages",
         "prepublish": "npm run build:packages",
         "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
         "server": "node main.js",
