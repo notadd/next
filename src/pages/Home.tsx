@@ -125,22 +125,8 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         return (
             <div className="home">
-                <Grid container spacing={24} className="top-statistics">
-                    <Grid item xs={12} sm={6} md={3}>
-                        <Paper className={this.props.classes.paper}>xs=3</Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <Paper className={this.props.classes.paper}>xs=3</Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <Paper className={this.props.classes.paper}>xs=3</Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <Paper className={this.props.classes.paper}>xs=3</Paper>
-                    </Grid>
-                </Grid>
                 <Grid container spacing={24} className="bottom-content">
-                    <Grid item xs={12} md={8} sm={12} style={{marginTop: 30}}>
+                    <Grid item xs={12} md={8} sm={12}>
                         <Paper className={this.props.classes.leftPaper}>
                             <div className="home-bg">
                                 <div>
@@ -200,7 +186,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </div>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={4} style={{marginTop: 30}}>
+                    <Grid item xs={12} sm={12} md={4}>
                         <Paper className={this.props.classes.rightPaper}>
                             <div className="version-information" style={{paddingBottom: 25}}>
                                 <p>

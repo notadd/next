@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router';
+import {Redirect, Route, Switch} from 'react-router';
 import Side from '../layouts/SideBar';
 import Home from './Home';
 import Configurations from './Configurations';
@@ -27,7 +27,7 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import  {withStyles, WithStyles, StyleRules, Theme} from 'material-ui/styles';
+import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
 type State = {
     open: boolean,
@@ -342,6 +342,7 @@ class App extends React.Component<ViewProps, State> {
                                         </Drawer>
                                     </Hidden>
                                     <div className="view">
+                                        <Redirect exact path="/" to="/home"/>
                                         <Route exact path="/home" component={Home}/>
                                         <Route exact path="/configurations" component={Configurations}/>
                                         <Route exact path="/seo" component={Seo}/>

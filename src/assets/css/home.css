@@ -1,11 +1,8 @@
-.home .top-statistics{
-    margin-top: 0;
+.home {
+    margin-top: 98px;
 }
 .home .top-statistics > div {
     padding: 14px;
-}
-.home .bottom-content > div:first-child {
-    padding: 0 16px 0 14px;
 }
 .home .bottom-content .home-bg {
     height: 250px;
@@ -142,9 +139,6 @@
 }
 .home .version-information > div p span {
     word-break: break-all;
-}
-.home .bottom-content > div:last-child {
-    padding: 0 12px 0 14px;
 }
 .home .bottom-content > div > div {
     min-height: 385px;

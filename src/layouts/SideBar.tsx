@@ -71,12 +71,6 @@ class SideBar extends React.Component<Props, State> {
                 index: 0,
                 children: [
                     {
-                        'name': '首页',
-                        'path': '/home',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
                         'name': '参数配置',
                         'path': '/configurations',
                         'open': false,
