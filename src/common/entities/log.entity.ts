@@ -1,12 +1,14 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { IsString } from "class-validator";
 
 @Entity('logs')
 export class Log {
     @PrimaryGeneratedColumn()
-    key: string;
+    id: number;
 
     @Column()
-    value: string;
+    @IsString()
+    content: string;
 
     @CreateDateColumn()
     createdAt: string;

@@ -10,16 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const class_validator_1 = require("class-validator");
 let Log = class Log {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
-    __metadata("design:type", String)
-], Log.prototype, "key", void 0);
+    __metadata("design:type", Number)
+], Log.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
+    class_validator_1.IsString(),
     __metadata("design:type", String)
-], Log.prototype, "value", void 0);
+], Log.prototype, "content", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", String)
