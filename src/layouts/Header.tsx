@@ -68,10 +68,6 @@ const styles = {
     },
 };
 
-export interface Props {
-    classes: object;
-}
-
 type State = {
     current: number,
     navs: object,
