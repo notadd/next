@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Redirect, Route, Switch} from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
+import { Link } from 'react-router-dom'
 import Side from '../layouts/SideBar';
 import Home from './Home';
 import Configurations from './Configurations';
@@ -49,6 +50,7 @@ const styles = (theme: Theme): StyleRules => ({
         height: '100%',
         top: 70,
         width: drawerWidth,
+        boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -231,7 +233,9 @@ class App extends React.Component<ViewProps, State> {
                                 <div className="main-view">
                                     <div className={this.props.classes.header}>
                                         <div className={this.props.classes.headerLeft}>
-                                            <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
+                                            <Link to="/home">
+                                                <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
+                                            </Link>
                                             <IconButton
                                                 aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
@@ -342,21 +346,23 @@ class App extends React.Component<ViewProps, State> {
                                         </Drawer>
                                     </Hidden>
                                     <div className="view">
-                                        <Redirect exact path="/" to="/home"/>
-                                        <Route exact path="/home" component={Home}/>
-                                        <Route exact path="/configurations" component={Configurations}/>
-                                        <Route exact path="/seo" component={Seo}/>
-                                        <Route exact path="/upload" component={Upload}/>
-                                        <Route exact path="/mail" component={Mail}/>
-                                        <Route exact path="/debug" component={Debug}/>
-                                        <Route exact path="/extension" component={Extension}/>
-                                        <Route exact path="/module/open-module" component={ModuleOpen}/>
-                                        <Route exact path="/module/domain-config" component={ModuleDomain}/>
-                                        <Route exact path="/module/import-export" component={ModuleImport}/>
-                                        <Route exact path="/module/install" component={ModuleInstall}/>
-                                        <Route exact path="/addon/openAddon" component={AddonOpen}/>
-                                        <Route exact path="/addon/import-export" component={AddonImport}/>
-                                        <Route exact path="/addon/install" component={AddonInstall}/>
+                                        <Switch>
+                                            <Route exact path="/configurations" component={Configurations}/>
+                                            <Route exact path="/home" component={Home}/>
+                                            <Route exact path="/seo" component={Seo}/>
+                                            <Route exact path="/upload" component={Upload}/>
+                                            <Route exact path="/mail" component={Mail}/>
+                                            <Route exact path="/debug" component={Debug}/>
+                                            <Route exact path="/extension" component={Extension}/>
+                                            <Route exact path="/module/open-module" component={ModuleOpen}/>
+                                            <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                                            <Route exact path="/module/import-export" component={ModuleImport}/>
+                                            <Route exact path="/module/install" component={ModuleInstall}/>
+                                            <Route exact path="/addon/openAddon" component={AddonOpen}/>
+                                            <Route exact path="/addon/import-export" component={AddonImport}/>
+                                            <Route exact path="/addon/install" component={AddonInstall}/>
+                                            <Route path="/" render={() => (<Redirect to="/home"/>)}/>
+                                        </Switch>
                                     </div>
                                 </div>
                             );

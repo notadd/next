@@ -191,7 +191,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                             <div className="version-information" style={{paddingBottom: 25}}>
                                 <p>
                                     <span>Notadd版本</span>
-                                    <span>1.16.30</span>
+                                    <span style={{color: '#3f51b5'}}>1.16.30</span>
                                 </p>
                                 <div>
                                     {this.state.version.map((item, index) => {
