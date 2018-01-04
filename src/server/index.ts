@@ -1,6 +1,6 @@
 import { NotaddFactory } from '@notadd/core';
 import { ApplicationModule } from './modules/application.module';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import * as ip from 'ip';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { FlubErrorHandler } from 'nestjs-flub/packages';
@@ -29,6 +29,7 @@ export async function bootstrap() {
     const application = await NotaddFactory.create(ApplicationModule, server);
     application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
+    application.useGlobalPipes(new ValidationPipe());
     /**
      * @type { Logger }
      */

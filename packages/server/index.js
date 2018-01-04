@@ -35,6 +35,7 @@ function bootstrap() {
         const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule, server);
         application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
+        application.useGlobalPipes(new common_1.ValidationPipe());
         const logger = new common_1.Logger('NotaddFactory', true);
         const options = new swagger_1.DocumentBuilder()
             .setTitle('Notadd')
