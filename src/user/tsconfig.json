@@ -9,7 +9,7 @@
         "noImplicitAny": false,
         "noLib": false,
         "noUnusedLocals": false,
-        "outDir": "../../node_modules/@notadd/user",
+        "outDir": "../../packages/user",
         "removeComments": true,
         "strict": true,
         "target": "ES2015"

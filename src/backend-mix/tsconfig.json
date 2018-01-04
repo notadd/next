@@ -15,7 +15,7 @@
         "noImplicitThis": true,
         "noLib": false,
         "noUnusedLocals": true,
-        "outDir": "../../node_modules/@notadd/backend-mix",
+        "outDir": "../../packages/backend-mix",
         "removeComments": true,
         "strict": true,
         "strictNullChecks": true,
