@@ -27,7 +27,9 @@ import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Popover from 'material-ui/Popover';
+import Grid from 'material-ui/Grid';
+import TextField from 'material-ui/TextField';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
 type State = {
@@ -121,6 +123,24 @@ const styles = (theme: Theme): StyleRules => ({
         fontSize: '18px',
         width: '28px',
     },
+    textFieldRoot: {
+        padding: 0,
+    },
+    textFieldInput: {
+        fontSize: 12,
+        boxSizing: 'border-box',
+        padding: '0 30px 0 58px',
+        height: 70,
+        width: 'inherit'
+    },
+    popPaper: {
+        position: 'fixed',
+        left: '0 !important',
+        top: '0 !important',
+        boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.1)',
+        width: 'inherit',
+        maxWidth: '100vw',
+    }
 });
 
 type ViewProps = WithStyles;
@@ -219,7 +239,7 @@ class App extends React.Component<ViewProps, State> {
         }
     };
     render() {
-        const { value } = this.state;
+        const { value, openSearch  } = this.state;
         const { classes } = this.props;
         return (
             <HashRouter  basename="/">
@@ -265,13 +285,37 @@ class App extends React.Component<ViewProps, State> {
                                             >
                                                 <Search/>
                                             </IconButton>
-                                            <Menu
-                                                className="header-search"
-                                                id="lock-menu"
-                                                open={this.state.openSearch}
-                                            >
-                                                <MenuItem>eyrur</MenuItem>
-                                            </Menu>
+                                            <Grid container spacing={0}>
+                                                <Grid item xs={3} sm={3} md={3}>
+                                                    <Popover
+                                                        open={openSearch}
+                                                        anchorPosition={{ top: 0, left: 0 }}
+                                                        anchorOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        transformOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        classes={{
+                                                            paper: classes.popPaper
+                                                        }}
+                                                        onClose={this.handleOpenSearch}
+                                                    >
+                                                        <TextField
+                                                            defaultValue="react-bootstrap"
+                                                            InputProps={{
+                                                                disableUnderline: true,
+                                                                classes: {
+                                                                    root: classes.textFieldRoot,
+                                                                    input: classes.textFieldInput,
+                                                                },
+                                                            }}
+                                                        />
+                                                    </Popover>
+                                                </Grid>
+                                            </Grid>
                                             <BottomNavigation
                                                 value={value}
                                                 onChange={this.handleChange}

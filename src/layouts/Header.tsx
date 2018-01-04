@@ -6,7 +6,9 @@ import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Popover from 'material-ui/Popover';
+// import Grid from 'material-ui/Grid';
+import TextField from 'material-ui/TextField';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
@@ -66,6 +68,20 @@ const styles = {
         fontSize: '18px',
         width: '28px',
     },
+    textFieldRoot: {
+        padding: 0,
+    },
+    textFieldInput: {
+        borderRadius: 4,
+        border: '1px solid #ced4da',
+        fontSize: 16,
+        padding: '10px 12px',
+        width: 'calc(100% - 24px)',
+        '&:focus': {
+            borderColor: '#80bdff',
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+        },
+    },
 };
 
 type State = {
@@ -112,6 +128,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
         },
         fullScreen: false,
         openSearch: false,
+        anchorEl: null,
     };
     handleChange = (event: any, value: any) => {
         this.setState({ value });
@@ -165,7 +182,8 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
         }
     };
     render() {
-        const { value } = this.state;
+        const { value, openSearch  } = this.state;
+        const { classes } = this.props;
         return (
             <div className={this.props.classes.header}>
                 <div className={this.props.classes.headerLeft}>
@@ -198,13 +216,32 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                     >
                         <Search/>
                     </IconButton>
-                    <Menu
-                        className="header-search"
-                        id="lock-menu"
-                        open={this.state.openSearch}
+                    <Popover
+                        open={openSearch}
+                        anchorEl="anchorPosition"
+                        anchorPosition={{ top: 150, left: 0 }}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        onClose={this.handleOpenSearch}
                     >
-                        <MenuItem>eyrur</MenuItem>
-                    </Menu>
+                        <TextField
+                            defaultValue="react-bootstrap"
+                            label="Bootstrap"
+                            InputProps={{
+                                disableUnderline: true,
+                                classes: {
+                                    root: classes.textFieldRoot,
+                                    input: classes.textFieldInput,
+                                },
+                            }}
+                        />
+                    </Popover>
                     <BottomNavigation
                         value={value}
                         onChange={this.handleChange}
