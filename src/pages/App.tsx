@@ -28,7 +28,6 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
-import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
@@ -131,14 +130,15 @@ const styles = (theme: Theme): StyleRules => ({
         boxSizing: 'border-box',
         padding: '0 30px 0 58px',
         height: 70,
-        width: 'inherit'
+        width: '100%'
     },
     popPaper: {
         position: 'fixed',
         left: '0 !important',
         top: '0 !important',
         boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.1)',
-        width: 'inherit',
+        borderRadius: 0,
+        width: '330px',
         maxWidth: '100vw',
     }
 });
@@ -238,6 +238,11 @@ class App extends React.Component<ViewProps, State> {
             }
         }
     };
+    handleClose = () => {
+        this.setState({
+            openSearch: false,
+        });
+    };
     render() {
         const { value, openSearch  } = this.state;
         const { classes } = this.props;
@@ -285,37 +290,33 @@ class App extends React.Component<ViewProps, State> {
                                             >
                                                 <Search/>
                                             </IconButton>
-                                            <Grid container spacing={0}>
-                                                <Grid item xs={3} sm={3} md={3}>
-                                                    <Popover
-                                                        open={openSearch}
-                                                        anchorPosition={{ top: 0, left: 0 }}
-                                                        anchorOrigin={{
-                                                            vertical: 'top',
-                                                            horizontal: 'right',
-                                                        }}
-                                                        transformOrigin={{
-                                                            vertical: 'top',
-                                                            horizontal: 'right',
-                                                        }}
-                                                        classes={{
-                                                            paper: classes.popPaper
-                                                        }}
-                                                        onClose={this.handleOpenSearch}
-                                                    >
-                                                        <TextField
-                                                            defaultValue="react-bootstrap"
-                                                            InputProps={{
-                                                                disableUnderline: true,
-                                                                classes: {
-                                                                    root: classes.textFieldRoot,
-                                                                    input: classes.textFieldInput,
-                                                                },
-                                                            }}
-                                                        />
-                                                    </Popover>
-                                                </Grid>
-                                            </Grid>
+                                            <Popover
+                                                open={openSearch}
+                                                anchorPosition={{ top: 0, left: 0 }}
+                                                anchorOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'right',
+                                                }}
+                                                transformOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'right',
+                                                }}
+                                                classes={{
+                                                    paper: classes.popPaper
+                                                }}
+                                                onClose={this.handleClose}
+                                            >
+                                                <TextField
+                                                    defaultValue="react-bootstrap"
+                                                    InputProps={{
+                                                        disableUnderline: true,
+                                                        classes: {
+                                                            root: classes.textFieldRoot,
+                                                            input: classes.textFieldInput,
+                                                        },
+                                                    }}
+                                                />
+                                            </Popover>
                                             <BottomNavigation
                                                 value={value}
                                                 onChange={this.handleChange}
