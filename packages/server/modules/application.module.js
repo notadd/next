@@ -14,8 +14,6 @@ const backend_1 = require("@notadd/backend");
 const common_1 = require("@nestjs/common");
 const user_1 = require("@notadd/user");
 const graphql_1 = require("@nestjs/graphql");
-const graphql_tools_1 = require("graphql-tools");
-const mergeSchemas_1 = require("graphql-tools/dist/stitching/mergeSchemas");
 const apollo_server_express_1 = require("apollo-server-express");
 const common_2 = require("@notadd/common");
 let ApplicationModule = class ApplicationModule {
@@ -33,31 +31,7 @@ let ApplicationModule = class ApplicationModule {
     createSchema() {
         const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.graphql');
         const schema = this.graphQLFactory.createSchema({ typeDefs });
-        const delegates = this.graphQLFactory.createDelegates();
-        const { humanSchema, linkTypeDefs } = this.createDelegatedSchema();
-        return mergeSchemas_1.default({
-            schemas: [schema, humanSchema, linkTypeDefs],
-            resolvers: delegates,
-        });
-    }
-    createDelegatedSchema() {
-        const linkTypeDefs = `
-            extend type Cat {
-                human: Human
-            }
-        `;
-        const humanSchema = graphql_tools_1.makeExecutableSchema({
-            typeDefs: `
-                type Human {
-                    id: ID!
-                }
-                type Query {
-                    humanById(id: ID!): Human
-                }
-            `,
-        });
-        graphql_tools_1.addMockFunctionsToSchema({ schema: humanSchema });
-        return { humanSchema, linkTypeDefs };
+        return this.graphQLFactory.createSchema({ typeDefs });
     }
 };
 ApplicationModule = __decorate([

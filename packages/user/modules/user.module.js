@@ -14,6 +14,7 @@ const user_controller_1 = require("../controllers/user.controller");
 const user_service_1 = require("../services/user.service");
 const database_module_1 = require("@notadd/common/modules/database.module");
 const repository_provider_1 = require("../providers/repository.provider");
+const user_resolver_1 = require("../resolvers/user.resolver");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -23,6 +24,7 @@ UserModule = __decorate([
     common_1.Module({
         components: [
             ...repository_provider_1.repositoryProvider,
+            user_resolver_1.UserResolver,
             user_service_1.UserService,
         ],
         controllers: [

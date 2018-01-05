@@ -37,33 +37,6 @@ export class ApplicationModule {
     createSchema() {
         const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.graphql');
         const schema = this.graphQLFactory.createSchema({ typeDefs });
-
-        const delegates = this.graphQLFactory.createDelegates();
-        const { humanSchema, linkTypeDefs } = this.createDelegatedSchema();
-        return mergeSchemas({
-            schemas: [ schema, humanSchema, linkTypeDefs ],
-            resolvers: delegates,
-        });
-    }
-
-    createDelegatedSchema() {
-        const linkTypeDefs = `
-            extend type Cat {
-                human: Human
-            }
-        `;
-        const humanSchema = makeExecutableSchema({
-            typeDefs: `
-                type Human {
-                    id: ID!
-                }
-                type Query {
-                    humanById(id: ID!): Human
-                }
-            `,
-        });
-        addMockFunctionsToSchema({ schema: humanSchema });
-
-        return { humanSchema, linkTypeDefs };
+        return this.graphQLFactory.createSchema({ typeDefs });
     }
 }
