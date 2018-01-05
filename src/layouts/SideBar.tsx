@@ -318,7 +318,7 @@ class SideBar extends React.Component<Props, State> {
                                     }}
                                 >
                                     <Icon style={{color: '#808080'}}>{item.icon}</Icon>
-                                    <ListItemText inset primary={item.name}/>
+                                    <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
                                     {
                                         item.open ? <ExpandLess style={{color: '#808080'}}/>
                                         : <KeyboardArrowRight style={{color: '#808080'}}/>}
