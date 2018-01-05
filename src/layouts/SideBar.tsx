@@ -317,9 +317,11 @@ class SideBar extends React.Component<Props, State> {
                                         height: 52
                                     }}
                                 >
-                                    <Icon color="inherit">{item.icon}</Icon>
+                                    <Icon style={{color: '#808080'}}>{item.icon}</Icon>
                                     <ListItemText inset primary={item.name}/>
-                                    {item.open ? <ExpandLess/> : <KeyboardArrowRight/>}
+                                    {
+                                        item.open ? <ExpandLess style={{color: '#808080'}}/>
+                                        : <KeyboardArrowRight style={{color: '#808080'}}/>}
                                 </ListItem>
                                 <Collapse component="li" in={item.open} unmountOnExit>
                                     <List

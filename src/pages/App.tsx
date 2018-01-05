@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Side from '../layouts/SideBar';
 import Home from './Home';
 import Configurations from './Configurations';
