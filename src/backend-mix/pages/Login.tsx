@@ -59,7 +59,7 @@ class Login extends React.Component<Props, State> {
             username: this.state.userName,
             password: this.state.password,
         }).then(response => {
-            if (response.status === 200) {
+            if (response.status === 201) {
                 const user = {
                     username: this.state.userName,
                     password: this.state.password
