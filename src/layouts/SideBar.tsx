@@ -1,10 +1,9 @@
 import * as React from 'react';
 import createHashHistory from 'history/createHashHistory';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
 import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
+import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import ChatBubble from 'material-ui-icons/ChatBubble';
 import Notifications from 'material-ui-icons/Notifications';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
@@ -14,6 +13,7 @@ import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
 import { History } from 'history';
+import Icon from 'material-ui/Icon';
 
 const styles = {
     bigAvatar: {
@@ -69,6 +69,7 @@ class SideBar extends React.Component<Props, State> {
                 name: '全局设置',
                 open: false,
                 index: 0,
+                icon: 'view_quilt',
                 children: [
                     {
                         'name': '参数配置',
@@ -86,6 +87,7 @@ class SideBar extends React.Component<Props, State> {
             },
             {
                 name: '附件设置',
+                icon: 'insert_drive_file',
                 open: false,
                 index: 1,
                 children: [
@@ -100,6 +102,7 @@ class SideBar extends React.Component<Props, State> {
             {
                 name: '应用管理',
                 open: false,
+                icon: 'work',
                 index: 2,
                 children: [
                     {
@@ -156,10 +159,12 @@ class SideBar extends React.Component<Props, State> {
                 name: '全局插件',
                 open: false,
                 index: 3,
+                icon: 'gavel',
                 children: []
             },
             {
                 name: '系统插件',
+                icon: 'widgets',
                 open: false,
                 index: 4,
                 children: [
@@ -312,11 +317,9 @@ class SideBar extends React.Component<Props, State> {
                                         height: 52
                                     }}
                                 >
-                                    <ListItemIcon>
-                                        <InboxIcon/>
-                                    </ListItemIcon>
+                                    <Icon color="inherit">{item.icon}</Icon>
                                     <ListItemText inset primary={item.name}/>
-                                    {item.open ? <ExpandLess/> : <ExpandMore/>}
+                                    {item.open ? <ExpandLess/> : <KeyboardArrowRight/>}
                                 </ListItem>
                                 <Collapse component="li" in={item.open} unmountOnExit>
                                     <List
@@ -381,7 +384,7 @@ class SideBar extends React.Component<Props, State> {
                                                                 ) : child.hasOwnProperty('children')
                                                                     && child.children.length > 0
                                                                     && child.open === false ? (
-                                                                    <ExpandMore/>
+                                                                    <KeyboardArrowRight/>
                                                                 ) : null
                                                             }
                                                         </ListItem>
