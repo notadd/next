@@ -32,10 +32,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-        'padding-right': '0',
+        'text-align': 'center',
+        'padding': '0',
     },
     tableCellStatus: {
         'text-align': 'left',

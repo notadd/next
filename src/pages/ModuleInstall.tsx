@@ -46,9 +46,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
 type State = {
@@ -97,7 +96,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>模块名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
                                 <TableCell numeric/>
@@ -111,7 +110,9 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                         className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
-                                        <TableCell>{n.name}</TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.name}
+                                        </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.author}
                                         </TableCell>

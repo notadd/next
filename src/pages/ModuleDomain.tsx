@@ -29,13 +29,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding-top': '0',
     },
 };
 type State = {
@@ -90,7 +85,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>模块名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
@@ -105,7 +100,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                         className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
-                                        <TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.name}</TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.domain}

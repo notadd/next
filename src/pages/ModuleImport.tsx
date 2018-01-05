@@ -32,16 +32,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-        'padding-right': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '12px',
-        'padding-right': '0',
-        'width': '40px',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
 type State = {
@@ -118,7 +110,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus}>
+                                <TableCell className={this.props.classes.tableCell} numeric>
                                     <Checkbox
                                         checked={this.state.checkedAll}
                                         onChange={this.handleChangeAll('checkedAll')}
@@ -138,7 +130,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
-                                        <TableCell padding="checkbox">
+                                        <TableCell padding="checkbox" className={this.props.classes.tableCell} numeric>
                                             <Checkbox
                                                 checked={n.check}
                                                 onChange={this.handleChange(n)}

@@ -37,13 +37,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
 type State = {
@@ -100,10 +95,10 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>拓展名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>拓展名称</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCellStatus} numeric>状态</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
                                 <TableCell numeric/>
                             </TableRow>
                         </TableHead>
@@ -115,7 +110,9 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                         className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                         key={n.id}
                                     >
-                                        <TableCell>{n.name}</TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.name}
+                                            </TableCell>
                                         <TableCell className={this.props.classes.tableCell} numeric>
                                             {n.author}
                                             </TableCell>
