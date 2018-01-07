@@ -15,7 +15,7 @@ export class User {
     @Column({
         length: 20,
     })
-    name: string;
+    username: string;
 
     @Column()
     @Index({
