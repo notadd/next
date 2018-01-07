@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const repository_provider_1 = require("../providers/repository.provider");
+const logRepositoy_provider_1 = require("../providers/logRepositoy.provider");
 const log_resolvers_1 = require("../resolvers/log.resolvers");
 const log_service_1 = require("../services/log.service");
 const database_module_1 = require("./database.module");
@@ -16,8 +16,11 @@ let LogModule = class LogModule {
 LogModule = __decorate([
     common_1.Module({
         components: [
-            ...repository_provider_1.repositoryProvider,
+            ...logRepositoy_provider_1.logRepositoryProvider,
             log_resolvers_1.LogResolvers,
+            log_service_1.LogService,
+        ],
+        exports: [
             log_service_1.LogService,
         ],
         imports: [
