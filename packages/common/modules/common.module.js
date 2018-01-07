@@ -9,10 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("../services/setting.service");
 const configuration_service_1 = require("../services/configuration.service");
-const log_service_1 = require("../services/log.service");
 const database_module_1 = require("./database.module");
 const repository_provider_1 = require("../providers/repository.provider");
 const auth_module_1 = require("./auth.module");
+const log_module_1 = require("./log.module");
 let CommonModule = class CommonModule {
 };
 CommonModule = __decorate([
@@ -20,12 +20,12 @@ CommonModule = __decorate([
         components: [
             ...repository_provider_1.repositoryProvider,
             configuration_service_1.ConfigurationService,
-            log_service_1.LogService,
             setting_service_1.SettingService,
         ],
         modules: [
             database_module_1.DatabaseModule,
             auth_module_1.AuthModule,
+            log_module_1.LogModule,
         ],
     })
 ], CommonModule);

@@ -1,0 +1,8 @@
+type Query {
+    getLogs: [Log],
+}
+
+type Log {
+    id: Int,
+    content: String,
+}
