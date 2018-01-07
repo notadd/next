@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const configuration_service_1 = require("../services/configuration.service");
 const database_module_1 = require("./database.module");
-const repository_provider_1 = require("../providers/repository.provider");
 const auth_module_1 = require("./auth.module");
 const log_module_1 = require("./log.module");
 const setting_module_1 = require("./setting.module");
@@ -18,7 +17,6 @@ let CommonModule = class CommonModule {
 CommonModule = __decorate([
     common_1.Module({
         components: [
-            ...repository_provider_1.repositoryProvider,
             configuration_service_1.ConfigurationService,
         ],
         modules: [
