@@ -31,6 +31,16 @@ let SettingService = class SettingService {
             return yield this.repository.find();
         });
     }
+    getSettingByKey(key) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .where('key = :key', {
+                key: key,
+            })
+                .getOne();
+        });
+    }
 };
 SettingService = __decorate([
     common_1.Component(),

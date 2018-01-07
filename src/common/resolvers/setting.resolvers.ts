@@ -1,5 +1,4 @@
 import { Query, Resolver } from "@nestjs/graphql";
-import { UserService } from "../../user/services/user.service";
 import { Setting } from "../entities/setting.entity";
 import { SettingService } from "../services/setting.service";
 
@@ -10,5 +9,10 @@ export class SettingResolvers {
     @Query()
     async getSettings(): Promise<Setting[]> {
         return await this.settingService.findAll();
+    }
+
+    @Query()
+    async getSettingByKey(object, args): Promise<Setting | undefined> {
+        return await this.settingService.getSettingByKey(args.key);
     }
 }

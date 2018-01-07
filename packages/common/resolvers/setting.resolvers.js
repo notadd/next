@@ -28,6 +28,11 @@ let SettingResolvers = class SettingResolvers {
             return yield this.settingService.findAll();
         });
     }
+    getSettingByKey(object, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.settingService.getSettingByKey(args.key);
+        });
+    }
 };
 __decorate([
     graphql_1.Query(),
@@ -35,6 +40,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], SettingResolvers.prototype, "getSettings", null);
+__decorate([
+    graphql_1.Query(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], SettingResolvers.prototype, "getSettingByKey", null);
 SettingResolvers = __decorate([
     graphql_1.Resolver('Setting'),
     __metadata("design:paramtypes", [setting_service_1.SettingService])

@@ -7,10 +7,8 @@ export class SettingService {
     /**
      * @param { Repository<Setting> } repository
      */
-    constructor(
-        @Inject('SettingRepositoryToken')
-        private readonly repository: Repository<Setting>,
-    ) {
+    constructor(@Inject('SettingRepositoryToken')
+                private readonly repository: Repository<Setting>,) {
     }
 
     /**
@@ -18,5 +16,19 @@ export class SettingService {
      */
     async findAll(): Promise<Setting[]> {
         return await this.repository.find();
+    }
+
+    /**
+     * @param { String } key
+     *
+     * @returns { Promise<Setting | undefined> }
+     */
+    async getSettingByKey(key: String): Promise<Setting | undefined> {
+        return await this.repository
+            .createQueryBuilder()
+            .where('key = :key', {
+                key: key,
+            })
+            .getOne();
     }
 }
