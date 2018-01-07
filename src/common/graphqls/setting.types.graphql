@@ -1,0 +1,13 @@
+type Query {
+    getSettings: [Setting],
+    getSettingByKey(key: String): Setting,
+}
+
+type Mutation {
+    setSetting(key: String, value: String): Setting,
+}
+
+type Setting {
+    key: String,
+    value: String,
+}

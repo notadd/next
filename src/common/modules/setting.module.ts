@@ -1,17 +1,17 @@
 import { Module } from "@nestjs/common";
 import { repositoryProvider } from "../providers/repository.provider";
-import { LogResolvers } from "../resolvers/log.resolvers";
-import { LogService } from "../services/log.service";
+import { SettingResolvers } from "../resolvers/setting.resolvers";
+import { SettingService } from "../services/setting.service";
 import { DatabaseModule } from "./database.module";
 
 @Module({
     components: [
         ...repositoryProvider,
-        LogResolvers,
-        LogService,
+        SettingResolvers,
+        SettingService,
     ],
     imports: [
         DatabaseModule,
-    ],
+    ]
 })
-export class LogModule {}
+export class SettingModule {}
