@@ -21,7 +21,7 @@ __decorate([
         length: 20,
     }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], User.prototype, "username", void 0);
 __decorate([
     typeorm_1.Column(),
     typeorm_1.Index({

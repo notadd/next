@@ -31,6 +31,20 @@ let UserService = class UserService {
             return yield this.repository.find();
         });
     }
+    findUserByid(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository.findOneById(id);
+        });
+    }
+    findUserByUsername(username) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .where('username = :username')
+                .setParameter('username', username)
+                .getOne();
+        });
+    }
 };
 UserService = __decorate([
     common_1.Component(),

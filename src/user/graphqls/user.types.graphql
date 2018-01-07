@@ -1,5 +1,7 @@
 type Query {
     getUsers: [User],
+    getUserById(id: Int): User,
+    getUserByUsername(username: String): User,
 }
 
 type Mutation {
