@@ -1,6 +1,6 @@
 {
     "name": "@notadd/react-scripts",
-    "version": "2.1.1",
+    "version": "2.1.11",
     "description": "Notadd Server Package.",
     "main": "main.js",
     "scripts": {
