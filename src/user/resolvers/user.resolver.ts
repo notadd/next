@@ -13,12 +13,17 @@ export class UserResolver {
     }
 
     @Query()
+    async getUserByEmail(obj, args): Promise<User> {
+        return await this.userService.getUserByEmail(args.email);
+    }
+
+    @Query()
     async getUserById(obj, args): Promise<User | undefined> {
-        return await this.userService.findUserByid(args.id);
+        return await this.userService.getUserById(args.id);
     }
 
     @Query()
     async getUserByUsername(obj, args): Promise<User | undefined> {
-        return await this.userService.findUserByUsername(args.username);
+        return await this.userService.getUserByUsername(args.username);
     }
 }

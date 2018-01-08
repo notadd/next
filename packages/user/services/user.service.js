@@ -31,12 +31,21 @@ let UserService = class UserService {
             return yield this.repository.find();
         });
     }
-    findUserByid(id) {
+    getUserByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .where('email = :email', {
+                email: email,
+            }).getOne();
+        });
+    }
+    getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.findOneById(id);
         });
     }
-    findUserByUsername(username) {
+    getUserByUsername(username) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()

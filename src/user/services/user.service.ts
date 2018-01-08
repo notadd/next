@@ -20,16 +20,24 @@ export class UserService {
         return await this.repository.find();
     }
 
+    async getUserByEmail(email: String): Promise<User | undefined> {
+        return await this.repository
+            .createQueryBuilder()
+            .where('email = :email', {
+                email: email,
+            }).getOne();
+    }
+
     /**
      * @param {Number} id
      *
      * @returns { Promise<User | undefined> }
      */
-    async findUserByid(id: Number): Promise<User | undefined> {
+    async getUserById(id: Number): Promise<User | undefined> {
         return await this.repository.findOneById(id);
     }
 
-    async findUserByUsername(username: String): Promise<User | undefined> {
+    async getUserByUsername(username: String): Promise<User | undefined> {
         return await this.repository
             .createQueryBuilder()
             .where('username = :username')

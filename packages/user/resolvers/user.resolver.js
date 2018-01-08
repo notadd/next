@@ -28,14 +28,19 @@ let UserResolver = class UserResolver {
             return yield this.userService.getUsers();
         });
     }
+    getUserByEmail(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.getUserByEmail(args.email);
+        });
+    }
     getUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.findUserByid(args.id);
+            return yield this.userService.getUserById(args.id);
         });
     }
     getUserByUsername(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.findUserByUsername(args.username);
+            return yield this.userService.getUserByUsername(args.username);
         });
     }
 };
@@ -45,6 +50,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "getUsers", null);
+__decorate([
+    graphql_1.Query(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "getUserByEmail", null);
 __decorate([
     graphql_1.Query(),
     __metadata("design:type", Function),

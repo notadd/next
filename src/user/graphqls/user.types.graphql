@@ -1,15 +1,36 @@
+input UserInput {
+    # User id.
+    id: Int,
+    # User name.
+    username: String,
+    # User email.
+    email: String,
+    # User password.
+    password: String,
+}
+
 type Query {
     # This query get all users.
     getUsers: [User],
     # This query get user by id.
     getUserById(id: Int): User,
+    # This query get user by email.
+    getUserByEmail(email: String): User,
     # This query get user by username.
     getUserByUsername(username: String): User,
 }
 
 type Mutation {
     # This mutation create a user.
-    createUser(name: String): User
+    createUser(user: UserInput): User,
+    deleteUser(user: UserInput): User!,
+    deleteUserByEmail(email: String): User!,
+    deleteUserById(id: Int): User!,
+    deleteUserByUsername(username: String): User!,
+    updateUser(user: UserInput): User,
+    updateUserByEmail(email: String, user: UserInput): User,
+    updateUserById(id: Int, user: UserInput): User,
+    updateUserByUsername(username: String, user: UserInput): User,
 }
 
 type User {
