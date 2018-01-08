@@ -14,7 +14,7 @@ const class_validator_1 = require("class-validator");
 let Setting = class Setting {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryColumn(),
     class_validator_1.IsString(),
     __metadata("design:type", String)
 ], Setting.prototype, "key", void 0);

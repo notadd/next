@@ -4,7 +4,8 @@ import { SettingService } from "../services/setting.service";
 
 @Resolver('Setting')
 export class SettingResolvers {
-    constructor(private readonly settingService: SettingService) {}
+    constructor(private readonly settingService: SettingService) {
+    }
 
     @Query()
     async getSettings(): Promise<Setting[]> {

@@ -1,9 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { IsString } from "class-validator";
 
 @Entity('settings')
 export class Setting {
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     @IsString()
     key: string;
 

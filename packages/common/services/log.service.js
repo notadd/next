@@ -26,9 +26,19 @@ let LogService = class LogService {
     constructor(repository) {
         this.repository = repository;
     }
-    findAll() {
+    getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.find();
+        });
+    }
+    getLogById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .where('id = :id', {
+                id: id,
+            })
+                .getOne();
         });
     }
 };

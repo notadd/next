@@ -4,7 +4,8 @@ import { User } from "../entities/user.entity";
 
 @Resolver('User')
 export class UserResolver {
-    constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) {
+    }
 
     @Query()
     async getUsers(): Promise<User[]> {

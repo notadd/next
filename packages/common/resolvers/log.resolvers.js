@@ -25,7 +25,12 @@ let LogResolvers = class LogResolvers {
     }
     getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.logService.findAll();
+            return yield this.logService.getLogs();
+        });
+    }
+    getLogById(obj, { id }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.logService.getLogById(id);
         });
     }
 };
@@ -35,6 +40,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], LogResolvers.prototype, "getLogs", null);
+__decorate([
+    graphql_1.Query(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], LogResolvers.prototype, "getLogById", null);
 LogResolvers = __decorate([
     graphql_1.Resolver('Log'),
     __metadata("design:paramtypes", [log_service_1.LogService])

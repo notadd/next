@@ -16,7 +16,21 @@ export class LogService {
     /**
      * @returns { Promise<Log[]> }
      */
-    async findAll(): Promise<Log[]> {
+    async getLogs(): Promise<Log[]> {
         return await this.repository.find();
+    }
+
+    /**
+     * @param { Number } id
+     *
+     * @returns { Promise<Log> }
+     */
+    async getLogById(id: Number): Promise<Log | undefined> {
+        return await this.repository
+            .createQueryBuilder()
+            .where('id = :id', {
+                id: id,
+            })
+            .getOne();
     }
 }
