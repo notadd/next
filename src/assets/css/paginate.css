@@ -1,0 +1,14 @@
+.table-footer {
+
+}
+.table-footer .table-row {
+
+}
+.table-footer .table-row .table-paginate {
+    padding: 0;
+}
+.table-footer .table-paginate > div {
+    height: 32px;
+    min-height: 32px;
+    padding-right: 0;
+}

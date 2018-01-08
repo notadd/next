@@ -9,8 +9,10 @@ import Switch from 'material-ui/Switch';
 import Table, {
     TableBody,
     TableCell,
+    TableFooter,
     TableHead,
     TableRow,
+    TablePagination,
 } from 'material-ui/Table';
 import Dialog, {
     DialogActions,
@@ -63,6 +65,8 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         open: false,
         modalId: '',
         modalName: '',
+        page: 0,
+        rowsPerPage: 2,
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -84,7 +88,15 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleChangePage = (event: any, page: number) => {
+        this.setState({ page });
+    };
+
+    handleChangeRowsPerPage = (event: any) => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
     render() {
+        const { rowsPerPage, page } = this.state;
         return (
             <div>
                 <p className="crumbs">
@@ -103,7 +115,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            {list.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -136,6 +148,18 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                 );
                             })}
                         </TableBody>
+                        <TableFooter className="table-footer">
+                            <TableRow className="table-row">
+                                <TablePagination
+                                    className="table-paginate"
+                                    count={list.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onChangePage={this.handleChangePage}
+                                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                />
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </Paper>
                 <Dialog
