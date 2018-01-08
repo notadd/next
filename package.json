@@ -21,6 +21,7 @@
     "material-ui": "1.0.0-beta.25",
     "material-ui-icons": "^1.0.0-beta.17",
     "normalize.css": "^7.0.0",
+    "omnibar": "^1.1.0",
     "prop-types": "^15.6.0",
     "react": "latest",
     "react-dom": "latest",

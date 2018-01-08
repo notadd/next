@@ -28,7 +28,9 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
-import TextField from 'material-ui/TextField';
+import Omnibar from 'omnibar';
+import NpmSearchExtension from './NpmSearchExtension';
+// import BarExtension from './BarExtension';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
 type State = {
@@ -306,16 +308,13 @@ class App extends React.Component<ViewProps, State> {
                                                 }}
                                                 onClose={this.handleClose}
                                             >
-                                                <TextField
-                                                    defaultValue="react-bootstrap"
-                                                    InputProps={{
-                                                        disableUnderline: true,
-                                                        classes: {
-                                                            root: classes.textFieldRoot,
-                                                            input: classes.textFieldInput,
-                                                        },
-                                                    }}
-                                                />
+                                                <Omnibar
+                                                    placeholder="Search npm packages"
+                                                    maxResults={10}
+                                                    maxViewableResults={5}
+                                                    extensions={[
+                                                        NpmSearchExtension,
+                                                    ]} />
                                             </Popover>
                                             <BottomNavigation
                                                 value={value}
