@@ -28,8 +28,8 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
-import Omnibar from 'omnibar';
-import NpmSearchExtension from './NpmSearchExtension';
+// import Omnibar from 'omnibar';
+// import NpmSearchExtension from './NpmSearchExtension';
 // import BarExtension from './BarExtension';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
@@ -308,13 +308,13 @@ class App extends React.Component<ViewProps, State> {
                                                 }}
                                                 onClose={this.handleClose}
                                             >
-                                                <Omnibar
-                                                    placeholder="Search npm packages"
-                                                    maxResults={10}
-                                                    maxViewableResults={5}
-                                                    extensions={[
-                                                        NpmSearchExtension,
-                                                    ]} />
+                                                {/*<Omnibar*/}
+                                                    {/*placeholder="Search npm packages"*/}
+                                                    {/*maxResults={10}*/}
+                                                    {/*maxViewableResults={5}*/}
+                                                    {/*extensions={[*/}
+                                                        {/*NpmSearchExtension,*/}
+                                                    {/*]} />*/}
                                             </Popover>
                                             <BottomNavigation
                                                 value={value}

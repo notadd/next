@@ -60,6 +60,12 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-select@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-1.1.0.tgz#b3ddf7a58f033f69d3c47c825587a54fec1629c6"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@latest":
   version "16.0.31"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.31.tgz#5285da62f3ac62b797f6d0729a1d6181f3180c3e"
