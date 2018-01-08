@@ -1,9 +1,13 @@
 type Query {
+    # This query get all logs.
     getLogs: [Log],
+    # This query get a log by id.
     getLogById(id: Int): Log!,
 }
 
 type Log {
+    # Log id.
     id: Int,
+    # Log content.
     content: String,
 }

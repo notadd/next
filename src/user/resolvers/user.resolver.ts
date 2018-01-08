@@ -9,7 +9,7 @@ export class UserResolver {
 
     @Query()
     async getUsers(): Promise<User[]> {
-        return await this.userService.findAll()
+        return await this.userService.getUsers()
     }
 
     @Query()

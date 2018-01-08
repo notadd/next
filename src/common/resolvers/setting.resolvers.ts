@@ -9,7 +9,7 @@ export class SettingResolvers {
 
     @Query()
     async getSettings(): Promise<Setting[]> {
-        return await this.settingService.findAll();
+        return await this.settingService.getSettings();
     }
 
     @Query()

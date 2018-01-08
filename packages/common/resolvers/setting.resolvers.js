@@ -25,7 +25,7 @@ let SettingResolvers = class SettingResolvers {
     }
     getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.settingService.findAll();
+            return yield this.settingService.getSettings();
         });
     }
     getSettingByKey(object, args) {

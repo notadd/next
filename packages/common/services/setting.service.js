@@ -26,7 +26,7 @@ let SettingService = class SettingService {
     constructor(repository) {
         this.repository = repository;
     }
-    findAll() {
+    getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.find();
         });

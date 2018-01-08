@@ -25,7 +25,7 @@ let UserResolver = class UserResolver {
     }
     getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.findAll();
+            return yield this.userService.getUsers();
         });
     }
     getUserById(obj, args) {

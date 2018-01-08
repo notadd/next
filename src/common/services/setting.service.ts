@@ -14,7 +14,7 @@ export class SettingService {
     /**
      * @returns { Promise<Setting[]> }
      */
-    async findAll(): Promise<Setting[]> {
+    async getSettings(): Promise<Setting[]> {
         return await this.repository.find();
     }
 

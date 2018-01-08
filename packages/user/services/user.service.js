@@ -26,7 +26,7 @@ let UserService = class UserService {
     constructor(repository) {
         this.repository = repository;
     }
-    findAll() {
+    getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.find();
         });
