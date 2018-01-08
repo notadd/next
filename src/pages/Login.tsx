@@ -9,6 +9,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { CircularProgress } from 'material-ui/Progress';
 // import Prompt from '../components/Prompt';
 import { History } from 'history';
+// import Snackbar from 'material-ui/Snackbar';
+// import Slide from 'material-ui/transitions/Slide';
 import axios from 'axios';
 
 const styles = {
@@ -28,6 +30,8 @@ type State = {
     userName: string,
     password: string
     loading: boolean,
+    transition: any,
+    open: boolean,
 };
 
 interface Props extends WithStyles<keyof typeof styles> {
@@ -39,12 +43,17 @@ class Login extends React.Component<Props, State> {
         userName: '',
         password: '',
         loading: false,
+        transition: undefined,
+        open: false,
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
+    };
+    handleClose = () => {
+        this.setState({ open: false });
     };
     handleSubmit = (event: any) => {
         event.preventDefault();
@@ -148,6 +157,15 @@ class Login extends React.Component<Props, State> {
                                 {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
                             </Button>
                         </CardActions>
+                        {/*<Snackbar*/}
+                            {/*open={this.state.open}*/}
+                            {/*onClose={this.handleClose}*/}
+                            {/*transition={this.state.transition}*/}
+                            {/*SnackbarContentProps={{*/}
+                                {/*'aria-describedby': 'message-id',*/}
+                            {/*}}*/}
+                            {/*message={<span id="message-id">I love snacks</span>}*/}
+                        {/*/>*/}
                     </Card>
                 </div>
             </div>
