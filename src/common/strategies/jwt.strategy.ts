@@ -5,7 +5,7 @@ import { AuthService } from "../services/auth.service";
 
 @Component()
 export class JwtStrategy extends Strategy {
-    constructor(private readonly authService: AuthService) {
+    constructor(private readonly service: AuthService) {
         super(
             {
                 jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -18,7 +18,7 @@ export class JwtStrategy extends Strategy {
     }
 
     public async verify(req, payload, done) {
-        const isValid = await this.authService.validateUser(payload);
+        const isValid = await this.service.validateUser(payload);
         if (!isValid) {
             return done('Unauthorized', false);
         }

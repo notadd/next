@@ -20,17 +20,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const log_service_1 = require("../services/log.service");
 let LogResolvers = class LogResolvers {
-    constructor(logService) {
-        this.logService = logService;
+    constructor(service) {
+        this.service = service;
     }
     getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.logService.getLogs();
+            return yield this.service.getLogs();
         });
     }
     getLogById(obj, { id }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.logService.getLogById(id);
+            return yield this.service.getLogById(id);
         });
     }
 };

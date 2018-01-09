@@ -20,67 +20,67 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const user_service_1 = require("../services/user.service");
 let UserResolver = class UserResolver {
-    constructor(userService) {
-        this.userService = userService;
+    constructor(service) {
+        this.service = service;
     }
     deleteUser(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.deleteUser(args.user);
+            return yield this.service.deleteUser(args.user);
         });
     }
     deleteUserByEmail(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.deleteUserByEmail(args.email);
+            return yield this.service.deleteUserByEmail(args.email);
         });
     }
     deleteUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.deleteUserById(args.id);
+            return yield this.service.deleteUserById(args.id);
         });
     }
     deleteUserByUsername(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.deleteUserByUsername(args.username);
+            return yield this.service.deleteUserByUsername(args.username);
         });
     }
     getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.getUsers();
+            return yield this.service.getUsers();
         });
     }
     getUserByEmail(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.getUserByEmail(args.email);
+            return yield this.service.getUserByEmail(args.email);
         });
     }
     getUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.getUserById(args.id);
+            return yield this.service.getUserById(args.id);
         });
     }
     getUserByUsername(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.getUserByUsername(args.username);
+            return yield this.service.getUserByUsername(args.username);
         });
     }
     updateUser(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.updateUser(args.user);
+            return yield this.service.updateUser(args.user);
         });
     }
     updateUserByEmail(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.updateUserByEmail(args.email, args.user);
+            return yield this.service.updateUserByEmail(args.email, args.user);
         });
     }
     updateUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.updateUserByEmail(args.id, args.user);
+            return yield this.service.updateUserByEmail(args.id, args.user);
         });
     }
     updateUserByUsername(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.updateUserByUsername(args.username, args.user);
+            return yield this.service.updateUserByUsername(args.username, args.user);
         });
     }
 };

@@ -20,17 +20,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const setting_service_1 = require("../services/setting.service");
 let SettingResolvers = class SettingResolvers {
-    constructor(settingService) {
-        this.settingService = settingService;
+    constructor(service) {
+        this.service = service;
     }
     getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.settingService.getSettings();
+            return yield this.service.getSettings();
         });
     }
     getSettingByKey(object, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.settingService.getSettingByKey(args.key);
+            return yield this.service.getSettingByKey(args.key);
         });
     }
 };

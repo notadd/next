@@ -25,13 +25,13 @@ const auth_service_1 = require("../services/auth.service");
 const swagger_1 = require("@nestjs/swagger");
 const auth_login_dto_1 = require("../dtos/auth.login.dto");
 let AuthController = class AuthController {
-    constructor(authService) {
-        this.authService = authService;
+    constructor(service) {
+        this.service = service;
     }
     getToken(userInfo) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(userInfo);
-            return yield this.authService.createToken();
+            return yield this.service.createToken();
         });
     }
     authorized() {

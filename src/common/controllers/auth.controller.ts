@@ -7,9 +7,9 @@ import { AuthLogin } from "../dtos/auth.login.dto";
 @Controller('auth')
 export class AuthController {
     /**
-     * @param { AuthService } authService
+     * @param { AuthService } service
      */
-    constructor(private readonly authService: AuthService) {
+    constructor(private readonly service: AuthService) {
     }
 
     @ApiOperation({
@@ -27,7 +27,7 @@ export class AuthController {
     public async getToken(@Body() userInfo: AuthLogin) {
         console.log(userInfo);
 
-        return await this.authService.createToken();
+        return await this.service.createToken();
     }
 
     @Get('authorized')

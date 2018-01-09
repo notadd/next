@@ -22,18 +22,18 @@ const passport_jwt_1 = require("passport-jwt");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../services/auth.service");
 let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
-    constructor(authService) {
+    constructor(service) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             passReqToCallback: true,
             secretOrKey: 'secret',
         }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return yield this.verify(req, payload, next); }));
-        this.authService = authService;
+        this.service = service;
         passport.use(this);
     }
     verify(req, payload, done) {
         return __awaiter(this, void 0, void 0, function* () {
-            const isValid = yield this.authService.validateUser(payload);
+            const isValid = yield this.service.validateUser(payload);
             if (!isValid) {
                 return done('Unauthorized', false);
             }

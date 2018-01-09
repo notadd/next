@@ -4,16 +4,16 @@ import { LogService } from "../services/log.service";
 
 @Resolver('Log')
 export class LogResolvers {
-    constructor(private readonly logService: LogService) {
+    constructor(private readonly service: LogService) {
     }
 
     @Query()
     async getLogs(): Promise<Log[]> {
-        return await this.logService.getLogs();
+        return await this.service.getLogs();
     }
 
     @Query()
     async getLogById(obj, { id }): Promise<Log | undefined> {
-        return await this.logService.getLogById(id);
+        return await this.service.getLogById(id);
     }
 }
