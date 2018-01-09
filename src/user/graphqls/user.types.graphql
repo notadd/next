@@ -2,7 +2,7 @@ input UserInput {
     # User id.
     id: Int,
     # User name.
-    username: String,
+    username: String!,
     # User email.
     email: String,
     # User password.

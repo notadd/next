@@ -13,7 +13,7 @@ export class UserResolver {
     }
 
     @Query()
-    async getUserByEmail(obj, args): Promise<User> {
+    async getUserByEmail(obj, args): Promise<User | undefined> {
         return await this.userService.getUserByEmail(args.email);
     }
 

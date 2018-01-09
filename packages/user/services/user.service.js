@@ -26,6 +26,53 @@ let UserService = class UserService {
     constructor(repository) {
         this.repository = repository;
     }
+    deleteUser(obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (obj.id) {
+                return yield this.deleteUserById(obj.id);
+            }
+            else if (obj.username) {
+                return yield this.deleteUserByUsername(obj.username);
+            }
+            else if (obj.email) {
+                return yield this.deleteUserByEmail(obj.email);
+            }
+            return false;
+        });
+    }
+    deleteUserByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .delete()
+                .where('email = :email', {
+                email: email,
+            })
+                .execute();
+        });
+    }
+    deleteUserById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .delete()
+                .where('id = :id', {
+                id: id,
+            })
+                .execute();
+        });
+    }
+    deleteUserByUsername(username) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .delete()
+                .where('username = :username', {
+                username: username,
+            })
+                .execute();
+        });
+    }
     getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository.find();
@@ -52,6 +99,51 @@ let UserService = class UserService {
                 .where('username = :username')
                 .setParameter('username', username)
                 .getOne();
+        });
+    }
+    updateUser(obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (obj.id) {
+                yield this.updateUserById(obj.id, obj);
+            }
+            else if (obj.username) {
+                yield this.updateUserByUsername(obj.username, obj);
+            }
+            else if (obj.email) {
+                yield this.updateUserByEmail(obj.email, obj);
+            }
+            return false;
+        });
+    }
+    updateUserByEmail(email, obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .update(obj)
+                .where('email = :email', {
+                email: email,
+            })
+                .execute();
+        });
+    }
+    updateUserById(id, obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .update(obj)
+                .where('id = :id')
+                .setParameter('id', id)
+                .execute();
+        });
+    }
+    updateUserByUsername(username, obj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .update(obj)
+                .where('username = :username')
+                .setParameter('username', username)
+                .execute();
         });
     }
 };
