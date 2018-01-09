@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Switch from 'material-ui/Switch';
 import Checkbox from 'material-ui/Checkbox';
@@ -53,6 +54,8 @@ const list = [
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
+        rowsPerPage: 2,
+        currentPage: 0,
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -74,7 +77,11 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             [name]: event.target.checked,
         });
     };
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
@@ -93,7 +100,8 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -128,6 +136,20 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
             </div>
         );
