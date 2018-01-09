@@ -23,6 +23,7 @@
 .sideBar .userBox {
     background: url("../images/userbg.png") #000000 no-repeat center center;
     height: 139px;
+    margin-bottom: 20px;
 }
 
 .sideBar .user-right {

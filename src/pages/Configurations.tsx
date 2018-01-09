@@ -40,8 +40,18 @@ const styles = {
         'height': '20px',
     },
     switchDefault: {
-        'height': 'inherit'
-    }
+        'height': 'inherit',
+    },
+    helpText: {
+        color: '#808080',
+        fontSize: '12px',
+        marginTop: 0,
+    },
+    underline: {
+        '&:before': {
+            background: '#dfdfdf',
+        }
+    },
 };
 
 type State = {
@@ -93,6 +103,9 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('webName')}
                                         value={this.state.webName}
                                     />
@@ -109,6 +122,9 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('domainName')}
                                         value={this.state.domainName}
                                     />
@@ -134,7 +150,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         />
                                     }
                                 />
-                                <FormHelperText className={this.props.classes.subLabel}>
+                                <FormHelperText classes={{root: this.props.classes.helpText}}>
                                     关闭后网站将不能访问
                                 </FormHelperText>
                             </Grid>
@@ -156,7 +172,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         />
                                     }
                                 />
-                                <FormHelperText className={this.props.classes.subLabel}>
+                                <FormHelperText classes={{root: this.props.classes.helpText}}>
                                     由于前后端分离机制，官方不对多域名做特殊支持，可能导致其他未知问题
                                 </FormHelperText>
                             </Grid>
@@ -173,6 +189,9 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('keepRecord')}
                                         value={this.state.keepRecord}
                                     />
@@ -189,6 +208,9 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('companyName')}
                                         value={this.state.companyName}
                                     />
@@ -206,6 +228,12 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
+                                        multiline={true}
+                                        rowsMax="3"
+                                        rows="3"
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         className={this.props.classes.formLabelFont}
                                         onChange={this.handleChange('statisticalCode')}
                                         value={this.state.statisticalCode}
@@ -223,6 +251,9 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('copyright')}
                                         value={this.state.copyright}
                                     />
