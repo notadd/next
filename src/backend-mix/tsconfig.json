@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "baseUrl": "./../../",
-        "declaration": false,
+        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
