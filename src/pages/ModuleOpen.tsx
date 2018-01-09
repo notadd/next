@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -9,10 +10,10 @@ import Switch from 'material-ui/Switch';
 import Table, {
     TableBody,
     TableCell,
-    TableFooter,
+    // TableFooter,
     TableHead,
     TableRow,
-    TablePagination,
+    // TablePagination,
 } from 'material-ui/Table';
 import Dialog, {
     DialogActions,
@@ -58,15 +59,25 @@ const list = [
     createData('商家', 'eref', '142513233', false),
     createData('CMS', 'eref', '142513233', false),
     createData('Notadd2', 'eref', '142513233', false),
+    createData('用户中心', 'Mark', '142513233', true),
+    createData('商城', 'eref', '142513233', false),
+    createData('商家', 'eref', '142513233', false),
+    createData('CMS', 'eref', '142513233', false),
+    createData('Notadd2', 'eref', '142513233', false),
+    createData('用户中心', 'Mark', '142513233', true),
+    createData('商城', 'eref', '142513233', false),
+    createData('商家', 'eref', '142513233', false),
+    createData('CMS', 'eref', '142513233', false),
 ];
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
+        list: [],
         open: false,
         modalId: '',
         modalName: '',
-        page: 0,
         rowsPerPage: 2,
+        currentPage: 0,
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -88,15 +99,17 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChangePage = (event: any, page: number) => {
-        this.setState({ page });
-    };
-
-    handleChangeRowsPerPage = (event: any) => {
-        this.setState({ rowsPerPage: event.target.value });
+    // handleChangePage = (event: any, page: number) => {
+    //     this.setState({ page });
+    // };
+    // handleChangeRowsPerPage = (event: any) => {
+    //     this.setState({ rowsPerPage: event.target.value });
+    // };
+    handlePageClick = (list: any) => {
+        this.setState({ currentPage: list.selected });
     };
     render() {
-        const { rowsPerPage, page } = this.state;
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
@@ -115,7 +128,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage).map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -148,7 +161,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                 );
                             })}
                         </TableBody>
-                        <TableFooter className="table-footer">
+                        {/*<TableFooter className="table-footer">
                             <TableRow className="table-row">
                                 <TablePagination
                                     className="table-paginate"
@@ -159,8 +172,20 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                 />
                             </TableRow>
-                        </TableFooter>
+                        </TableFooter>*/}
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate previousLabel={"<"}
+                                       nextLabel={">"}
+                                       breakLabel={<a href="javascript:;">...</a>}
+                                       breakClassName={"break-me"}
+                                       pageCount={list.length / rowsPerPage}
+                                       marginPagesDisplayed={2}
+                                       pageRangeDisplayed={3}
+                                       onPageChange={this.handlePageClick}
+                                       containerClassName={"pagination"}
+                                       activeClassName={"active"} />
+                    </div>
                 </Paper>
                 <Dialog
                     open={this.state.open}
