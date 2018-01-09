@@ -29,6 +29,12 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-paginate@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@types/react-paginate/-/react-paginate-4.3.1.tgz#04c558a67751c38c24160df8f812f6b57600081a"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-router-config@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-router-config/-/react-router-config-1.0.5.tgz#b6a4106ec1ab318db69dec0ddcba143c753effd1"
@@ -1866,7 +1872,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.1, fbjs@^0.8.16:
+fbjs@^0.8.1, fbjs@^0.8.16, fbjs@^0.8.4:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -4569,6 +4575,14 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-create-fragment@^15.0.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.6.2.tgz#a394de7c2c7becd6b5475ba1b97ac472ce7c74f8"
+  dependencies:
+    fbjs "^0.8.4"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.0"
+
 react-dev-utils@^4.0.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.1.tgz#9f2763e7bafa1a1b9c52254d2a479deec280f111"
@@ -4623,6 +4637,14 @@ react-jss@^8.1.0:
     jss-preset-default "^4.0.1"
     prop-types "^15.6.0"
     theming "^1.3.0"
+
+react-paginate@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-5.0.0.tgz#b5c12191ea81adc6d4d1b339b805e81841eaa8ea"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+    react-addons-create-fragment "^15.0.0"
 
 react-popper@^0.7.4:
   version "0.7.4"
