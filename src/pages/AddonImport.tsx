@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
@@ -62,6 +63,8 @@ const list = [
 class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
+        rowsPerPage: 2,
+        currentPage: 0,
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -92,8 +95,12 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
             [pro]: event.target.checked,
         });
     };
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
 
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -129,7 +136,8 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -157,6 +165,20 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                             })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
             </div>
         );
