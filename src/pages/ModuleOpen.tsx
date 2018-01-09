@@ -10,10 +10,8 @@ import Switch from 'material-ui/Switch';
 import Table, {
     TableBody,
     TableCell,
-    // TableFooter,
     TableHead,
     TableRow,
-    // TablePagination,
 } from 'material-ui/Table';
 import Dialog, {
     DialogActions,
@@ -99,12 +97,6 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     handleClose = () => {
         this.setState({ open: false });
     };
-    // handleChangePage = (event: any, page: number) => {
-    //     this.setState({ page });
-    // };
-    // handleChangeRowsPerPage = (event: any) => {
-    //     this.setState({ rowsPerPage: event.target.value });
-    // };
     handlePageClick = (list: any) => {
         this.setState({ currentPage: list.selected });
     };
@@ -161,18 +153,6 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                 );
                             })}
                         </TableBody>
-                        {/*<TableFooter className="table-footer">
-                            <TableRow className="table-row">
-                                <TablePagination
-                                    className="table-paginate"
-                                    count={list.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onChangePage={this.handleChangePage}
-                                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                                />
-                            </TableRow>
-                        </TableFooter>*/}
                     </Table>
                     <div className="table-pagination">
                         <ReactPaginate previousLabel={"<"}
