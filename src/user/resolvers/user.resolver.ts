@@ -48,22 +48,22 @@ export class UserResolver {
     }
 
     @Mutation()
-    async updateUser(obj, args): Promise<User | undefined> {
+    async updateUser(obj, args): Promise<Boolean> {
         return await this.service.updateUser(args.user);
     }
 
     @Mutation()
-    async updateUserByEmail(obj, args): Promise<User | undefined> {
+    async updateUserByEmail(obj, args): Promise<Boolean> {
         return await this.service.updateUserByEmail(args.email, args.user);
     }
 
     @Mutation()
-    async updateUserById(obj, args): Promise<User | undefined> {
+    async updateUserById(obj, args): Promise<Boolean> {
         return await this.service.updateUserByEmail(args.id, args.user);
     }
 
     @Mutation()
-    async updateUserByUsername(obj, args): Promise<User | undefined> {
+    async updateUserByUsername(obj, args): Promise<Boolean> {
         return await this.service.updateUserByUsername(args.username, args.user);
     }
 }

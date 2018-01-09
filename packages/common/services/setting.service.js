@@ -41,6 +41,29 @@ let SettingService = class SettingService {
                 .getOne();
         });
     }
+    removeSetting(key) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .delete()
+                .where('key = :key')
+                .setParameter('key', key)
+                .execute();
+        });
+    }
+    setSetting(key, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository
+                .createQueryBuilder()
+                .update({
+                key: key,
+                value: value,
+            })
+                .where('key = :key')
+                .setParameter('key', key)
+                .execute();
+        });
+    }
 };
 SettingService = __decorate([
     common_1.Component(),

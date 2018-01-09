@@ -31,4 +31,36 @@ export class SettingService {
             })
             .getOne();
     }
+
+    /**
+     * @param { String } key
+     *
+     * @returns { Promise<Boolean> }
+     */
+    async removeSetting(key: String): Promise<Boolean> {
+        return await this.repository
+            .createQueryBuilder()
+            .delete()
+            .where('key = :key')
+            .setParameter('key', key)
+            .execute();
+    }
+
+    /**
+     * @param { String } key
+     * @param { String } value
+     *
+     * @returns { Promise<Boolean> }
+     */
+    async setSetting(key: String, value: String): Promise<Boolean> {
+        return await this.repository
+            .createQueryBuilder()
+            .update({
+                key:key,
+                value: value,
+            })
+            .where('key = :key')
+            .setParameter('key', key)
+            .execute();
+    }
 }
