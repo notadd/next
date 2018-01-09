@@ -1,4 +1,4 @@
-import { Connection } from "typeorm";
+import { Connection, Repository } from "typeorm";
 import { Setting } from "../entities/setting.entity";
 
 export const settingRepositoryProvider = [

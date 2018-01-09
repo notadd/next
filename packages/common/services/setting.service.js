@@ -55,7 +55,8 @@ let SettingService = class SettingService {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()
-                .update({
+                .update()
+                .set({
                 key: key,
                 value: value,
             })

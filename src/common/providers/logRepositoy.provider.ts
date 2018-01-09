@@ -1,4 +1,4 @@
-import { Connection } from "typeorm";
+import { Connection, Repository } from "typeorm";
 import { Log } from "../entities/log.entity";
 
 export const logRepositoryProvider = [

@@ -55,8 +55,9 @@ export class SettingService {
     async setSetting(key: String, value: String): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
-            .update({
-                key:key,
+            .update()
+            .set({
+                key: key,
                 value: value,
             })
             .where('key = :key')

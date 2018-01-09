@@ -1,4 +1,6 @@
 export declare class Log {
-    key: string;
-    value: string;
+    id: number;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
 }
