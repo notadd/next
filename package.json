@@ -19,6 +19,7 @@
     "@types/react-router-dom": "^4.2.3",
     "@types/react-router-redux": "^5.0.10",
     "@types/react-select": "^1.1.0",
+    "@types/react-sortable-tree": "^0.1.2",
     "axios": "^0.17.1",
     "material-ui": "1.0.0-beta.25",
     "material-ui-icons": "^1.0.0-beta.17",
@@ -34,6 +35,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "react-scripts-ts": "latest",
+    "react-sortable-tree": "^1.5.4",
     "redux": "^3.7.2"
   },
   "devDependencies": {
