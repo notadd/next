@@ -1,3 +1,3 @@
 export declare class UserController {
-    root(): string;
+    handle(): string;
 }
