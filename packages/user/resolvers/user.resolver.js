@@ -23,6 +23,26 @@ let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
     }
+    deleteUser(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.deleteUser(args.user);
+        });
+    }
+    deleteUserByEmail(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.deleteUserByEmail(args.email);
+        });
+    }
+    deleteUserById(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.deleteUserById(args.id);
+        });
+    }
+    deleteUserByUsername(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.deleteUserByUsername(args.username);
+        });
+    }
     getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.userService.getUsers();
@@ -43,7 +63,51 @@ let UserResolver = class UserResolver {
             return yield this.userService.getUserByUsername(args.username);
         });
     }
+    updateUser(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.updateUser(args.user);
+        });
+    }
+    updateUserByEmail(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.updateUserByEmail(args.email, args.user);
+        });
+    }
+    updateUserById(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.updateUserByEmail(args.id, args.user);
+        });
+    }
+    updateUserByUsername(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.updateUserByUsername(args.username, args.user);
+        });
+    }
 };
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUser", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUserByEmail", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUserById", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUserByUsername", null);
 __decorate([
     graphql_1.Query(),
     __metadata("design:type", Function),
@@ -68,6 +132,30 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "getUserByUsername", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUser", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUserByEmail", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUserById", null);
+__decorate([
+    graphql_1.Mutation(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUserByUsername", null);
 UserResolver = __decorate([
     graphql_1.Resolver('User'),
     __metadata("design:paramtypes", [user_service_1.UserService])

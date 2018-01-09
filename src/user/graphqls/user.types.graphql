@@ -23,14 +23,14 @@ type Query {
 type Mutation {
     # This mutation create a user.
     createUser(user: UserInput): User,
-    deleteUser(user: UserInput): User!,
-    deleteUserByEmail(email: String): User!,
-    deleteUserById(id: Int): User!,
-    deleteUserByUsername(username: String): User!,
-    updateUser(user: UserInput): User,
-    updateUserByEmail(email: String, user: UserInput): User,
-    updateUserById(id: Int, user: UserInput): User,
-    updateUserByUsername(username: String, user: UserInput): User,
+    deleteUser(user: UserInput): Boolean,
+    deleteUserByEmail(email: String): Boolean,
+    deleteUserById(id: Int): Boolean,
+    deleteUserByUsername(username: String): Boolean,
+    updateUser(user: UserInput): Boolean,
+    updateUserByEmail(email: String, user: UserInput): Boolean,
+    updateUserById(id: Int, user: UserInput): Boolean,
+    updateUserByUsername(username: String, user: UserInput): Boolean,
 }
 
 type User {
