@@ -8,6 +8,7 @@ import Debug from './Debug';
 import Extension from './Extension';
 import Login from './Login';
 import Mail from './Mail';
+import Menus from './Menus';
 import Seo from './Seo';
 import Upload from './Upload';
 import ModuleOpen from './ModuleOpen';
@@ -400,6 +401,7 @@ class App extends React.Component<ViewProps, State> {
                                             <Route exact path="/home" component={Home}/>
                                             <Route exact path="/seo" component={Seo}/>
                                             <Route exact path="/upload" component={Upload}/>
+                                            <Route exact path="/menu" component={Menus}/>
                                             <Route exact path="/mail" component={Mail}/>
                                             <Route exact path="/debug" component={Debug}/>
                                             <Route exact path="/extension" component={Extension}/>

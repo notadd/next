@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -56,13 +57,24 @@ const list = [
     createData('商家', 'eref', '142513233', false),
     createData('CMS', 'eref', '142513233', false),
     createData('Notadd2', 'eref', '142513233', false),
+    createData('用户中心', 'Mark', '142513233', true),
+    createData('商城', 'eref', '142513233', false),
+    createData('商家', 'eref', '142513233', false),
+    createData('CMS', 'eref', '142513233', false),
+    createData('Notadd2', 'eref', '142513233', false),
+    createData('用户中心', 'Mark', '142513233', true),
+    createData('商城', 'eref', '142513233', false),
+    createData('商家', 'eref', '142513233', false),
 ];
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
+        list: [],
         open: false,
         modalId: '',
         modalName: '',
+        rowsPerPage: 2,
+        currentPage: 0,
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -84,7 +96,11 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     handleClose = () => {
         this.setState({ open: false });
     };
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
@@ -103,7 +119,8 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -137,6 +154,20 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
                 <Dialog
                     open={this.state.open}

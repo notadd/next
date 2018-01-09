@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -72,6 +73,8 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         open: false,
         modalId: '',
         modalName: '',
+        rowsPerPage: 2,
+        currentPage: 0,
     };
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
@@ -85,7 +88,11 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
     handleClose = () => {
         this.setState({ open: false });
     };
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
@@ -103,7 +110,8 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
@@ -139,6 +147,20 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                             })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
                 <Dialog
                     open={this.state.open}
