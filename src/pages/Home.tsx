@@ -38,7 +38,7 @@ type State = {
 
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        value: 1,
+        value: 0,
         list: [
             {
                 img: 'https://ww4.sinaimg.cn/large/0060lm7Tly1flat9vypmpj302o02odg7.jpg',
@@ -74,11 +74,6 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                 img: 'https://ww1.sinaimg.cn/large/0060lm7Tly1flatcehb6qj302o02oq34.jpg',
                 link: 'https://github.com/zhanghuan1203',
                 name: '浅殇',
-            },
-            {
-                img: 'https://ww3.sinaimg.cn/large/0060lm7Tly1flatchc1l3j302o02o0t1.jpg',
-                link: 'https://gitee.com/ywcap',
-                name: 'Ywcap',
             },
             {
                 img: 'https://ww3.sinaimg.cn/large/0060lm7Tly1flatchc1l3j302o02o0t1.jpg',

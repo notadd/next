@@ -29,7 +29,7 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
-// import Omnibar from 'omnibar';
+import Select from 'react-select';
 // import NpmSearchExtension from './NpmSearchExtension';
 // import BarExtension from './BarExtension';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
@@ -189,6 +189,7 @@ class App extends React.Component<ViewProps, State> {
         },
         fullScreen: false,
         openSearch: false,
+        selectedOption: undefined,
     };
     toggleDrawer = () => {
         this.setState({
@@ -206,7 +207,6 @@ class App extends React.Component<ViewProps, State> {
         if (this.state.fullScreen) {
             const el = document;
             let cfs;
-
             if (el.webkitCancelFullScreen) {
                 cfs = el.webkitCancelFullScreen;
             } else if (el['mozCancelFullScreen']) {
@@ -251,9 +251,14 @@ class App extends React.Component<ViewProps, State> {
             openSearch: false,
         });
     };
+    handleChangeSelect = (selectedOption:any) => {
+        this.setState({ selectedOption });
+        console.log(`Selected: ${selectedOption.label}`);
+    };
     render() {
-        const { value, openSearch  } = this.state;
+        const { value, openSearch, selectedOption } = this.state;
         const { classes } = this.props;
+        const selectValue = selectedOption && selectedOption.value;
         return (
             <HashRouter  basename="/">
                 <Switch>
@@ -267,7 +272,10 @@ class App extends React.Component<ViewProps, State> {
                                     <div className={this.props.classes.header}>
                                         <div className={this.props.classes.headerLeft}>
                                             <Link to="/home">
-                                                <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
+                                                <img
+                                                    className={this.props.classes.logo}
+                                                    src={require('../assets/images/notadd_logo.png')}
+                                                />
                                             </Link>
                                             <IconButton
                                                 aria-owns={open ? 'menu-appbar' : null}
@@ -314,13 +322,15 @@ class App extends React.Component<ViewProps, State> {
                                                 }}
                                                 onClose={this.handleClose}
                                             >
-                                                {/*<Omnibar*/}
-                                                    {/*placeholder="Search npm packages"*/}
-                                                    {/*maxResults={10}*/}
-                                                    {/*maxViewableResults={5}*/}
-                                                    {/*extensions={[*/}
-                                                        {/*NpmSearchExtension,*/}
-                                                    {/*]} />*/}
+                                                <Select
+                                                    name="form-field-name"
+                                                    value={selectValue}
+                                                    onChange={this.handleChangeSelect}
+                                                    options={[
+                                                        { value: 'one', label: 'One' },
+                                                        { value: 'two', label: 'Two' },
+                                                    ]}
+                                                />
                                             </Popover>
                                             <BottomNavigation
                                                 value={value}
