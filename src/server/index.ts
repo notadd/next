@@ -19,7 +19,8 @@ const cross = (req, res, next) => {
 };
 
 export async function bootstrap() {
-    const port = 3000;
+    const index = process.argv.indexOf('--port');
+    const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
     const address = `http://${ip.address()}:${port}`;
     const server = express();
     server.use(express.static(process.cwd() + '/public/'));
@@ -51,6 +52,8 @@ export async function bootstrap() {
     SwaggerModule.setup('/api-doc', application, document);
 
     await application.listen(port, () => {
+        logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+        logger.log(`Swagger Server on: ${address}/api-doc`);
         logger.log(`Server on: ${address}`);
     });
 }

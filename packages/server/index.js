@@ -28,7 +28,8 @@ const cross = (req, res, next) => {
 };
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
-        const port = 3000;
+        const index = process.argv.indexOf('--port');
+        const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
         const server = express();
         server.use(express.static(process.cwd() + '/public/'));
@@ -46,6 +47,8 @@ function bootstrap() {
         const document = swagger_1.SwaggerModule.createDocument(application, options);
         swagger_1.SwaggerModule.setup('/api-doc', application, document);
         yield application.listen(port, () => {
+            logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+            logger.log(`Swagger Server on: ${address}/api-doc`);
             logger.log(`Server on: ${address}`);
         });
     });
