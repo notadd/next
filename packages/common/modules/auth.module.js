@@ -10,7 +10,6 @@ const passport = require("passport");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../services/auth.service");
 const jwt_strategy_1 = require("../strategies/jwt.strategy");
-const auth_controller_1 = require("../controllers/auth.controller");
 let AuthModule = class AuthModule {
     configure(consumer) {
         consumer
@@ -23,9 +22,6 @@ AuthModule = __decorate([
         components: [
             auth_service_1.AuthService,
             jwt_strategy_1.JwtStrategy,
-        ],
-        controllers: [
-            auth_controller_1.AuthController,
         ],
     })
 ], AuthModule);

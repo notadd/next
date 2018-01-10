@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const application_controller_1 = require("../controllers/application.controller");
 const backend_1 = require("@notadd/backend");
 const common_1 = require("@nestjs/common");
 const user_1 = require("@notadd/user");
@@ -41,9 +40,6 @@ ApplicationModule = __decorate([
             graphql_1.GraphQLModule,
             backend_1.BackendModule,
             user_1.UserModule,
-        ],
-        controllers: [
-            application_controller_1.ApplicationController,
         ],
         components: [],
     }),

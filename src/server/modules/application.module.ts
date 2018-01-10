@@ -1,10 +1,7 @@
-import { ApplicationController } from '../controllers/application.controller';
 import { BackendModule } from '@notadd/backend';
 import { Module, RequestMethod } from '@nestjs/common';
 import { UserModule } from '@notadd/user';
 import { GraphQLFactory, GraphQLModule } from "@nestjs/graphql";
-import { addMockFunctionsToSchema, makeExecutableSchema } from "graphql-tools";
-import mergeSchemas from "graphql-tools/dist/stitching/mergeSchemas";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
 import { CommonModule } from "@notadd/common";
@@ -15,9 +12,6 @@ import { CommonModule } from "@notadd/common";
         GraphQLModule,
         BackendModule,
         UserModule,
-    ],
-    controllers: [
-        ApplicationController,
     ],
     components: [],
 })

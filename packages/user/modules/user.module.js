@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const user_controller_1 = require("../controllers/user.controller");
 const user_service_1 = require("../services/user.service");
 const database_module_1 = require("@notadd/common/modules/database.module");
 const repository_provider_1 = require("../providers/repository.provider");
@@ -26,9 +25,6 @@ UserModule = __decorate([
             ...repository_provider_1.repositoryProvider,
             user_resolver_1.UserResolver,
             user_service_1.UserService,
-        ],
-        controllers: [
-            user_controller_1.UserController,
         ],
         imports: [
             database_module_1.DatabaseModule

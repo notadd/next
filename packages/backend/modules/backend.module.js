@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const backend_controller_1 = require("../controllers/backend.controller");
 let BackendModule = class BackendModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -19,11 +18,7 @@ let BackendModule = class BackendModule {
     }
 };
 BackendModule = __decorate([
-    common_1.Module({
-        controllers: [
-            backend_controller_1.BackendController,
-        ],
-    }),
+    common_1.Module({}),
     __metadata("design:paramtypes", [])
 ], BackendModule);
 exports.BackendModule = BackendModule;
