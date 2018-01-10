@@ -2,6 +2,8 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
+import IconButton from 'material-ui/IconButton';
+import ModeEdit from 'material-ui-icons/ModeEdit';
 
 const styles = {
     root: {
@@ -83,10 +85,22 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                 </p>
                 <h4 className="title">菜单管理</h4>
                 <Paper className={this.props.classes.root}>
-                    <div style={{ height: 400 }} className="{menus-manager}">
+                    <div className="menus-manager">
                         <SortableTree
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
+                            generateNodeProps={({ node, path }) => ({
+                                buttons: [
+                                    <IconButton
+                                        onClick={() =>
+                                            this.setState(state => ({
+                                            }))
+                                        }
+                                    >
+                                        <ModeEdit />
+                                    </IconButton>,
+                                ],
+                            })}
                         />
                     </div>
                 </Paper>
