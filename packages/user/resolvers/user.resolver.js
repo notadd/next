@@ -75,7 +75,7 @@ let UserResolver = class UserResolver {
     }
     updateUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.updateUserByEmail(args.id, args.user);
+            return yield this.service.updateUserById(args.id, args.user);
         });
     }
     updateUserByUsername(obj, args) {

@@ -4,7 +4,14 @@ export declare class SettingResolvers {
     private readonly service;
     constructor(service: SettingService);
     getSettings(): Promise<Setting[]>;
-    getSettingByKey(object: any, args: any): Promise<Setting | undefined>;
-    removeSetting(obj: any, args: any): Promise<Boolean>;
-    setSetting(obj: any, args: any): Promise<Boolean>;
+    getSettingByKey(object: any, args: {
+        key: String;
+    }): Promise<Setting | undefined>;
+    removeSetting(obj: any, args: {
+        key: String;
+    }): Promise<Boolean>;
+    setSetting(obj: any, args: {
+        key: String;
+        value: String;
+    }): Promise<Boolean>;
 }

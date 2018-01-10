@@ -8,22 +8,22 @@ export class UserResolver {
     }
 
     @Mutation()
-    async deleteUser(obj, args): Promise<Boolean> {
+    async deleteUser(obj, args: { user }): Promise<Boolean> {
         return await this.service.deleteUser(args.user);
     }
 
     @Mutation()
-    async deleteUserByEmail(obj, args): Promise<Boolean> {
+    async deleteUserByEmail(obj, args: { email: String }): Promise<Boolean> {
         return await this.service.deleteUserByEmail(args.email);
     }
 
     @Mutation()
-    async deleteUserById(obj, args): Promise<Boolean> {
+    async deleteUserById(obj, args: { id: Number }): Promise<Boolean> {
         return await this.service.deleteUserById(args.id);
     }
 
     @Mutation()
-    async deleteUserByUsername(obj, args): Promise<Boolean> {
+    async deleteUserByUsername(obj, args: { username: String }): Promise<Boolean> {
         return await this.service.deleteUserByUsername(args.username);
     }
 
@@ -33,37 +33,37 @@ export class UserResolver {
     }
 
     @Query()
-    async getUserByEmail(obj, args): Promise<User | undefined> {
+    async getUserByEmail(obj, args: { email: String }): Promise<User | undefined> {
         return await this.service.getUserByEmail(args.email);
     }
 
     @Query()
-    async getUserById(obj, args): Promise<User | undefined> {
+    async getUserById(obj, args: { id: Number }): Promise<User | undefined> {
         return await this.service.getUserById(args.id);
     }
 
     @Query()
-    async getUserByUsername(obj, args): Promise<User | undefined> {
+    async getUserByUsername(obj, args: { username: String }): Promise<User | undefined> {
         return await this.service.getUserByUsername(args.username);
     }
 
     @Mutation()
-    async updateUser(obj, args): Promise<Boolean> {
+    async updateUser(obj, args: { user }): Promise<Boolean> {
         return await this.service.updateUser(args.user);
     }
 
     @Mutation()
-    async updateUserByEmail(obj, args): Promise<Boolean> {
+    async updateUserByEmail(obj, args: { email: String, user }): Promise<Boolean> {
         return await this.service.updateUserByEmail(args.email, args.user);
     }
 
     @Mutation()
-    async updateUserById(obj, args): Promise<Boolean> {
-        return await this.service.updateUserByEmail(args.id, args.user);
+    async updateUserById(obj, args: { id: Number, user }): Promise<Boolean> {
+        return await this.service.updateUserById(args.id, args.user);
     }
 
     @Mutation()
-    async updateUserByUsername(obj, args): Promise<Boolean> {
+    async updateUserByUsername(obj, args: { username: String, user }): Promise<Boolean> {
         return await this.service.updateUserByUsername(args.username, args.user);
     }
 }
