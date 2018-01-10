@@ -63,3 +63,10 @@
 .rst__rowWrapper .rst__rowContents {
     background-color: inherit;
 }
+.rst__rowToolbar {
+    display: none;
+}
+.rst__rowWrapper:hover .rst__rowToolbar {
+    display: block;
+    cursor: pointer;
+}
