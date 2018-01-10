@@ -14,7 +14,7 @@ import { UserResolver } from "../resolvers/user.resolver";
     controllers: [
         UserController,
     ],
-    modules: [
+    imports: [
         DatabaseModule
     ],
 })

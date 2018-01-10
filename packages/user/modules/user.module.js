@@ -30,7 +30,7 @@ UserModule = __decorate([
         controllers: [
             user_controller_1.UserController,
         ],
-        modules: [
+        imports: [
             database_module_1.DatabaseModule
         ],
     }),
