@@ -12,7 +12,7 @@ export class UserSubscriber implements EntitySubscriberInterface {
      * @param { InsertEvent<User> } event
      */
     beforeInsert(event: InsertEvent<User>) {
-        event.entity.password = createHmac('sha256', user.password).digest('hex');
+        event.entity.password = createHmac('sha256', event.entity.password).digest('hex');
     }
 
     /**
