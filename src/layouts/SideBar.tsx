@@ -2,7 +2,7 @@ import * as React from 'react';
 import createHashHistory from 'history/createHashHistory';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import ExpandLess from 'material-ui-icons/ExpandLess';
+import ExpandMore from 'material-ui-icons/ExpandMore';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import ChatBubble from 'material-ui-icons/ChatBubble';
 import Notifications from 'material-ui-icons/Notifications';
@@ -159,7 +159,7 @@ class SideBar extends React.Component<Props, State> {
                 name: '全局插件',
                 open: false,
                 index: 3,
-                icon: 'gavel',
+                icon: 'extension',
                 children: []
             },
             {
@@ -320,8 +320,8 @@ class SideBar extends React.Component<Props, State> {
                                     <Icon style={{color: '#808080'}}>{item.icon}</Icon>
                                     <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
                                     {
-                                        item.open ? <ExpandLess style={{color: '#808080'}}/>
-                                        : <KeyboardArrowRight style={{color: '#808080'}}/>}
+                                        item.open ? <ExpandMore style={{color: '#808080', width: 20, height: 20}}/>
+                                        : <KeyboardArrowRight style={{color: '#808080', width: 20, height: 20}}/>}
                                 </ListItem>
                                 <Collapse component="li" in={item.open} unmountOnExit>
                                     <List
@@ -382,11 +382,23 @@ class SideBar extends React.Component<Props, State> {
                                                                 child.hasOwnProperty('children')
                                                                     && child.children.length > 0
                                                                     && child.open ?  (
-                                                                    <ExpandLess/>
+                                                                    <ExpandMore
+                                                                        style={{
+                                                                            color: '#808080',
+                                                                            width: 20,
+                                                                            height: 20,
+                                                                        }}
+                                                                    />
                                                                 ) : child.hasOwnProperty('children')
                                                                     && child.children.length > 0
                                                                     && child.open === false ? (
-                                                                    <KeyboardArrowRight/>
+                                                                    <KeyboardArrowRight
+                                                                        style={{
+                                                                            color: '#808080',
+                                                                            width: 20,
+                                                                            height: 20,
+                                                                        }}
+                                                                    />
                                                                 ) : null
                                                             }
                                                         </ListItem>

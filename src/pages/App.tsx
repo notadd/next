@@ -93,17 +93,22 @@ const styles = (theme: Theme): StyleRules => ({
     },
     menuBtn: {
         'align-self': 'stretch',
-        background: '#3949a3',
         borderRadius: 0,
         height: 'auto',
         fontSize: '24px',
         marginLeft: '60px',
+        '&:hover': {
+            background: '#3949a3',
+        },
     },
     navBtn: {
         flex: 'none',
         padding: '0 3px',
         width: 'auto',
         fontSize: '14px',
+        '&:hover': {
+            background: '#3949a3',
+        },
     },
     btnLabel: {
         color: '#fff',
@@ -276,7 +281,7 @@ class App extends React.Component<ViewProps, State> {
                                             <IconButton
                                                 aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
-                                                style={{background: 'none', marginLeft: '0'}}
+                                                style={{marginLeft: '0'}}
                                                 className={this.props.classes.menuBtn}
                                                 onClick={this.handleFullScreen}
                                                 color="contrast"
@@ -286,7 +291,7 @@ class App extends React.Component<ViewProps, State> {
                                             <IconButton
                                                 aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
-                                                style={{background: 'none', marginLeft: '0'}}
+                                                style={{marginLeft: '0'}}
                                                 className={this.props.classes.menuBtn}
                                                 onClick={this.handleOpenSearch}
                                                 color="contrast"
