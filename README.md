@@ -15,18 +15,20 @@
 ```yaml
 default:
     type: "postgres"
-    host: "192.168.109.120" // 数据库连接
-    port: 5432              // 数据库端口
-    username: "postgres"    // 数据库用户名
-    password: "123qwe"      // 数据库用户密码
-    database: "new"         // 数据库密码
+    host: "192.168.109.120"
+    port: 5432
+    username: "postgres"
+    password: "123qwe"
+    database: "new"
     entities:
-        - '/**/*.entity.js'
+        - '**/*.entity.js'
     migrations:
-        - '/**/*.migration.js'
+        - '**/*.migration.js'
     logging: true
     migrationsRun: true
-    synchronize: true
+    subscribers:
+        - '**/*.entity.subscriber.js'
+    synchronize: false
 ```
 
 > npm run dev
