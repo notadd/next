@@ -43,6 +43,7 @@ type State = {
     user: object,
     fullScreen: boolean,
     openSearch: boolean,
+    selectedOption: object,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
@@ -190,7 +191,9 @@ class App extends React.Component<ViewProps, State> {
         },
         fullScreen: false,
         openSearch: false,
-        selectedOption: undefined,
+        selectedOption: {
+            value: '',
+        },
     };
     toggleDrawer = () => {
         this.setState({
