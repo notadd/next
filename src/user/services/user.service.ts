@@ -1,6 +1,7 @@
 import { Component, Inject } from "@nestjs/common";
 import { User } from "../entities/user.entity";
 import { Repository } from "typeorm";
+import { UserCreateDto } from "../dtos/user.create.dto";
 
 @Component()
 export class UserService {
@@ -18,11 +19,12 @@ export class UserService {
      *
      * @returns { Promise<User> }
      */
-    async createUser(obj): Promise<User> {
-        const user = new User();
-        user.username = obj.username;
-        user.email = obj.email;
-        user.password = obj.password;
+    async createUser(obj: UserCreateDto): Promise<User> {
+        const user = await this.repository.create({
+            username: obj.username,
+            email: obj.email,
+            password: obj.password,
+        });
 
         return await this.repository.save(user);
     }

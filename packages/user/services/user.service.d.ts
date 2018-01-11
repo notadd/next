@@ -1,9 +1,10 @@
 import { User } from "../entities/user.entity";
 import { Repository } from "typeorm";
+import { UserCreateDto } from "../dtos/user.create.dto";
 export declare class UserService {
     private readonly repository;
     constructor(repository: Repository<User>);
-    createUser(obj: any): Promise<User>;
+    createUser(obj: UserCreateDto): Promise<User>;
     deleteUser(obj: any): Promise<Boolean>;
     deleteUserByEmail(email: String): Promise<Boolean>;
     deleteUserById(id: Number): Promise<Boolean>;
