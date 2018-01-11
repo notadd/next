@@ -6,15 +6,15 @@ export declare class UserService {
     constructor(repository: Repository<User>);
     createUser(obj: UserCreateDto): Promise<User>;
     deleteUser(obj: any): Promise<Boolean>;
-    deleteUserByEmail(email: String): Promise<Boolean>;
+    deleteUserByEmail(email: string): Promise<Boolean>;
     deleteUserById(id: Number): Promise<Boolean>;
-    deleteUserByUsername(username: String): Promise<boolean>;
+    deleteUserByUsername(username: string): Promise<boolean>;
     getUsers(): Promise<User[]>;
-    getUserByEmail(email: String): Promise<User | undefined>;
+    getUserByEmail(email: string): Promise<User | undefined>;
     getUserById(id: Number): Promise<User | undefined>;
-    getUserByUsername(username: String): Promise<User | undefined>;
+    getUserByUsername(username: string): Promise<User | undefined>;
     updateUser(obj: any): Promise<Boolean>;
-    updateUserByEmail(email: String, obj: any): Promise<Boolean>;
-    updateUserById(id: Number, obj: any): Promise<Boolean>;
-    updateUserByUsername(username: String, obj: any): Promise<Boolean>;
+    updateUserByEmail(email: string, obj: any): Promise<Boolean>;
+    updateUserById(id: number, obj: any): Promise<Boolean>;
+    updateUserByUsername(username: string, obj: any): Promise<Boolean>;
 }

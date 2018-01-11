@@ -5,13 +5,13 @@ export declare class SettingResolvers {
     constructor(service: SettingService);
     getSettings(): Promise<Setting[]>;
     getSettingByKey(object: any, args: {
-        key: String;
+        key: string;
     }): Promise<Setting | undefined>;
     removeSetting(obj: any, args: {
-        key: String;
+        key: string;
     }): Promise<Boolean>;
     setSetting(obj: any, args: {
-        key: String;
-        value: String;
+        key: string;
+        value: string;
     }): Promise<Boolean>;
 }

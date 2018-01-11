@@ -51,7 +51,7 @@ export class UserService {
      *
      * @returns { Promise<Boolean> }
      */
-    async deleteUserByEmail(email: String): Promise<Boolean> {
+    async deleteUserByEmail(email: string): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .delete()
@@ -77,11 +77,11 @@ export class UserService {
     }
 
     /**
-     * @param { String } username
+     * @param { string } username
      *
      * @returns { Promise<boolean> }
      */
-    async deleteUserByUsername(username: String): Promise<boolean> {
+    async deleteUserByUsername(username: string): Promise<boolean> {
         return await this.repository
             .createQueryBuilder()
             .delete()
@@ -99,11 +99,11 @@ export class UserService {
     }
 
     /**
-     * @param { String } email
+     * @param { string } email
      *
      * @returns { Promise<User | undefined> }
      */
-    async getUserByEmail(email: String): Promise<User | undefined> {
+    async getUserByEmail(email: string): Promise<User | undefined> {
         return await this.repository
             .createQueryBuilder()
             .where('email = :email', {
@@ -121,11 +121,11 @@ export class UserService {
     }
 
     /**
-     * @param { String } username
+     * @param { string } username
      *
      * @returns { Promise<User | undefined> }
      */
-    async getUserByUsername(username: String): Promise<User | undefined> {
+    async getUserByUsername(username: string): Promise<User | undefined> {
         return await this.repository
             .createQueryBuilder()
             .where('username = :username')
@@ -151,12 +151,12 @@ export class UserService {
     }
 
     /**
-     * @param { String } email
+     * @param { string } email
      * @param obj
      *
      * @returns { Promise<Boolean> }
      */
-    async updateUserByEmail(email: String, obj): Promise<Boolean> {
+    async updateUserByEmail(email: string, obj): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .update(obj)
@@ -167,12 +167,12 @@ export class UserService {
     }
 
     /**
-     * @param { Number } id
+     * @param { number } id
      * @param obj
      *
      * @returns { Promise<Boolean> }
      */
-    async updateUserById(id: Number, obj): Promise<Boolean> {
+    async updateUserById(id: number, obj): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .update(obj)
@@ -182,12 +182,12 @@ export class UserService {
     }
 
     /**
-     * @param { String } username
+     * @param { string } username
      * @param obj
      *
      * @returns { Promise<Boolean> }
      */
-    async updateUserByUsername(username: String, obj): Promise<Boolean> {
+    async updateUserByUsername(username: string, obj): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .update(obj)

@@ -2,14 +2,14 @@ import { IsNumber, IsString } from "class-validator";
 
 export class UserUpdateDto {
     @IsNumber()
-    readonly id: Number;
+    readonly id: number;
 
     @IsString()
-    readonly username: String;
+    readonly username: string;
 
     @IsString()
-    readonly email: String;
+    readonly email: string;
 
     @IsString()
-    readonly password: String;
+    readonly password: string;
 }

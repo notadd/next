@@ -6,22 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passport = require("passport");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../services/auth.service");
 const jwt_strategy_1 = require("../strategies/jwt.strategy");
+const auth_resolvers_1 = require("../resolvers/auth.resolvers");
+const user_service_1 = require("../services/user.service");
+const repository_provider_1 = require("../providers/repository.provider");
+const database_module_1 = require("@notadd/common/modules/database.module");
 let AuthModule = class AuthModule {
-    configure(consumer) {
-        consumer
-            .apply(passport.authenticate('jwt', { session: false }))
-            .forRoutes({ path: '/auth/authorized', method: common_1.RequestMethod.ALL });
-    }
 };
 AuthModule = __decorate([
     common_1.Module({
         components: [
+            ...repository_provider_1.repositoryProvider,
+            auth_resolvers_1.AuthResolvers,
             auth_service_1.AuthService,
             jwt_strategy_1.JwtStrategy,
+            user_service_1.UserService,
+        ],
+        imports: [
+            database_module_1.DatabaseModule,
         ],
     })
 ], AuthModule);

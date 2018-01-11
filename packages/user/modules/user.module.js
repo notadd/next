@@ -14,6 +14,7 @@ const user_service_1 = require("../services/user.service");
 const database_module_1 = require("@notadd/common/modules/database.module");
 const repository_provider_1 = require("../providers/repository.provider");
 const user_resolver_1 = require("../resolvers/user.resolver");
+const auth_module_1 = require("./auth.module");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -26,8 +27,13 @@ UserModule = __decorate([
             user_resolver_1.UserResolver,
             user_service_1.UserService,
         ],
+        exports: [
+            ...repository_provider_1.repositoryProvider,
+            user_service_1.UserService,
+        ],
         imports: [
-            database_module_1.DatabaseModule
+            database_module_1.DatabaseModule,
+            auth_module_1.AuthModule,
         ],
     }),
     __metadata("design:paramtypes", [])

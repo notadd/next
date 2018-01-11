@@ -24,15 +24,15 @@ export declare class UserResolver {
         user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserByEmail(obj: any, args: {
-        email: String;
+        email: string;
         user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserById(obj: any, args: {
-        id: Number;
+        id: number;
         user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserByUsername(obj: any, args: {
-        username: String;
+        username: string;
         user: UserUpdateDto;
     }): Promise<Boolean>;
 }

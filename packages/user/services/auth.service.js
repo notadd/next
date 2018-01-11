@@ -17,20 +17,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
-let AuthResolvers = class AuthResolvers {
-    getAuthToken(obj, args) {
+const jwt = require("jsonwebtoken");
+const common_1 = require("@nestjs/common");
+const user_service_1 = require("@notadd/user/services/user.service");
+const crypto_1 = require("crypto");
+let AuthService = class AuthService {
+    constructor(userService) {
+        this.userService = userService;
+    }
+    createToken(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
+            const user = yield this.userService.getUserByUsername(username);
+            if (typeof user === 'undefined') {
+                throw new Error('User Do not exists!');
+            }
+            if (user.password !== crypto_1.createHmac('sha256', password).digest('hex')) {
+                throw new Error('Password is incorrect!');
+            }
+            const expiresIn = 60 * 60;
+            const secretOrKey = 'secret';
+            const token = jwt.sign(user, secretOrKey, { expiresIn });
+            return {
+                expires: expiresIn,
+                token: token,
+            };
+        });
+    }
+    validateUser(signedUser) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return true;
         });
     }
 };
-__decorate([
-    graphql_1.Query(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], AuthResolvers.prototype, "getAuthToken", null);
-AuthResolvers = __decorate([
-    graphql_1.Resolver('Auth')
-], AuthResolvers);
-exports.AuthResolvers = AuthResolvers;
+AuthService = __decorate([
+    common_1.Component(),
+    __metadata("design:paramtypes", [user_service_1.UserService])
+], AuthService);
+exports.AuthService = AuthService;

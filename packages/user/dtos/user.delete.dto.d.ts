@@ -1,5 +1,5 @@
 export declare class UserDeleteDto {
-    readonly id: Number;
-    readonly username: String;
-    readonly email: String;
+    readonly id: number;
+    readonly username: string;
+    readonly email: string;
 }

@@ -23,7 +23,7 @@ export class SettingService {
      *
      * @returns { Promise<Setting | undefined> }
      */
-    async getSettingByKey(key: String): Promise<Setting | undefined> {
+    async getSettingByKey(key: string): Promise<Setting | undefined> {
         return await this.repository
             .createQueryBuilder()
             .where('key = :key', {
@@ -37,7 +37,7 @@ export class SettingService {
      *
      * @returns { Promise<Boolean> }
      */
-    async removeSetting(key: String): Promise<Boolean> {
+    async removeSetting(key: string): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .delete()
@@ -52,7 +52,7 @@ export class SettingService {
      *
      * @returns { Promise<Boolean> }
      */
-    async setSetting(key: String, value: String): Promise<Boolean> {
+    async setSetting(key: string, value: string): Promise<Boolean> {
         return await this.repository
             .createQueryBuilder()
             .update()

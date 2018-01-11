@@ -13,17 +13,17 @@ export class SettingResolvers {
     }
 
     @Query()
-    async getSettingByKey(object, args: { key: String }): Promise<Setting | undefined> {
+    async getSettingByKey(object, args: { key: string }): Promise<Setting | undefined> {
         return await this.service.getSettingByKey(args.key);
     }
 
     @Mutation()
-    async removeSetting(obj, args: { key: String }): Promise<Boolean> {
+    async removeSetting(obj, args: { key: string }): Promise<Boolean> {
         return await this.service.removeSetting(args.key);
     }
 
     @Mutation()
-    async setSetting(obj, args: { key: String, value: String }): Promise<Boolean> {
+    async setSetting(obj, args: { key: string, value: string }): Promise<Boolean> {
         return await this.service.setSetting(args.key, args.value);
     }
 }

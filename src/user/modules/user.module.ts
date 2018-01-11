@@ -3,6 +3,7 @@ import { UserService } from "../services/user.service";
 import { DatabaseModule } from "@notadd/common/modules/database.module";
 import { repositoryProvider } from "../providers/repository.provider";
 import { UserResolver } from "../resolvers/user.resolver";
+import { AuthModule } from "./auth.module";
 
 @Module({
     components: [
@@ -10,8 +11,13 @@ import { UserResolver } from "../resolvers/user.resolver";
         UserResolver,
         UserService,
     ],
+    exports: [
+        ...repositoryProvider,
+        UserService,
+    ],
     imports: [
-        DatabaseModule
+        DatabaseModule,
+        AuthModule,
     ],
 })
 export class UserModule {

@@ -62,17 +62,17 @@ export class UserResolver {
     }
 
     @Mutation()
-    async updateUserByEmail(obj, args: { email: String, user: UserUpdateDto }): Promise<Boolean> {
+    async updateUserByEmail(obj, args: { email: string, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserByEmail(args.email, args.user);
     }
 
     @Mutation()
-    async updateUserById(obj, args: { id: Number, user: UserUpdateDto }): Promise<Boolean> {
+    async updateUserById(obj, args: { id: number, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserById(args.id, args.user);
     }
 
     @Mutation()
-    async updateUserByUsername(obj, args: { username: String, user: UserUpdateDto }): Promise<Boolean> {
+    async updateUserByUsername(obj, args: { username: string, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserByUsername(args.username, args.user);
     }
 }
