@@ -1,6 +1,6 @@
 {
     "name": "@notadd/backend-mix",
-    "version": "2.1.11",
+    "version": "2.1.12",
     "description": "A React project",
     "keywords": [
         "express",
