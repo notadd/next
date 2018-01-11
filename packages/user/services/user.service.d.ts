@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 export declare class UserService {
     private readonly repository;
     constructor(repository: Repository<User>);
+    createUser(obj: any): Promise<User>;
     deleteUser(obj: any): Promise<Boolean>;
     deleteUserByEmail(email: String): Promise<Boolean>;
     deleteUserById(id: Number): Promise<Boolean>;

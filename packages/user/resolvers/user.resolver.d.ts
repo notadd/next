@@ -1,43 +1,38 @@
 import { UserService } from "../services/user.service";
 import { User } from "../entities/user.entity";
+import { UserCreateDto } from "../dtos/user.create.dto";
+import { UserUpdateDto } from "../dtos/user.update.dto";
+import { UserDeleteDto } from "../dtos/user.delete.dto";
+import { UserQueryDto } from "../dtos/user.query.dto";
 export declare class UserResolver {
     private readonly service;
     constructor(service: UserService);
+    createUser(obj: any, args: {
+        user: UserCreateDto;
+    }): Promise<User>;
     deleteUser(obj: any, args: {
-        user;
+        user: UserDeleteDto;
     }): Promise<Boolean>;
-    deleteUserByEmail(obj: any, args: {
-        email: String;
-    }): Promise<Boolean>;
-    deleteUserById(obj: any, args: {
-        id: Number;
-    }): Promise<Boolean>;
-    deleteUserByUsername(obj: any, args: {
-        username: String;
-    }): Promise<Boolean>;
+    deleteUserByEmail(obj: any, args: UserDeleteDto): Promise<Boolean>;
+    deleteUserById(obj: any, args: UserDeleteDto): Promise<Boolean>;
+    deleteUserByUsername(obj: any, args: UserDeleteDto): Promise<Boolean>;
     getUsers(): Promise<User[]>;
-    getUserByEmail(obj: any, args: {
-        email: String;
-    }): Promise<User | undefined>;
-    getUserById(obj: any, args: {
-        id: Number;
-    }): Promise<User | undefined>;
-    getUserByUsername(obj: any, args: {
-        username: String;
-    }): Promise<User | undefined>;
+    getUserByEmail(obj: any, args: UserQueryDto): Promise<User | undefined>;
+    getUserById(obj: any, args: UserQueryDto): Promise<User | undefined>;
+    getUserByUsername(obj: any, args: UserQueryDto): Promise<User | undefined>;
     updateUser(obj: any, args: {
-        user;
+        user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserByEmail(obj: any, args: {
         email: String;
-        user;
+        user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserById(obj: any, args: {
         id: Number;
-        user;
+        user: UserUpdateDto;
     }): Promise<Boolean>;
     updateUserByUsername(obj: any, args: {
         username: String;
-        user;
+        user: UserUpdateDto;
     }): Promise<Boolean>;
 }

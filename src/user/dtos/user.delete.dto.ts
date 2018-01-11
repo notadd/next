@@ -2,11 +2,11 @@ import { IsNumber, IsString } from "class-validator";
 
 export class UserDeleteDto {
     @IsNumber()
-    readonly id?: Number;
+    readonly id: Number;
 
     @IsString()
-    readonly username?: String;
+    readonly username: String;
 
     @IsString()
-    readonly email?: String;
+    readonly email: String;
 }

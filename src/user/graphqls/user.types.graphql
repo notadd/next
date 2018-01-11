@@ -4,9 +4,9 @@ input UserInput {
     # User name.
     username: String!,
     # User email.
-    email: String,
+    email: String!,
     # User password.
-    password: String,
+    password: String!,
 }
 
 type Query {

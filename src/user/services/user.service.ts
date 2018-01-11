@@ -16,6 +16,20 @@ export class UserService {
     /**
      * @param obj
      *
+     * @returns { Promise<User> }
+     */
+    async createUser(obj): Promise<User> {
+        const user = new User();
+        user.username = obj.username;
+        user.email = obj.email;
+        user.password = obj.password;
+
+        return await this.repository.save(user);
+    }
+
+    /**
+     * @param obj
+     *
      * @returns { Promise<Boolean> }
      */
     async deleteUser(obj): Promise<Boolean> {
