@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { Component } from '@nestjs/common';
+import { Component, forwardRef, Inject } from '@nestjs/common';
 import { UserService } from "@notadd/user/services/user.service";
 import { createHmac } from "crypto";
 

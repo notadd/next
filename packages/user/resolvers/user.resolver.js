@@ -137,6 +137,7 @@ __decorate([
 ], UserResolver.prototype, "getUsers", null);
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_query_dto_1.UserQueryDto]),
     __metadata("design:returntype", Promise)
@@ -150,6 +151,7 @@ __decorate([
 ], UserResolver.prototype, "getUserById", null);
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_query_dto_1.UserQueryDto]),
     __metadata("design:returntype", Promise)
@@ -163,6 +165,7 @@ __decorate([
 ], UserResolver.prototype, "updateUser", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

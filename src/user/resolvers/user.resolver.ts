@@ -50,6 +50,7 @@ export class UserResolver {
     }
 
     @Query()
+    @UseGuards(UserGuard)
     async getUserByEmail(obj, args: UserQueryDto): Promise<User | undefined> {
         return await this.service.getUserByEmail(args.email);
     }
@@ -61,6 +62,7 @@ export class UserResolver {
     }
 
     @Query()
+    @UseGuards(UserGuard)
     async getUserByUsername(obj, args: UserQueryDto): Promise<User | undefined> {
         return await this.service.getUserByUsername(args.username);
     }
@@ -72,6 +74,7 @@ export class UserResolver {
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async updateUserByEmail(obj, args: { email: string, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserByEmail(args.email, args.user);
     }

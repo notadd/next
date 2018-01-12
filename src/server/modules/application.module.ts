@@ -8,8 +8,6 @@ import { CommonModule } from '@notadd/common';
 import { AuthenticationModule } from '@notadd/authentication';
 
 @Module({
-    components: [
-    ],
     imports: [
         CommonModule,
         GraphQLModule,

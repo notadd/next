@@ -26,7 +26,7 @@ AuthenticationModule = __decorate([
             auth_service_1.AuthService,
         ],
         imports: [
-            user_1.UserModule
+            common_1.forwardRef(() => user_1.UserModule),
         ],
     })
 ], AuthenticationModule);

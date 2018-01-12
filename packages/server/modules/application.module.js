@@ -15,7 +15,7 @@ const user_1 = require("@notadd/user");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_server_express_1 = require("apollo-server-express");
 const common_2 = require("@notadd/common");
-const authentication_module_1 = require("@notadd/authentication/modules/authentication.module");
+const authentication_1 = require("@notadd/authentication");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -36,13 +36,12 @@ let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
     common_1.Module({
-        components: [],
         imports: [
             common_2.CommonModule,
             graphql_1.GraphQLModule,
             backend_1.BackendModule,
             user_1.UserModule,
-            authentication_module_1.AuthenticationModule,
+            authentication_1.AuthenticationModule,
         ],
     }),
     __metadata("design:paramtypes", [graphql_1.GraphQLFactory])
