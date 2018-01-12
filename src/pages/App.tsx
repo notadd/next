@@ -34,6 +34,7 @@ import Select from 'react-select';
 // import NpmSearchExtension from './NpmSearchExtension';
 // import BarExtension from './BarExtension';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
+import { History } from 'history';
 import 'react-select/dist/react-select.css';
 
 type State = {
@@ -157,9 +158,11 @@ const styles = (theme: Theme): StyleRules => ({
     },
 });
 
-type ViewProps = WithStyles;
+interface Props extends WithStyles<keyof typeof styles> {
+    history: History;
+}
 
-class App extends React.Component<ViewProps, State> {
+class App extends React.Component<Props, State> {
     state = {
         open: false,
         current: 1,
@@ -199,8 +202,16 @@ class App extends React.Component<ViewProps, State> {
             value: '',
         },
         selectOptions: [
-            { value: 'one', label: 'One' },
-            { value: 'two', label: 'Two' },
+            {
+                value: '参数配置',
+                label: '参数配置',
+                url: '/configurations',
+            },
+            {
+                value: 'SEO设置',
+                label: 'SEO设置',
+                url: '/seo',
+            },
         ],
     };
     toggleDrawer = () => {
@@ -263,7 +274,7 @@ class App extends React.Component<ViewProps, State> {
             openSearch: false,
         });
     };
-    handleChangeSelect = (selectedOption:any) => {
+    handleChangeSelect = (selectedOption: object) => {
         this.setState({ selectedOption });
     };
     render() {
