@@ -48,3 +48,33 @@ body {
 .top-action-module .btn-group button{
     font-size: 16px;
 }
+.searchSelect .Select-input {
+    height: 70px;
+}
+.Select-placeholder {
+    line-height: 70px;
+    padding-left: 58px;
+}
+.Select-input > input {
+    line-height: 54px;
+}
+.Select-arrow-zone {
+    display: none;
+}
+.Select-clear-zone {
+    width: 60px;
+}
+.Select-control {
+    border-radius: 0;
+    padding-left: 48px;
+}
+.Select-value-label {
+    margin-left: 48px;
+}
+.Select-placeholder, .Select--single > .Select-control .Select-value {
+    line-height: 70px;
+}
+.Select-option {
+    color: #808080;
+    padding: 15px 30px;
+}

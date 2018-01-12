@@ -34,6 +34,7 @@ import Select from 'react-select';
 // import NpmSearchExtension from './NpmSearchExtension';
 // import BarExtension from './BarExtension';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
+import 'react-select/dist/react-select.css';
 
 type State = {
     open: boolean,
@@ -44,6 +45,7 @@ type State = {
     fullScreen: boolean,
     openSearch: boolean,
     selectedOption: object,
+    selectOptions: Array<any>,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
@@ -150,7 +152,9 @@ const styles = (theme: Theme): StyleRules => ({
         borderRadius: 0,
         width: '330px',
         maxWidth: '100vw',
-    }
+        overflowX: 'visible',
+        overflowY: 'visible',
+    },
 });
 
 type ViewProps = WithStyles;
@@ -194,6 +198,10 @@ class App extends React.Component<ViewProps, State> {
         selectedOption: {
             value: '',
         },
+        selectOptions: [
+            { value: 'one', label: 'One' },
+            { value: 'two', label: 'Two' },
+        ],
     };
     toggleDrawer = () => {
         this.setState({
@@ -257,10 +265,9 @@ class App extends React.Component<ViewProps, State> {
     };
     handleChangeSelect = (selectedOption:any) => {
         this.setState({ selectedOption });
-        console.log(`Selected: ${selectedOption.label}`);
     };
     render() {
-        const { value, openSearch, selectedOption } = this.state;
+        const { value, openSearch, selectedOption, selectOptions } = this.state;
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         return (
@@ -328,12 +335,11 @@ class App extends React.Component<ViewProps, State> {
                                             >
                                                 <Select
                                                     name="form-field-name"
+                                                    className="searchSelect"
                                                     value={selectValue}
+                                                    placeholder="请输入关键词..."
                                                     onChange={this.handleChangeSelect}
-                                                    options={[
-                                                        { value: 'one', label: 'One' },
-                                                        { value: 'two', label: 'Two' },
-                                                    ]}
+                                                    options={selectOptions}
                                                 />
                                             </Popover>
                                             <BottomNavigation
