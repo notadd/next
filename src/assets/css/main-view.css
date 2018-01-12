@@ -2,3 +2,12 @@
     max-width: 1240px;
     margin: 0 auto;
 }
+/*导航栏搜索图标*/
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    margin-top: -12px;
+    fill: #b3b3b3 !important;
+    z-index: 5;
+}

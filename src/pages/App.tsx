@@ -333,6 +333,7 @@ class App extends React.Component<ViewProps, State> {
                                                 }}
                                                 onClose={this.handleClose}
                                             >
+                                                <Search className="search-icon" />
                                                 <Select
                                                     name="form-field-name"
                                                     className="searchSelect"
