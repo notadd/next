@@ -1,4 +1,8 @@
-import { CanActivate, ExecutionContext, Guard } from "@nestjs/common";
+import {
+    CanActivate,
+    ExecutionContext,
+    Guard,
+} from "@nestjs/common";
 
 @Guard()
 export class BackendGuard implements CanActivate {

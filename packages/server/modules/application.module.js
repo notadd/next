@@ -36,14 +36,14 @@ let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
     common_1.Module({
-        modules: [
+        components: [],
+        imports: [
             common_2.CommonModule,
             graphql_1.GraphQLModule,
             backend_1.BackendModule,
             user_1.UserModule,
             authentication_module_1.AuthenticationModule,
         ],
-        components: [],
     }),
     __metadata("design:paramtypes", [graphql_1.GraphQLFactory])
 ], ApplicationModule);

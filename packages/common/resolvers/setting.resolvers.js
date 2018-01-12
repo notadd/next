@@ -19,6 +19,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const setting_service_1 = require("../services/setting.service");
+const common_1 = require("@nestjs/common");
+const authentication_1 = require("@notadd/authentication");
 let SettingResolvers = class SettingResolvers {
     constructor(service) {
         this.service = service;
@@ -46,24 +48,28 @@ let SettingResolvers = class SettingResolvers {
 };
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], SettingResolvers.prototype, "getSettings", null);
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], SettingResolvers.prototype, "getSettingByKey", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], SettingResolvers.prototype, "removeSetting", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

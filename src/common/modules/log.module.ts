@@ -17,4 +17,5 @@ import { DatabaseModule } from "./database.module";
         DatabaseModule,
     ],
 })
-export class LogModule {}
+export class LogModule {
+}

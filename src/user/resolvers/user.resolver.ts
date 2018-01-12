@@ -5,6 +5,8 @@ import { UserCreateDto } from "../dtos/user.create.dto";
 import { UserUpdateDto } from "../dtos/user.update.dto";
 import { UserDeleteDto } from "../dtos/user.delete.dto";
 import { UserQueryDto } from "../dtos/user.query.dto";
+import { UseGuards } from "@nestjs/common";
+import { UserGuard } from "@notadd/authentication";
 
 @Resolver('User')
 export class UserResolver {
@@ -12,31 +14,37 @@ export class UserResolver {
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async createUser(obj, args: { user: UserCreateDto }): Promise<User> {
         return await this.service.createUser(args.user);
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async deleteUser(obj, args: { user: UserDeleteDto }): Promise<Boolean> {
         return await this.service.deleteUser(args.user);
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async deleteUserByEmail(obj, args: UserDeleteDto): Promise<Boolean> {
         return await this.service.deleteUserByEmail(args.email);
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async deleteUserById(obj, args: UserDeleteDto): Promise<Boolean> {
         return await this.service.deleteUserById(args.id);
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async deleteUserByUsername(obj, args: UserDeleteDto): Promise<Boolean> {
         return await this.service.deleteUserByUsername(args.username);
     }
 
     @Query()
+    @UseGuards(UserGuard)
     async getUsers(): Promise<User[]> {
         return await this.service.getUsers()
     }
@@ -47,6 +55,7 @@ export class UserResolver {
     }
 
     @Query()
+    @UseGuards(UserGuard)
     async getUserById(obj, args: UserQueryDto): Promise<User | undefined> {
         return await this.service.getUserById(args.id);
     }
@@ -57,6 +66,7 @@ export class UserResolver {
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async updateUser(obj, args: { user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUser(args.user);
     }
@@ -67,11 +77,13 @@ export class UserResolver {
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async updateUserById(obj, args: { id: number, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserById(args.id, args.user);
     }
 
     @Mutation()
+    @UseGuards(UserGuard)
     async updateUserByUsername(obj, args: { username: string, user: UserUpdateDto }): Promise<Boolean> {
         return await this.service.updateUserByUsername(args.username, args.user);
     }

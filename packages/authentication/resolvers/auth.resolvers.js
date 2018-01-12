@@ -19,6 +19,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const auth_service_1 = require("../services/auth.service");
+const common_1 = require("@nestjs/common");
+const user_guard_1 = require("../guards/user.guard");
 let AuthResolvers = class AuthResolvers {
     constructor(service) {
         this.service = service;
@@ -31,6 +33,7 @@ let AuthResolvers = class AuthResolvers {
 };
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

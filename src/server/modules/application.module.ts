@@ -8,14 +8,15 @@ import { CommonModule } from '@notadd/common';
 import { AuthenticationModule } from '@notadd/authentication/modules/authentication.module';
 
 @Module({
-    modules: [
+    components: [
+    ],
+    imports: [
         CommonModule,
         GraphQLModule,
         BackendModule,
         UserModule,
         AuthenticationModule,
     ],
-    components: [],
 })
 export class ApplicationModule {
     constructor(private readonly graphQLFactory: GraphQLFactory) {

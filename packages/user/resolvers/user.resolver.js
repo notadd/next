@@ -21,6 +21,8 @@ const graphql_1 = require("@nestjs/graphql");
 const user_service_1 = require("../services/user.service");
 const user_delete_dto_1 = require("../dtos/user.delete.dto");
 const user_query_dto_1 = require("../dtos/user.query.dto");
+const common_1 = require("@nestjs/common");
+const authentication_1 = require("@notadd/authentication");
 let UserResolver = class UserResolver {
     constructor(service) {
         this.service = service;
@@ -93,36 +95,42 @@ let UserResolver = class UserResolver {
 };
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteUser", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_delete_dto_1.UserDeleteDto]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteUserByEmail", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_delete_dto_1.UserDeleteDto]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteUserById", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_delete_dto_1.UserDeleteDto]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteUserByUsername", null);
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -135,6 +143,7 @@ __decorate([
 ], UserResolver.prototype, "getUserByEmail", null);
 __decorate([
     graphql_1.Query(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, user_query_dto_1.UserQueryDto]),
     __metadata("design:returntype", Promise)
@@ -147,6 +156,7 @@ __decorate([
 ], UserResolver.prototype, "getUserByUsername", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
@@ -159,12 +169,14 @@ __decorate([
 ], UserResolver.prototype, "updateUserByEmail", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "updateUserById", null);
 __decorate([
     graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
