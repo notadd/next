@@ -66,6 +66,7 @@ body {
 }
 .Select-control {
     border-radius: 0;
+    border: none;
     padding-left: 48px;
 }
 .Select-value-label {

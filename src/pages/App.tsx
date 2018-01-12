@@ -33,6 +33,7 @@ import Popover from 'material-ui/Popover';
 import Select from 'react-select';
 // import NpmSearchExtension from './NpmSearchExtension';
 // import BarExtension from './BarExtension';
+import createHashHistory from 'history/createHashHistory';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 import { History } from 'history';
 import 'react-select/dist/react-select.css';
@@ -202,6 +203,7 @@ class App extends React.Component<Props, State> {
         openSearch: false,
         selectedOption: {
             value: '',
+            url: '',
         },
         selectOptions: [
             {
@@ -278,6 +280,7 @@ class App extends React.Component<Props, State> {
     };
     handleChangeSelect = (selectedOption: object) => {
         this.setState({ selectedOption });
+        createHashHistory().push(selectedOption['url']);
     };
     render() {
         const { value, openSearch, selectedOption, selectOptions } = this.state;
