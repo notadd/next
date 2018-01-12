@@ -131,7 +131,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '10px'}}>
+                        <Grid container spacing={40} style={{marginTop: '16px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControlLabel
                                     label="站点开启"
@@ -177,7 +177,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormHelperText>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
+                        <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -217,7 +217,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
+                        <Grid container spacing={40} style={{marginTop: '10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
