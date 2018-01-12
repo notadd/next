@@ -57,3 +57,5 @@ export async function bootstrap() {
         logger.log(`Server on: ${address}`);
     });
 }
+
+export * from './modules/application.module';

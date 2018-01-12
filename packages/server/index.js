@@ -7,6 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@notadd/core");
 const application_module_1 = require("./modules/application.module");
@@ -54,3 +57,4 @@ function bootstrap() {
     });
 }
 exports.bootstrap = bootstrap;
+__export(require("./modules/application.module"));

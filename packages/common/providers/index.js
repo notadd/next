@@ -3,8 +3,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./entities"));
-__export(require("./modules"));
-__export(require("./providers"));
-__export(require("./resolvers"));
-__export(require("./services"));
+__export(require("./database.providers"));
+__export(require("./logRepositoy.provider"));
+__export(require("./settingRepository.provider"));

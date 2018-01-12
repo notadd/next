@@ -5,7 +5,7 @@ import { GraphQLFactory, GraphQLModule } from '@nestjs/graphql';
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { MiddlewaresConsumer } from '@nestjs/common/interfaces/middlewares';
 import { CommonModule } from '@notadd/common';
-import { AuthenticationModule } from '@notadd/authentication/modules/authentication.module';
+import { AuthenticationModule } from '@notadd/authentication';
 
 @Module({
     components: [
