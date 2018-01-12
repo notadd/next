@@ -158,7 +158,9 @@ const styles = (theme: Theme): StyleRules => ({
     },
 });
 
-interface Props extends WithStyles<keyof typeof styles> {
+const stylesType = {} as StyleRules;
+
+interface Props extends WithStyles<keyof typeof stylesType> {
     history: History;
 }
 
@@ -457,4 +459,4 @@ class App extends React.Component<Props, State> {
         );
     }
 }
-export default withStyles(styles)<{}>(App);
+export default withStyles(styles, { withTheme: true })<{}>(App);
