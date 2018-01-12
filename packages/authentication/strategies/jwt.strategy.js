@@ -17,27 +17,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
+const passport = require("passport");
+const passport_jwt_1 = require("passport-jwt");
+const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../services/auth.service");
-let AuthResolvers = class AuthResolvers {
+let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
     constructor(service) {
+        super({
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            passReqToCallback: true,
+            secretOrKey: 'secret',
+        }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return yield this.verify(req, payload, next); }));
         this.service = service;
+        passport.use(this);
     }
-    getAuthToken(obj, args) {
+    verify(req, payload, done) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.createToken(args.auth.username, args.auth.password);
+            const isValid = yield this.service.validateUser(payload);
+            if (!isValid) {
+                return done('Unauthorized', false);
+            }
+            done(null, payload);
         });
     }
 };
-__decorate([
-    graphql_1.Query(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], AuthResolvers.prototype, "getAuthToken", null);
-AuthResolvers = __decorate([
-    graphql_1.Resolver('Auth'),
-    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" && _a || Object])
-], AuthResolvers);
-exports.AuthResolvers = AuthResolvers;
-var _a;
+JwtStrategy = __decorate([
+    common_1.Component(),
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
+], JwtStrategy);
+exports.JwtStrategy = JwtStrategy;

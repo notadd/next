@@ -37,7 +37,6 @@ __decorate([
 ], AuthResolvers.prototype, "getAuthToken", null);
 AuthResolvers = __decorate([
     graphql_1.Resolver('Auth'),
-    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" && _a || Object])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthResolvers);
 exports.AuthResolvers = AuthResolvers;
-var _a;

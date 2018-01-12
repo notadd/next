@@ -7,26 +7,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const auth_service_1 = require("../../authentication/services/auth.service");
-const jwt_strategy_1 = require("../../authentication/strategies/jwt.strategy");
-const auth_resolvers_1 = require("../../authentication/resolvers/auth.resolvers");
-const user_service_1 = require("../services/user.service");
-const repository_provider_1 = require("../providers/repository.provider");
-const database_module_1 = require("@notadd/common/modules/database.module");
-let AuthModule = class AuthModule {
+const auth_resolvers_1 = require("../resolvers/auth.resolvers");
+const jwt_strategy_1 = require("../strategies/jwt.strategy");
+const user_module_1 = require("@notadd/user/modules/user.module");
+const user_service_1 = require("@notadd/user/services/user.service");
+const auth_service_1 = require("../services/auth.service");
+let AuthenticationModule = class AuthenticationModule {
 };
-AuthModule = __decorate([
+AuthenticationModule = __decorate([
     common_1.Module({
         components: [
-            ...repository_provider_1.repositoryProvider,
             auth_resolvers_1.AuthResolvers,
             auth_service_1.AuthService,
             jwt_strategy_1.JwtStrategy,
-            user_service_1.UserService,
+            user_service_1.UserService
+        ],
+        exports: [
+            auth_service_1.AuthService,
         ],
         imports: [
-            database_module_1.DatabaseModule,
+            user_module_1.UserModule
         ],
     })
-], AuthModule);
-exports.AuthModule = AuthModule;
+], AuthenticationModule);
+exports.AuthenticationModule = AuthenticationModule;
