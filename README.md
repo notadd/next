@@ -4,7 +4,9 @@
 
 执行 NPM 包安装，并启动 Postgres 数据库
 
-> npm install
+> yarn install
+
+必须使用 yarn ！！！必须使用 yarn ！！！必须使用 yarn ！！！
 
 ## 第二步
 
