@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 
 language: node_js
 
@@ -22,3 +22,4 @@ before_install:
 install:    
     - npm install yarn -g
     - yarn install
+    
