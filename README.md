@@ -10,7 +10,7 @@
 
 ## 第二步
 
-修改数据库配置文件（`orncinfig.yml`）：
+修改数据库配置文件（`ormconfig.yml`）：
 
 参考如下：
 
@@ -33,4 +33,4 @@ default:
     synchronize: false
 ```
 
-> npm run dev
+> yarn run dev
