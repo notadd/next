@@ -14,7 +14,10 @@ matrix:
         - node_js: 6
           env: version=6
 services:
-    - postgresql          
+    - postgresql  
+
+before_install:
+    - sh -c "psql -c 'create database notadd;' -U postgres;"
 
 install:    
     - npm install yarn -g
