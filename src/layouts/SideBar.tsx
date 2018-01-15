@@ -53,19 +53,28 @@ const styles = {
     },
 };
 
-type State = {
-    navs: any,
-    user: object
+type User = {
+    name: string;
+    email: string;
+    user_img: string;
+    message: number;
 };
 
-interface Props extends WithStyles<keyof typeof styles> {
-    history: History,
+type State = {
+    navs: any;
+    user: User;
+};
+
+interface Props {
+    history?: History,
     open: boolean,
 }
 
-class SideBar extends React.Component<Props, State> {
-    constructor() {
-        super();
+type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
+
+class SideBar extends React.Component<PropsWithStyles, State> {
+    constructor(props: PropsWithStyles, state: State) {
+        super(props, state);
         this.state = {
             navs: [
                 {
@@ -239,7 +248,7 @@ class SideBar extends React.Component<Props, State> {
     }
     render() {
         return (
-            <div className="sideBar" isOpen={this.props.open} {...this.props}>
+            <div className="sideBar">
                 <div className="userBox">
                     <div
                         style={{
@@ -296,7 +305,7 @@ class SideBar extends React.Component<Props, State> {
                     </div>
                 </div>
                 {
-                    this.state.navs.map((item, index) => {
+                    this.state.navs.map((item: any, index: number) => {
                         return (
                             <List
                                 className={this.props.classes.root}
@@ -337,7 +346,7 @@ class SideBar extends React.Component<Props, State> {
                                         }}
                                     >
                                         {
-                                            item.children.map((child, childIndex) => {
+                                            item.children.map((child: any, childIndex: number) => {
                                                 return (
                                                     <List
                                                         style={{
@@ -415,7 +424,7 @@ class SideBar extends React.Component<Props, State> {
                                                                         style={{borderBottom: '1px solid #e0e0e0'}}
                                                                     >
                                                                         {
-                                                                            child.children.map((inner, innertIndex) => {
+                                                                            child.children.map((inner: any, innertIndex: number) => {
                                                                                 return (
                                                                                     <NavLink
                                                                                         to={inner.path}
@@ -464,4 +473,4 @@ class SideBar extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)<{}>(SideBar);
+export default withStyles(styles)<Props>(SideBar);

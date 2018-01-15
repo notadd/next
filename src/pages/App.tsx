@@ -165,6 +165,7 @@ const stylesType = {} as StyleRules;
 
 interface Props extends WithStyles<keyof typeof stylesType> {
     history: History;
+    open: boolean;
 }
 
 class App extends React.Component<Props, State> {
