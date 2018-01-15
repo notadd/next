@@ -5,8 +5,10 @@ import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
-import FileDownload from 'material-ui-icons/FileDownload';
-import FileUpload from 'material-ui-icons/FileUpload';
+import ModeEdit from 'material-ui-icons/ModeEdit';
+import Search from 'material-ui-icons/Search';
+import Add from 'material-ui-icons/Add';
+import Cached from 'material-ui-icons/Cached';
 import Table, {
     TableBody,
     TableCell,
@@ -25,6 +27,24 @@ const styles = {
         'background-color': '#3f51b5',
         'color': '#fff',
         'margin-left': '10px',
+    },
+    btnEdit: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#3f51b5',
+        'color': '#fff',
+        'margin-left': '10px',
+        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+    },
+    btnDelete: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#fff',
+        'color': '#808080',
+        'margin-left': '10px',
+        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
     },
     root: {
         'padding': '40px 30px',
@@ -48,9 +68,9 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: any, description: any, version: any) {
+function createData(check: boolean, name: any, type: any, time: any) {
     id += 1;
-    return { id, check, name, description, version };
+    return { id, check, name, type, time };
 }
 
 const list = [
@@ -107,7 +127,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         const { currentPage, rowsPerPage } = this.state;
         return (
-            <div className="top-action-module">
+            <div className="top-action-module cms">
                 <p className="crumbs">
                     CMS / 文章管理
                 </p>
@@ -116,12 +136,22 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
-                        <FileUpload />
+                        <Search />
                     </IconButton>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
-                        <FileDownload />
+                        <DeleteIcon />
+                    </IconButton>
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <Add />
+                    </IconButton>
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <Cached />
                     </IconButton>
                 </div>
                 <Paper className={this.props.classes.root}>
@@ -130,7 +160,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             <TableRow>
                                 <TableCell className={this.props.classes.tableCellStatus}>
                                     <Checkbox
-                                        className="table-ckeckbox"
                                         checked={this.state.checkedAll}
                                         onChange={this.handleChangeAll('checkedAll')}
                                         value="checkedAll"
@@ -154,7 +183,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             <TableCell padding="checkbox"
                                                        className={this.props.classes.tableCellStatus}>
                                                 <Checkbox
-                                                    className="table-ckeckbox"
                                                     checked={n.check}
                                                     onChange={this.handleChange(n)}
                                                     value="n.check"
@@ -164,21 +192,21 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 {n.name}
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.description}
+                                                {n.type}
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.version}
+                                                {n.time}
                                             </TableCell>
                                             <TableCell numeric>
                                                 <IconButton
-                                                    className={this.props.classes.menuBtn}
+                                                    className={this.props.classes.btnEdit}
                                                     onClick={() => this.handleClickEdit(n)}
                                                 >
-                                                    <DeleteIcon />
+                                                    <ModeEdit />
                                                 </IconButton>
                                                 <IconButton
-                                                    className={this.props.classes.menuBtn}
-                                                    onClick={() => this.handleClickRemove(n)}
+                                                    className={this.props.classes.btnDelete}
+                                                    onClick={() => this.handleClickRemove(index)}
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>
