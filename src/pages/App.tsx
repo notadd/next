@@ -19,6 +19,9 @@ import ModuleInstall from './ModuleInstall';
 import AddonOpen from './AddonOpen';
 import AddonImport from './AddonImport';
 import AddonInstall from './AddonInstall';
+
+import Article from './cms/Article';
+
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import Hidden from 'material-ui/Hidden';
@@ -450,6 +453,7 @@ class App extends React.Component<Props, State> {
                                             <Route exact path="/addon/openAddon" component={AddonOpen}/>
                                             <Route exact path="/addon/import-export" component={AddonImport}/>
                                             <Route exact path="/addon/install" component={AddonInstall}/>
+                                            <Route exact path="/cms/article" component={Article}/>
                                             <Route path="/" render={() => (<Redirect to="/home"/>)}/>
                                         </Switch>
                                     </div>
