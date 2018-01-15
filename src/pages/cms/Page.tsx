@@ -3,8 +3,10 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
+import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import ClearIcon from 'material-ui-icons/Clear';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
@@ -15,6 +17,11 @@ import Table, {
     TableHead,
     TableRow,
 } from 'material-ui/Table';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+} from 'material-ui/Dialog';
 
 const styles = {
     evenRow: {
@@ -68,17 +75,17 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: any, type: any, time: any) {
+function createData(check: boolean, name: any, author: any) {
     id += 1;
-    return { id, check, name, type, time };
+    return { id, check, name, author };
 }
 
 const list = [
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
 ];
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -86,6 +93,9 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         checkedAll: false,
         rowsPerPage: 2,
         currentPage: 0,
+        open: false,
+        modalId: '',
+        modalName: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -118,6 +128,19 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({
             [pro]: event.target.checked,
         });
+    };
+    handleClickRemove = (pro: any) => {
+        this.state.modalName = pro.name;
+        this.state.modalId = pro.id;
+        this.setState({
+            open: true,
+        });
+    };
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleSubmit = () => {
+        this.setState({ open: false });
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -164,9 +187,8 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         value="checkedAll"
                                     />
                                 </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>发布时间</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>页面名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell numeric/>
                             </TableRow>
                         </TableHead>
@@ -193,10 +215,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 {n.name}
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.type}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.time}
+                                                {n.author}
                                             </TableCell>
                                             <TableCell numeric>
                                                 <IconButton
@@ -232,6 +251,34 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         />
                     </div>
                 </Paper>
+                <Dialog
+                    open={this.state.open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={this.handleClose}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4>
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={this.handleClose}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleSubmit} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }
