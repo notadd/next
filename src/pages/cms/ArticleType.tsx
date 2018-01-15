@@ -129,14 +129,14 @@ render() {
                         onChange={treeData => this.setState({ treeData })}
                         getNodeKey={({ node }) => node.id}
                         generateNodeProps={({ node, path }) => ({
-                                buttons: [
-                                    <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
-                                    >
-                                        <ModeEdit />
-                                    </IconButton>,
-                                ],
-                            })}
+                            buttons: [
+                                <IconButton
+                                     onClick={() => this.handleClickEdit(node)}
+                                >
+                                    <ModeEdit />
+                                </IconButton>,
+                            ],
+                        })}
                     />
                 </div>
             </Paper>

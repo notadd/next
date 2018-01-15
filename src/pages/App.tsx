@@ -440,7 +440,7 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/addon/import-export" component={AddonImport}/>
                                                 <Route exact path="/addon/install" component={AddonInstall}/>
                                                 <Route exact path="/cms/article" component={Article}/>
-                                                <Route exact path="/cms/article/edit" component={ArticleEdit}/>
+                                                <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
                                                 <Route exact path="/cms/article/type/edit" component={ArticleTypeEdit}/>
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
