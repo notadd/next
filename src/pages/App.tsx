@@ -34,8 +34,6 @@ import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
 import Select from 'react-select';
-// import NpmSearchExtension from './NpmSearchExtension';
-// import BarExtension from './BarExtension';
 import createHashHistory from 'history/createHashHistory';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 import { History } from 'history';
@@ -59,22 +57,21 @@ const styles = (theme: Theme): StyleRules => ({
         height: 'calc(100vh - 70px)',
         width: drawerWidth,
         position: 'relative',
-        marginRight: 30,
         boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
+            duration: 300,
         }),
     },
     drawerPaperClose: {
         width: 90,
-        marginRight: 30,
         overflowX: 'hidden',
         position: 'relative',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
+            duration: 300,
         }),
+        transform: 'translateX(0) !important',
     },
     header: {
         'align-items': 'center',
@@ -415,7 +412,7 @@ class App extends React.Component<Props, State> {
                                             onClose={this.toggleDrawer}
                                             open={this.state.open}
                                         >
-                                            <Side/>
+                                            <Side open={this.state.open}/>
                                         </Drawer>
                                         <div className="content">
                                             <Switch>

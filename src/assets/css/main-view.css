@@ -15,4 +15,6 @@
 /*内容区*/
 .content {
     width: 100%;
+    padding: 30px;
+    overflow-x: hidden;
 }

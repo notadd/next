@@ -59,142 +59,146 @@ type State = {
 };
 
 interface Props extends WithStyles<keyof typeof styles> {
-    history: History;
+    history: History,
+    open: boolean,
 }
 
 class SideBar extends React.Component<Props, State> {
-    state = {
-        navs: [
-            {
-                name: '全局设置',
-                open: false,
-                index: 0,
-                icon: 'view_quilt',
-                children: [
-                    {
-                        'name': '参数配置',
-                        'path': '/configurations',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': 'SEO设置',
-                        'path': '/seo',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
+    constructor() {
+        super();
+        this.state = {
+            navs: [
+                {
+                    name: '全局设置',
+                    open: false,
+                    index: 0,
+                    icon: 'view_quilt',
+                    children: [
+                        {
+                            'name': '参数配置',
+                            'path': '/configurations',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': 'SEO设置',
+                            'path': '/seo',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '附件设置',
+                    icon: 'insert_drive_file',
+                    open: false,
+                    index: 1,
+                    children: [
+                        {
+                            'name': '上传设置',
+                            'path': '/upload',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '应用管理',
+                    open: false,
+                    icon: 'work',
+                    index: 2,
+                    children: [
+                        {
+                            'name': '模块配置',
+                            'path': '/module',
+                            'open': false,
+                            'children': [
+                                {
+                                    'name': '开启模块',
+                                    'path': '/module/open-module'
+                                },
+                                {
+                                    'name': '域名配置',
+                                    'path': '/module/domain-config'
+                                },
+                                {
+                                    'name': '导入导出',
+                                    'path': '/module/import-export'
+                                },
+                                {
+                                    'name': '本地安装',
+                                    'path': '/module/install'
+                                },
+                            ]
+                        },
+                        {
+                            'name': '插件配置',
+                            'path': '/addon',
+                            'open': false,
+                            'children': [
+                                {
+                                    'name': '开启插件',
+                                    'path': '/addon/openAddon'
+                                },
+                                {
+                                    'name': '导入导出',
+                                    'path': '/addon/import-export'
+                                },
+                                {
+                                    'name': '本地安装',
+                                    'path': '/addon/install'
+                                },
+                            ],
+                        },
+                        {
+                            'name': '拓展配置',
+                            'path': '/extension',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '全局插件',
+                    open: false,
+                    index: 3,
+                    icon: 'extension',
+                    children: []
+                },
+                {
+                    name: '系统插件',
+                    icon: 'widgets',
+                    open: false,
+                    index: 4,
+                    children: [
+                        {
+                            'name': '菜单管理',
+                            'path': '/menu',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '邮件设置',
+                            'path': '/mail',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '调试工具',
+                            'path': '/debug',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                }
+            ],
+            user: {
+                name: '管理员',
+                email: 'zhhu_123@163.com',
+                user_img: require('../assets/images/user.jpg'),
+                message: 5,
             },
-            {
-                name: '附件设置',
-                icon: 'insert_drive_file',
-                open: false,
-                index: 1,
-                children: [
-                    {
-                        'name': '上传设置',
-                        'path': '/upload',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            },
-            {
-                name: '应用管理',
-                open: false,
-                icon: 'work',
-                index: 2,
-                children: [
-                    {
-                        'name': '模块配置',
-                        'path': '/module',
-                        'open': false,
-                        'children': [
-                            {
-                                'name': '开启模块',
-                                'path': '/module/open-module'
-                            },
-                            {
-                                'name': '域名配置',
-                                'path': '/module/domain-config'
-                            },
-                            {
-                                'name': '导入导出',
-                                'path': '/module/import-export'
-                            },
-                            {
-                                'name': '本地安装',
-                                'path': '/module/install'
-                            },
-                        ]
-                    },
-                    {
-                        'name': '插件配置',
-                        'path': '/addon',
-                        'open': false,
-                        'children': [
-                            {
-                                'name': '开启插件',
-                                'path': '/addon/openAddon'
-                            },
-                            {
-                                'name': '导入导出',
-                                'path': '/addon/import-export'
-                            },
-                            {
-                                'name': '本地安装',
-                                'path': '/addon/install'
-                            },
-                        ],
-                    },
-                    {
-                        'name': '拓展配置',
-                        'path': '/extension',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            },
-            {
-                name: '全局插件',
-                open: false,
-                index: 3,
-                icon: 'extension',
-                children: []
-            },
-            {
-                name: '系统插件',
-                icon: 'widgets',
-                open: false,
-                index: 4,
-                children: [
-                    {
-                        'name': '菜单管理',
-                        'path': '/menu',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': '邮件设置',
-                        'path': '/mail',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': '调试工具',
-                        'path': '/debug',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            }
-        ],
-        user: {
-            name: '管理员',
-            email: 'zhhu_123@163.com',
-            user_img: require('../assets/images/user.jpg'),
-            message: 5,
-        },
+        }
     };
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
@@ -235,7 +239,7 @@ class SideBar extends React.Component<Props, State> {
     }
     render() {
         return (
-            <div className="sideBar">
+            <div className="sideBar" isOpen={this.props.open} {...this.props}>
                 <div className="userBox">
                     <div
                         style={{
