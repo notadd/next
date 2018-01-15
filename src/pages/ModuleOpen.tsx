@@ -96,6 +96,9 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleSubmit = () => {
+        this.setState({ open: false });
+    };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
@@ -192,7 +195,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                         <Button onClick={this.handleClose}>
                             取消
                         </Button>
-                        <Button onClick={this.handleClose} autoFocus>
+                        <Button onClick={this.handleSubmit} autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>

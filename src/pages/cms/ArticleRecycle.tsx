@@ -1,6 +1,5 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
@@ -8,9 +7,7 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
-import ModeEdit from 'material-ui-icons/ModeEdit';
-import Search from 'material-ui-icons/Search';
-import Add from 'material-ui-icons/Add';
+import ReplyAll from 'material-ui-icons/ReplyAll';
 import Cached from 'material-ui-icons/Cached';
 import Table, {
     TableBody,
@@ -76,20 +73,20 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: any, type: any, time: any) {
+function createData(check: boolean, name: any, author: any) {
     id += 1;
-    return { id, check, name, type, time };
+    return { id, check, name, author };
 }
 
 const list = [
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯', '2017-12-01 13:20:59'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
 ];
 
-class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
+class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
         rowsPerPage: 2,
@@ -112,6 +109,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             [name]: event.target.checked,
         });
     };
+    handleClickEdit = (pro: any) => {
+        window.console.log(pro);
+    }
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
         pro.check = true;
@@ -127,9 +127,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             [pro]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    }
     handleClickRemove = (pro: any) => {
         this.state.modalName = pro.name;
         this.state.modalId = pro.id;
@@ -154,22 +151,12 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 <p className="crumbs">
                     CMS / 文章管理
                 </p>
-                <h4 className="title">全部文章</h4>
+                <h4 className="title">回收站</h4>
                 <div className="btn-group">
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
-                        <Search />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
                         <DeleteIcon />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
                     </IconButton>
                     <IconButton
                         className={this.props.classes.menuBtn}
@@ -189,8 +176,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     />
                                 </TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>发布时间</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
                                 <TableCell numeric/>
                             </TableRow>
                         </TableHead>
@@ -217,19 +203,15 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 {n.name}
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.type}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.time}
+                                                {n.author}
                                             </TableCell>
                                             <TableCell numeric>
-                                                <Link to={'/cms/article/edit/' + n.id}>
-                                                    <IconButton
-                                                        className={this.props.classes.btnEdit}
-                                                    >
-                                                        <ModeEdit />
-                                                    </IconButton>
-                                                </Link>
+                                                <IconButton
+                                                    className={this.props.classes.btnEdit}
+                                                    onClick={() => this.handleClickEdit(n)}
+                                                >
+                                                    <ReplyAll />
+                                                </IconButton>
                                                 <IconButton
                                                     className={this.props.classes.btnDelete}
                                                     onClick={() => this.handleClickRemove(n)}
@@ -289,4 +271,4 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         );
     }
 }
-export default withStyles(styles)(Article);
+export default withStyles(styles)(ArticleRecycle);
