@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
+const rename = require('gulp-rename');
 const sequence = require('gulp-sequence');
 const ts = require('gulp-typescript');
 
@@ -56,6 +57,14 @@ modules.forEach(module => {
                 `${source}/${module}/*.js`,
             ]).pipe(gulp.dest(`${dist}/${module}`));
         } else {
+            gulp.src([
+                `${source}/${module}/**/*.graphql`,
+                `${source}/${module}/*.graphql`,
+            ]).pipe(rename(function (path) {
+                path.basename = path.basename.replace('.original', '.types');
+                console.log("Rename:", JSON.stringify(path));
+            })).pipe(gulp.dest(`${dist}/${module}`));
+
             return packages[module]
                 .src()
                 .pipe(packages[module]())
@@ -80,6 +89,7 @@ function tasks() {
             watchMedia(source, module);
             watchTypescript(source, module);
         } else {
+            watchGraphql(source, module);
             watchTypescript(source, module);
         }
     });
@@ -103,19 +113,21 @@ function watchAny(source, module) {
     });
 }
 
-function watchTypescript(source, module) {
+function watchGraphql(source, module) {
     gulp.watch(
         [
-            `${source}/${module}/**/*.ts`,
-            `${source}/${module}/**/*.tsx`,
-            `${source}/${module}/*.ts`,
-            `${source}/${module}/*.tsx`,
+            `${source}/${module}/**/*.graphql`,
+            `${source}/${module}/*.graphql`,
         ],
         [
             module,
         ]
     ).on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        gulp.src([
+            `${source}/${module}/**/*.graphql`,
+            `${source}/${module}/*.graphql`,
+        ]).pipe(gulp.dest(`${dist}/${module}`));
     });
 }
 
@@ -150,5 +162,21 @@ function watchMedia(source, module) {
             `${source}/${module}/**/*.svg`,
             `${source}/${module}/*.svg`,
         ]).pipe(gulp.dest(`${dist}/${module}`));
+    });
+}
+
+function watchTypescript(source, module) {
+    gulp.watch(
+        [
+            `${source}/${module}/**/*.ts`,
+            `${source}/${module}/**/*.tsx`,
+            `${source}/${module}/*.ts`,
+            `${source}/${module}/*.tsx`,
+        ],
+        [
+            module,
+        ]
+    ).on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 }
