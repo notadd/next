@@ -1,6 +1,6 @@
 .main-view .view {
-    max-width: 1240px;
     margin: 0 auto;
+    display: flex;
 }
 /*导航栏搜索图标*/
 .search-icon {
@@ -10,4 +10,9 @@
     margin-top: -12px;
     fill: #b3b3b3 !important;
     z-index: 5;
+}
+
+/*内容区*/
+.content {
+    width: 100%;
 }

@@ -21,7 +21,6 @@ import AddonImport from './AddonImport';
 import AddonInstall from './AddonInstall';
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
-import Hidden from 'material-ui/Hidden';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -37,6 +36,7 @@ import createHashHistory from 'history/createHashHistory';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 import { History } from 'history';
 import 'react-select/dist/react-select.css';
+import * as classNames from 'classnames';
 
 type State = {
     open: boolean,
@@ -51,15 +51,11 @@ type State = {
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
-    paperRoot: {
-        top: 70,
-        width: drawerWidth,
-    },
     drawerPaper: {
-        position: 'fixed',
-        height: '100%',
-        top: 70,
+        height: 'calc(100vh - 70px)',
         width: drawerWidth,
+        position: 'relative',
+        marginRight: 30,
         boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
@@ -67,9 +63,10 @@ const styles = (theme: Theme): StyleRules => ({
         }),
     },
     drawerPaperClose: {
-        width: 0,
+        width: 90,
+        marginRight: 30,
         overflowX: 'hidden',
-        top: 70,
+        position: 'relative',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -404,54 +401,39 @@ class App extends React.Component<Props, State> {
                                             </IconButton>
                                         </div>
                                     </div>
-                                    <Hidden mdUp>
-                                        <Drawer
-                                            type="temporary"
-                                            open={this.state.open}
-                                            onClose={this.toggleDrawer}
-                                            ModalProps={{
-                                                keepMounted: true, // Better open performance on mobile.
-                                            }}
-                                        >
-                                            <Side/>
-                                        </Drawer>
-                                    </Hidden>
-                                    <Hidden smDown implementation="css">
+                                    <div className="view">
                                         <Drawer
                                             type="persistent"
                                             classes={{
                                                 modal: classes.root,
-                                                paper: classes.drawerPaper,
-                                            }}
-                                            ModalProps={{
-                                                keepMounted: true,
+                                                paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                                             }}
                                             onClose={this.toggleDrawer}
                                             open={this.state.open}
                                         >
                                             <Side/>
                                         </Drawer>
-                                    </Hidden>
-                                    <div className="view">
-                                        <Switch>
-                                            <Route exact path="/configurations" component={Configurations}/>
-                                            <Route exact path="/home" component={Home}/>
-                                            <Route exact path="/seo" component={Seo}/>
-                                            <Route exact path="/upload" component={Upload}/>
-                                            <Route exact path="/menu" component={Menus}/>
-                                            <Route exact path="/menu/edit" component={MenuEdit}/>
-                                            <Route exact path="/mail" component={Mail}/>
-                                            <Route exact path="/debug" component={Debug}/>
-                                            <Route exact path="/extension" component={Extension}/>
-                                            <Route exact path="/module/open-module" component={ModuleOpen}/>
-                                            <Route exact path="/module/domain-config" component={ModuleDomain}/>
-                                            <Route exact path="/module/import-export" component={ModuleImport}/>
-                                            <Route exact path="/module/install" component={ModuleInstall}/>
-                                            <Route exact path="/addon/openAddon" component={AddonOpen}/>
-                                            <Route exact path="/addon/import-export" component={AddonImport}/>
-                                            <Route exact path="/addon/install" component={AddonInstall}/>
-                                            <Route path="/" render={() => (<Redirect to="/home"/>)}/>
-                                        </Switch>
+                                        <div className="content">
+                                            <Switch>
+                                                <Route exact path="/configurations" component={Configurations}/>
+                                                <Route exact path="/home" component={Home}/>
+                                                <Route exact path="/seo" component={Seo}/>
+                                                <Route exact path="/upload" component={Upload}/>
+                                                <Route exact path="/menu" component={Menus}/>
+                                                <Route exact path="/menu/edit" component={MenuEdit}/>
+                                                <Route exact path="/mail" component={Mail}/>
+                                                <Route exact path="/debug" component={Debug}/>
+                                                <Route exact path="/extension" component={Extension}/>
+                                                <Route exact path="/module/open-module" component={ModuleOpen}/>
+                                                <Route exact path="/module/domain-config" component={ModuleDomain}/>
+                                                <Route exact path="/module/import-export" component={ModuleImport}/>
+                                                <Route exact path="/module/install" component={ModuleInstall}/>
+                                                <Route exact path="/addon/openAddon" component={AddonOpen}/>
+                                                <Route exact path="/addon/import-export" component={AddonImport}/>
+                                                <Route exact path="/addon/install" component={AddonInstall}/>
+                                                <Route path="/" render={() => (<Redirect to="/home"/>)}/>
+                                            </Switch>
+                                        </div>
                                     </div>
                                 </div>
                             );
