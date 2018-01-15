@@ -2,8 +2,10 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
-import IconButton from 'material-ui/IconButton';
 import ModeEdit from 'material-ui-icons/ModeEdit';
+import IconButton from 'material-ui/IconButton';
+import Add from 'material-ui-icons/Add';
+import Cached from 'material-ui-icons/Cached';
 
 const styles = {
     root: {
@@ -13,6 +15,14 @@ const styles = {
         'display': 'flex',
         'flex-wrap': 'wrap',
         'margin': '0',
+    },
+    menuBtn: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#3f51b5',
+        'color': '#fff',
+        'margin-left': '10px',
     },
 };
 type State = {};
@@ -95,11 +105,23 @@ handleClickEdit = (pro: any) => {
 render() {
     // const getNodeKey = ({ treeIndex }: any) => treeIndex;
     return (
-        <div className="configurations">
+        <div className="top-action-module">
             <p className="crumbs">
                 CMS <b>/</b> 文章管理
             </p>
             <h4 className="title">分类管理</h4>
+            <div className="btn-group">
+                <IconButton
+                    className={this.props.classes.menuBtn}
+                >
+                    <Add />
+                </IconButton>
+                <IconButton
+                    className={this.props.classes.menuBtn}
+                >
+                    <Cached />
+                </IconButton>
+            </div>
             <Paper className={this.props.classes.root}>
                 <div className="menus-manager">
                     <SortableTree
