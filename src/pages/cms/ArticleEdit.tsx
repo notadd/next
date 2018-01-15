@@ -74,8 +74,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -97,8 +99,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -115,8 +119,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.img}
                                     />
                                 </FormControl>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -133,8 +139,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.type}
                                     />
                                 </FormControl>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -154,8 +162,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.abstract}
                                     />
                                 </FormControl>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -175,9 +185,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 <FormControlLabel
                                     label="隐藏"
                                     classes={{
-                                    root: this.props.classes.formLabel,
-                                    label: this.props.classes.formLabel
-                                }}
+                                        root: this.props.classes.formLabel,
+                                        label: this.props.classes.formLabel
+                                    }}
                                     className={this.props.classes.formControlMargin}
                                     control={
                                     <Switch
@@ -190,8 +200,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                 }
                                 />
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -208,8 +220,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.time}
                                     />
                                 </FormControl>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -226,8 +240,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.origin}
                                     />
                                 </FormControl>
-                                <FormControl fullWidth
-                                             className={this.props.classes.formControlMargin}>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}

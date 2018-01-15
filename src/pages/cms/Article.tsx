@@ -102,8 +102,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleClickEdit = (pro: any) => {
+        window.console.log(pro);
     }
     handleClickRemove = (pro: any) => {
+        window.console.log(pro);
     }
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
@@ -180,8 +182,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                             key={n.id}
                                         >
-                                            <TableCell padding="checkbox"
-                                                       className={this.props.classes.tableCellStatus}>
+                                            <TableCell
+                                                padding="checkbox"
+                                                className={this.props.classes.tableCellStatus}
+                                            >
                                                 <Checkbox
                                                     checked={n.check}
                                                     onChange={this.handleChange(n)}
