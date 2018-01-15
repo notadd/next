@@ -3,8 +3,10 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
+import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import ClearIcon from 'material-ui-icons/Clear';
 import ReplyAll from 'material-ui-icons/ReplyAll';
 import Cached from 'material-ui-icons/Cached';
 import Table, {
@@ -13,6 +15,11 @@ import Table, {
     TableHead,
     TableRow,
 } from 'material-ui/Table';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+} from 'material-ui/Dialog';
 
 const styles = {
     evenRow: {
@@ -84,6 +91,9 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         checkedAll: false,
         rowsPerPage: 2,
         currentPage: 0,
+        open: false,
+        modalId: '',
+        modalName: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -102,9 +112,6 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     handleClickEdit = (pro: any) => {
         window.console.log(pro);
     }
-    handleClickRemove = (pro: any) => {
-        window.console.log(pro);
-    }
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
         pro.check = true;
@@ -119,6 +126,19 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         this.setState({
             [pro]: event.target.checked,
         });
+    };
+    handleClickRemove = (pro: any) => {
+        this.state.modalName = pro.name;
+        this.state.modalId = pro.id;
+        this.setState({
+            open: true,
+        });
+    };
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleSubmit = () => {
+        this.setState({ open: false });
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -194,7 +214,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                 </IconButton>
                                                 <IconButton
                                                     className={this.props.classes.btnDelete}
-                                                    onClick={() => this.handleClickRemove(index)}
+                                                    onClick={() => this.handleClickRemove(n)}
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -219,6 +239,34 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         />
                     </div>
                 </Paper>
+                <Dialog
+                    open={this.state.open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={this.handleClose}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4>
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={this.handleClose}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleSubmit} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }
