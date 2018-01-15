@@ -19,6 +19,10 @@ import ModuleInstall from './ModuleInstall';
 import AddonOpen from './AddonOpen';
 import AddonImport from './AddonImport';
 import AddonInstall from './AddonInstall';
+
+import Article from './cms/Article';
+import ArticleEdit from './cms/ArticleEdit';
+
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
@@ -431,6 +435,8 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/addon/openAddon" component={AddonOpen}/>
                                                 <Route exact path="/addon/import-export" component={AddonImport}/>
                                                 <Route exact path="/addon/install" component={AddonInstall}/>
+                                                <Route exact path="/cms/article" component={Article}/>
+                                                <Route exact path="/cms/article/edit" component={ArticleEdit}/>
                                                 <Route path="/" render={() => (<Redirect to="/home"/>)}/>
                                             </Switch>
                                         </div>
