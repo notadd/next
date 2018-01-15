@@ -29,7 +29,7 @@ let ApplicationModule = class ApplicationModule {
             .forRoutes({ path: '/graphql', method: common_1.RequestMethod.ALL });
     }
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.graphql');
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.types.graphql');
         const schema = this.graphQLFactory.createSchema({ typeDefs });
         return this.graphQLFactory.createSchema({ typeDefs });
     }

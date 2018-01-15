@@ -1,0 +1,45 @@
+input UserInput {
+    # User id.
+    id: Int,
+    # User name.
+    username: String!,
+    # User email.
+    email: String!,
+    # User password.
+    password: String!,
+}
+
+type Query {
+    # This query get all users.
+    getUsers: [User],
+    # This query get user by id.
+    getUserById(id: Int): User,
+    # This query get user by email.
+    getUserByEmail(email: String): User,
+    # This query get user by username.
+    getUserByUsername(username: String): User,
+}
+
+type Mutation {
+    # This mutation create a user.
+    createUser(user: UserInput): User,
+    deleteUser(user: UserInput): Boolean,
+    deleteUserByEmail(email: String): Boolean,
+    deleteUserById(id: Int): Boolean,
+    deleteUserByUsername(username: String): Boolean,
+    updateUser(user: UserInput): Boolean,
+    updateUserByEmail(email: String, user: UserInput): Boolean,
+    updateUserById(id: Int, user: UserInput): Boolean,
+    updateUserByUsername(username: String, user: UserInput): Boolean,
+}
+
+type User {
+    # User id.
+    id: Int,
+    # User name.
+    username: String,
+    # User email.
+    email: String,
+    # User password.
+    password: String,
+}

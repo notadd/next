@@ -30,7 +30,7 @@ export class ApplicationModule {
     }
 
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.graphql');
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.types.graphql');
         const schema = this.graphQLFactory.createSchema({ typeDefs });
         return this.graphQLFactory.createSchema({ typeDefs });
     }

@@ -1,0 +1,12 @@
+input AuthInput {
+    username: String!,
+    password: String!,
+}
+
+type Query {
+    getAuthToken(auth: AuthInput): Auth,
+}
+
+type Auth {
+    token: String!,
+}
