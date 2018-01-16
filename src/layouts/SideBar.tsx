@@ -212,7 +212,6 @@ class SideBar extends React.Component<PropsWithStyles, State> {
         this.setState({
             open: nextProps['open']
         });
-        window.console.log(this.props);
     }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
@@ -254,7 +253,13 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     render() {
         return (
             <div className="sideBar">
-                <div className={classNames('userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox')}>
+                <div
+                    className={
+                        classNames(
+                            'userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox'
+                        )
+                    }
+                >
                     <div>
                         <Avatar
                             alt={this.state.user.name}
