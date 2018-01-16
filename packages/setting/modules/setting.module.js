@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const setting_entity_1 = require("../entities/setting.entity");
 const setting_resolvers_1 = require("../resolvers/setting.resolvers");
 const setting_service_1 = require("../services/setting.service");
 const typeorm_1 = require("@nestjs/typeorm");
-const setting_entity_1 = require("../entities/setting.entity");
 let SettingModule = class SettingModule {
 };
 SettingModule = __decorate([

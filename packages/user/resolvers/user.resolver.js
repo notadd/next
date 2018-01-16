@@ -18,11 +18,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
-const user_service_1 = require("../services/user.service");
-const user_delete_dto_1 = require("../dtos/user.delete.dto");
-const user_query_dto_1 = require("../dtos/user.query.dto");
 const common_1 = require("@nestjs/common");
 const authentication_1 = require("@notadd/authentication");
+const user_delete_dto_1 = require("../dtos/user.delete.dto");
+const user_query_dto_1 = require("../dtos/user.query.dto");
+const user_service_1 = require("../services/user.service");
 let UserResolver = class UserResolver {
     constructor(service) {
         this.service = service;

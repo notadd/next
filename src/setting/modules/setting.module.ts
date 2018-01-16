@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
+import { Setting } from "../entities/setting.entity";
 import { SettingResolvers } from "../resolvers/setting.resolvers";
 import { SettingService } from "../services/setting.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Setting } from "../entities/setting.entity";
 
 @Module({
     components: [

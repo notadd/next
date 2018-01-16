@@ -21,9 +21,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
 const setting_entity_1 = require("../entities/setting.entity");
-const typeorm_1 = require("typeorm");
-const typeorm_2 = require("@nestjs/typeorm");
 let SettingService = class SettingService {
     constructor(repository) {
         this.repository = repository;
@@ -70,7 +70,7 @@ let SettingService = class SettingService {
 };
 SettingService = __decorate([
     common_1.Component(),
-    __param(0, typeorm_2.InjectRepository(setting_entity_1.Setting)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(0, typeorm_1.InjectRepository(setting_entity_1.Setting)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SettingService);
 exports.SettingService = SettingService;

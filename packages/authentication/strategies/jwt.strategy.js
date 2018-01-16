@@ -18,9 +18,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
-const passport_jwt_1 = require("passport-jwt");
-const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../services/auth.service");
+const common_1 = require("@nestjs/common");
+const passport_jwt_1 = require("passport-jwt");
 let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
     constructor(service) {
         super({

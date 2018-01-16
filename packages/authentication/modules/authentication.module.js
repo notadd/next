@@ -6,11 +6,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const auth_resolvers_1 = require("../resolvers/auth.resolvers");
+const auth_service_1 = require("../services/auth.service");
+const common_1 = require("@nestjs/common");
 const jwt_strategy_1 = require("../strategies/jwt.strategy");
 const user_1 = require("@notadd/user");
-const auth_service_1 = require("../services/auth.service");
 let AuthenticationModule = class AuthenticationModule {
 };
 AuthenticationModule = __decorate([

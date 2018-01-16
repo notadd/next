@@ -19,8 +19,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const common_1 = require("@nestjs/common");
-const user_service_1 = require("@notadd/user/services/user.service");
 const crypto_1 = require("crypto");
+const user_service_1 = require("@notadd/user/services/user.service");
 let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;

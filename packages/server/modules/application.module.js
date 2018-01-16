@@ -9,16 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const backend_1 = require("@notadd/backend");
-const common_1 = require("@nestjs/common");
-const user_1 = require("@notadd/user");
-const graphql_1 = require("@nestjs/graphql");
-const apollo_server_express_1 = require("apollo-server-express");
 const authentication_1 = require("@notadd/authentication");
-const typeorm_1 = require("@nestjs/typeorm");
-const configuration_module_1 = require("../../configuration/modules/configuration.module");
+const backend_1 = require("@notadd/backend");
+const configuration_1 = require("@notadd/configuration");
+const apollo_server_express_1 = require("apollo-server-express");
+const graphql_1 = require("@nestjs/graphql");
 const logger_1 = require("@notadd/logger");
+const common_1 = require("@nestjs/common");
 const setting_1 = require("@notadd/setting");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_1 = require("@notadd/user");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -42,7 +42,7 @@ ApplicationModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot(),
             graphql_1.GraphQLModule,
-            configuration_module_1.ConfigurationModule,
+            configuration_1.ConfigurationModule,
             logger_1.LogModule,
             setting_1.SettingModule,
             backend_1.BackendModule,

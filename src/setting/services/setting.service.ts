@@ -1,7 +1,7 @@
 import { Component } from "@nestjs/common";
-import { Setting } from "../entities/setting.entity";
-import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Setting } from "../entities/setting.entity";
 
 @Component()
 export class SettingService {

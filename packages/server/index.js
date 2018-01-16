@@ -11,13 +11,13 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@notadd/core");
-const modules_1 = require("./modules");
-const common_1 = require("@nestjs/common");
 const express = require("express");
 const ip = require("ip");
+const modules_1 = require("./modules");
 const swagger_1 = require("@nestjs/swagger");
 const packages_1 = require("nestjs-flub/packages");
+const common_1 = require("@nestjs/common");
+const core_1 = require("@notadd/core");
 const cross = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');

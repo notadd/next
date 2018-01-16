@@ -17,8 +17,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
 const auth_service_1 = require("../services/auth.service");
+const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const user_guard_1 = require("../guards/user.guard");
 let AuthResolvers = class AuthResolvers {

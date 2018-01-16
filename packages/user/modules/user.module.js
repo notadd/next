@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const user_service_1 = require("../services/user.service");
-const user_resolver_1 = require("../resolvers/user.resolver");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entities/user.entity");
+const user_resolver_1 = require("../resolvers/user.resolver");
+const user_service_1 = require("../services/user.service");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);

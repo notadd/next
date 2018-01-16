@@ -1,8 +1,8 @@
 import { Logger, Module } from '@nestjs/common';
-import { UserService } from "../services/user.service";
-import { UserResolver } from "../resolvers/user.resolver";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "../entities/user.entity";
+import { UserResolver } from "../resolvers/user.resolver";
+import { UserService } from "../services/user.service";
 
 @Module({
     components: [

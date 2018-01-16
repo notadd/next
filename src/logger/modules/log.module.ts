@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
+import { Log } from "../entities/log.entity";
 import { LogResolvers } from "../resolvers/log.resolvers";
 import { LogService } from "../services/log.service";
+import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Log } from "../entities/log.entity";
 
 @Module({
     components: [

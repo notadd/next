@@ -1,8 +1,8 @@
 import { Component, Inject } from "@nestjs/common";
-import { User } from "../entities/user.entity";
-import { Repository } from "typeorm";
-import { UserCreateDto } from "../dtos/user.create.dto";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { User } from "../entities/user.entity";
+import { UserCreateDto } from "../dtos/user.create.dto";
 
 @Component()
 export class UserService {
