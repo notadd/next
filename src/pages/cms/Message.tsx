@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
-// import Collapse from 'material-ui/transitions/Collapse';
+import Collapse from 'material-ui/transitions/Collapse';
 import Table, {
     TableBody,
     TableCell,
@@ -51,11 +51,11 @@ function createData(collapse: boolean, name: string, phone: string, email: strin
 }
 
 const list = [
-    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
 ];
 
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -83,7 +83,12 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
-
+    handleClick = (pro: any) => {
+        pro.collapse = !pro.collapse;
+        this.setState({
+            [pro]: pro.collapse,
+        });
+    };
     render() {
         const { currentPage, rowsPerPage } = this.state;
         return (
@@ -96,9 +101,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus}>
-
-                                </TableCell>
+                                <TableCell className={this.props.classes.tableCellStatus} />
                                 <TableCell className={this.props.classes.tableCell} numeric>姓名</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>电话</TableCell>
                                 <TableCell className={this.props.classes.tableCell} numeric>邮箱</TableCell>
@@ -114,22 +117,29 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                             key={n.id}
                                         >
-                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                            <TableCell
+                                                className={this.props.classes.tableCell}
+                                                numeric
+                                                onClick={() => this.handleClick(n)}
+                                            >
                                                 {
                                                     n.collapse ?
-                                                        <KeyboardArrowRight
-                                                            style={{
-                                                                color: '#808080',
-                                                                width: 20,
-                                                                height: 20}}
-                                                        /> :
                                                         <ExpandMore
+                                                            style={{
+                                                                    color: '#808080',
+                                                                    width: 20,
+                                                                    height: 20}}
+                                                        /> :
+                                                        <KeyboardArrowRight
                                                             style={{
                                                                 color: '#808080',
                                                                 width: 20,
                                                                 height: 20}}
                                                         />
                                                 }
+                                                <Collapse in={n.collapse} timeout="auto" unmountOnExit>
+                                                    11
+                                                </Collapse>
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
                                                 {n.name}
