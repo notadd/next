@@ -97,7 +97,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         const { currentPage, rowsPerPage } = this.state;
         return (
-            <div className="top-action-module cms">
+            <div className="top-action-module">
                 <p className="crumbs">
                     CMS / 页面管理
                 </p>

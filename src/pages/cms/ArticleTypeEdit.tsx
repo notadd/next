@@ -86,8 +86,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('typeName')}
                                         value={this.state.typeName}
                                     />
@@ -105,8 +105,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('otherName')}
                                         value={this.state.otherName}
                                     />
@@ -126,8 +126,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('link')}
                                         value={this.state.link}
                                     />
@@ -145,8 +145,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('description')}
                                         value={this.state.description}
                                     />
@@ -166,8 +166,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('color')}
                                         value={this.state.color}
                                     />

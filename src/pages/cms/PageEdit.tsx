@@ -88,8 +88,8 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('name')}
                                         value={this.state.name}
                                     />
@@ -114,8 +114,8 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('otherName')}
                                         value={this.state.otherName}
                                     />
@@ -134,8 +134,8 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('type')}
                                         value={this.state.type}
                                     />
@@ -143,9 +143,9 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <FormControlLabel
                                     label="开启"
                                     classes={{
-                                            root: this.props.classes.formLabel,
-                                            label: this.props.classes.formLabel
-                                        }}
+                                        root: this.props.classes.formLabel,
+                                        label: this.props.classes.formLabel
+                                    }}
                                     className={this.props.classes.formControlMargin}
                                     control={
                                         <Switch
