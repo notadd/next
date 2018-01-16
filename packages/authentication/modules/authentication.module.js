@@ -10,7 +10,6 @@ const common_1 = require("@nestjs/common");
 const auth_resolvers_1 = require("../resolvers/auth.resolvers");
 const jwt_strategy_1 = require("../strategies/jwt.strategy");
 const user_1 = require("@notadd/user");
-const user_service_1 = require("@notadd/user/services/user.service");
 const auth_service_1 = require("../services/auth.service");
 let AuthenticationModule = class AuthenticationModule {
 };
@@ -20,10 +19,6 @@ AuthenticationModule = __decorate([
             auth_resolvers_1.AuthResolvers,
             auth_service_1.AuthService,
             jwt_strategy_1.JwtStrategy,
-            user_service_1.UserService,
-        ],
-        exports: [
-            auth_service_1.AuthService,
         ],
         imports: [
             common_1.forwardRef(() => user_1.UserModule),
