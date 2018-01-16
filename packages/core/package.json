@@ -25,7 +25,7 @@
         "@nestjs/microservices": "^4.0.0",
         "@nestjs/swagger": "^1.1.2",
         "@nestjs/testing": "^4.0.0",
-        "@nestjs/typeorm": "^1.0.0",
+        "@nestjs/typeorm": "^2.0.0",
         "@nestjs/websockets": "^4.0.0",
         "apollo-server-express": "^1.2.0",
         "class-transformer": "^0.1.8",
