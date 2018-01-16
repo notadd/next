@@ -1,9 +1,8 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./common.module"));
-__export(require("./database.module"));
-__export(require("./log.module"));
-__export(require("./setting.module"));
+var common_module_1 = require("./common.module");
+exports.CommonModule = common_module_1.CommonModule;
+var log_module_1 = require("./log.module");
+exports.LogModule = log_module_1.LogModule;
+var setting_module_1 = require("./setting.module");
+exports.SettingModule = setting_module_1.SettingModule;

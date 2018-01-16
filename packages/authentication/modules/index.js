@@ -1,6 +1,4 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./authentication.module"));
+var authentication_module_1 = require("./authentication.module");
+exports.AuthenticationModule = authentication_module_1.AuthenticationModule;

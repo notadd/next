@@ -1,7 +1,6 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./log.resolvers"));
-__export(require("./setting.resolvers"));
+var log_resolvers_1 = require("./log.resolvers");
+exports.LogResolvers = log_resolvers_1.LogResolvers;
+var setting_resolvers_1 = require("./setting.resolvers");
+exports.SettingResolvers = setting_resolvers_1.SettingResolvers;

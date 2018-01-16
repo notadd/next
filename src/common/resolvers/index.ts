@@ -1,2 +1,2 @@
-export * from './log.resolvers';
-export * from './setting.resolvers';
+export { LogResolvers } from './log.resolvers';
+export { SettingResolvers } from './setting.resolvers';

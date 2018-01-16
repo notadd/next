@@ -1,10 +1,10 @@
 import { NotaddFactory } from '@notadd/core';
-import { ApplicationModule } from './modules/application.module';
+import { ApplicationModule } from "./modules";
 import { Logger, ValidationPipe } from '@nestjs/common';
+import * as express from 'express';
 import * as ip from 'ip';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { FlubErrorHandler } from 'nestjs-flub/packages';
-import * as express from 'express';
 
 const cross = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

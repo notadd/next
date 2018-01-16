@@ -1,7 +1,6 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./user.entity.subscriber"));
-__export(require("./user.entity"));
+var user_entity_subscriber_1 = require("./user.entity.subscriber");
+exports.UserSubscriber = user_entity_subscriber_1.UserSubscriber;
+var user_entity_1 = require("./user.entity");
+exports.User = user_entity_1.User;

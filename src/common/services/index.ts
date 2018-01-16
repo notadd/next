@@ -1,3 +1,3 @@
-export * from './configuration.service';
-export * from './log.service';
-export * from './setting.service';
+export { ConfigurationService } from './configuration.service';
+export { LogService } from './log.service';
+export { SettingService } from './setting.service';

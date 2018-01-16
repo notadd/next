@@ -12,12 +12,12 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@notadd/core");
-const application_module_1 = require("./modules/application.module");
+const modules_1 = require("./modules");
 const common_1 = require("@nestjs/common");
+const express = require("express");
 const ip = require("ip");
 const swagger_1 = require("@nestjs/swagger");
 const packages_1 = require("nestjs-flub/packages");
-const express = require("express");
 const cross = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -34,7 +34,7 @@ function bootstrap() {
         const index = process.argv.indexOf('--port');
         const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
-        const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule);
+        const application = yield core_1.NotaddFactory.create(modules_1.ApplicationModule);
         application.use(express.static(process.cwd() + '/public/'));
         application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());

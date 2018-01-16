@@ -1,7 +1,6 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./backend.guard"));
-__export(require("./user.guard"));
+var backend_guard_1 = require("./backend.guard");
+exports.BackendGuard = backend_guard_1.BackendGuard;
+var user_guard_1 = require("./user.guard");
+exports.UserGuard = user_guard_1.UserGuard;

@@ -1,4 +1,3 @@
-export * from './common.module';
-export * from './database.module';
-export * from './log.module';
-export * from './setting.module';
+export { CommonModule } from './common.module';
+export { LogModule } from './log.module';
+export { SettingModule } from './setting.module';

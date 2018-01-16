@@ -1,8 +1,8 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./configuration.service"));
-__export(require("./log.service"));
-__export(require("./setting.service"));
+var configuration_service_1 = require("./configuration.service");
+exports.ConfigurationService = configuration_service_1.ConfigurationService;
+var log_service_1 = require("./log.service");
+exports.LogService = log_service_1.LogService;
+var setting_service_1 = require("./setting.service");
+exports.SettingService = setting_service_1.SettingService;

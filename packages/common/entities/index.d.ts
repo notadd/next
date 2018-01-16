@@ -1,2 +1,2 @@
-export * from './log.entity';
-export * from './setting.entity';
+export { Log } from './log.entity';
+export { Setting } from './setting.entity';

@@ -1,9 +1,10 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./user.create.dto"));
-__export(require("./user.delete.dto"));
-__export(require("./user.query.dto"));
-__export(require("./user.update.dto"));
+var user_create_dto_1 = require("./user.create.dto");
+exports.UserCreateDto = user_create_dto_1.UserCreateDto;
+var user_delete_dto_1 = require("./user.delete.dto");
+exports.UserDeleteDto = user_delete_dto_1.UserDeleteDto;
+var user_query_dto_1 = require("./user.query.dto");
+exports.UserQueryDto = user_query_dto_1.UserQueryDto;
+var user_update_dto_1 = require("./user.update.dto");
+exports.UserUpdateDto = user_update_dto_1.UserUpdateDto;
