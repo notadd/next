@@ -22,12 +22,11 @@ export async function bootstrap() {
     const index = process.argv.indexOf('--port');
     const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
     const address = `http://${ip.address()}:${port}`;
-    const server = express();
-    server.use(express.static(process.cwd() + '/public/'));
     /**
      * @type { INestApplication }
      */
-    const application = await NotaddFactory.create(ApplicationModule, server);
+    const application = await NotaddFactory.create(ApplicationModule);
+    application.use(express.static(process.cwd() + '/public/'));
     application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
     application.useGlobalPipes(new ValidationPipe());

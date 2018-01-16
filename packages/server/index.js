@@ -34,9 +34,8 @@ function bootstrap() {
         const index = process.argv.indexOf('--port');
         const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
-        const server = express();
-        server.use(express.static(process.cwd() + '/public/'));
-        const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule, server);
+        const application = yield core_1.NotaddFactory.create(application_module_1.ApplicationModule);
+        application.use(express.static(process.cwd() + '/public/'));
         application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
         application.useGlobalPipes(new common_1.ValidationPipe());
