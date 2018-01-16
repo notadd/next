@@ -2,22 +2,18 @@
     font-size: 12px;
     color: #808080;
 }
-
 .table-head tr {
     height: 50px;
 }
-
 .table-head tr th {
     font-size: 12px !important;
     color: #808080 !important;
 }
-
-.table-body {
+.table-body{
     font-size: 12px !important;
     color: #808080 !important;
 }
-
-.table-body .table-check-box {
+.table-body .table-check-box{
     width: inherit;
     height: inherit;
 }

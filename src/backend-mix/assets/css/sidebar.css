@@ -1,10 +1,8 @@
 .sideBar {
     color: #9ea7b4 !important;
-    width: 260px;
-    height: 100%;
-    min-height: calc(~"100% - 70px");
-    position: fixed;
-    background-color: #fff;
+    width: inherit;
+    height: inherit;
+    background-color: #ffffff;
     box-shadow: 3px 0 15px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -25,13 +23,43 @@
 }
 
 .sideBar .userBox {
-    background: url("../images/userbg.png") #000 no-repeat center center;
+    background: url("../images/userbg.png") #000000 no-repeat center center;
     height: 139px;
+    margin-bottom: 20px;
+}
+
+.userBox .bigAvatar {
+    width: 50px;
+    height: 50px;
+    margin-top: 35px;
+    margin-right: 20px;
+}
+.sideBar .userBox > div {
+    background: rgba(0, 0, 0, 0.5);
+    height: inherit;
+    display: flex;
+    justify-content: center;
+}
+.sideBar .small-userBox {
+    background: none;
+    height: 90px;
+}
+.sideBar .small-userBox > div {
+    align-items: center;
+    background: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+.sideBar .small-userBox .bigAvatar {
+    margin: 0;
 }
 
 .sideBar .user-right {
-    color: #fff;
+    color: #ffffff;
     margin-top: 39px;
+}
+
+.small-userBox .user-right {
+    display: none;
 }
 
 .sideBar p:nth-child(2) {
@@ -74,9 +102,9 @@
 .sideBar .selectFirstLevelMenu h3,
 .sideBar .innerRootSelect h3,
 .sideBar a.innerSelectBtn h3 {
-    color: #333;
+    color: #333333;
 }
 
 .sideBar > div > h3 {
-    color: #333;
+    color: #333333;
 }
