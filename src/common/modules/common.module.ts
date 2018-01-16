@@ -9,7 +9,7 @@ import { SettingModule } from "./setting.module";
         ConfigurationService,
     ],
     modules: [
-        DatabaseModule,
+        // DatabaseModule,
         LogModule,
         SettingModule,
     ],

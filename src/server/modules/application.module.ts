@@ -6,9 +6,11 @@ import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { MiddlewaresConsumer } from '@nestjs/common/interfaces/middlewares';
 import { CommonModule } from '@notadd/common';
 import { AuthenticationModule } from '@notadd/authentication';
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
     imports: [
+        TypeOrmModule.forRoot(),
         CommonModule,
         GraphQLModule,
         BackendModule,

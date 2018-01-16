@@ -1,14 +1,17 @@
 import { Component, Inject } from "@nestjs/common";
 import { Setting } from "../entities/setting.entity";
 import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Component()
 export class SettingService {
     /**
      * @param { Repository<Setting> } repository
      */
-    constructor(@Inject('SettingRepositoryToken')
-                private readonly repository: Repository<Setting>,) {
+    constructor(
+        @InjectRepository(Setting)
+        private readonly repository: Repository<Setting>,
+    ) {
     }
 
     /**

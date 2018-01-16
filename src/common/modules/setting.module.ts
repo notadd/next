@@ -1,12 +1,11 @@
 import { Module } from "@nestjs/common";
-import { settingRepositoryProvider } from "../providers/settingRepository.provider";
 import { SettingResolvers } from "../resolvers/setting.resolvers";
 import { SettingService } from "../services/setting.service";
-import { DatabaseModule } from "./database.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Setting } from "../entities/setting.entity";
 
 @Module({
     components: [
-        ...settingRepositoryProvider,
         SettingResolvers,
         SettingService,
     ],
@@ -14,7 +13,7 @@ import { DatabaseModule } from "./database.module";
         SettingService,
     ],
     imports: [
-        DatabaseModule,
+        TypeOrmModule.forFeature([Setting]),
     ]
 })
 export class SettingModule {

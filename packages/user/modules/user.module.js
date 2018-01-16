@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("../services/user.service");
-const database_module_1 = require("@notadd/common/modules/database.module");
-const repository_provider_1 = require("../providers/repository.provider");
 const user_resolver_1 = require("../resolvers/user.resolver");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("../entities/user.entity");
 let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
@@ -22,16 +22,14 @@ let UserModule = class UserModule {
 UserModule = __decorate([
     common_1.Module({
         components: [
-            ...repository_provider_1.repositoryProvider,
             user_resolver_1.UserResolver,
             user_service_1.UserService,
         ],
         exports: [
-            ...repository_provider_1.repositoryProvider,
             user_service_1.UserService,
         ],
         imports: [
-            database_module_1.DatabaseModule,
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User])
         ],
     }),
     __metadata("design:paramtypes", [])

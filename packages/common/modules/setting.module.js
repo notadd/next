@@ -7,16 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const settingRepository_provider_1 = require("../providers/settingRepository.provider");
 const setting_resolvers_1 = require("../resolvers/setting.resolvers");
 const setting_service_1 = require("../services/setting.service");
-const database_module_1 = require("./database.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const setting_entity_1 = require("../entities/setting.entity");
 let SettingModule = class SettingModule {
 };
 SettingModule = __decorate([
     common_1.Module({
         components: [
-            ...settingRepository_provider_1.settingRepositoryProvider,
             setting_resolvers_1.SettingResolvers,
             setting_service_1.SettingService,
         ],
@@ -24,7 +23,7 @@ SettingModule = __decorate([
             setting_service_1.SettingService,
         ],
         imports: [
-            database_module_1.DatabaseModule,
+            typeorm_1.TypeOrmModule.forFeature([setting_entity_1.Setting]),
         ]
     })
 ], SettingModule);

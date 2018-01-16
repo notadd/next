@@ -22,6 +22,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
+const log_entity_1 = require("../entities/log.entity");
+const typeorm_2 = require("@nestjs/typeorm");
 let LogService = class LogService {
     constructor(repository) {
         this.repository = repository;
@@ -44,7 +46,7 @@ let LogService = class LogService {
 };
 LogService = __decorate([
     common_1.Component(),
-    __param(0, common_1.Inject('LogRepositoryToken')),
+    __param(0, typeorm_2.InjectRepository(log_entity_1.Log)),
     __metadata("design:paramtypes", [typeorm_1.Repository])
 ], LogService);
 exports.LogService = LogService;

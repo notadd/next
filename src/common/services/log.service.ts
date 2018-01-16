@@ -1,6 +1,7 @@
 import { Component, Inject } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { Log } from "../entities/log.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Component()
 export class LogService {
@@ -8,7 +9,7 @@ export class LogService {
      * @param { Repository<Log> } repository
      */
     constructor(
-        @Inject('LogRepositoryToken')
+        @InjectRepository(Log)
         private readonly repository: Repository<Log>,
     ) {
     }

@@ -1,12 +1,11 @@
 import { Module } from "@nestjs/common";
-import { logRepositoryProvider } from "../providers/logRepositoy.provider";
 import { LogResolvers } from "../resolvers/log.resolvers";
 import { LogService } from "../services/log.service";
-import { DatabaseModule } from "./database.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Log } from "../entities/log.entity";
 
 @Module({
     components: [
-        ...logRepositoryProvider,
         LogResolvers,
         LogService,
     ],
@@ -14,7 +13,7 @@ import { DatabaseModule } from "./database.module";
         LogService,
     ],
     imports: [
-        DatabaseModule,
+        TypeOrmModule.forFeature([Log]),
     ],
 })
 export class LogModule {
