@@ -6,7 +6,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import Collapse from 'material-ui/transitions/Collapse';
 import Table, {
-    TableBody,
+    // TableBody,
     TableCell,
     TableHead,
     TableRow,
@@ -44,20 +44,6 @@ type State = {
     modalName: string,
 };
 
-let id = 0;
-function createData(collapse: boolean, name: string, phone: string, email: string, time: string, msg: string) {
-    id += 1;
-    return { id, collapse, name, phone, email, time, msg };
-}
-
-const list = [
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-];
-
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
@@ -66,6 +52,53 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
         open: false,
         modalId: '',
         modalName: '',
+        lists: [
+            {
+                id: 1,
+                collapse: false,
+                name: '王先生',
+                phone: '13999554621',
+                email: 'ibenchu@qq.com',
+                time: '2017-12-01 13:34:35',
+                msg: '你好，我对贵公司的产品很有兴趣',
+            },
+            {
+                id: 2,
+                collapse: false,
+                name: '王先生',
+                phone: '13999554621',
+                email: 'ibenchu@qq.com',
+                time: '2017-12-01 13:34:35',
+                msg: '你好，我对贵公司的产品很有兴趣',
+            },
+            {
+                id: 3,
+                collapse: false,
+                name: '王先生',
+                phone: '13999554621',
+                email: 'ibenchu@qq.com',
+                time: '2017-12-01 13:34:35',
+                msg: '你好，我对贵公司的产品很有兴趣',
+            },
+            {
+                id: 4,
+                collapse: false,
+                name: '王先生',
+                phone: '13999554621',
+                email: 'ibenchu@qq.com',
+                time: '2017-12-01 13:34:35',
+                msg: '你好，我对贵公司的产品很有兴趣',
+            },
+            {
+                id: 5,
+                collapse: false,
+                name: '王先生',
+                phone: '13999554621',
+                email: 'ibenchu@qq.com',
+                time: '2017-12-01 13:34:35',
+                msg: '你好，我对贵公司的产品很有兴趣',
+            },
+        ],
     };
     handleClickRemove = (pro: any) => {
         this.state.modalName = pro.name;
@@ -90,13 +123,13 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, lists } = this.state;
         return (
-            <div className="top-action-module">
+            <div className="top-action-module cms-message">
                 <p className="crumbs">
-                    CMS / 页面管理
+                    CMS / 信息管理
                 </p>
-                <h4 className="title">全部页面</h4>
+                <h4 className="title">客户留言</h4>
                 <Paper className={this.props.classes.root}>
                     <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
@@ -108,27 +141,26 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <TableCell className={this.props.classes.tableCell} numeric>时间</TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                    return (
-                                        <TableRow
-                                            hover
+                    </Table>
+                    <ul className="table-body">
+                        {lists.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                            .map((n, index) => {
+                                return (
+                                    <li key={n.id}>
+                                        <div
                                             className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                            key={n.id}
                                         >
-                                            <TableCell
+                                            <div
                                                 className={this.props.classes.tableCell}
-                                                numeric
                                                 onClick={() => this.handleClick(n)}
                                             >
                                                 {
                                                     n.collapse ?
                                                         <ExpandMore
                                                             style={{
-                                                                    color: '#808080',
-                                                                    width: 20,
-                                                                    height: 20}}
+                                                                color: '#808080',
+                                                                width: 20,
+                                                                height: 20}}
                                                         /> :
                                                         <KeyboardArrowRight
                                                             style={{
@@ -137,34 +169,39 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                                 height: 20}}
                                                         />
                                                 }
-                                                <Collapse in={n.collapse} timeout="auto" unmountOnExit>
-                                                    11
-                                                </Collapse>
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                            </div>
+                                            <div className={this.props.classes.tableCell}>
                                                 {n.name}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                            </div>
+                                            <div className={this.props.classes.tableCell}>
                                                 {n.phone}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                            </div>
+                                            <div className={this.props.classes.tableCell}>
                                                 {n.email}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                            </div>
+                                            <div className={this.props.classes.tableCell}>
                                                 {n.time}
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
+                                            </div>
+                                        </div>
+                                        <Collapse
+                                            in={n.collapse}
+                                            timeout="auto"
+                                            unmountOnExit
+                                            className="collapse-msg"
+                                        >
+                                            留言：{n.msg}
+                                        </Collapse>
+                                    </li>
+                                );
+                            })}
+                    </ul>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={list.length / rowsPerPage}
+                            pageCount={lists.length / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
