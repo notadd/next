@@ -9,6 +9,8 @@ import Notifications from 'material-ui-icons/Notifications';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import * as classNames from 'classnames';
 import Badge from 'material-ui/Badge';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
@@ -63,6 +65,7 @@ type State = {
 interface Props {
     history?: History;
     open: boolean;
+    width: string;
 }
 
 type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
@@ -209,6 +212,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
         this.setState({
             open: nextProps['open']
         });
+        window.console.log(this.props);
     }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
@@ -250,7 +254,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     render() {
         return (
             <div className="sideBar">
-                <div className="userBox small-userBox">
+                <div className={classNames('userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox')}>
                     <div>
                         <Avatar
                             alt={this.state.user.name}
@@ -473,4 +477,4 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     }
 }
 
-export default withStyles(styles)<Props>(SideBar);
+export default compose(withStyles(styles), withWidth())(SideBar);
