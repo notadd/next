@@ -2,6 +2,9 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
+import ExpandMore from 'material-ui-icons/ExpandMore';
+import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
+// import Collapse from 'material-ui/transitions/Collapse';
 import Table, {
     TableBody,
     TableCell,
@@ -30,6 +33,7 @@ const styles = {
         'padding-right': '0',
         'width': '40px',
     },
+    menuBtn: {},
 };
 type State = {
     checkedAll: boolean,
@@ -41,17 +45,17 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: string, phone: string, email: string, time: string, msg: string) {
+function createData(collapse: boolean, name: string, phone: string, email: string, time: string, msg: string) {
     id += 1;
-    return { id, check, name, phone, email, time, msg };
+    return { id, collapse, name, phone, email, time, msg };
 }
 
 const list = [
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
-    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(true, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
 ];
 
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -62,20 +66,6 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
         open: false,
         modalId: '',
         modalName: '',
-    };
-    handleChangeAll = (name: any) => (event: any) => {
-        if (event.target.checked) {
-            list.map(item => {
-                item.check = true;
-            });
-        } else {
-            list.map(item => {
-                item.check = false;
-            });
-        }
-        this.setState({
-            [name]: event.target.checked,
-        });
     };
     handleClickRemove = (pro: any) => {
         this.state.modalName = pro.name;
@@ -125,7 +115,21 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             key={n.id}
                                         >
                                             <TableCell className={this.props.classes.tableCell} numeric>
-
+                                                {
+                                                    n.collapse ?
+                                                        <KeyboardArrowRight
+                                                            style={{
+                                                                color: '#808080',
+                                                                width: 20,
+                                                                height: 20}}
+                                                        /> :
+                                                        <ExpandMore
+                                                            style={{
+                                                                color: '#808080',
+                                                                width: 20,
+                                                                height: 20}}
+                                                        />
+                                                }
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
                                                 {n.name}
