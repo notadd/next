@@ -32,6 +32,7 @@ import Message from './cms/Message';
 
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
+import Hidden from 'material-ui/Hidden';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -65,27 +66,30 @@ const styles = (theme: Theme): StyleRules => ({
         width: drawerWidth,
         position: 'relative',
         boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: 300,
-        }),
+        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+    },
+    xsDrawerPaper: {
+        height: 'calc(100vh - 70px)',
+        width: drawerWidth,
+        position: 'fixed',
+        zIndex: 500,
+        top: 70,
+        boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
+        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
     drawerPaperClose: {
         width: 90,
         overflowX: 'hidden',
         position: 'relative',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: 300,
-        }),
         transform: 'translateX(0) !important',
+        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
-    header: {
-        'align-items': 'center',
-        background: '#3f51b5',
-        boxShadow: '0px 1px 4px 0 rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        'justify-content': 'space-between',
+    xsDrawerPaperClose: {
+        width: 0,
+        overflowX: 'hidden',
+        position: 'fixed',
+        zIndex: 500,
+        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
     headerLeft: {
         'align-items': 'center',
@@ -302,7 +306,7 @@ class App extends React.Component<Props, State> {
                         children={() => {
                             return (
                                 <div className="main-view">
-                                    <div className={this.props.classes.header}>
+                                    <div className="header">
                                         <div className={this.props.classes.headerLeft}>
                                             <Link to="/home">
                                                 <img
@@ -411,18 +415,35 @@ class App extends React.Component<Props, State> {
                                         </div>
                                     </div>
                                     <div className="view">
-                                        <Drawer
-                                            type="persistent"
-                                            classes={{
-                                                modal: classes.root,
-                                                paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                                            }}
-                                            onClose={this.toggleDrawer}
-                                            open={this.state.open}
-                                        >
-                                            <Side open={this.state.open}/>
-                                        </Drawer>
-                                        <div className="content">
+                                        <Hidden smUp implementation="css">
+                                            <Drawer
+                                                type="persistent"
+                                                classes={{
+                                                    modal: classes.root,
+                                                    docked: classNames(classes.xsDrawerPaper, !this.state.open && classes.xsDrawerPaperClose),
+                                                    paper: classNames(classes.xsDrawerPaper, !this.state.open && classes.xsDrawerPaperClose),
+                                                }}
+                                                onClose={this.toggleDrawer}
+                                                open={this.state.open}
+                                            >
+                                                <Side open={this.state.open}/>
+                                            </Drawer>
+                                        </Hidden>
+                                        <Hidden smDown implementation="css">
+                                            <Drawer
+                                                type="persistent"
+                                                classes={{
+                                                    modal: classes.root,
+                                                    docked: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                                                    paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                                                }}
+                                                onClose={this.toggleDrawer}
+                                                open={this.state.open}
+                                            >
+                                                <Side open={this.state.open}/>
+                                            </Drawer>
+                                        </Hidden>
+                                        <div className={classNames('content', this.state.open && 'move-content')}>
                                             <Switch>
                                                 <Route exact path="/configurations" component={Configurations}/>
                                                 <Route exact path="/home" component={Home}/>

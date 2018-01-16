@@ -9,6 +9,8 @@ import Notifications from 'material-ui-icons/Notifications';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import * as classNames from 'classnames';
 import Badge from 'material-ui/Badge';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
@@ -16,12 +18,6 @@ import { History } from 'history';
 import Icon from 'material-ui/Icon';
 
 const styles = {
-    bigAvatar: {
-        'width': '50px',
-        'height': '50px',
-        'margin-top': '35px',
-        'margin-right': '20px',
-    },
     badge: {
         'box-sizing': 'border-box',
         'border': '2px solid #fff',
@@ -64,11 +60,13 @@ type State = {
     navs: any;
     navsCms: any,
     user: User;
+    open: boolean,
 };
 
 interface Props {
-    history?: History,
-    open: boolean,
+    history?: History;
+    open: boolean;
+    width: string;
 }
 
 type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
@@ -271,14 +269,21 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                     ]
                 },
             ],
+            open: props.open,
             user: {
                 name: '管理员',
                 email: 'zhhu_123@163.com',
                 user_img: require('../assets/images/user.jpg'),
                 message: 5,
             },
-        }
-    };
+        };
+    }
+    componentWillReceiveProps(nextProps: object) {
+        this.setState({
+            open: nextProps['open']
+        });
+        window.console.log(this.props);
+    }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
         if (user === null) {
@@ -319,19 +324,12 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     render() {
         return (
             <div className="sideBar">
-                <div className="userBox">
-                    <div
-                        style={{
-                            background: 'rgba(0, 0, 0, 0.5)',
-                            height: 'inherit',
-                            display: 'flex',
-                            justifyContent: 'center'
-                        }}
-                    >
+                <div className={classNames('userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox')}>
+                    <div>
                         <Avatar
                             alt={this.state.user.name}
                             src={this.state.user.user_img}
-                            className={this.props.classes.bigAvatar}
+                            className="bigAvatar"
                         />
                         <div className="user-right">
                             <p>{this.state.user.name}</p>
@@ -494,34 +492,40 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                         style={{borderBottom: '1px solid #e0e0e0'}}
                                                                     >
                                                                         {
-                                                                            child.children.map((inner: any, innertIndex: number) => {
-                                                                                return (
-                                                                                    <NavLink
-                                                                                        to={inner.path}
-                                                                                        className={
-                                                                                            this.props.classes.innerRoot
-                                                                                        }
-                                                                                        activeClassName={
-                                                                                            classNames(
-                                                                                                this.
-                                                                                                props.
-                                                                                                classes.innerSelectBtn,
-                                                                                                'innerSelectBtn'
-                                                                                            )
-                                                                                        }
-                                                                                        key={
-                                                                                            index.toString()
-                                                                                            + childIndex
-                                                                                            + innertIndex
-                                                                                        }
-                                                                                    >
-                                                                                        <ListItemText
-                                                                                            style={{paddingLeft: 78}}
-                                                                                            inset
-                                                                                            primary={inner.name}
-                                                                                        />
-                                                                                    </NavLink>
-                                                                                );
+                                                                            child.children.map(
+                                                                                (inner: any, innertIndex: number) => {
+                                                                                    return (
+                                                                                        <NavLink
+                                                                                            to={inner.path}
+                                                                                            className={
+                                                                                                this.props
+                                                                                                    .classes
+                                                                                                    .innerRoot
+                                                                                            }
+                                                                                            activeClassName={
+                                                                                                classNames(
+                                                                                                    this.
+                                                                                                    props.
+                                                                                                    classes
+                                                                                                        .innerSelectBtn,
+                                                                                                    'innerSelectBtn'
+                                                                                                )
+                                                                                            }
+                                                                                            key={
+                                                                                                index.toString()
+                                                                                                + childIndex
+                                                                                                + innertIndex
+                                                                                            }
+                                                                                        >
+                                                                                            <ListItemText
+                                                                                                style={{
+                                                                                                    paddingLeft: 78
+                                                                                                }}
+                                                                                                inset
+                                                                                                primary={inner.name}
+                                                                                            />
+                                                                                        </NavLink>
+                                                                                    );
                                                                             })
                                                                         }
                                                                     </List>
@@ -543,4 +547,4 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     }
 }
 
-export default withStyles(styles)<Props>(SideBar);
+export default compose(withStyles(styles), withWidth())(SideBar);

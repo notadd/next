@@ -4834,17 +4834,17 @@ react-scrollbar-size@^2.0.2:
     prop-types "^15.5.10"
     react-event-listener "^0.5.0"
 
-react-select@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.2.0.tgz#4f91df941c4ecdb94701faca2533b60e31d7508e"
+react-select@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.2.1.tgz#a2fe58a569eb14dcaa6543816260b97e538120d1"
   dependencies:
     classnames "^2.2.4"
     prop-types "^15.5.8"
     react-input-autosize "^2.1.2"
 
-react-sortable-tree@^1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/react-sortable-tree/-/react-sortable-tree-1.5.4.tgz#b5f18e117cf0fdb98197adda75989425d7f36520"
+react-sortable-tree@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-sortable-tree/-/react-sortable-tree-1.6.0.tgz#8842858866f6b5c35c0ca21f0ccc13594cd1ac17"
   dependencies:
     lodash.isequal "^4.4.0"
     prop-types "^15.6.0"

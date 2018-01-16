@@ -1,6 +1,7 @@
 @import "../iconfont/material-icons.css";
 @import "reset.css";
 @import "public.css";
+@import "header.css";
 @import "sidebar.css";
 @import "main-view.css";
 @import "configurations.css";
