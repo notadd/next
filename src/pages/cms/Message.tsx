@@ -5,12 +5,6 @@ import Paper from 'material-ui/Paper';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import Collapse from 'material-ui/transitions/Collapse';
-import Table, {
-    // TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-} from 'material-ui/Table';
 
 const styles = {
     evenRow: {
@@ -18,20 +12,6 @@ const styles = {
     },
     root: {
         'padding': '40px 30px',
-    },
-    table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
-    },
-    tableCell: {
-        'text-align': 'left',
-        'padding': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '0',
-        'padding-right': '0',
-        'width': '40px',
     },
     menuBtn: {},
 };
@@ -47,16 +27,16 @@ type State = {
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
-        rowsPerPage: 2,
+        rowsPerPage: 4,
         currentPage: 0,
         open: false,
         modalId: '',
         modalName: '',
-        lists: [
+        list: [
             {
                 id: 1,
                 collapse: false,
-                name: '王先生',
+                name: '王先生1',
                 phone: '13999554621',
                 email: 'ibenchu@qq.com',
                 time: '2017-12-01 13:34:35',
@@ -65,7 +45,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
             {
                 id: 2,
                 collapse: false,
-                name: '王先生',
+                name: '王先生2',
                 phone: '13999554621',
                 email: 'ibenchu@qq.com',
                 time: '2017-12-01 13:34:35',
@@ -74,7 +54,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
             {
                 id: 3,
                 collapse: false,
-                name: '王先生',
+                name: '王先生3',
                 phone: '13999554621',
                 email: 'ibenchu@qq.com',
                 time: '2017-12-01 13:34:35',
@@ -83,7 +63,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
             {
                 id: 4,
                 collapse: false,
-                name: '王先生',
+                name: '王先生4',
                 phone: '13999554621',
                 email: 'ibenchu@qq.com',
                 time: '2017-12-01 13:34:35',
@@ -92,26 +72,13 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
             {
                 id: 5,
                 collapse: false,
-                name: '王先生',
+                name: '王先生5',
                 phone: '13999554621',
                 email: 'ibenchu@qq.com',
                 time: '2017-12-01 13:34:35',
                 msg: '你好，我对贵公司的产品很有兴趣',
             },
         ],
-    };
-    handleClickRemove = (pro: any) => {
-        this.state.modalName = pro.name;
-        this.state.modalId = pro.id;
-        this.setState({
-            open: true,
-        });
-    };
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-    handleSubmit = () => {
-        this.setState({ open: false });
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -123,7 +90,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     render() {
-        const { currentPage, rowsPerPage, lists } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div className="top-action-module cms-message">
                 <p className="crumbs">
@@ -131,29 +98,20 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                 </p>
                 <h4 className="title">客户留言</h4>
                 <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus} />
-                                <TableCell className={this.props.classes.tableCell} numeric>姓名</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>电话</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>邮箱</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>时间</TableCell>
-                            </TableRow>
-                        </TableHead>
-                    </Table>
+                    <ul className="table-head">
+                        <li />
+                        <li>姓名</li>
+                        <li>电话</li>
+                        <li>邮箱</li>
+                        <li>时间</li>
+                    </ul>
                     <ul className="table-body">
-                        {lists.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                        {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
                             .map((n, index) => {
                                 return (
                                     <li key={n.id}>
-                                        <div
-                                            className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        >
-                                            <div
-                                                className={this.props.classes.tableCell}
-                                                onClick={() => this.handleClick(n)}
-                                            >
+                                        <div className={index % 2 === 0 ? this.props.classes.evenRow : ''}>
+                                            <div onClick={() => this.handleClick(n)}>
                                                 {
                                                     n.collapse ?
                                                         <ExpandMore
@@ -170,18 +128,10 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                         />
                                                 }
                                             </div>
-                                            <div className={this.props.classes.tableCell}>
-                                                {n.name}
-                                            </div>
-                                            <div className={this.props.classes.tableCell}>
-                                                {n.phone}
-                                            </div>
-                                            <div className={this.props.classes.tableCell}>
-                                                {n.email}
-                                            </div>
-                                            <div className={this.props.classes.tableCell}>
-                                                {n.time}
-                                            </div>
+                                            <div>{n.name}</div>
+                                            <div>{n.phone}</div>
+                                            <div>{n.email}</div>
+                                            <div>{n.time}</div>
                                         </div>
                                         <Collapse
                                             in={n.collapse}
@@ -201,7 +151,7 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={lists.length / rowsPerPage}
+                            pageCount={list.length / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
