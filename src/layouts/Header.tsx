@@ -12,13 +12,6 @@ import TextField from 'material-ui/TextField';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
-    header: {
-        'align-items': 'center',
-        background: '#3f51b5',
-        boxShadow: '0px 1px 4px 0 rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        'justify-content': 'space-between',
-    },
     headerLeft: {
         'align-items': 'center',
         display: 'flex',
@@ -185,7 +178,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
         const { value, openSearch  } = this.state;
         const { classes } = this.props;
         return (
-            <div className={this.props.classes.header}>
+            <div className="header">
                 <div className={this.props.classes.headerLeft}>
                     <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
                     <IconButton
