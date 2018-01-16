@@ -75,7 +75,7 @@ modules.forEach(module => {
 });
 
 gulp.task('build', function (cb) {
-    sequence('common', modules.filter((module) => module !== 'common'), cb);
+    sequence('authentication', modules.filter((module) => module !== 'common'), cb);
 });
 
 gulp.task('watch', function () {

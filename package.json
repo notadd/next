@@ -118,10 +118,12 @@
         "packages/authentication",
         "packages/backend",
         "packages/backend-mix",
-        "packages/common",
+        "packages/configuration",
         "packages/core",
+        "packages/logger",
         "packages/react-scripts",
         "packages/server",
+        "packages/setting",
         "packages/user"
     ]
 }

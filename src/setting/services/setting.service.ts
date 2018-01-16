@@ -1,4 +1,4 @@
-import { Component, Inject } from "@nestjs/common";
+import { Component } from "@nestjs/common";
 import { Setting } from "../entities/setting.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
