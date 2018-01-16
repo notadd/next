@@ -26,6 +26,7 @@ import ArticleType from './cms/ArticleType';
 import ArticleTypeEdit from './cms/ArticleTypeEdit';
 import ArticleRecycle from './cms/ArticleRecycle';
 import Page from './cms/Page';
+import PageEdit from './cms/PageEdit';
 
 import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
@@ -443,6 +444,7 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/cms/article/type/edit" component={ArticleTypeEdit}/>
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>
+                                                <Route exact path="/cms/page/edit/:id" component={PageEdit}/>
                                                 <Route path="/" render={() => (<Redirect to="/home"/>)}/>
                                             </Switch>
                                         </div>
