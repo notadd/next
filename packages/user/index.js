@@ -6,6 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./dtos"));
 __export(require("./entities"));
 __export(require("./modules"));
-__export(require("./providers"));
 __export(require("./resolvers"));
 __export(require("./services"));

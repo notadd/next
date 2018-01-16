@@ -57,7 +57,6 @@
         "@notadd/authentication": "^2.1.1",
         "@notadd/backend": "^2.1.1",
         "@notadd/backend-mix": "^2.1.1",
-        "@notadd/common": "^2.1.1",
         "@notadd/configuration": "^2.1.1",
         "@notadd/core": "^2.1.1",
         "@notadd/logger": "^2.1.1",
