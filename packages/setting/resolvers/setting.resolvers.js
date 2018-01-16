@@ -18,41 +18,64 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
-const log_service_1 = require("../services/log.service");
+const setting_service_1 = require("../services/setting.service");
 const common_1 = require("@nestjs/common");
-const user_guard_1 = require("@notadd/authentication/guards/user.guard");
-let LogResolvers = class LogResolvers {
+const authentication_1 = require("@notadd/authentication");
+let SettingResolvers = class SettingResolvers {
     constructor(service) {
         this.service = service;
     }
-    getLogs() {
+    getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogs();
+            return yield this.service.getSettings();
         });
     }
-    getLogById(obj, { id }) {
+    getSettingByKey(object, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogById(id);
+            return yield this.service.getSettingByKey(args.key);
+        });
+    }
+    removeSetting(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.service.removeSetting(args.key);
+        });
+    }
+    setSetting(obj, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.service.setSetting(args.key, args.value);
         });
     }
 };
 __decorate([
     graphql_1.Query(),
-    common_1.UseGuards(user_guard_1.UserGuard),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], LogResolvers.prototype, "getLogs", null);
+], SettingResolvers.prototype, "getSettings", null);
 __decorate([
     graphql_1.Query(),
-    common_1.UseGuards(user_guard_1.UserGuard),
+    common_1.UseGuards(authentication_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], LogResolvers.prototype, "getLogById", null);
-LogResolvers = __decorate([
-    graphql_1.Resolver('Log'),
-    __metadata("design:paramtypes", [typeof (_a = typeof log_service_1.LogService !== "undefined" && log_service_1.LogService) === "function" && _a || Object])
-], LogResolvers);
-exports.LogResolvers = LogResolvers;
-var _a;
+], SettingResolvers.prototype, "getSettingByKey", null);
+__decorate([
+    graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], SettingResolvers.prototype, "removeSetting", null);
+__decorate([
+    graphql_1.Mutation(),
+    common_1.UseGuards(authentication_1.UserGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], SettingResolvers.prototype, "setSetting", null);
+SettingResolvers = __decorate([
+    graphql_1.Resolver('Setting'),
+    __metadata("design:paramtypes", [setting_service_1.SettingService])
+], SettingResolvers);
+exports.SettingResolvers = SettingResolvers;

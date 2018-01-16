@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -17,42 +20,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
-const log_service_1 = require("../services/log.service");
 const common_1 = require("@nestjs/common");
-const user_guard_1 = require("@notadd/authentication/guards/user.guard");
-let LogResolvers = class LogResolvers {
-    constructor(service) {
-        this.service = service;
+const typeorm_1 = require("typeorm");
+const log_entity_1 = require("../entities/log.entity");
+const typeorm_2 = require("@nestjs/typeorm");
+let LogService = class LogService {
+    constructor(repository) {
+        this.repository = repository;
     }
     getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogs();
+            return yield this.repository.find();
         });
     }
-    getLogById(obj, { id }) {
+    getLogById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogById(id);
+            return yield this.repository
+                .createQueryBuilder()
+                .where('id = :id', {
+                id: id,
+            })
+                .getOne();
         });
     }
 };
-__decorate([
-    graphql_1.Query(),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], LogResolvers.prototype, "getLogs", null);
-__decorate([
-    graphql_1.Query(),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], LogResolvers.prototype, "getLogById", null);
-LogResolvers = __decorate([
-    graphql_1.Resolver('Log'),
-    __metadata("design:paramtypes", [typeof (_a = typeof log_service_1.LogService !== "undefined" && log_service_1.LogService) === "function" && _a || Object])
-], LogResolvers);
-exports.LogResolvers = LogResolvers;
-var _a;
+LogService = __decorate([
+    common_1.Component(),
+    __param(0, typeorm_2.InjectRepository(log_entity_1.Log)),
+    __metadata("design:paramtypes", [typeorm_1.Repository])
+], LogService);
+exports.LogService = LogService;

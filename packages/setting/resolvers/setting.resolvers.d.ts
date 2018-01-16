@@ -1,5 +1,5 @@
-import { Setting } from "../../setting/entities/setting.entity";
-import { SettingService } from "../../setting/services/setting.service";
+import { Setting } from "../entities/setting.entity";
+import { SettingService } from "../services/setting.service";
 export declare class SettingResolvers {
     private readonly service;
     constructor(service: SettingService);

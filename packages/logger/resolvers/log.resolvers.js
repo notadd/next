@@ -52,7 +52,6 @@ __decorate([
 ], LogResolvers.prototype, "getLogById", null);
 LogResolvers = __decorate([
     graphql_1.Resolver('Log'),
-    __metadata("design:paramtypes", [typeof (_a = typeof log_service_1.LogService !== "undefined" && log_service_1.LogService) === "function" && _a || Object])
+    __metadata("design:paramtypes", [log_service_1.LogService])
 ], LogResolvers);
 exports.LogResolvers = LogResolvers;
-var _a;
