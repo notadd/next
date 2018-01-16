@@ -412,7 +412,7 @@ class App extends React.Component<Props, State> {
                                         </div>
                                     </div>
                                     <div className="view">
-                                        <Hidden xsDown implementation="css">
+                                        <Hidden smUp implementation="css">
                                             <Drawer
                                                 type="persistent"
                                                 classes={{
@@ -426,12 +426,13 @@ class App extends React.Component<Props, State> {
                                                 <Side open={this.state.open}/>
                                             </Drawer>
                                         </Hidden>
-                                        <Hidden xsUp implementation="css">
+                                        <Hidden smDown implementation="css">
                                             <Drawer
                                                 type="persistent"
                                                 classes={{
                                                     modal: classes.root,
                                                     docked: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                                                    paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                                                 }}
                                                 onClose={this.toggleDrawer}
                                                 open={this.state.open}
