@@ -81,20 +81,6 @@ type State = {
     modalName: string,
 };
 
-let id = 0;
-function createData(check: boolean, name: any, author: any) {
-    id += 1;
-    return { id, check, name, author };
-}
-
-const list = [
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-];
-
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
@@ -103,14 +89,46 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         open: false,
         modalId: '',
         modalName: '',
+        list: [
+            {
+                id: 1,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                author: '新闻资讯1',
+            },
+            {
+                id: 2,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                author: '新闻资讯2',
+            },
+            {
+                id: 3,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                author: '新闻资讯3',
+            },
+            {
+                id: 4,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                author: '新闻资讯4',
+            },
+            {
+                id: 5,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                author: '新闻资讯5',
+            },
+        ],
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
-            list.map(item => {
+            this.state.list.map(item => {
                 item.check = true;
             });
         } else {
-            list.map(item => {
+            this.state.list.map(item => {
                 item.check = false;
             });
         }
@@ -127,7 +145,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         if (!event.target.checked) {
             pro.check = false;
         }
-        list.map(item => {
+        this.state.list.map(item => {
             if (item.check === false) {
                 this.state.checkedAll = false;
             }
@@ -154,7 +172,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">

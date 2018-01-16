@@ -58,6 +58,7 @@ type User = {
 
 type State = {
     navs: any;
+    navsCms: any,
     user: User;
     open: boolean,
 };
@@ -198,6 +199,75 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                         }
                     ]
                 }
+            ],
+            navsCms: [
+                {
+                    name: '文章管理',
+                    open: false,
+                    index: 0,
+                    icon: 'view_quilt',
+                    children: [
+                        {
+                            'name': '全部文章',
+                            'path': '/cms/article',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/article/type',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '回收站',
+                            'path': '/cms/article/recycle',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '页面管理',
+                    icon: 'insert_drive_file',
+                    open: false,
+                    index: 1,
+                    children: [
+                        {
+                            'name': '全部页面',
+                            'path': '/cms/page',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/page/type',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '模块管理',
+                    open: false,
+                    icon: 'work',
+                    index: 2,
+                    children: []
+                },
+                {
+                    name: '信息管理',
+                    open: false,
+                    index: 3,
+                    icon: 'extension',
+                    children: [
+                        {
+                            'name': '客户留言',
+                            'path': '/cms/message',
+                            'open': false,
+                            'children': [],
+                        },
+                    ]
+                },
             ],
             open: props.open,
             user: {
