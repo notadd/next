@@ -62,7 +62,6 @@ modules.forEach(module => {
                 `${source}/${module}/*.graphql`,
             ]).pipe(rename(function (path) {
                 path.basename = path.basename.replace('.original', '.types');
-                console.log("Rename:", JSON.stringify(path));
             })).pipe(gulp.dest(`${dist}/${module}`));
 
             return packages[module]
