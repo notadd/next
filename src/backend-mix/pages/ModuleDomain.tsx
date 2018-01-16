@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Switch from 'material-ui/Switch';
 import Checkbox from 'material-ui/Checkbox';
@@ -29,19 +30,14 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding-top': '0',
     },
 };
-type State = {};
+type State = {
+};
 
 let id = 0;
-
 function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean) {
     id += 1;
     return { id, name, domain, defaul, other, use };
@@ -58,8 +54,9 @@ const list = [
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
+        rowsPerPage: 2,
+        currentPage: 0,
     };
-
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.use = true;
@@ -70,7 +67,6 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             [pro]: checked,
         });
     };
-
     changeCheckBox = (pro: any) => (event: any) => {
         if (event.target.checked) {
             pro.defaul = true;
@@ -81,64 +77,82 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             [name]: event.target.checked,
         });
     };
-
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
                     全局 / 应用管理 / 模块配置
                 </p>
                 <h4 className="title">域名配置</h4>
-                <Paper className={ this.props.classes.root }>
-                    <Table className={ this.props.classes.table }>
+                <Paper className={this.props.classes.root}>
+                    <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>模块名称</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>域名</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>默认</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>别名</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
                                 <TableCell numeric>使用域名</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            { list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
-                                        key={ n.id }
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                        key={n.id}
                                     >
-                                        <TableCell>{ n.name }</TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.domain }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.name}</TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.domain}
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
                                             <Checkbox
                                                 className="table-check-box"
-                                                checked={ n.defaul }
-                                                onChange={ this.changeCheckBox(n) }
+                                                checked={n.defaul}
+                                                onChange={this.changeCheckBox(n)}
                                                 value="n.defaul"
                                             />
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.other }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.other}
                                         </TableCell>
                                         <TableCell numeric>
                                             <Switch
-                                                checked={ n.use }
-                                                onChange={ this.handleChange(n) }
+                                                checked={n.use}
+                                                onChange={this.handleChange(n)}
                                                 aria-label="n.use"
                                             />
                                         </TableCell>
                                     </TableRow>
                                 );
-                            }) }
+                            })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
             </div>
         );
     }
 }
-
 export default withStyles(styles)(ModuleOpen);

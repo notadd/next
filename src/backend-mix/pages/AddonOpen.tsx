@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -37,19 +38,14 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
-type State = {};
+type State = {
+};
 
 let id = 0;
-
 function createData(name: any, author: any, descri: any, status: boolean) {
     id += 1;
     return { id, name, author, descri, status };
@@ -68,8 +64,9 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
         open: false,
         modalId: '',
         modalName: '',
+        rowsPerPage: 2,
+        currentPage: 0,
     };
-
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
             pro.status = true;
@@ -80,7 +77,6 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
             [pro]: checked,
         });
     };
-
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
         this.state.modalId = pro.id;
@@ -88,67 +84,86 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
             open: true,
         });
     };
-
     handleClose = () => {
         this.setState({ open: false });
     };
-
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div>
                 <p className="crumbs">
                     全局 / 应用管理 / 插件配置
                 </p>
                 <h4 className="title">开启插件</h4>
-                <Paper className={ this.props.classes.root }>
-                    <Table className={ this.props.classes.table }>
+                <Paper className={this.props.classes.root}>
+                    <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell>插件名称</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>作者</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>描述</TableCell>
-                                <TableCell className={ this.props.classes.tableCellStatus } numeric>状态</TableCell>
-                                <TableCell numeric></TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
+                                <TableCell numeric/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            { list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
-                                        key={ n.id }
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                        key={n.id}
                                     >
-                                        <TableCell>{ n.name }</TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.author }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.name}
+                                            </TableCell>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.author}
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.descri }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.descri}
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
+                                        <TableCell className={this.props.classes.tableCell} numeric>
                                             <Switch
-                                                checked={ n.status }
-                                                onChange={ this.handleChange(n) }
+                                                checked={n.status}
+                                                onChange={this.handleChange(n)}
                                                 aria-label="n.status"
                                             />
                                         </TableCell>
                                         <TableCell numeric>
                                             <IconButton
-                                                className={ this.props.classes.menuBtn }
-                                                onClick={ () => this.handleClickOpen(n) }
+                                                className={this.props.classes.menuBtn}
+                                                onClick={() => this.handleClickOpen(n)}
                                             >
-                                                <DeleteIcon/>
+                                                <DeleteIcon />
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 );
-                            }) }
+                            })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
                 <Dialog
-                    open={ this.state.open }
+                    open={this.state.open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                     className="dialog-content"
@@ -158,19 +173,19 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={ this.handleClose }
+                            onClick={this.handleClose}
                         >
-                            <ClearIcon/>
+                            <ClearIcon />
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除插件名称"{ this.state.modalName }"吗?</h4>
+                        <h4>确定要删除插件名称"{this.state.modalName}"吗?</h4>
                     </DialogContent>
                     <DialogActions className="dialog-actions">
-                        <Button onClick={ this.handleClose }>
+                        <Button onClick={this.handleClose}>
                             取消
                         </Button>
-                        <Button onClick={ this.handleClose } autoFocus>
+                        <Button onClick={this.handleClose} autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>
@@ -179,5 +194,4 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
         );
     }
 }
-
 export default withStyles(styles)(AddonOpen);
