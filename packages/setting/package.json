@@ -1,0 +1,24 @@
+{
+    "name": "@notadd/setting",
+    "version": "2.1.1",
+    "description": "Notadd Setting Package.",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/notadd/next.git"
+    },
+    "keywords": [
+        "Notadd",
+        "Administration",
+        "Backend"
+    ],
+    "author": "notadd",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/notadd/next/issues"
+    },
+    "homepage": "https://github.com/notadd/next#readme"
+}

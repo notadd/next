@@ -9,8 +9,11 @@ const packages = {
     backend: ts.createProject('src/backend/tsconfig.json'),
     'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
     common: ts.createProject('src/common/tsconfig.json'),
+    configuration: ts.createProject('src/configuration/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
+    logger: ts.createProject('src/logger/tsconfig.json'),
     server: ts.createProject('src/server/tsconfig.json'),
+    setting: ts.createProject('src/setting/tsconfig.json'),
     user: ts.createProject('src/user/tsconfig.json'),
 };
 
