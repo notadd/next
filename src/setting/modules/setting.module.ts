@@ -7,10 +7,12 @@ import { Setting } from "../entities/setting.entity";
 import { SettingResolvers } from "../resolvers/setting.resolvers";
 import { SettingService } from "../services/setting.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { EventHandlers } from "../events/handlers/index";
 
 @Module({
     components: [
         ...CommandHandlers,
+        ...EventHandlers,
         SettingResolvers,
         SettingService,
     ],
@@ -33,5 +35,7 @@ export class SettingModule implements OnModuleInit {
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);
         this.command.register(CommandHandlers);
+        this.event.setModuleRef(this.moduleRef);
+        this.event.register(EventHandlers);
     }
 }
