@@ -1,27 +1,23 @@
 import * as React from 'react';
 import createHashHistory from 'history/createHashHistory';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
-import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
+import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import ChatBubble from 'material-ui-icons/ChatBubble';
 import Notifications from 'material-ui-icons/Notifications';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import * as classNames from 'classnames';
 import Badge from 'material-ui/Badge';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
 import { History } from 'history';
+import Icon from 'material-ui/Icon';
 
 const styles = {
-    bigAvatar: {
-        'width': '50px',
-        'height': '50px',
-        'margin-top': '35px',
-        'margin-right': '20px',
-    },
     badge: {
         'box-sizing': 'border-box',
         'border': '2px solid #fff',
@@ -40,7 +36,7 @@ const styles = {
         'height': '40px',
     },
     innerRoot: {
-        'background': '#ededed',
+        'background': '#ededed' ,
     },
     innerSelectBtn: {
         'background': '#e0e0e0',
@@ -53,145 +49,240 @@ const styles = {
     },
 };
 
-type State = {
-    navs: any,
-    user: object
+type User = {
+    name: string;
+    email: string;
+    user_img: string;
+    message: number;
 };
 
-interface Props extends WithStyles<keyof typeof styles> {
-    history: History;
+type State = {
+    navs: any;
+    navsCms: any,
+    user: User;
+    open: boolean,
+};
+
+interface Props {
+    history?: History;
+    open: boolean;
+    width: string;
 }
 
-class SideBar extends React.Component<Props, State> {
-    state = {
-        navs: [
-            {
-                name: '全局设置',
-                open: false,
-                index: 0,
-                children: [
-                    {
-                        'name': '参数配置',
-                        'path': '/configurations',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': 'SEO设置',
-                        'path': '/seo',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            },
-            {
-                name: '附件设置',
-                open: false,
-                index: 1,
-                children: [
-                    {
-                        'name': '上传设置',
-                        'path': '/upload',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            },
-            {
-                name: '应用管理',
-                open: false,
-                index: 2,
-                children: [
-                    {
-                        'name': '模块配置',
-                        'path': '/module',
-                        'open': false,
-                        'children': [
-                            {
-                                'name': '开启模块',
-                                'path': '/module/open-module'
-                            },
-                            {
-                                'name': '域名配置',
-                                'path': '/module/domain-config'
-                            },
-                            {
-                                'name': '导入导出',
-                                'path': '/module/import-export'
-                            },
-                            {
-                                'name': '本地安装',
-                                'path': '/module/install'
-                            },
-                        ]
-                    },
-                    {
-                        'name': '插件配置',
-                        'path': '/addon',
-                        'open': false,
-                        'children': [
-                            {
-                                'name': '开启插件',
-                                'path': '/addon/openAddon'
-                            },
-                            {
-                                'name': '导入导出',
-                                'path': '/addon/import-export'
-                            },
-                            {
-                                'name': '本地安装',
-                                'path': '/addon/install'
-                            },
-                        ],
-                    },
-                    {
-                        'name': '拓展配置',
-                        'path': '/extension',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            },
-            {
-                name: '全局插件',
-                open: false,
-                index: 3,
-                children: []
-            },
-            {
-                name: '系统插件',
-                open: false,
-                index: 4,
-                children: [
-                    {
-                        'name': '菜单管理',
-                        'path': '/menu',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': '邮件设置',
-                        'path': '/mail',
-                        'open': false,
-                        'children': [],
-                    },
-                    {
-                        'name': '调试工具',
-                        'path': '/debug',
-                        'open': false,
-                        'children': [],
-                    }
-                ]
-            }
-        ],
-        user: {
-            name: '管理员',
-            email: 'zhhu_123@163.com',
-            user_img: require('../assets/images/user.jpg'),
-            message: 5,
-        },
-    };
+type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
 
+class SideBar extends React.Component<PropsWithStyles, State> {
+    constructor(props: PropsWithStyles, state: State) {
+        super(props, state);
+        this.state = {
+            navs: [
+                {
+                    name: '全局设置',
+                    open: false,
+                    index: 0,
+                    icon: 'view_quilt',
+                    children: [
+                        {
+                            'name': '参数配置',
+                            'path': '/configurations',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': 'SEO设置',
+                            'path': '/seo',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '附件设置',
+                    icon: 'insert_drive_file',
+                    open: false,
+                    index: 1,
+                    children: [
+                        {
+                            'name': '上传设置',
+                            'path': '/upload',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '应用管理',
+                    open: false,
+                    icon: 'work',
+                    index: 2,
+                    children: [
+                        {
+                            'name': '模块配置',
+                            'path': '/module',
+                            'open': false,
+                            'children': [
+                                {
+                                    'name': '开启模块',
+                                    'path': '/module/open-module'
+                                },
+                                {
+                                    'name': '域名配置',
+                                    'path': '/module/domain-config'
+                                },
+                                {
+                                    'name': '导入导出',
+                                    'path': '/module/import-export'
+                                },
+                                {
+                                    'name': '本地安装',
+                                    'path': '/module/install'
+                                },
+                            ]
+                        },
+                        {
+                            'name': '插件配置',
+                            'path': '/addon',
+                            'open': false,
+                            'children': [
+                                {
+                                    'name': '开启插件',
+                                    'path': '/addon/openAddon'
+                                },
+                                {
+                                    'name': '导入导出',
+                                    'path': '/addon/import-export'
+                                },
+                                {
+                                    'name': '本地安装',
+                                    'path': '/addon/install'
+                                },
+                            ],
+                        },
+                        {
+                            'name': '拓展配置',
+                            'path': '/extension',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '全局插件',
+                    open: false,
+                    index: 3,
+                    icon: 'extension',
+                    children: []
+                },
+                {
+                    name: '系统插件',
+                    icon: 'widgets',
+                    open: false,
+                    index: 4,
+                    children: [
+                        {
+                            'name': '菜单管理',
+                            'path': '/menu',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '邮件设置',
+                            'path': '/mail',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '调试工具',
+                            'path': '/debug',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                }
+            ],
+            navsCms: [
+                {
+                    name: '文章管理',
+                    open: false,
+                    index: 0,
+                    icon: 'view_quilt',
+                    children: [
+                        {
+                            'name': '全部文章',
+                            'path': '/cms/article',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/article/type',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '回收站',
+                            'path': '/cms/article/recycle',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '页面管理',
+                    icon: 'insert_drive_file',
+                    open: false,
+                    index: 1,
+                    children: [
+                        {
+                            'name': '全部页面',
+                            'path': '/cms/page',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/page/type',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '模块管理',
+                    open: false,
+                    icon: 'work',
+                    index: 2,
+                    children: []
+                },
+                {
+                    name: '信息管理',
+                    open: false,
+                    index: 3,
+                    icon: 'extension',
+                    children: [
+                        {
+                            'name': '客户留言',
+                            'path': '/cms/message',
+                            'open': false,
+                            'children': [],
+                        },
+                    ]
+                },
+            ],
+            open: props.open,
+            user: {
+                name: '管理员',
+                email: 'zhhu_123@163.com',
+                user_img: require('../assets/images/user.jpg'),
+                message: 5,
+            },
+        };
+    }
+    componentWillReceiveProps(nextProps: object) {
+        this.setState({
+            open: nextProps['open']
+        });
+    }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
         if (user === null) {
@@ -199,11 +290,10 @@ class SideBar extends React.Component<Props, State> {
             window.location.reload();
         } else {
             const userState = Object.assign(this.state.user);
-            userState.name = JSON.parse(user)[ 'username' ];
-            this.setState({ user: userState });
+            userState.name = JSON.parse(user)['username'];
+            this.setState({user: userState});
         }
     }
-
     handleClick(index: number, subIndex: any) {
         const sides = Object.assign({}, this.state.navs);
         if (subIndex === null) {
@@ -215,72 +305,70 @@ class SideBar extends React.Component<Props, State> {
                 }
             });
         } else {
-            const childArr = sides[ index ].children;
+            const childArr = sides[index].children;
             Object.keys(childArr).forEach(item => {
                 if (item === subIndex.toString()) {
-                    childArr[ Number(item) ].open = !childArr[ Number(item) ].open;
+                    childArr[Number(item)].open = ! childArr[Number(item)].open;
                 } else {
-                    childArr[ Number(item) ].open = false;
+                    childArr[Number(item)].open = false;
                 }
             });
         }
         const arr = new Array();
         Object.keys(sides).forEach(item => {
-            arr.push(sides[ item ]);
+            arr.push(sides[item]);
         });
         this.setState({ navs: arr });
     }
-
     render() {
         return (
             <div className="sideBar">
-                <div className="userBox">
-                    <div
-                        style={ {
-                            background: 'rgba(0, 0, 0, 0.5)',
-                            height: 'inherit',
-                            display: 'flex',
-                            justifyContent: 'center'
-                        } }
-                    >
+                <div
+                    className={
+                        classNames(
+                            'userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox'
+                        )
+                    }
+                >
+                    <div>
                         <Avatar
-                            alt={ this.state.user.name }
-                            src={ this.state.user.user_img }
-                            className={ this.props.classes.bigAvatar }
+                            alt={this.state.user.name}
+                            src={this.state.user.user_img}
+                            className="bigAvatar"
                         />
                         <div className="user-right">
-                            <p>{ this.state.user.name }</p>
-                            <p>{ this.state.user.email }</p>
+                            <p>{this.state.user.name}</p>
+                            <p>{this.state.user.email}</p>
                             <div>
                                 <Badge
-                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
-                                    classes={ {
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
+                                    classes={{
                                         colorAccent: this.props.classes.badge,
-                                    } }
-                                    style={ { border: 0 } }
-                                    badgeContent={ 4 }
+                                    }}
+                                    style={{border: 0}}
+                                    badgeContent={4}
                                     color="accent"
                                 >
                                     <Notifications/>
                                 </Badge>
                                 <Badge
-                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={ {
                                         colorAccent: this.props.classes.badge,
                                     } }
-                                    style={ { border: 0, marginLeft: 30 } }
-                                    badgeContent={ 4 }
+                                    style={{border: 0, marginLeft: 30}}
+                                    badgeContent={4}
                                     color="accent"
                                 >
                                     <MailIcon/>
                                 </Badge>
                                 <Badge
-                                    className={ classNames(this.props.classes.badge, 'badgeIcon') }
-                                    classes={ {
+                                    className={classNames(this.props.classes.badge, 'badgeIcon')}
+                                    classes={{
                                         colorAccent: this.props.classes.badge,
-                                    } }
-                                    style={ { border: 0, marginLeft: 30 } }
-                                    badgeContent={ 4 }
+                                    }}
+                                    style={{border: 0, marginLeft: 30}}
+                                    badgeContent={4}
                                     color="accent"
                                 >
                                     <ChatBubble/>
@@ -290,55 +378,55 @@ class SideBar extends React.Component<Props, State> {
                     </div>
                 </div>
                 {
-                    this.state.navs.map((item, index) => {
+                    this.state.navs.map((item: any, index: number) => {
                         return (
                             <List
-                                className={ this.props.classes.root }
-                                key={ index }
-                                style={ { paddingTop: 0, paddingBottom: 0 } }
+                                className={this.props.classes.root}
+                                key={index}
+                                style={{paddingTop: 0, paddingBottom: 0}}
                             >
                                 <ListItem
                                     button
-                                    onClick={ () => this.handleClick(index, null) }
+                                    onClick={() => this.handleClick(index, null)}
                                     className={
                                         classNames(
                                             item.open ?
-                                                this.props.classes.selectFirstLevelMenu : '',
+                                            this.props.classes.selectFirstLevelMenu : '',
                                             item.open ? 'selectFirstLevelMenu' : ''
                                         )
                                     }
-                                    style={ {
+                                    style={{
                                         paddingTop: 0,
                                         paddingBottom: 0,
                                         paddingLeft: 23,
                                         paddingRight: 25,
                                         height: 52
-                                    } }
+                                    }}
                                 >
-                                    <ListItemIcon>
-                                        <InboxIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText inset primary={ item.name }/>
-                                    { item.open ? <ExpandLess/> : <ExpandMore/> }
+                                    <Icon style={{color: '#808080'}}>{item.icon}</Icon>
+                                    <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
+                                    {
+                                        item.open ? <ExpandMore style={{color: '#808080', width: 20, height: 20}}/>
+                                        : <KeyboardArrowRight style={{color: '#808080', width: 20, height: 20}}/>}
                                 </ListItem>
-                                <Collapse component="li" in={ item.open } unmountOnExit>
+                                <Collapse component="li" in={item.open} unmountOnExit>
                                     <List
                                         disablePadding
-                                        style={ {
+                                        style={{
                                             paddingTop: 0,
                                             paddingBottom: 0,
                                             borderBottom: '1px solid #e0e0e0'
-                                        } }
+                                        }}
                                     >
                                         {
-                                            item.children.map((child, childIndex) => {
+                                            item.children.map((child: any, childIndex: number) => {
                                                 return (
                                                     <List
-                                                        style={ {
+                                                        style={{
                                                             paddingTop: 0,
                                                             paddingBottom: 0,
-                                                        } }
-                                                        key={ index.toString() + childIndex }
+                                                        }}
+                                                        key={index.toString() + childIndex}
                                                     >
                                                         <ListItem
                                                             button
@@ -349,65 +437,82 @@ class SideBar extends React.Component<Props, State> {
                                                                     child.open ? 'innerRootSelect' : '',
                                                                 )
                                                             }
-                                                            style={ {
+                                                            style={{
                                                                 paddingRight: 25,
-                                                            } }
+                                                            }}
                                                         >
                                                             {
                                                                 child.hasOwnProperty('children')
                                                                 && child.children.length ? (
                                                                     <ListItemText
-                                                                        onClick={ () =>
-                                                                            this.handleClick(index, childIndex) }
-                                                                        style={ { paddingLeft: 78 } }
+                                                                        onClick={() =>
+                                                                            this.handleClick(index, childIndex)}
+                                                                        style={{paddingLeft: 78}}
                                                                         inset
-                                                                        primary={ child.name }
+                                                                        primary={child.name}
                                                                     />
                                                                 ) : (
                                                                     <NavLink
-                                                                        to={ child.path }
+                                                                        to={child.path}
                                                                         activeClassName="selectBtn"
                                                                     >
                                                                         <ListItemText
-                                                                            style={ { paddingLeft: 78 } }
+                                                                            style={{paddingLeft: 78}}
                                                                             inset
-                                                                            primary={ child.name }
+                                                                            primary={child.name}
                                                                         />
                                                                     </NavLink>
                                                                 )
                                                             }
                                                             {
                                                                 child.hasOwnProperty('children')
-                                                                && child.children.length > 0
-                                                                && child.open ? (
-                                                                    <ExpandLess/>
+                                                                    && child.children.length > 0
+                                                                    && child.open ?  (
+                                                                    <ExpandMore
+                                                                        style={{
+                                                                            color: '#808080',
+                                                                            width: 20,
+                                                                            height: 20,
+                                                                        }}
+                                                                    />
                                                                 ) : child.hasOwnProperty('children')
-                                                                && child.children.length > 0
-                                                                && child.open === false ? (
-                                                                    <ExpandMore/>
+                                                                    && child.children.length > 0
+                                                                    && child.open === false ? (
+                                                                    <KeyboardArrowRight
+                                                                        style={{
+                                                                            color: '#808080',
+                                                                            width: 20,
+                                                                            height: 20,
+                                                                        }}
+                                                                    />
                                                                 ) : null
                                                             }
                                                         </ListItem>
                                                         {
                                                             child.hasOwnProperty('children') && child.children.length
                                                                 ? (
-                                                                    <Collapse component="li" in={ child.open }
-                                                                              unmountOnExit>
-                                                                        <List
-                                                                            disablePadding
-                                                                            style={ { borderBottom: '1px solid #e0e0e0' } }
-                                                                        >
-                                                                            {
-                                                                                child.children.map((inner, innertIndex) => {
+                                                                <Collapse component="li" in={child.open} unmountOnExit>
+                                                                    <List
+                                                                        disablePadding
+                                                                        style={{borderBottom: '1px solid #e0e0e0'}}
+                                                                    >
+                                                                        {
+                                                                            child.children.map(
+                                                                                (inner: any, innertIndex: number) => {
                                                                                     return (
                                                                                         <NavLink
-                                                                                            to={ inner.path }
+                                                                                            to={inner.path}
                                                                                             className={
-                                                                                                this.props.classes.innerRoot
+                                                                                                this.props
+                                                                                                    .classes
+                                                                                                    .innerRoot
                                                                                             }
                                                                                             activeClassName={
                                                                                                 classNames(
-                                                                                                    this.props.classes.innerSelectBtn,
+                                                                                                    this.
+                                                                                                    props.
+                                                                                                    classes
+                                                                                                        .innerSelectBtn,
                                                                                                     'innerSelectBtn'
                                                                                                 )
                                                                                             }
@@ -418,17 +523,19 @@ class SideBar extends React.Component<Props, State> {
                                                                                             }
                                                                                         >
                                                                                             <ListItemText
-                                                                                                style={ { paddingLeft: 78 } }
+                                                                                                style={{
+                                                                                                    paddingLeft: 78
+                                                                                                }}
                                                                                                 inset
-                                                                                                primary={ inner.name }
+                                                                                                primary={inner.name}
                                                                                             />
                                                                                         </NavLink>
                                                                                     );
-                                                                                })
-                                                                            }
-                                                                        </List>
-                                                                    </Collapse>
-                                                                ) : null
+                                                                            })
+                                                                        }
+                                                                    </List>
+                                                                </Collapse>
+                                                            ) : null
                                                         }
                                                     </List>
                                                 );
@@ -445,4 +552,4 @@ class SideBar extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)<any>(SideBar);
+export default compose(withStyles(styles), withWidth())(SideBar);
