@@ -43,12 +43,16 @@ const styles = {
     },
 };
 type State = {
+    name: string,
+    otherName: string,
+    type: string,
+    isOpen: boolean,
 };
 
 class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         name: 'NotAdd',
-        otherName: 'LOGO.png',
+        otherName: '新闻资讯',
         type: '新闻资讯',
         isOpen: false,
     };

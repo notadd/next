@@ -73,6 +73,12 @@ const styles = {
     },
 };
 type State = {
+    checkedAll: boolean,
+    rowsPerPage: number,
+    currentPage: number,
+    open: boolean,
+    modalId: string,
+    modalName: string,
 };
 
 let id = 0;
