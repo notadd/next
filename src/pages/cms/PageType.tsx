@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
 
@@ -27,7 +28,7 @@ const styles = {
 };
 type State = {};
 
-class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State> {
+class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         treeData: [{}],
     };
@@ -107,10 +108,15 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         return (
             <div className="top-action-module">
                 <p className="crumbs">
-                    CMS <b>/</b> 文章管理
+                    CMS <b>/</b> 页面管理
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <DeleteIcon />
+                    </IconButton>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
@@ -144,4 +150,4 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         );
     }
 }
-export default withStyles(styles)(ArticleType);
+export default withStyles(styles)(PageType);

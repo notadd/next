@@ -43,6 +43,15 @@ const styles = {
     },
 };
 type State = {
+    webName: string,
+    img: string,
+    type: string,
+    abstract: string,
+    time: string,
+    link: string,
+    origin: string,
+    kind: string,
+    isHidden: boolean,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {

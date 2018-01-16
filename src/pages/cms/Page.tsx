@@ -2,6 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
+import { Link } from 'react-router-dom';
 import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -72,6 +73,12 @@ const styles = {
     },
 };
 type State = {
+    checkedAll: boolean,
+    rowsPerPage: number,
+    currentPage: number,
+    open: boolean,
+    modalId: string,
+    modalName: string,
 };
 
 let id = 0;
@@ -218,12 +225,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 {n.author}
                                             </TableCell>
                                             <TableCell numeric>
-                                                <IconButton
-                                                    className={this.props.classes.btnEdit}
-                                                    onClick={() => this.handleClickEdit(n)}
-                                                >
-                                                    <ModeEdit />
-                                                </IconButton>
+                                                <Link to={'/cms/page/edit/' + n.id}>
+                                                    <IconButton
+                                                        className={this.props.classes.btnEdit}
+                                                    >
+                                                        <ModeEdit />
+                                                    </IconButton>
+                                                </Link>
                                                 <IconButton
                                                     className={this.props.classes.btnDelete}
                                                     onClick={() => this.handleClickRemove(n)}

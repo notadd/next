@@ -1,25 +1,21 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
+import { FormControlLabel, FormControl } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
+import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 
 const styles = {
     root: {
         'padding': '40px 30px',
+        'margin-bottom': '60px',
     },
     container: {
         display: 'flex',
         'flex-wrap': 'wrap',
         'margin': '0',
-    },
-    labelClass: {
-        'color': '#b8b8b8',
-    },
-    menu: {
-        'width': '200px',
     },
     formLabel: {
         'flex-direction': 'row-reverse',
@@ -31,32 +27,34 @@ const styles = {
     formLabelFont: {
         'font-size': '16px',
     },
-    subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+    formControlMargin: {
+        'margin-bottom': '32px',
     },
     underline: {
         '&:before': {
             background: '#dfdfdf',
         }
     },
+    switchHeight: {
+        'height': '20px',
+    },
+    switchDefault: {
+        'height': 'inherit',
+    },
 };
-
 type State = {
-    typeName: string,
+    name: string,
     otherName: string,
-    color: string,
-    description: string,
-    link: string,
+    type: string,
+    isOpen: boolean,
 };
 
-class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
+class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        typeName: 'NotAdd',
-        otherName: 'news',
-        color: '#ff3300',
-        description: '',
-        link: 'www.baidu.com',
+        name: 'NotAdd',
+        otherName: '新闻资讯',
+        type: '新闻资讯',
+        isOpen: false,
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -66,21 +64,25 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
     };
     render() {
         return (
-            <div className="configurations">
+            <div className="top-action-module cms">
                 <p className="crumbs">
-                    CMS <b>/</b> 文章管理 / 分类管理
+                    CMS / 页面管理 / 全部页面
                 </p>
                 <h4 className="title">编辑</h4>
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
-                        <Grid container spacing={40}>
+                        <Grid container spacing={24}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
-                                        分类名称
+                                        标题
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
@@ -88,13 +90,20 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('typeName')}
-                                        value={this.state.typeName}
+                                        onChange={this.handleChange('name')}
+                                        value={this.state.name}
                                     />
                                 </FormControl>
+                                <div className="editor">
+                                    编辑器插件
+                                </div>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -111,16 +120,15 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         value={this.state.otherName}
                                     />
                                 </FormControl>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={40} style={{marginTop: '12px'}}>
-                            <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
-                                        内链
+                                        分类
                                     </InputLabel>
                                     <Input
                                         id="name-simple"
@@ -128,50 +136,28 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('link')}
-                                        value={this.state.link}
+                                        onChange={this.handleChange('type')}
+                                        value={this.state.type}
                                     />
                                 </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        描述
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('description')}
-                                        value={this.state.description}
-                                    />
-                                </FormControl>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={40} style={{marginTop: '12px'}}>
-                            <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        颜色
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('color')}
-                                        value={this.state.color}
-                                    />
-                                </FormControl>
+                                <FormControlLabel
+                                    label="开启"
+                                    classes={{
+                                        root: this.props.classes.formLabel,
+                                        label: this.props.classes.formLabel
+                                    }}
+                                    className={this.props.classes.formControlMargin}
+                                    control={
+                                        <Switch
+                                            classes={{
+                                                root: this.props.classes.switchHeight,
+                                                default: this.props.classes.switchDefault,
+                                            }}
+                                            onChange={(event, checked) => this.setState({ isOpen: checked })}
+                                            checked={this.state.isOpen}
+                                        />
+                                    }
+                                />
                             </Grid>
                         </Grid>
                         <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
@@ -183,4 +169,4 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
         );
     }
 }
-export default withStyles(styles)(ArticleTypeEdit);
+export default withStyles(styles)(PageEdit);
