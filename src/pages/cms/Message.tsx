@@ -41,17 +41,17 @@ type State = {
 };
 
 let id = 0;
-function createData(check: boolean, name: any, author: any) {
+function createData(check: boolean, name: string, phone: string, email: string, time: string, msg: string) {
     id += 1;
-    return { id, check, name, author };
+    return { id, check, name, phone, email, time, msg };
 }
 
 const list = [
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
-    createData(false, '标题名称测试标题名称测试标题名称测试标题名称测试', '新闻资讯'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
+    createData(false, '王先生', '13999554621', 'ibenchu@qq.com', '2017-12-01 13:34:35', '你好，我对贵公司的产品很有兴趣'),
 ];
 
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -109,9 +109,10 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <TableCell className={this.props.classes.tableCellStatus}>
 
                                 </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>页面名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell numeric/>
+                                <TableCell className={this.props.classes.tableCell} numeric>姓名</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>电话</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>邮箱</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>时间</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
@@ -123,17 +124,20 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                             key={n.id}
                                         >
-                                            <TableCell
-                                                padding="checkbox"
-                                                className={this.props.classes.tableCellStatus}
-                                            >
+                                            <TableCell className={this.props.classes.tableCell} numeric>
 
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
                                                 {n.name}
                                             </TableCell>
                                             <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.author}
+                                                {n.phone}
+                                            </TableCell>
+                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                                {n.email}
+                                            </TableCell>
+                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                                {n.time}
                                             </TableCell>
                                         </TableRow>
                                     );
