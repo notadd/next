@@ -52,21 +52,12 @@ const styles = {
     },
 };
 type State = {
+    open: boolean,
+    modalId: string,
+    modalName: string,
+    rowsPerPage: number,
+    currentPage: number,
 };
-
-let id = 0;
-function createData(name: any, author: any, descri: any, status: boolean) {
-    id += 1;
-    return { id, name, author, descri, status };
-}
-
-const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', true),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', true),
-];
 
 class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
@@ -78,34 +69,34 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         list: [
             {
                 id: 11,
-                statue: false,
+                status: false,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
             },
             {
                 id: 12,
-                statue: true,
+                status: true,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
             },
             {
                 id: 13,
-                statue: false,
+                status: false,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
             },
             {
                 id: 14,
-                statue: true,
+                status: true,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
             },{
                 id: 15,
-                statue: false,
+                status: false,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
@@ -129,7 +120,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         this.setState({ currentPage: data.selected });
     };
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div>
                 <p className="crumbs">

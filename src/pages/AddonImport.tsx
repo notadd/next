@@ -44,6 +44,9 @@ const styles = {
     },
 };
 type State = {
+    checkedAll: boolean,
+    rowsPerPage: number,
+    currentPage: number,
 };
 
 class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State> {
