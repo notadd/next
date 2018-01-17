@@ -36,12 +36,6 @@ const styles = {
         'text-align': 'left',
         'padding': '0',
     },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '0',
-        'padding-right': '0',
-        'width': '40px',
-    },
 };
 type State = {
     checkedAll: boolean,
@@ -149,7 +143,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                        <Table className={this.props.classes.table}>
                            <TableHead className="table-head">
                                <TableRow>
-                                   <TableCell className={this.props.classes.tableCellStatus} numeric>
+                                   <TableCell className="table-cell-status" numeric>
                                        <Checkbox
                                            checked={this.state.checkedAll}
                                            onChange={this.handleChangeAll('checkedAll')}
@@ -170,7 +164,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                                key={n.id}
                                            >
-                                               <TableCell padding="checkbox" className={this.props.classes.tableCellStatus} numeric>
+                                               <TableCell padding="checkbox" className="table-cell-status" numeric>
                                                    <Checkbox
                                                        checked={n.check}
                                                        onChange={this.handleChange(n)}

@@ -36,12 +36,6 @@ const styles = {
         'text-align': 'left',
         'padding': '0',
     },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '12px',
-        'padding-right': '0',
-        'width': '40px',
-    },
 };
 type State = {
     checkedAll: boolean,
@@ -150,7 +144,7 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                         <Table className={this.props.classes.table}>
                             <TableHead className="table-head">
                                 <TableRow>
-                                    <TableCell className={this.props.classes.tableCellStatus}>
+                                    <TableCell className="table-cell-status">
                                         <Checkbox
                                             checked={this.state.checkedAll}
                                             onChange={this.handleChangeAll('checkedAll')}
@@ -171,7 +165,10 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                                                 className={index % 2 === 0 ? this.props.classes.evenRow : ''}
                                                 key={n.id}
                                             >
-                                                <TableCell padding="checkbox">
+                                                <TableCell
+                                                    padding="checkbox"
+                                                    className="table-cell-status"
+                                                >
                                                     <Checkbox
                                                         checked={n.check}
                                                         onChange={this.handleChange(n)}
