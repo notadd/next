@@ -6,15 +6,10 @@ import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
+import Popover from 'material-ui/Popover';
+import TextField from 'material-ui/TextField';
 import withStyles from 'material-ui/styles/withStyles';
 const styles = {
-    header: {
-        'align-items': 'center',
-        background: '#3f51b5',
-        boxShadow: '0px 1px 4px 0 rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        'justify-content': 'space-between',
-    },
     headerLeft: {
         'align-items': 'center',
         display: 'flex',
@@ -64,6 +59,20 @@ const styles = {
         fontSize: '18px',
         width: '28px',
     },
+    textFieldRoot: {
+        padding: 0,
+    },
+    textFieldInput: {
+        borderRadius: 4,
+        border: '1px solid #ced4da',
+        fontSize: 16,
+        padding: '10px 12px',
+        width: 'calc(100% - 24px)',
+        '&:focus': {
+            borderColor: '#80bdff',
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+        },
+    },
 };
 class HeaderLayout extends React.Component {
     constructor() {
@@ -101,9 +110,14 @@ class HeaderLayout extends React.Component {
                 name: '后台管理员',
             },
             fullScreen: false,
+            openSearch: false,
+            anchorEl: null,
         };
         this.handleChange = (event, value) => {
             this.setState({ value });
+        };
+        this.handleOpenSearch = () => {
+            this.setState({ openSearch: true });
         };
         this.handleFullScreen = () => {
             this.setState({ fullScreen: !this.state.fullScreen });
@@ -155,16 +169,31 @@ class HeaderLayout extends React.Component {
         };
     }
     render() {
-        const { value } = this.state;
-        return (React.createElement("div", { className: this.props.classes.header },
+        const { value, openSearch } = this.state;
+        const { classes } = this.props;
+        return (React.createElement("div", { className: "header" },
             React.createElement("div", { className: this.props.classes.headerLeft },
                 React.createElement("img", { className: this.props.classes.logo, src: require('../assets/images/notadd_logo.png') }),
                 React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", className: this.props.classes.menuBtn, color: "contrast" },
                     React.createElement(MenuIcon, null)),
                 React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", style: { background: 'none', marginLeft: '0' }, className: this.props.classes.menuBtn, onClick: this.handleFullScreen, color: "contrast" },
                     React.createElement(FullScreen, null)),
-                React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", style: { background: 'none', marginLeft: '0' }, className: this.props.classes.menuBtn, color: "contrast" },
+                React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", style: { background: 'none', marginLeft: '0' }, className: this.props.classes.menuBtn, onClick: this.handleOpenSearch, color: "contrast" },
                     React.createElement(Search, null)),
+                React.createElement(Popover, { open: openSearch, anchorEl: "anchorPosition", anchorPosition: { top: 150, left: 0 }, anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }, transformOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }, onClose: this.handleOpenSearch },
+                    React.createElement(TextField, { defaultValue: "react-bootstrap", label: "Bootstrap", InputProps: {
+                            disableUnderline: true,
+                            classes: {
+                                root: classes.textFieldRoot,
+                                input: classes.textFieldInput,
+                            },
+                        } })),
                 React.createElement(BottomNavigation, { value: value, onChange: this.handleChange, showLabels: true, className: this.props.classes.root }, this.state.navs.map((item, index) => {
                     return (React.createElement(BottomNavigationButton, { classes: {
                             root: this.props.classes.navBtn,

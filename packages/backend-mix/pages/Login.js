@@ -27,6 +27,8 @@ class Login extends React.Component {
             userName: '',
             password: '',
             loading: false,
+            transition: undefined,
+            open: false,
         };
         this.handleChange = (name) => (event) => {
             let val = event.target.value;
@@ -34,25 +36,34 @@ class Login extends React.Component {
                 [name]: val,
             });
         };
+        this.handleClose = () => {
+            this.setState({ open: false });
+        };
         this.handleSubmit = (event) => {
             event.preventDefault();
             this.setState({
                 loading: true,
             });
-            axios.post('http://192.168.109.120:3000/auth/token', {
+            axios.post('localhost:3000/auth/token', {
                 username: this.state.userName,
                 password: this.state.password,
             }).then(response => {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     const user = {
                         username: this.state.userName,
                         password: this.state.password
                     };
                     localStorage.setItem('notadd_user', JSON.stringify(user));
-                    localStorage.setItem('notadd_token', response.data.access_token);
+                    localStorage.setItem('notadd_token', response.data.data.access_token);
                     this.props.history.push('/index');
                 }
             });
+            const user = {
+                username: this.state.userName,
+                password: this.state.password
+            };
+            localStorage.setItem('notadd_user', JSON.stringify(user));
+            this.props.history.push('/index');
         };
     }
     render() {

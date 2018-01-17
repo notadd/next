@@ -1,25 +1,21 @@
 import * as React from 'react';
 import createHashHistory from 'history/createHashHistory';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
-import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
+import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import ChatBubble from 'material-ui-icons/ChatBubble';
 import Notifications from 'material-ui-icons/Notifications';
 import withStyles from 'material-ui/styles/withStyles';
 import * as classNames from 'classnames';
 import Badge from 'material-ui/Badge';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 import MailIcon from 'material-ui-icons/Mail';
 import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
+import Icon from 'material-ui/Icon';
 const styles = {
-    bigAvatar: {
-        'width': '50px',
-        'height': '50px',
-        'margin-top': '35px',
-        'margin-right': '20px',
-    },
     badge: {
         'box-sizing': 'border-box',
         'border': '2px solid #fff',
@@ -51,14 +47,15 @@ const styles = {
     },
 };
 class SideBar extends React.Component {
-    constructor() {
-        super(...arguments);
+    constructor(props, state) {
+        super(props, state);
         this.state = {
             navs: [
                 {
                     name: '全局设置',
                     open: false,
                     index: 0,
+                    icon: 'view_quilt',
                     children: [
                         {
                             'name': '参数配置',
@@ -76,6 +73,7 @@ class SideBar extends React.Component {
                 },
                 {
                     name: '附件设置',
+                    icon: 'insert_drive_file',
                     open: false,
                     index: 1,
                     children: [
@@ -90,6 +88,7 @@ class SideBar extends React.Component {
                 {
                     name: '应用管理',
                     open: false,
+                    icon: 'work',
                     index: 2,
                     children: [
                         {
@@ -146,10 +145,12 @@ class SideBar extends React.Component {
                     name: '全局插件',
                     open: false,
                     index: 3,
+                    icon: 'extension',
                     children: []
                 },
                 {
                     name: '系统插件',
+                    icon: 'widgets',
                     open: false,
                     index: 4,
                     children: [
@@ -174,6 +175,76 @@ class SideBar extends React.Component {
                     ]
                 }
             ],
+            navsCms: [
+                {
+                    name: '文章管理',
+                    open: false,
+                    index: 0,
+                    icon: 'view_quilt',
+                    children: [
+                        {
+                            'name': '全部文章',
+                            'path': '/cms/article',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/article/type',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '回收站',
+                            'path': '/cms/article/recycle',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '页面管理',
+                    icon: 'insert_drive_file',
+                    open: false,
+                    index: 1,
+                    children: [
+                        {
+                            'name': '全部页面',
+                            'path': '/cms/page',
+                            'open': false,
+                            'children': [],
+                        },
+                        {
+                            'name': '分类管理',
+                            'path': '/cms/page/type',
+                            'open': false,
+                            'children': [],
+                        }
+                    ]
+                },
+                {
+                    name: '模块管理',
+                    open: false,
+                    icon: 'work',
+                    index: 2,
+                    children: []
+                },
+                {
+                    name: '信息管理',
+                    open: false,
+                    index: 3,
+                    icon: 'extension',
+                    children: [
+                        {
+                            'name': '客户留言',
+                            'path': '/cms/message',
+                            'open': false,
+                            'children': [],
+                        },
+                    ]
+                },
+            ],
+            open: props.open,
             user: {
                 name: '管理员',
                 email: 'zhhu_123@163.com',
@@ -181,6 +252,11 @@ class SideBar extends React.Component {
                 message: 5,
             },
         };
+    }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            open: nextProps['open']
+        });
     }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
@@ -225,14 +301,9 @@ class SideBar extends React.Component {
     }
     render() {
         return (React.createElement("div", { className: "sideBar" },
-            React.createElement("div", { className: "userBox" },
-                React.createElement("div", { style: {
-                        background: 'rgba(0, 0, 0, 0.5)',
-                        height: 'inherit',
-                        display: 'flex',
-                        justifyContent: 'center'
-                    } },
-                    React.createElement(Avatar, { alt: this.state.user.name, src: this.state.user.user_img, className: this.props.classes.bigAvatar }),
+            React.createElement("div", { className: classNames('userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox') },
+                React.createElement("div", null,
+                    React.createElement(Avatar, { alt: this.state.user.name, src: this.state.user.user_img, className: "bigAvatar" }),
                     React.createElement("div", { className: "user-right" },
                         React.createElement("p", null, this.state.user.name),
                         React.createElement("p", null, this.state.user.email),
@@ -259,10 +330,10 @@ class SideBar extends React.Component {
                             paddingRight: 25,
                             height: 52
                         } },
-                        React.createElement(ListItemIcon, null,
-                            React.createElement(InboxIcon, null)),
-                        React.createElement(ListItemText, { inset: true, primary: item.name }),
-                        item.open ? React.createElement(ExpandLess, null) : React.createElement(ExpandMore, null)),
+                        React.createElement(Icon, { style: { color: '#808080' } }, item.icon),
+                        React.createElement(ListItemText, { inset: true, style: { paddingLeft: 40 }, primary: item.name }),
+                        item.open ? React.createElement(ExpandMore, { style: { color: '#808080', width: 20, height: 20 } })
+                            : React.createElement(KeyboardArrowRight, { style: { color: '#808080', width: 20, height: 20 } })),
                     React.createElement(Collapse, { component: "li", in: item.open, unmountOnExit: true },
                         React.createElement(List, { disablePadding: true, style: {
                                 paddingTop: 0,
@@ -281,19 +352,34 @@ class SideBar extends React.Component {
                                         React.createElement(ListItemText, { style: { paddingLeft: 78 }, inset: true, primary: child.name }))),
                                     child.hasOwnProperty('children')
                                         && child.children.length > 0
-                                        && child.open ? (React.createElement(ExpandLess, null)) : child.hasOwnProperty('children')
+                                        && child.open ? (React.createElement(ExpandMore, { style: {
+                                            color: '#808080',
+                                            width: 20,
+                                            height: 20,
+                                        } })) : child.hasOwnProperty('children')
                                         && child.children.length > 0
-                                        && child.open === false ? (React.createElement(ExpandMore, null)) : null),
+                                        && child.open === false ? (React.createElement(KeyboardArrowRight, { style: {
+                                            color: '#808080',
+                                            width: 20,
+                                            height: 20,
+                                        } })) : null),
                                 child.hasOwnProperty('children') && child.children.length
                                     ? (React.createElement(Collapse, { component: "li", in: child.open, unmountOnExit: true },
                                         React.createElement(List, { disablePadding: true, style: { borderBottom: '1px solid #e0e0e0' } }, child.children.map((inner, innertIndex) => {
-                                            return (React.createElement(NavLink, { to: inner.path, className: this.props.classes.innerRoot, activeClassName: classNames(this.props.classes.innerSelectBtn, 'innerSelectBtn'), key: index.toString()
+                                            return (React.createElement(NavLink, { to: inner.path, className: this.props
+                                                    .classes
+                                                    .innerRoot, activeClassName: classNames(this.
+                                                    props.
+                                                    classes
+                                                    .innerSelectBtn, 'innerSelectBtn'), key: index.toString()
                                                     + childIndex
                                                     + innertIndex },
-                                                React.createElement(ListItemText, { style: { paddingLeft: 78 }, inset: true, primary: inner.name })));
+                                                React.createElement(ListItemText, { style: {
+                                                        paddingLeft: 78
+                                                    }, inset: true, primary: inner.name })));
                                         })))) : null));
                         })))));
             })));
     }
 }
-export default withStyles(styles)(SideBar);
+export default compose(withStyles(styles), withWidth())(SideBar);

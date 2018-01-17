@@ -1,7 +1,6 @@
 .upload .ant-card-head-title {
     font-weight: bold;
 }
-
 .upload .ant-form-item:last-child label::after {
     content: '';
 }

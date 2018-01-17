@@ -27,13 +27,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
 let id = 0;
@@ -86,14 +81,14 @@ class Extension extends React.Component {
                 React.createElement(Table, { className: this.props.classes.table },
                     React.createElement(TableHead, { className: "table-head" },
                         React.createElement(TableRow, null,
-                            React.createElement(TableCell, null, "\u62D3\u5C55\u540D\u79F0"),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u62D3\u5C55\u540D\u79F0"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u4F5C\u8005"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u63CF\u8FF0"),
-                            React.createElement(TableCell, { className: this.props.classes.tableCellStatus, numeric: true }, "\u72B6\u6001"),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u72B6\u6001"),
                             React.createElement(TableCell, { numeric: true }))),
                     React.createElement(TableBody, { className: "table-body" }, list.map((n, index) => {
                         return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : '', key: n.id },
-                            React.createElement(TableCell, null, n.name),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.name),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.author),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.descri),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true },

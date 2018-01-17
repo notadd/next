@@ -1,0 +1,60 @@
+.cms-message .table-body li {
+    border-bottom: 1px solid rgba(235, 235, 235, 1);
+}
+.cms-message .table-body li > div:first-child {
+    width: 100%;
+    position: relative;
+}
+.cms-message .table-body li .collapse-msg {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 40px;
+}
+.cms-message .table-body li > div:first-child > div{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+.cms-message .table-body li > div:first-child > div:first-child {
+    width: 40px;
+    padding-left: 12px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+.cms-message .table-head {
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    border-top: 1px solid rgba(235, 235, 235, 1);
+    border-bottom: 1px solid rgba(235, 235, 235, 1);
+}
+.cms-message .table-head li:nth-child(2) {
+    padding-left: 48px;
+}
+.cms-message .table-head li {
+    float: left;
+    height: 50px;
+}
+.cms-message .table-head li:nth-child(2),
+.cms-message .table-head li:nth-child(3),
+.cms-message .table-head li:nth-child(4),
+.cms-message .table-head li:nth-child(5) {
+    width: 22.9%;
+}
+.cms-message .table-body li > div:first-child:hover {
+    background: #eee;
+}
+.cms-message .table-body li > div:first-child > div:nth-child(2) {
+    width: 22.9%;
+    padding-left: 48px;
+}
+.cms-message .table-body li > div:first-child > div:nth-child(3) {
+    width: 22.9%;
+}
+.cms-message .table-body li > div:first-child > div:nth-child(4) {
+    width: 22.9%;
+}
+.cms-message .table-body li > div:first-child > div:nth-child(5) {
+    width: 22.9%
+}
