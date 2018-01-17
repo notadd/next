@@ -33,8 +33,14 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'center',
+        'text-align': 'left',
         'padding': '0',
+    },
+    tableCellStatus: {
+        'text-align': 'left',
+        'padding-left': '0',
+        'padding-right': '0',
+        'width': '40px',
     },
 };
 type State = {
@@ -112,52 +118,54 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                         <FileDownload />
                     </IconButton>
                 </div>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCell} numeric>
-                                    <Checkbox
-                                        checked={this.state.checkedAll}
-                                        onChange={this.handleChangeAll('checkedAll')}
-                                        value="checkedAll"
-                                    />
-                                </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell padding="checkbox" className={this.props.classes.tableCell} numeric>
-                                            <Checkbox
-                                                checked={n.check}
-                                                onChange={this.handleChange(n)}
-                                                value="n.check"
-                                            />
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.name}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.description}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.version}
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                <Paper className="root-paper">
+                   <div className="table-hidden">
+                       <Table className={this.props.classes.table}>
+                           <TableHead className="table-head">
+                               <TableRow>
+                                   <TableCell className={this.props.classes.tableCellStatus} numeric>
+                                       <Checkbox
+                                           checked={this.state.checkedAll}
+                                           onChange={this.handleChangeAll('checkedAll')}
+                                           value="checkedAll"
+                                       />
+                                   </TableCell>
+                                   <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
+                                   <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                   <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
+                               </TableRow>
+                           </TableHead>
+                           <TableBody className="table-body">
+                               {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                   .map((n, index) => {
+                                       return (
+                                           <TableRow
+                                               hover
+                                               className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                               key={n.id}
+                                           >
+                                               <TableCell padding="checkbox" className={this.props.classes.tableCellStatus} numeric>
+                                                   <Checkbox
+                                                       checked={n.check}
+                                                       onChange={this.handleChange(n)}
+                                                       value="n.check"
+                                                   />
+                                               </TableCell>
+                                               <TableCell className={this.props.classes.tableCell} numeric>
+                                                   {n.name}
+                                               </TableCell>
+                                               <TableCell className={this.props.classes.tableCell} numeric>
+                                                   {n.description}
+                                               </TableCell>
+                                               <TableCell className={this.props.classes.tableCell} numeric>
+                                                   {n.version}
+                                               </TableCell>
+                                           </TableRow>
+                                       );
+                                   })}
+                           </TableBody>
+                       </Table>
+                   </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
