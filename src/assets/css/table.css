@@ -44,6 +44,7 @@
     }
     .root-paper .table-hidden {
         overflow-x: auto;
+        overflow-y: hidden;
     }
     .root-paper .table-cell-status {
         min-width: 40px !important;

@@ -97,54 +97,56 @@ class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
                     CMS / 信息管理
                 </p>
                 <h4 className="title">客户留言</h4>
-                <Paper className={this.props.classes.root}>
-                    <ul className="table-head">
-                        <li />
-                        <li>姓名</li>
-                        <li>电话</li>
-                        <li>邮箱</li>
-                        <li>时间</li>
-                    </ul>
-                    <ul className="table-body">
-                        {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                            .map((n, index) => {
-                                return (
-                                    <li key={n.id}>
-                                        <div className={index % 2 === 0 ? this.props.classes.evenRow : ''}>
-                                            <div onClick={() => this.handleClick(n)}>
-                                                {
-                                                    n.collapse ?
-                                                        <ExpandMore
-                                                            style={{
+                <Paper className="root-paper">
+                   <div className="table-hidden">
+                       <ul className="table-head">
+                           <li />
+                           <li>姓名</li>
+                           <li>电话</li>
+                           <li>邮箱</li>
+                           <li>时间</li>
+                       </ul>
+                       <ul className="table-body">
+                           {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                               .map((n, index) => {
+                                   return (
+                                       <li key={n.id}>
+                                           <div className={index % 2 === 0 ? this.props.classes.evenRow : ''}>
+                                               <div onClick={() => this.handleClick(n)}>
+                                                   {
+                                                       n.collapse ?
+                                                           <ExpandMore
+                                                               style={{
                                                                 color: '#808080',
                                                                 width: 20,
                                                                 height: 20}}
-                                                        /> :
-                                                        <KeyboardArrowRight
-                                                            style={{
+                                                           /> :
+                                                           <KeyboardArrowRight
+                                                               style={{
                                                                 color: '#808080',
                                                                 width: 20,
                                                                 height: 20}}
-                                                        />
-                                                }
-                                            </div>
-                                            <div>{n.name}</div>
-                                            <div>{n.phone}</div>
-                                            <div>{n.email}</div>
-                                            <div>{n.time}</div>
-                                        </div>
-                                        <Collapse
-                                            in={n.collapse}
-                                            timeout="auto"
-                                            unmountOnExit
-                                            className="collapse-msg"
-                                        >
-                                            留言：{n.msg}
-                                        </Collapse>
-                                    </li>
-                                );
-                            })}
-                    </ul>
+                                                           />
+                                                   }
+                                               </div>
+                                               <div>{n.name}</div>
+                                               <div>{n.phone}</div>
+                                               <div>{n.email}</div>
+                                               <div>{n.time}</div>
+                                           </div>
+                                           <Collapse
+                                               in={n.collapse}
+                                               timeout="auto"
+                                               unmountOnExit
+                                               className="collapse-msg"
+                                           >
+                                               留言：{n.msg}
+                                           </Collapse>
+                                       </li>
+                                   );
+                               })}
+                       </ul>
+                   </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
