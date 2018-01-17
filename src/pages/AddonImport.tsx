@@ -142,52 +142,54 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                         <FileDownload />
                     </IconButton>
                 </div>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus}>
-                                    <Checkbox
-                                        checked={this.state.checkedAll}
-                                        onChange={this.handleChangeAll('checkedAll')}
-                                        value="checkedAll"
-                                    />
-                                </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell padding="checkbox">
-                                            <Checkbox
-                                                checked={n.check}
-                                                onChange={this.handleChange(n)}
-                                                value="n.check"
-                                            />
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.name}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.description}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.version}
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                <Paper className="root-paper">
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className={this.props.classes.tableCellStatus}>
+                                        <Checkbox
+                                            checked={this.state.checkedAll}
+                                            onChange={this.handleChangeAll('checkedAll')}
+                                            value="checkedAll"
+                                        />
+                                    </TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
+                                            >
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        checked={n.check}
+                                                        onChange={this.handleChange(n)}
+                                                        value="n.check"
+                                                    />
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.name}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.description}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.version}
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
