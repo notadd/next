@@ -385,30 +385,38 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                 key={index}
                                 style={{paddingTop: 0, paddingBottom: 0}}
                             >
-                                <ListItem
-                                    button
-                                    onClick={() => this.handleClick(index, null)}
-                                    className={
-                                        classNames(
-                                            item.open ?
-                                            this.props.classes.selectFirstLevelMenu : '',
-                                            item.open ? 'selectFirstLevelMenu' : ''
-                                        )
-                                    }
-                                    style={{
-                                        paddingTop: 0,
-                                        paddingBottom: 0,
-                                        paddingLeft: 23,
-                                        paddingRight: 25,
-                                        height: 52
-                                    }}
-                                >
-                                    <Icon style={{color: '#808080'}}>{item.icon}</Icon>
-                                    <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
-                                    {
-                                        item.open ? <ExpandMore style={{color: '#808080', width: 20, height: 20}}/>
-                                        : <KeyboardArrowRight style={{color: '#808080', width: 20, height: 20}}/>}
-                                </ListItem>
+                                {
+                                    !this.state.open && this.props.width !== 'xs' ?
+                                        <ListItem
+                                            className={
+                                                classNames(
+                                                    item.open ?
+                                                    this.props.classes.selectFirstLevelMenu : '',
+                                                    'list-item'
+                                                )
+                                            }
+                                        >
+                                            <Icon style={{color: '#808080'}}>{item.icon}</Icon>
+                                        </ListItem>
+                                        :
+                                        <ListItem
+                                            button
+                                            onClick={() => this.handleClick(index, null)}
+                                            className={
+                                                classNames(
+                                                    item.open ?
+                                                        this.props.classes.selectFirstLevelMenu : '',
+                                                    item.open ? 'selectFirstLevelMenu' : '',
+                                                )
+                                            }
+                                        >
+                                            <Icon style={{color: '#808080'}}>{item.icon}</Icon>
+                                            <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
+                                            {
+                                                item.open ? <ExpandMore style={{color: '#808080', width: 20, height: 20}}/>
+                                                    : <KeyboardArrowRight style={{color: '#808080', width: 20, height: 20}}/>}
+                                        </ListItem>
+                                }
                                 <Collapse component="li" in={item.open} unmountOnExit>
                                     <List
                                         disablePadding
