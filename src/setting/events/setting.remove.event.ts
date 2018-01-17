@@ -4,6 +4,8 @@ export class SettingRemoveEvent implements IEvent {
     /**
      * @param {string} key
      */
-    constructor(private readonly key: string) {
+    constructor(
+        private readonly key: string,
+    ) {
     }
 }
