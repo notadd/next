@@ -43,7 +43,7 @@ ApplicationModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot(),
             graphql_1.GraphQLModule,
             configuration_1.ConfigurationModule,
-            logger_1.LogModule,
+            logger_1.LoggerModule,
             setting_1.SettingModule,
             backend_1.BackendModule,
             user_1.UserModule,

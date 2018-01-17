@@ -3,7 +3,7 @@ import { BackendModule } from '@notadd/backend';
 import { ConfigurationModule } from "@notadd/configuration";
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { GraphQLFactory, GraphQLModule } from '@nestjs/graphql';
-import { LogModule } from "@notadd/logger";
+import { LoggerModule } from "@notadd/logger";
 import { MiddlewaresConsumer } from '@nestjs/common/interfaces/middlewares';
 import { Module, RequestMethod } from '@nestjs/common';
 import { SettingModule } from "@notadd/setting";
@@ -15,7 +15,7 @@ import { UserModule } from '@notadd/user';
         TypeOrmModule.forRoot(),
         GraphQLModule,
         ConfigurationModule,
-        LogModule,
+        LoggerModule,
         SettingModule,
         BackendModule,
         UserModule,
