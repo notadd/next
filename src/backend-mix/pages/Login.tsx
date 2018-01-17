@@ -9,6 +9,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { CircularProgress } from 'material-ui/Progress';
 // import Prompt from '../components/Prompt';
 import { History } from 'history';
+// import Snackbar from 'material-ui/Snackbar';
+// import Slide from 'material-ui/transitions/Slide';
 import axios from 'axios';
 
 const styles = {
@@ -28,6 +30,8 @@ type State = {
     userName: string,
     password: string
     loading: boolean,
+    transition: any,
+    open: boolean,
 };
 
 interface Props extends WithStyles<keyof typeof styles> {
@@ -39,15 +43,18 @@ class Login extends React.Component<Props, State> {
         userName: '',
         password: '',
         loading: false,
+        transition: undefined,
+        open: false,
     };
-
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
     };
-
+    handleClose = () => {
+        this.setState({ open: false });
+    };
     handleSubmit = (event: any) => {
         event.preventDefault();
         this.setState(
@@ -55,51 +62,57 @@ class Login extends React.Component<Props, State> {
                 loading: true,
             },
         );
-        axios.post('http://192.168.109.120:3000/auth/token', {
+        axios.post('localhost:3000/auth/token', {
             username: this.state.userName,
             password: this.state.password,
         }).then(response => {
-            if (response.status === 201) {
+            if (response.status === 200) {
                 const user = {
                     username: this.state.userName,
                     password: this.state.password
                 };
                 localStorage.setItem('notadd_user', JSON.stringify(user));
-                localStorage.setItem('notadd_token', response.data.access_token);
+                localStorage.setItem('notadd_token', response.data.data.access_token);
                 this.props.history.push('/index');
             }
         });
+        const user = {
+            username: this.state.userName,
+            password: this.state.password
+        };
+        localStorage.setItem('notadd_user', JSON.stringify(user));
+        // localStorage.setItem('notadd_token', response.data.data.access_token);
+        this.props.history.push('/index');
     };
-
     render() {
         return (
             <div className="login">
                 <div className="wrapBox">
                     <Card className="innerBox">
-                        <CardContent style={ { padding: 0 } }>
+                        <CardContent style={{padding: 0}}>
                             <h3 className="boxTitle">登录</h3>
-                            <Tooltip placement="bottom" title="Login" onClick={ this.handleSubmit }>
+                            <Tooltip placement="bottom" title="Login" onClick={this.handleSubmit}>
                                 <Button fab color="accent" className="absolute">
-                                    <KeyboardArrowRight/>
+                                    <KeyboardArrowRight />
                                 </Button>
                             </Tooltip>
-                            <FormControl fullWidth style={ { marginTop: 65 } }>
+                            <FormControl fullWidth style={{marginTop: 65}}>
                                 <InputLabel
                                     htmlFor="user-name"
-                                    className={ this.props.classes.formLabelFont }
+                                    className={this.props.classes.formLabelFont}
                                 >
                                     用户名
                                 </InputLabel>
                                 <Input
                                     id="user-name"
-                                    className={ this.props.classes.formLabelFont }
-                                    onChange={ this.handleChange('userName') }
-                                    value={ this.state.userName }
+                                    className={this.props.classes.formLabelFont}
+                                    onChange={this.handleChange('userName')}
+                                    value={this.state.userName}
                                 />
                             </FormControl>
-                            <FormControl fullWidth style={ { marginTop: 35 } }>
+                            <FormControl fullWidth style={{marginTop: 35}}>
                                 <InputLabel
-                                    className={ this.props.classes.formLabelFont }
+                                    className={this.props.classes.formLabelFont}
                                     htmlFor="user-password"
                                 >
                                     密码
@@ -112,43 +125,51 @@ class Login extends React.Component<Props, State> {
                                             }
                                         }
                                     }
-                                    className={ this.props.classes.formLabelFont }
+                                    className={this.props.classes.formLabelFont}
                                     id="user-password"
                                     type="password"
-                                    onChange={ this.handleChange('password') }
-                                    value={ this.state.password }
+                                    onChange={this.handleChange('password')}
+                                    value={this.state.password}
                                 />
                             </FormControl>
                         </CardContent>
-                        <CardActions style={ { marginTop: 30, padding: 0 } }>
+                        <CardActions style={{marginTop: 30, padding: 0}}>
                             <Button
                                 raised
                                 disabled={
                                     this.state.userName === '' || this.state.password === '' || this.state.loading
                                 }
                                 color="primary"
-                                style={ {
+                                style={{
                                     width: '100%',
                                     height: 48,
                                     fontSize: 14,
                                     borderRadius: 4,
                                     margin: 0
-                                } }
+                                }}
                                 className={
                                     this.state.userName === ''
                                     || this.state.password === '' ?
                                         this.props.classes.disabled : ''
                                 }
-                                onClick={ this.handleSubmit }
+                                onClick={this.handleSubmit}
                             >
-                                { this.state.loading ? <div><CircularProgress size={ 24 }/></div> : <span> 登录</span> }
+                                {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
                             </Button>
                         </CardActions>
+                        {/*<Snackbar*/}
+                            {/*open={this.state.open}*/}
+                            {/*onClose={this.handleClose}*/}
+                            {/*transition={this.state.transition}*/}
+                            {/*SnackbarContentProps={{*/}
+                                {/*'aria-describedby': 'message-id',*/}
+                            {/*}}*/}
+                            {/*message={<span id="message-id">I love snacks</span>}*/}
+                        {/*/>*/}
                     </Card>
                 </div>
             </div>
         );
     }
 }
-
 export default withStyles(styles)(Login);

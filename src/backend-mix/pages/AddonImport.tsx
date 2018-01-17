@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
@@ -32,10 +33,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-        'padding-right': '0',
+        'text-align': 'center',
+        'padding': '0',
     },
     tableCellStatus: {
         'text-align': 'left',
@@ -44,10 +43,10 @@ const styles = {
         'width': '40px',
     },
 };
-type State = {};
+type State = {
+};
 
 let id = 0;
-
 function createData(check: boolean, name: any, description: any, version: any) {
     id += 1;
     return { id, check, name, description, version };
@@ -64,8 +63,9 @@ const list = [
 class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
+        rowsPerPage: 2,
+        currentPage: 0,
     };
-
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
             list.map(item => {
@@ -80,10 +80,12 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
             [name]: event.target.checked,
         });
     };
-
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
-        pro.check = event.target.checked;
+        pro.check = true;
+        if (!event.target.checked) {
+            pro.check = false;
+        }
         list.map(item => {
             if (item.check === false) {
                 this.state.checkedAll = false;
@@ -93,8 +95,12 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
             [pro]: event.target.checked,
         });
     };
+    handlePageClick = (data: any) => {
+        this.setState({ currentPage: data.selected });
+    };
 
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -103,65 +109,79 @@ class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State
                 <h4 className="title">导入/导出</h4>
                 <div className="btn-group">
                     <IconButton
-                        className={ this.props.classes.menuBtn }
+                        className={this.props.classes.menuBtn}
                     >
-                        <FileUpload/>
+                        <FileUpload />
                     </IconButton>
                     <IconButton
-                        className={ this.props.classes.menuBtn }
+                        className={this.props.classes.menuBtn}
                     >
-                        <FileDownload/>
+                        <FileDownload />
                     </IconButton>
                 </div>
-                <Paper className={ this.props.classes.root }>
-                    <Table className={ this.props.classes.table }>
+                <Paper className={this.props.classes.root}>
+                    <Table className={this.props.classes.table}>
                         <TableHead className="table-head">
                             <TableRow>
-                                <TableCell className={ this.props.classes.tableCellStatus }>
+                                <TableCell className={this.props.classes.tableCellStatus}>
                                     <Checkbox
-                                        checked={ this.state.checkedAll }
-                                        onChange={ this.handleChangeAll('checkedAll') }
+                                        checked={this.state.checkedAll}
+                                        onChange={this.handleChangeAll('checkedAll')}
                                         value="checkedAll"
                                     />
                                 </TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>插件名称</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>描述</TableCell>
-                                <TableCell className={ this.props.classes.tableCell } numeric>版本</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            { list.map((n, index) => {
+                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                .map((n, index) => {
                                 return (
                                     <TableRow
                                         hover
-                                        className={ index % 2 === 0 ? this.props.classes.evenRow : '' }
-                                        key={ n.id }
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                        key={n.id}
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
-                                                checked={ n.check }
-                                                onChange={ this.handleChange(n) }
+                                                checked={n.check}
+                                                onChange={this.handleChange(n)}
                                                 value="n.check"
                                             />
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.name }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.name}
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.description }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.description}
                                         </TableCell>
-                                        <TableCell className={ this.props.classes.tableCell } numeric>
-                                            { n.version }
+                                        <TableCell className={this.props.classes.tableCell} numeric>
+                                            {n.version}
                                         </TableCell>
                                     </TableRow>
                                 );
-                            }) }
+                            })}
                         </TableBody>
                     </Table>
+                    <div className="table-pagination">
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={<a href="javascript:;">...</a>}
+                            breakClassName={'break-me'}
+                            pageCount={list.length / rowsPerPage}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
+                    </div>
                 </Paper>
             </div>
         );
     }
 }
-
 export default withStyles(styles)(AddonImport);

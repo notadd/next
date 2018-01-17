@@ -1,0 +1,44 @@
+.table-footer .table-paginate > div {
+    height: 32px;
+    min-height: 32px;
+    padding-right: 0;
+}
+.table-pagination {
+    height: 52px;
+}
+.table-pagination .pagination {
+    float: right;
+    margin-top: 20px;
+}
+.table-pagination .pagination li {
+    float: left;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: solid 1px #e4eaec;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #808080;
+    margin-right: 10px;
+}
+.pagination li:last-child {
+    margin-right: 0;
+}
+.pagination li.active {
+    background-color: #3f51b5;
+    color: #fff;
+}
+.pagination li.disabled {
+    background-color: #f5f5f5;
+}
+.pagination li.disabled a:hover {
+    cursor: not-allowed;
+}
+.pagination li a {
+    display: block;
+}
+.pagination li:focus,
+.pagination li a:focus {
+    outline: -webkit-focus-ring-color auto 0;
+}
