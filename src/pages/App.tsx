@@ -420,8 +420,10 @@ class App extends React.Component<Props, State> {
                                                 type="persistent"
                                                 classes={{
                                                     modal: classes.root,
-                                                    docked: classNames(classes.xsDrawerPaper, !this.state.open && classes.xsDrawerPaperClose),
-                                                    paper: classNames(classes.xsDrawerPaper, !this.state.open && classes.xsDrawerPaperClose),
+                                                    docked: classNames(classes.xsDrawerPaper,
+                                                        !this.state.open && classes.xsDrawerPaperClose),
+                                                    paper: classNames(classes.xsDrawerPaper,
+                                                        !this.state.open && classes.xsDrawerPaperClose),
                                                 }}
                                                 onClose={this.toggleDrawer}
                                                 open={this.state.open}
@@ -432,10 +434,13 @@ class App extends React.Component<Props, State> {
                                         <Hidden smDown implementation="css">
                                             <Drawer
                                                 type="persistent"
+                                                className={!this.state.open ? 'smallSideBar' : ''}
                                                 classes={{
                                                     modal: classes.root,
-                                                    docked: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                                                    paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                                                    docked: classNames(classes.drawerPaper,
+                                                        !this.state.open && classes.drawerPaperClose),
+                                                    paper: classNames(classes.drawerPaper,
+                                                        !this.state.open && classes.drawerPaperClose),
                                                 }}
                                                 onClose={this.toggleDrawer}
                                                 open={this.state.open}

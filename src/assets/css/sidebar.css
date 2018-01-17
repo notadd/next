@@ -43,6 +43,7 @@
 .sideBar .small-userBox {
     background: none;
     height: 90px;
+    margin-bottom: 0;
 }
 .sideBar .small-userBox > div {
     align-items: center;
@@ -71,6 +72,10 @@
 
 .sideBar .user-right > div:last-child {
     margin-top: 15px;
+}
+.sideBar .list-item {
+    padding: 0px 25px 0px 23px;
+    height: 52px;
 }
 
 .sideBar .badgeIcon svg {
@@ -107,4 +112,13 @@
 
 .sideBar > div > h3 {
     color: #333333;
+}
+
+.smallSideBar .list-item {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+.smallSideBar .list-item:hover {
+    background: #ededed;
 }
