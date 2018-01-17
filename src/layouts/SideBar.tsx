@@ -57,8 +57,7 @@ type User = {
 };
 
 type State = {
-    navs: any;
-    navsCms: any,
+    navs: Array<any>;
     user: User;
     open: boolean,
 };
@@ -67,6 +66,8 @@ interface Props {
     history?: History;
     open: boolean;
     width: string;
+    navs: Array<any>;
+    sideNav: Array<any>;
 }
 
 type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
@@ -75,200 +76,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     constructor(props: PropsWithStyles, state: State) {
         super(props, state);
         this.state = {
-            navs: [
-                {
-                    name: '全局设置',
-                    open: false,
-                    index: 0,
-                    icon: 'view_quilt',
-                    children: [
-                        {
-                            'name': '参数配置',
-                            'path': '/configurations',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': 'SEO设置',
-                            'path': '/seo',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                },
-                {
-                    name: '附件设置',
-                    icon: 'insert_drive_file',
-                    open: false,
-                    index: 1,
-                    children: [
-                        {
-                            'name': '上传设置',
-                            'path': '/upload',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                },
-                {
-                    name: '应用管理',
-                    open: false,
-                    icon: 'work',
-                    index: 2,
-                    children: [
-                        {
-                            'name': '模块配置',
-                            'path': '/module',
-                            'open': false,
-                            'children': [
-                                {
-                                    'name': '开启模块',
-                                    'path': '/module/open-module'
-                                },
-                                {
-                                    'name': '域名配置',
-                                    'path': '/module/domain-config'
-                                },
-                                {
-                                    'name': '导入导出',
-                                    'path': '/module/import-export'
-                                },
-                                {
-                                    'name': '本地安装',
-                                    'path': '/module/install'
-                                },
-                            ]
-                        },
-                        {
-                            'name': '插件配置',
-                            'path': '/addon',
-                            'open': false,
-                            'children': [
-                                {
-                                    'name': '开启插件',
-                                    'path': '/addon/openAddon'
-                                },
-                                {
-                                    'name': '导入导出',
-                                    'path': '/addon/import-export'
-                                },
-                                {
-                                    'name': '本地安装',
-                                    'path': '/addon/install'
-                                },
-                            ],
-                        },
-                        {
-                            'name': '拓展配置',
-                            'path': '/extension',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                },
-                {
-                    name: '全局插件',
-                    open: false,
-                    index: 3,
-                    icon: 'extension',
-                    children: []
-                },
-                {
-                    name: '系统插件',
-                    icon: 'widgets',
-                    open: false,
-                    index: 4,
-                    children: [
-                        {
-                            'name': '菜单管理',
-                            'path': '/menu',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': '邮件设置',
-                            'path': '/mail',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': '调试工具',
-                            'path': '/debug',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                }
-            ],
-            navsCms: [
-                {
-                    name: '文章管理',
-                    open: false,
-                    index: 0,
-                    icon: 'view_quilt',
-                    children: [
-                        {
-                            'name': '全部文章',
-                            'path': '/cms/article',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': '分类管理',
-                            'path': '/cms/article/type',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': '回收站',
-                            'path': '/cms/article/recycle',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                },
-                {
-                    name: '页面管理',
-                    icon: 'insert_drive_file',
-                    open: false,
-                    index: 1,
-                    children: [
-                        {
-                            'name': '全部页面',
-                            'path': '/cms/page',
-                            'open': false,
-                            'children': [],
-                        },
-                        {
-                            'name': '分类管理',
-                            'path': '/cms/page/type',
-                            'open': false,
-                            'children': [],
-                        }
-                    ]
-                },
-                {
-                    name: '模块管理',
-                    open: false,
-                    icon: 'work',
-                    index: 2,
-                    children: []
-                },
-                {
-                    name: '信息管理',
-                    open: false,
-                    index: 3,
-                    icon: 'extension',
-                    children: [
-                        {
-                            'name': '客户留言',
-                            'path': '/cms/message',
-                            'open': false,
-                            'children': [],
-                        },
-                    ]
-                },
-            ],
+            navs: props.sideNav,
             open: props.open,
             user: {
                 name: '管理员',
@@ -280,7 +88,8 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     }
     componentWillReceiveProps(nextProps: object) {
         this.setState({
-            open: nextProps['open']
+            open: nextProps['open'],
+            navs: nextProps['sideNav'],
         });
     }
     componentDidMount() {
@@ -378,6 +187,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                     </div>
                 </div>
                 {
+                    this.state.navs &&
                     this.state.navs.map((item: any, index: number) => {
                         return (
                             <List
