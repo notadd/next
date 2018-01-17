@@ -43,37 +43,56 @@ const styles = {
     },
 };
 type State = {
+    open: boolean,
+    modalId: string,
+    modalName: string,
+    rowsPerPage: number,
+    currentPage: number,
 };
-
-let id = 0;
-function createData(name: any, author: any, descri: any, status: boolean) {
-    id += 1;
-    return { id, name, author, descri, status };
-}
-
-const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-];
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        list: [],
+        list: [
+            {
+                id: 11,
+                name: '用户中心',
+                author: 'Mark',
+                descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
+                status: true,
+            },
+            {
+                id: 12,
+                name: '商城',
+                author: 'Mark',
+                descri: 'fefreg',
+                status: true,
+            },
+            {
+                id: 13,
+                name: '商家',
+                author: 'Mark',
+                descri: 'fefreg',
+                status: false,
+            },
+            {
+                id: 14,
+                name: 'CMS',
+                author: 'Mark',
+                descri: 'fefreg',
+                status: false,
+            },
+            {
+                id: 15,
+                name: 'Notadd2',
+                author: 'Mark',
+                descri: 'fefreg',
+                status: true,
+            },
+        ],
         open: false,
         modalId: '',
         modalName: '',
-        rowsPerPage: 2,
+        rowsPerPage: 3,
         currentPage: 0,
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
@@ -103,60 +122,62 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         this.setState({ currentPage: data.selected });
     };
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div>
                 <p className="crumbs">
                     全局 / 应用管理 / 模块配置
                 </p>
                 <h4 className="title">开启模块</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
-                                <TableCell numeric/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell className={this.props.classes.tableCell} numeric>{n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            <Switch
-                                                checked={n.status}
-                                                onChange={this.handleChange(n)}
-                                                aria-label="n.status"
-                                            />
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            <IconButton
-                                                className={this.props.classes.menuBtn}
-                                                onClick={() => this.handleClickOpen(n)}
+                <Paper className="root-paper">
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
+                                    <TableCell numeric/>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
                                             >
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                                                <TableCell className={this.props.classes.tableCell} numeric>{n.name}</TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.author}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.descri}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    <Switch
+                                                        checked={n.status}
+                                                        onChange={this.handleChange(n)}
+                                                        aria-label="n.status"
+                                                    />
+                                                </TableCell>
+                                                <TableCell numeric>
+                                                    <IconButton
+                                                        className={this.props.classes.menuBtn}
+                                                        onClick={() => this.handleClickOpen(n)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
