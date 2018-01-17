@@ -18,20 +18,9 @@ body {
 }
 .title {
     font-size: 18px;
-    margin-bottom: 15px;
+    margin-bottom: 24px;
     margin-top: 5px;
     font-weight: 600;
-}
-@media (max-width: 479px) {
-    .crumbs {
-        color: #333;
-        font-size: 12px;
-    }
-    .title {
-        margin-bottom: 27px;
-        margin-top: 4px;
-        font-weight: 600;
-    }
 }
 #root {
     height: inherit;
@@ -39,18 +28,18 @@ body {
 .header-search {
     position: inherit !important;
 }
+/*表格顶部按钮操作*/
 .top-action-module {
     position: relative;
 }
 .top-action-module .btn-group {
     position: absolute;
     right: 0;
-    top: 36px;
+    top: 6px;
 }
 .top-action-module .btn-group button{
     font-size: 16px;
 }
-
 /*顶部搜索*/
 .header-search > div {
     top: 0 !important;

@@ -52,6 +52,7 @@ type State = {
     open: boolean,
     current: number,
     navs: object,
+    sideNav: object,
     value: number,
     user: object,
     fullScreen: boolean,
@@ -172,6 +173,7 @@ const stylesType = {} as StyleRules;
 interface Props extends WithStyles<keyof typeof stylesType> {
     history: History;
     open: boolean;
+    sideNav: object,
 }
 
 class App extends React.Component<Props, State> {
@@ -182,26 +184,349 @@ class App extends React.Component<Props, State> {
             {
                 name: '全局',
                 path: '/all',
+                side: [
+                    {
+                        name: '全局设置',
+                        open: false,
+                        index: 0,
+                        icon: 'view_quilt',
+                        children: [
+                            {
+                                'name': '参数配置',
+                                'path': '/configurations',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': 'SEO设置',
+                                'path': '/seo',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    },
+                    {
+                        name: '附件设置',
+                        icon: 'insert_drive_file',
+                        open: false,
+                        index: 1,
+                        children: [
+                            {
+                                'name': '上传设置',
+                                'path': '/upload',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    },
+                    {
+                        name: '应用管理',
+                        open: false,
+                        icon: 'work',
+                        index: 2,
+                        children: [
+                            {
+                                'name': '模块配置',
+                                'path': '/module',
+                                'open': false,
+                                'children': [
+                                    {
+                                        'name': '开启模块',
+                                        'path': '/module/open-module'
+                                    },
+                                    {
+                                        'name': '域名配置',
+                                        'path': '/module/domain-config'
+                                    },
+                                    {
+                                        'name': '导入导出',
+                                        'path': '/module/import-export'
+                                    },
+                                    {
+                                        'name': '本地安装',
+                                        'path': '/module/install'
+                                    },
+                                ]
+                            },
+                            {
+                                'name': '插件配置',
+                                'path': '/addon',
+                                'open': false,
+                                'children': [
+                                    {
+                                        'name': '开启插件',
+                                        'path': '/addon/openAddon'
+                                    },
+                                    {
+                                        'name': '导入导出',
+                                        'path': '/addon/import-export'
+                                    },
+                                    {
+                                        'name': '本地安装',
+                                        'path': '/addon/install'
+                                    },
+                                ],
+                            },
+                            {
+                                'name': '拓展配置',
+                                'path': '/extension',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    },
+                    {
+                        name: '全局插件',
+                        open: false,
+                        index: 3,
+                        icon: 'extension',
+                        children: []
+                    },
+                    {
+                        name: '系统插件',
+                        icon: 'widgets',
+                        open: false,
+                        index: 4,
+                        children: [
+                            {
+                                'name': '菜单管理',
+                                'path': '/menu',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': '邮件设置',
+                                'path': '/mail',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': '调试工具',
+                                'path': '/debug',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    }
+                ],
             },
             {
                 name: 'CMS',
                 path: '/cms',
+                side: [
+                    {
+                        name: '文章管理',
+                        open: false,
+                        index: 0,
+                        icon: 'view_quilt',
+                        children: [
+                            {
+                                'name': '全部文章',
+                                'path': '/cms/article',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': '分类管理',
+                                'path': '/cms/article/type',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': '回收站',
+                                'path': '/cms/article/recycle',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    },
+                    {
+                        name: '页面管理',
+                        icon: 'insert_drive_file',
+                        open: false,
+                        index: 1,
+                        children: [
+                            {
+                                'name': '全部页面',
+                                'path': '/cms/page',
+                                'open': false,
+                                'children': [],
+                            },
+                            {
+                                'name': '分类管理',
+                                'path': '/cms/page/type',
+                                'open': false,
+                                'children': [],
+                            }
+                        ]
+                    },
+                    {
+                        name: '模块管理',
+                        open: false,
+                        icon: 'work',
+                        index: 2,
+                        children: []
+                    },
+                    {
+                        name: '信息管理',
+                        open: false,
+                        index: 3,
+                        icon: 'extension',
+                        children: [
+                            {
+                                'name': '客户留言',
+                                'path': '/cms/message',
+                                'open': false,
+                                'children': [],
+                            },
+                        ]
+                    },
+                ],
             },
             {
                 name: '商城',
                 path: '/mall',
+                side: [],
             },
             {
                 name: '用户中心',
                 path: '/user',
+                side: [],
             },
             {
                 name: '微信',
                 path: '/weChat',
+                side: [],
             },
             {
                 name: '论坛',
                 path: '/bbs',
+                side: [],
+            }
+        ],
+        sideNav: [
+            {
+                name: '全局设置',
+                open: false,
+                index: 0,
+                icon: 'view_quilt',
+                children: [
+                    {
+                        'name': '参数配置',
+                        'path': '/configurations',
+                        'open': false,
+                        'children': [],
+                    },
+                    {
+                        'name': 'SEO设置',
+                        'path': '/seo',
+                        'open': false,
+                        'children': [],
+                    }
+                ]
+            },
+            {
+                name: '附件设置',
+                icon: 'insert_drive_file',
+                open: false,
+                index: 1,
+                children: [
+                    {
+                        'name': '上传设置',
+                        'path': '/upload',
+                        'open': false,
+                        'children': [],
+                    }
+                ]
+            },
+            {
+                name: '应用管理',
+                open: false,
+                icon: 'work',
+                index: 2,
+                children: [
+                    {
+                        'name': '模块配置',
+                        'path': '/module',
+                        'open': false,
+                        'children': [
+                            {
+                                'name': '开启模块',
+                                'path': '/module/open-module'
+                            },
+                            {
+                                'name': '域名配置',
+                                'path': '/module/domain-config'
+                            },
+                            {
+                                'name': '导入导出',
+                                'path': '/module/import-export'
+                            },
+                            {
+                                'name': '本地安装',
+                                'path': '/module/install'
+                            },
+                        ]
+                    },
+                    {
+                        'name': '插件配置',
+                        'path': '/addon',
+                        'open': false,
+                        'children': [
+                            {
+                                'name': '开启插件',
+                                'path': '/addon/openAddon'
+                            },
+                            {
+                                'name': '导入导出',
+                                'path': '/addon/import-export'
+                            },
+                            {
+                                'name': '本地安装',
+                                'path': '/addon/install'
+                            },
+                        ],
+                    },
+                    {
+                        'name': '拓展配置',
+                        'path': '/extension',
+                        'open': false,
+                        'children': [],
+                    }
+                ]
+            },
+            {
+                name: '全局插件',
+                open: false,
+                index: 3,
+                icon: 'extension',
+                children: []
+            },
+            {
+                name: '系统插件',
+                icon: 'widgets',
+                open: false,
+                index: 4,
+                children: [
+                    {
+                        'name': '菜单管理',
+                        'path': '/menu',
+                        'open': false,
+                        'children': [],
+                    },
+                    {
+                        'name': '邮件设置',
+                        'path': '/mail',
+                        'open': false,
+                        'children': [],
+                    },
+                    {
+                        'name': '调试工具',
+                        'path': '/debug',
+                        'open': false,
+                        'children': [],
+                    }
+                ]
             }
         ],
         value: 0,
@@ -234,6 +559,7 @@ class App extends React.Component<Props, State> {
     };
     handleChange = (event: any, value: any) => {
         this.setState({ value });
+        this.setState({ sideNav: this.state.navs[value].side });
     };
     handleOpenSearch = () => {
         this.setState({ openSearch: true });
@@ -444,7 +770,7 @@ class App extends React.Component<Props, State> {
                                                 onClose={this.toggleDrawer}
                                                 open={this.state.open}
                                             >
-                                                <Side open={this.state.open}/>
+                                                <Side open={this.state.open} sideNav={this.state.sideNav}/>
                                             </Drawer>
                                         </Hidden>
                                         <div className={classNames('content', this.state.open && 'move-content')}>

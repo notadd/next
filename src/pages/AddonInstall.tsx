@@ -52,21 +52,12 @@ const styles = {
     },
 };
 type State = {
+    open: boolean,
+    modalId: string,
+    modalName: string,
+    rowsPerPage: number,
+    currentPage: number,
 };
-
-let id = 0;
-function createData(name: any, author: any, descri: any, status: boolean) {
-    id += 1;
-    return { id, name, author, descri, status };
-}
-
-const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', true),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', true),
-];
 
 class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
@@ -75,6 +66,43 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         modalName: '',
         rowsPerPage: 2,
         currentPage: 0,
+        list: [
+            {
+                id: 11,
+                status: false,
+                author: 'Mark',
+                name: 'notadd',
+                descri: '一些说明',
+            },
+            {
+                id: 12,
+                status: true,
+                author: 'Mark',
+                name: 'notadd',
+                descri: '一些说明',
+            },
+            {
+                id: 13,
+                status: false,
+                author: 'Mark',
+                name: 'notadd',
+                descri: '一些说明',
+            },
+            {
+                id: 14,
+                status: true,
+                author: 'Mark',
+                name: 'notadd',
+                descri: '一些说明',
+            },{
+                id: 15,
+                status: false,
+                author: 'Mark',
+                name: 'notadd',
+                descri: '一些说明',
+            },
+
+        ],
     };
     handleClickOpen = (pro: any) => {
         this.state.modalName = pro.name;
@@ -92,61 +120,63 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         this.setState({ currentPage: data.selected });
     };
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div>
                 <p className="crumbs">
                     全局 / 应用管理 / 插件配置
                 </p>
                 <h4 className="title">本地安装</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell numeric/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.name}
-                                            </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            {
-                                                n.status ? <IconButton
-                                                    className={this.props.classes.menuBtn}
-                                                    onClick={() => this.handleClickOpen(n)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton> : <IconButton
-                                                    className={this.props.classes.downBtn}
-                                                    onClick={() => this.handleDownLoad()}
-                                                >
-                                                    <FileDownload />
-                                                </IconButton>
-                                            }
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                <Paper className="root-paper">
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                    <TableCell numeric/>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
+                                            >
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.name}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.author}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.descri}
+                                                </TableCell>
+                                                <TableCell numeric>
+                                                    {
+                                                        n.status ? <IconButton
+                                                            className={this.props.classes.menuBtn}
+                                                            onClick={() => this.handleClickOpen(n)}
+                                                        >
+                                                            <DeleteIcon />
+                                                        </IconButton> : <IconButton
+                                                            className={this.props.classes.downBtn}
+                                                            onClick={() => this.handleDownLoad()}
+                                                        >
+                                                            <FileDownload />
+                                                        </IconButton>
+                                                    }
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}

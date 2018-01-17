@@ -31,31 +31,62 @@ const styles = {
     },
     tableCell: {
         'text-align': 'center',
-        'padding-top': '0',
+        'padding': '0',
     },
 };
 type State = {
+    open: boolean,
+    rowsPerPage: number,
+    currentPage: number,
 };
-
-let id = 0;
-function createData(name: any, domain: any, defaul: boolean, other: any, use: boolean) {
-    id += 1;
-    return { id, name, domain, defaul, other, use };
-}
-
-const list = [
-    createData('notadd', '多域名功能未开启', true, '/', true),
-    createData('商城', '多域名功能未开启', false, '无', false),
-    createData('商家', '多域名功能未开启', false, '无', false),
-    createData('CMS', '多域名功能未开启', false, '无', false),
-    createData('Notadd2', '多域名功能未开启', false, '无', false),
-];
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
         rowsPerPage: 2,
         currentPage: 0,
+        list: [
+            {
+                id: 11,
+                name: 'notadd',
+                domain: '多域名功能未开启',
+                defaul: true,
+                other: '/',
+                use: true,
+            },
+            {
+                id: 12,
+                name: 'notadd',
+                domain: '多域名功能未开启',
+                defaul: false,
+                other: '/',
+                use: false,
+            },
+            {
+                id: 13,
+                name: 'notadd',
+                domain: '多域名功能未开启',
+                defaul: false,
+                other: '/',
+                use: false,
+            },
+            {
+                id: 14,
+                name: 'notadd',
+                domain: '多域名功能未开启',
+                defaul: false,
+                other: '/',
+                use: false,
+            },
+            {
+                id: 15,
+                name: 'notadd',
+                domain: '多域名功能未开启',
+                defaul: false,
+                other: '/',
+                use: false,
+            },
+        ],
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -81,61 +112,63 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         this.setState({ currentPage: data.selected });
     };
     render() {
-        const { currentPage, rowsPerPage } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
             <div>
                 <p className="crumbs">
                     全局 / 应用管理 / 模块配置
                 </p>
                 <h4 className="title">域名配置</h4>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
-                                <TableCell numeric>使用域名</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.domain}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            <Checkbox
-                                                className="table-check-box"
-                                                checked={n.defaul}
-                                                onChange={this.changeCheckBox(n)}
-                                                value="n.defaul"
-                                            />
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.other}
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            <Switch
-                                                checked={n.use}
-                                                onChange={this.handleChange(n)}
-                                                aria-label="n.use"
-                                            />
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                <Paper className="root-paper">
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>域名</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>默认</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
+                                    <TableCell numeric>使用域名</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
+                                            >
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.name}</TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.domain}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    <Checkbox
+                                                        className="table-check-box"
+                                                        checked={n.defaul}
+                                                        onChange={this.changeCheckBox(n)}
+                                                        value="n.defaul"
+                                                    />
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.other}
+                                                </TableCell>
+                                                <TableCell numeric>
+                                                    <Switch
+                                                        checked={n.use}
+                                                        onChange={this.handleChange(n)}
+                                                        aria-label="n.use"
+                                                    />
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}

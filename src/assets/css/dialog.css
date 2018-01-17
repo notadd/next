@@ -49,3 +49,8 @@
     color: #fff;
     font-size: 12px;
 }
+@media (max-width: 479px) {
+    .dialog-content > div:nth-child(2) {
+        min-width: 94.6%;
+    }
+}

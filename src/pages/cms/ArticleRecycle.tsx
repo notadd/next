@@ -62,12 +62,6 @@ const styles = {
         'text-align': 'left',
         'padding': '0',
     },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '0',
-        'padding-right': '0',
-        'width': '40px',
-    },
 };
 type State = {
     checkedAll: boolean,
@@ -188,66 +182,68 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         <Cached />
                     </IconButton>
                 </div>
-                <Paper className={this.props.classes.root}>
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCellStatus}>
-                                    <Checkbox
-                                        checked={this.state.checkedAll}
-                                        onChange={this.handleChangeAll('checkedAll')}
-                                        value="checkedAll"
-                                    />
-                                </TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell numeric/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                    return (
-                                        <TableRow
-                                            hover
-                                            className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                            key={n.id}
-                                        >
-                                            <TableCell
-                                                padding="checkbox"
-                                                className={this.props.classes.tableCellStatus}
+                <Paper className="root-paper">
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className="table-cell-status">
+                                        <Checkbox
+                                            checked={this.state.checkedAll}
+                                            onChange={this.handleChangeAll('checkedAll')}
+                                            value="checkedAll"
+                                        />
+                                    </TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell numeric/>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
                                             >
-                                                <Checkbox
-                                                    checked={n.check}
-                                                    onChange={this.handleChange(n)}
-                                                    value="n.check"
-                                                />
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.name}
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>
-                                                {n.author}
-                                            </TableCell>
-                                            <TableCell numeric>
-                                                <IconButton
-                                                    className={this.props.classes.btnEdit}
-                                                    onClick={() => this.handleClickEdit(n)}
+                                                <TableCell
+                                                    padding="checkbox"
+                                                    className="table-cell-status"
                                                 >
-                                                    <ReplyAll />
-                                                </IconButton>
-                                                <IconButton
-                                                    className={this.props.classes.btnDelete}
-                                                    onClick={() => this.handleClickRemove(n)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
+                                                    <Checkbox
+                                                        checked={n.check}
+                                                        onChange={this.handleChange(n)}
+                                                        value="n.check"
+                                                    />
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.name}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.author}
+                                                </TableCell>
+                                                <TableCell className="table-action-btn" numeric>
+                                                    <IconButton
+                                                        className={this.props.classes.btnEdit}
+                                                        onClick={() => this.handleClickEdit(n)}
+                                                    >
+                                                        <ReplyAll />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        className={this.props.classes.btnDelete}
+                                                        onClick={() => this.handleClickRemove(n)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
