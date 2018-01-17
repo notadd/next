@@ -137,6 +137,10 @@ function watchMedia(source, module) {
         [
             `${source}/${module}/**/*.css`,
             `${source}/${module}/*.css`,
+            `${source}/${module}/**/*.eot`,
+            `${source}/${module}/*.eot`,
+            `${source}/${module}/**/*.ijmap`,
+            `${source}/${module}/*.ijmap`,
             `${source}/${module}/**/*.jpg`,
             `${source}/${module}/*.jpg`,
             `${source}/${module}/**/*.jpeg`,
@@ -145,6 +149,10 @@ function watchMedia(source, module) {
             `${source}/${module}/*.png`,
             `${source}/${module}/**/*.svg`,
             `${source}/${module}/*.svg`,
+            `${source}/${module}/**/*.ttf`,
+            `${source}/${module}/*.ttf`,
+            `${source}/${module}/**/*.woff2`,
+            `${source}/${module}/*.woff2`,
         ],
         [
             module,
