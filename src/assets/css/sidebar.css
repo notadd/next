@@ -122,3 +122,20 @@
 .smallSideBar .list-item:hover {
     background: #ededed;
 }
+.smallSideBar .sideBar > ul {
+    position: relative;
+}
+.smallSideBar .sideBar > ul > li:nth-child(2) {
+    position: absolute;
+    width: 260px;
+    left: 90px;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.05);
+}
+.smallSideBar .sideBar > ul > li:nth-child(2) div,
+.smallSideBar .sideBar > ul > li:nth-child(2) li {
+    background: inherit;
+    z-index: 500;
+}

@@ -79,14 +79,13 @@ const styles = (theme: Theme): StyleRules => ({
     },
     drawerPaperClose: {
         width: 90,
-        overflowX: 'hidden',
         position: 'relative',
+        overflow: 'visible',
         transform: 'translateX(0) !important',
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
     xsDrawerPaperClose: {
         width: 0,
-        overflowX: 'hidden',
         position: 'fixed',
         zIndex: 500,
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',

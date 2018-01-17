@@ -395,6 +395,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                     'list-item'
                                                 )
                                             }
+                                            onMouseEnter={() => this.handleClick(index, null)}
                                         >
                                             <Icon style={{color: '#808080'}}>{item.icon}</Icon>
                                         </ListItem>
