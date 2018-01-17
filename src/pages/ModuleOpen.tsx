@@ -57,7 +57,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                 id: 11,
                 name: '用户中心',
                 author: 'Mark',
-                descri: 'fefreg',
+                descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
                 status: true,
             },
             {
@@ -130,52 +130,54 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                 </p>
                 <h4 className="title">开启模块</h4>
                 <Paper className="root-paper">
-                    <Table className={this.props.classes.table}>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
-                                <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
-                                <TableCell numeric/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                .map((n, index) => {
-                                return (
-                                    <TableRow
-                                        hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                        key={n.id}
-                                    >
-                                        <TableCell className={this.props.classes.tableCell} numeric>{n.name}</TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.author}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            {n.descri}
-                                        </TableCell>
-                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                            <Switch
-                                                checked={n.status}
-                                                onChange={this.handleChange(n)}
-                                                aria-label="n.status"
-                                            />
-                                        </TableCell>
-                                        <TableCell numeric>
-                                            <IconButton
-                                                className={this.props.classes.menuBtn}
-                                                onClick={() => this.handleClickOpen(n)}
+                    <div className="table-hidden">
+                        <Table className={this.props.classes.table}>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    <TableCell className={this.props.classes.tableCell} numeric>模块名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>状态</TableCell>
+                                    <TableCell numeric/>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                    .map((n, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                                key={n.id}
                                             >
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                                                <TableCell className={this.props.classes.tableCell} numeric>{n.name}</TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.author}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.descri}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    <Switch
+                                                        checked={n.status}
+                                                        onChange={this.handleChange(n)}
+                                                        aria-label="n.status"
+                                                    />
+                                                </TableCell>
+                                                <TableCell numeric>
+                                                    <IconButton
+                                                        className={this.props.classes.menuBtn}
+                                                        onClick={() => this.handleClickOpen(n)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}

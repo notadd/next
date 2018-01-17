@@ -1,3 +1,4 @@
+/*表格*/
 .table-head {
     font-size: 12px;
     color: #808080;
@@ -16,4 +17,19 @@
 .table-body .table-check-box{
     width: inherit;
     height: inherit;
+}
+/*表格外间距*/
+.root-paper {
+    padding: 40px 30px;
+}
+@media (max-width: 479px) {
+    .root-paper {
+        padding: 30px 20px;
+    }
+    .root-paper .table-hidden {
+        overflow-x: auto;
+    }
+    .root-paper .table-head tr th {
+        min-width: 80px;
+    }
 }
