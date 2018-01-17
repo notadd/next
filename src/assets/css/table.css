@@ -40,7 +40,7 @@
     }
     .root-paper tr th,
     .root-paper tr td {
-        padding: 0 8px;
+        padding: 0 4px;
     }
     .root-paper .table-hidden {
         overflow-x: auto;
