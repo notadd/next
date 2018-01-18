@@ -12,6 +12,8 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Typography from 'material-ui/Typography';
+import Popover from 'material-ui/Popover';
 import Table, {
     TableBody,
     TableCell,
@@ -71,10 +73,12 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
+    openMessageTip: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
+    message: string,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -87,6 +91,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalName: '',
         modalType: 0,
         modalNum: 0,
+        openMessageTip: false,
         list: [
             {
                 id: 1,
@@ -124,6 +129,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 time: '2017-12-01 13:20:59',
             },
         ],
+        message: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -175,7 +181,17 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     modalType: 1,
                     modalNum: arr.length,
                 });
+            } else {
+                this.setState({
+                    openMessageTip: true,
+                    message: '请选择要删除的文章',
+                });
             }
+        });
+    };
+    handlePopperClose = () => {
+        this.setState({
+            openMessageTip: false,
         });
     };
     handleClose = () => {
@@ -189,7 +205,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -270,6 +286,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/article/edit/' + n.id}>
                                                         <IconButton
+                                                            onMouseOut={this.handlePopperClose}
                                                             className={this.props.classes.btnEdit}
                                                         >
                                                             <ModeEdit />
@@ -288,6 +305,21 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </TableBody>
                         </Table>
                     </div>
+                    <Popover
+                        open={openMessageTip}
+                        anchorPosition={{ top: 0, left: 400 }}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        className="message-pop-over"
+                    >
+                        <Typography className="message-content">{message}</Typography>
+                    </Popover>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
@@ -322,8 +354,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     <DialogContent className="dialog-content">
                         {
                             modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
-                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>
-                        }
+                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
 
                     </DialogContent>
                     <DialogActions className="dialog-actions">
