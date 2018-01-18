@@ -208,11 +208,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     >
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/article/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
