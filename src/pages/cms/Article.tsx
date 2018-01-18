@@ -71,13 +71,26 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
+    openMessageTip: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
+    message: string,
 };
 
-class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
+interface Props {
+    history?: History;
+    openMessageTip: boolean;
+    message: string;
+}
+type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
+
+class Article extends  React.Component<PropsWithStyles, State> {
+    constructor(props: PropsWithStyles, state: State) {
+        super(props, state);
+        window.console.log(props);
+    }
     state = {
         checkedAll: false,
         rowsPerPage: 2,
@@ -87,6 +100,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalName: '',
         modalType: 0,
         modalNum: 0,
+        openMessageTip: false,
         list: [
             {
                 id: 1,
@@ -124,6 +138,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 time: '2017-12-01 13:20:59',
             },
         ],
+        message: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -174,6 +189,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     open: true,
                     modalType: 1,
                     modalNum: arr.length,
+                });
+            } else {
+                this.setState({
+                    openMessageTip: true,
+                    message: '请选择要删除的文章',
                 });
             }
         });
@@ -322,8 +342,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     <DialogContent className="dialog-content">
                         {
                             modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
-                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>
-                        }
+                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
 
                     </DialogContent>
                     <DialogActions className="dialog-actions">

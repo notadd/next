@@ -41,6 +41,7 @@ import Search from 'material-ui-icons/Search';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
+import Typography from 'material-ui/Typography';
 import Select from 'react-select';
 import createHashHistory from 'history/createHashHistory';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
@@ -50,6 +51,7 @@ import * as classNames from 'classnames';
 
 type State = {
     open: boolean,
+    openMessageTip: boolean,
     current: number,
     navs: object,
     sideNav: object,
@@ -57,6 +59,7 @@ type State = {
     user: object,
     fullScreen: boolean,
     openSearch: boolean,
+    message: string,
     selectedOption: object,
     selectOptions: Array<any>,
 };
@@ -174,11 +177,15 @@ interface Props extends WithStyles<keyof typeof stylesType> {
     history: History;
     open: boolean;
     sideNav: object,
+    openMessageTip: boolean,
+    message: string,
 }
 
 class App extends React.Component<Props, State> {
     state = {
         open: false,
+        openMessageTip: false,
+        message: '',
         current: 1,
         navs: [
             {
@@ -618,7 +625,7 @@ class App extends React.Component<Props, State> {
         createHashHistory().push(selectedOption['url']);
     };
     render() {
-        const { value, openSearch, selectedOption, selectOptions } = this.state;
+        const { value, openSearch, selectedOption, selectOptions, openMessageTip, message } = this.state;
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         return (
@@ -804,6 +811,20 @@ class App extends React.Component<Props, State> {
                                             </Switch>
                                         </div>
                                     </div>
+                                    <Popover
+                                        open={openMessageTip}
+                                        anchorPosition={{ top: 0, left: 10 }}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                    >
+                                        <Typography>{message}</Typography>
+                                    </Popover>
                                 </div>
                             );
                         }}
