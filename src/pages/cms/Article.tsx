@@ -189,6 +189,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     };
+    handlePopperClose = () => {
+        this.setState({
+            openMessageTip: false,
+        });
+    };
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -281,6 +286,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/article/edit/' + n.id}>
                                                         <IconButton
+                                                            onMouseOut={this.handlePopperClose}
                                                             className={this.props.classes.btnEdit}
                                                         >
                                                             <ModeEdit />

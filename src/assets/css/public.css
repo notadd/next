@@ -101,4 +101,5 @@ body {
     min-width: 300px;
     font-size: 12px;
     padding: 12px 12px;
+    border-left: 2px solid #f50057;
 }
