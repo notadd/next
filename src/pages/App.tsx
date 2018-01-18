@@ -82,6 +82,7 @@ const styles = (theme: Theme): StyleRules => ({
         width: 90,
         position: 'relative',
         overflow: 'visible',
+        zIndex: 1,
         transform: 'translateX(0) !important',
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
