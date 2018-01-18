@@ -24,15 +24,12 @@
         "react-router-config": "^1.0.0-beta.4",
         "react-router-dom": "^4.2.2",
         "react-router-redux": "^4.0.8",
-        "react-scripts-ts": "latest",
         "react-select": "^1.2.1",
         "react-sortable-tree": "^1.6.0",
         "recompose": "^0.26.0",
         "redux": "^3.7.2"
     },
     "devDependencies": {
-        "@types/jest": "latest",
-        "@types/node": "latest",
         "@types/react": "latest",
         "@types/react-dom": "latest",
         "@types/recompose": "latest",
