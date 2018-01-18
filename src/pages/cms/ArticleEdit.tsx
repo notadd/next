@@ -85,7 +85,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         isHidden: false,
         selectedDate: moment(),
     };
-    // handleDateChange = (date) => {
+    // handleDateChange = (date: date) => {
     //     window.console.log(date);
     //     this.setState({ selectedDate: date });
     // }
@@ -235,6 +235,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         发布时间
                                     </InputLabel>
                                     <DatePicker
+                                        className={this.props.classes.formLabelFont}
                                         keyboard
                                         clearable
                                         value={selectedDate}
