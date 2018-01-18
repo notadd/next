@@ -4859,9 +4859,9 @@ react-select@^1.2.1:
     prop-types "^15.5.8"
     react-input-autosize "^2.1.2"
 
-react-sortable-tree@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-sortable-tree/-/react-sortable-tree-1.6.0.tgz#8842858866f6b5c35c0ca21f0ccc13594cd1ac17"
+react-sortable-tree@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-sortable-tree/-/react-sortable-tree-1.7.0.tgz#5f1ad55e5ff2122e60e770c560050891e98f2d6f"
   dependencies:
     lodash.isequal "^4.4.0"
     prop-types "^15.6.0"

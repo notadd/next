@@ -37,7 +37,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts-ts": "latest",
     "react-select": "^1.2.1",
-    "react-sortable-tree": "^1.6.0",
+    "react-sortable-tree": "^1.7.0",
     "recompose": "^0.26.0",
     "redux": "^3.7.2"
   },

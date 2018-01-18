@@ -233,8 +233,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                         disablePadding
                                         style={{
                                             paddingTop: 0,
-                                            paddingBottom: 0,
-                                            borderBottom: '1px solid #e0e0e0'
+                                            paddingBottom: 0
                                         }}
                                     >
                                         {
