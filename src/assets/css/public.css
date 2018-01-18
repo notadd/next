@@ -78,3 +78,12 @@ body {
     color: #808080;
     padding: 15px 30px;
 }
+/*表单下拉框*/
+#menu-type > div > ul {
+    max-height: 300px;
+}
+#menu-type .input-drop-paper {
+    font-size: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}

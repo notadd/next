@@ -6,6 +6,10 @@ import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
+import { MenuItem } from 'material-ui/Menu';
+import Select from 'material-ui/Select';
+import moment from 'moment';
+import { DatePicker } from 'material-ui-pickers';
 
 const styles = {
     root: {
@@ -58,14 +62,33 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     state = {
         webName: 'NotAdd',
         img: 'LOGO.png',
-        type: '新闻资讯',
+        type: '',
+        types: [
+            {
+                id: '12',
+                type: '新闻1',
+            },
+            {
+                id: '13',
+                type: '新闻2',
+            },
+            {
+                id: '14',
+                type: '新闻3',
+            },
+        ],
         abstract: '',
         time: '2016-12-30',
         link: 'http://',
         origin: 'www.ibenchu.com',
         kind: '新闻资讯',
         isHidden: false,
+        selectedDate: moment(),
     };
+    // handleDateChange = (date: date) => {
+    //     window.console.log(date);
+    //     this.setState({ selectedDate: date });
+    // }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -73,6 +96,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         });
     };
     render() {
+        const { selectedDate } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -138,15 +162,26 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     >
                                         分类
                                     </InputLabel>
-                                    <Input
-                                        id="name-simple"
+                                    <Select
                                         className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('type')}
                                         value={this.state.type}
-                                    />
+                                        onChange={this.handleChange('type')}
+                                        input={<Input name="type" id="age-simple" />}
+                                    >
+                                        {
+                                            this.state.types.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
                                 </FormControl>
                                 <FormControl
                                     fullWidth
@@ -169,26 +204,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         className={this.props.classes.formLabelFont}
                                         onChange={this.handleChange('abstract')}
                                         value={this.state.abstract}
-                                    />
-                                </FormControl>
-                                <FormControl
-                                    fullWidth
-                                    className={this.props.classes.formControlMargin}
-                                >
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        分类
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('kind')}
-                                        value={this.state.kind}
                                     />
                                 </FormControl>
                                 <FormControlLabel
@@ -219,14 +234,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     >
                                         发布时间
                                     </InputLabel>
-                                    <Input
-                                        id="name-simple"
+                                    <DatePicker
                                         className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('time')}
-                                        value={this.state.time}
+                                        keyboard
+                                        clearable
+                                        value={selectedDate}
+                                        animateYearScrolling={false}
                                     />
                                 </FormControl>
                                 <FormControl

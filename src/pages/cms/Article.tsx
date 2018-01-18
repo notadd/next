@@ -73,6 +73,8 @@ type State = {
     open: boolean,
     modalId: string,
     modalName: string,
+    modalType: number,
+    modalNum: number,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -83,6 +85,8 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         open: false,
         modalId: '',
         modalName: '',
+        modalType: 0,
+        modalNum: 0,
         list: [
             {
                 id: 1,
@@ -158,6 +162,20 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.state.modalId = pro.id;
         this.setState({
             open: true,
+            modalType: 0,
+        });
+    };
+    handleBatchRemove = () => {
+        const arr = new Array();
+        Object.keys(this.state.list).forEach(item => {
+            if (this.state.list[item].check) {
+                arr.push(this.state.list[item].check);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                });
+            }
         });
     };
     handleClose = () => {
@@ -171,7 +189,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage, list } = this.state;
+        const { currentPage, rowsPerPage, list, modalType } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -186,14 +204,17 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </IconButton>
                     <IconButton
                         className={this.props.classes.menuBtn}
+                        onClick={this.handleBatchRemove}
                     >
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/article/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
@@ -299,7 +320,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4>
+                        {
+                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>
+                        }
+
                     </DialogContent>
                     <DialogActions className="dialog-actions">
                         <Button onClick={this.handleClose}>

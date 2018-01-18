@@ -318,7 +318,7 @@ class App extends React.Component<Props, State> {
                         name: '文章管理',
                         open: false,
                         index: 0,
-                        icon: 'view_quilt',
+                        icon: 'reorder',
                         children: [
                             {
                                 'name': '全部文章',
@@ -342,7 +342,7 @@ class App extends React.Component<Props, State> {
                     },
                     {
                         name: '页面管理',
-                        icon: 'insert_drive_file',
+                        icon: 'note',
                         open: false,
                         index: 1,
                         children: [
@@ -363,7 +363,7 @@ class App extends React.Component<Props, State> {
                     {
                         name: '模块管理',
                         open: false,
-                        icon: 'work',
+                        icon: 'view_carousel',
                         index: 2,
                         children: []
                     },
@@ -371,7 +371,7 @@ class App extends React.Component<Props, State> {
                         name: '信息管理',
                         open: false,
                         index: 3,
-                        icon: 'extension',
+                        icon: 'chat_bubble',
                         children: [
                             {
                                 'name': '客户留言',

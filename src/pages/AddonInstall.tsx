@@ -94,14 +94,14 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
-            },{
+            },
+            {
                 id: 15,
                 status: false,
                 author: 'Mark',
                 name: 'notadd',
                 descri: '一些说明',
             },
-
         ],
     };
     handleClickOpen = (pro: any) => {
