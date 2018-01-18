@@ -72,6 +72,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                         {
                             id: 31,
                             title: '新闻XXX',
+                            canDrag: true,
                             children: [],
                         },
                     ],
@@ -103,7 +104,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     render() {
         // const getNodeKey = ({ treeIndex }: any) => treeIndex;
-        const alertNodeInfo = (node:any) => {
+        const alertNodeInfo = (node: object) => {
             const objectString = Object.keys(node)
                 .map(k => (k === 'children' ? 'children: Array' : `${k}: '${node[k]}'`))
                 .join(',\n   ');

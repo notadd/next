@@ -71,6 +71,9 @@
     display: block;
     cursor: pointer;
 }
+.rst__rowContentsDragDisabled {
+    color: #b3b3b3;
+}
 @media (max-width: 479px) {
     .rst__rowContents {
         min-width: 100%;
