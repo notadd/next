@@ -87,3 +87,18 @@ body {
     padding-top: 6px;
     padding-bottom: 6px;
 }
+/*消息提醒*/
+.message-pop-over {
+    width: inherit !important;
+    height: inherit !important;
+}
+.message-pop-over > div:first-child {
+    position: inherit;
+    width: 0;
+    height: 0;
+}
+.message-pop-over .message-content {
+    min-width: 300px;
+    font-size: 12px;
+    padding: 12px 12px;
+}

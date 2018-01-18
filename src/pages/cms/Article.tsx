@@ -12,6 +12,8 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Typography from 'material-ui/Typography';
+import Popover from 'material-ui/Popover';
 import Table, {
     TableBody,
     TableCell,
@@ -79,18 +81,7 @@ type State = {
     message: string,
 };
 
-interface Props {
-    history?: History;
-    openMessageTip: boolean;
-    message: string;
-}
-type PropsWithStyles = Props & WithStyles<keyof typeof styles>;
-
-class Article extends  React.Component<PropsWithStyles, State> {
-    constructor(props: PropsWithStyles, state: State) {
-        super(props, state);
-        window.console.log(props);
-    }
+class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
         rowsPerPage: 2,
@@ -209,7 +200,7 @@ class Article extends  React.Component<PropsWithStyles, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -308,6 +299,21 @@ class Article extends  React.Component<PropsWithStyles, State> {
                             </TableBody>
                         </Table>
                     </div>
+                    <Popover
+                        open={openMessageTip}
+                        anchorPosition={{ top: 0, left: 400 }}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        className="message-pop-over"
+                    >
+                        <Typography className="message-content">{message}</Typography>
+                    </Popover>
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
