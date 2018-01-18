@@ -8,6 +8,8 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
+import moment from 'moment';
+import { DatePicker } from 'material-ui-pickers';
 
 const styles = {
     root: {
@@ -81,7 +83,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         origin: 'www.ibenchu.com',
         kind: '新闻资讯',
         isHidden: false,
+        selectedDate: moment(),
     };
+    // handleDateChange = (date) => {
+    //     window.console.log(date);
+    //     this.setState({ selectedDate: date });
+    // }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -89,6 +96,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         });
     };
     render() {
+        const { selectedDate } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -146,7 +154,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 </FormControl>
                                 <FormControl
                                     fullWidth
-                                    className={this.props.classes.formControlMargin}>
+                                    className={this.props.classes.formControlMargin}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -167,7 +176,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                                         value={index}
                                                         key={index}
                                                     >
-                                                        { item.type }
+                                                        {item.type}
                                                     </MenuItem>
                                                 );
                                             })
@@ -225,14 +234,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     >
                                         发布时间
                                     </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('time')}
-                                        value={this.state.time}
+                                    <DatePicker
+                                        keyboard
+                                        clearable
+                                        value={selectedDate}
+                                        animateYearScrolling={false}
                                     />
                                 </FormControl>
                                 <FormControl
