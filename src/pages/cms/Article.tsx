@@ -162,12 +162,20 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.state.modalId = pro.id;
         this.setState({
             open: true,
+            modalType: 0,
         });
     };
     handleBatchRemove = () => {
-        this.setState({
-            open: true,
-            modalType: 1,
+        const arr = new Array();
+        Object.keys(this.state.list).forEach(item => {
+            if (this.state.list[item].check) {
+                arr.push(this.state.list[item].check);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                });
+            }
         });
     };
     handleClose = () => {
