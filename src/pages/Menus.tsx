@@ -29,6 +29,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                 {
                     id: 1,
                     title: '产品中心',
+                    canDrag: false,
                     children: [],
                 },
                 {
@@ -39,21 +40,25 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                         {
                             id: 21,
                             title: '媒体报道',
+                            canDrag: true,
                             children: [],
                         },
                         {
                             id: 22,
                             title: '行业资讯',
+                            canDrag: true,
                             children: [
                                 {
                                     id: 221,
                                     title: '资讯1-1',
+                                    canDrag: true,
                                     children: [],
                                 },
                             ],
                         },
                         {
                             id: 23,
+                            canDrag: true,
                             title: '企业公告',
                             children: [],
                         },
@@ -62,6 +67,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                 {
                     id: 3,
                     title: '视频中心',
+                    canDrag: true,
                     children: [
                         {
                             id: 31,
@@ -73,14 +79,17 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                 {
                     id: 4,
                     title: '其他资讯',
+                    canDrag: true,
                     children: [
                         {
                             id: 41,
                             title: '0109资讯1-1',
+                            canDrag: true,
                             children: [],
                         },
                         {
                             id: 42,
+                            canDrag: true,
                             title: '0109资讯1-2',
                             children: [],
                         },
@@ -116,6 +125,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                             onChange={treeData => this.setState({ treeData })}
                             getNodeKey={({ node }) => node.id}
                             rowHeight={40}
+                            canDrag={({ node }) => node.canDrag}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
                                     <IconButton
