@@ -1,11 +1,11 @@
 import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import { FormControlLabel, FormControl, FormHelperText } from 'material-ui/Form';
 import Switch from 'material-ui/Switch';
 import Input, { InputLabel } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
     root: {

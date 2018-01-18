@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
+import { History } from 'history';
+import { HashRouter } from 'react-router-dom';
+import * as classNames from 'classnames';
 import Side from '../layouts/SideBar';
 import Home from './Home';
 import Configurations from './Configurations';
@@ -30,7 +33,6 @@ import PageEdit from './cms/PageEdit';
 import PageType from './cms/PageType';
 import Message from './cms/Message';
 
-import { HashRouter } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import Hidden from 'material-ui/Hidden';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
@@ -43,22 +45,20 @@ import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
 import Select from 'react-select';
 import createHashHistory from 'history/createHashHistory';
-import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
-import { History } from 'history';
 import 'react-select/dist/react-select.css';
-import * as classNames from 'classnames';
+import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
 type State = {
-    open: boolean,
     current: number,
-    navs: object,
-    sideNav: object,
-    value: number,
-    user: object,
     fullScreen: boolean,
+    open: boolean,
+    navs: object,
+    user: object,
     openSearch: boolean,
     selectedOption: object,
     selectOptions: Array<any>,
+    sideNav: object,
+    value: number,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({

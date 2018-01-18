@@ -1,6 +1,7 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
+import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { SortableTreeWithoutDndContext as SortableTree } from 'react-sortable-tree';
@@ -118,7 +119,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                             onChange={treeData => this.setState({ treeData })}
                             getNodeKey={({ node }) => {
                                 window.console.log(node);
-                                return node.id
+                                return node.id;
                             }}
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
@@ -137,4 +138,4 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         );
     }
 }
-export default withStyles(styles, isTouchDevice ? TouchBackend : HTML5Backend)(Menus);
+export default DragDropContext(isTouchDevice ? TouchBackend : HTML5Backend)(withStyles(styles)(Menus));
