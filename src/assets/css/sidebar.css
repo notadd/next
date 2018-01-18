@@ -102,7 +102,9 @@
     background: #ededed;
     position: absolute;
 }
-
+.sideBar > ul > li:first-child {
+    border-bottom: none;
+}
 .sideBar .selectBtn h3,
 .sideBar .selectFirstLevelMenu h3,
 .sideBar .innerRootSelect h3,

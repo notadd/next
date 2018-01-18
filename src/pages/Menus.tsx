@@ -94,6 +94,15 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     render() {
         // const getNodeKey = ({ treeIndex }: any) => treeIndex;
+        const alertNodeInfo = (node:any) => {
+            const objectString = Object.keys(node)
+                .map(k => (k === 'children' ? 'children: Array' : `${k}: '${node[k]}'`))
+                .join(',\n   ');
+
+            window.alert(
+                objectString
+            );
+        };
         return (
             <div className="configurations">
                 <p className="crumbs">
@@ -106,10 +115,11 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
                             getNodeKey={({ node }) => node.id}
-                            generateNodeProps={({ node, path }) => ({
+                            rowHeight={40}
+                            generateNodeProps={(rowInfo) => ({
                                 buttons: [
                                     <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
+                                        onClick={() => alertNodeInfo(rowInfo)}
                                     >
                                         <ModeEdit />
                                     </IconButton>,
