@@ -103,7 +103,6 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         window.console.log(pro);
     };
     render() {
-        // const getNodeKey = ({ treeIndex }: any) => treeIndex;
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -127,7 +126,6 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         <SortableTree
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
-                            getNodeKey={({ node }) => node.id}
                             generateNodeProps={({ node, path }) => ({
                                 buttons: [
                                     <IconButton

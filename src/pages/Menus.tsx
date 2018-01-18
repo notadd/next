@@ -1,7 +1,9 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import SortableTree from 'react-sortable-tree';
+import HTML5Backend from 'react-dnd-html5-backend';
+import TouchBackend from 'react-dnd-touch-backend';
+import { SortableTreeWithoutDndContext as SortableTree } from 'react-sortable-tree';
 import IconButton from 'material-ui/IconButton';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 
@@ -15,6 +17,7 @@ const styles = {
         'margin': '0',
     },
 };
+const isTouchDevice = !!('ontouchstart' in window || navigator.maxTouchPoints);
 type State = {};
 
 class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -93,7 +96,6 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         window.console.log(pro);
     };
     render() {
-        // const getNodeKey = ({ treeIndex }: any) => treeIndex;
         const alertNodeInfo = (node: object) => {
             const objectString = Object.keys(node)
                 .map(k => (k === 'children' ? 'children: Array' : `${k}: '${node[k]}'`))
@@ -114,7 +116,10 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <SortableTree
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
-                            getNodeKey={({ node }) => node.id}
+                            getNodeKey={({ node }) => {
+                                window.console.log(node);
+                                return node.id
+                            }}
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
@@ -132,4 +137,4 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         );
     }
 }
-export default withStyles(styles)(Menus);
+export default withStyles(styles, isTouchDevice ? TouchBackend : HTML5Backend)(Menus);

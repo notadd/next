@@ -14,6 +14,8 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/prop-types": "^15.5.2",
+    "@types/react-dnd-html5-backend": "^2.1.8",
+    "@types/react-dnd-touch-backend": "^0.3.2",
     "@types/react-paginate": "^4.3.1",
     "@types/react-router-config": "^1.0.5",
     "@types/react-router-dom": "^4.2.3",
@@ -26,6 +28,8 @@
     "normalize.css": "^7.0.0",
     "prop-types": "^15.6.0",
     "react": "latest",
+    "react-dnd-html5-backend": "^2.5.4",
+    "react-dnd-touch-backend": "^0.3.20",
     "react-dom": "latest",
     "react-paginate": "^5.0.0",
     "react-redux": "^5.0.6",
