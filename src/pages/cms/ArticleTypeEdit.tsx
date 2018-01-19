@@ -48,16 +48,25 @@ type State = {
     color: string,
     description: string,
     link: string,
+    pageType: string,
 };
 
 class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        typeName: 'NotAdd',
-        otherName: 'news',
-        color: '#ff3300',
-        description: '',
-        link: 'www.baidu.com',
-    };
+    constructor (props: any) {
+        super(props);
+        let type = '';
+        if (props.location.pathname.indexOf('/add') > 0) {
+            type = '1';
+        }
+        this.state = {
+            typeName: 'NotAdd',
+            otherName: 'news',
+            color: '#ff3300',
+            description: '',
+            link: 'www.baidu.com',
+            pageType: type,
+        };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -70,7 +79,9 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                 <p className="crumbs">
                     CMS <b>/</b> 文章管理 / 分类管理
                 </p>
-                <h4 className="title">编辑</h4>
+                <h4 className="title">
+                    {this.state.pageType === '1' ? '新增' : '编辑'}
+                </h4>
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={40}>

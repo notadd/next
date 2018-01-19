@@ -136,7 +136,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
-                    <Link to={'/cms/article/type/edit/' + 'add'}>
+                    <Link to={'/cms/article/type/edit'}>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
