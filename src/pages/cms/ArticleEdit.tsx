@@ -106,6 +106,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             [name]: val,
         });
     };
+    getImgURL = (node: any) => {
+        window.console.log(node);
+    };
     render() {
         return (
             <div className="top-action-module cms">
@@ -147,6 +150,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
+                                    style={{ position: 'relative'}}
                                 >
                                     <InputLabel
                                         htmlFor="name-simple"
@@ -160,8 +164,15 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('img')}
-                                        value={this.state.img}
+                                    />
+                                    <Input
+                                        type="file"
+                                        id="name-simple"
+                                        className="upload-image"
+                                        onChange={this.getImgURL}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -178,7 +189,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.type}
                                         onChange={this.handleChange('type')}
-                                        input={<Input name="type" id="age-simple" />}
+                                        input={<Input name="type" id="type-simple" />}
                                     >
                                         {
                                             this.state.types.map((item: any, index: number) => {
@@ -226,15 +237,15 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     }}
                                     className={this.props.classes.formControlMargin}
                                     control={
-                                    <Switch
-                                        classes={{
-                                            root: this.props.classes.switchHeight,
-                                            default: this.props.classes.switchDefault,
-                                        }}
-                                        onChange={(event, checked) => this.setState({ isHidden: checked })}
-                                        checked={this.state.isHidden}
-                                    />
-                                }
+                                        <Switch
+                                            classes={{
+                                                root: this.props.classes.switchHeight,
+                                                default: this.props.classes.switchDefault,
+                                            }}
+                                            onChange={(event, checked) => this.setState({ isHidden: checked })}
+                                            checked={this.state.isHidden}
+                                        />
+                                    }
                                 />
                                 <FormControl
                                     fullWidth
