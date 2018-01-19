@@ -1,10 +1,12 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
 import ErrorIcon from 'material-ui-icons/ErrorOutline';
 import Add from 'material-ui-icons/Add';
@@ -134,11 +136,13 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/article/type/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
@@ -157,6 +161,11 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                                          onClick={() => this.handleClickEdit(node)}
                                     >
                                         <ModeEdit />
+                                    </IconButton>,
+                                    <IconButton
+                                         onClick={() => this.handleClickEdit(node)}
+                                    >
+                                        <DeleteIcon />
                                     </IconButton>,
                                 ],
                             })}

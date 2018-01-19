@@ -166,6 +166,11 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     >
                                         <ModeEdit />
                                     </IconButton>,
+                                    <IconButton
+                                         onClick={() => this.handleClickEdit(node)}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>,
                                 ],
                             })}
                         />
