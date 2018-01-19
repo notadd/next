@@ -117,6 +117,9 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleCloseTip = () => {
+        this.setState({ openTip: false });
+    };
     handleSubmit = () => {
         this.setState({ open: false });
     };
@@ -199,7 +202,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={this.handleCloseTip}
                         >
                             <ClearIcon />
                         </IconButton>
@@ -207,7 +210,6 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                     <DialogContent className="dialog-content">
                         <h4>
                             <IconButton
-                                onClick={this.handleClose}
                             >
                                 <ErrorIcon />
                             </IconButton>
