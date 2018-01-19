@@ -199,7 +199,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                     open={this.state.open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    className="dialog-content"
+                    className="dialog-content-action"
                 >
                     <DialogTitle
                         id="alert-dialog-title"

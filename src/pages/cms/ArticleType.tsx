@@ -47,7 +47,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
 
         this.state = {
             open: false,
-            openTip: true,
+            openTip: false,
             modalName: '产品中心',
             modalId: '',
             treeData: [
@@ -164,7 +164,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                     open={this.state.open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    className="dialog-content"
+                    className="dialog-content-action"
                 >
                     <DialogTitle
                         id="alert-dialog-title"
@@ -192,7 +192,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                     open={this.state.openTip}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    className="dialog-content"
+                    className="dialog-content-action dialog-tip"
                 >
                     <DialogTitle
                         id="alert-dialog-title"
