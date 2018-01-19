@@ -128,16 +128,12 @@
     position: relative;
 }
 .smallSideBar .sideBar > ul > li:nth-child(2) {
-    position: absolute;
-    width: 260px;
-    left: 90px;
-    top: 0;
-    z-index: 1000;
     background-color: #ffffff;
     box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.05);
-}
-.smallSideBar .sideBar > ul > li:nth-child(2) div,
-.smallSideBar .sideBar > ul > li:nth-child(2) li {
-    background: inherit;
+    left: 90px;
+    padding: 10px 0;
+    position: absolute;
+    top: 0;
+    width: 260px;
     z-index: 500;
 }
