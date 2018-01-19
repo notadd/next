@@ -160,9 +160,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             [pro]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    }
     handleClickRemove = (pro: any) => {
         this.state.modalName = pro.name;
         this.state.modalId = pro.id;
@@ -186,12 +183,12 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     openMessageTip: true,
                     message: '请选择要删除的文章',
                 });
+                setInterval(() => {
+                    this.setState({
+                        openMessageTip: false,
+                    });
+                }, 1500);
             }
-        });
-    };
-    handlePopperClose = () => {
-        this.setState({
-            openMessageTip: false,
         });
     };
     handleClose = () => {
@@ -203,7 +200,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
-
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
@@ -286,7 +282,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/article/edit/' + n.id}>
                                                         <IconButton
-                                                            onMouseOut={this.handlePopperClose}
                                                             className={this.props.classes.btnEdit}
                                                         >
                                                             <ModeEdit />
