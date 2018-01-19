@@ -50,45 +50,56 @@ type State = {
     webName: string,
     img: string,
     type: string,
+    types: Array<any>,
     abstract: string,
     time: string,
     link: string,
     origin: string,
     kind: string,
+    pageType: string,
     isHidden: boolean,
+    selectedDate: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        webName: 'NotAdd',
-        img: 'LOGO.png',
-        type: '',
-        types: [
-            {
-                id: '12',
-                type: '新闻1',
-            },
-            {
-                id: '13',
-                type: '新闻2',
-            },
-            {
-                id: '14',
-                type: '新闻3',
-            },
-        ],
-        abstract: '',
-        time: '2016-12-30',
-        link: 'http://',
-        origin: 'www.ibenchu.com',
-        kind: '新闻资讯',
-        isHidden: false,
-        selectedDate: moment(),
-    };
-    // handleDateChange = (date: date) => {
-    //     window.console.log(date);
-    //     this.setState({ selectedDate: date });
-    // }
+    constructor (props: any) {
+        super(props);
+        let type = '';
+        if (props.location.pathname.indexOf('/add') > 0) {
+            type = '1';
+        }
+        this.state = {
+            webName: 'NotAdd',
+            img: 'LOGO.png',
+            type: '',
+            types: [
+                {
+                    id: '12',
+                    type: '新闻1',
+                },
+                {
+                    id: '13',
+                    type: '新闻2',
+                },
+                {
+                    id: '14',
+                    type: '新闻3',
+                },
+            ],
+            abstract: '',
+            time: '2016-12-30',
+            link: 'http://',
+            origin: 'www.ibenchu.com',
+            kind: '新闻资讯',
+            isHidden: false,
+            pageType: type,
+            selectedDate: moment(),
+        };
+    }
+    handleDateChange = (date: any) => {
+        window.console.log(date);
+        this.setState({ selectedDate: date });
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -96,13 +107,14 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         });
     };
     render() {
-        const { selectedDate } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
                     CMS / 文章管理 / 全部文章
                 </p>
-                <h4 className="title">编辑</h4>
+                <h4 className="title">
+                    {this.state.pageType === '1' ? '新增' : '编辑'}
+                </h4>
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
@@ -235,10 +247,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         发布时间
                                     </InputLabel>
                                     <DatePicker
-                                        className={this.props.classes.formLabelFont}
+                                        className="data-picker"
                                         keyboard
                                         clearable
-                                        value={selectedDate}
+                                        value={this.state.selectedDate}
+                                        onChange={this.handleDateChange}
                                         animateYearScrolling={false}
                                     />
                                 </FormControl>

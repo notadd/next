@@ -87,6 +87,10 @@ body {
     padding-top: 6px;
     padding-bottom: 6px;
 }
+/*日期组件*/
+.data-picker input {
+    font-size: 16px;
+}
 /*消息提醒*/
 .message-pop-over {
     width: inherit !important;
