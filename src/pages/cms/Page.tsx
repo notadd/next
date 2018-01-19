@@ -202,11 +202,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     >
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/page/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
