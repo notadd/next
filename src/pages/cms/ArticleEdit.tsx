@@ -50,59 +50,74 @@ type State = {
     webName: string,
     img: string,
     type: string,
+    types: Array<any>,
     abstract: string,
     time: string,
     link: string,
     origin: string,
     kind: string,
+    pageType: string,
     isHidden: boolean,
+    selectedDate: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        webName: 'NotAdd',
-        img: 'LOGO.png',
-        type: '',
-        types: [
-            {
-                id: '12',
-                type: '新闻1',
-            },
-            {
-                id: '13',
-                type: '新闻2',
-            },
-            {
-                id: '14',
-                type: '新闻3',
-            },
-        ],
-        abstract: '',
-        time: '2016-12-30',
-        link: 'http://',
-        origin: 'www.ibenchu.com',
-        kind: '新闻资讯',
-        isHidden: false,
-        selectedDate: moment(),
-    };
-    // handleDateChange = (date: date) => {
-    //     window.console.log(date);
-    //     this.setState({ selectedDate: date });
-    // }
+    constructor (props: any) {
+        super(props);
+        let type = '';
+        if (props.location.pathname.indexOf('/add') > 0) {
+            type = '1';
+        }
+        this.state = {
+            webName: 'NotAdd',
+            img: 'LOGO.png',
+            type: '',
+            types: [
+                {
+                    id: '12',
+                    type: '新闻1',
+                },
+                {
+                    id: '13',
+                    type: '新闻2',
+                },
+                {
+                    id: '14',
+                    type: '新闻3',
+                },
+            ],
+            abstract: '',
+            time: '2016-12-30',
+            link: 'http://',
+            origin: 'www.ibenchu.com',
+            kind: '新闻资讯',
+            isHidden: false,
+            pageType: type,
+            selectedDate: moment(),
+        };
+    }
+    handleDateChange = (date: any) => {
+        window.console.log(date);
+        this.setState({ selectedDate: date });
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
     };
+    getImgURL = (node: any) => {
+        window.console.log(node);
+    };
     render() {
-        const { selectedDate } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
                     CMS / 文章管理 / 全部文章
                 </p>
-                <h4 className="title">编辑</h4>
+                <h4 className="title">
+                    {this.state.pageType === '1' ? '新增' : '编辑'}
+                </h4>
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
@@ -135,6 +150,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
+                                    style={{ position: 'relative'}}
                                 >
                                     <InputLabel
                                         htmlFor="name-simple"
@@ -148,8 +164,15 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('img')}
-                                        value={this.state.img}
+                                    />
+                                    <Input
+                                        type="file"
+                                        id="name-simple"
+                                        className="upload-image"
+                                        onChange={this.getImgURL}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -166,7 +189,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.type}
                                         onChange={this.handleChange('type')}
-                                        input={<Input name="type" id="age-simple" />}
+                                        input={<Input name="type" id="type-simple" />}
                                     >
                                         {
                                             this.state.types.map((item: any, index: number) => {
@@ -214,15 +237,15 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     }}
                                     className={this.props.classes.formControlMargin}
                                     control={
-                                    <Switch
-                                        classes={{
-                                            root: this.props.classes.switchHeight,
-                                            default: this.props.classes.switchDefault,
-                                        }}
-                                        onChange={(event, checked) => this.setState({ isHidden: checked })}
-                                        checked={this.state.isHidden}
-                                    />
-                                }
+                                        <Switch
+                                            classes={{
+                                                root: this.props.classes.switchHeight,
+                                                default: this.props.classes.switchDefault,
+                                            }}
+                                            onChange={(event, checked) => this.setState({ isHidden: checked })}
+                                            checked={this.state.isHidden}
+                                        />
+                                    }
                                 />
                                 <FormControl
                                     fullWidth
@@ -235,10 +258,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         发布时间
                                     </InputLabel>
                                     <DatePicker
-                                        className={this.props.classes.formLabelFont}
+                                        className="data-picker"
                                         keyboard
                                         clearable
-                                        value={selectedDate}
+                                        value={this.state.selectedDate}
+                                        onChange={this.handleDateChange}
                                         animateYearScrolling={false}
                                     />
                                 </FormControl>

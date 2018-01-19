@@ -133,6 +133,7 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <SortableTree
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
+                            rowHeight={40}
                             getNodeKey={({ node }) => node.id}
                             generateNodeProps={({ node, path }) => ({
                                 buttons: [

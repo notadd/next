@@ -70,6 +70,8 @@ type State = {
     open: boolean,
     modalId: string,
     modalName: string,
+    modalType: number,
+    modalNum: number,
 };
 
 class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -80,6 +82,8 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         open: false,
         modalId: '',
         modalName: '',
+        modalType: 0,
+        modalNum: 0,
         list: [
             {
                 id: 1,
@@ -152,6 +156,19 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             open: true,
         });
     };
+    handleBatchRemove = () => {
+        const arr = new Array();
+        Object.keys(this.state.list).forEach(item => {
+            if (this.state.list[item].check) {
+                arr.push(this.state.list[item].check);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                });
+            }
+        });
+    };
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -163,7 +180,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
 
     render() {
-        const { currentPage, rowsPerPage, list } = this.state;
+        const { currentPage, rowsPerPage, list, modalType } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -173,6 +190,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                 <div className="btn-group">
                     <IconButton
                         className={this.props.classes.menuBtn}
+                        onClick={this.handleBatchRemove}
                     >
                         <DeleteIcon />
                     </IconButton>
@@ -263,7 +281,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                     open={this.state.open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    className="dialog-content"
+                    className="dialog-content-action"
                 >
                     <DialogTitle
                         id="alert-dialog-title"
@@ -276,7 +294,9 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
-                        <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4>
+                        {
+                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">
                         <Button onClick={this.handleClose}>
