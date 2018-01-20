@@ -126,9 +126,22 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         this.setState({ open: false });
     };
     render() {
-    // eslint-disable-next-line
-        const handleClickEdit = ( node: object ) => {
-            window.console.log(node);
+        const handleClickEdit = ( pro: any ) => {
+            window.console.log(pro);
+            this.setState({
+                modalId: pro.node.id,
+            });
+        };
+        const handleClickRemove = ( pro: any ) => {
+            if (pro.node.children.length > 0) {
+                this.setState({ openTip: true });
+            } else {
+                this.setState({
+                    open: true,
+                    modalName: pro.node.title,
+                    modalId: pro.node.id,
+                });
+            }
         };
         return (
             <div className="top-action-module">
@@ -164,7 +177,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                                         <ModeEdit />
                                     </IconButton>,
                                     <IconButton
-                                         onClick={() => handleClickEdit(rowInfo)}
+                                         onClick={() => handleClickRemove(rowInfo)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>,
