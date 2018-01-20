@@ -125,10 +125,11 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
     handleSubmit = () => {
         this.setState({ open: false });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    };
     render() {
+    // eslint-disable-next-line
+        const handleClickEdit = ( node: object ) => {
+            window.console.log(node);
+        };
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -155,15 +156,15 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
                             rowHeight={40}
-                            generateNodeProps={({ node, path }) => ({
+                            generateNodeProps={(rowInfo) => ({
                                 buttons: [
                                     <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
+                                         onClick={() => handleClickEdit(rowInfo)}
                                     >
                                         <ModeEdit />
                                     </IconButton>,
                                     <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
+                                         onClick={() => handleClickEdit(rowInfo)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>,

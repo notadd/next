@@ -106,8 +106,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             [name]: val,
         });
     };
-    getImgURL = (node: any) => {
-        window.console.log(node);
+    getImgURL = (event: any) => {
+        this.setState({
+            img: event.target.value.substr(12),
+        });
     };
     render() {
         return (
@@ -164,6 +166,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
+                                        value={this.state.img}
                                     />
                                     <Input
                                         type="file"
