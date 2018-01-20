@@ -79,13 +79,15 @@ type State = {
     modalType: number,
     modalNum: number,
     message: string,
+    list: Array<any>,
+    listPage: Array<any>,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         checkedAll: false,
-        rowsPerPage: 2,
-        currentPage: 0,
+        rowsPerPage: 3,
+        currentPage: 1,
         open: false,
         modalId: '',
         modalName: '',
@@ -128,22 +130,42 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 type: '新闻资讯5',
                 time: '2017-12-01 13:20:59',
             },
+            {
+                id: 6,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                type: '新闻资讯4',
+                time: '2017-12-01 13:20:59',
+            },
+            {
+                id: 7,
+                check: false,
+                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                type: '新闻资讯5',
+                time: '2017-12-01 13:20:59',
+            },
         ],
+        listPage: [],
         message: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
+        const rowPage = this.state.rowsPerPage;
+        const currentPage = this.state.currentPage;
+        const lists = this.state.list.slice(((currentPage - 1) * rowPage), currentPage * rowPage);
         if (event.target.checked) {
-            this.state.list.map(item => {
+            lists.map(item => {
                 item.check = true;
             });
         } else {
-            this.state.list.map(item => {
+            lists.map(item => {
                 item.check = false;
             });
         }
         this.setState({
             [name]: event.target.checked,
+            listPage: lists,
         });
+        window.console.log(this.state.listPage);
     };
     handleChange = (pro: any) => (event: any) => {
         this.state.checkedAll = true;
@@ -198,7 +220,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handlePageClick = (data: any) => {
-        this.setState({ currentPage: data.selected });
+        this.setState({
+            currentPage: data.selected,
+            checkedAll: false,
+        });
     };
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
