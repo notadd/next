@@ -88,8 +88,22 @@ body {
     padding-bottom: 6px;
 }
 /*日期组件*/
+.data-picker {
+    position: absolute !important;
+    width: 100%;
+}
+.data-picker > div:before {
+    background-color: #dfdfdf;
+    height: 0;
+}
+.data-picker > div > div {
+    margin-left: 8px;
+    margin-top: 6px;
+    height: 30px;
+}
 .data-picker input {
     font-size: 16px;
+    opacity: 0;
 }
 /*图片上传*/
 .upload-image {
