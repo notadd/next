@@ -165,13 +165,14 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
-                                    <IconButton>
+                                    <IconButton key={rowInfo.node.id}>
                                         <Link to={'/cms/article/type/edit/' + rowInfo.node.id}>
                                             <ModeEdit />
                                         </Link>
                                     </IconButton>,
                                     <IconButton
-                                         onClick={() => handleClickRemove(rowInfo)}
+                                        key={rowInfo.node.id}
+                                        onClick={() => handleClickRemove(rowInfo)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>,

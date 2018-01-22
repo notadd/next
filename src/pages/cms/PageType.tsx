@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
 import ModeEdit from 'material-ui-icons/ModeEdit';
@@ -124,11 +125,18 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleSubmit = () => {
         this.setState({ open: false });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    };
     render() {
-        // const getNodeKey = ({ treeIndex }: any) => treeIndex;
+        const handleClickRemove = ( pro: any ) => {
+            if (pro.node.children.length > 0) {
+                this.setState({ openTip: true });
+            } else {
+                this.setState({
+                    open: true,
+                    modalName: pro.node.title,
+                    modalId: pro.node.id,
+                });
+            }
+        };
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -158,16 +166,16 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
                             rowHeight={40}
-                            getNodeKey={({ node }) => node.id}
-                            generateNodeProps={({ node, path }) => ({
+                            generateNodeProps={(rowInfo) => ({
                                 buttons: [
-                                    <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
-                                    >
-                                        <ModeEdit />
+                                    <IconButton key={rowInfo.node.id}>
+                                        <Link to={'/cms/page/type/edit/' + rowInfo.node.id}>
+                                            <ModeEdit />
+                                        </Link>
                                     </IconButton>,
                                     <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
+                                        key={rowInfo.node.id}
+                                        onClick={() => handleClickRemove(rowInfo)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>,
