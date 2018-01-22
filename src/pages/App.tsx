@@ -31,6 +31,7 @@ import ArticleRecycle from './cms/ArticleRecycle';
 import Page from './cms/Page';
 import PageEdit from './cms/PageEdit';
 import PageType from './cms/PageType';
+import PageTypeEdit from './cms/PageTypeEdit';
 import Message from './cms/Message';
 
 import Drawer from 'material-ui/Drawer';
@@ -656,7 +657,7 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/seo" component={Seo}/>
                                                 <Route exact path="/upload" component={Upload}/>
                                                 <Route exact path="/menu" component={Menus}/>
-                                                <Route exact path="/menu/edit" component={MenuEdit}/>
+                                                <Route exact path="/menu/edit/:id" component={MenuEdit}/>
                                                 <Route exact path="/mail" component={Mail}/>
                                                 <Route exact path="/debug" component={Debug}/>
                                                 <Route exact path="/extension" component={Extension}/>
@@ -670,11 +671,12 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/cms/article" component={Article}/>
                                                 <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
-                                                <Route exact path="/cms/article/type/edit" component={ArticleTypeEdit}/>
+                                                <Route exact path="/cms/article/type/edit/:id" component={ArticleTypeEdit}/>
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>
                                                 <Route exact path="/cms/page/edit/:id" component={PageEdit}/>
                                                 <Route exact path="/cms/page/type" component={PageType}/>
+                                                <Route exact path="/cms/page/type/edit/:id" component={PageTypeEdit}/>
                                                 <Route exact path="/cms/message" component={Message}/>
                                                 <Route path="/" render={() => (<Redirect to="/home"/>)}/>
                                             </Switch>

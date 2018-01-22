@@ -67,6 +67,25 @@
 .rst__rowToolbar {
     display: none;
 }
+.rst__rowToolbar .rst__toolbarButton {
+    position: absolute;
+    z-index: 100;
+}
+.rst__rowToolbar .rst__toolbarButton a {
+    color: rgba(0, 0, 0, 0.54);
+}
+.rst__rowToolbar .rst__toolbarButton a svg{
+    width: 1em;
+    height: 1em;
+}
+.rst__rowToolbar .rst__toolbarButton:first-child {
+    right: 54px;
+    top: -12px;
+}
+.rst__rowToolbar .rst__toolbarButton:last-child {
+    right: 8px;
+    top: -14px;
+}
 .rst__rowWrapper:hover .rst__rowToolbar {
     display: block;
     cursor: pointer;

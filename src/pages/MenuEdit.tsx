@@ -57,25 +57,22 @@ const styles = {
 type State = {
     webName: string,
     siteOpen: boolean,
-    domainName: string,
-    multiDomainOpen: boolean,
-    keepRecord: string,
-    companyName: string,
-    copyright: string,
-    statisticalCode: string,
+    pageType: string,
 };
 
 class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        webName: 'NotAdd',
-        domainName: '',
-        siteOpen: true,
-        multiDomainOpen: false,
-        keepRecord: '',
-        companyName: '',
-        copyright: '',
-        statisticalCode: '',
-    };
+    constructor (props: any) {
+        super(props);
+        let type = '';
+        if (props.location.pathname.indexOf('/add') > 0) {
+            type = '1';
+        }
+        this.state = {
+            webName: 'NotAdd',
+            siteOpen: true,
+            pageType: type,
+        };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -86,9 +83,11 @@ class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
         return (
             <div>
                 <p className="crumbs">
-                    全局 <b>/</b> 系统插件
+                    全局 <b>/</b> 系统插件 / 菜单管理
                 </p>
-                <h4 className="title">菜单管理</h4>
+                <h4 className="title">
+                    {this.state.pageType === '1' ? '新增' : '编辑'}
+                </h4>
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={40}>

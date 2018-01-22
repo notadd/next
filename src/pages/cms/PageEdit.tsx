@@ -4,6 +4,8 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 
@@ -46,6 +48,7 @@ type State = {
     name: string,
     otherName: string,
     type: string,
+    types: Array<any>,
     pageType: string,
     isOpen: boolean,
 };
@@ -58,9 +61,23 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             type = '1';
         }
         this.state = {
+            types: [
+                {
+                    id: '12',
+                    type: '新闻1',
+                },
+                {
+                    id: '13',
+                    type: '新闻2',
+                },
+                {
+                    id: '14',
+                    type: '新闻3',
+                },
+            ],
             name: 'NotAdd',
             otherName: '新闻资讯',
-            type: '新闻资讯',
+            type: '',
             isOpen: false,
             pageType: type,
         };
@@ -141,15 +158,26 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     >
                                         分类
                                     </InputLabel>
-                                    <Input
-                                        id="name-simple"
+                                    <Select
                                         className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        onChange={this.handleChange('type')}
                                         value={this.state.type}
-                                    />
+                                        onChange={this.handleChange('type')}
+                                        input={<Input name="type" id="type-simple" />}
+                                    >
+                                        {
+                                            this.state.types.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
                                 </FormControl>
                                 <FormControlLabel
                                     label="开启"

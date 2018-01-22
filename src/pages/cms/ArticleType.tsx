@@ -1,10 +1,12 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
 import ErrorIcon from 'material-ui-icons/ErrorOutline';
 import Add from 'material-ui-icons/Add';
@@ -117,13 +119,24 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleCloseTip = () => {
+        this.setState({ openTip: false });
+    };
     handleSubmit = () => {
         this.setState({ open: false });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    };
     render() {
+        const handleClickRemove = ( pro: any ) => {
+            if (pro.node.children.length > 0) {
+                this.setState({ openTip: true });
+            } else {
+                this.setState({
+                    open: true,
+                    modalName: pro.node.title,
+                    modalId: pro.node.id,
+                });
+            }
+        };
         return (
             <div className="top-action-module">
                 <p className="crumbs">
@@ -131,11 +144,13 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/article/type/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
@@ -148,12 +163,18 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
                             rowHeight={40}
-                            generateNodeProps={({ node, path }) => ({
+                            generateNodeProps={(rowInfo) => ({
                                 buttons: [
+                                    <IconButton key={rowInfo.node.id}>
+                                        <Link to={'/cms/article/type/edit/' + rowInfo.node.id}>
+                                            <ModeEdit />
+                                        </Link>
+                                    </IconButton>,
                                     <IconButton
-                                         onClick={() => this.handleClickEdit(node)}
+                                        key={rowInfo.node.id}
+                                        onClick={() => handleClickRemove(rowInfo)}
                                     >
-                                        <ModeEdit />
+                                        <DeleteIcon />
                                     </IconButton>,
                                 ],
                             })}
@@ -199,7 +220,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={this.handleCloseTip}
                         >
                             <ClearIcon />
                         </IconButton>
@@ -207,7 +228,6 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                     <DialogContent className="dialog-content">
                         <h4>
                             <IconButton
-                                onClick={this.handleClose}
                             >
                                 <ErrorIcon />
                             </IconButton>
