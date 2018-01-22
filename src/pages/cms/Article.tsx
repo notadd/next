@@ -157,7 +157,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }

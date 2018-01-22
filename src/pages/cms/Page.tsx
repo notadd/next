@@ -12,6 +12,7 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Snackbar from 'material-ui/Snackbar';
 import Table, {
     TableBody,
     TableCell,
@@ -71,6 +72,8 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
+    openMessageTip: boolean,
+    message: string,
     modalId: string,
     modalName: string,
     modalType: number,
@@ -88,6 +91,8 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalName: '',
         modalType: 0,
         modalNum: 0,
+        openMessageTip: false,
+        message: '',
         list: [
             {
                 id: 1,
@@ -133,7 +138,6 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }
@@ -142,9 +146,6 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             [name]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    }
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -185,6 +186,11 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         modalType: 1,
                         modalNum: arr.length,
                     });
+                } else {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的页面',
+                    });
                 }
             }
         }
@@ -194,6 +200,9 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleSubmit = () => {
         this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -212,7 +221,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -307,6 +316,16 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </TableBody>
                         </Table>
                     </div>
+                    <Snackbar
+                        className="message-snack-bar"
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        open={openMessageTip}
+                        onClose={this.handleCloseTip}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{message}</span>}
+                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}

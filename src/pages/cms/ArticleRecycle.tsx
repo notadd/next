@@ -9,6 +9,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
 import ReplyAll from 'material-ui-icons/ReplyAll';
 import Cached from 'material-ui-icons/Cached';
+import Snackbar from 'material-ui/Snackbar';
 import Table, {
     TableBody,
     TableCell,
@@ -68,6 +69,8 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
+    openMessageTip: boolean,
+    message: string,
     modalId: string,
     modalName: string,
     modalType: number,
@@ -85,6 +88,8 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         modalName: '',
         modalType: 0,
         modalNum: 0,
+        openMessageTip: false,
+        message: '',
         list: [
             {
                 id: 1,
@@ -130,7 +135,6 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }
@@ -182,6 +186,11 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         modalType: 1,
                         modalNum: arr.length,
                     });
+                } else {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的文章',
+                    });
                 }
             }
         }
@@ -191,6 +200,9 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
     handleSubmit = () => {
         this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -209,7 +221,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="top-action-module cms">
                 <p className="crumbs">
@@ -291,6 +303,16 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                             </TableBody>
                         </Table>
                     </div>
+                    <Snackbar
+                        className="message-snack-bar"
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        open={openMessageTip}
+                        onClose={this.handleCloseTip}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{message}</span>}
+                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
