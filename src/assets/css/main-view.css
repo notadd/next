@@ -5,6 +5,7 @@
     margin: 0 auto;
     display: flex;
     margin-top: 70px;
+    min-height: calc(100vh - 70px);
 }
 /*导航栏搜索图标*/
 .search-icon {

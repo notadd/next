@@ -46,6 +46,8 @@ import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
 import Select from 'react-select';
 import createHashHistory from 'history/createHashHistory';
+import withWidth from 'material-ui/utils/withWidth';
+import compose from 'recompose/compose';
 import 'react-select/dist/react-select.css';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 
@@ -62,14 +64,7 @@ type State = {
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
-    drawerPaper: {
-        height: 'calc(100vh - 70px)',
-        width: drawerWidth,
-        position: 'relative',
-        boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
-        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
-    },
-    xsDrawerPaper: {
+    drawerDocked: {
         height: 'calc(100vh - 70px)',
         width: drawerWidth,
         position: 'fixed',
@@ -78,9 +73,11 @@ const styles = (theme: Theme): StyleRules => ({
         boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
+    drawerPaper: {
+        width: 'inherit',
+    },
     drawerPaperClose: {
         width: 90,
-        position: 'relative',
         overflow: 'visible',
         zIndex: 1,
         transform: 'translateX(0) !important',
@@ -429,13 +426,15 @@ class App extends React.Component<Props, State> {
         ],
     };
     toggleDrawer = () => {
-        this.setState({
-            open: !this.state.open,
-        });
+        window.console.log(this.props.width);
+        if (this.props.width !== 'sm') {
+            this.setState({
+                open: !this.state.open,
+            });
+        }
     };
     handleChange = (event: any, value: any) => {
         this.setState({ value });
-        window.console.log(this.state.navs[value].side);
     };
     handleOpenSearch = () => {
         this.setState({ openSearch: true });
@@ -494,10 +493,11 @@ class App extends React.Component<Props, State> {
         createHashHistory().push(selectedOption['url']);
     };
     render() {
-        const { value, openSearch, selectedOption, selectOptions } = this.state;
+        const { value, openSearch, selectedOption, selectOptions, open } = this.state;
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         const wd = this.props.width;
+        const condition = (!open && (wd === ('md' || 'lg' || 'xl'))) || (open && (wd == 'sm'));
         return (
             <HashRouter  basename="/">
                 <Switch>
@@ -618,16 +618,18 @@ class App extends React.Component<Props, State> {
                                     </div>
                                     <div className="view">
                                         {
-                                            !open && wd === ('md' || 'lg' || 'xl') || open && wd === 'sm' ?
+                                            window.console.log((!open && (wd === ('md' || 'lg' || 'xl'))) || (open && (wd == 'sm')))
+                                        }
+                                        {
+                                            condition ?
                                                 <Drawer
                                                     type="persistent"
-                                                    className={!this.state.open ? 'smallSideBar' : ''}
+                                                    className={condition && 'smallSideBar'}
                                                     classes={{
                                                         modal: classes.root,
-                                                        docked: classNames(classes.drawerPaper,
+                                                        docked: classNames(classes.drawerDocked,
                                                             !this.state.open && classes.drawerPaperClose),
-                                                        paper: classNames(classes.drawerPaper,
-                                                            !this.state.open && classes.drawerPaperClose),
+                                                        paper: classes.drawerPaper
                                                     }}
                                                     onClose={this.toggleDrawer}
                                                     open={this.state.open}
@@ -639,15 +641,14 @@ class App extends React.Component<Props, State> {
                                                     type="persistent"
                                                     classes={{
                                                         modal: classes.root,
-                                                        docked: classNames(classes.xsDrawerPaper,
-                                                            !this.state.open && classes.xsDrawerPaperClose),
-                                                        paper: classNames(classes.xsDrawerPaper,
-                                                            !this.state.open && classes.xsDrawerPaperClose),
+                                                        docked: classNames(classes.drawerDocked,
+                                                            !this.state.open && classes.drawerPaperClose),
+                                                        paper: classes.drawerPaper
                                                     }}
                                                     onClose={this.toggleDrawer}
                                                     open={this.state.open}
                                                 >
-                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current].side}/>
+                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current - 1].side}/>
                                                 </Drawer>
                                         }
                                         <div className={classNames('content', this.state.open && wd !== 'sm' && 'move-content')}>
@@ -691,4 +692,4 @@ class App extends React.Component<Props, State> {
         );
     }
 }
-export default withStyles(styles, { withTheme: true })<{}>(App);
+export default compose(withStyles(styles), withWidth())(App);
