@@ -119,18 +119,8 @@ body {
     opacity: 0;
 }
 /*消息提醒*/
-.message-pop-over {
-    width: inherit !important;
-    height: inherit !important;
-}
-.message-pop-over > div:first-child {
-    position: inherit;
-    width: 0;
-    height: 0;
-}
-.message-pop-over .message-content {
-    min-width: 300px;
-    font-size: 12px;
-    padding: 12px 12px;
-    border-left: 2px solid #f50057;
+.message-snack-bar > div {
+    background-color: #fff;
+    color: inherit;
+    font-size: 14px;
 }

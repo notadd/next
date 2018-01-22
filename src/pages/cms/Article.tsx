@@ -12,8 +12,7 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
-import Typography from 'material-ui/Typography';
-import Popover from 'material-ui/Popover';
+import Snackbar from 'material-ui/Snackbar';
 import Table, {
     TableBody,
     TableCell,
@@ -212,11 +211,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         openMessageTip: true,
                         message: '请选择要删除的文章',
                     });
-                    setInterval(() => {
-                        this.setState({
-                            openMessageTip: false,
-                        });
-                    }, 1500);
                 }
             }
         }
@@ -226,6 +220,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleSubmit = () => {
         this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -342,21 +339,16 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </TableBody>
                         </Table>
                     </div>
-                    <Popover
+                    <Snackbar
+                        className="message-snack-bar"
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={openMessageTip}
-                        anchorPosition={{ top: 0, left: 400 }}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                        onClose={this.handleCloseTip}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
                         }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        className="message-pop-over"
-                    >
-                        <Typography className="message-content">{message}</Typography>
-                    </Popover>
+                        message={<span id="message-id">{message}</span>}
+                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
