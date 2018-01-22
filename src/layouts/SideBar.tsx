@@ -66,7 +66,6 @@ interface Props {
     history?: History;
     open: boolean;
     width: string;
-    navs: Array<any>;
     sideNav: Array<any>;
 }
 
@@ -85,6 +84,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                 message: 5,
             },
         };
+        window.console.log(this.props.open);
         window.console.log(typeof this.props.sideNav);
     }
     componentWillReceiveProps(nextProps: object) {
@@ -132,15 +132,18 @@ class SideBar extends React.Component<PropsWithStyles, State> {
         this.setState({ navs: arr });
     }
     render() {
+        const wd = this.props.width;
+        const open = this.state.open;
         return (
             <div className="sideBar">
                 <div
                     className={
                         classNames(
-                            'userBox', !this.state.open && this.props.width !== 'xs' && 'small-userBox'
+                            'userBox', ((!open && (wd === ('lg' || 'xl' || 'md'))) || (open && (wd === 'sm'))) && 'small-userBox'
                         )
                     }
                 >
+                    {/*<p>{this.props.sideNav.values()}</p>*/}
                     <div>
                         <Avatar
                             alt={this.state.user.name}
@@ -198,10 +201,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                 style={{paddingTop: 0, paddingBottom: 0}}
                             >
                                 {
-                                    window.console.log(!this.state.open && this.props.width !== 'xs')
-                                }
-                                {
-                                    !this.state.open && this.props.width !== 'xs' ?
+                                    !open && wd === ('md' || 'lg' || 'xl') || open && wd === 'sm' ?
                                         <ListItem
                                             className={
                                                 classNames(
