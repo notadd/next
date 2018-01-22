@@ -1,12 +1,21 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import TouchBackend from 'react-dnd-touch-backend';
-import { SortableTreeWithoutDndContext as SortableTree } from 'react-sortable-tree';
-import IconButton from 'material-ui/IconButton';
+import SortableTree from 'react-sortable-tree';
+import { Link } from 'react-router-dom';
 import ModeEdit from 'material-ui-icons/ModeEdit';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
+import ClearIcon from 'material-ui-icons/Clear';
+import ErrorIcon from 'material-ui-icons/ErrorOutline';
+import Add from 'material-ui-icons/Add';
+import Cached from 'material-ui-icons/Cached';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+} from 'material-ui/Dialog';
 
 const styles = {
     root: {
@@ -17,20 +26,32 @@ const styles = {
         'flex-wrap': 'wrap',
         'margin': '0',
     },
+    menuBtn: {
+        'width': '32px',
+        'height': '32px',
+        'border-radius': '50%',
+        'background-color': '#3f51b5',
+        'color': '#fff',
+        'margin-left': '10px',
+    },
 };
-const isTouchDevice = !!('ontouchstart' in window || navigator.maxTouchPoints);
 type State = {
+    modalName: string,
+    modalId: string,
+    open: boolean,
+    openTip: boolean,
     treeData: Array<any>,
 };
 
 class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        treeData: [{}],
-    };
     constructor(props: any) {
         super(props);
 
         this.state = {
+            open: false,
+            openTip: false,
+            modalName: '产品中心',
+            modalId: '',
             treeData: [
                 {
                     id: 1,
@@ -95,8 +116,14 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
         };
     }
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openTip: false });
+    };
+    handleSubmit = () => {
+        this.setState({ open: false });
     };
     render() {
         const handleClickRemove = ( pro: any ) => {
@@ -111,7 +138,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         };
         return (
-            <div className="configurations">
+            <div className="configurations top-action-module">
                 <p className="crumbs">
                     全局 <b>/</b> 系统插件
                 </p>
@@ -154,8 +181,63 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                         />
                     </div>
                 </Paper>
+                <Dialog
+                    open={this.state.open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content-action"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={this.handleClose}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        <h4>确定要删除分类名称"{this.state.modalName}"吗?</h4>
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={this.handleClose}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleSubmit} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={this.state.openTip}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content-action dialog-tip"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={this.handleCloseTip}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        <h4>
+                            <IconButton
+                            >
+                                <ErrorIcon />
+                            </IconButton>
+                            删除失败！
+                        </h4>
+                        <p>要删除此分类必须先删除子层级！</p>
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }
 }
-export default DragDropContext(isTouchDevice ? TouchBackend : HTML5Backend)(withStyles(styles)(Menus));
+export default withStyles(styles)(Menus);
