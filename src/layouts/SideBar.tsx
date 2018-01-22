@@ -279,6 +279,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                         <NavLink
                                                                             to={child.path}
                                                                             activeClassName="selectBtn"
+                                                                            exact
                                                                         >
                                                                             <ListItemText
                                                                                 style={{paddingLeft: 78}}
