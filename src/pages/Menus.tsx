@@ -38,6 +38,7 @@ const styles = {
 type State = {
     modalName: string,
     modalId: string,
+    nodeLength: number,
     open: boolean,
     openTip: boolean,
     treeData: Array<any>,
@@ -52,6 +53,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
             openTip: false,
             modalName: '产品中心',
             modalId: '',
+            nodeLength: 0,
             treeData: [
                 {
                     id: 1,
@@ -123,19 +125,23 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ openTip: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        if (this.state.nodeLength > 0) {
+            this.setState({
+                open: false,
+                openTip: true,
+            });
+        } else {
+            this.setState({ open: false });
+        }
     };
     render() {
         const handleClickRemove = ( pro: any ) => {
-            if (pro.node.children.length > 0) {
-                this.setState({ openTip: true });
-            } else {
-                this.setState({
-                    open: true,
-                    modalName: pro.node.title,
-                    modalId: pro.node.id,
-                });
-            }
+            this.setState({
+                open: true,
+                modalName: pro.node.title,
+                modalId: pro.node.id,
+                nodeLength: pro.node.children.length,
+            });
         };
         return (
             <div className="configurations top-action-module">
