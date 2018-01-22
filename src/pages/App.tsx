@@ -795,7 +795,7 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/cms/article" component={Article}/>
                                                 <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
-                                                <Route exact path="/cms/article/type/edit" component={ArticleTypeEdit}/>
+                                                <Route exact path="/cms/article/type/edit/:id" component={ArticleTypeEdit}/>
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>
                                                 <Route exact path="/cms/page/edit/:id" component={PageEdit}/>

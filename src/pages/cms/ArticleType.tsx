@@ -126,12 +126,6 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         this.setState({ open: false });
     };
     render() {
-        const handleClickEdit = ( pro: any ) => {
-            window.console.log(pro);
-            this.setState({
-                modalId: pro.node.id,
-            });
-        };
         const handleClickRemove = ( pro: any ) => {
             if (pro.node.children.length > 0) {
                 this.setState({ openTip: true });
@@ -150,7 +144,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
-                    <Link to={'/cms/article/type/edit'}>
+                    <Link to={'/cms/article/type/edit/' + 'add'}>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
@@ -171,10 +165,10 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
-                                    <IconButton
-                                         onClick={() => handleClickEdit(rowInfo)}
-                                    >
-                                        <ModeEdit />
+                                    <IconButton>
+                                        <Link to={'/cms/article/type/edit/' + rowInfo.node.id}>
+                                            <ModeEdit />
+                                        </Link>
                                     </IconButton>,
                                     <IconButton
                                          onClick={() => handleClickRemove(rowInfo)}
