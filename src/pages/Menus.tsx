@@ -19,7 +19,9 @@ const styles = {
     },
 };
 const isTouchDevice = !!('ontouchstart' in window || navigator.maxTouchPoints);
-type State = {};
+type State = {
+    treeData: Array<any>,
+};
 
 class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
@@ -97,14 +99,16 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         window.console.log(pro);
     };
     render() {
-        const alertNodeInfo = (node: object) => {
-            const objectString = Object.keys(node)
-                .map(k => (k === 'children' ? 'children: Array' : `${k}: '${node[k]}'`))
-                .join(',\n   ');
-
-            window.alert(
-                objectString
-            );
+        const handleClickRemove = ( pro: any ) => {
+            if (pro.node.children.length > 0) {
+                this.setState({ openTip: true });
+            } else {
+                this.setState({
+                    open: true,
+                    modalName: pro.node.title,
+                    modalId: pro.node.id,
+                });
+            }
         };
         return (
             <div className="configurations">
@@ -112,22 +116,38 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                     全局 <b>/</b> 系统插件
                 </p>
                 <h4 className="title">菜单管理</h4>
+                <div className="btn-group">
+                    <Link to={'/menu/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
+                    <IconButton
+                        className={this.props.classes.menuBtn}
+                    >
+                        <Cached />
+                    </IconButton>
+                </div>
                 <Paper className={this.props.classes.root}>
                     <div className="menus-manager">
                         <SortableTree
                             treeData={this.state.treeData}
                             onChange={treeData => this.setState({ treeData })}
-                            getNodeKey={({ node }) => {
-                                window.console.log(node);
-                                return node.id;
-                            }}
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
+                                    <IconButton key={rowInfo.node.id}>
+                                        <Link to={'/menu/edit/' + rowInfo.node.id}>
+                                            <ModeEdit />
+                                        </Link>
+                                    </IconButton>,
                                     <IconButton
-                                        onClick={() => alertNodeInfo(rowInfo)}
+                                        key={rowInfo.node.id}
+                                        onClick={() => handleClickRemove(rowInfo)}
                                     >
-                                        <ModeEdit />
+                                        <DeleteIcon />
                                     </IconButton>,
                                 ],
                             })}
