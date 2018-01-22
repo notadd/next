@@ -75,6 +75,7 @@ type State = {
     modalName: string,
     modalType: number,
     modalNum: number,
+    list: Array<any>,
 };
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -121,14 +122,21 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         ],
     };
     handleChangeAll = (name: any) => (event: any) => {
+        const rowPage = this.state.rowsPerPage;
+        const currentPage = this.state.currentPage + 1;
         if (event.target.checked) {
-            this.state.list.map(item => {
-                item.check = true;
-            });
+            for (let i = 0; i < this.state.list.length; i += 1) {
+                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                    this.state.list[i].check = true;
+                }
+            }
         } else {
-            this.state.list.map(item => {
-                item.check = false;
-            });
+            for (let i = 0; i < this.state.list.length; i += 1) {
+                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                    window.console.log(i);
+                    this.state.list[i].check = false;
+                }
+            }
         }
         this.setState({
             [name]: event.target.checked,
@@ -138,16 +146,20 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         window.console.log(pro);
     }
     handleChange = (pro: any) => (event: any) => {
+        const rowPage = this.state.rowsPerPage;
+        const currentPage = this.state.currentPage + 1;
         this.state.checkedAll = true;
         pro.check = true;
         if (!event.target.checked) {
             pro.check = false;
         }
-        this.state.list.map(item => {
-            if (item.check === false) {
-                this.state.checkedAll = false;
+        for (let i = 0; i < this.state.list.length; i += 1) {
+            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                if (this.state.list[i].check === false) {
+                    this.state.checkedAll = false;
+                }
             }
-        });
+        }
         this.setState({
             [pro]: event.target.checked,
         });
@@ -157,20 +169,25 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.state.modalId = pro.id;
         this.setState({
             open: true,
+            modalType: 0,
         });
     };
     handleBatchRemove = () => {
+        const rowPage = this.state.rowsPerPage;
+        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
-        Object.keys(this.state.list).forEach(item => {
-            if (this.state.list[item].check) {
-                arr.push(this.state.list[item].check);
-                this.setState({
-                    open: true,
-                    modalType: 1,
-                    modalNum: arr.length,
-                });
+        for (let i = 0; i < this.state.list.length; i += 1) {
+            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                if (this.state.list[i].check) {
+                    arr.push(this.state.list[i].check);
+                    this.setState({
+                        open: true,
+                        modalType: 1,
+                        modalNum: arr.length,
+                    });
+                }
             }
-        });
+        }
     };
     handleClose = () => {
         this.setState({ open: false });
@@ -179,7 +196,19 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handlePageClick = (data: any) => {
-        this.setState({ currentPage: data.selected });
+        const rowPage = this.state.rowsPerPage;
+        const currentPage = this.state.currentPage + 1;
+        for (let i = 0; i < this.state.list.length; i += 1) {
+            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                if (this.state.list[i].check === true) {
+                    this.state.list[i].check = false;
+                }
+            }
+        }
+        this.setState({
+            currentPage: data.selected,
+            checkedAll: false,
+        });
     };
 
     render() {
