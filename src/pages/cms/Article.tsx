@@ -80,7 +80,6 @@ type State = {
     modalNum: number,
     message: string,
     list: Array<any>,
-    listPage: Array<any>,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -145,7 +144,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 time: '2017-12-01 13:20:59',
             },
         ],
-        listPage: [],
         message: '',
     };
     handleChangeAll = (name: any) => (event: any) => {
