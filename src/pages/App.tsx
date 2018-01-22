@@ -31,6 +31,7 @@ import ArticleRecycle from './cms/ArticleRecycle';
 import Page from './cms/Page';
 import PageEdit from './cms/PageEdit';
 import PageType from './cms/PageType';
+import PageTypeEdit from './cms/PageTypeEdit';
 import Message from './cms/Message';
 
 import Drawer from 'material-ui/Drawer';
@@ -800,6 +801,7 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/cms/page" component={Page}/>
                                                 <Route exact path="/cms/page/edit/:id" component={PageEdit}/>
                                                 <Route exact path="/cms/page/type" component={PageType}/>
+                                                <Route exact path="/cms/page/type/edit/:id" component={PageTypeEdit}/>
                                                 <Route exact path="/cms/message" component={Message}/>
                                                 <Route path="/" render={() => (<Redirect to="/home"/>)}/>
                                             </Switch>

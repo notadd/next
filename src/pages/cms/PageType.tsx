@@ -144,16 +144,13 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                 </p>
                 <h4 className="title">分类管理</h4>
                 <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Add />
-                    </IconButton>
+                    <Link to={'/cms/page/type/edit/' + 'add'}>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Add />
+                        </IconButton>
+                    </Link>
                     <IconButton
                         className={this.props.classes.menuBtn}
                     >
