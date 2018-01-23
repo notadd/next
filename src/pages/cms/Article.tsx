@@ -264,7 +264,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         return (
             <div className="cms">
                 <div className="top-action-module clearfix">
-                    <div className="left-title pull-left">
+                    <div className="pull-left">
                         <p className="crumbs">
                             CMS / 文章管理
                         </p>
