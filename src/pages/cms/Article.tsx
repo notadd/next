@@ -13,6 +13,7 @@ import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
 import Snackbar from 'material-ui/Snackbar';
+import Input from 'material-ui/Input';
 import Table, {
     TableBody,
     TableCell,
@@ -73,6 +74,7 @@ type State = {
     currentPage: number,
     open: boolean,
     openMessageTip: boolean,
+    openSearch: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
@@ -92,6 +94,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalType: 0,
         modalNum: 0,
         openMessageTip: false,
+        openSearch: false,
         list: [
             {
                 id: 1,
@@ -223,6 +226,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
+    handleOpenSearch = () => {
+        this.setState({ openSearch: true });
+    };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -247,11 +253,24 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 </p>
                 <h4 className="title">全部文章</h4>
                 <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Search />
-                    </IconButton>
+                    {
+                        this.state.openSearch ?
+                            <div className="input-search-module">
+                                <Input
+                                    placeholder="请输入要搜索的内容"
+                                    className="input-search"
+                                />
+                                <IconButton>
+                                    <Search />
+                                </IconButton>
+                            </div> :
+                            <IconButton
+                                className={this.props.classes.menuBtn}
+                                onClick={this.handleOpenSearch}
+                            >
+                                <Search />
+                            </IconButton>
+                    }
                     <IconButton
                         className={this.props.classes.menuBtn}
                         onClick={this.handleBatchRemove}

@@ -124,3 +124,36 @@ body {
     color: inherit;
     font-size: 14px;
 }
+/*input搜索*/
+.input-search-module {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    right: 0;
+}
+.input-search-module > button {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 18px;
+}
+.input-search-module > button svg{
+    color: #3f51b5;
+    width: 1.2em;
+    height: 1.2em;
+}
+.input-search:after,
+.input-search:before {
+    height: inherit !important;
+}
+.input-search input {
+    font-size: 12px;
+    width: 198px;
+    height: 32px;
+    border-radius: 16px;
+    border: solid 1px #3f51b5;
+    padding: 0 12px;
+    color: #808080;
+}
