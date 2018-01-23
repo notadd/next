@@ -182,7 +182,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        style={{ position: 'relative' }}
+                                        style={{position: 'relative'}}
                                     >
                                         颜色
                                     </InputLabel>
@@ -193,7 +193,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             underline: this.props.classes.underline,
                                         }}
                                         value={this.state.color}
-                                        style={{ marginTop: '0' }}
+                                        style={{marginTop: '0'}}
                                     />
                                     <ColorPicker
                                         color={this.state.color}

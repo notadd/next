@@ -103,8 +103,8 @@ class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('webName')}
                                         value={this.state.webName}
                                     />
@@ -114,19 +114,19 @@ class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <FormControlLabel
                                     label="是否开启"
                                     classes={ {
-                                            root: this.props.classes.formLabel,
-                                            label: this.props.classes.formLabel
-                                        } }
+                                        root: this.props.classes.formLabel,
+                                        label: this.props.classes.formLabel
+                                    } }
                                     control={
-                                            <Switch
-                                                classes={{
-                                                    root: this.props.classes.switchHeight,
-                                                    default: this.props.classes.switchDefault,
-                                                }}
-                                                onChange={(event, checked) => this.setState({ siteOpen: checked })}
-                                                checked={this.state.siteOpen}
-                                            />
-                                        }
+                                        <Switch
+                                            classes={{
+                                                root: this.props.classes.switchHeight,
+                                                default: this.props.classes.switchDefault,
+                                            }}
+                                            onChange={(event, checked) => this.setState({ siteOpen: checked })}
+                                            checked={this.state.siteOpen}
+                                        />
+                                    }
                                 />
                             </Grid>
                         </Grid>
