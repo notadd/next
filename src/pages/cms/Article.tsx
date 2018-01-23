@@ -80,6 +80,7 @@ type State = {
     modalType: number,
     modalNum: number,
     message: string,
+    searchValue: string,
     list: Array<any>,
 };
 
@@ -95,6 +96,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalNum: 0,
         openMessageTip: false,
         openSearch: false,
+        searchValue: '',
         list: [
             {
                 id: 1,
@@ -229,6 +231,14 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleOpenSearch = () => {
         this.setState({ openSearch: true });
     };
+    handleCloseSearch = () => {
+        if (this.state.searchValue.length < 1) {
+            this.setState({ openSearch: false });
+        }
+    };
+    handleSearch = () => {
+        window.console.log(this.state.searchValue);
+    };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -242,6 +252,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({
             currentPage: data.selected,
             checkedAll: false,
+        });
+    };
+    handleChangeSearch = (name: any) => (event: any) => {
+        this.setState({
+            searchValue: event.target.value,
         });
     };
     render() {
@@ -259,8 +274,14 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <Input
                                     placeholder="请输入要搜索的内容"
                                     className="input-search"
+                                    value={this.state.searchValue}
+                                    onChange={this.handleChangeSearch('searchValue')}
+                                    onKeyUp={this.handleSearch}
+                                    onBlur={this.handleCloseSearch}
                                 />
-                                <IconButton>
+                                <IconButton
+                                    onClick={this.handleSearch}
+                                >
                                     <Search />
                                 </IconButton>
                             </div> :
