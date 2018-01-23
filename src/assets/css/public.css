@@ -11,34 +11,63 @@ body {
     "WenQuanYi Micro Hei",
     sans-serif;
 }
-/*面包屑导航*/
-.crumbs {
-    color: #333;
-    font-size: 12px;
-}
-.title {
-    font-size: 18px;
-    margin-bottom: 24px;
-    margin-top: 5px;
-    font-weight: 600;
-}
 #root {
     height: inherit;
 }
 .header-search {
     position: inherit !important;
 }
-/*表格顶部按钮操作*/
-.top-action-module {
-    position: relative;
+/*面包屑导航*/
+.top-action-module .left-title .crumbs {
+    color: #333;
+    font-size: 12px;
 }
+.top-action-module .left-title .title {
+    font-size: 18px;
+    margin-bottom: 24px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+/*表格顶部按钮操作*/
 .top-action-module .btn-group {
-    position: absolute;
-    right: 0;
-    top: 6px;
+    margin-top: 8px;
 }
 .top-action-module .btn-group button{
     font-size: 16px;
+}
+
+/*表格顶部input搜索*/
+.input-search-module {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    right: 0;
+}
+.input-search-module > button {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 18px;
+}
+.input-search-module > button svg{
+    color: #3f51b5;
+    width: 1.2em;
+    height: 1.2em;
+}
+.input-search:after,
+.input-search:before {
+    height: inherit !important;
+}
+.input-search input {
+    font-size: 12px;
+    width: 170px;
+    height: 32px;
+    border-radius: 16px;
+    border: solid 1px #3f51b5;
+    padding: 0 40px 0 12px;
+    color: #808080;
 }
 /*顶部搜索*/
 .header-search > div {
@@ -124,36 +153,16 @@ body {
     color: inherit;
     font-size: 14px;
 }
-/*input搜索*/
-.input-search-module {
-    display: inline-block;
-    position: relative;
-    top: -4px;
-    right: 0;
-}
-.input-search-module > button {
-    position: absolute;
-    right: 12px;
-    top: 8px;
-    cursor: pointer;
-    width: 24px;
-    height: 18px;
-}
-.input-search-module > button svg{
-    color: #3f51b5;
-    width: 1.2em;
-    height: 1.2em;
-}
-.input-search:after,
-.input-search:before {
-    height: inherit !important;
-}
-.input-search input {
-    font-size: 12px;
-    width: 170px;
-    height: 32px;
-    border-radius: 16px;
-    border: solid 1px #3f51b5;
-    padding: 0 40px 0 12px;
-    color: #808080;
+@media (max-width: 479px) {
+    /*顶部按钮操作*/
+    .top-action-module .left-title .title {
+        margin-bottom: 14px;
+    }
+    .top-action-module .btn-group {
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+    .input-search input {
+        width: 135px;
+    }
 }

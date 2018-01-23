@@ -262,54 +262,58 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="top-action-module cms">
-                <p className="crumbs">
-                    CMS / 文章管理
-                </p>
-                <h4 className="title">全部文章</h4>
-                <div className="btn-group">
-                    {
-                        this.state.openSearch ?
-                            <div className="input-search-module">
-                                <Input
-                                    placeholder="请输入要搜索的内容"
-                                    className="input-search"
-                                    value={this.state.searchValue}
-                                    onChange={this.handleChangeSearch('searchValue')}
-                                    onKeyUp={this.handleSearch}
-                                    onBlur={this.handleCloseSearch}
-                                />
+            <div className="cms">
+                <div className="top-action-module clearfix">
+                    <div className="left-title pull-left">
+                        <p className="crumbs">
+                            CMS / 文章管理
+                        </p>
+                        <h4 className="title">全部文章</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        {
+                            this.state.openSearch ?
+                                <div className="input-search-module">
+                                    <Input
+                                        placeholder="请输入要搜索的内容"
+                                        className="input-search"
+                                        value={this.state.searchValue}
+                                        onChange={this.handleChangeSearch('searchValue')}
+                                        onKeyUp={this.handleSearch}
+                                        onBlur={this.handleCloseSearch}
+                                    />
+                                    <IconButton
+                                        onClick={this.handleSearch}
+                                    >
+                                        <Search />
+                                    </IconButton>
+                                </div> :
                                 <IconButton
-                                    onClick={this.handleSearch}
+                                    className={this.props.classes.menuBtn}
+                                    onClick={this.handleOpenSearch}
                                 >
                                     <Search />
                                 </IconButton>
-                            </div> :
+                        }
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchRemove}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                        <Link to={'/cms/article/edit/' + 'add'}>
                             <IconButton
                                 className={this.props.classes.menuBtn}
-                                onClick={this.handleOpenSearch}
                             >
-                                <Search />
+                                <Add />
                             </IconButton>
-                    }
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                        onClick={this.handleBatchRemove}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <Link to={'/cms/article/edit/' + 'add'}>
+                        </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
-                            <Add />
+                            <Cached />
                         </IconButton>
-                    </Link>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Cached />
-                    </IconButton>
+                    </div>
                 </div>
                 <Paper className="root-paper">
                     <div className="table-hidden">
