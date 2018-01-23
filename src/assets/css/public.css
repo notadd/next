@@ -19,7 +19,7 @@ body {
 }
 /*面包屑导航*/
 .crumbs {
-    color: #333;
+    color: #808080;
     font-size: 12px;
 }
 .title {
@@ -56,11 +56,11 @@ body {
     width: 1.2em;
     height: 1.2em;
 }
-.input-search:after,
-.input-search:before {
+.input-search-module .input-search:after,
+.input-search-module .input-search:before {
     height: inherit !important;
 }
-.input-search input {
+.input-search-module .input-search input {
     font-size: 12px;
     width: 170px;
     height: 32px;
@@ -162,7 +162,7 @@ body {
         margin-top: 8px;
         margin-bottom: 20px;
     }
-    .input-search input {
+    .input-search-module .input-search input {
         width: 135px;
     }
 }
