@@ -223,23 +223,27 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="top-action-module cms">
-                <p className="crumbs">
-                    CMS / 文章管理
-                </p>
-                <h4 className="title">回收站</h4>
-                <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                        onClick={this.handleBatchRemove}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Cached />
-                    </IconButton>
+            <div className="cms">
+                <div className="top-action-module clearfix">
+                    <div className="left-title pull-left">
+                        <p className="crumbs">
+                            CMS / 文章管理
+                        </p>
+                        <h4 className="title">回收站</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchRemove}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <Cached />
+                        </IconButton>
+                    </div>
                 </div>
                 <Paper className="root-paper">
                     <div className="table-hidden">
