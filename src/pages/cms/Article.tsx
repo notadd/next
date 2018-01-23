@@ -236,6 +236,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             this.setState({ openSearch: false });
         }
     };
+    handleChangeSearch = (name: any) => (event: any) => {
+        this.setState({
+            searchValue: event.target.value,
+        });
+    };
     handleSearch = () => {
         window.console.log(this.state.searchValue);
     };
@@ -252,11 +257,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({
             currentPage: data.selected,
             checkedAll: false,
-        });
-    };
-    handleChangeSearch = (name: any) => (event: any) => {
-        this.setState({
-            searchValue: event.target.value,
         });
     };
     render() {
