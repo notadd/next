@@ -145,22 +145,26 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
     render() {
         const { currentPage, rowsPerPage, list } = this.state;
         return (
-            <div className="top-action-module">
-                <p className="crumbs">
-                    全局 / 应用管理 / 模块配置
-                </p>
-                <h4 className="title">导入/导出</h4>
-                <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <FileUpload />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <FileDownload />
-                    </IconButton>
+            <div>
+                <div className="top-action-module clearfix">
+                    <div className="pull-left">
+                        <p className="crumbs">
+                            全局 / 应用管理 / 模块配置
+                        </p>
+                        <h4 className="title">导入/导出</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <FileUpload />
+                        </IconButton>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                        >
+                            <FileDownload />
+                        </IconButton>
+                    </div>
                 </div>
                 <Paper className="root-paper">
                    <div className="table-hidden">

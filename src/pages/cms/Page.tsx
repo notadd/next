@@ -12,6 +12,8 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Snackbar from 'material-ui/Snackbar';
+import Input from 'material-ui/Input';
 import Table, {
     TableBody,
     TableCell,
@@ -71,10 +73,14 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
+    openMessageTip: boolean,
+    openSearch: boolean,
+    message: string,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
+    searchValue: string,
     list: Array<any>,
 };
 
@@ -88,6 +94,10 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalName: '',
         modalType: 0,
         modalNum: 0,
+        openMessageTip: false,
+        openSearch: false,
+        searchValue: '',
+        message: '',
         list: [
             {
                 id: 1,
@@ -133,7 +143,6 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }
@@ -142,9 +151,6 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             [name]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    }
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -185,6 +191,11 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         modalType: 1,
                         modalNum: arr.length,
                     });
+                } else {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的页面',
+                    });
                 }
             }
         }
@@ -194,6 +205,25 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleSubmit = () => {
         this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openMessageTip: false });
+    };
+    handleOpenSearch = () => {
+        this.setState({ openSearch: true });
+    };
+    handleCloseSearch = () => {
+        if (this.state.searchValue.length < 1) {
+            this.setState({ openSearch: false });
+        }
+    };
+    handleChangeSearch = (name: any) => (event: any) => {
+        this.setState({
+            searchValue: event.target.value,
+        });
+    };
+    handleSearch = () => {
+        window.console.log(this.state.searchValue);
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -212,37 +242,60 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="top-action-module cms">
-                <p className="crumbs">
-                    CMS / 页面管理
-                </p>
-                <h4 className="title">全部页面</h4>
-                <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Search />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                        onClick={this.handleBatchRemove}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <Link to={'/cms/page/edit/' + 'add'}>
+            <div className="cms">
+                <div className="top-action-module clearfix">
+                    <div className="left-title pull-left">
+                        <p className="crumbs">
+                            CMS / 页面管理
+                        </p>
+                        <h4 className="title">全部页面</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        {
+                            this.state.openSearch ?
+                                <div className="input-search-module">
+                                    <Input
+                                        placeholder="请输入要搜索的内容"
+                                        className="input-search"
+                                        value={this.state.searchValue}
+                                        onChange={this.handleChangeSearch('searchValue')}
+                                        onKeyUp={this.handleSearch}
+                                        onBlur={this.handleCloseSearch}
+                                    />
+                                    <IconButton
+                                        onClick={this.handleSearch}
+                                    >
+                                        <Search />
+                                    </IconButton>
+                                </div> :
+                                <IconButton
+                                    className={this.props.classes.menuBtn}
+                                    onClick={this.handleOpenSearch}
+                                >
+                                    <Search />
+                                </IconButton>
+                        }
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchRemove}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                        <Link to={'/cms/page/edit/' + 'add'}>
+                            <IconButton
+                                className={this.props.classes.menuBtn}
+                            >
+                                <Add />
+                            </IconButton>
+                        </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
-                            <Add />
+                            <Cached />
                         </IconButton>
-                    </Link>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Cached />
-                    </IconButton>
+                    </div>
                 </div>
                 <Paper className="root-paper">
                     <div className="table-hidden">
@@ -307,6 +360,16 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </TableBody>
                         </Table>
                     </div>
+                    <Snackbar
+                        className="message-snack-bar"
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        open={openMessageTip}
+                        onClose={this.handleCloseTip}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{message}</span>}
+                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}

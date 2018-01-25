@@ -11,9 +11,15 @@ body {
     "WenQuanYi Micro Hei",
     sans-serif;
 }
+#root {
+    height: inherit;
+}
+.header-search {
+    position: inherit !important;
+}
 /*面包屑导航*/
 .crumbs {
-    color: #333;
+    color: #808080;
     font-size: 12px;
 }
 .title {
@@ -22,23 +28,46 @@ body {
     margin-top: 5px;
     font-weight: 600;
 }
-#root {
-    height: inherit;
-}
-.header-search {
-    position: inherit !important;
-}
 /*表格顶部按钮操作*/
-.top-action-module {
-    position: relative;
-}
 .top-action-module .btn-group {
-    position: absolute;
-    right: 0;
-    top: 6px;
+    margin-top: 8px;
 }
 .top-action-module .btn-group button{
     font-size: 16px;
+}
+
+/*表格顶部input搜索*/
+.input-search-module {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    right: 0;
+}
+.input-search-module > button {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 18px;
+}
+.input-search-module > button svg{
+    color: #3f51b5;
+    width: 1.2em;
+    height: 1.2em;
+}
+.input-search-module .input-search:after,
+.input-search-module .input-search:before {
+    height: inherit !important;
+}
+.input-search-module .input-search input {
+    font-size: 12px;
+    width: 170px;
+    height: 32px;
+    border-radius: 16px;
+    border: solid 1px #3f51b5;
+    padding: 0 40px 0 12px;
+    color: #808080;
 }
 /*顶部搜索*/
 .header-search > div {
@@ -105,6 +134,14 @@ body {
     font-size: 16px;
     opacity: 0;
 }
+/*颜色选择组件*/
+.form-color-picker > span {
+    width: 100%;
+    position: absolute;
+    top: 16px;
+    opacity: 0;
+    height: 30px;
+}
 /*图片上传*/
 .upload-image {
     position: absolute !important;
@@ -119,18 +156,21 @@ body {
     opacity: 0;
 }
 /*消息提醒*/
-.message-pop-over {
-    width: inherit !important;
-    height: inherit !important;
+.message-snack-bar > div {
+    background-color: #fff;
+    color: inherit;
+    font-size: 14px;
 }
-.message-pop-over > div:first-child {
-    position: inherit;
-    width: 0;
-    height: 0;
-}
-.message-pop-over .message-content {
-    min-width: 300px;
-    font-size: 12px;
-    padding: 12px 12px;
-    border-left: 2px solid #f50057;
+@media (max-width: 479px) {
+    /*顶部按钮操作*/
+    .top-action-module .title {
+        margin-bottom: 14px;
+    }
+    .top-action-module .btn-group {
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+    .input-search-module .input-search input {
+        width: 135px;
+    }
 }

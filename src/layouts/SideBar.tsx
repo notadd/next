@@ -279,6 +279,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                         <NavLink
                                                                             to={child.path}
                                                                             activeClassName="selectBtn"
+                                                                            exact
                                                                         >
                                                                             <ListItemText
                                                                                 style={{paddingLeft: 78}}
@@ -325,6 +326,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                                         (inner: any, innertIndex: number) => {
                                                                                             return (
                                                                                                 <NavLink
+                                                                                                    exact
                                                                                                     to={inner.path}
                                                                                                     className={
                                                                                                         this.props

@@ -71,6 +71,9 @@
     position: absolute;
     z-index: 100;
 }
+.rst__rowToolbar .rst__toolbarButton > button {
+    width: 28px;
+}
 .rst__rowToolbar .rst__toolbarButton a {
     color: rgba(0, 0, 0, 0.54);
 }
@@ -79,11 +82,11 @@
     height: 1em;
 }
 .rst__rowToolbar .rst__toolbarButton:first-child {
-    right: 54px;
+    right: 28px;
     top: -12px;
 }
 .rst__rowToolbar .rst__toolbarButton:last-child {
-    right: 8px;
+    right: 0;
     top: -14px;
 }
 .rst__rowWrapper:hover .rst__rowToolbar {

@@ -38,6 +38,7 @@ const styles = {
 type State = {
     modalName: string,
     modalId: string,
+    nodeLength: number,
     open: boolean,
     openTip: boolean,
     treeData: Array<any>,
@@ -52,6 +53,7 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
             openTip: false,
             modalName: '产品中心',
             modalId: '',
+            nodeLength: 0,
             treeData: [
                 {
                     id: 1,
@@ -123,39 +125,47 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ openTip: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        if (this.state.nodeLength > 0) {
+            this.setState({
+                open: false,
+                openTip: true,
+            });
+        } else {
+            this.setState({ open: false });
+        }
     };
     render() {
         const handleClickRemove = ( pro: any ) => {
-            if (pro.node.children.length > 0) {
-                this.setState({ openTip: true });
-            } else {
-                this.setState({
-                    open: true,
-                    modalName: pro.node.title,
-                    modalId: pro.node.id,
-                });
-            }
+            this.setState({
+                open: true,
+                modalName: pro.node.title,
+                modalId: pro.node.id,
+                nodeLength: pro.node.children.length,
+            });
         };
         return (
-            <div className="configurations top-action-module">
-                <p className="crumbs">
-                    全局 <b>/</b> 系统插件
-                </p>
-                <h4 className="title">菜单管理</h4>
-                <div className="btn-group">
-                    <Link to={'/menu/edit/' + 'add'}>
+            <div className="configurations">
+                <div className="top-action-module clearfix">
+                    <div className="pull-left">
+                        <p className="crumbs">
+                            全局 <b>/</b> 系统插件
+                        </p>
+                        <h4 className="title">菜单管理</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        <Link to={'/menu/edit/' + 'add'}>
+                            <IconButton
+                                className={this.props.classes.menuBtn}
+                            >
+                                <Add />
+                            </IconButton>
+                        </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
-                            <Add />
+                            <Cached />
                         </IconButton>
-                    </Link>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Cached />
-                    </IconButton>
+                    </div>
                 </div>
                 <Paper className={this.props.classes.root}>
                     <div className="menus-manager">

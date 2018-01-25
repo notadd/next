@@ -5,6 +5,8 @@ import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import ColorPicker from 'rc-color-picker';
+import 'rc-color-picker/assets/index.css';
 
 const styles = {
     root: {
@@ -61,7 +63,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
         this.state = {
             typeName: 'NotAdd',
             otherName: 'news',
-            color: '#ff3300',
+            color: '',
             description: '',
             link: 'www.baidu.com',
             pageType: type,
@@ -71,6 +73,16 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
         let val = event.target.value;
         this.setState({
             [name]: val,
+        });
+    };
+    changeHandler = (pro: any) => {
+        this.setState({
+            color: pro.color,
+        });
+    };
+    closeHandler = (pro: any) => {
+        this.setState({
+            color: pro.color,
         });
     };
     render() {
@@ -156,8 +168,8 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         onChange={this.handleChange('description')}
                                         value={this.state.description}
                                     />
@@ -170,6 +182,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
+                                        style={{position: 'relative'}}
                                     >
                                         颜色
                                     </InputLabel>
@@ -177,11 +190,21 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
-                                                underline: this.props.classes.underline,
-                                            }}
-                                        onChange={this.handleChange('color')}
+                                            underline: this.props.classes.underline,
+                                        }}
                                         value={this.state.color}
+                                        style={{marginTop: '0'}}
                                     />
+                                    <ColorPicker
+                                        color={this.state.color}
+                                        alpha={30}
+                                        onChange={this.changeHandler}
+                                        onClose={this.closeHandler}
+                                        placement="bottomLeft"
+                                        className="form-color-picker"
+                                    >
+                                        <span className="rc-color-picker-trigger" />
+                                    </ColorPicker>
                                 </FormControl>
                             </Grid>
                         </Grid>

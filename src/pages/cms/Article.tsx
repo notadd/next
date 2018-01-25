@@ -12,8 +12,8 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
-import Typography from 'material-ui/Typography';
-import Popover from 'material-ui/Popover';
+import Snackbar from 'material-ui/Snackbar';
+import Input from 'material-ui/Input';
 import Table, {
     TableBody,
     TableCell,
@@ -74,11 +74,13 @@ type State = {
     currentPage: number,
     open: boolean,
     openMessageTip: boolean,
+    openSearch: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
     message: string,
+    searchValue: string,
     list: Array<any>,
 };
 
@@ -93,6 +95,8 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         modalType: 0,
         modalNum: 0,
         openMessageTip: false,
+        openSearch: false,
+        searchValue: '',
         list: [
             {
                 id: 1,
@@ -158,7 +162,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }
@@ -212,11 +215,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         openMessageTip: true,
                         message: '请选择要删除的文章',
                     });
-                    setInterval(() => {
-                        this.setState({
-                            openMessageTip: false,
-                        });
-                    }, 1500);
                 }
             }
         }
@@ -226,6 +224,25 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleSubmit = () => {
         this.setState({ open: false });
+    };
+    handleCloseTip = () => {
+        this.setState({ openMessageTip: false });
+    };
+    handleOpenSearch = () => {
+        this.setState({ openSearch: true });
+    };
+    handleCloseSearch = () => {
+        if (this.state.searchValue.length < 1) {
+            this.setState({ openSearch: false });
+        }
+    };
+    handleChangeSearch = (name: any) => (event: any) => {
+        this.setState({
+            searchValue: event.target.value,
+        });
+    };
+    handleSearch = () => {
+        window.console.log(this.state.searchValue);
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -245,35 +262,58 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="top-action-module cms">
-                <p className="crumbs">
-                    CMS / 文章管理
-                </p>
-                <h4 className="title">全部文章</h4>
-                <div className="btn-group">
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Search />
-                    </IconButton>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                        onClick={this.handleBatchRemove}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                    <Link to={'/cms/article/edit/' + 'add'}>
+            <div className="cms">
+                <div className="top-action-module clearfix">
+                    <div className="pull-left">
+                        <p className="crumbs">
+                            CMS / 文章管理
+                        </p>
+                        <h4 className="title">全部文章</h4>
+                    </div>
+                    <div className="btn-group pull-right">
+                        {
+                            this.state.openSearch ?
+                                <div className="input-search-module">
+                                    <Input
+                                        placeholder="请输入要搜索的内容"
+                                        className="input-search"
+                                        value={this.state.searchValue}
+                                        onChange={this.handleChangeSearch('searchValue')}
+                                        onKeyUp={this.handleSearch}
+                                        onBlur={this.handleCloseSearch}
+                                    />
+                                    <IconButton
+                                        onClick={this.handleSearch}
+                                    >
+                                        <Search />
+                                    </IconButton>
+                                </div> :
+                                <IconButton
+                                    className={this.props.classes.menuBtn}
+                                    onClick={this.handleOpenSearch}
+                                >
+                                    <Search />
+                                </IconButton>
+                        }
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchRemove}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                        <Link to={'/cms/article/edit/' + 'add'}>
+                            <IconButton
+                                className={this.props.classes.menuBtn}
+                            >
+                                <Add />
+                            </IconButton>
+                        </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
                         >
-                            <Add />
+                            <Cached />
                         </IconButton>
-                    </Link>
-                    <IconButton
-                        className={this.props.classes.menuBtn}
-                    >
-                        <Cached />
-                    </IconButton>
+                    </div>
                 </div>
                 <Paper className="root-paper">
                     <div className="table-hidden">
@@ -342,21 +382,16 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </TableBody>
                         </Table>
                     </div>
-                    <Popover
+                    <Snackbar
+                        className="message-snack-bar"
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={openMessageTip}
-                        anchorPosition={{ top: 0, left: 400 }}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                        onClose={this.handleCloseTip}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
                         }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        className="message-pop-over"
-                    >
-                        <Typography className="message-content">{message}</Typography>
-                    </Popover>
+                        message={<span id="message-id">{message}</span>}
+                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
