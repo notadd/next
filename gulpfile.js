@@ -14,6 +14,7 @@ const packages = {
     server: ts.createProject('src/server/tsconfig.json'),
     setting: ts.createProject('src/setting/tsconfig.json'),
     user: ts.createProject('src/user/tsconfig.json'),
+    websocket: ts.createProject('src/websocket/tsconfig.json'),
 };
 
 const modules = Object.keys(packages).concat([

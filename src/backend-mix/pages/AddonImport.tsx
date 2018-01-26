@@ -1,6 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import ReactPaginate from 'react-paginate';
+import * as ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
