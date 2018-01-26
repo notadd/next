@@ -1,12 +1,12 @@
+import { CommandHandlers } from "../commands/handlers/index";
+import { EventHandlers } from "../events/handlers/index";
 import { Log } from "../entities/log.entity";
 import { LogResolvers } from "../resolvers/log.resolvers";
 import { LogService } from "../services/log.service";
-import { Module, OnModuleInit } from "@nestjs/common";
+import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
 import { ModuleRef } from "@nestjs/core";
-import { CommandHandlers } from "../commands/handlers/index";
-import { EventHandlers } from "../events/handlers/index";
 
 @Module({
     components: [
@@ -29,6 +29,9 @@ export class LoggerModule implements OnModuleInit {
         private readonly command: CommandBus,
         private readonly event: EventBus,
     ) {
+    }
+
+    configure(consumer: MiddlewaresConsumer) {
     }
 
     onModuleInit() {

@@ -64,6 +64,7 @@
         "@notadd/server": "^2.1.1",
         "@notadd/setting": "^2.1.1",
         "@notadd/user": "^2.1.1",
+        "@notadd/websocket": "^2.1.1",
         "@types/autoprefixer": "^6.7.3",
         "@types/case-sensitive-paths-webpack-plugin": "^2.1.0",
         "@types/chai": "^3.5.2",
@@ -124,6 +125,7 @@
         "packages/react-scripts",
         "packages/server",
         "packages/setting",
-        "packages/user"
+        "packages/user",
+        "packages/websocket"
     ]
 }

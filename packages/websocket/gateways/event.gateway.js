@@ -6,17 +6,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const configuration_service_1 = require("../services/configuration.service");
-const common_1 = require("@nestjs/common");
-let ConfigurationModule = class ConfigurationModule {
-    configure(consumer) {
-    }
+const websockets_1 = require("@nestjs/websockets");
+let EventGateway = class EventGateway {
 };
-ConfigurationModule = __decorate([
-    common_1.Module({
-        components: [
-            configuration_service_1.ConfigurationService,
-        ],
-    })
-], ConfigurationModule);
-exports.ConfigurationModule = ConfigurationModule;
+EventGateway = __decorate([
+    websockets_1.WebSocketGateway()
+], EventGateway);
+exports.EventGateway = EventGateway;

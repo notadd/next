@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = require("../commands/handlers/index");
+const index_2 = require("../events/handlers/index");
 const log_entity_1 = require("../entities/log.entity");
 const log_resolvers_1 = require("../resolvers/log.resolvers");
 const log_service_1 = require("../services/log.service");
@@ -16,13 +18,13 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const cqrs_1 = require("@nestjs/cqrs");
 const core_1 = require("@nestjs/core");
-const index_1 = require("../commands/handlers/index");
-const index_2 = require("../events/handlers/index");
 let LoggerModule = class LoggerModule {
     constructor(moduleRef, command, event) {
         this.moduleRef = moduleRef;
         this.command = command;
         this.event = event;
+    }
+    configure(consumer) {
     }
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);

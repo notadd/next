@@ -29,8 +29,8 @@ gulp.task('default', function () {
     nodemon({
         script: 'node_modules/@notadd/server/bootstrap.js',
         watch: [
+            "ormconfig.yml",
             "packages/",
-            "main.js",
         ],
         ext: 'js'
     });

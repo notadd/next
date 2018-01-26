@@ -18,6 +18,8 @@ let UserModule = class UserModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
     }
+    configure(consumer) {
+    }
 };
 UserModule = __decorate([
     common_1.Module({

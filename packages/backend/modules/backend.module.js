@@ -14,6 +14,8 @@ let BackendModule = class BackendModule {
     constructor() {
         this.logger = new common_1.Logger('NotaddApplication', true);
     }
+    configure(consumer) {
+    }
     onModuleInit() {
     }
 };

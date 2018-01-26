@@ -4,16 +4,17 @@ import { ConfigurationModule } from "@notadd/configuration";
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { GraphQLFactory, GraphQLModule } from '@nestjs/graphql';
 import { LoggerModule } from "@notadd/logger";
-import { MiddlewaresConsumer } from '@nestjs/common/interfaces/middlewares';
-import { Module, RequestMethod } from '@nestjs/common';
+import { MiddlewaresConsumer, Module, RequestMethod } from '@nestjs/common';
 import { SettingModule } from "@notadd/setting";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from '@notadd/user';
+import { WebsocketModule } from "@notadd/websocket";
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(),
         GraphQLModule,
+        WebsocketModule,
         ConfigurationModule,
         LoggerModule,
         SettingModule,
@@ -38,6 +39,7 @@ export class ApplicationModule {
     createSchema() {
         const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.types.graphql');
         const schema = this.graphQLFactory.createSchema({ typeDefs });
+
         return this.graphQLFactory.createSchema({ typeDefs });
     }
 }

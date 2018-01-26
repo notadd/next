@@ -24,6 +24,8 @@ let SettingModule = class SettingModule {
         this.command = command;
         this.event = event;
     }
+    configure(consumer) {
+    }
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);
         this.command.register(handlers_1.CommandHandlers);
