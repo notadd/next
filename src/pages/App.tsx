@@ -68,8 +68,8 @@ const styles = (theme: Theme): StyleRules => ({
         height: 'calc(100vh - 70px)',
         width: drawerWidth,
         position: 'fixed',
-        zIndex: 500,
         top: 70,
+        zIndex: 500,
         boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
@@ -77,6 +77,7 @@ const styles = (theme: Theme): StyleRules => ({
         width: 'inherit',
     },
     drawerPaperClose: {
+        top: 70,
         width: 90,
         overflow: 'visible',
         zIndex: 1,
@@ -433,8 +434,8 @@ class App extends React.Component<Props, State> {
             });
         }
     };
-    handleChange = (event: any, value: any) => {
-        this.setState({ value });
+    handleChange = (event: any, value: number) => {
+        this.setState({current: value });
     };
     handleOpenSearch = () => {
         this.setState({ openSearch: true });
@@ -648,7 +649,7 @@ class App extends React.Component<Props, State> {
                                                     onClose={this.toggleDrawer}
                                                     open={this.state.open}
                                                 >
-                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current - 1].side}/>
+                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current].side}/>
                                                 </Drawer>
                                         }
                                         <div className={classNames('content', this.state.open && wd !== 'sm' && 'move-content')}>

@@ -92,7 +92,6 @@ class SideBar extends React.Component<PropsWithStyles, State> {
             open: nextProps['open'],
             navs: nextProps['sideNav'],
         });
-        window.console.log(nextProps);
     }
     componentDidMount() {
         const user = localStorage.getItem('notadd_user');
