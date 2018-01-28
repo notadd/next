@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const configuration_service_1 = require("../services/configuration.service");
 const common_1 = require("@nestjs/common");
 let ConfigurationModule = class ConfigurationModule {
+    configure(consumer) {
+    }
 };
 ConfigurationModule = __decorate([
     common_1.Module({

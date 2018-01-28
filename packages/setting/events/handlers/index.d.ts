@@ -1,2 +1,3 @@
 import { SettingUpdateHandler } from "./setting.update.handler";
-export declare const EventHandlers: (typeof SettingUpdateHandler)[];
+import { SettingRemoveHandler } from "./setting.remove.handler";
+export declare const EventHandlers: (typeof SettingUpdateHandler | typeof SettingRemoveHandler)[];

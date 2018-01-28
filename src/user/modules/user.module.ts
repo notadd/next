@@ -1,4 +1,4 @@
-import { Logger, Module } from '@nestjs/common';
+import { Logger, MiddlewaresConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "../entities/user.entity";
 import { UserResolver } from "../resolvers/user.resolver";
@@ -21,5 +21,8 @@ export class UserModule {
 
     constructor() {
         this.logger = new Logger('NotaddApplication', true);
+    }
+
+    configure(consumer: MiddlewaresConsumer) {
     }
 }

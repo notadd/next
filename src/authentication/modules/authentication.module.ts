@@ -1,6 +1,6 @@
 import { AuthResolvers } from "../resolvers/auth.resolvers";
 import { AuthService } from "../services/auth.service";
-import { forwardRef, Module } from "@nestjs/common";
+import { forwardRef, MiddlewaresConsumer, Module } from "@nestjs/common";
 import { JwtStrategy } from "../strategies/jwt.strategy";
 import { UserModule } from "@notadd/user";
 
@@ -15,4 +15,6 @@ import { UserModule } from "@notadd/user";
     ],
 })
 export class AuthenticationModule {
+    configure(consumer: MiddlewaresConsumer) {
+    }
 }

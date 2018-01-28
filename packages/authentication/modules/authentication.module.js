@@ -12,6 +12,8 @@ const common_1 = require("@nestjs/common");
 const jwt_strategy_1 = require("../strategies/jwt.strategy");
 const user_1 = require("@notadd/user");
 let AuthenticationModule = class AuthenticationModule {
+    configure(consumer) {
+    }
 };
 AuthenticationModule = __decorate([
     common_1.Module({

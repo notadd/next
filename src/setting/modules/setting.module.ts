@@ -1,8 +1,7 @@
 import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
 import { CommandHandlers } from "../commands/handlers";
-import { Module } from "@nestjs/common";
+import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
-import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { Setting } from "../entities/setting.entity";
 import { SettingResolvers } from "../resolvers/setting.resolvers";
 import { SettingService } from "../services/setting.service";
@@ -30,6 +29,9 @@ export class SettingModule implements OnModuleInit {
         private readonly command: CommandBus,
         private readonly event: EventBus,
     ) {
+    }
+
+    configure(consumer: MiddlewaresConsumer) {
     }
 
     onModuleInit() {

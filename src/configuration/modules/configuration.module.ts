@@ -1,5 +1,5 @@
 import { ConfigurationService } from "../services/configuration.service";
-import { Module } from "@nestjs/common";
+import { MiddlewaresConsumer, Module } from "@nestjs/common";
 
 @Module({
     components: [
@@ -7,5 +7,6 @@ import { Module } from "@nestjs/common";
     ],
 })
 export class ConfigurationModule {
-
+    configure(consumer: MiddlewaresConsumer) {
+    }
 }

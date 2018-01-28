@@ -1,10 +1,11 @@
 import { CommandBus, EventBus } from "@nestjs/cqrs";
+import { MiddlewaresConsumer, OnModuleInit } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
-import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 export declare class SettingModule implements OnModuleInit {
     private readonly moduleRef;
     private readonly command;
     private readonly event;
     constructor(moduleRef: ModuleRef, command: CommandBus, event: EventBus);
+    configure(consumer: MiddlewaresConsumer): void;
     onModuleInit(): void;
 }

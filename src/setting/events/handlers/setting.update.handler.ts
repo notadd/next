@@ -4,6 +4,5 @@ import { SettingUpdateEvent } from "../setting.update.event";
 @EventsHandler(SettingUpdateEvent)
 export class SettingUpdateHandler implements IEventHandler<SettingUpdateEvent> {
     handle(event: SettingUpdateEvent) {
-
     }
 }

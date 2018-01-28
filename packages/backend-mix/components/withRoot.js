@@ -1,8 +1,8 @@
 import * as React from 'react';
-import JssProvider from 'react-jss/lib/JssProvider';
 import { withStyles, MuiThemeProvider } from 'material-ui/styles';
 import { wrapDisplayName } from 'recompose';
 import createContext from '../styles/createContext';
+import JssProvider from 'react-jss/lib/JssProvider';
 const decorate = withStyles(theme => ({
     '@global': {
         html: {

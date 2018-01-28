@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var log_module_1 = require("./log.module");
-exports.LogModule = log_module_1.LogModule;
+var logger_module_1 = require("./logger.module");
+exports.LoggerModule = logger_module_1.LoggerModule;

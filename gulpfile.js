@@ -15,6 +15,7 @@ const packages = {
     server: ts.createProject('src/server/tsconfig.json'),
     setting: ts.createProject('src/setting/tsconfig.json'),
     user: ts.createProject('src/user/tsconfig.json'),
+    websocket: ts.createProject('src/websocket/tsconfig.json'),
 };
 
 const modules = Object.keys(packages).concat([
@@ -29,8 +30,8 @@ gulp.task('default', function () {
     nodemon({
         script: 'node_modules/@notadd/server/bootstrap.js',
         watch: [
+            "ormconfig.yml",
             "packages/",
-            "main.js",
         ],
         ext: 'js'
     });
@@ -138,6 +139,10 @@ function watchMedia(source, module) {
         [
             `${source}/${module}/**/*.css`,
             `${source}/${module}/*.css`,
+            `${source}/${module}/**/*.eot`,
+            `${source}/${module}/*.eot`,
+            `${source}/${module}/**/*.ijmap`,
+            `${source}/${module}/*.ijmap`,
             `${source}/${module}/**/*.jpg`,
             `${source}/${module}/*.jpg`,
             `${source}/${module}/**/*.jpeg`,
@@ -146,6 +151,10 @@ function watchMedia(source, module) {
             `${source}/${module}/*.png`,
             `${source}/${module}/**/*.svg`,
             `${source}/${module}/*.svg`,
+            `${source}/${module}/**/*.ttf`,
+            `${source}/${module}/*.ttf`,
+            `${source}/${module}/**/*.woff2`,
+            `${source}/${module}/*.woff2`,
         ],
         [
             module,
