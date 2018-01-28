@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles from 'material-ui/styles/withStyles';
+import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -27,13 +28,8 @@ const styles = {
         'border-collapse': 'inherit',
     },
     tableCell: {
-        'text-align': 'left',
-        'padding-top': '1px',
-        'padding-bottom': '0',
-    },
-    tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '34px',
+        'text-align': 'center',
+        'padding': '0',
     },
 };
 let id = 0;
@@ -55,6 +51,8 @@ class AddonOpen extends React.Component {
             open: false,
             modalId: '',
             modalName: '',
+            rowsPerPage: 2,
+            currentPage: 0,
         };
         this.handleChange = (pro) => (event, checked) => {
             if (checked) {
@@ -77,8 +75,12 @@ class AddonOpen extends React.Component {
         this.handleClose = () => {
             this.setState({ open: false });
         };
+        this.handlePageClick = (data) => {
+            this.setState({ currentPage: data.selected });
+        };
     }
     render() {
+        const { currentPage, rowsPerPage } = this.state;
         return (React.createElement("div", null,
             React.createElement("p", { className: "crumbs" }, "\u5168\u5C40 / \u5E94\u7528\u7BA1\u7406 / \u63D2\u4EF6\u914D\u7F6E"),
             React.createElement("h4", { className: "title" }, "\u5F00\u542F\u63D2\u4EF6"),
@@ -86,14 +88,15 @@ class AddonOpen extends React.Component {
                 React.createElement(Table, { className: this.props.classes.table },
                     React.createElement(TableHead, { className: "table-head" },
                         React.createElement(TableRow, null,
-                            React.createElement(TableCell, null, "\u63D2\u4EF6\u540D\u79F0"),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u63D2\u4EF6\u540D\u79F0"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u4F5C\u8005"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u63CF\u8FF0"),
-                            React.createElement(TableCell, { className: this.props.classes.tableCellStatus, numeric: true }, "\u72B6\u6001"),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u72B6\u6001"),
                             React.createElement(TableCell, { numeric: true }))),
-                    React.createElement(TableBody, { className: "table-body" }, list.map((n, index) => {
+                    React.createElement(TableBody, { className: "table-body" }, list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                        .map((n, index) => {
                         return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : '', key: n.id },
-                            React.createElement(TableCell, null, n.name),
+                            React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.name),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.author),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.descri),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true },
@@ -101,7 +104,9 @@ class AddonOpen extends React.Component {
                             React.createElement(TableCell, { numeric: true },
                                 React.createElement(IconButton, { className: this.props.classes.menuBtn, onClick: () => this.handleClickOpen(n) },
                                     React.createElement(DeleteIcon, null)))));
-                    })))),
+                    }))),
+                React.createElement("div", { className: "table-pagination" },
+                    React.createElement(ReactPaginate, { previousLabel: '<', nextLabel: '>', breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: 'break-me', pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: 'pagination', activeClassName: 'active' }))),
             React.createElement(Dialog, { open: this.state.open, "aria-labelledby": "alert-dialog-title", "aria-describedby": "alert-dialog-description", className: "dialog-content" },
                 React.createElement(DialogTitle, { id: "alert-dialog-title", className: "dialog-title" },
                     React.createElement(IconButton, { onClick: this.handleClose },
