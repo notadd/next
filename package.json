@@ -41,7 +41,7 @@
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.4.2",
         "socket.io": "^2.0.3",
-        "typeorm": "^0.1.9",
+        "typeorm": "^0.1.11",
         "typescript": "^2.4.2"
     },
     "devDependencies": {
@@ -49,11 +49,11 @@
         "@nestjs/core": "^4.5.0",
         "@nestjs/cqrs": "^4.0.0",
         "@nestjs/graphql": "^2.0.0",
-        "@nestjs/microservices": "^4.3.0",
+        "@nestjs/microservices": "^4.5.0",
         "@nestjs/swagger": "^1.1.2",
-        "@nestjs/testing": "^4.3.0",
+        "@nestjs/testing": "^4.5.0",
         "@nestjs/typeorm": "^2.0.0",
-        "@nestjs/websockets": "^4.0.0",
+        "@nestjs/websockets": "^4.5.0",
         "@notadd/authentication": "^2.1.1",
         "@notadd/backend": "^2.1.1",
         "@notadd/backend-mix": "^2.1.1",
