@@ -20,6 +20,7 @@ const setting_1 = require("@notadd/setting");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
+const injection_1 = require("@notadd/injection");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -47,6 +48,7 @@ ApplicationModule = __decorate([
             configuration_1.ConfigurationModule,
             logger_1.LoggerModule,
             setting_1.SettingModule,
+            injection_1.InjectionModule,
             backend_1.BackendModule,
             user_1.UserModule,
             authentication_1.AuthenticationModule,

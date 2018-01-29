@@ -9,6 +9,7 @@ import { SettingModule } from "@notadd/setting";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from '@notadd/user';
 import { WebsocketModule } from "@notadd/websocket";
+import { InjectionModule } from "@notadd/injection";
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { WebsocketModule } from "@notadd/websocket";
         ConfigurationModule,
         LoggerModule,
         SettingModule,
+        InjectionModule,
         BackendModule,
         UserModule,
         AuthenticationModule,
