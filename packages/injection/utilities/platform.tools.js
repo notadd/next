@@ -16,5 +16,11 @@ class PlatformTools {
             throw err;
         }
     }
+    static pathNormalize(pathString) {
+        return path.normalize(pathString);
+    }
+    static pathResolve(pathString) {
+        return path.resolve(pathString);
+    }
 }
 exports.PlatformTools = PlatformTools;

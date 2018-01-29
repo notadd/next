@@ -20,4 +20,22 @@ export class PlatformTools {
             throw err;
         }
     }
+
+    /**
+     * @param { string } pathString
+     *
+     * @returns { string }
+     */
+    static pathNormalize(pathString: string): string {
+        return path.normalize(pathString);
+    }
+
+    /**
+     * @param { string } pathString
+     *
+     * @returns { string }
+     */
+    static pathResolve(pathString: string): string {
+        return path.resolve(pathString);
+    }
 }
