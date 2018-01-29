@@ -129,16 +129,34 @@ class SideBar extends React.Component<PropsWithStyles, State> {
         });
         this.setState({ navs: arr });
     }
-    handleMouseLeave() {
+    handleEnterSub(index: number, subIndex: any) {
         const sides = Object.assign({}, this.state.navs);
         Object.keys(sides).forEach(item => {
-            sides[ item ].open = false;
+            if (item === index.toString()) {
+                sides[ item ].open = true;
+            }
         });
         const arr = new Array();
         Object.keys(sides).forEach(item => {
             arr.push(sides[item]);
         });
         this.setState({ navs: arr });
+    }
+    handleMouseLeave() {
+        const wd = this.props.width;
+        const open = this.state.open;
+        const condition = (open === false && ((wd === 'md') || (wd === 'lg') || (wd === 'xl'))) || (wd === 'sm');
+        if (condition) {
+            const sides = Object.assign({}, this.state.navs);
+            Object.keys(sides).forEach(item => {
+                sides[ item ].open = false;
+            });
+            const arr = new Array();
+            Object.keys(sides).forEach(item => {
+                arr.push(sides[item]);
+            });
+            this.setState({ navs: arr });
+        }
     }
     render() {
         const { width, classes } = this.props;
@@ -272,8 +290,6 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                 paddingTop: 0,
                                                 paddingBottom: 0
                                             }}
-                                            onMouseEnter={() => this.handleCollapse(index, null)}
-                                            onMouseLeave={() => this.handleMouseLeave()}
                                         >
                                             {
                                                 item.children.map((child: any, childIndex: number) => {
@@ -283,6 +299,8 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                 paddingTop: 0,
                                                                 paddingBottom: 0,
                                                             }}
+                                                            onMouseEnter={() => this.handleEnterSub(index, childIndex)}
+                                                            onMouseLeave={() => this.handleMouseLeave()}
                                                             key={index.toString() + childIndex}
                                                         >
                                                             <ListItem
@@ -302,8 +320,12 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                     child.hasOwnProperty('children')
                                                                     && child.children.length ? (
                                                                         <ListItemText
-                                                                            onClick={() =>
-                                                                                this.handleCollapse(index, childIndex)}
+                                                                            onClick={
+                                                                                () =>
+                                                                                    this.handleCollapse(
+                                                                                        index, childIndex
+                                                                                    )
+                                                                            }
                                                                             style={{paddingLeft: 78}}
                                                                             inset
                                                                             primary={child.name}

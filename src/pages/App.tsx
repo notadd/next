@@ -59,7 +59,6 @@ type State = {
     openSearch: boolean,
     selectedOption: object,
     selectOptions: Array<any>,
-    value: number,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
@@ -122,6 +121,7 @@ const styles = (theme: Theme): StyleRules => ({
         padding: '0 3px',
         width: 'auto',
         fontSize: '14px',
+        'min-width': '56px',
         '&:hover': {
             background: '#3949a3',
         },
@@ -179,8 +179,8 @@ interface Props extends WithStyles<keyof typeof stylesType> {
 
 class App extends React.Component<Props, State> {
     state = {
-        open: false,
-        current: 1,
+        open: true,
+        current: 0,
         navs: [
             {
                 name: '全局',
@@ -405,7 +405,6 @@ class App extends React.Component<Props, State> {
                 side: [],
             }
         ],
-        value: 0,
         user: {
             name: '后台管理员',
         },
@@ -429,7 +428,6 @@ class App extends React.Component<Props, State> {
         ],
     };
     toggleDrawer = () => {
-        window.console.log(this.props.width);
         if (this.props.width !== 'sm') {
             this.setState({
                 open: !this.state.open,
@@ -496,7 +494,7 @@ class App extends React.Component<Props, State> {
         createHashHistory().push(selectedOption['url']);
     };
     render() {
-        const { value, openSearch, selectedOption, selectOptions, open } = this.state;
+        const { current, openSearch, selectedOption, selectOptions, open } = this.state;
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         const wd = this.props.width;
@@ -572,7 +570,7 @@ class App extends React.Component<Props, State> {
                                                 />
                                             </Popover>
                                             <BottomNavigation
-                                                value={value}
+                                                value={current}
                                                 onChange={this.handleChange}
                                                 showLabels
                                                 className={this.props.classes.root}
