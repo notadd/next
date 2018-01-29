@@ -60,7 +60,6 @@ type State = {
     openSearch: boolean,
     selectedOption: object,
     selectOptions: Array<any>,
-    value: number,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
@@ -578,7 +577,7 @@ class App extends React.Component<Props, State> {
                                                 </div>
                                                 <div className="menus-list">
                                                     <BottomNavigation
-                                                        value={value}
+                                                        value={current}
                                                         onChange={this.handleChange}
                                                         showLabels
                                                         className={this.props.classes.root}
@@ -681,7 +680,7 @@ class App extends React.Component<Props, State> {
                                                         />
                                                     </Popover>
                                                     <BottomNavigation
-                                                        value={value}
+                                                        value={current}
                                                         onChange={this.handleChange}
                                                         showLabels
                                                         className={this.props.classes.root}
