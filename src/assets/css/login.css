@@ -49,3 +49,24 @@
     position: absolute;
     box-shadow: 0px 7px 20px 0 rgba(233, 30, 99, 0.3)
 }
+@media (max-width: 479px) {
+    .login .wrapBox {
+        height: 55.25%;
+        top: 50%;
+        left: 50%;
+        width: 81.64%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        margin-left: 0;
+    }
+
+    .login .innerBox {
+        width: 104.73%;
+        height: 104.95%;
+        padding: 2.2rem;
+        position: absolute;
+    }
+    .login .boxTitle:before {
+        left: -24px;
+    }
+}

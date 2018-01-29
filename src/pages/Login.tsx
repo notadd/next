@@ -168,18 +168,18 @@ class Login extends React.Component<Props, State> {
                                 {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
                             </Button>
                         </CardActions>
-                        <Snackbar
-                            open={this.state.open}
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                            onClose={this.handleClose}
-                            transition={this.state.transition}
-                            SnackbarContentProps={{
-                                'aria-describedby': 'message-id',
-                            }}
-                            message={<span id="message-id">{this.state.errorMessage}</span>}
-                        />
                     </Card>
                 </div>
+                <Snackbar
+                    open={this.state.open}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleClose}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
