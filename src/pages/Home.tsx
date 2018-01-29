@@ -1,20 +1,11 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import Add from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
-    },
-    menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
     },
     paper: {
         'padding': '16px',
@@ -152,9 +143,6 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             </div>
                                         );
                                     })}
-                                    <Button fab color="accent" className="absolute">
-                                        <Add />
-                                    </Button>
                                 </div>
                             </div>
                             <Grid className="teamBox" container spacing={40}>

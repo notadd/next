@@ -45,7 +45,8 @@ const styles = {
     selectFirstLevelMenu: {
         'background': '#f7f7f7',
         'border-top': '1px solid #e0e0e0',
-        'border-bottom': '1px solid #e0e0e0'
+        'border-bottom': '1px solid #e0e0e0',
+        'color': '#333333',
     },
 };
 
@@ -129,9 +130,10 @@ class SideBar extends React.Component<PropsWithStyles, State> {
         this.setState({ navs: arr });
     }
     render() {
-        const wd = this.props.width;
+        const { width, classes } = this.props;
+        const wd = width;
         const open = this.state.open;
-        const condition = (open === false && ((wd === 'md') || (wd ==='lg') || (wd ==='xl'))) || (wd === 'sm');
+        const condition = (open === false && ((wd === 'md') || (wd === 'lg') || (wd === 'xl'))) || (wd === 'sm');
         return (
             <div className="sideBar">
                 <div
@@ -200,7 +202,8 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                 classNames(
                                                     item.open ?
                                                     this.props.classes.selectFirstLevelMenu : '',
-                                                    'list-item'
+                                                    'list-item',
+                                                    item.open ? 'selectFirstLevelMenu' : '',
                                                 )
                                             }
                                             onMouseEnter={() => this.handleClick(index, null)}
@@ -219,11 +222,26 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                 )
                                             }
                                         >
-                                            <Icon style={{color: '#808080'}}>{item.icon}</Icon>
+                                            <Icon style={{color: 'inherit'}}>{item.icon}</Icon>
                                             <ListItemText inset style={{paddingLeft: 40}} primary={item.name}/>
                                             {
-                                                item.open ? <ExpandMore style={{color: '#808080', width: 20, height: 20}}/>
-                                                    : <KeyboardArrowRight style={{color: '#808080', width: 20, height: 20}}/>}
+                                                item.open ?
+                                                    <ExpandMore
+                                                        style={{
+                                                            color: 'inherit',
+                                                            width: 20,
+                                                            height: 20,
+                                                        }}
+                                                    />
+                                                    :
+                                                    <KeyboardArrowRight
+                                                        style={{
+                                                            color: 'inherit',
+                                                            width: 20,
+                                                            height: 20,
+                                                        }}
+                                                    />
+                                            }
                                         </ListItem>
                                 }
                                 {
@@ -307,50 +325,61 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                 }
                                                             </ListItem>
                                                             {
-                                                                child.hasOwnProperty('children') && child.children.length
-                                                                    ? (
-                                                                        <Collapse component="li" in={child.open} unmountOnExit>
+                                                                child.hasOwnProperty('children')
+                                                                && child.children.length
+                                                                    ?
+                                                                    (
+                                                                        <Collapse
+                                                                            component="li"
+                                                                            in={child.open}
+                                                                            unmountOnExit
+                                                                        >
                                                                             <List
                                                                                 disablePadding
-                                                                                style={{borderBottom: '1px solid #e0e0e0'}}
+                                                                                style={{
+                                                                                    borderBottom: '1px solid #e0e0e0'
+                                                                                }}
                                                                             >
                                                                                 {
                                                                                     child.children.map(
-                                                                                        (inner: any, innertIndex: number) => {
-                                                                                            return (
-                                                                                                <NavLink
-                                                                                                    exact
-                                                                                                    to={inner.path}
-                                                                                                    className={
-                                                                                                        this.props
-                                                                                                            .classes
-                                                                                                            .innerRoot
+                                                                                        (
+                                                                                            inner: any,
+                                                                                            innerIndex: number
+                                                                                        ) => (
+                                                                                            <NavLink
+                                                                                                exact
+                                                                                                to={inner.path}
+                                                                                                className={
+                                                                                                    this.props
+                                                                                                        .classes
+                                                                                                        .innerRoot
+                                                                                                }
+                                                                                                activeClassName={
+                                                                                                    classNames(
+                                                                                                        classes
+                                                                                                        .innerSelectBtn,
+                                                                                                        'innerSelectBtn'
+                                                                                                    )
+                                                                                                }
+                                                                                                key={
+                                                                                                    index.toString()
+                                                                                                    + childIndex
+                                                                                                    + innerIndex
+                                                                                                }
+                                                                                            >
+                                                                                                <ListItemText
+                                                                                                    style={{
+                                                                                                        paddingLeft:
+                                                                                                            78
+                                                                                                    }}
+                                                                                                    inset
+                                                                                                    primary={
+                                                                                                        inner.name
                                                                                                     }
-                                                                                                    activeClassName={
-                                                                                                        classNames(
-                                                                                                            this.
-                                                                                                                props.
-                                                                                                                classes
-                                                                                                                .innerSelectBtn,
-                                                                                                            'innerSelectBtn'
-                                                                                                        )
-                                                                                                    }
-                                                                                                    key={
-                                                                                                        index.toString()
-                                                                                                        + childIndex
-                                                                                                        + innertIndex
-                                                                                                    }
-                                                                                                >
-                                                                                                    <ListItemText
-                                                                                                        style={{
-                                                                                                            paddingLeft: 78
-                                                                                                        }}
-                                                                                                        inset
-                                                                                                        primary={inner.name}
-                                                                                                    />
-                                                                                                </NavLink>
-                                                                                            );
-                                                                                        })
+                                                                                                />
+                                                                                            </NavLink>
+                                                                                            )
+                                                                                        )
                                                                                 }
                                                                             </List>
                                                                         </Collapse>
@@ -361,8 +390,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                 })
                                             }
                                         </List>
-                                    </Collapse>
-                                }
+                                    </Collapse>}
                             </List>
                         );
                     })

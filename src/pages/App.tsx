@@ -35,7 +35,6 @@ import PageTypeEdit from './cms/PageTypeEdit';
 import Message from './cms/Message';
 
 import Drawer from 'material-ui/Drawer';
-// import Hidden from 'material-ui/Hidden';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -501,7 +500,7 @@ class App extends React.Component<Props, State> {
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         const wd = this.props.width;
-        const condition = (open === false && ((wd === 'md') || (wd ==='lg') || (wd ==='xl'))) || (wd === 'sm');
+        const condition = (open === false && ((wd === 'md') || (wd === 'lg') || (wd === 'xl'))) || (wd === 'sm');
         return (
             <HashRouter  basename="/">
                 <Switch>
@@ -627,31 +626,45 @@ class App extends React.Component<Props, State> {
                                                     type="persistent"
                                                     classes={{
                                                         modal: classes.root,
-                                                        docked: classNames(classes.drawerDocked,
-                                                            !this.state.open && classes.drawerPaperClose),
+                                                        docked: classNames(
+                                                            classes.drawerDocked,
+                                                            !this.state.open && classes.drawerPaperClose
+                                                        ),
                                                         paper: classes.drawerPaper
                                                     }}
                                                     onClose={this.toggleDrawer}
                                                     open={this.state.open}
                                                 >
-                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current].side}/>
+                                                    <Side
+                                                        open={this.state.open}
+                                                        sideNav={this.state.navs[this.state.current].side}
+                                                    />
                                                 </Drawer>
                                                 :
                                                 <Drawer
                                                     type="persistent"
                                                     classes={{
                                                         modal: classes.root,
-                                                        docked: classNames(classes.drawerDocked,
-                                                            !this.state.open && classes.xsDrawerPaperClose),
+                                                        docked: classNames(
+                                                            classes.drawerDocked,
+                                                            !this.state.open && classes.xsDrawerPaperClose
+                                                        ),
                                                         paper: classes.drawerPaper
                                                     }}
                                                     onClose={this.toggleDrawer}
                                                     open={this.state.open}
                                                 >
-                                                    <Side open={this.state.open} sideNav={this.state.navs[this.state.current].side}/>
+                                                    <Side
+                                                        open={this.state.open}
+                                                        sideNav={this.state.navs[this.state.current].side}
+                                                    />
                                                 </Drawer>
                                         }
-                                        <div className={classNames('content', this.state.open && wd !== 'sm' && 'move-content')}>
+                                        <div
+                                            className={
+                                                classNames('content', this.state.open && wd !== 'sm' && 'move-content')
+                                            }
+                                        >
                                             <Switch>
                                                 <Route exact path="/configurations" component={Configurations}/>
                                                 <Route exact path="/home" component={Home}/>
@@ -672,7 +685,11 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/cms/article" component={Article}/>
                                                 <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
-                                                <Route exact path="/cms/article/type/edit/:id" component={ArticleTypeEdit}/>
+                                                <Route
+                                                    exact
+                                                    path="/cms/article/type/edit/:id"
+                                                    component={ArticleTypeEdit}
+                                                />
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>
                                                 <Route exact path="/cms/page/edit/:id" component={PageEdit}/>
