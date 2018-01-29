@@ -520,7 +520,6 @@ class App extends React.Component<Props, State> {
                                                 />
                                             </Link>
                                             <IconButton
-                                                aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
                                                 className={this.props.classes.menuBtn}
                                                 color="contrast"
@@ -529,7 +528,6 @@ class App extends React.Component<Props, State> {
                                                 <MenuIcon/>
                                             </IconButton>
                                             <IconButton
-                                                aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
                                                 style={{marginLeft: '0'}}
                                                 className={this.props.classes.menuBtn}
@@ -539,7 +537,6 @@ class App extends React.Component<Props, State> {
                                                 <FullScreen/>
                                             </IconButton>
                                             <IconButton
-                                                aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
                                                 style={{marginLeft: '0'}}
                                                 className={this.props.classes.menuBtn}
@@ -600,7 +597,6 @@ class App extends React.Component<Props, State> {
                                         </div>
                                         <div className={this.props.classes.navUser}>
                                             <IconButton
-                                                aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
                                                 className={this.props.classes.iconBtn}
                                                 style={{marginRight: '30px'}}
@@ -609,7 +605,6 @@ class App extends React.Component<Props, State> {
                                                 <Tv/>
                                             </IconButton>
                                             <IconButton
-                                                aria-owns={open ? 'menu-appbar' : null}
                                                 aria-haspopup="true"
                                                 className={this.props.classes.iconBtn}
                                                 style={{marginRight: '10px'}}

@@ -182,7 +182,6 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                 <div className={this.props.classes.headerLeft}>
                     <img className={this.props.classes.logo} src={require('../assets/images/notadd_logo.png')}/>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
                         aria-haspopup="true"
                         className={this.props.classes.menuBtn}
                         color="contrast"
@@ -190,7 +189,6 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         <MenuIcon/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
                         aria-haspopup="true"
                         style={{background: 'none', marginLeft: '0'}}
                         className={this.props.classes.menuBtn}
@@ -200,7 +198,6 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         <FullScreen/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
                         aria-haspopup="true"
                         style={{background: 'none', marginLeft: '0'}}
                         className={this.props.classes.menuBtn}
@@ -261,7 +258,6 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                 </div>
                 <div className={this.props.classes.navUser}>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
                         aria-haspopup="true"
                         className={this.props.classes.iconBtn}
                         style={{marginRight: '30px'}}
@@ -270,7 +266,6 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         <Tv/>
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
                         aria-haspopup="true"
                         className={this.props.classes.iconBtn}
                         style={{marginRight: '10px'}}
