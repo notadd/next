@@ -40,6 +40,7 @@ import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
 import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
+import MoreHoriz from 'material-ui-icons/MoreHoriz';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
@@ -59,6 +60,7 @@ type State = {
     openSearch: boolean,
     selectedOption: object,
     selectOptions: Array<any>,
+    value: number,
 };
 const drawerWidth = 260;
 const styles = (theme: Theme): StyleRules => ({
@@ -509,109 +511,219 @@ class App extends React.Component<Props, State> {
                         children={() => {
                             return (
                                 <div className="main-view">
-                                    <div className="header">
-                                        <div className={this.props.classes.headerLeft}>
-                                            <Link to="/home">
-                                                <img
-                                                    className={this.props.classes.logo}
-                                                    src={require('../assets/images/notadd_logo.png')}
-                                                />
-                                            </Link>
-                                            <IconButton
-                                                aria-haspopup="true"
-                                                className={this.props.classes.menuBtn}
-                                                color="contrast"
-                                                onClick={this.toggleDrawer}
-                                            >
-                                                <MenuIcon/>
-                                            </IconButton>
-                                            <IconButton
-                                                aria-haspopup="true"
-                                                style={{marginLeft: '0'}}
-                                                className={this.props.classes.menuBtn}
-                                                onClick={this.handleFullScreen}
-                                                color="contrast"
-                                            >
-                                                <FullScreen/>
-                                            </IconButton>
-                                            <IconButton
-                                                aria-haspopup="true"
-                                                style={{marginLeft: '0'}}
-                                                className={this.props.classes.menuBtn}
-                                                onClick={this.handleOpenSearch}
-                                                color="contrast"
-                                            >
-                                                <Search/>
-                                            </IconButton>
-                                            <Popover
-                                                open={openSearch}
-                                                anchorPosition={{ top: 0, left: 0 }}
-                                                anchorOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'right',
-                                                }}
-                                                transformOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'right',
-                                                }}
-                                                classes={{
-                                                    paper: classes.popPaper
-                                                }}
-                                                onClose={this.handleClose}
-                                            >
-                                                <Search className="search-icon" />
-                                                <Select
-                                                    name="form-field-name"
-                                                    className="searchSelect"
-                                                    value={selectValue}
-                                                    placeholder="请输入关键词..."
-                                                    onChange={this.handleChangeSelect}
-                                                    options={selectOptions}
-                                                />
-                                            </Popover>
-                                            <BottomNavigation
-                                                value={current}
-                                                onChange={this.handleChange}
-                                                showLabels
-                                                className={this.props.classes.root}
-                                            >
-                                                {
-                                                    this.state.navs.map((item, index) => {
-                                                        return (
-                                                            <BottomNavigationButton
-                                                                classes={{
-                                                                    root: this.props.classes.navBtn,
-                                                                    label: this.props.classes.btnLabel,
-                                                                    selected: this.props.classes.selectRoot,
-                                                                    selectedLabel: this.props.classes.selectedLabel,
-                                                                }}
-                                                                key={index}
-                                                                label={item.name}
+                                    {
+                                        wd === 'xs' ?
+                                            <div className="mobile-header">
+                                                <div className="top-menu">
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        className={this.props.classes.menuBtn}
+                                                        color="contrast"
+                                                        onClick={this.toggleDrawer}
+                                                    >
+                                                        <MenuIcon/>
+                                                    </IconButton>
+                                                    <Link to="/home">
+                                                        <img
+                                                            className={this.props.classes.logo}
+                                                            src={require('../assets/images/notadd_logo.png')}
+                                                        />
+                                                    </Link>
+                                                    <div>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            style={{marginLeft: '0'}}
+                                                            className={this.props.classes.menuBtn}
+                                                            onClick={this.handleOpenSearch}
+                                                            color="contrast"
+                                                        >
+                                                            <Search/>
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            style={{marginLeft: '0'}}
+                                                            className={this.props.classes.menuBtn}
+                                                            color="contrast"
+                                                        >
+                                                            <MoreHoriz/>
+                                                        </IconButton>
+                                                        <Popover
+                                                            open={openSearch}
+                                                            anchorPosition={{ top: 0, left: 0 }}
+                                                            anchorOrigin={{
+                                                                vertical: 'top',
+                                                                horizontal: 'right',
+                                                            }}
+                                                            transformOrigin={{
+                                                                vertical: 'top',
+                                                                horizontal: 'right',
+                                                            }}
+                                                            classes={{
+                                                                paper: classes.popPaper
+                                                            }}
+                                                            className="mobile-search"
+                                                            onClose={this.handleClose}
+                                                        >
+                                                            <Search className="search-icon" />
+                                                            <Select
+                                                                name="form-field-name"
+                                                                className="searchSelect"
+                                                                value={selectValue}
+                                                                placeholder="请输入关键词..."
+                                                                onChange={this.handleChangeSelect}
+                                                                options={selectOptions}
                                                             />
-                                                        );
-                                                    })
-                                                }
-                                            </BottomNavigation>
-                                        </div>
-                                        <div className={this.props.classes.navUser}>
-                                            <IconButton
-                                                aria-haspopup="true"
-                                                className={this.props.classes.iconBtn}
-                                                style={{marginRight: '30px'}}
-                                                color="contrast"
-                                            >
-                                                <Tv/>
-                                            </IconButton>
-                                            <IconButton
-                                                aria-haspopup="true"
-                                                className={this.props.classes.iconBtn}
-                                                style={{marginRight: '10px'}}
-                                                color="contrast"
-                                            >
-                                                <Setting/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
+                                                        </Popover>
+                                                    </div>
+                                                </div>
+                                                <div className="menus-list">
+                                                    <BottomNavigation
+                                                        value={value}
+                                                        onChange={this.handleChange}
+                                                        showLabels
+                                                        className={this.props.classes.root}
+                                                    >
+                                                        {
+                                                            this.state.navs.map((item, index) => {
+                                                                return (
+                                                                    <BottomNavigationButton
+                                                                        classes={{
+                                                                            root: this.props.classes.navBtn,
+                                                                            label: this.props.classes.btnLabel,
+                                                                            selected: this.props.classes.selectRoot,
+                                                                            selectedLabel: this.props.classes.selectedLabel,
+                                                                        }}
+                                                                        key={index}
+                                                                        label={item.name}
+                                                                    />
+                                                                );
+                                                            })
+                                                        }
+                                                    </BottomNavigation>
+                                                    <div className={this.props.classes.navUser}>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            className={this.props.classes.iconBtn}
+                                                            style={{marginRight: '30px'}}
+                                                            color="contrast"
+                                                        >
+                                                            <Tv/>
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            className={this.props.classes.iconBtn}
+                                                            style={{marginRight: '10px'}}
+                                                            color="contrast"
+                                                        >
+                                                            <Setting/>
+                                                        </IconButton>
+                                                    </div>
+                                                </div>
+                                            </div> :
+                                            <div className="header">
+                                                <div className={this.props.classes.headerLeft}>
+                                                    <Link to="/home">
+                                                        <img
+                                                            className={this.props.classes.logo}
+                                                            src={require('../assets/images/notadd_logo.png')}
+                                                        />
+                                                    </Link>
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        className={this.props.classes.menuBtn}
+                                                        color="contrast"
+                                                        onClick={this.toggleDrawer}
+                                                    >
+                                                        <MenuIcon/>
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        style={{marginLeft: '0'}}
+                                                        className={this.props.classes.menuBtn}
+                                                        onClick={this.handleFullScreen}
+                                                        color="contrast"
+                                                    >
+                                                        <FullScreen/>
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        style={{marginLeft: '0'}}
+                                                        className={this.props.classes.menuBtn}
+                                                        onClick={this.handleOpenSearch}
+                                                        color="contrast"
+                                                    >
+                                                        <Search/>
+                                                    </IconButton>
+                                                    <Popover
+                                                        open={openSearch}
+                                                        anchorPosition={{ top: 0, left: 0 }}
+                                                        anchorOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        transformOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        classes={{
+                                                            paper: classes.popPaper
+                                                        }}
+                                                        onClose={this.handleClose}
+                                                    >
+                                                        <Search className="search-icon" />
+                                                        <Select
+                                                            name="form-field-name"
+                                                            className="searchSelect"
+                                                            value={selectValue}
+                                                            placeholder="请输入关键词..."
+                                                            onChange={this.handleChangeSelect}
+                                                            options={selectOptions}
+                                                        />
+                                                    </Popover>
+                                                    <BottomNavigation
+                                                        value={value}
+                                                        onChange={this.handleChange}
+                                                        showLabels
+                                                        className={this.props.classes.root}
+                                                    >
+                                                        {
+                                                            this.state.navs.map((item, index) => {
+                                                                return (
+                                                                    <BottomNavigationButton
+                                                                        classes={{
+                                                                            root: this.props.classes.navBtn,
+                                                                            label: this.props.classes.btnLabel,
+                                                                            selected: this.props.classes.selectRoot,
+                                                                            selectedLabel: this.props.classes.selectedLabel,
+                                                                        }}
+                                                                        key={index}
+                                                                        label={item.name}
+                                                                    />
+                                                                );
+                                                            })
+                                                        }
+                                                    </BottomNavigation>
+                                                </div>
+                                                <div className={this.props.classes.navUser}>
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        className={this.props.classes.iconBtn}
+                                                        style={{marginRight: '30px'}}
+                                                        color="contrast"
+                                                    >
+                                                        <Tv/>
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-haspopup="true"
+                                                        className={this.props.classes.iconBtn}
+                                                        style={{marginRight: '10px'}}
+                                                        color="contrast"
+                                                    >
+                                                        <Setting/>
+                                                    </IconButton>
+                                                </div>
+                                            </div>
+                                    }
                                     <div className={classNames('view', condition && 'smallSide-view')}>
                                         {
                                             condition ?
