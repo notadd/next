@@ -38,6 +38,7 @@ import Drawer from 'material-ui/Drawer';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
+import Close from 'material-ui-icons/Close';
 import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
 import MoreHoriz from 'material-ui-icons/MoreHoriz';
@@ -520,7 +521,9 @@ class App extends React.Component<Props, State> {
                                                         color="contrast"
                                                         onClick={this.toggleDrawer}
                                                     >
-                                                        <MenuIcon/>
+                                                        {
+                                                            open ? <Close/>:<MenuIcon/>
+                                                        }
                                                     </IconButton>
                                                     <Link to="/home">
                                                         <img
@@ -633,7 +636,9 @@ class App extends React.Component<Props, State> {
                                                         color="contrast"
                                                         onClick={this.toggleDrawer}
                                                     >
-                                                        <MenuIcon/>
+                                                        {
+                                                            open ? <Close/>:<MenuIcon/>
+                                                        }
                                                     </IconButton>
                                                     <IconButton
                                                         aria-haspopup="true"

@@ -25,9 +25,6 @@
     display: flex;
     justify-content: space-between;
 }
-.mobile-header .top-menu button {
-    font-size: 1.6rem;
-}
 .mobile-header .top-menu > button {
     margin-left: -1.8rem;
 }
