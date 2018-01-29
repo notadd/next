@@ -47,6 +47,29 @@
     padding: 0 2rem;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.08);
     height: 7rem;
+    display: flex;
+    justify-content: space-between;
+}
+.mobile-header .menus-list > div:first-child {
+    padding-left: 0;
+    overflow-x: auto;
+    height: inherit;
+}
+.mobile-header .menus-list > div:last-child {
+    padding-left: 0;
+    margin-right: -2rem;
+}
+.mobile-header .menus-list > div:last-child button {
+    margin-right: 0 !important;
+    width: 0;
+    padding: 0 2.3rem;
+}
+.mobile-header .menus-list button {
+    min-width: inherit;
+    max-width: inherit;
+    height: 100%;
+    padding: 0 2.5rem;
+    font-size: 1.6rem;
 }
 @media (max-width: 479px) {
     html, body {

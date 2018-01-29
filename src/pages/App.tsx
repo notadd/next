@@ -599,6 +599,24 @@ class App extends React.Component<Props, State> {
                                                             })
                                                         }
                                                     </BottomNavigation>
+                                                    <div className={this.props.classes.navUser}>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            className={this.props.classes.iconBtn}
+                                                            style={{marginRight: '30px'}}
+                                                            color="contrast"
+                                                        >
+                                                            <Tv/>
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-haspopup="true"
+                                                            className={this.props.classes.iconBtn}
+                                                            style={{marginRight: '10px'}}
+                                                            color="contrast"
+                                                        >
+                                                            <Setting/>
+                                                        </IconButton>
+                                                    </div>
                                                 </div>
                                             </div> :
                                             <div className="header">
