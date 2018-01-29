@@ -63,7 +63,7 @@
 @media (max-width: 479px) {
     .cms-message .table-head,
     .cms-message .table-body {
-        width: 160%;
+        width: 180%;
     }
     .cms-message .table-head li:nth-child(2),
     .cms-message .table-head li:nth-child(3),
