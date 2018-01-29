@@ -11,12 +11,6 @@ body {
     "WenQuanYi Micro Hei",
     sans-serif;
 }
-#root {
-    height: inherit;
-}
-.header-search {
-    position: inherit !important;
-}
 /*面包屑导航*/
 .crumbs {
     color: #808080;
