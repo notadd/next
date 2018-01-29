@@ -16,6 +16,9 @@ class PlatformTools {
             throw err;
         }
     }
+    static pathExtname(pathString) {
+        return path.extname(pathString);
+    }
     static pathNormalize(pathString) {
         return path.normalize(pathString);
     }

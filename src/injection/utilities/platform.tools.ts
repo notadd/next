@@ -26,6 +26,15 @@ export class PlatformTools {
      *
      * @returns { string }
      */
+    static pathExtname(pathString: string): string {
+        return path.extname(pathString);
+    }
+
+    /**
+     * @param { string } pathString
+     *
+     * @returns { string }
+     */
     static pathNormalize(pathString: string): string {
         return path.normalize(pathString);
     }
