@@ -24,6 +24,7 @@
     line-height: 7rem;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 .mobile-header .top-menu > button {
     margin-left: -1.8rem;
@@ -57,9 +58,6 @@
     overflow-x: auto;
     height: inherit;
 }
-.mobile-header .menus-list > div:first-child button {
-    font-size: 1.4rem;
-}
 .mobile-header .menus-list > div:last-child {
     padding-left: 0;
     margin-right: -2rem;
@@ -74,12 +72,8 @@
     max-width: inherit;
     height: 100%;
     padding: 0 2.5rem;
-    font-size: 1.6rem;
 }
 @media (max-width: 479px) {
-    html, body {
-        font-size: 62.5%;
-    }
     .mobile-search >div:nth-child(2) {
         width: 100%;
     }
