@@ -120,9 +120,23 @@
     height: 60px;
     display: flex;
     justify-content: center;
+    padding: initial;
+}
+.smallSide-view .list-item .list-text h3 {
+    text-align: center;
+}
+.smallSide-view .list-item .list-text {
+    text-align: center;
+    display: none;
 }
 .smallSide-view .list-item:hover {
     background: #ededed;
+}
+.smallSide-view .list-item:hover .list-icon {
+    display: none;
+}
+.smallSide-view .list-item:hover .list-text {
+    display: block;
 }
 .smallSide-view .sideBar > ul {
     position: relative;
