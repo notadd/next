@@ -40,17 +40,17 @@
     display: flex;
     justify-content: center;
 }
-.sideBar .small-userBox {
+.smallSide-view .sideBar .userBox {
     background: none;
     height: 90px;
     margin-bottom: 0;
 }
-.sideBar .small-userBox > div {
+.smallSide-view .sideBar .userBox > div {
     align-items: center;
     background: none;
     border-bottom: 1px solid #e0e0e0;
 }
-.sideBar .small-userBox .bigAvatar {
+.smallSide-view .sideBar .userBox .bigAvatar {
     margin: 0;
 }
 
@@ -59,7 +59,7 @@
     margin-top: 39px;
 }
 
-.small-userBox .user-right {
+.smallSide-view .user-right {
     display: none;
 }
 
@@ -116,18 +116,18 @@
     color: #333333;
 }
 
-.smallSideBar .list-item {
+.smallSide-view .list-item {
     height: 60px;
     display: flex;
     justify-content: center;
 }
-.smallSideBar .list-item:hover {
+.smallSide-view .list-item:hover {
     background: #ededed;
 }
-.smallSideBar .sideBar > ul {
+.smallSide-view .sideBar > ul {
     position: relative;
 }
-.smallSideBar .sideBar > ul > li:nth-child(2) {
+.smallSide-view .sideBar > ul > li:nth-child(2) {
     background-color: #ffffff;
     box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.05);
     left: 90px;

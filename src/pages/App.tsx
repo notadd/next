@@ -75,13 +75,15 @@ const styles = (theme: Theme): StyleRules => ({
     },
     drawerPaper: {
         width: 'inherit',
+        top: 'auto',
+        overflow: 'visible',
+        transform: 'translateX(0) !important',
     },
     drawerPaperClose: {
         top: 70,
         width: 90,
         overflow: 'visible',
         zIndex: 1,
-        transform: 'translateX(0) !important',
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
     xsDrawerPaperClose: {
@@ -89,6 +91,7 @@ const styles = (theme: Theme): StyleRules => ({
         position: 'fixed',
         zIndex: 500,
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        transform: 'translateX(-260px) !important',
     },
     headerLeft: {
         'align-items': 'center',
@@ -498,7 +501,7 @@ class App extends React.Component<Props, State> {
         const { classes } = this.props;
         const selectValue = selectedOption && selectedOption.value;
         const wd = this.props.width;
-        const condition = (!open && (wd === ('md' || 'lg' || 'xl'))) || (open && (wd == 'sm'));
+        const condition = (open === false && ((wd === 'md') || (wd ==='lg') || (wd ==='xl'))) || (wd === 'sm');
         return (
             <HashRouter  basename="/">
                 <Switch>
@@ -617,15 +620,11 @@ class App extends React.Component<Props, State> {
                                             </IconButton>
                                         </div>
                                     </div>
-                                    <div className="view">
-                                        {
-                                            window.console.log((!open && (wd === ('md' || 'lg' || 'xl'))) || (open && (wd == 'sm')))
-                                        }
+                                    <div className={classNames('view', condition && 'smallSide-view')}>
                                         {
                                             condition ?
                                                 <Drawer
                                                     type="persistent"
-                                                    className={condition && 'smallSideBar'}
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(classes.drawerDocked,
@@ -643,7 +642,7 @@ class App extends React.Component<Props, State> {
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(classes.drawerDocked,
-                                                            !this.state.open && classes.drawerPaperClose),
+                                                            !this.state.open && classes.xsDrawerPaperClose),
                                                         paper: classes.drawerPaper
                                                     }}
                                                     onClose={this.toggleDrawer}

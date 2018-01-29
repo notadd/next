@@ -84,8 +84,6 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                 message: 5,
             },
         };
-        window.console.log(this.props.open);
-        window.console.log(typeof this.props.sideNav);
     }
     componentWillReceiveProps(nextProps: object) {
         this.setState({
@@ -133,16 +131,12 @@ class SideBar extends React.Component<PropsWithStyles, State> {
     render() {
         const wd = this.props.width;
         const open = this.state.open;
+        const condition = (open === false && ((wd === 'md') || (wd ==='lg') || (wd ==='xl'))) || (wd === 'sm');
         return (
             <div className="sideBar">
                 <div
-                    className={
-                        classNames(
-                            'userBox', ((!open && (wd === ('lg' || 'xl' || 'md'))) || (open && (wd === 'sm'))) && 'small-userBox'
-                        )
-                    }
+                    className="userBox"
                 >
-                    {/*<p>{this.props.sideNav.values()}</p>*/}
                     <div>
                         <Avatar
                             alt={this.state.user.name}
@@ -200,7 +194,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                 style={{paddingTop: 0, paddingBottom: 0}}
                             >
                                 {
-                                    !open && wd === ('md' || 'lg' || 'xl') || open && wd === 'sm' ?
+                                    condition ?
                                         <ListItem
                                             className={
                                                 classNames(

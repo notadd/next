@@ -23,14 +23,20 @@
     padding: 30px;
     overflow-x: hidden;
     transition: width 225ms;
+    margin-left: 90px;
 }
 .move-content {
-    transform: translateX(260px);
-    transition: all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    margin-left: 260px;
+    transition: margin-left 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 @media (max-width: 479px) {
     .content {
         width: 100%;
         padding: 10px;
+        margin-left: 0;
+    }
+    .move-content {
+        transform: translateX(260px);
+        transition: all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
     }
 }

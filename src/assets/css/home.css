@@ -71,15 +71,16 @@
 }
 
 .home .bottom-content .teamBox {
+    padding: 20px 30px;
     min-height: 72px;
-    padding: 0 30px;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .home .bottom-content .teamBox div {
-    padding: 10px 19px;
+    padding: 0 30px;
     width: auto;
+    line-height: 2.5;
     max-width: none;
     flex-basis: auto;
     display: flex;
