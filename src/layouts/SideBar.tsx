@@ -103,7 +103,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
             this.setState({user: userState});
         }
     }
-    handleClick(index: number, subIndex: any) {
+    handleCollapse(index: number, subIndex: any) {
         const sides = Object.assign({}, this.state.navs);
         if (subIndex === null) {
             Object.keys(sides).forEach(item => {
@@ -123,6 +123,17 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                 }
             });
         }
+        const arr = new Array();
+        Object.keys(sides).forEach(item => {
+            arr.push(sides[item]);
+        });
+        this.setState({ navs: arr });
+    }
+    handleMouseLeave() {
+        const sides = Object.assign({}, this.state.navs);
+        Object.keys(sides).forEach(item => {
+            sides[ item ].open = false;
+        });
         const arr = new Array();
         Object.keys(sides).forEach(item => {
             arr.push(sides[item]);
@@ -206,14 +217,21 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                     item.open ? 'selectFirstLevelMenu' : '',
                                                 )
                                             }
-                                            onMouseEnter={() => this.handleClick(index, null)}
+                                            onMouseEnter={() => this.handleCollapse(index, null)}
+                                            onMouseLeave={() => this.handleMouseLeave()}
                                         >
-                                            <Icon style={{color: '#808080'}}>{item.icon}</Icon>
+                                            <Icon className="list-icon" style={{color: 'inherit'}}>{item.icon}</Icon>
+                                            <ListItemText
+                                                className="list-text"
+                                                inset
+                                                style={{padding: 0}}
+                                                primary={item.name}
+                                            />
                                         </ListItem>
                                         :
                                         <ListItem
                                             button
-                                            onClick={() => this.handleClick(index, null)}
+                                            onClick={() => this.handleCollapse(index, null)}
                                             className={
                                                 classNames(
                                                     item.open ?
@@ -245,13 +263,17 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                         </ListItem>
                                 }
                                 {
-                                    item.children.length > 0 && <Collapse component="li" in={item.open} unmountOnExit>
+                                    item.children.length > 0
+                                    &&
+                                    <Collapse component="li" in={item.open} unmountOnExit>
                                         <List
                                             disablePadding
                                             style={{
                                                 paddingTop: 0,
                                                 paddingBottom: 0
                                             }}
+                                            onMouseEnter={() => this.handleCollapse(index, null)}
+                                            onMouseLeave={() => this.handleMouseLeave()}
                                         >
                                             {
                                                 item.children.map((child: any, childIndex: number) => {
@@ -281,7 +303,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                     && child.children.length ? (
                                                                         <ListItemText
                                                                             onClick={() =>
-                                                                                this.handleClick(index, childIndex)}
+                                                                                this.handleCollapse(index, childIndex)}
                                                                             style={{paddingLeft: 78}}
                                                                             inset
                                                                             primary={child.name}
@@ -306,7 +328,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                     && child.open ?  (
                                                                         <ExpandMore
                                                                             style={{
-                                                                                color: '#808080',
+                                                                                color: 'inherit',
                                                                                 width: 20,
                                                                                 height: 20,
                                                                             }}
@@ -316,7 +338,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                                                     && child.open === false ? (
                                                                         <KeyboardArrowRight
                                                                             style={{
-                                                                                color: '#808080',
+                                                                                color: 'inherit',
                                                                                 width: 20,
                                                                                 height: 20,
                                                                             }}
