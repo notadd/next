@@ -4,7 +4,7 @@ import { SettingService } from "../services/setting.service";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication";
 
-@Resolver('Setting')
+@Resolver("Setting")
 export class SettingResolvers {
     constructor(private readonly service: SettingService) {
     }

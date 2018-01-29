@@ -37,7 +37,7 @@ let SettingService = class SettingService {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()
-                .where('key = :key', {
+                .where("key = :key", {
                 key: key,
             })
                 .getOne();
@@ -48,8 +48,8 @@ let SettingService = class SettingService {
             return yield this.repository
                 .createQueryBuilder()
                 .delete()
-                .where('key = :key')
-                .setParameter('key', key)
+                .where("key = :key")
+                .setParameter("key", key)
                 .execute();
         });
     }
@@ -62,8 +62,8 @@ let SettingService = class SettingService {
                 key: key,
                 value: value,
             })
-                .where('key = :key')
-                .setParameter('key', key)
+                .where("key = :key")
+                .setParameter("key", key)
                 .execute();
         });
     }

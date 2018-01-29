@@ -1,5 +1,5 @@
-import { INestApplication } from '@nestjs/common';
-import { NestFactoryStatic } from '@nestjs/core';
+import { INestApplication } from "@nestjs/common";
+import { NestFactoryStatic } from "@nestjs/core";
 export declare class NotaddFactoryStatic extends NestFactoryStatic {
     private _logger;
     constructor();

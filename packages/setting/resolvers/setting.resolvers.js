@@ -75,7 +75,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], SettingResolvers.prototype, "setSetting", null);
 SettingResolvers = __decorate([
-    graphql_1.Resolver('Setting'),
+    graphql_1.Resolver("Setting"),
     __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], SettingResolvers);
 exports.SettingResolvers = SettingResolvers;

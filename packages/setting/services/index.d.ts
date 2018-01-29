@@ -1,1 +1,1 @@
-export { SettingService } from './setting.service';
+export { SettingService } from "./setting.service";

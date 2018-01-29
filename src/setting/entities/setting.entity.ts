@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { IsString } from "class-validator";
 
-@Entity('settings')
+@Entity("settings")
 export class Setting {
     @PrimaryColumn()
     @IsString()

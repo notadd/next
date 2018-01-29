@@ -1,54 +1,54 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
-import Switch from 'material-ui/Switch';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControlLabel, FormControl } from "material-ui/Form";
+import Switch from "material-ui/Switch";
+import Input, { InputLabel } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     labelClass: {
-        'color': '#b8b8b8',
+        "color": "#b8b8b8",
     },
     menu: {
-        'width': '200px',
+        "width": "200px",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+        "font-size": "12px",
+        "color": "#808080",
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
     helpText: {
-        color: '#808080',
-        fontSize: '12px',
+        color: "#808080",
+        fontSize: "12px",
         marginTop: 0,
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
 };
@@ -56,14 +56,14 @@ class MenuEdit extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
-            webName: 'NotAdd',
-            domainName: '',
+            webName: "NotAdd",
+            domainName: "",
             siteOpen: true,
             multiDomainOpen: false,
-            keepRecord: '',
-            companyName: '',
-            copyright: '',
-            statisticalCode: '',
+            keepRecord: "",
+            companyName: "",
+            copyright: "",
+            statisticalCode: "",
         };
         this.handleChange = (name) => (event) => {
             let val = event.target.value;
@@ -87,7 +87,7 @@ class MenuEdit extends React.Component {
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u83DC\u5355\u540D\u79F0"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('webName'), value: this.state.webName }))),
+                                    }, onChange: this.handleChange("webName"), value: this.state.webName }))),
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControlLabel, { label: "是否开启", classes: {
                                     root: this.props.classes.formLabel,

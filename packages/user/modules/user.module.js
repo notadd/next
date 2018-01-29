@@ -16,7 +16,7 @@ const user_resolver_1 = require("../resolvers/user.resolver");
 const user_service_1 = require("../services/user.service");
 let UserModule = class UserModule {
     constructor() {
-        this.logger = new common_1.Logger('NotaddApplication', true);
+        this.logger = new common_1.Logger("NotaddApplication", true);
     }
     configure(consumer) {
     }

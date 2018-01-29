@@ -1,45 +1,45 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Switch from 'material-ui/Switch';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
+import { FormControlLabel, FormControl } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import Switch from "material-ui/Switch";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
-        'margin-bottom': '60px',
+        "padding": "40px 30px",
+        "margin-bottom": "60px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     formControlMargin: {
-        'margin-bottom': '32px',
+        "margin-bottom": "32px",
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
 };
 type State = {
@@ -56,14 +56,14 @@ type State = {
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        webName: 'NotAdd',
-        img: 'LOGO.png',
-        type: '新闻资讯',
-        abstract: '',
-        time: '2016-12-30',
-        link: 'http://',
-        origin: 'www.ibenchu.com',
-        kind: '新闻资讯',
+        webName: "NotAdd",
+        img: "LOGO.png",
+        type: "新闻资讯",
+        abstract: "",
+        time: "2016-12-30",
+        link: "http://",
+        origin: "www.ibenchu.com",
+        kind: "新闻资讯",
         isHidden: false,
     };
     handleChange = (name: any) => (event: any) => {
@@ -99,7 +99,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('webName')}
+                                        onChange={this.handleChange("webName")}
                                         value={this.state.webName}
                                     />
                                 </FormControl>
@@ -124,7 +124,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('img')}
+                                        onChange={this.handleChange("img")}
                                         value={this.state.img}
                                     />
                                 </FormControl>
@@ -144,7 +144,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('type')}
+                                        onChange={this.handleChange("type")}
                                         value={this.state.type}
                                     />
                                 </FormControl>
@@ -167,7 +167,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                             underline: this.props.classes.underline,
                                         }}
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('abstract')}
+                                        onChange={this.handleChange("abstract")}
                                         value={this.state.abstract}
                                     />
                                 </FormControl>
@@ -187,7 +187,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('kind')}
+                                        onChange={this.handleChange("kind")}
                                         value={this.state.kind}
                                     />
                                 </FormControl>
@@ -225,7 +225,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('time')}
+                                        onChange={this.handleChange("time")}
                                         value={this.state.time}
                                     />
                                 </FormControl>
@@ -245,7 +245,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('origin')}
+                                        onChange={this.handleChange("origin")}
                                         value={this.state.origin}
                                     />
                                 </FormControl>
@@ -265,7 +265,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('link')}
+                                        onChange={this.handleChange("link")}
                                         value={this.state.link}
                                     />
                                 </FormControl>

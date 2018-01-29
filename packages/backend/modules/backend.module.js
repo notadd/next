@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 let BackendModule = class BackendModule {
     constructor() {
-        this.logger = new common_1.Logger('NotaddApplication', true);
+        this.logger = new common_1.Logger("NotaddApplication", true);
     }
     configure(consumer) {
     }

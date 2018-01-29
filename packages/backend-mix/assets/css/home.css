@@ -89,13 +89,13 @@
 }
 
 .home .bottom-content .teamBox div:after {
-    content: '|';
+    content: "|";
     position: absolute;
     right: 0;
 }
 
 .home .bottom-content .teamBox div:last-child:after {
-    content: '';
+    content: "";
 }
 
 .home .bottom-content ul li span {

@@ -28,14 +28,14 @@ let AuthService = class AuthService {
     createToken(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield this.userService.getUserByUsername(username);
-            if (typeof user === 'undefined') {
-                throw new Error('User Do not exists!');
+            if (typeof user === "undefined") {
+                throw new Error("User Do not exists!");
             }
-            if (user.password !== crypto_1.createHmac('sha256', password).digest('hex')) {
-                throw new Error('Password is incorrect!');
+            if (user.password !== crypto_1.createHmac("sha256", password).digest("hex")) {
+                throw new Error("Password is incorrect!");
             }
             const expiresIn = 60 * 60;
-            const secretOrKey = 'secret';
+            const secretOrKey = "secret";
             const token = jwt.sign(user, secretOrKey, { expiresIn });
             return {
                 expires: expiresIn,

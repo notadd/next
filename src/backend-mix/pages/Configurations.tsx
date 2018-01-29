@@ -1,55 +1,55 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControlLabel, FormControl, FormHelperText } from 'material-ui/Form';
-import Switch from 'material-ui/Switch';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControlLabel, FormControl, FormHelperText } from "material-ui/Form";
+import Switch from "material-ui/Switch";
+import Input, { InputLabel } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     labelClass: {
-        'color': '#b8b8b8',
+        "color": "#b8b8b8",
     },
     menu: {
-        'width': '200px',
+        "width": "200px",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+        "font-size": "12px",
+        "color": "#808080",
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
     helpText: {
-        color: '#808080',
-        fontSize: '12px',
+        color: "#808080",
+        fontSize: "12px",
         marginTop: 0,
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
 };
@@ -67,14 +67,14 @@ type State = {
 
 class Configurations extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        webName: 'NotAdd',
-        domainName: '',
+        webName: "NotAdd",
+        domainName: "",
         siteOpen: true,
         multiDomainOpen: false,
-        keepRecord: '',
-        companyName: '',
-        copyright: '',
-        statisticalCode: '',
+        keepRecord: "",
+        companyName: "",
+        copyright: "",
+        statisticalCode: "",
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -106,7 +106,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('webName')}
+                                        onChange={this.handleChange("webName")}
                                         value={this.state.webName}
                                     />
                                 </FormControl>
@@ -125,13 +125,13 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('domainName')}
+                                        onChange={this.handleChange("domainName")}
                                         value={this.state.domainName}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '16px'}}>
+                        <Grid container spacing={40} style={{marginTop: "16px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControlLabel
                                     label="站点开启"
@@ -177,7 +177,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormHelperText>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -192,7 +192,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('keepRecord')}
+                                        onChange={this.handleChange("keepRecord")}
                                         value={this.state.keepRecord}
                                     />
                                 </FormControl>
@@ -211,13 +211,13 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('companyName')}
+                                        onChange={this.handleChange("companyName")}
                                         value={this.state.companyName}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '10px'}}>
+                        <Grid container spacing={40} style={{marginTop: "10px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -235,7 +235,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                             underline: this.props.classes.underline,
                                         }}
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('statisticalCode')}
+                                        onChange={this.handleChange("statisticalCode")}
                                         value={this.state.statisticalCode}
                                     />
                                 </FormControl>
@@ -254,7 +254,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('copyright')}
+                                        onChange={this.handleChange("copyright")}
                                         value={this.state.copyright}
                                     />
                                 </FormControl>

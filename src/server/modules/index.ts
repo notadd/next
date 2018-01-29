@@ -1,1 +1,1 @@
-export { ApplicationModule } from './application.module';
+export { ApplicationModule } from "./application.module";

@@ -1,23 +1,23 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControl } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     formLabelFont: {
-        'font-size': '16px',
-        'color': '#808080',
+        "font-size": "16px",
+        "color": "#808080",
     },
 };
 type State = {
@@ -28,9 +28,9 @@ type State = {
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        title: '',
-        describe: '',
-        keywords: '',
+        title: "",
+        describe: "",
+        keywords: "",
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -59,13 +59,13 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('title')}
+                                        onChange={this.handleChange("title")}
                                         value={this.state.title}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -77,13 +77,13 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('describe')}
+                                        onChange={this.handleChange("describe")}
                                         value={this.state.describe}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -95,7 +95,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('keywords')}
+                                        onChange={this.handleChange("keywords")}
                                         value={this.state.keywords}
                                     />
                                 </FormControl>

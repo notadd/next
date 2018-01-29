@@ -1,1 +1,1 @@
-export { SettingModule } from './setting.module';
+export { SettingModule } from "./setting.module";

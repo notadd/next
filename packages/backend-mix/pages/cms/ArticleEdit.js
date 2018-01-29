@@ -1,58 +1,58 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Switch from 'material-ui/Switch';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
+import { FormControlLabel, FormControl } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import Switch from "material-ui/Switch";
+import Button from "material-ui/Button";
 const styles = {
     root: {
-        'padding': '40px 30px',
-        'margin-bottom': '60px',
+        "padding": "40px 30px",
+        "margin-bottom": "60px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     formControlMargin: {
-        'margin-bottom': '32px',
+        "margin-bottom": "32px",
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
 };
 class ArticleEdit extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
-            webName: 'NotAdd',
-            img: 'LOGO.png',
-            type: '新闻资讯',
-            abstract: '',
-            time: '2016-12-30',
-            link: 'http://',
-            origin: 'www.ibenchu.com',
-            kind: '新闻资讯',
+            webName: "NotAdd",
+            img: "LOGO.png",
+            type: "新闻资讯",
+            abstract: "",
+            time: "2016-12-30",
+            link: "http://",
+            origin: "www.ibenchu.com",
+            kind: "新闻资讯",
             isHidden: false,
         };
         this.handleChange = (name) => (event) => {
@@ -74,29 +74,29 @@ class ArticleEdit extends React.Component {
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u6587\u7AE0\u6807\u9898"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('webName'), value: this.state.webName })),
+                                    }, onChange: this.handleChange("webName"), value: this.state.webName })),
                             React.createElement("div", { className: "editor" }, "\u7F16\u8F91\u5668\u63D2\u4EF6")),
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u7F29\u7565\u56FE"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('img'), value: this.state.img })),
+                                    }, onChange: this.handleChange("img"), value: this.state.img })),
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u5206\u7C7B"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('type'), value: this.state.type })),
+                                    }, onChange: this.handleChange("type"), value: this.state.type })),
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u6458\u8981"),
                                 React.createElement(Input, { id: "name-simple", multiline: true, rowsMax: "3", rows: "3", classes: {
                                         underline: this.props.classes.underline,
-                                    }, className: this.props.classes.formLabelFont, onChange: this.handleChange('abstract'), value: this.state.abstract })),
+                                    }, className: this.props.classes.formLabelFont, onChange: this.handleChange("abstract"), value: this.state.abstract })),
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u5206\u7C7B"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('kind'), value: this.state.kind })),
+                                    }, onChange: this.handleChange("kind"), value: this.state.kind })),
                             React.createElement(FormControlLabel, { label: "隐藏", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
@@ -108,17 +108,17 @@ class ArticleEdit extends React.Component {
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u53D1\u5E03\u65F6\u95F4"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('time'), value: this.state.time })),
+                                    }, onChange: this.handleChange("time"), value: this.state.time })),
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u6765\u6E90"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('origin'), value: this.state.origin })),
+                                    }, onChange: this.handleChange("origin"), value: this.state.origin })),
                             React.createElement(FormControl, { fullWidth: true, className: this.props.classes.formControlMargin },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u6765\u6E90\u94FE\u63A5"),
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
-                                    }, onChange: this.handleChange('link'), value: this.state.link })))),
+                                    }, onChange: this.handleChange("link"), value: this.state.link })))),
                     React.createElement(Button, { raised: true, color: "primary", style: { marginTop: 34, fontSize: 12, borderRadius: 4 } }, "\u786E\u8BA4\u63D0\u4EA4")))));
     }
 }

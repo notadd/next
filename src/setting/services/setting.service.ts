@@ -29,7 +29,7 @@ export class SettingService {
     async getSettingByKey(key: string): Promise<Setting | undefined> {
         return await this.repository
             .createQueryBuilder()
-            .where('key = :key', {
+            .where("key = :key", {
                 key: key,
             })
             .getOne();
@@ -44,8 +44,8 @@ export class SettingService {
         return await this.repository
             .createQueryBuilder()
             .delete()
-            .where('key = :key')
-            .setParameter('key', key)
+            .where("key = :key")
+            .setParameter("key", key)
             .execute();
     }
 
@@ -63,8 +63,8 @@ export class SettingService {
                 key: key,
                 value: value,
             })
-            .where('key = :key')
-            .setParameter('key', key)
+            .where("key = :key")
+            .setParameter("key", key)
             .execute();
     }
 }

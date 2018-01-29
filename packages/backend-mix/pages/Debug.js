@@ -1,34 +1,34 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControlLabel } from 'material-ui/Form';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
-import Switch from 'material-ui/Switch';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControlLabel } from "material-ui/Form";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
+import Switch from "material-ui/Switch";
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        'display': 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        "display": "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     formLabel: {
-        'color': '#333',
-        'flex-direction': 'row-reverse',
-        'font-size': '16px !important',
-        'margin': '0',
-        'width': '100%',
+        "color": "#333",
+        "flex-direction": "row-reverse",
+        "font-size": "16px !important",
+        "margin": "0",
+        "width": "100%",
     },
     smallBtn: {
-        'border-radius': '4px',
-        'font-size': '12px',
-        'height': '24px',
-        'min-height': '24px',
-        'min-width': '48px',
-        'padding': '0',
-        'width': '48px',
+        "border-radius": "4px",
+        "font-size": "12px",
+        "height": "24px",
+        "min-height": "24px",
+        "min-width": "48px",
+        "padding": "0",
+        "width": "48px",
     }
 };
 class Seo extends React.Component {
@@ -54,13 +54,13 @@ class Seo extends React.Component {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Button, { color: "primary", className: this.props.classes.smallBtn, raised: true, dense: true }, "\u6E05\u9664") }))),
-                    React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: '-10px' } },
+                    React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: "-10px" } },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControlLabel, { label: "Debug模式", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { onChange: (event, checked) => this.setState({ debug: checked }), checked: this.state.debug }) }))),
-                    React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: '-10px' } },
+                    React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: "-10px" } },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControlLabel, { label: "测试模式", classes: {
                                     root: this.props.classes.formLabel,

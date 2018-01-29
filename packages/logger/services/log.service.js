@@ -37,7 +37,7 @@ let LogService = class LogService {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()
-                .where('id = :id', {
+                .where("id = :id", {
                 id: id,
             })
                 .getOne();

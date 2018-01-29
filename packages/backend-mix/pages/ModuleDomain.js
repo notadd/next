@@ -1,31 +1,31 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import ReactPaginate from 'react-paginate';
-import Paper from 'material-ui/Paper';
-import Switch from 'material-ui/Switch';
-import Checkbox from 'material-ui/Checkbox';
-import Table, { TableBody, TableCell, TableHead, TableRow, } from 'material-ui/Table';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import ReactPaginate from "react-paginate";
+import Paper from "material-ui/Paper";
+import Switch from "material-ui/Switch";
+import Checkbox from "material-ui/Checkbox";
+import Table, { TableBody, TableCell, TableHead, TableRow, } from "material-ui/Table";
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#ffffff",
+        "box-shadow": "0px 2px 4px 0 rgba(0, 0, 0, 0.3)",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
+        "border-top": "1px solid rgba(235, 235, 235, 1)",
+        "border-collapse": "inherit",
     },
     tableCell: {
-        'text-align': 'center',
-        'padding-top': '0',
+        "text-align": "center",
+        "padding-top": "0",
     },
 };
 let id = 0;
@@ -34,11 +34,11 @@ function createData(name, domain, defaul, other, use) {
     return { id, name, domain, defaul, other, use };
 }
 const list = [
-    createData('notadd', '多域名功能未开启', true, '/', true),
-    createData('商城', '多域名功能未开启', false, '无', false),
-    createData('商家', '多域名功能未开启', false, '无', false),
-    createData('CMS', '多域名功能未开启', false, '无', false),
-    createData('Notadd2', '多域名功能未开启', false, '无', false),
+    createData("notadd", "多域名功能未开启", true, "/", true),
+    createData("商城", "多域名功能未开启", false, "无", false),
+    createData("商家", "多域名功能未开启", false, "无", false),
+    createData("CMS", "多域名功能未开启", false, "无", false),
+    createData("Notadd2", "多域名功能未开启", false, "无", false),
 ];
 class ModuleOpen extends React.Component {
     constructor() {
@@ -90,7 +90,7 @@ class ModuleOpen extends React.Component {
                             React.createElement(TableCell, { numeric: true }, "\u4F7F\u7528\u57DF\u540D"))),
                     React.createElement(TableBody, { className: "table-body" }, list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
                         .map((n, index) => {
-                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : '', key: n.id },
+                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : "", key: n.id },
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.name),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.domain),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true },
@@ -100,7 +100,7 @@ class ModuleOpen extends React.Component {
                                 React.createElement(Switch, { checked: n.use, onChange: this.handleChange(n), "aria-label": "n.use" }))));
                     }))),
                 React.createElement("div", { className: "table-pagination" },
-                    React.createElement(ReactPaginate, { previousLabel: '<', nextLabel: '>', breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: 'break-me', pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: 'pagination', activeClassName: 'active' })))));
+                    React.createElement(ReactPaginate, { previousLabel: "<", nextLabel: ">", breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: "break-me", pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: "pagination", activeClassName: "active" })))));
     }
 }
 export default withStyles(styles)(ModuleOpen);

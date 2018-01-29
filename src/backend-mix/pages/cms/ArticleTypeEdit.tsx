@@ -1,43 +1,43 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControl } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     labelClass: {
-        'color': '#b8b8b8',
+        "color": "#b8b8b8",
     },
     menu: {
-        'width': '200px',
+        "width": "200px",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+        "font-size": "12px",
+        "color": "#808080",
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
 };
@@ -52,11 +52,11 @@ type State = {
 
 class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        typeName: 'NotAdd',
-        otherName: 'news',
-        color: '#ff3300',
-        description: '',
-        link: 'www.baidu.com',
+        typeName: "NotAdd",
+        otherName: "news",
+        color: "#ff3300",
+        description: "",
+        link: "www.baidu.com",
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -88,7 +88,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('typeName')}
+                                        onChange={this.handleChange("typeName")}
                                         value={this.state.typeName}
                                     />
                                 </FormControl>
@@ -107,13 +107,13 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('otherName')}
+                                        onChange={this.handleChange("otherName")}
                                         value={this.state.otherName}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '12px'}}>
+                        <Grid container spacing={40} style={{marginTop: "12px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -128,7 +128,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('link')}
+                                        onChange={this.handleChange("link")}
                                         value={this.state.link}
                                     />
                                 </FormControl>
@@ -147,13 +147,13 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('description')}
+                                        onChange={this.handleChange("description")}
                                         value={this.state.description}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '12px'}}>
+                        <Grid container spacing={40} style={{marginTop: "12px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -168,7 +168,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('color')}
+                                        onChange={this.handleChange("color")}
                                         value={this.state.color}
                                     />
                                 </FormControl>

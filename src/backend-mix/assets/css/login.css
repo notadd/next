@@ -29,7 +29,7 @@ height: 100%;
 }
 .login .boxTitle:before {
     background: #e91e63;
-    content: '';
+    content: "";
     position: absolute;
     top: 4px;
     left: -40px;

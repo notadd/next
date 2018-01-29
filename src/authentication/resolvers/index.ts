@@ -1,1 +1,1 @@
-export { AuthResolvers } from './auth.resolvers';
+export { AuthResolvers } from "./auth.resolvers";

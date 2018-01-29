@@ -8,7 +8,7 @@ import { UserQueryDto } from "../dtos/user.query.dto";
 import { UserService } from "../services/user.service";
 import { UserUpdateDto } from "../dtos/user.update.dto";
 
-@Resolver('User')
+@Resolver("User")
 export class UserResolver {
     constructor(private readonly service: UserService) {
     }

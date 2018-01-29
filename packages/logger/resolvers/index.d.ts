@@ -1,1 +1,1 @@
-export { LogResolvers } from './log.resolvers';
+export { LogResolvers } from "./log.resolvers";

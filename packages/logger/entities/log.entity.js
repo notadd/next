@@ -31,6 +31,6 @@ __decorate([
     __metadata("design:type", String)
 ], Log.prototype, "updatedAt", void 0);
 Log = __decorate([
-    typeorm_1.Entity('logs')
+    typeorm_1.Entity("logs")
 ], Log);
 exports.Log = Log;

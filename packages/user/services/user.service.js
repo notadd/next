@@ -57,7 +57,7 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .delete()
-                .where('email = :email', {
+                .where("email = :email", {
                 email: email,
             })
                 .execute();
@@ -68,7 +68,7 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .delete()
-                .where('id = :id', {
+                .where("id = :id", {
                 id: id,
             })
                 .execute();
@@ -79,7 +79,7 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .delete()
-                .where('username = :username', {
+                .where("username = :username", {
                 username: username,
             })
                 .execute();
@@ -94,7 +94,7 @@ let UserService = class UserService {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()
-                .where('email = :email', {
+                .where("email = :email", {
                 email: email,
             }).getOne();
         });
@@ -108,8 +108,8 @@ let UserService = class UserService {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repository
                 .createQueryBuilder()
-                .where('username = :username')
-                .setParameter('username', username)
+                .where("username = :username")
+                .setParameter("username", username)
                 .getOne();
         });
     }
@@ -132,7 +132,7 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .update(obj)
-                .where('email = :email', {
+                .where("email = :email", {
                 email: email,
             })
                 .execute();
@@ -143,8 +143,8 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .update(obj)
-                .where('id = :id')
-                .setParameter('id', id)
+                .where("id = :id")
+                .setParameter("id", id)
                 .execute();
         });
     }
@@ -153,8 +153,8 @@ let UserService = class UserService {
             return yield this.repository
                 .createQueryBuilder()
                 .update(obj)
-                .where('username = :username')
-                .setParameter('username', username)
+                .where("username = :username")
+                .setParameter("username", username)
                 .execute();
         });
     }

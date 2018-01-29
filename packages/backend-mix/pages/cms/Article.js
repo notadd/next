@@ -1,65 +1,65 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import { Link } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ClearIcon from 'material-ui-icons/Clear';
-import ModeEdit from 'material-ui-icons/ModeEdit';
-import Search from 'material-ui-icons/Search';
-import Add from 'material-ui-icons/Add';
-import Cached from 'material-ui-icons/Cached';
-import Table, { TableBody, TableCell, TableHead, TableRow, } from 'material-ui/Table';
-import Dialog, { DialogActions, DialogContent, DialogTitle, } from 'material-ui/Dialog';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import Paper from "material-ui/Paper";
+import Checkbox from "material-ui/Checkbox";
+import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "material-ui-icons/Delete";
+import ClearIcon from "material-ui-icons/Clear";
+import ModeEdit from "material-ui-icons/ModeEdit";
+import Search from "material-ui-icons/Search";
+import Add from "material-ui-icons/Add";
+import Cached from "material-ui-icons/Cached";
+import Table, { TableBody, TableCell, TableHead, TableRow, } from "material-ui/Table";
+import Dialog, { DialogActions, DialogContent, DialogTitle, } from "material-ui/Dialog";
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#3f51b5',
-        'color': '#fff',
-        'margin-left': '10px',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#3f51b5",
+        "color": "#fff",
+        "margin-left": "10px",
     },
     btnEdit: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#3f51b5',
-        'color': '#fff',
-        'margin-left': '10px',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#3f51b5",
+        "color": "#fff",
+        "margin-left": "10px",
+        "box-shadow": "0px 2px 4px 0 rgba(0, 0, 0, 0.3)",
     },
     btnDelete: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#fff',
-        'color': '#808080',
-        'margin-left': '10px',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#fff",
+        "color": "#808080",
+        "margin-left": "10px",
+        "box-shadow": "0px 2px 4px 0 rgba(0, 0, 0, 0.3)",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
+        "border-top": "1px solid rgba(235, 235, 235, 1)",
+        "border-collapse": "inherit",
     },
     tableCell: {
-        'text-align': 'left',
-        'padding': '0',
+        "text-align": "left",
+        "padding": "0",
     },
     tableCellStatus: {
-        'text-align': 'left',
-        'padding-left': '0',
-        'padding-right': '0',
-        'width': '40px',
+        "text-align": "left",
+        "padding-left": "0",
+        "padding-right": "0",
+        "width": "40px",
     },
 };
 class Article extends React.Component {
@@ -70,43 +70,43 @@ class Article extends React.Component {
             rowsPerPage: 2,
             currentPage: 0,
             open: false,
-            modalId: '',
-            modalName: '',
+            modalId: "",
+            modalName: "",
             list: [
                 {
                     id: 1,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯1',
-                    time: '2017-12-01 13:20:59',
+                    name: "标题名称测试标题名称测试标题名称测试标题名称测试",
+                    type: "新闻资讯1",
+                    time: "2017-12-01 13:20:59",
                 },
                 {
                     id: 2,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯2',
-                    time: '2017-12-01 13:20:59',
+                    name: "标题名称测试标题名称测试标题名称测试标题名称测试",
+                    type: "新闻资讯2",
+                    time: "2017-12-01 13:20:59",
                 },
                 {
                     id: 3,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯3',
-                    time: '2017-12-01 13:20:59',
+                    name: "标题名称测试标题名称测试标题名称测试标题名称测试",
+                    type: "新闻资讯3",
+                    time: "2017-12-01 13:20:59",
                 },
                 {
                     id: 4,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯4',
-                    time: '2017-12-01 13:20:59',
+                    name: "标题名称测试标题名称测试标题名称测试标题名称测试",
+                    type: "新闻资讯4",
+                    time: "2017-12-01 13:20:59",
                 },
                 {
                     id: 5,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯5',
-                    time: '2017-12-01 13:20:59',
+                    name: "标题名称测试标题名称测试标题名称测试标题名称测试",
+                    type: "新闻资讯5",
+                    time: "2017-12-01 13:20:59",
                 },
             ],
         };
@@ -179,28 +179,28 @@ class Article extends React.Component {
                     React.createElement(TableHead, { className: "table-head" },
                         React.createElement(TableRow, null,
                             React.createElement(TableCell, { className: this.props.classes.tableCellStatus },
-                                React.createElement(Checkbox, { checked: this.state.checkedAll, onChange: this.handleChangeAll('checkedAll'), value: "checkedAll" })),
+                                React.createElement(Checkbox, { checked: this.state.checkedAll, onChange: this.handleChangeAll("checkedAll"), value: "checkedAll" })),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u6587\u7AE0\u540D\u79F0"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u5206\u7C7B"),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u53D1\u5E03\u65F6\u95F4"),
                             React.createElement(TableCell, { numeric: true }))),
                     React.createElement(TableBody, { className: "table-body" }, list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
                         .map((n, index) => {
-                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : '', key: n.id },
+                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : "", key: n.id },
                             React.createElement(TableCell, { padding: "checkbox", className: this.props.classes.tableCellStatus },
                                 React.createElement(Checkbox, { checked: n.check, onChange: this.handleChange(n), value: "n.check" })),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.name),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.type),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.time),
                             React.createElement(TableCell, { numeric: true },
-                                React.createElement(Link, { to: '/cms/article/edit/' + n.id },
+                                React.createElement(Link, { to: "/cms/article/edit/" + n.id },
                                     React.createElement(IconButton, { className: this.props.classes.btnEdit },
                                         React.createElement(ModeEdit, null))),
                                 React.createElement(IconButton, { className: this.props.classes.btnDelete, onClick: () => this.handleClickRemove(n) },
                                     React.createElement(DeleteIcon, null)))));
                     }))),
                 React.createElement("div", { className: "table-pagination" },
-                    React.createElement(ReactPaginate, { previousLabel: '<', nextLabel: '>', breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: 'break-me', pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: 'pagination', activeClassName: 'active' }))),
+                    React.createElement(ReactPaginate, { previousLabel: "<", nextLabel: ">", breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: "break-me", pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: "pagination", activeClassName: "active" }))),
             React.createElement(Dialog, { open: this.state.open, "aria-labelledby": "alert-dialog-title", "aria-describedby": "alert-dialog-description", className: "dialog-content" },
                 React.createElement(DialogTitle, { id: "alert-dialog-title", className: "dialog-title" },
                     React.createElement(IconButton, { onClick: this.handleClose },
