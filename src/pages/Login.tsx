@@ -9,7 +9,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { CircularProgress } from 'material-ui/Progress';
 // import Prompt from '../components/Prompt';
 import { History } from 'history';
-// import Snackbar from 'material-ui/Snackbar';
+import Snackbar from 'material-ui/Snackbar';
 // import Slide from 'material-ui/transitions/Slide';
 import axios from 'axios';
 
@@ -32,6 +32,7 @@ type State = {
     loading: boolean,
     transition: any,
     open: boolean,
+    errorMessage: string,
 };
 
 interface Props extends WithStyles<keyof typeof styles> {
@@ -45,6 +46,7 @@ class Login extends React.Component<Props, State> {
         loading: false,
         transition: undefined,
         open: false,
+        errorMessage: '',
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -62,27 +64,36 @@ class Login extends React.Component<Props, State> {
                 loading: true,
             },
         );
-        axios.post('localhost:3000/auth/token', {
-            username: this.state.userName,
-            password: this.state.password,
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    tokens: getAuthToken(auth: {                        
+                        username: "${this.state.userName}",
+                        password: "${this.state.password}",
+                    }) {
+                        token,
+                    }
+                }                
+            `,
         }).then(response => {
-            if (response.status === 200) {
+            if (response.data.errors) {
+                this.setState(
+                    {
+                        open: true,
+                        loading: false,
+                        errorMessage: response.data.errors[0].message,
+                    },
+                );
+            } else {
                 const user = {
                     username: this.state.userName,
                     password: this.state.password
                 };
                 localStorage.setItem('notadd_user', JSON.stringify(user));
-                localStorage.setItem('notadd_token', response.data.data.access_token);
+                localStorage.setItem('notadd_token', response.data.data.tokens.token);
                 this.props.history.push('/index');
             }
         });
-        const user = {
-            username: this.state.userName,
-            password: this.state.password
-        };
-        localStorage.setItem('notadd_user', JSON.stringify(user));
-        // localStorage.setItem('notadd_token', response.data.data.access_token);
-        this.props.history.push('/index');
     };
     render() {
         return (
@@ -157,17 +168,18 @@ class Login extends React.Component<Props, State> {
                                 {this.state.loading ?  <div><CircularProgress size={24}/></div> : <span> 登录</span>}
                             </Button>
                         </CardActions>
-                        {/*<Snackbar*/}
-                            {/*open={this.state.open}*/}
-                            {/*onClose={this.handleClose}*/}
-                            {/*transition={this.state.transition}*/}
-                            {/*SnackbarContentProps={{*/}
-                                {/*'aria-describedby': 'message-id',*/}
-                            {/*}}*/}
-                            {/*message={<span id="message-id">I love snacks</span>}*/}
-                        {/*/>*/}
                     </Card>
                 </div>
+                <Snackbar
+                    open={this.state.open}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleClose}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
