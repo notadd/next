@@ -11,6 +11,11 @@
 }
 .mobile-header {
     background-color: #3f51b5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 .mobile-header .top-menu {
     padding: 0 2rem;
@@ -55,6 +60,9 @@
     overflow-x: auto;
     height: inherit;
 }
+.mobile-header .menus-list > div:first-child button {
+    font-size: 1.4rem;
+}
 .mobile-header .menus-list > div:last-child {
     padding-left: 0;
     margin-right: -2rem;
@@ -74,5 +82,8 @@
 @media (max-width: 479px) {
     html, body {
         font-size: 62.5%;
+    }
+    .mobile-search >div:nth-child(2) {
+        width: 100%;
     }
 }

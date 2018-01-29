@@ -40,6 +40,7 @@ import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
 import FullScreen from 'material-ui-icons/Fullscreen';
 import Search from 'material-ui-icons/Search';
+import MoreHoriz from 'material-ui-icons/MoreHoriz';
 import Tv from 'material-ui-icons/Tv';
 import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
@@ -545,7 +546,7 @@ class App extends React.Component<Props, State> {
                                                             className={this.props.classes.menuBtn}
                                                             color="contrast"
                                                         >
-                                                            <Search/>
+                                                            <MoreHoriz/>
                                                         </IconButton>
                                                         <Popover
                                                             open={openSearch}
@@ -561,6 +562,7 @@ class App extends React.Component<Props, State> {
                                                             classes={{
                                                                 paper: classes.popPaper
                                                             }}
+                                                            className="mobile-search"
                                                             onClose={this.handleClose}
                                                         >
                                                             <Search className="search-icon" />
