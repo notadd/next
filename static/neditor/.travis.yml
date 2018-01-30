@@ -1,0 +1,41 @@
+
+sudo: false
+
+language: node_js
+
+matrix:
+    fast_finish: true
+    include:
+        - node_js: node
+          env: FOR=php
+        - node_js: node
+          env: FOR=jsp
+        - node_js: node
+          env: FOR=net
+        - node_js: node
+          env: FOR=asp
+
+  
+before_install:
+    - npm install grunt -g
+
+install:    
+    - npm install
+    - grunt neditor --server="$FOR"
+    # - sh -c "if [ '$FOR' = 'php' ]; then grunt neditor;  fi"
+    #- sh -c "if [ '$FOR' = 'jsp' ]; then grunt neditor --server=jsp;  fi"
+    #- sh -c "if [ '$FOR' = 'net' ]; then grunt neditor --server=.net;  fi"
+    #- sh -c "if [ '$FOR' = 'asp' ]; then grunt neditor --server=asp;  fi"
+    - tar -cvf neditor.tar --exclude=.git dist
+    - xz -z9 neditor.tar
+
+script:
+    - sh -c "if [ '$FOR' = 'net' ]; then curl -T neditor.tar.xz http://v0.api.upyun.com/notadd/download/neditor/Nediotr-net-master.tar.xz -u "$UPYUN" -v;  fi"
+    - sh -c "if [ '$FOR' = 'asp' ]; then curl -T neditor.tar.xz http://v0.api.upyun.com/notadd/download/neditor/Nediotr-asp-master.tar.xz -u "$UPYUN" -v;  fi"
+    - sh -c "if [ '$FOR' = 'php' ]; then curl -T neditor.tar.xz http://v0.api.upyun.com/notadd/download/neditor/Nediotr-php-master.tar.xz -u "$UPYUN" -v;  fi"
+    - sh -c "if [ '$FOR' = 'jsp' ]; then curl -T neditor.tar.xz http://v0.api.upyun.com/notadd/download/neditor/Nediotr-jsp-master.tar.xz -u "$UPYUN" -v;  fi"
+    
+notifications:
+    webhooks:
+        - https://hook.bearychat.com/=bwA22/travis/52fa443470377f35e5a3d068b8d2d5ca
+        - https://hook.bearychat.com/=bwA7K/travis/3c04d191a6066d3e178ab8d93643e708
