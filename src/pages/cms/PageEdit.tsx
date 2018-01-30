@@ -100,7 +100,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={7}>
                                 <FormControl
                                     fullWidth
                                     required
@@ -126,7 +126,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     编辑器插件
                                 </div>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={5}>
                                 <FormControl
                                     fullWidth
                                     required

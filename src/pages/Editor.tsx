@@ -7,10 +7,13 @@ type State = {
     id: string;
 };
 
+declare global {
+    interface Window { UE: any; }
+}
+
 class Editor extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any){
         super(props);
-        window.console.log(props);
         this.state = {
             id: `editor_${(Math.random() * 100000000000000000)}`,
         };
@@ -24,11 +27,11 @@ class Editor extends React.Component<WithStyles<keyof typeof styles>, State> {
     }
     initEditor() {
         const id = this.state.id;
-        const ueEditor = UE.getEditor(this.state.id, {/*这里是配置*/ });
+        const ueEditor = window.UE.getEditor(this.state.id, {/*这里是配置*/ });
         const self = this;
         ueEditor.ready((ueditor: any) => {
             if (!ueditor) {
-                UE.delEditor(id);
+                window.UE.delEditor(id);
                 self.initEditor();
             }
         })

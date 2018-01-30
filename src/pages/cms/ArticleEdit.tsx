@@ -2,6 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+// import Editor from '../Editor';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Switch from 'material-ui/Switch';
@@ -120,7 +121,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={7}>
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
@@ -142,10 +143,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                 </FormControl>
                                 <div className="editor">
-                                    编辑器插件
+                                    {/*<Editor id="content"/>*/}
                                 </div>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={5}>
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
