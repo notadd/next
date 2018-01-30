@@ -38,33 +38,39 @@ export class SettingService {
     /**
      * @param { String } key
      *
-     * @returns { Promise<Boolean> }
+     * @returns { Promise<Setting | undefined> }
      */
-    async removeSetting(key: string): Promise<Boolean> {
-        return await this.repository
-            .createQueryBuilder()
-            .delete()
-            .where("key = :key")
-            .setParameter("key", key)
-            .execute();
+    async removeSetting(key: string): Promise<Setting | undefined> {
+        let setting: Setting | undefined = await this.getSettingByKey(key);
+        if (typeof setting == "undefined") {
+            throw new Error(`Setting dot not exists with key ${key}`);
+        } else {
+            await this.repository.delete({
+                key: setting.key,
+            });
+        }
+
+        return setting;
     }
 
     /**
      * @param { String } key
      * @param { String } value
      *
-     * @returns { Promise<Boolean> }
+     * @returns { Promise<Setting> }
      */
-    async setSetting(key: string, value: string): Promise<Boolean> {
-        return await this.repository
-            .createQueryBuilder()
-            .update()
-            .set({
+    async setSetting(key: string, value: string): Promise<Setting> {
+        let setting: Setting | undefined = await this.getSettingByKey(key);
+        if (typeof setting == "undefined") {
+            setting = await this.repository.create({
                 key: key,
                 value: value,
-            })
-            .where("key = :key")
-            .setParameter("key", key)
-            .execute();
+            });
+        } else {
+            setting.value = value;
+        }
+        await this.repository.save(setting);
+
+        return setting;
     }
 }

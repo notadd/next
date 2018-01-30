@@ -45,26 +45,32 @@ let SettingService = class SettingService {
     }
     removeSetting(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository
-                .createQueryBuilder()
-                .delete()
-                .where("key = :key")
-                .setParameter("key", key)
-                .execute();
+            let setting = yield this.getSettingByKey(key);
+            if (typeof setting == "undefined") {
+                throw new Error(`Setting dot not exists with key ${key}`);
+            }
+            else {
+                yield this.repository.delete({
+                    key: setting.key,
+                });
+            }
+            return setting;
         });
     }
     setSetting(key, value) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository
-                .createQueryBuilder()
-                .update()
-                .set({
-                key: key,
-                value: value,
-            })
-                .where("key = :key")
-                .setParameter("key", key)
-                .execute();
+            let setting = yield this.getSettingByKey(key);
+            if (typeof setting == "undefined") {
+                setting = yield this.repository.create({
+                    key: key,
+                    value: value,
+                });
+            }
+            else {
+                setting.value = value;
+            }
+            yield this.repository.save(setting);
+            return setting;
         });
     }
 };

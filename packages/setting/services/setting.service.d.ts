@@ -5,6 +5,6 @@ export declare class SettingService {
     constructor(repository: Repository<Setting>);
     getSettings(): Promise<Setting[]>;
     getSettingByKey(key: string): Promise<Setting | undefined>;
-    removeSetting(key: string): Promise<Boolean>;
-    setSetting(key: string, value: string): Promise<Boolean>;
+    removeSetting(key: string): Promise<Setting | undefined>;
+    setSetting(key: string, value: string): Promise<Setting>;
 }

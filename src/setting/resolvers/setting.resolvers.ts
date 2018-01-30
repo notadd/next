@@ -23,13 +23,13 @@ export class SettingResolvers {
 
     @Mutation()
     @UseGuards(UserGuard)
-    async removeSetting(obj, args: { key: string }): Promise<Boolean> {
+    async removeSetting(obj, args: { key: string }): Promise<Setting | undefined> {
         return await this.service.removeSetting(args.key);
     }
 
     @Mutation()
     @UseGuards(UserGuard)
-    async setSetting(obj, args: { key: string, value: string }): Promise<Boolean> {
+    async setSetting(obj, args: { key: string, value: string }): Promise<Setting> {
         return await this.service.setSetting(args.key, args.value);
     }
 }
