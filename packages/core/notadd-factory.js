@@ -65,6 +65,12 @@ class NotaddFactoryStatic {
     getContainer() {
         return this.container;
     }
+    getLoader() {
+        return this.instanceLoader;
+    }
+    getScanner() {
+        return this.dependenciesScanner;
+    }
     createApplicationInstance(instance) {
         return this.createProxy(instance);
     }

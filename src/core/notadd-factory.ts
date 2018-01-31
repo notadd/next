@@ -90,6 +90,20 @@ export class NotaddFactoryStatic {
         return this.container;
     }
 
+    /**
+     * @returns { InstanceLoader }
+     */
+    public getLoader(): InstanceLoader {
+        return this.instanceLoader;
+    }
+
+    /**
+     * @returns { DependenciesScanner }
+     */
+    public getScanner(): DependenciesScanner {
+        return this.dependenciesScanner;
+    }
+
     private createApplicationInstance<T>(instance: T) {
         return this.createProxy(instance);
     }
