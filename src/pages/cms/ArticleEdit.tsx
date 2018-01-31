@@ -2,7 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-import Editor from '../../pages/Editor';
+import Editor from '../Editor';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Switch from 'material-ui/Switch';
@@ -45,6 +45,7 @@ const styles = {
     switchDefault: {
         'height': 'inherit',
     },
+    editor: {},
 };
 type State = {
     webName: string,
@@ -58,6 +59,7 @@ type State = {
     kind: string,
     pageType: string,
     isHidden: boolean,
+    path: string,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -92,6 +94,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             kind: '新闻资讯',
             isHidden: false,
             pageType: type,
+            path: 'neditor/',
         };
     }
     handleDateChange = (date: any) => {
@@ -143,11 +146,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                 </FormControl>
                                 <div className="editor">
-                                    <Editor
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                    />
+                                    <Editor path={this.state.path}/>
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={5}>
