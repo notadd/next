@@ -5,21 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const extension__module_1 = require("./extension. module");
 const addon_module_1 = require("./addon.module");
 const module_module_1 = require("./module.module");
 let InjectionModule = class InjectionModule {
-    constructor() {
-        this.logger = new common_1.Logger("NotaddInjection", true);
-    }
-    configure(consumer) {
-        this.logger.log('Begin to load injection.');
-    }
 };
 InjectionModule = __decorate([
     common_1.Module({
@@ -28,7 +19,6 @@ InjectionModule = __decorate([
             module_module_1.ModuleModule,
             addon_module_1.AddonModule,
         ],
-    }),
-    __metadata("design:paramtypes", [])
+    })
 ], InjectionModule);
 exports.InjectionModule = InjectionModule;

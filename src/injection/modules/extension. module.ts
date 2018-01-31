@@ -1,19 +1,32 @@
-import { Logger, MiddlewaresConsumer, Module } from "@nestjs/common";
-import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
+import { Logger, Module } from "@nestjs/common";
+import { SettingService } from "@notadd/setting/services/setting.service";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
+import { NestContainer } from "@nestjs/core/injector/container";
+import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
 
 @Module({
     imports: [
-        ...importClassesFromDirectories(["**/*.extension.injection.js"]),
+        SettingModule,
     ],
 })
-export class ExtensionModule {
+export class ExtensionModule implements OnModuleInitWithContainer {
     private logger: Logger;
 
-    constructor() {
+    /**
+     * @param { SettingService } settingService
+     */
+    constructor(private readonly settingService: SettingService) {
         this.logger = new Logger("NotaddExtension", true);
     }
 
-    configure(consumer: MiddlewaresConsumer) {
-        this.logger.log('Begin to load extension.');
+    /**
+     * @param { NestContainer } container
+     *
+     * @returns { Promise<void> }
+     */
+    async onModuleInitWithContainer(container: NestContainer): Promise<void> {
+        const settings = await this.settingService.getSettings();
+        console.log(settings);
+        this.logger.log("Extensions loaded");
     }
 }
