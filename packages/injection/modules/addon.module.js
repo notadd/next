@@ -20,16 +20,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const import_classes_from_directories_1 = require("../utilities/import.classes.from.directories");
 let AddonModule = class AddonModule {
     constructor(settingService) {
         this.settingService = settingService;
         this.logger = new common_1.Logger("NotaddAddon", true);
     }
-    onModuleInitWithContainer(container) {
+    onModuleInitWithInjection() {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
             console.log(settings);
-            this.logger.log("Addons loaded");
+            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.module.js"]);
         });
     }
 };

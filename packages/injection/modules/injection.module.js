@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const extension__module_1 = require("./extension. module");
+const extension_module_1 = require("./extension.module");
 const addon_module_1 = require("./addon.module");
 const module_module_1 = require("./module.module");
 let InjectionModule = class InjectionModule {
@@ -15,7 +15,7 @@ let InjectionModule = class InjectionModule {
 InjectionModule = __decorate([
     common_1.Module({
         imports: [
-            extension__module_1.ExtensionModule,
+            extension_module_1.ExtensionModule,
             module_module_1.ModuleModule,
             addon_module_1.AddonModule,
         ],

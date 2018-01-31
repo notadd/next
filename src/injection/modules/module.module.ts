@@ -1,15 +1,15 @@
 import { Logger, Module } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
-import { NestContainer } from "@nestjs/core/injector/container";
-import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
+import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
+import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
 
 @Module({
     imports: [
         SettingModule,
     ],
 })
-export class ModuleModule implements OnModuleInitWithContainer {
+export class ModuleModule implements OnModuleInitWithInjection {
     private logger: Logger;
 
     /**
@@ -20,13 +20,12 @@ export class ModuleModule implements OnModuleInitWithContainer {
     }
 
     /**
-     * @param { NestContainer } container
-     *
-     * @returns { Promise<void> }
+     * @returns { Promise<Array<Function>> }
      */
-    async onModuleInitWithContainer(container: NestContainer): Promise<void> {
+    async onModuleInitWithInjection(): Promise<Array<Function>> {
         const settings = await this.settingService.getSettings();
         console.log(settings);
-        this.logger.log("Modules loaded");
+
+        return importClassesFromDirectories(["**/*.module.js"]);
     }
 }
