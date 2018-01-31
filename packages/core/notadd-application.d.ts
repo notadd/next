@@ -1,7 +1,6 @@
 /// <reference types="node" />
 import * as http from 'http';
-import { CanActivate, ExceptionFilter, NestInterceptor, PipeTransform, WebSocketAdapter } from '@nestjs/common';
-import { INestApplication, INestMicroservice } from '@nestjs/common';
+import { CanActivate, ExceptionFilter, INestApplication, INestMicroservice, NestInterceptor, PipeTransform, WebSocketAdapter } from '@nestjs/common';
 import { MicroserviceConfiguration } from '@nestjs/common/interfaces/microservices/microservice-configuration.interface';
 import { NestApplicationContext } from "@nestjs/core";
 import { NestContainer } from "@nestjs/core/injector/container";
@@ -45,7 +44,9 @@ export declare class NotaddApplication extends NestApplicationContext implements
     private listenToPromise(microservice);
     private callInitHook();
     private callModuleInitHook(module);
+    private callModuleInitWithContainerHook(module);
     private hasOnModuleInitHook(instance);
+    private hasOnModuleInitWithContainerHook(instance);
     private callDestroyHook();
     private callModuleDestroyHook(module);
     private hasOnModuleDestroyHook(instance);

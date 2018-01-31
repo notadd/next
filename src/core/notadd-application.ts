@@ -5,15 +5,13 @@ import iterate from 'iterare';
 import {
     CanActivate,
     ExceptionFilter,
-    NestInterceptor,
-    OnModuleDestroy,
-    PipeTransform,
-    WebSocketAdapter,
-} from '@nestjs/common';
-import {
     INestApplication,
     INestMicroservice,
+    NestInterceptor,
+    OnModuleDestroy,
     OnModuleInit,
+    PipeTransform,
+    WebSocketAdapter,
 } from '@nestjs/common';
 import { Logger } from '@nestjs/common/services/logger.service';
 import {
@@ -32,6 +30,7 @@ import { RoutesResolver } from "@nestjs/core/router/routes-resolver";
 import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
 import { Module } from "@nestjs/core/injector/module";
 import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/exceptions/microservices-package-not-found.exception";
+import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
 
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || ({} as any);
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || ({} as any);
@@ -237,6 +236,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         const modules = this.container.getModules();
         modules.forEach(module => {
             this.callModuleInitHook(module);
+            this.callModuleInitWithContainerHook(module);
         });
     }
 
@@ -249,8 +249,21 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
             .forEach(instance => (instance as OnModuleInit).onModuleInit());
     }
 
+    private callModuleInitWithContainerHook(module: Module) {
+        const components = [ ...module.routes, ...module.components ];
+        iterate(components)
+            .map(([ key, { instance } ]) => instance)
+            .filter(instance => !isNil(instance))
+            .filter(this.hasOnModuleInitWithContainerHook)
+            .forEach(instance => (instance as OnModuleInitWithContainer).onModuleInitWithContainer(this.container));
+    }
+
     private hasOnModuleInitHook(instance): instance is OnModuleInit {
         return !isUndefined((instance as OnModuleInit).onModuleInit);
+    }
+
+    private hasOnModuleInitWithContainerHook(instance): instance is OnModuleInitWithContainer {
+        return !isUndefined((instance as OnModuleInitWithContainer).onModuleInitWithContainer);
     }
 
     private callDestroyHook() {

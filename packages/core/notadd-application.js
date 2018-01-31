@@ -169,6 +169,7 @@ class NotaddApplication extends core_1.NestApplicationContext {
         const modules = this.container.getModules();
         modules.forEach(module => {
             this.callModuleInitHook(module);
+            this.callModuleInitWithContainerHook(module);
         });
     }
     callModuleInitHook(module) {
@@ -179,8 +180,19 @@ class NotaddApplication extends core_1.NestApplicationContext {
             .filter(this.hasOnModuleInitHook)
             .forEach(instance => instance.onModuleInit());
     }
+    callModuleInitWithContainerHook(module) {
+        const components = [...module.routes, ...module.components];
+        iterare_1.default(components)
+            .map(([key, { instance }]) => instance)
+            .filter(instance => !shared_utils_1.isNil(instance))
+            .filter(this.hasOnModuleInitWithContainerHook)
+            .forEach(instance => instance.onModuleInitWithContainer(this.container));
+    }
     hasOnModuleInitHook(instance) {
         return !shared_utils_1.isUndefined(instance.onModuleInit);
+    }
+    hasOnModuleInitWithContainerHook(instance) {
+        return !shared_utils_1.isUndefined(instance.onModuleInitWithContainer);
     }
     callDestroyHook() {
         const modules = this.container.getModules();
