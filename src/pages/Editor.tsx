@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {WithStyles} from 'material-ui/styles/withStyles';
+import { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {};
 
 type State = {
     id: string;
+    height: string;
 };
 
 declare global {
@@ -12,13 +13,14 @@ declare global {
 }
 
 class Editor extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor(props: any){
+    constructor(props: any) {
         super(props);
         this.state = {
             id: `editor_${(Math.random() * 100000000000000000)}`,
+            height: '300',
         };
     }
-    compontDidMount() {
+    componentDidMount() {
         this.initEditor();
     }
     componentWillUnmount() {
@@ -27,19 +29,24 @@ class Editor extends React.Component<WithStyles<keyof typeof styles>, State> {
     }
     initEditor() {
         const id = this.state.id;
-        const ueEditor = window.UE.getEditor(this.state.id, {/*这里是配置*/ });
+        // const baseURL = '../../../static/neditor';
+        const ueEditor = window.UE.getEditor(this.state.id, {
+            lang: 'zh-cn',
+            initialFrameHeight: this.state.height,
+            initialFrameWidth: '100%',
+        });
         const self = this;
         ueEditor.ready((ueditor: any) => {
             if (!ueditor) {
                 window.UE.delEditor(id);
                 self.initEditor();
             }
-        })
+        });
     }
-    render(){
+    render() {
         return (
-            <div id={this.state.id}></div>
-        )
+            <div id={this.state.id} />
+        );
     }
 }
 export default Editor;

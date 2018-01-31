@@ -11,7 +11,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import { History } from 'history';
 import Snackbar from 'material-ui/Snackbar';
 // import Slide from 'material-ui/transitions/Slide';
-import axios from 'axios';
+// import axios from 'axios';
 
 const styles = {
     card: {
@@ -64,36 +64,36 @@ class Login extends React.Component<Props, State> {
                 loading: true,
             },
         );
-        axios.post('http://localhost:3000/graphql?', {
-            query: `
-                query {
-                    tokens: getAuthToken(auth: {                        
-                        username: "${this.state.userName}",
-                        password: "${this.state.password}",
-                    }) {
-                        token,
-                    }
-                }                
-            `,
-        }).then(response => {
-            if (response.data.errors) {
-                this.setState(
-                    {
-                        open: true,
-                        loading: false,
-                        errorMessage: response.data.errors[0].message,
-                    },
-                );
-            } else {
+        // axios.post('http://localhost:3000/graphql?', {
+        //     query: `
+        //         query {
+        //             tokens: getAuthToken(auth: {
+        //                 username: "${this.state.userName}",
+        //                 password: "${this.state.password}",
+        //             }) {
+        //                 token,
+        //             }
+        //         }
+        //     `,
+        // }).then(response => {
+        //     if (response.data.errors) {
+        //         this.setState(
+        //             {
+        //                 open: true,
+        //                 loading: false,
+        //                 errorMessage: response.data.errors[0].message,
+        //             },
+        //         );
+        //     } else {
                 const user = {
                     username: this.state.userName,
                     password: this.state.password
                 };
                 localStorage.setItem('notadd_user', JSON.stringify(user));
-                localStorage.setItem('notadd_token', response.data.data.tokens.token);
+                // localStorage.setItem('notadd_token', response.data.data.tokens.token);
                 this.props.history.push('/index');
-            }
-        });
+        //     }
+        // });
     };
     render() {
         return (

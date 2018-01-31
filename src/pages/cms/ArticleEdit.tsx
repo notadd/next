@@ -2,7 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-// import Editor from '../Editor';
+import Editor from '../../pages/Editor';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Switch from 'material-ui/Switch';
@@ -143,7 +143,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                 </FormControl>
                                 <div className="editor">
-                                    {/*<Editor id="content"/>*/}
+                                    <Editor
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                    />
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={5}>
