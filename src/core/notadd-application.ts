@@ -235,7 +235,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         });
     }
 
-    private callInitHook() {
+    private callInitHook(): void {
         const modules = this.container.getModules();
         modules.forEach(module => {
             this.callModuleInitHook(module);
@@ -243,22 +243,23 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         });
     }
 
-    private async callInitWithInjectionHook() {
-        let components = [];
-        const injections: Function[] = [];
+    private async callInitWithInjectionHook(): Promise<void> {
+        let injections: Function[] = [];
+        let targets: object[] = [];
         const modules = this.container.getModules();
         modules.forEach((module: Module) => {
-            components = components.concat([...module.routes, ...module.components ]);
+            const components = [...module.routes, ...module.components ];
+            iterate(components)
+                .map(([ key, { instance } ]) => instance)
+                .filter(instance => !isNil(instance))
+                .filter(this.hasOnModuleInitWithInjectionHook)
+                .forEach(instance => {
+                    targets.push(instance);
+                });
         });
-        const values = iterate(components)
-            .map(([ key, { instance } ]) => instance)
-            .filter(instance => !isNil(instance))
-            .filter(this.hasOnModuleInitWithInjectionHook)
-            .toArray();
         let key = 0;
-        while (key < values.length) {
-            console.log("A:" + values.length + ":" + (new Date).toString());
-            (await (values[key] as OnModuleInitWithInjection).onModuleInitWithInjection()).forEach(injection => {
+        while (key < targets.length) {
+            (await (targets[key] as OnModuleInitWithInjection).onModuleInitWithInjection()).forEach(injection => {
                 injections.push(injection);
             });
             key ++;

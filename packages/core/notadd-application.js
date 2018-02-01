@@ -175,21 +175,22 @@ class NotaddApplication extends core_1.NestApplicationContext {
     }
     callInitWithInjectionHook() {
         return __awaiter(this, void 0, void 0, function* () {
-            let components = [];
-            const injections = [];
+            let injections = [];
+            let targets = [];
             const modules = this.container.getModules();
             modules.forEach((module) => {
-                components = components.concat([...module.routes, ...module.components]);
+                const components = [...module.routes, ...module.components];
+                iterare_1.default(components)
+                    .map(([key, { instance }]) => instance)
+                    .filter(instance => !shared_utils_1.isNil(instance))
+                    .filter(this.hasOnModuleInitWithInjectionHook)
+                    .forEach(instance => {
+                    targets.push(instance);
+                });
             });
-            const values = iterare_1.default(components)
-                .map(([key, { instance }]) => instance)
-                .filter(instance => !shared_utils_1.isNil(instance))
-                .filter(this.hasOnModuleInitWithInjectionHook)
-                .toArray();
             let key = 0;
-            while (key < values.length) {
-                console.log("A:" + values.length + ":" + (new Date).toString());
-                (yield values[key].onModuleInitWithInjection()).forEach(injection => {
+            while (key < targets.length) {
+                (yield targets[key].onModuleInitWithInjection()).forEach(injection => {
                     injections.push(injection);
                 });
                 key++;
