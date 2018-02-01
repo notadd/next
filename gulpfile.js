@@ -5,6 +5,7 @@ const sequence = require('gulp-sequence');
 const ts = require('gulp-typescript');
 
 const packages = {
+    'addon-demo': ts.createProject('src/addon-demo/tsconfig.json'),
     authentication: ts.createProject('src/authentication/tsconfig.json'),
     backend: ts.createProject('src/backend/tsconfig.json'),
     'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),

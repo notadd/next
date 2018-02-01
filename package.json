@@ -117,6 +117,7 @@
     },
     "private": true,
     "workspaces": [
+        "packages/addon-demo",
         "packages/authentication",
         "packages/backend",
         "packages/backend-mix",
