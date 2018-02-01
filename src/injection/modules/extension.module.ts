@@ -1,0 +1,30 @@
+import { Logger, Module } from "@nestjs/common";
+import { SettingService } from "@notadd/setting/services/setting.service";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
+import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
+import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
+
+@Module({
+    imports: [
+        SettingModule,
+    ],
+})
+export class ExtensionModule implements OnModuleInitWithInjection {
+    private logger: Logger;
+
+    /**
+     * @param { SettingService } settingService
+     */
+    constructor(private readonly settingService: SettingService) {
+        this.logger = new Logger("NotaddExtension", true);
+    }
+
+    /**
+     * @returns { Promise<Array<Function>> }
+     */
+    async onModuleInitWithInjection(): Promise<Array<Function>> {
+        const settings = await this.settingService.getSettings();
+
+        return [];
+    }
+}
