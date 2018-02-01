@@ -2,3 +2,41 @@
     width: 100%;
     height: 286px;
 }
+.editor .edui-notadd .edui-editor {
+    width: 100% !important;
+}
+.editor .edui-notadd .edui-toolbar .edui-button .edui-icon,
+.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-icon,
+.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-icon {
+    padding: 0 4px !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+.editor .edui-iconfont {
+    width: 0.8em;
+    height: 0.8em;
+}
+.editor .edui-notadd .edui-toolbar .edui-combox .edui-combox-body {
+    height: 20px;
+    margin: 0 3px;
+}
+.editor .edui-notadd .edui-toolbar .edui-combox-body .edui-arrow::after {
+    height: 19px;
+}
+.editor .edui-notadd .edui-toolbar .edui-combox-body .edui-arrow {
+    line-height: 0.7 !important;
+}
+.editor .edui-notadd .edui-toolbar .edui-button, .edui-notadd .edui-toolbar .edui-splitbutton,
+.editor .edui-notadd .edui-toolbar .edui-menubutton, .edui-notadd .edui-toolbar .edui-combox {
+    padding: 2px 0 !important;
+}
+.editor .edui-notadd .edui-editor-toolbarbox {
+    position: relative !important;
+}
+.editor .edui-notadd .edui-editor-iframeholder {
+    width: 100% !important;
+    height: 251px !important;
+}
+.view {
+    overflow-y: auto !important;
+}
