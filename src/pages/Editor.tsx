@@ -112,7 +112,6 @@ class Editor extends React.Component<Props, State> {
         // 等待代码加载完成后初始化编辑器
         Promise.all(loading).then(() => {
             setTimeout(() => {
-                window.console.log(111);
                 self.initEditor();
             }, 300);
         });

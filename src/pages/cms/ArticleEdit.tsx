@@ -60,6 +60,7 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: string,
+    list: Array<any>,
     // content: any,
 };
 
@@ -96,6 +97,14 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
+            list: [
+                {
+                    path: 'neditor/',
+                },
+                {
+                    path: 'neditor/',
+                },
+            ],
             // content: '',
         };
     }
@@ -108,6 +117,15 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         this.setState({
             [name]: val,
         });
+    };
+    handleAddEditor = () => {
+        this.state.list.push({
+            path: 'neditor/',
+        });
+    };
+    handleRemoveEditor = (index: number) => {
+        window.console.log(index);
+        this.state.list.splice(index, 1);
     };
     getImgURL = (event: any) => {
         this.setState({
@@ -147,9 +165,19 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         value={this.state.webName}
                                     />
                                 </FormControl>
-                                <div className="editor">
-                                    <Editor path={this.state.path}/>
-                                </div>
+                                {
+                                    this.state.list.map((item, index) => {
+                                        return (
+                                            <div className="editor" key={index}>
+                                                <Editor path={item.path}/>
+                                                {
+                                                    index === 0 ? <span onClick={this.handleAddEditor}>添加</span> :
+                                                        <span onClick={() => this.handleRemoveEditor(index)}>删除</span>
+                                                }
+                                            </div>
+                                        );
+                                    })
+                                }
                             </Grid>
                             <Grid item xs={12} sm={5}>
                                 <FormControl
