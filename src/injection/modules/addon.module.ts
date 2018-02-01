@@ -25,6 +25,6 @@ export class AddonModule implements OnModuleInitWithInjection {
     async onModuleInitWithInjection(): Promise<Array<Function>> {
         const settings = await this.settingService.getSettings();
 
-        return importClassesFromDirectories(["**/*.module.js"]);
+        return importClassesFromDirectories([ "**/*.injection.js" ]);
     }
 }

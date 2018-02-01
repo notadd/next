@@ -29,7 +29,7 @@ let AddonModule = class AddonModule {
     onModuleInitWithInjection() {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
-            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.module.js"]);
+            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"]);
         });
     }
 };

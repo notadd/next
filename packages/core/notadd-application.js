@@ -191,6 +191,7 @@ class NotaddApplication extends core_1.NestApplicationContext {
             let key = 0;
             while (key < targets.length) {
                 (yield targets[key].onModuleInitWithInjection()).forEach(injection => {
+                    console.log(injection.type);
                     injections.push(injection);
                 });
                 key++;

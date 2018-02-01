@@ -244,7 +244,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
     }
 
     private async callInitWithInjectionHook(): Promise<void> {
-        let injections: Function[] = [];
+        let injections: object[] = [];
         let targets: object[] = [];
         const modules = this.container.getModules();
         modules.forEach((module: Module) => {
@@ -260,6 +260,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         let key = 0;
         while (key < targets.length) {
             (await (targets[key] as OnModuleInitWithInjection).onModuleInitWithInjection()).forEach(injection => {
+                console.log(injection.type);
                 injections.push(injection);
             });
             key ++;

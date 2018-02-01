@@ -54,6 +54,7 @@
         "@nestjs/testing": "^4.3.0",
         "@nestjs/typeorm": "^2.0.0",
         "@nestjs/websockets": "^4.0.0",
+        "@notadd/addon-demo": "^2.1.1",
         "@notadd/authentication": "^2.1.1",
         "@notadd/backend": "^2.1.1",
         "@notadd/backend-mix": "^2.1.1",

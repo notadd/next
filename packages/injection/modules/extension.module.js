@@ -20,7 +20,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const import_classes_from_directories_1 = require("../utilities/import.classes.from.directories");
 let ExtensionModule = class ExtensionModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -29,7 +28,7 @@ let ExtensionModule = class ExtensionModule {
     onModuleInitWithInjection() {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
-            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.module.js"]);
+            return [];
         });
     }
 };
