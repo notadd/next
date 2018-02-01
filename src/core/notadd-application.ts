@@ -31,6 +31,7 @@ import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
 import { Module } from "@nestjs/core/injector/module";
 import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/exceptions/microservices-package-not-found.exception";
 import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
+import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
 
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || ({} as any);
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || ({} as any);
@@ -90,6 +91,8 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
 
     public async init() {
         this.setupParserMiddlewares();
+
+        await this.callInitWithInjectionHook();
 
         await this.setupModules();
         await this.setupRouter();
@@ -240,6 +243,29 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         });
     }
 
+    private async callInitWithInjectionHook() {
+        let components = [];
+        const injections: Function[] = [];
+        const modules = this.container.getModules();
+        modules.forEach((module: Module) => {
+            components = components.concat([...module.routes, ...module.components ]);
+        });
+        const values = iterate(components)
+            .map(([ key, { instance } ]) => instance)
+            .filter(instance => !isNil(instance))
+            .filter(this.hasOnModuleInitWithInjectionHook)
+            .toArray();
+        let key = 0;
+        while (key < values.length) {
+            console.log("A:" + values.length + ":" + (new Date).toString());
+            (await (values[key] as OnModuleInitWithInjection).onModuleInitWithInjection()).forEach(injection => {
+                injections.push(injection);
+            });
+            key ++;
+        }
+        console.log(injections);
+    }
+
     private callModuleInitHook(module: Module) {
         const components = [ ...module.routes, ...module.components ];
         iterate(components)
@@ -264,6 +290,10 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
 
     private hasOnModuleInitWithContainerHook(instance): instance is OnModuleInitWithContainer {
         return !isUndefined((instance as OnModuleInitWithContainer).onModuleInitWithContainer);
+    }
+
+    private hasOnModuleInitWithInjectionHook(instance): instance is OnModuleInitWithInjection {
+        return !isUndefined((instance as OnModuleInitWithInjection).onModuleInitWithInjection);
     }
 
     private callDestroyHook() {

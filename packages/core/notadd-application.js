@@ -56,6 +56,7 @@ class NotaddApplication extends core_1.NestApplicationContext {
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             this.setupParserMiddlewares();
+            yield this.callInitWithInjectionHook();
             yield this.setupModules();
             yield this.setupRouter();
             this.callInitHook();
@@ -172,6 +173,30 @@ class NotaddApplication extends core_1.NestApplicationContext {
             this.callModuleInitWithContainerHook(module);
         });
     }
+    callInitWithInjectionHook() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let components = [];
+            const injections = [];
+            const modules = this.container.getModules();
+            modules.forEach((module) => {
+                components = components.concat([...module.routes, ...module.components]);
+            });
+            const values = iterare_1.default(components)
+                .map(([key, { instance }]) => instance)
+                .filter(instance => !shared_utils_1.isNil(instance))
+                .filter(this.hasOnModuleInitWithInjectionHook)
+                .toArray();
+            let key = 0;
+            while (key < values.length) {
+                console.log("A:" + values.length + ":" + (new Date).toString());
+                (yield values[key].onModuleInitWithInjection()).forEach(injection => {
+                    injections.push(injection);
+                });
+                key++;
+            }
+            console.log(injections);
+        });
+    }
     callModuleInitHook(module) {
         const components = [...module.routes, ...module.components];
         iterare_1.default(components)
@@ -193,6 +218,9 @@ class NotaddApplication extends core_1.NestApplicationContext {
     }
     hasOnModuleInitWithContainerHook(instance) {
         return !shared_utils_1.isUndefined(instance.onModuleInitWithContainer);
+    }
+    hasOnModuleInitWithInjectionHook(instance) {
+        return !shared_utils_1.isUndefined(instance.onModuleInitWithInjection);
     }
     callDestroyHook() {
         const modules = this.container.getModules();

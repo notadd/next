@@ -43,10 +43,12 @@ export declare class NotaddApplication extends NestApplicationContext implements
     private setupMiddlewares(instance);
     private listenToPromise(microservice);
     private callInitHook();
+    private callInitWithInjectionHook();
     private callModuleInitHook(module);
     private callModuleInitWithContainerHook(module);
     private hasOnModuleInitHook(instance);
     private hasOnModuleInitWithContainerHook(instance);
+    private hasOnModuleInitWithInjectionHook(instance);
     private callDestroyHook();
     private callModuleDestroyHook(module);
     private hasOnModuleDestroyHook(instance);

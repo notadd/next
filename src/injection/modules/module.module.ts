@@ -24,7 +24,6 @@ export class ModuleModule implements OnModuleInitWithInjection {
      */
     async onModuleInitWithInjection(): Promise<Array<Function>> {
         const settings = await this.settingService.getSettings();
-        console.log(settings);
 
         return importClassesFromDirectories(["**/*.module.js"]);
     }
