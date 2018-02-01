@@ -60,6 +60,7 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: string,
+    // content: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -95,6 +96,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
+            // content: '',
         };
     }
     handleDateChange = (date: any) => {

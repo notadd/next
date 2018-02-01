@@ -5,6 +5,8 @@ type State = {
     randomId: string;
     instance: any,
     height: string;
+    input: any,
+    ready: any,
 };
 
 declare global {
@@ -15,6 +17,7 @@ interface Props {
     config?: object;
     path: string;
     value?: string;
+    // content: any;
 }
 
 class Editor extends React.Component<Props, State> {
@@ -25,9 +28,11 @@ class Editor extends React.Component<Props, State> {
             id: `editor_${(Math.random() * 100000000000000000)}`,
             instance: null,
             height: '300',
+            input: '',
+            ready: '',
         };
     }
-    componentDidMount() {
+    componentWillMount() {
         if (window.UE !== undefined) {
             // 如果全局对象存在，说明编辑器代码已经初始化完成，直接加载编辑器
             this.initEditor();
@@ -38,7 +43,6 @@ class Editor extends React.Component<Props, State> {
     }
     componentWillUnmount() {
         // 组件卸载后，清除放入库的id
-        // window.UE.delEditor(this.state.id);
         if (this.state.instance !== null && this.state.instance.destroy) {
             this.state.instance.destroy();
         }
@@ -51,7 +55,7 @@ class Editor extends React.Component<Props, State> {
         // 如果这个tag不存在，则生成相关代码tag以加载代码
         if (configScriptTag === null) {
             loading.push(new Promise((resolve, reject) => {
-                configScriptTag = document.createElement('script');
+                let configScriptTag: HTMLElement = document.createElement('script');
                 configScriptTag['type'] = 'text/javascript';
                 configScriptTag['src'] = `${self.props.path}neditor.config.js`;
                 configScriptTag['id'] = 'configScriptTag';
@@ -63,12 +67,14 @@ class Editor extends React.Component<Props, State> {
                             resolve(configScriptTag);
                         }
                     };
+                } else {
+                    configScriptTag.onload = () => {
+                        // resolve(configScriptTag);
+                        if (configScriptTag !== null) {
+                            configScriptTag.addEventListener('load', () => resolve(configScriptTag));
+                        }
+                    };
                 }
-                // else {
-                //     configScriptTag.onload = () => {
-                //         resolve(configScriptTag);
-                //     };
-                // }
                 configScriptTag.onerror = () => {
                     reject(Error('Configuration load error!'));
                 };
@@ -77,7 +83,7 @@ class Editor extends React.Component<Props, State> {
         }
         if (editorScriptTag === null) {
             loading.push(new Promise((resolve, reject) => {
-                editorScriptTag = document.createElement('script');
+                let editorScriptTag: HTMLElement = document.createElement('script');
                 editorScriptTag['type'] = 'text/javascript';
                 editorScriptTag['src'] = `${self.props.path}neditor.all.min.js`;
                 editorScriptTag['id'] = 'editorScriptTag';
@@ -89,12 +95,14 @@ class Editor extends React.Component<Props, State> {
                             resolve(editorScriptTag);
                         }
                     };
+                } else {
+                    editorScriptTag.onload = () => {
+                        // resolve(editorScriptTag);
+                        if (editorScriptTag !== null) {
+                            editorScriptTag.addEventListener('load', () => resolve(editorScriptTag));
+                        }
+                    };
                 }
-                // else {
-                //     editorScriptTag.onload = () => {
-                //         resolve(editorScriptTag);
-                //     };
-                // }
                 editorScriptTag.onerror = () => {
                     reject(Error('Editor load error!'));
                 };
@@ -104,6 +112,7 @@ class Editor extends React.Component<Props, State> {
         // 等待代码加载完成后初始化编辑器
         Promise.all(loading).then(() => {
             setTimeout(() => {
+                window.console.log(111);
                 self.initEditor();
             }, 300);
         });
@@ -115,18 +124,24 @@ class Editor extends React.Component<Props, State> {
                 instance: window.UE.getEditor(self.state.randomId, self.props.config),
             });
             // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
-            // self.state.instance.addListener('contentChange', () => {
-            //     self.$emit('input', self.state.instance.getContent());
+            // self.state.instance.addEventListener('contentChange', () => {
+            //     self.setState({
+            //         'input': self.state.instance.getContent(),
+            //     });
+            //     // self.$emit('input', self.state.instance.getContent());
             // });
-            // self.state.instance.addListener('ready', () => {
+            // self.state.instance.addEventListener('ready', () => {
             //     self.state.instance.setContent(self.props.value);
-            //     self.$emit('ready', self.state.instance);
+            //     self.setState({
+            //         'ready': self.state.instance,
+            //     });
+            //     // self.$emit('ready', self.state.instance);
             // });
         }
     }
     render() {
         return (
-            <div id={this.state.randomId}/>
+            <div id={this.state.randomId} />
         );
     }
 }
