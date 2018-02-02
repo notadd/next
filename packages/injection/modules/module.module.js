@@ -22,6 +22,7 @@ const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const import_classes_from_directories_1 = require("../utilities/import.classes.from.directories");
+const injection_metadata_1 = require("../metadatas/injection.metadata");
 let ModuleModule = class ModuleModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -39,6 +40,12 @@ let ModuleModule = class ModuleModule {
                         && injection.type == injection_constants_1.InjectionType.Extension;
                 }
                 return false;
+            }).map(instance => {
+                const metadata = new injection_metadata_1.InjectionMetadata();
+                metadata.identification = instance.identification;
+                metadata.module = instance.module;
+                metadata.type = instance.type;
+                return metadata;
             });
         });
     }

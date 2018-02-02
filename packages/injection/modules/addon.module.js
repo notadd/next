@@ -22,6 +22,7 @@ const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const import_classes_from_directories_1 = require("../utilities/import.classes.from.directories");
+const injection_metadata_1 = require("../metadatas/injection.metadata");
 let AddonModule = class AddonModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -31,14 +32,20 @@ let AddonModule = class AddonModule {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
             return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"])
-                .filter((injection) => {
-                if (injection instanceof Function) {
-                    return injection.identification.length
-                        && injection.module
-                        && injection.type.length
-                        && injection.type == injection_constants_1.InjectionType.Addon;
+                .filter(instance => {
+                if (instance instanceof Function) {
+                    return instance.identification.length
+                        && instance.module
+                        && instance.type.length
+                        && instance.type == injection_constants_1.InjectionType.Addon;
                 }
                 return false;
+            }).map(instance => {
+                const metadata = new injection_metadata_1.InjectionMetadata();
+                metadata.identification = instance.identification;
+                metadata.module = instance.module;
+                metadata.type = instance.type;
+                return metadata;
             });
         });
     }

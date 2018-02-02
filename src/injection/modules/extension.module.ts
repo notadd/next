@@ -4,6 +4,7 @@ import { SettingService } from "@notadd/setting/services/setting.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
 import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
+import { InjectionMetadata } from "../metadatas/injection.metadata";
 
 @Module({
     imports: [
@@ -21,9 +22,9 @@ export class ExtensionModule implements OnModuleInitWithInjection {
     }
 
     /**
-     * @returns { Promise<Array<Function>> }
+     * @returns { Promise<Array<InjectionMetadata>> }
      */
-    async onModuleInitWithInjection(): Promise<Array<Function>> {
+    async onModuleInitWithInjection(): Promise<Array<InjectionMetadata>> {
         const settings = await this.settingService.getSettings();
 
         return importClassesFromDirectories<Function>([ "**/*.injection.js" ])
@@ -36,6 +37,13 @@ export class ExtensionModule implements OnModuleInitWithInjection {
                 }
 
                 return false;
+            }).map(instance => {
+                const metadata = new InjectionMetadata();
+                metadata.identification = (<any> instance).identification;
+                metadata.module = (<any> instance).module;
+                metadata.type = (<any> instance).type;
+
+                return metadata;
             });
     }
 }
