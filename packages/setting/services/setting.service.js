@@ -27,20 +27,25 @@ const setting_entity_1 = require("../entities/setting.entity");
 let SettingService = class SettingService {
     constructor(repository) {
         this.repository = repository;
+        this.isInitialized = false;
+        this.settings = [];
     }
     getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository.find();
+            if (!this.isInitialized) {
+                yield this.initialize();
+            }
+            return this.settings;
         });
     }
     getSettingByKey(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository
-                .createQueryBuilder()
-                .where("key = :key", {
-                key: key,
-            })
-                .getOne();
+            if (!this.isInitialized) {
+                yield this.initialize();
+            }
+            return this.settings.find((setting) => {
+                return setting.key == key;
+            });
         });
     }
     removeSetting(key) {
@@ -50,9 +55,10 @@ let SettingService = class SettingService {
                 throw new Error(`Setting dot not exists with key ${key}`);
             }
             else {
-                yield this.repository.delete({
+                this.repository.delete({
                     key: setting.key,
                 });
+                this.initialize();
             }
             return setting;
         });
@@ -69,8 +75,15 @@ let SettingService = class SettingService {
             else {
                 setting.value = value;
             }
-            yield this.repository.save(setting);
+            this.repository.save(setting);
+            this.initialize();
             return setting;
+        });
+    }
+    initialize() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.settings = yield this.repository.find();
+            this.isInitialized = true;
         });
     }
 };

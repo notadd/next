@@ -5,6 +5,9 @@ import { Setting } from "../entities/setting.entity";
 
 @Component()
 export class SettingService {
+    private isInitialized: boolean = false;
+    private settings: Setting[] = [];
+
     /**
      * @param { Repository<Setting> } repository
      */
@@ -17,8 +20,12 @@ export class SettingService {
     /**
      * @returns { Promise<Setting[]> }
      */
-    async getSettings(): Promise<Setting[]> {
-        return await this.repository.find();
+    public async getSettings(): Promise<Setting[]> {
+        if (!this.isInitialized) {
+            await this.initialize();
+        }
+
+        return this.settings;
     }
 
     /**
@@ -26,13 +33,14 @@ export class SettingService {
      *
      * @returns { Promise<Setting | undefined> }
      */
-    async getSettingByKey(key: string): Promise<Setting | undefined> {
-        return await this.repository
-            .createQueryBuilder()
-            .where("key = :key", {
-                key: key,
-            })
-            .getOne();
+    public async getSettingByKey(key: string): Promise<Setting | undefined> {
+        if (!this.isInitialized) {
+            await this.initialize();
+        }
+
+        return this.settings.find((setting: Setting) => {
+            return setting.key == key;
+        });
     }
 
     /**
@@ -40,14 +48,15 @@ export class SettingService {
      *
      * @returns { Promise<Setting | undefined> }
      */
-    async removeSetting(key: string): Promise<Setting | undefined> {
+    public async removeSetting(key: string): Promise<Setting | undefined> {
         let setting: Setting | undefined = await this.getSettingByKey(key);
         if (typeof setting == "undefined") {
             throw new Error(`Setting dot not exists with key ${key}`);
         } else {
-            await this.repository.delete({
+            this.repository.delete({
                 key: setting.key,
             });
+            this.initialize();
         }
 
         return setting;
@@ -59,7 +68,7 @@ export class SettingService {
      *
      * @returns { Promise<Setting> }
      */
-    async setSetting(key: string, value: string): Promise<Setting> {
+    public async setSetting(key: string, value: string): Promise<Setting> {
         let setting: Setting | undefined = await this.getSettingByKey(key);
         if (typeof setting == "undefined") {
             setting = await this.repository.create({
@@ -69,8 +78,14 @@ export class SettingService {
         } else {
             setting.value = value;
         }
-        await this.repository.save(setting);
+        this.repository.save(setting);
+        this.initialize();
 
         return setting;
+    }
+
+    private async initialize(): Promise<void> {
+        this.settings = await this.repository.find();
+        this.isInitialized = true;
     }
 }
