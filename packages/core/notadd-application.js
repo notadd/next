@@ -60,7 +60,7 @@ class NotaddApplication extends core_1.NestApplicationContext {
             yield this.setupModules();
             yield this.setupRouter();
             this.callInitHook();
-            this.logger.log("Nest application successfully started");
+            this.logger.log("Notadd application successfully started");
             this.isInitialized = true;
         });
     }

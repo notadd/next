@@ -4,7 +4,6 @@ import { SettingService } from "@notadd/setting/services/setting.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
 import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
-import { Injection } from "@notadd/core/interfaces/injection.interface";
 
 @Module({
     imports: [
@@ -30,7 +29,10 @@ export class AddonModule implements OnModuleInitWithInjection {
         return importClassesFromDirectories<Function>([ "**/*.injection.js" ])
             .filter((injection) => {
                 if (injection instanceof Function) {
-                    return (<any> injection).type == InjectionType.Addon;
+                    return (<any> injection).identification.length
+                        && (<any> injection).module
+                        && (<any> injection).type.length
+                        && (<any> injection).type == InjectionType.Addon;
                 }
 
                 return false;

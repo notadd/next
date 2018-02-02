@@ -33,7 +33,10 @@ let ModuleModule = class ModuleModule {
             return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"])
                 .filter(injection => {
                 if (injection instanceof Function) {
-                    return injection.type == injection_constants_1.InjectionType.Extension;
+                    return injection.identification.length
+                        && injection.module
+                        && injection.type.length
+                        && injection.type == injection_constants_1.InjectionType.Extension;
                 }
                 return false;
             });

@@ -98,7 +98,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         await this.setupRouter();
 
         this.callInitHook();
-        this.logger.log("Nest application successfully started");
+        this.logger.log("Notadd application successfully started");
         this.isInitialized = true;
     }
 

@@ -29,7 +29,10 @@ export class ModuleModule implements OnModuleInitWithInjection {
         return importClassesFromDirectories<Function>([ "**/*.injection.js" ])
             .filter(injection => {
                 if (injection instanceof Function) {
-                    return (<any> injection).type == InjectionType.Extension;
+                    return (<any> injection).identification.length
+                        && (<any> injection).module
+                        && (<any> injection).type.length
+                        && (<any> injection).type == InjectionType.Extension;
                 }
 
                 return false;
