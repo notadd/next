@@ -3,3 +3,11 @@ img {
     max-width: 100%;
     height: auto;
 }
+.view {
+    height: 250px !important;
+    overflow: auto !important;
+    padding: 0 4px;
+}
+body {
+    margin: 0;
+}
