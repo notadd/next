@@ -11,6 +11,7 @@
         "build:watch": "gulp watch --dist packages",
         "dev": "gulp --dist packages",
         "dev:backend-mix": "gulp backend-mix-server --dist packages",
+        "install": "node ./node_modules/@notadd/server/install.js",
         "prepublish": "npm run build:packages",
         "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
         "server": "node ./node_modules/@notadd/server/bootstrap.js",

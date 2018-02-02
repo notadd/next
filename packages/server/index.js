@@ -15,7 +15,9 @@ const express = require("express");
 const ip = require("ip");
 const modules_1 = require("./modules");
 const swagger_1 = require("@nestjs/swagger");
+const fs_1 = require("fs");
 const packages_1 = require("nestjs-flub/packages");
+const path_1 = require("path");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@notadd/core");
 const cross = (req, res, next) => {
@@ -31,6 +33,12 @@ const cross = (req, res, next) => {
 };
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
+        const logger = new common_1.Logger("NotaddFactory", true);
+        if (!fs_1.existsSync(path_1.join(process.cwd(), 'ormconfig.yml'))) {
+            logger.error("Database configuration do not exists!");
+            logger.warn("Please usg command: [yarn run install] to finish installation. Application aborted!");
+            process.exit(1);
+        }
         const index = process.argv.indexOf("--port");
         const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
@@ -39,7 +47,6 @@ function bootstrap() {
         application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
         application.useGlobalPipes(new common_1.ValidationPipe());
-        const logger = new common_1.Logger("NotaddFactory", true);
         const options = new swagger_1.DocumentBuilder()
             .setTitle("Notadd")
             .setDescription("API document for Notadd.")

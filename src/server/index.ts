@@ -2,7 +2,9 @@ import * as express from "express";
 import * as ip from "ip";
 import { ApplicationModule } from "./modules";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { existsSync } from 'fs';
 import { FlubErrorHandler } from "nestjs-flub/packages";
+import { join } from 'path';
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NotaddFactory } from "@notadd/core";
 
@@ -19,6 +21,16 @@ const cross = (req, res, next) => {
 };
 
 export async function bootstrap() {
+    /**
+     * @type { Logger }
+     */
+    const logger = new Logger("NotaddFactory", true);
+    if (!existsSync(join(process.cwd(), 'ormconfig.yml'))) {
+        logger.error("Database configuration do not exists!");
+        logger.warn("Please usg command: [yarn run install] to finish installation. Application aborted!");
+        process.exit(1);
+    }
+
     const index = process.argv.indexOf("--port");
     const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
     const address = `http://${ip.address()}:${port}`;
@@ -30,10 +42,6 @@ export async function bootstrap() {
     application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
     application.useGlobalPipes(new ValidationPipe());
-    /**
-     * @type { Logger }
-     */
-    const logger = new Logger("NotaddFactory", true);
     /**
      * @type { SwaggerBaseConfig }
      */
