@@ -51,7 +51,9 @@ type State = {
     webName: string,
     img: string,
     type: string,
+    topType: string,
     types: Array<any>,
+    topTypes: Array<any>,
     abstract: string,
     time: string,
     link: string,
@@ -73,6 +75,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             webName: 'NotAdd',
             img: 'LOGO.png',
             type: '',
+            topType: '',
             types: [
                 {
                     id: '12',
@@ -85,6 +88,28 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 {
                     id: '14',
                     type: '新闻3',
+                },
+            ],
+            topTypes: [
+                {
+                    id: '00',
+                    type: '全局',
+                },
+                {
+                    id: '01',
+                    type: '一级分类',
+                },
+                {
+                    id: '02',
+                    type: '二级分类',
+                },
+                {
+                    id: '03',
+                    type: '三级分类',
+                },
+                {
+                    id: '04',
+                    type: '当前分类',
                 },
             ],
             abstract: '',
@@ -232,6 +257,37 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         onChange={this.handleChange('abstract')}
                                         value={this.state.abstract}
                                     />
+                                </FormControl>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        htmlFor="name-simple"
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        置顶
+                                    </InputLabel>
+                                    <Select
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.topType}
+                                        onChange={this.handleChange('topType')}
+                                        input={<Input name="type" id="type-simple" />}
+                                    >
+                                        {
+                                            this.state.topTypes.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
                                 </FormControl>
                                 <FormControlLabel
                                     label="隐藏"
