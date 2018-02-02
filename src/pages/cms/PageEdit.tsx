@@ -53,6 +53,8 @@ type State = {
     pageType: string,
     isOpen: boolean,
     list: Array<any>,
+    num: number,
+    value: any,
 };
 
 class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -82,8 +84,11 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             type: '',
             isOpen: false,
             pageType: type,
+            num: 0,
+            value: '',
             list: [
                 {
+                    id: 0,
                     path: 'neditor/',
                 },
             ],
@@ -92,15 +97,16 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleAddEditor = () => {
         this.state.list.push({
             path: 'neditor/',
+            id: this.state.num + 1,
         });
         this.setState({
             list: this.state.list,
+            num: this.state.num + 1,
         });
-        window.console.log(this.state.list);
     };
     handleRemoveEditor = (index: number) => {
-        let arr = [];
-        arr = Object.assign([], this.state.list);
+        window.console.log(index);
+        const arr = Object.assign([], this.state.list);
         arr.splice(index, 1);
         this.setState({
             list: arr,
@@ -150,7 +156,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     this.state.list.map((item, index) => {
                                         return (
                                             <div className="editor" key={index}>
-                                                <Editor path={item.path}/>
+                                                <Editor path={item.path} value={this.state.value}/>
                                                 {
                                                     index === 0 ?
                                                         <span onClick={this.handleAddEditor}>添加</span> :
@@ -233,7 +239,11 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 />
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button
+                            raised
+                            color="primary"
+                            style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                        >
                             确认提交
                         </Button>
                     </form>

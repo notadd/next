@@ -62,6 +62,8 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: string,
+    value: string,
+    content: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -120,6 +122,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
+            content: '',
+            value: '',
         };
     }
     handleDateChange = (date: any) => {
@@ -131,6 +135,13 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         this.setState({
             [name]: val,
         });
+    };
+    handleSubmit = () => {
+        this.setState({
+           value: this.state.content,
+        });
+        window.console.log(this.state.value);
+        window.console.log(this.state.content);
     };
     getImgURL = (event: any) => {
         this.setState({
@@ -171,7 +182,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                 </FormControl>
                                 <div className="editor">
-                                    <Editor path={this.state.path}/>
+                                    <Editor path={this.state.path} value={this.state.content} />
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={5}>
@@ -376,7 +387,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button
+                            raised
+                            color="primary"
+                            style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                            onChange={this.handleSubmit}
+                        >
                             确认提交
                         </Button>
                     </form>

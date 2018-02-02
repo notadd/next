@@ -16,7 +16,7 @@ declare global {
 interface Props {
     config?: object;
     path: string;
-    value?: string;
+    value: string;
     // content: any;
 }
 
