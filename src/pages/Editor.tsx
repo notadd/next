@@ -32,7 +32,7 @@ class Editor extends React.Component<Props, State> {
             ready: '',
         };
     }
-    componentWillMount() {
+    componentDidMount() {
         if (window.UE !== undefined) {
             // 如果全局对象存在，说明编辑器代码已经初始化完成，直接加载编辑器
             this.initEditor();
@@ -122,6 +122,7 @@ class Editor extends React.Component<Props, State> {
             self.setState({
                 instance: window.UE.getEditor(self.state.randomId, self.props.config),
             });
+            window.console.log(self.state.instance);
             // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
             // self.state.instance.addEventListener('contentChange', () => {
             //     self.setState({

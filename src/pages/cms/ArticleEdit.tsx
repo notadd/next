@@ -61,7 +61,6 @@ type State = {
     isHidden: boolean,
     path: string,
     list: Array<any>,
-    // content: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -101,11 +100,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 {
                     path: 'neditor/',
                 },
-                {
-                    path: 'neditor/',
-                },
             ],
-            // content: '',
         };
     }
     handleDateChange = (date: any) => {
@@ -122,10 +117,18 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         this.state.list.push({
             path: 'neditor/',
         });
+        this.setState({
+            list: this.state.list,
+        });
+        window.console.log(this.state.list);
     };
     handleRemoveEditor = (index: number) => {
-        window.console.log(index);
-        this.state.list.splice(index, 1);
+        let arr = [];
+        arr = Object.assign([], this.state.list);
+        arr.splice(index, 1);
+        this.setState({
+           list: arr,
+        });
     };
     getImgURL = (event: any) => {
         this.setState({
@@ -171,9 +174,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                             <div className="editor" key={index}>
                                                 <Editor path={item.path}/>
                                                 {
-                                                    index === 0 ? <span onClick={this.handleAddEditor}>添加</span> :
-                                                        <span onClick={() => this.handleRemoveEditor(index)}>删除</span>
-                                                }
+                                                    index === 0 ?
+                                                        <span onClick={this.handleAddEditor}>添加</span> :
+                                                        <span onClick={() => this.handleRemoveEditor(index)}>删除</span>}
                                             </div>
                                         );
                                     })
