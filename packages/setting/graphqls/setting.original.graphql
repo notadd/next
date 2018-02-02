@@ -1,0 +1,19 @@
+type Query {
+    # This query get all settings.
+    getSettings: [Setting],
+    # This query get a setting by key.
+    getSettingByKey(key: String): Setting,
+}
+
+type Mutation {
+    removeSetting(key: String): Setting,
+    # This mutation set a setting by key and value.
+    setSetting(key: String, value: String): Setting,
+}
+
+type Setting {
+    # Setting key.
+    key: String,
+    # Setting value.
+    value: String,
+}
