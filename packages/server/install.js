@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
+const child_process_1 = require("child_process");
 const inquirer_1 = require("inquirer");
 function install() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -41,7 +42,27 @@ function install() {
             ],
             default: 0,
         });
-        console.log(result.engine);
+        yield addPackageForDatabase(result.engine);
+    });
+}
+function addPackageForDatabase(engine) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(clc.blue(`Install package for database engine ${engine}...`));
+        return new Promise((resolve, reject) => {
+            const child = child_process_1.exec(`yarn add ${engine} -W`, (error, stdout, stderr) => {
+                if (error !== undefined && error !== null) {
+                    reject(error);
+                }
+                else {
+                    console.log('sdfsfsf');
+                    resolve({ stdout, stderr });
+                }
+            });
+            const killChild = () => child.kill();
+            process.setMaxListeners(20);
+            process.on('exit', killChild);
+            child.on('exit', () => process.removeListener('exit', killChild));
+        });
     });
 }
 install();
