@@ -2,6 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import Editor from '../Editor';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
@@ -51,6 +52,7 @@ type State = {
     types: Array<any>,
     pageType: string,
     isOpen: boolean,
+    list: Array<any>,
 };
 
 class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -80,8 +82,30 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             type: '',
             isOpen: false,
             pageType: type,
+            list: [
+                {
+                    path: 'neditor/',
+                },
+            ],
         };
     }
+    handleAddEditor = () => {
+        this.state.list.push({
+            path: 'neditor/',
+        });
+        this.setState({
+            list: this.state.list,
+        });
+        window.console.log(this.state.list);
+    };
+    handleRemoveEditor = (index: number) => {
+        let arr = [];
+        arr = Object.assign([], this.state.list);
+        arr.splice(index, 1);
+        this.setState({
+            list: arr,
+        });
+    };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -122,9 +146,19 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         value={this.state.name}
                                     />
                                 </FormControl>
-                                <div className="editor">
-                                    编辑器插件
-                                </div>
+                                {
+                                    this.state.list.map((item, index) => {
+                                        return (
+                                            <div className="editor" key={index}>
+                                                <Editor path={item.path}/>
+                                                {
+                                                    index === 0 ?
+                                                        <span onClick={this.handleAddEditor}>添加</span> :
+                                                        <span onClick={() => this.handleRemoveEditor(index)}>删除</span>}
+                                            </div>
+                                        );
+                                    })
+                                }
                             </Grid>
                             <Grid item xs={12} sm={5}>
                                 <FormControl
