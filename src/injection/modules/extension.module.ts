@@ -1,3 +1,4 @@
+import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Logger, Module } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
@@ -25,6 +26,13 @@ export class ExtensionModule implements OnModuleInitWithInjection {
     async onModuleInitWithInjection(): Promise<Array<Function>> {
         const settings = await this.settingService.getSettings();
 
-        return [];
+        return importClassesFromDirectories<Function>([ "**/*.injection.js" ])
+            .filter(injection => {
+                if (injection instanceof Function) {
+                    return (<any> injection).type == InjectionType.Extension;
+                }
+
+                return false;
+            });
     }
 }

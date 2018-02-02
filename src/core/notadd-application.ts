@@ -260,7 +260,6 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
         let key = 0;
         while (key < targets.length) {
             (await (targets[key] as OnModuleInitWithInjection).onModuleInitWithInjection()).forEach(injection => {
-                console.log(injection.type);
                 injections.push(injection);
             });
             key ++;

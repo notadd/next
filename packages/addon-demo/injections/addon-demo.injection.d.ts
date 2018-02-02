@@ -1,5 +1,5 @@
-import { AddonDemoModule } from "../modules/addon-demo.module";
 export declare class AddonDemoInjection {
-    static module: typeof AddonDemoModule;
+    static identification: string;
+    static module: any;
     static type: string;
 }

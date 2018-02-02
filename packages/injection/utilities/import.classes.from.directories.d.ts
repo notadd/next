@@ -1,1 +1,1 @@
-export declare function importClassesFromDirectories(directories: string[], formats?: string[]): Function[];
+export declare function importClassesFromDirectories<T>(directories: string[], formats?: string[]): T[];

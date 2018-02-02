@@ -3,24 +3,22 @@ import { PlatformTools } from "./platform.tools";
 /**
  * @param { string[] } directories
  * @param { (string | string)[] } formats
- * @returns { Function[] }
+ * @returns { T[] }
  */
-export function importClassesFromDirectories(directories: string[], formats = [ ".js", ".ts"]): Function[] {
+export function importClassesFromDirectories<T>(directories: string[], formats = [ ".js", ".ts"]): T[] {
     /**
      * @param exported
-     * @param { Function[] } allLoaded
+     * @param { T[] } allLoaded
      *
-     * @returns { Function[] }
+     * @returns { T[] }
      */
-    function loadFileClasses(exported: any, allLoaded: Function[]) {
+    function loadFileClasses<T>(exported: any, allLoaded: T[]) {
         if (typeof exported === "function") {
             allLoaded.push(exported);
-
         } else if (Array.isArray(exported)) {
-            exported.forEach((i: any) => loadFileClasses(i, allLoaded));
-
+            exported.forEach((i: any) => loadFileClasses<T>(i, allLoaded));
         } else if (typeof exported === "object") {
-            Object.keys(exported).forEach(key => loadFileClasses(exported[key], allLoaded));
+            Object.keys(exported).forEach(key => loadFileClasses<T>(exported[key], allLoaded));
         }
 
         return allLoaded;
@@ -33,9 +31,10 @@ export function importClassesFromDirectories(directories: string[], formats = [ 
     const dirs = allFiles
         .filter(file => {
             const dtsExtension = file.substring(file.length - 5, file.length);
+
             return formats.indexOf(PlatformTools.pathExtname(file)) !== -1 && dtsExtension !== ".d.ts";
         })
-        .map(file => PlatformTools.load(PlatformTools.pathResolve(file)));
+        .map(file => PlatformTools.load(PlatformTools.pathResolve(file)) as T);
 
-    return loadFileClasses(dirs, []);
+    return loadFileClasses<T>(dirs, []);
 }

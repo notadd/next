@@ -17,6 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
@@ -29,7 +30,13 @@ let AddonModule = class AddonModule {
     onModuleInitWithInjection() {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
-            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"]);
+            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"])
+                .filter((injection) => {
+                if (injection instanceof Function) {
+                    return injection.type == injection_constants_1.InjectionType.Addon;
+                }
+                return false;
+            });
         });
     }
 };
