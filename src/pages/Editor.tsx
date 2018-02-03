@@ -23,6 +23,7 @@ interface Props {
 class Editor extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
+        localStorage.setItem('editor_path', props.path);
         this.state = {
             randomId: `editor_${(Math.random() * 100000000000000000)}`,
             id: `editor_${(Math.random() * 100000000000000000)}`,
@@ -32,7 +33,7 @@ class Editor extends React.Component<Props, State> {
             ready: '',
         };
     }
-    componentDidMount() {
+    componentWillMount() {
         if (window.UE !== undefined) {
             // 如果全局对象存在，说明编辑器代码已经初始化完成，直接加载编辑器
             this.initEditor();

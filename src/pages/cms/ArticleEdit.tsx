@@ -61,7 +61,7 @@ type State = {
     kind: string,
     pageType: string,
     isHidden: boolean,
-    path: string,
+    path: any,
     value: string,
     content: any,
 };
@@ -73,6 +73,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
         }
+        window.console.log(localStorage.getItem('editor_path'));
         this.state = {
             webName: 'NotAdd',
             img: 'LOGO.png',
