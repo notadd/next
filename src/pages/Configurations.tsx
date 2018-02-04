@@ -135,8 +135,8 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                     if (results[a] !== null) {
                         const d = {};
                         d[a] = results[a].value;
-                        if (d[a] === 'siteOpen' || d[a] === 'siteOpen') {
-                            d[a] ? d[a] = true : d[a] = false;
+                        if (results[a].key === 'global.siteOpen' || results[a].key === 'global.multiDomainOpen') {
+                            Number(results[a].value) === 1 ? d[a] = true : d[a] = false;
                         }
                         this.setState(d);
                     }

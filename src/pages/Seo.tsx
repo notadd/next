@@ -83,7 +83,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
     }
     handleClose = () => {
         this.setState({ open: false });
-    }
+    };
     handleSubmit = () => {
         this.setState(
             {
