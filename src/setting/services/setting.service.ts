@@ -53,10 +53,10 @@ export class SettingService {
         if (typeof setting == "undefined") {
             throw new Error(`Setting dot not exists with key ${key}`);
         } else {
-            this.repository.delete({
+            await this.repository.delete({
                 key: setting.key,
             });
-            this.initialize();
+            await this.initialize();
         }
 
         return setting;
@@ -78,8 +78,8 @@ export class SettingService {
         } else {
             setting.value = value;
         }
-        this.repository.save(setting);
-        this.initialize();
+        await this.repository.save(setting);
+        await this.initialize();
 
         return setting;
     }
