@@ -36,7 +36,7 @@ function bootstrap() {
         const logger = new common_1.Logger("NotaddFactory", true);
         if (!fs_1.existsSync(path_1.join(process.cwd(), 'ormconfig.yml'))) {
             logger.error("Database configuration do not exists!");
-            logger.warn("Please usg command: [yarn run install] to finish installation. Application aborted!");
+            logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
             process.exit(1);
         }
         const index = process.argv.indexOf("--port");

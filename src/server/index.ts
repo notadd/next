@@ -27,7 +27,7 @@ export async function bootstrap() {
     const logger = new Logger("NotaddFactory", true);
     if (!existsSync(join(process.cwd(), 'ormconfig.yml'))) {
         logger.error("Database configuration do not exists!");
-        logger.warn("Please usg command: [yarn run install] to finish installation. Application aborted!");
+        logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
         process.exit(1);
     }
 
