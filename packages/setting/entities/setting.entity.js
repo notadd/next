@@ -32,6 +32,6 @@ __decorate([
     __metadata("design:type", String)
 ], Setting.prototype, "updatedAt", void 0);
 Setting = __decorate([
-    typeorm_1.Entity('settings')
+    typeorm_1.Entity("settings")
 ], Setting);
 exports.Setting = Setting;

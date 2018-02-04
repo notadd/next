@@ -26,7 +26,7 @@ let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             passReqToCallback: true,
-            secretOrKey: 'secret',
+            secretOrKey: "secret",
         }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return yield this.verify(req, payload, next); }));
         this.service = service;
         passport.use(this);
@@ -35,7 +35,7 @@ let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
         return __awaiter(this, void 0, void 0, function* () {
             const isValid = yield this.service.validateUser(payload);
             if (!isValid) {
-                return done('Unauthorized', false);
+                return done("Unauthorized", false);
             }
             done(null, payload);
         });

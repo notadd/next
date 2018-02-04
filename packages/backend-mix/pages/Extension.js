@@ -1,34 +1,34 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ClearIcon from 'material-ui-icons/Clear';
-import Switch from 'material-ui/Switch';
-import Table, { TableBody, TableCell, TableHead, TableRow, } from 'material-ui/Table';
-import Dialog, { DialogActions, DialogContent, DialogTitle, } from 'material-ui/Dialog';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "material-ui-icons/Delete";
+import ClearIcon from "material-ui-icons/Clear";
+import Switch from "material-ui/Switch";
+import Table, { TableBody, TableCell, TableHead, TableRow, } from "material-ui/Table";
+import Dialog, { DialogActions, DialogContent, DialogTitle, } from "material-ui/Dialog";
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#ffffff",
+        "box-shadow": "0px 2px 4px 0 rgba(0, 0, 0, 0.3)",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
+        "border-top": "1px solid rgba(235, 235, 235, 1)",
+        "border-collapse": "inherit",
     },
     tableCell: {
-        'text-align': 'center',
-        'padding': '0',
+        "text-align": "center",
+        "padding": "0",
     },
 };
 let id = 0;
@@ -37,19 +37,19 @@ function createData(name, author, descri, status) {
     return { id, name, author, descri, status };
 }
 const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
+    createData("用户中心", "Mark", "142513233", true),
+    createData("商城", "eref", "142513233", false),
+    createData("商家", "eref", "142513233", false),
+    createData("CMS", "eref", "142513233", false),
+    createData("Notadd2", "eref", "142513233", false),
 ];
 class Extension extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
             open: false,
-            modalId: '',
-            modalName: '',
+            modalId: "",
+            modalName: "",
         };
         this.handleChange = (pro) => (event, checked) => {
             if (checked) {
@@ -87,7 +87,7 @@ class Extension extends React.Component {
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, "\u72B6\u6001"),
                             React.createElement(TableCell, { numeric: true }))),
                     React.createElement(TableBody, { className: "table-body" }, list.map((n, index) => {
-                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : '', key: n.id },
+                        return (React.createElement(TableRow, { hover: true, className: index % 2 === 0 ? this.props.classes.evenRow : "", key: n.id },
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.name),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.author),
                             React.createElement(TableCell, { className: this.props.classes.tableCell, numeric: true }, n.descri),

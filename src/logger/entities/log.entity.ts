@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { IsString } from "class-validator";
 
-@Entity('logs')
+@Entity("logs")
 export class Log {
     @PrimaryGeneratedColumn()
     id: number;

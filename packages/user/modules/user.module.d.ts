@@ -1,4 +1,4 @@
-import { MiddlewaresConsumer } from '@nestjs/common';
+import { MiddlewaresConsumer } from "@nestjs/common";
 export declare class UserModule {
     private logger;
     constructor();

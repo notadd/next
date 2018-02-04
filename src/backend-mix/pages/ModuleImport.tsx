@@ -1,40 +1,40 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import ReactPaginate from 'react-paginate';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
-import IconButton from 'material-ui/IconButton';
-import FileDownload from 'material-ui-icons/FileDownload';
-import FileUpload from 'material-ui-icons/FileUpload';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import ReactPaginate from "react-paginate";
+import Paper from "material-ui/Paper";
+import Checkbox from "material-ui/Checkbox";
+import IconButton from "material-ui/IconButton";
+import FileDownload from "material-ui-icons/FileDownload";
+import FileUpload from "material-ui-icons/FileUpload";
 import Table, {
     TableBody,
     TableCell,
     TableHead,
     TableRow,
-} from 'material-ui/Table';
+} from "material-ui/Table";
 
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#3f51b5',
-        'color': '#fff',
-        'margin-left': '10px',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#3f51b5",
+        "color": "#fff",
+        "margin-left": "10px",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
+        "border-top": "1px solid rgba(235, 235, 235, 1)",
+        "border-collapse": "inherit",
     },
     tableCell: {
-        'text-align': 'center',
-        'padding': '0',
+        "text-align": "center",
+        "padding": "0",
     },
 };
 type State = {
@@ -47,11 +47,11 @@ function createData(check: boolean, name: any, description: any, version: any) {
 }
 
 const list = [
-    createData(false, 'notadd', '一些说明', '0.777'),
-    createData(false, 'notadd2', '一些说明', '0.456'),
-    createData(false, 'notadd3', '一些说明', '0.7777'),
-    createData(false, 'notadd4', '一些说明', '0.77477'),
-    createData(false, 'notadd5', '一些说明', '0.24325'),
+    createData(false, "notadd", "一些说明", "0.777"),
+    createData(false, "notadd2", "一些说明", "0.456"),
+    createData(false, "notadd3", "一些说明", "0.7777"),
+    createData(false, "notadd4", "一些说明", "0.77477"),
+    createData(false, "notadd5", "一些说明", "0.24325"),
 ];
 
 class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -119,7 +119,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                                 <TableCell className={this.props.classes.tableCell} numeric>
                                     <Checkbox
                                         checked={this.state.checkedAll}
-                                        onChange={this.handleChangeAll('checkedAll')}
+                                        onChange={this.handleChangeAll("checkedAll")}
                                         value="checkedAll"
                                     />
                                 </TableCell>
@@ -134,7 +134,7 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ""}
                                         key={n.id}
                                     >
                                         <TableCell padding="checkbox" className={this.props.classes.tableCell} numeric>
@@ -160,16 +160,16 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
                     </Table>
                     <div className="table-pagination">
                         <ReactPaginate
-                            previousLabel={'<'}
-                            nextLabel={'>'}
+                            previousLabel={"<"}
+                            nextLabel={">"}
                             breakLabel={<a href="javascript:;">...</a>}
-                            breakClassName={'break-me'}
+                            breakClassName={"break-me"}
                             pageCount={list.length / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
-                            containerClassName={'pagination'}
-                            activeClassName={'active'}
+                            containerClassName={"pagination"}
+                            activeClassName={"active"}
                         />
                     </div>
                 </Paper>

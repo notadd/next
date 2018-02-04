@@ -1,155 +1,155 @@
-import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
-import { Link } from 'react-router-dom';
-import Side from '../layouts/SideBar';
-import Home from './Home';
-import Configurations from './Configurations';
-import Debug from './Debug';
-import Extension from './Extension';
-import Login from './Login';
-import Mail from './Mail';
-import Menus from './Menus';
-import MenuEdit from './MenuEdit';
-import Seo from './Seo';
-import Upload from './Upload';
-import ModuleOpen from './ModuleOpen';
-import ModuleDomain from './ModuleDomain';
-import ModuleImport from './ModuleImport';
-import ModuleInstall from './ModuleInstall';
-import AddonOpen from './AddonOpen';
-import AddonImport from './AddonImport';
-import AddonInstall from './AddonInstall';
-import Article from './cms/Article';
-import ArticleEdit from './cms/ArticleEdit';
-import ArticleType from './cms/ArticleType';
-import ArticleTypeEdit from './cms/ArticleTypeEdit';
-import ArticleRecycle from './cms/ArticleRecycle';
-import Page from './cms/Page';
-import PageEdit from './cms/PageEdit';
-import PageType from './cms/PageType';
-import Message from './cms/Message';
-import { HashRouter } from 'react-router-dom';
-import Drawer from 'material-ui/Drawer';
-import Hidden from 'material-ui/Hidden';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import Setting from 'material-ui-icons/Settings';
-import MenuIcon from 'material-ui-icons/Menu';
-import FullScreen from 'material-ui-icons/Fullscreen';
-import Search from 'material-ui-icons/Search';
-import Tv from 'material-ui-icons/Tv';
-import IconButton from 'material-ui/IconButton';
-import Popover from 'material-ui/Popover';
-import Select from 'react-select';
-import createHashHistory from 'history/createHashHistory';
-import { withStyles } from 'material-ui/styles';
-import 'react-select/dist/react-select.css';
-import * as classNames from 'classnames';
+import * as React from "react";
+import { Redirect, Route, Switch } from "react-router";
+import { Link } from "react-router-dom";
+import Side from "../layouts/SideBar";
+import Home from "./Home";
+import Configurations from "./Configurations";
+import Debug from "./Debug";
+import Extension from "./Extension";
+import Login from "./Login";
+import Mail from "./Mail";
+import Menus from "./Menus";
+import MenuEdit from "./MenuEdit";
+import Seo from "./Seo";
+import Upload from "./Upload";
+import ModuleOpen from "./ModuleOpen";
+import ModuleDomain from "./ModuleDomain";
+import ModuleImport from "./ModuleImport";
+import ModuleInstall from "./ModuleInstall";
+import AddonOpen from "./AddonOpen";
+import AddonImport from "./AddonImport";
+import AddonInstall from "./AddonInstall";
+import Article from "./cms/Article";
+import ArticleEdit from "./cms/ArticleEdit";
+import ArticleType from "./cms/ArticleType";
+import ArticleTypeEdit from "./cms/ArticleTypeEdit";
+import ArticleRecycle from "./cms/ArticleRecycle";
+import Page from "./cms/Page";
+import PageEdit from "./cms/PageEdit";
+import PageType from "./cms/PageType";
+import Message from "./cms/Message";
+import { HashRouter } from "react-router-dom";
+import Drawer from "material-ui/Drawer";
+import Hidden from "material-ui/Hidden";
+import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavigation";
+import Setting from "material-ui-icons/Settings";
+import MenuIcon from "material-ui-icons/Menu";
+import FullScreen from "material-ui-icons/Fullscreen";
+import Search from "material-ui-icons/Search";
+import Tv from "material-ui-icons/Tv";
+import IconButton from "material-ui/IconButton";
+import Popover from "material-ui/Popover";
+import Select from "react-select";
+import createHashHistory from "history/createHashHistory";
+import { withStyles } from "material-ui/styles";
+import "react-select/dist/react-select.css";
+import * as classNames from "classnames";
 const drawerWidth = 260;
 const styles = (theme) => ({
     drawerPaper: {
-        height: 'calc(100vh - 70px)',
+        height: "calc(100vh - 70px)",
         width: drawerWidth,
-        position: 'relative',
-        boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
-        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        position: "relative",
+        boxShadow: "3px 0 6px 0 rgba(0, 0, 0, 0.05)",
+        transition: "all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
     },
     xsDrawerPaper: {
-        height: 'calc(100vh - 70px)',
+        height: "calc(100vh - 70px)",
         width: drawerWidth,
-        position: 'fixed',
+        position: "fixed",
         zIndex: 500,
         top: 70,
-        boxShadow: '3px 0 6px 0 rgba(0, 0, 0, 0.05)',
-        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        boxShadow: "3px 0 6px 0 rgba(0, 0, 0, 0.05)",
+        transition: "all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
     },
     drawerPaperClose: {
         width: 90,
-        overflowX: 'hidden',
-        position: 'relative',
-        transform: 'translateX(0) !important',
-        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        overflowX: "hidden",
+        position: "relative",
+        transform: "translateX(0) !important",
+        transition: "all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
     },
     xsDrawerPaperClose: {
         width: 0,
-        overflowX: 'hidden',
-        position: 'fixed',
+        overflowX: "hidden",
+        position: "fixed",
         zIndex: 500,
-        transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        transition: "all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
     },
     headerLeft: {
-        'align-items': 'center',
-        display: 'flex',
+        "align-items": "center",
+        display: "flex",
     },
     logo: {
-        marginLeft: '30px',
-        width: '88px',
+        marginLeft: "30px",
+        width: "88px",
     },
     root: {
-        background: '#3f51b5',
-        color: '#fff',
-        paddingLeft: '15px',
-        height: '70px',
-        'justify-content': 'flex-start',
+        background: "#3f51b5",
+        color: "#fff",
+        paddingLeft: "15px",
+        height: "70px",
+        "justify-content": "flex-start",
     },
     menuBtn: {
-        'align-self': 'stretch',
+        "align-self": "stretch",
         borderRadius: 0,
-        height: 'auto',
-        fontSize: '24px',
-        marginLeft: '60px',
-        '&:hover': {
-            background: '#3949a3',
+        height: "auto",
+        fontSize: "24px",
+        marginLeft: "60px",
+        "&:hover": {
+            background: "#3949a3",
         },
     },
     navBtn: {
-        flex: 'none',
-        padding: '0 3px',
-        width: 'auto',
-        fontSize: '14px',
-        '&:hover': {
-            background: '#3949a3',
+        flex: "none",
+        padding: "0 3px",
+        width: "auto",
+        fontSize: "14px",
+        "&:hover": {
+            background: "#3949a3",
         },
     },
     btnLabel: {
-        color: '#fff',
-        fontSize: '14px',
+        color: "#fff",
+        fontSize: "14px",
     },
     selectedLabel: {
-        color: '#ffffff',
+        color: "#ffffff",
     },
     selectRoot: {
-        background: '#3949a3',
+        background: "#3949a3",
     },
     navUser: {
-        'align-items': 'center',
-        display: 'flex',
-        float: 'right',
-        'justify-content': 'center',
+        "align-items": "center",
+        display: "flex",
+        float: "right",
+        "justify-content": "center",
     },
     iconBtn: {
-        fontSize: '18px',
-        width: '28px',
+        fontSize: "18px",
+        width: "28px",
     },
     textFieldRoot: {
         padding: 0,
     },
     textFieldInput: {
         fontSize: 12,
-        boxSizing: 'border-box',
-        padding: '0 30px 0 58px',
+        boxSizing: "border-box",
+        padding: "0 30px 0 58px",
         height: 70,
-        width: '100%'
+        width: "100%"
     },
     popPaper: {
-        position: 'fixed',
-        left: '0 !important',
-        top: '0 !important',
-        boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.1)',
+        position: "fixed",
+        left: "0 !important",
+        top: "0 !important",
+        boxShadow: "0px 2px 4px 0 rgba(0, 0, 0, 0.1)",
         borderRadius: 0,
-        width: '330px',
-        maxWidth: '100vw',
-        overflowX: 'visible',
-        overflowY: 'visible',
+        width: "330px",
+        maxWidth: "100vw",
+        overflowX: "visible",
+        overflowY: "visible",
     },
 });
 const stylesType = {};
@@ -161,50 +161,50 @@ class App extends React.Component {
             current: 1,
             navs: [
                 {
-                    name: '全局',
-                    path: '/all',
+                    name: "全局",
+                    path: "/all",
                 },
                 {
-                    name: 'CMS',
-                    path: '/cms',
+                    name: "CMS",
+                    path: "/cms",
                 },
                 {
-                    name: '商城',
-                    path: '/mall',
+                    name: "商城",
+                    path: "/mall",
                 },
                 {
-                    name: '用户中心',
-                    path: '/user',
+                    name: "用户中心",
+                    path: "/user",
                 },
                 {
-                    name: '微信',
-                    path: '/weChat',
+                    name: "微信",
+                    path: "/weChat",
                 },
                 {
-                    name: '论坛',
-                    path: '/bbs',
+                    name: "论坛",
+                    path: "/bbs",
                 }
             ],
             value: 0,
             user: {
-                name: '后台管理员',
+                name: "后台管理员",
             },
             fullScreen: false,
             openSearch: false,
             selectedOption: {
-                value: '',
-                url: '',
+                value: "",
+                url: "",
             },
             selectOptions: [
                 {
-                    value: '参数配置',
-                    label: '参数配置',
-                    url: '/configurations',
+                    value: "参数配置",
+                    label: "参数配置",
+                    url: "/configurations",
                 },
                 {
-                    value: 'SEO设置',
-                    label: 'SEO设置',
-                    url: '/seo',
+                    value: "SEO设置",
+                    label: "SEO设置",
+                    url: "/seo",
                 },
             ],
         };
@@ -227,42 +227,42 @@ class App extends React.Component {
                 if (el.webkitCancelFullScreen) {
                     cfs = el.webkitCancelFullScreen;
                 }
-                else if (el['mozCancelFullScreen']) {
-                    cfs = el['mozCancelFullScreen'];
+                else if (el["mozCancelFullScreen"]) {
+                    cfs = el["mozCancelFullScreen"];
                 }
-                else if (el['exitFullScreen']) {
-                    cfs = el['exitFullScreen'];
+                else if (el["exitFullScreen"]) {
+                    cfs = el["exitFullScreen"];
                 }
-                else if (el['cancelFullScreen']) {
-                    cfs = el['cancelFullScreen'];
+                else if (el["cancelFullScreen"]) {
+                    cfs = el["cancelFullScreen"];
                 }
                 let wscript;
-                if (typeof cfs !== 'undefined' && cfs) {
+                if (typeof cfs !== "undefined" && cfs) {
                     cfs.call(el);
                     return;
                 }
-                if (typeof window['ActiveXObject'] !== 'undefined') {
-                    wscript = new window['ActiveXObject']('WScript.Shell');
+                if (typeof window["ActiveXObject"] !== "undefined") {
+                    wscript = new window["ActiveXObject"]("WScript.Shell");
                     if (wscript !== null) {
-                        wscript.SendKeys('{F11}');
+                        wscript.SendKeys("{F11}");
                     }
                 }
             }
             else {
                 const el = document.documentElement;
                 const rfs = el.webkitRequestFullScreen
-                    || el['mozRequestFullScreen']
-                    || el['msRequestFullScreen']
-                    || el['requestFullScreen'];
+                    || el["mozRequestFullScreen"]
+                    || el["msRequestFullScreen"]
+                    || el["requestFullScreen"];
                 let wscript;
-                if (typeof rfs !== 'undefined' && rfs) {
+                if (typeof rfs !== "undefined" && rfs) {
                     rfs.call(el);
                     return;
                 }
-                if (typeof window['ActiveXObject'] !== 'undefined') {
-                    wscript = new window['ActiveXObject']('WScript.Shell');
+                if (typeof window["ActiveXObject"] !== "undefined") {
+                    wscript = new window["ActiveXObject"]("WScript.Shell");
                     if (wscript) {
-                        wscript.SendKeys('{F11}');
+                        wscript.SendKeys("{F11}");
                     }
                 }
             }
@@ -274,7 +274,7 @@ class App extends React.Component {
         };
         this.handleChangeSelect = (selectedOption) => {
             this.setState({ selectedOption });
-            createHashHistory().push(selectedOption['url']);
+            createHashHistory().push(selectedOption["url"]);
         };
     }
     render() {
@@ -289,19 +289,19 @@ class App extends React.Component {
                             React.createElement("div", { className: "header" },
                                 React.createElement("div", { className: this.props.classes.headerLeft },
                                     React.createElement(Link, { to: "/home" },
-                                        React.createElement("img", { className: this.props.classes.logo, src: require('../assets/images/notadd_logo.png') })),
-                                    React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", className: this.props.classes.menuBtn, color: "contrast", onClick: this.toggleDrawer },
+                                        React.createElement("img", { className: this.props.classes.logo, src: require("../assets/images/notadd_logo.png") })),
+                                    React.createElement(IconButton, { "aria-owns": open ? "menu-appbar" : null, "aria-haspopup": "true", className: this.props.classes.menuBtn, color: "contrast", onClick: this.toggleDrawer },
                                         React.createElement(MenuIcon, null)),
-                                    React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", style: { marginLeft: '0' }, className: this.props.classes.menuBtn, onClick: this.handleFullScreen, color: "contrast" },
+                                    React.createElement(IconButton, { "aria-owns": open ? "menu-appbar" : null, "aria-haspopup": "true", style: { marginLeft: "0" }, className: this.props.classes.menuBtn, onClick: this.handleFullScreen, color: "contrast" },
                                         React.createElement(FullScreen, null)),
-                                    React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", style: { marginLeft: '0' }, className: this.props.classes.menuBtn, onClick: this.handleOpenSearch, color: "contrast" },
+                                    React.createElement(IconButton, { "aria-owns": open ? "menu-appbar" : null, "aria-haspopup": "true", style: { marginLeft: "0" }, className: this.props.classes.menuBtn, onClick: this.handleOpenSearch, color: "contrast" },
                                         React.createElement(Search, null)),
                                     React.createElement(Popover, { open: openSearch, anchorPosition: { top: 0, left: 0 }, anchorOrigin: {
-                                            vertical: 'top',
-                                            horizontal: 'right',
+                                            vertical: "top",
+                                            horizontal: "right",
                                         }, transformOrigin: {
-                                            vertical: 'top',
-                                            horizontal: 'right',
+                                            vertical: "top",
+                                            horizontal: "right",
                                         }, classes: {
                                             paper: classes.popPaper
                                         }, onClose: this.handleClose },
@@ -316,9 +316,9 @@ class App extends React.Component {
                                             }, key: index, label: item.name }));
                                     }))),
                                 React.createElement("div", { className: this.props.classes.navUser },
-                                    React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", className: this.props.classes.iconBtn, style: { marginRight: '30px' }, color: "contrast" },
+                                    React.createElement(IconButton, { "aria-owns": open ? "menu-appbar" : null, "aria-haspopup": "true", className: this.props.classes.iconBtn, style: { marginRight: "30px" }, color: "contrast" },
                                         React.createElement(Tv, null)),
-                                    React.createElement(IconButton, { "aria-owns": open ? 'menu-appbar' : null, "aria-haspopup": "true", className: this.props.classes.iconBtn, style: { marginRight: '10px' }, color: "contrast" },
+                                    React.createElement(IconButton, { "aria-owns": open ? "menu-appbar" : null, "aria-haspopup": "true", className: this.props.classes.iconBtn, style: { marginRight: "10px" }, color: "contrast" },
                                         React.createElement(Setting, null)))),
                             React.createElement("div", { className: "view" },
                                 React.createElement(Hidden, { smUp: true, implementation: "css" },
@@ -335,7 +335,7 @@ class App extends React.Component {
                                             paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                                         }, onClose: this.toggleDrawer, open: this.state.open },
                                         React.createElement(Side, { open: this.state.open }))),
-                                React.createElement("div", { className: classNames('content', this.state.open && 'move-content') },
+                                React.createElement("div", { className: classNames("content", this.state.open && "move-content") },
                                     React.createElement(Switch, null,
                                         React.createElement(Route, { exact: true, path: "/configurations", component: Configurations }),
                                         React.createElement(Route, { exact: true, path: "/home", component: Home }),

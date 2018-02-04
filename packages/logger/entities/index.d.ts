@@ -1,1 +1,1 @@
-export { Log } from './log.entity';
+export { Log } from "./log.entity";

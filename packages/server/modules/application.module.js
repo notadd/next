@@ -14,6 +14,7 @@ const backend_1 = require("@notadd/backend");
 const configuration_1 = require("@notadd/configuration");
 const apollo_server_express_1 = require("apollo-server-express");
 const graphql_1 = require("@nestjs/graphql");
+const injection_1 = require("@notadd/injection");
 const logger_1 = require("@notadd/logger");
 const common_1 = require("@nestjs/common");
 const setting_1 = require("@notadd/setting");
@@ -27,13 +28,13 @@ let ApplicationModule = class ApplicationModule {
     configure(consumer) {
         const schema = this.createSchema();
         consumer
-            .apply(apollo_server_express_1.graphiqlExpress({ endpointURL: '/graphql' }))
-            .forRoutes({ path: '/graphiql', method: common_1.RequestMethod.GET })
+            .apply(apollo_server_express_1.graphiqlExpress({ endpointURL: "/graphql" }))
+            .forRoutes({ path: "/graphiql", method: common_1.RequestMethod.GET })
             .apply(apollo_server_express_1.graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes({ path: '/graphql', method: common_1.RequestMethod.ALL });
+            .forRoutes({ path: "/graphql", method: common_1.RequestMethod.ALL });
     }
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.types.graphql');
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths("./**/*.types.graphql");
         const schema = this.graphQLFactory.createSchema({ typeDefs });
         return this.graphQLFactory.createSchema({ typeDefs });
     }
@@ -47,6 +48,7 @@ ApplicationModule = __decorate([
             configuration_1.ConfigurationModule,
             logger_1.LoggerModule,
             setting_1.SettingModule,
+            injection_1.InjectionModule,
             backend_1.BackendModule,
             user_1.UserModule,
             authentication_1.AuthenticationModule,

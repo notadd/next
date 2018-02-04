@@ -1,1 +1,1 @@
-export { ConfigurationModule } from './configuration.module';
+export { ConfigurationModule } from "./configuration.module";

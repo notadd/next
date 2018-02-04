@@ -1,46 +1,46 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormLabel, FormControlLabel, FormControl } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
-import Radio from 'material-ui/Radio';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormLabel, FormControlLabel, FormControl } from "material-ui/Form";
+import Input, { InputLabel, InputAdornment } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
+import Radio from "material-ui/Radio";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     labelClass: {
-        'color': '#b8b8b8',
+        "color": "#b8b8b8",
     },
     menu: {
-        'width': '200px',
+        "width": "200px",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '12px',
+        "font-size": "12px",
     },
     subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+        "font-size": "12px",
+        "color": "#808080",
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit'
+        "height": "inherit"
     }
 };
 type State = {
@@ -59,12 +59,12 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
         appendageSize: 1024,
         imgSize: 1024,
         videoSize: 1024,
-        extensionNames: 'jpg,jpeg,png',
-        fileNames: 'txt',
-        videoNames: '.flv,.swf,.mkv,.avi,.rm,.rmvb,.mpeg,.mpg,.ogg,.ogv,.mov,.wmv,.mp4,.\n' +
-        'webm,.mp3,.wav,.mid,.html,.php',
-        managementDocumentsNames: '',
-        managementImagesNames: '',
+        extensionNames: "jpg,jpeg,png",
+        fileNames: "txt",
+        videoNames: ".flv,.swf,.mkv,.avi,.rm,.rmvb,.mpeg,.mpg,.ogg,.ogv,.mov,.wmv,.mp4,.\n" +
+        "webm,.mp3,.wav,.mid,.html,.php",
+        managementDocumentsNames: "",
+        managementImagesNames: "",
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -99,14 +99,14 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('appendageSize')}
+                                        onChange={this.handleChange("appendageSize")}
                                         value={this.state.appendageSize}
                                         endAdornment={<InputAdornment position="end">KB</InputAdornment>}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -118,7 +118,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('imgSize')}
+                                        onChange={this.handleChange("imgSize")}
                                         value={this.state.imgSize}
                                     />
                                 </FormControl>
@@ -134,13 +134,13 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('videoSize')}
+                                        onChange={this.handleChange("videoSize")}
                                         value={this.state.videoSize}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -152,7 +152,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('extensionNames')}
+                                        onChange={this.handleChange("extensionNames")}
                                         value={this.state.extensionNames}
                                     />
                                 </FormControl>
@@ -168,13 +168,13 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('fileNames')}
+                                        onChange={this.handleChange("fileNames")}
                                         value={this.state.fileNames}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -186,7 +186,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('videoNames')}
+                                        onChange={this.handleChange("videoNames")}
                                         value={this.state.videoNames}
                                     />
                                 </FormControl>
@@ -202,13 +202,13 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('managementDocumentsNames')}
+                                        onChange={this.handleChange("managementDocumentsNames")}
                                         value={this.state.managementDocumentsNames}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: '0px'}}>
+                        <Grid container spacing={40} style={{marginTop: "0px"}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth required>
                                     <InputLabel
@@ -220,7 +220,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange('managementImagesNames')}
+                                        onChange={this.handleChange("managementImagesNames")}
                                         value={this.state.managementImagesNames}
                                     />
                                 </FormControl>

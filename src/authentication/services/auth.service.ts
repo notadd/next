@@ -1,5 +1,5 @@
-import * as jwt from 'jsonwebtoken';
-import { Component } from '@nestjs/common';
+import * as jwt from "jsonwebtoken";
+import { Component } from "@nestjs/common";
 import { createHmac } from "crypto";
 import { UserService } from "@notadd/user/services/user.service";
 
@@ -10,15 +10,15 @@ export class AuthService {
 
     async createToken(username: string, password: string) {
         const user = await this.userService.getUserByUsername(username);
-        if (typeof user === 'undefined') {
-            throw new Error('User Do not exists!');
+        if (typeof user === "undefined") {
+            throw new Error("User Do not exists!");
         }
-        if (user.password !== createHmac('sha256', password).digest('hex')) {
-            throw new Error('Password is incorrect!');
+        if (user.password !== createHmac("sha256", password).digest("hex")) {
+            throw new Error("Password is incorrect!");
         }
 
         const expiresIn = 60 * 60;
-        const secretOrKey = 'secret';
+        const secretOrKey = "secret";
         const token = jwt.sign(user, secretOrKey, { expiresIn });
 
         return {

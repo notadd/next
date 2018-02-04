@@ -11,7 +11,7 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 let UserSubscriber = class UserSubscriber {
     beforeInsert(event) {
-        event.entity.password = crypto_1.createHmac('sha256', event.entity.password).digest('hex');
+        event.entity.password = crypto_1.createHmac("sha256", event.entity.password).digest("hex");
     }
     listenTo() {
         return user_entity_1.User;

@@ -1,55 +1,55 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
-import Switch from 'material-ui/Switch';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import { FormControlLabel, FormControl } from "material-ui/Form";
+import Switch from "material-ui/Switch";
+import Input, { InputLabel } from "material-ui/Input";
+import Grid from "material-ui/Grid";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     labelClass: {
-        'color': '#b8b8b8',
+        "color": "#b8b8b8",
     },
     menu: {
-        'width': '200px',
+        "width": "200px",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     subLabel: {
-        'font-size': '12px',
-        'color': '#808080',
+        "font-size": "12px",
+        "color": "#808080",
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
     helpText: {
-        color: '#808080',
-        fontSize: '12px',
+        color: "#808080",
+        fontSize: "12px",
         marginTop: 0,
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
 };
@@ -67,14 +67,14 @@ type State = {
 
 class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        webName: 'NotAdd',
-        domainName: '',
+        webName: "NotAdd",
+        domainName: "",
         siteOpen: true,
         multiDomainOpen: false,
-        keepRecord: '',
-        companyName: '',
-        copyright: '',
-        statisticalCode: '',
+        keepRecord: "",
+        companyName: "",
+        copyright: "",
+        statisticalCode: "",
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -106,7 +106,7 @@ class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                        onChange={this.handleChange('webName')}
+                                        onChange={this.handleChange("webName")}
                                         value={this.state.webName}
                                     />
                                 </FormControl>

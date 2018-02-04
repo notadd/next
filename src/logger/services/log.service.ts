@@ -29,7 +29,7 @@ export class LogService {
     async getLogById(id: Number): Promise<Log | undefined> {
         return await this.repository
             .createQueryBuilder()
-            .where('id = :id', {
+            .where("id = :id", {
                 id: id,
             })
             .getOne();

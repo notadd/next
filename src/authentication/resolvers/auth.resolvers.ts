@@ -4,7 +4,7 @@ import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "../guards/user.guard";
 
-@Resolver('Auth')
+@Resolver("Auth")
 export class AuthResolvers {
     constructor(private readonly service: AuthService) {
     }

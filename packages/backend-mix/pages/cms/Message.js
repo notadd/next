@@ -1,16 +1,16 @@
-import * as React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
-import ReactPaginate from 'react-paginate';
-import Paper from 'material-ui/Paper';
-import ExpandMore from 'material-ui-icons/ExpandMore';
-import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
-import Collapse from 'material-ui/transitions/Collapse';
+import * as React from "react";
+import withStyles from "material-ui/styles/withStyles";
+import ReactPaginate from "react-paginate";
+import Paper from "material-ui/Paper";
+import ExpandMore from "material-ui-icons/ExpandMore";
+import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
+import Collapse from "material-ui/transitions/Collapse";
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     menuBtn: {},
 };
@@ -22,53 +22,53 @@ class Message extends React.Component {
             rowsPerPage: 4,
             currentPage: 0,
             open: false,
-            modalId: '',
-            modalName: '',
+            modalId: "",
+            modalName: "",
             list: [
                 {
                     id: 1,
                     collapse: false,
-                    name: '王先生1',
-                    phone: '13999554621',
-                    email: 'ibenchu@qq.com',
-                    time: '2017-12-01 13:34:35',
-                    msg: '你好，我对贵公司的产品很有兴趣',
+                    name: "王先生1",
+                    phone: "13999554621",
+                    email: "ibenchu@qq.com",
+                    time: "2017-12-01 13:34:35",
+                    msg: "你好，我对贵公司的产品很有兴趣",
                 },
                 {
                     id: 2,
                     collapse: false,
-                    name: '王先生2',
-                    phone: '13999554621',
-                    email: 'ibenchu@qq.com',
-                    time: '2017-12-01 13:34:35',
-                    msg: '你好，我对贵公司的产品很有兴趣',
+                    name: "王先生2",
+                    phone: "13999554621",
+                    email: "ibenchu@qq.com",
+                    time: "2017-12-01 13:34:35",
+                    msg: "你好，我对贵公司的产品很有兴趣",
                 },
                 {
                     id: 3,
                     collapse: false,
-                    name: '王先生3',
-                    phone: '13999554621',
-                    email: 'ibenchu@qq.com',
-                    time: '2017-12-01 13:34:35',
-                    msg: '你好，我对贵公司的产品很有兴趣',
+                    name: "王先生3",
+                    phone: "13999554621",
+                    email: "ibenchu@qq.com",
+                    time: "2017-12-01 13:34:35",
+                    msg: "你好，我对贵公司的产品很有兴趣",
                 },
                 {
                     id: 4,
                     collapse: false,
-                    name: '王先生4',
-                    phone: '13999554621',
-                    email: 'ibenchu@qq.com',
-                    time: '2017-12-01 13:34:35',
-                    msg: '你好，我对贵公司的产品很有兴趣',
+                    name: "王先生4",
+                    phone: "13999554621",
+                    email: "ibenchu@qq.com",
+                    time: "2017-12-01 13:34:35",
+                    msg: "你好，我对贵公司的产品很有兴趣",
                 },
                 {
                     id: 5,
                     collapse: false,
-                    name: '王先生5',
-                    phone: '13999554621',
-                    email: 'ibenchu@qq.com',
-                    time: '2017-12-01 13:34:35',
-                    msg: '你好，我对贵公司的产品很有兴趣',
+                    name: "王先生5",
+                    phone: "13999554621",
+                    email: "ibenchu@qq.com",
+                    time: "2017-12-01 13:34:35",
+                    msg: "你好，我对贵公司的产品很有兴趣",
                 },
             ],
         };
@@ -97,15 +97,15 @@ class Message extends React.Component {
                 React.createElement("ul", { className: "table-body" }, list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
                     .map((n, index) => {
                     return (React.createElement("li", { key: n.id },
-                        React.createElement("div", { className: index % 2 === 0 ? this.props.classes.evenRow : '' },
+                        React.createElement("div", { className: index % 2 === 0 ? this.props.classes.evenRow : "" },
                             React.createElement("div", { onClick: () => this.handleClick(n) }, n.collapse ?
                                 React.createElement(ExpandMore, { style: {
-                                        color: '#808080',
+                                        color: "#808080",
                                         width: 20,
                                         height: 20
                                     } }) :
                                 React.createElement(KeyboardArrowRight, { style: {
-                                        color: '#808080',
+                                        color: "#808080",
                                         width: 20,
                                         height: 20
                                     } })),
@@ -118,7 +118,7 @@ class Message extends React.Component {
                             n.msg)));
                 })),
                 React.createElement("div", { className: "table-pagination" },
-                    React.createElement(ReactPaginate, { previousLabel: '<', nextLabel: '>', breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: 'break-me', pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: 'pagination', activeClassName: 'active' })))));
+                    React.createElement(ReactPaginate, { previousLabel: "<", nextLabel: ">", breakLabel: React.createElement("a", { href: "javascript:;" }, "..."), breakClassName: "break-me", pageCount: list.length / rowsPerPage, marginPagesDisplayed: 2, pageRangeDisplayed: 2, onPageChange: this.handlePageClick, containerClassName: "pagination", activeClassName: "active" })))));
     }
 }
 export default withStyles(styles)(Message);

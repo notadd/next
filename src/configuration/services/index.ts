@@ -1,1 +1,1 @@
-export { ConfigurationService } from './configuration.service';
+export { ConfigurationService } from "./configuration.service";

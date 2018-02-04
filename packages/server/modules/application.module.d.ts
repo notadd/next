@@ -1,5 +1,5 @@
-import { GraphQLFactory } from '@nestjs/graphql';
-import { MiddlewaresConsumer } from '@nestjs/common';
+import { GraphQLFactory } from "@nestjs/graphql";
+import { MiddlewaresConsumer } from "@nestjs/common";
 export declare class ApplicationModule {
     private readonly graphQLFactory;
     constructor(graphQLFactory: GraphQLFactory);

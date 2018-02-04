@@ -57,7 +57,7 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .delete()
-            .where('email = :email', {
+            .where("email = :email", {
                 email: email,
             })
             .execute();
@@ -72,7 +72,7 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .delete()
-            .where('id = :id', {
+            .where("id = :id", {
                 id: id,
             })
             .execute();
@@ -87,7 +87,7 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .delete()
-            .where('username = :username', {
+            .where("username = :username", {
                 username: username,
             })
             .execute();
@@ -108,7 +108,7 @@ export class UserService {
     async getUserByEmail(email: string): Promise<User | undefined> {
         return await this.repository
             .createQueryBuilder()
-            .where('email = :email', {
+            .where("email = :email", {
                 email: email,
             }).getOne();
     }
@@ -130,8 +130,8 @@ export class UserService {
     async getUserByUsername(username: string): Promise<User | undefined> {
         return await this.repository
             .createQueryBuilder()
-            .where('username = :username')
-            .setParameter('username', username)
+            .where("username = :username")
+            .setParameter("username", username)
             .getOne();
     }
 
@@ -162,7 +162,7 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .update(obj)
-            .where('email = :email', {
+            .where("email = :email", {
                 email: email,
             })
             .execute();
@@ -178,8 +178,8 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .update(obj)
-            .where('id = :id')
-            .setParameter('id', id)
+            .where("id = :id")
+            .setParameter("id", id)
             .execute();
     }
 
@@ -193,8 +193,8 @@ export class UserService {
         return await this.repository
             .createQueryBuilder()
             .update(obj)
-            .where('username = :username')
-            .setParameter('username', username)
+            .where("username = :username")
+            .setParameter("username", username)
             .execute();
     }
 }

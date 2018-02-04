@@ -1,6 +1,6 @@
 {
     "name": "@notadd/user",
-    "version": "2.1.13",
+    "version": "2.1.14",
     "description": "Notadd User Package.",
     "main": "main.js",
     "scripts": {

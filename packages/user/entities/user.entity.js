@@ -42,6 +42,6 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "updatedAt", void 0);
 User = __decorate([
-    typeorm_1.Entity('users')
+    typeorm_1.Entity("users")
 ], User);
 exports.User = User;

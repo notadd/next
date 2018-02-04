@@ -1,45 +1,45 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Switch from 'material-ui/Switch';
-import Button from 'material-ui/Button';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
+import { FormControlLabel, FormControl } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import Switch from "material-ui/Switch";
+import Button from "material-ui/Button";
 
 const styles = {
     root: {
-        'padding': '40px 30px',
-        'margin-bottom': '60px',
+        "padding": "40px 30px",
+        "margin-bottom": "60px",
     },
     container: {
-        display: 'flex',
-        'flex-wrap': 'wrap',
-        'margin': '0',
+        display: "flex",
+        "flex-wrap": "wrap",
+        "margin": "0",
     },
     formLabel: {
-        'flex-direction': 'row-reverse',
-        'margin': '0',
-        'font-size': '16px !important',
-        'color': '#333',
-        'width': '100%',
+        "flex-direction": "row-reverse",
+        "margin": "0",
+        "font-size": "16px !important",
+        "color": "#333",
+        "width": "100%",
     },
     formLabelFont: {
-        'font-size': '16px',
+        "font-size": "16px",
     },
     formControlMargin: {
-        'margin-bottom': '32px',
+        "margin-bottom": "32px",
     },
     underline: {
-        '&:before': {
-            background: '#dfdfdf',
+        "&:before": {
+            background: "#dfdfdf",
         }
     },
     switchHeight: {
-        'height': '20px',
+        "height": "20px",
     },
     switchDefault: {
-        'height': 'inherit',
+        "height": "inherit",
     },
 };
 type State = {
@@ -51,9 +51,9 @@ type State = {
 
 class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
-        name: 'NotAdd',
-        otherName: '新闻资讯',
-        type: '新闻资讯',
+        name: "NotAdd",
+        otherName: "新闻资讯",
+        type: "新闻资讯",
         isOpen: false,
     };
     handleChange = (name: any) => (event: any) => {
@@ -90,7 +90,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('name')}
+                                        onChange={this.handleChange("name")}
                                         value={this.state.name}
                                     />
                                 </FormControl>
@@ -116,7 +116,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('otherName')}
+                                        onChange={this.handleChange("otherName")}
                                         value={this.state.otherName}
                                     />
                                 </FormControl>
@@ -136,7 +136,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('type')}
+                                        onChange={this.handleChange("type")}
                                         value={this.state.type}
                                     />
                                 </FormControl>

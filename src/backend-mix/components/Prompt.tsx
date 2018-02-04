@@ -1,6 +1,6 @@
-import * as React from 'react';
-import Popover from 'material-ui/Popover';
-import Typography from 'material-ui/Typography';
+import * as React from "react";
+import Popover from "material-ui/Popover";
+import Typography from "material-ui/Typography";
 
 interface Props extends  React.Component{
     open?: boolean,
@@ -17,12 +17,12 @@ class Prompt extends React.Component<Props, {}> {
                 anchorEl="anchorPosition"
                 anchorPosition={{ top: 150, left: left }}
                 anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                 }}
                 transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                 }}
             >
                 <Typography>{ message }</Typography>

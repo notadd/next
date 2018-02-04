@@ -51,7 +51,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LogResolvers.prototype, "getLogById", null);
 LogResolvers = __decorate([
-    graphql_1.Resolver('Log'),
+    graphql_1.Resolver("Log"),
     __metadata("design:paramtypes", [log_service_1.LogService])
 ], LogResolvers);
 exports.LogResolvers = LogResolvers;

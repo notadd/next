@@ -185,7 +185,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "updateUserByUsername", null);
 UserResolver = __decorate([
-    graphql_1.Resolver('User'),
+    graphql_1.Resolver("User"),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserResolver);
 exports.UserResolver = UserResolver;

@@ -1,44 +1,44 @@
-import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ClearIcon from 'material-ui-icons/Clear';
-import Switch from 'material-ui/Switch';
+import * as React from "react";
+import withStyles, { WithStyles } from "material-ui/styles/withStyles";
+import Paper from "material-ui/Paper";
+import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "material-ui-icons/Delete";
+import ClearIcon from "material-ui-icons/Clear";
+import Switch from "material-ui/Switch";
 import Table, {
     TableBody,
     TableCell,
     TableHead,
     TableRow,
-} from 'material-ui/Table';
+} from "material-ui/Table";
 import Dialog, {
     DialogActions,
     DialogContent,
     DialogTitle,
-} from 'material-ui/Dialog';
+} from "material-ui/Dialog";
 
 const styles = {
     evenRow: {
-        'background': '#f7f7f7',
+        "background": "#f7f7f7",
     },
     menuBtn: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#ffffff',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
+        "width": "32px",
+        "height": "32px",
+        "border-radius": "50%",
+        "background-color": "#ffffff",
+        "box-shadow": "0px 2px 4px 0 rgba(0, 0, 0, 0.3)",
     },
     root: {
-        'padding': '40px 30px',
+        "padding": "40px 30px",
     },
     table: {
-        'border-top': '1px solid rgba(235, 235, 235, 1)',
-        'border-collapse': 'inherit',
+        "border-top": "1px solid rgba(235, 235, 235, 1)",
+        "border-collapse": "inherit",
     },
     tableCell: {
-        'text-align': 'center',
-        'padding': '0',
+        "text-align": "center",
+        "padding": "0",
     },
 };
 type State = {
@@ -51,18 +51,18 @@ function createData(name: any, author: any, descri: any, status: boolean) {
 }
 
 const list = [
-    createData('用户中心', 'Mark', '142513233', true),
-    createData('商城', 'eref', '142513233', false),
-    createData('商家', 'eref', '142513233', false),
-    createData('CMS', 'eref', '142513233', false),
-    createData('Notadd2', 'eref', '142513233', false),
+    createData("用户中心", "Mark", "142513233", true),
+    createData("商城", "eref", "142513233", false),
+    createData("商家", "eref", "142513233", false),
+    createData("CMS", "eref", "142513233", false),
+    createData("Notadd2", "eref", "142513233", false),
 ];
 
 class Extension extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         open: false,
-        modalId: '',
-        modalName: '',
+        modalId: "",
+        modalName: "",
     };
     handleChange = (pro: any) => (event: any, checked: any) => {
         if (checked) {
@@ -107,7 +107,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                                 return (
                                     <TableRow
                                         hover
-                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
+                                        className={index % 2 === 0 ? this.props.classes.evenRow : ""}
                                         key={n.id}
                                     >
                                         <TableCell className={this.props.classes.tableCell} numeric>

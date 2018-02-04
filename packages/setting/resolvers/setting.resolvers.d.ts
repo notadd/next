@@ -9,9 +9,9 @@ export declare class SettingResolvers {
     }): Promise<Setting | undefined>;
     removeSetting(obj: any, args: {
         key: string;
-    }): Promise<Boolean>;
+    }): Promise<Setting | undefined>;
     setSetting(obj: any, args: {
         key: string;
         value: string;
-    }): Promise<Boolean>;
+    }): Promise<Setting>;
 }

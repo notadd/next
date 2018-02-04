@@ -1,19 +1,21 @@
 {
     "compilerOptions": {
         "allowJs": false,
-        "declaration": false,
+        "baseUrl": "./../../",
+        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",
         "noImplicitAny": false,
         "noLib": false,
         "noUnusedLocals": false,
-        "removeComments": false,
+        "removeComments": true,
         "strict": true,
         "target": "ES2015"
     },
     "include": [
-        "src/**/*.ts"
+        "*.ts",
+        "**/*.ts"
     ],
     "exclude": [
         "./**/*.spec.ts"

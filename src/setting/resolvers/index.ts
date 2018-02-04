@@ -1,1 +1,1 @@
-export { SettingResolvers } from './setting.resolvers';
+export { SettingResolvers } from "./setting.resolvers";
