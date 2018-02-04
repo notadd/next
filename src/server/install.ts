@@ -1,5 +1,5 @@
 import * as clc from "cli-color";
-import { exec } from 'child_process';
+import { execSync } from 'child_process';
 import { prompt } from "inquirer";
 
 async function install() {
@@ -32,26 +32,20 @@ async function install() {
         ],
         default: 0,
     });
-    await addPackageForDatabase(result.engine);
+    addPackageForDatabase(result.engine);
 }
 
-async function addPackageForDatabase(engine: string) {
-    console.log(clc.blue(`Install package for database engine ${engine}...`));
-    return new Promise<void>((resolve, reject) => {
-        const child = exec(`yarn add ${engine} -W`, (error: Error, stdout, stderr) => {
-            if (error !== undefined && error !== null) {
-                reject(error);
-            } else {
-                console.log('sdfsfsf');
-                resolve({ stdout, stderr });
-            }
-        });
+function addPackageForDatabase(engine: string) {
 
-        const killChild = () => child.kill();
-        process.setMaxListeners(20);
-        process.on('exit', killChild);
-        child.on('exit', () => process.removeListener('exit', killChild));
+    console.log(clc.blue(`Install package for database engine ${engine}...`));
+
+    execSync(`yarn add ${engine} -W`, {
+        cwd: process.cwd(),
+        env: process.env,
+        stdio: ["ignore", process.stdout, process.stderr],
     });
+
+    console.log(clc.blue(`Installed package ${engine}`));
 }
 
 install();

@@ -42,27 +42,16 @@ function install() {
             ],
             default: 0,
         });
-        yield addPackageForDatabase(result.engine);
+        addPackageForDatabase(result.engine);
     });
 }
 function addPackageForDatabase(engine) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log(clc.blue(`Install package for database engine ${engine}...`));
-        return new Promise((resolve, reject) => {
-            const child = child_process_1.exec(`yarn add ${engine} -W`, (error, stdout, stderr) => {
-                if (error !== undefined && error !== null) {
-                    reject(error);
-                }
-                else {
-                    console.log('sdfsfsf');
-                    resolve({ stdout, stderr });
-                }
-            });
-            const killChild = () => child.kill();
-            process.setMaxListeners(20);
-            process.on('exit', killChild);
-            child.on('exit', () => process.removeListener('exit', killChild));
-        });
+    console.log(clc.blue(`Install package for database engine ${engine}...`));
+    child_process_1.execSync(`yarn add ${engine} -W`, {
+        cwd: process.cwd(),
+        env: process.env,
+        stdio: ["ignore", process.stdout, process.stderr],
     });
+    console.log(clc.blue(`Installed package ${engine}`));
 }
 install();
