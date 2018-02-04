@@ -55,10 +55,10 @@ let SettingService = class SettingService {
                 throw new Error(`Setting dot not exists with key ${key}`);
             }
             else {
-                this.repository.delete({
+                yield this.repository.delete({
                     key: setting.key,
                 });
-                this.initialize();
+                yield this.initialize();
             }
             return setting;
         });
@@ -75,8 +75,8 @@ let SettingService = class SettingService {
             else {
                 setting.value = value;
             }
-            this.repository.save(setting);
-            this.initialize();
+            yield this.repository.save(setting);
+            yield this.initialize();
             return setting;
         });
     }

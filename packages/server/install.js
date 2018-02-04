@@ -72,7 +72,7 @@ function install() {
                 name: "databasePassword",
             },
         ]);
-        fs_1.writeFile(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
+        fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
             default: {
                 type: result.engine,
                 host: result.databaseHost,

@@ -1,6 +1,6 @@
 import * as clc from "cli-color";
 import { join } from "path";
-import { writeFile } from "fs";
+import { writeFileSync } from "fs";
 import { safeDump } from "js-yaml";
 import { execSync } from 'child_process';
 import { prompt } from "inquirer";
@@ -15,6 +15,7 @@ async function install() {
 
     `);
     console.log(clc.blue("Please answer the following questions carefully:"));
+
     const result = await prompt([
         {
             type: "list",
@@ -73,7 +74,7 @@ async function install() {
         // },
     ]);
 
-    writeFile(join(process.cwd(), "ormconfig.yml"), safeDump({
+    writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
         default: {
             type: result.engine,
             host: result.databaseHost,
