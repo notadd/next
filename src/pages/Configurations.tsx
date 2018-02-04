@@ -163,36 +163,36 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
             axios.post('http://localhost:3000/graphql?', {
                 query: `
                 mutation {
-                    webName: setSetting(key: "webName", value: "${this.state.webName}") {
+                    webName: setSetting(key: "global.webName", value: "${this.state.webName}") {
                     key,
                     value,
                     },
-                    domainName: setSetting(key: "domainName", value: "${this.state.domainName}") {
+                    domainName: setSetting(key: "global.domainName", value: "${this.state.domainName}") {
                     key,
                     value,
                     },  
-                    siteOpen: setSetting(key: "siteOpen", value: "${this.state.siteOpen ? 1 : 0}") {
+                    siteOpen: setSetting(key: "global.siteOpen", value: "${this.state.siteOpen ? 1 : 0}") {
                     key,
                     value,
                     },  
-                    multiDomainOpen: setSetting(key: "multiDomainOpen", value: "${this.state.multiDomainOpen ? 1 : 0}")
+                    multiDomainOpen: setSetting(key: "global.multiDomainOpen", value: "${this.state.multiDomainOpen ? 1 : 0}")
                      {
                     key,
                     value,
                     },  
-                    keepRecord: setSetting(key: "keepRecord", value: "${this.state.keepRecord}") {
+                    keepRecord: setSetting(key: "global.keepRecord", value: "${this.state.keepRecord}") {
                     key,
                     value,
                     },  
-                    companyName: setSetting(key: "companyName", value: "${this.state.companyName}") {
+                    companyName: setSetting(key: "global.companyName", value: "${this.state.companyName}") {
                     key,
                     value,
                     },  
-                    copyright: setSetting(key: "copyright", value: "${this.state.copyright}") {
+                    copyright: setSetting(key: "global.copyright", value: "${this.state.copyright}") {
                     key,
                     value,
                     },  
-                    statisticalCode: setSetting(key: "statisticalCode", value: "${this.state.statisticalCode}") {
+                    statisticalCode: setSetting(key: "global.statisticalCode", value: "${this.state.statisticalCode}") {
                     key,
                     value,
                     },
