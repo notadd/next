@@ -5,6 +5,7 @@ import Switch from 'material-ui/Switch';
 import Input, { InputLabel } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import axios from 'axios';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
@@ -66,16 +67,74 @@ type State = {
 };
 
 class Configurations extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        webName: 'NotAdd',
-        domainName: '',
-        siteOpen: true,
-        multiDomainOpen: false,
-        keepRecord: '',
-        companyName: '',
-        copyright: '',
-        statisticalCode: '',
-    };
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            webName: 'NotAdd',
+            domainName: '',
+            siteOpen: true,
+            multiDomainOpen: false,
+            keepRecord: '',
+            companyName: '',
+            copyright: '',
+            statisticalCode: '',
+        };
+    }
+    componentDidMount() {
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    webName: getSettingByKey(key: "global.webName") {
+                    key,
+                    value,
+                    },
+                    domainName: getSettingByKey(key: "global.domainName") {
+                    key,
+                    value,
+                    },  
+                    siteOpen: getSettingByKey(key: "global.siteOpen") {
+                    key,
+                    value,
+                    },  
+                    multiDomainOpen: getSettingByKey(key: "global.multiDomainOpen") {
+                    key,
+                    value,
+                    },  
+                    keepRecord: getSettingByKey(key: "global.keepRecord") {
+                    key,
+                    value,
+                    },  
+                    companyName: getSettingByKey(key: "global.companyName") {
+                    key,
+                    value,
+                    },  
+                    copyright: getSettingByKey(key: "global.copyright") {
+                    key,
+                    value,
+                    },  
+                    statisticalCode: getSettingByKey(key: "global.statisticalCode") {
+                    key,
+                    value,
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data;
+                Object.keys(results).forEach((a: string) => {
+                    window.console.log(results[a]);
+                    if (results[a] !== null) {
+                        const d = {};
+                        d[a] = results[a].value;
+                        if (d[a] === 'siteOpen' || d[a] === 'siteOpen') {
+                            d[a] ? d[a] = true : d[a] = false;
+                        }
+                        this.setState(d);
+                    }
+                });
+            }
+        });
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({

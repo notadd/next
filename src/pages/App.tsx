@@ -522,7 +522,7 @@ class App extends React.Component<Props, State> {
                                                         onClick={this.toggleDrawer}
                                                     >
                                                         {
-                                                            open ? <Close/>:<MenuIcon/>
+                                                            open ? <Close/> : <MenuIcon/>
                                                         }
                                                     </IconButton>
                                                     <Link to="/home">
@@ -637,7 +637,7 @@ class App extends React.Component<Props, State> {
                                                         onClick={this.toggleDrawer}
                                                     >
                                                         {
-                                                            open ? <Close/>:<MenuIcon/>
+                                                            open ? <Close/> :<MenuIcon/>
                                                         }
                                                     </IconButton>
                                                     <IconButton
