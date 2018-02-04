@@ -6,6 +6,7 @@ type Query {
 }
 
 type Mutation {
+    # This mutation remove a setting by key.
     removeSetting(key: String): Setting,
     # This mutation set a setting by key and value.
     setSetting(key: String, value: String): Setting,
