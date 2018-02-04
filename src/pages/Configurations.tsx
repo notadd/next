@@ -6,6 +6,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
+import { CircularProgress } from 'material-ui/Progress';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
@@ -64,6 +66,10 @@ type State = {
     companyName: string,
     copyright: string,
     statisticalCode: string,
+    loading: boolean,
+    transition: any,
+    open: boolean,
+    errorMessage: string,
 };
 
 class Configurations extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -78,6 +84,10 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
             companyName: '',
             copyright: '',
             statisticalCode: '',
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
         };
     }
     componentDidMount() {
@@ -122,7 +132,6 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
             if (!response.data.errors) {
                 const results: object = response.data.data;
                 Object.keys(results).forEach((a: string) => {
-                    window.console.log(results[a]);
                     if (results[a] !== null) {
                         const d = {};
                         d[a] = results[a].value;
@@ -141,6 +150,83 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
             [name]: val,
         });
     };
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleSubmit = () => {
+        if (this.state.webName) {
+            this.setState(
+                {
+                    loading: true,
+                },
+            );
+            axios.post('http://localhost:3000/graphql?', {
+                query: `
+                mutation {
+                    webName: setSetting(key: "webName", value: "${this.state.webName}") {
+                    key,
+                    value,
+                    },
+                    domainName: setSetting(key: "domainName", value: "${this.state.domainName}") {
+                    key,
+                    value,
+                    },  
+                    siteOpen: setSetting(key: "siteOpen", value: "${this.state.siteOpen ? 1 : 0}") {
+                    key,
+                    value,
+                    },  
+                    multiDomainOpen: setSetting(key: "multiDomainOpen", value: "${this.state.multiDomainOpen ? 1 : 0}")
+                     {
+                    key,
+                    value,
+                    },  
+                    keepRecord: setSetting(key: "keepRecord", value: "${this.state.keepRecord}") {
+                    key,
+                    value,
+                    },  
+                    companyName: setSetting(key: "companyName", value: "${this.state.companyName}") {
+                    key,
+                    value,
+                    },  
+                    copyright: setSetting(key: "copyright", value: "${this.state.copyright}") {
+                    key,
+                    value,
+                    },  
+                    statisticalCode: setSetting(key: "statisticalCode", value: "${this.state.statisticalCode}") {
+                    key,
+                    value,
+                    },
+                }
+            `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    this.setState(
+                        {
+                            open: true,
+                            loading: false,
+                            errorMessage: '提交成功！!',
+                        },
+                    );
+                } else {
+                    this.setState(
+                        {
+                            open: true,
+                            loading: false,
+                            errorMessage: response.data.errors[0].message,
+                        },
+                    );
+                }
+            });
+        } else {
+            this.setState(
+                {
+                    open: true,
+                    loading: false,
+                    errorMessage: '请输入网站名称!',
+                },
+            );
+        }
+    };
     render() {
         return (
             <div className="configurations">
@@ -152,7 +238,11 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={40}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.webName}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -319,10 +409,39 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
-                            确认提交
+                        <Button
+                            raised
+                            color="primary"
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                'disabled-btn' : ''
+                            }
+                            onClick={this.handleSubmit}
+                        >
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: !this.state.webName ? 'error-prompt' : ''
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleClose}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );

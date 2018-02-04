@@ -17,10 +17,6 @@ const styles = {
     card: {
         minWidth: 275,
     },
-    disabled: {
-        background: 'none !important',
-        border: '1px solid #e0e0e0',
-    },
     formLabelFont: {
         fontSize: '16px',
     },
@@ -161,7 +157,7 @@ class Login extends React.Component<Props, State> {
                                 className={
                                     this.state.userName === ''
                                     || this.state.password === '' ?
-                                        this.props.classes.disabled : ''
+                                        'disabled-btn' : ''
                                 }
                                 onClick={this.handleSubmit}
                             >

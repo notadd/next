@@ -155,6 +155,15 @@ body {
     color: inherit;
     font-size: 14px;
 }
+/*disabled button*/
+
+.disabled-btn {
+    background: none !important;
+    border: 1px solid #e0e0e0;
+}
+.error-prompt > div{
+    background: #ff1744 !important;
+}
 @media (max-width: 479px) {
     /*顶部按钮操作*/
     .top-action-module .title {
