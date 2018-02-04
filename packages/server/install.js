@@ -9,6 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
+const path_1 = require("path");
+const fs_1 = require("fs");
+const js_yaml_1 = require("js-yaml");
 const child_process_1 = require("child_process");
 const inquirer_1 = require("inquirer");
 function install() {
@@ -21,28 +24,86 @@ function install() {
     |_| |_|\\___/ \\__\\__,_|\\__,_|\\__,_|
 
     `);
-        console.log(clc.blue("Begin installation"));
-        const result = yield inquirer_1.prompt({
-            type: "list",
-            message: "Please select which database engine you want use:",
-            name: "engine",
-            choices: [
-                {
-                    name: "Postgres",
-                    value: "postgres",
-                },
-                {
-                    name: "MySQL",
-                    value: "mysql",
-                },
-                {
-                    name: "Sqlite",
-                    value: "sqlite",
-                },
-            ],
-            default: 0,
-        });
-        addPackageForDatabase(result.engine);
+        console.log(clc.blue("Please answer the following questions carefully:"));
+        const result = yield inquirer_1.prompt([
+            {
+                type: "list",
+                message: "Please select which database engine you want use:",
+                name: "engine",
+                choices: [
+                    {
+                        name: "Postgres",
+                        value: "postgres",
+                    },
+                    {
+                        name: "MySQL",
+                        value: "mysql",
+                    },
+                    {
+                        name: "Sqlite",
+                        value: "sqlite",
+                    },
+                ],
+                default: 0,
+            },
+            {
+                type: "input",
+                message: "Database Name:",
+                name: "database",
+            },
+            {
+                type: "input",
+                message: "Database Host:",
+                name: "databaseHost",
+            },
+            {
+                type: "input",
+                message: "Database Port:",
+                name: "databasePort",
+            },
+            {
+                type: "input",
+                message: "Database Username:",
+                name: "databaseUsername",
+            },
+            {
+                type: "input",
+                message: "Database Password:",
+                name: "databasePassword",
+            },
+        ]);
+        fs_1.writeFile(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
+            default: {
+                type: result.engine,
+                host: result.databaseHost,
+                port: result.databasePort,
+                username: result.databaseUsername,
+                password: result.databasePassword,
+                database: result.database,
+                entities: [
+                    "**/*.entity.js",
+                ],
+                migrations: [
+                    "**/*.migration.js",
+                ],
+                logging: true,
+                migrationsRun: false,
+                synchronize: true,
+            },
+        }));
+        let wanted = "";
+        switch (result.engine) {
+            case "mysql":
+                wanted = "mysql";
+                break;
+            case "sqlite":
+                wanted = "sqlite3";
+                break;
+            default:
+                wanted = "pg";
+                break;
+        }
+        addPackageForDatabase(wanted);
     });
 }
 function addPackageForDatabase(engine) {
