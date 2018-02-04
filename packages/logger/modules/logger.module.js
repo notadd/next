@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../commands/handlers/index");
-const index_2 = require("../events/handlers/index");
-const log_entity_1 = require("../entities/log.entity");
-const log_resolvers_1 = require("../resolvers/log.resolvers");
-const log_service_1 = require("../services/log.service");
+const handlers_1 = require("../commands/handlers");
+const handlers_2 = require("../events/handlers");
+const entities_1 = require("../entities");
+const resolvers_1 = require("../resolvers");
+const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const cqrs_1 = require("@nestjs/cqrs");
@@ -28,24 +28,24 @@ let LoggerModule = class LoggerModule {
     }
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);
-        this.command.register(index_1.CommandHandlers);
+        this.command.register(handlers_1.CommandHandlers);
         this.event.setModuleRef(this.moduleRef);
-        this.event.register(index_2.EventHandlers);
+        this.event.register(handlers_2.EventHandlers);
     }
 };
 LoggerModule = __decorate([
     common_1.Module({
         components: [
-            ...index_1.CommandHandlers,
-            ...index_2.EventHandlers,
-            log_resolvers_1.LogResolvers,
-            log_service_1.LogService,
+            ...handlers_1.CommandHandlers,
+            ...handlers_2.EventHandlers,
+            resolvers_1.LogResolvers,
+            services_1.LogService,
         ],
         exports: [
-            log_service_1.LogService,
+            services_1.LogService,
         ],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([log_entity_1.Log]),
+            typeorm_1.TypeOrmModule.forFeature([entities_1.Log]),
             cqrs_1.CQRSModule,
         ],
     }),

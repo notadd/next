@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const setting_entity_1 = require("../entities/setting.entity");
+const entities_1 = require("../entities");
 let SettingService = class SettingService {
     constructor(repository) {
         this.repository = repository;
@@ -89,7 +89,7 @@ let SettingService = class SettingService {
 };
 SettingService = __decorate([
     common_1.Component(),
-    __param(0, typeorm_1.InjectRepository(setting_entity_1.Setting)),
+    __param(0, typeorm_1.InjectRepository(entities_1.Setting)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SettingService);
 exports.SettingService = SettingService;

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const event_gateway_1 = require("../gateways/event.gateway");
+const gateways_1 = require("../gateways");
 let WebsocketModule = class WebsocketModule {
     configure(consumer) {
     }
@@ -15,7 +15,7 @@ let WebsocketModule = class WebsocketModule {
 WebsocketModule = __decorate([
     common_1.Module({
         components: [
-            event_gateway_1.EventGateway,
+            gateways_1.EventGateway,
         ],
     })
 ], WebsocketModule);

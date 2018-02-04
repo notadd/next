@@ -1,9 +1,9 @@
-import { User } from "../entities/user.entity";
-import { UserCreateDto } from "../dtos/user.create.dto";
-import { UserDeleteDto } from "../dtos/user.delete.dto";
-import { UserQueryDto } from "../dtos/user.query.dto";
-import { UserService } from "../services/user.service";
-import { UserUpdateDto } from "../dtos/user.update.dto";
+import { User } from "../entities";
+import { UserCreateDto } from "../dtos";
+import { UserDeleteDto } from "../dtos";
+import { UserQueryDto } from "../dtos";
+import { UserService } from "../services";
+import { UserUpdateDto } from "../dtos";
 export declare class UserResolver {
     private readonly service;
     constructor(service: UserService);

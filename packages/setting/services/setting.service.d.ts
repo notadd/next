@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { Setting } from "../entities/setting.entity";
+import { Setting } from "../entities";
 export declare class SettingService {
     private readonly repository;
     private isInitialized;

@@ -1,5 +1,5 @@
 import * as passport from "passport";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services";
 import { Component } from "@nestjs/common";
 import { ExtractJwt, Strategy } from "passport-jwt";
 

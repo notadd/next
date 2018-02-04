@@ -1,4 +1,4 @@
-import { ConfigurationService } from "../services/configuration.service";
+import { ConfigurationService } from "../services";
 import { MiddlewaresConsumer, Module } from "@nestjs/common";
 
 @Module({

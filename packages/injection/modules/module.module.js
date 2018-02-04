@@ -21,7 +21,7 @@ const injection_constants_1 = require("@notadd/core/constants/injection.constant
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const import_classes_from_directories_1 = require("../utilities/import.classes.from.directories");
+const utilities_1 = require("../utilities");
 const injection_metadata_1 = require("../metadatas/injection.metadata");
 let ModuleModule = class ModuleModule {
     constructor(settingService) {
@@ -31,7 +31,7 @@ let ModuleModule = class ModuleModule {
     onModuleInitWithInjection() {
         return __awaiter(this, void 0, void 0, function* () {
             const settings = yield this.settingService.getSettings();
-            return import_classes_from_directories_1.importClassesFromDirectories(["**/*.injection.js"])
+            return utilities_1.importClassesFromDirectories(["**/*.injection.js"])
                 .filter(injection => {
                 if (injection instanceof Function) {
                     return injection.identification.length

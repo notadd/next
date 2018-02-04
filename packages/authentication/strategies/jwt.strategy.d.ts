@@ -1,4 +1,4 @@
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services";
 import { Strategy } from "passport-jwt";
 export declare class JwtStrategy extends Strategy {
     private readonly service;

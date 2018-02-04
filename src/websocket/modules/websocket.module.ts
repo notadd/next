@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { EventGateway } from "../gateways/event.gateway";
+import { EventGateway } from "../gateways";
 import { MiddlewaresConsumer } from "@nestjs/common";
 
 @Module({

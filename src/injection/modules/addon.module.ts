@@ -3,7 +3,7 @@ import { Logger, Module } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
-import { importClassesFromDirectories } from "../utilities/import.classes.from.directories";
+import { importClassesFromDirectories } from "../utilities";
 import { InjectionMetadata } from "../metadatas/injection.metadata";
 
 @Module({

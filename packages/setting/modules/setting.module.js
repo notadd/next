@@ -13,11 +13,11 @@ const cqrs_1 = require("@nestjs/cqrs");
 const handlers_1 = require("../commands/handlers");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
-const setting_entity_1 = require("../entities/setting.entity");
-const setting_resolvers_1 = require("../resolvers/setting.resolvers");
-const setting_service_1 = require("../services/setting.service");
+const entities_1 = require("../entities");
+const resolvers_1 = require("../resolvers");
+const services_1 = require("../services");
 const typeorm_1 = require("@nestjs/typeorm");
-const index_1 = require("../events/handlers/index");
+const handlers_2 = require("../events/handlers");
 let SettingModule = class SettingModule {
     constructor(moduleRef, command, event) {
         this.moduleRef = moduleRef;
@@ -30,22 +30,22 @@ let SettingModule = class SettingModule {
         this.command.setModuleRef(this.moduleRef);
         this.command.register(handlers_1.CommandHandlers);
         this.event.setModuleRef(this.moduleRef);
-        this.event.register(index_1.EventHandlers);
+        this.event.register(handlers_2.EventHandlers);
     }
 };
 SettingModule = __decorate([
     common_1.Module({
         components: [
             ...handlers_1.CommandHandlers,
-            ...index_1.EventHandlers,
-            setting_resolvers_1.SettingResolvers,
-            setting_service_1.SettingService,
+            ...handlers_2.EventHandlers,
+            resolvers_1.SettingResolvers,
+            services_1.SettingService,
         ],
         exports: [
-            setting_service_1.SettingService,
+            services_1.SettingService,
         ],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([setting_entity_1.Setting]),
+            typeorm_1.TypeOrmModule.forFeature([entities_1.Setting]),
             cqrs_1.CQRSModule,
         ]
     }),

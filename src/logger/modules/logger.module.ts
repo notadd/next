@@ -1,8 +1,8 @@
-import { CommandHandlers } from "../commands/handlers/index";
-import { EventHandlers } from "../events/handlers/index";
-import { Log } from "../entities/log.entity";
-import { LogResolvers } from "../resolvers/log.resolvers";
-import { LogService } from "../services/log.service";
+import { CommandHandlers } from "../commands/handlers";
+import { EventHandlers } from "../events/handlers";
+import { Log } from "../entities";
+import { LogResolvers } from "../resolvers";
+import { LogService } from "../services";
 import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";

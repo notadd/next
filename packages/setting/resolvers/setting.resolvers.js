@@ -18,7 +18,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
-const setting_service_1 = require("../services/setting.service");
+const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
 const authentication_1 = require("@notadd/authentication");
 let SettingResolvers = class SettingResolvers {
@@ -76,6 +76,6 @@ __decorate([
 ], SettingResolvers.prototype, "setSetting", null);
 SettingResolvers = __decorate([
     graphql_1.Resolver("Setting"),
-    __metadata("design:paramtypes", [setting_service_1.SettingService])
+    __metadata("design:paramtypes", [services_1.SettingService])
 ], SettingResolvers);
 exports.SettingResolvers = SettingResolvers;

@@ -2,11 +2,11 @@ import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
 import { CommandHandlers } from "../commands/handlers";
 import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
-import { Setting } from "../entities/setting.entity";
-import { SettingResolvers } from "../resolvers/setting.resolvers";
-import { SettingService } from "../services/setting.service";
+import { Setting } from "../entities";
+import { SettingResolvers } from "../resolvers";
+import { SettingService } from "../services";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { EventHandlers } from "../events/handlers/index";
+import { EventHandlers } from "../events/handlers";
 
 @Module({
     components: [

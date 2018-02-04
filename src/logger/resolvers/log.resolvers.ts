@@ -1,5 +1,5 @@
-import { Log } from "../entities/log.entity";
-import { LogService } from "../services/log.service";
+import { Log } from "../entities";
+import { LogService } from "../services";
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";

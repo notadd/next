@@ -1,5 +1,5 @@
-import { Log } from "../entities/log.entity";
-import { LogService } from "../services/log.service";
+import { Log } from "../entities";
+import { LogService } from "../services";
 export declare class LogResolvers {
     private readonly service;
     constructor(service: LogService);

@@ -24,7 +24,7 @@ const common_1 = require("@nestjs/common");
 const crypto_1 = require("crypto");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const user_entity_1 = require("../entities/user.entity");
+const entities_1 = require("../entities");
 let UserService = class UserService {
     constructor(repository) {
         this.repository = repository;
@@ -162,7 +162,7 @@ let UserService = class UserService {
 };
 UserService = __decorate([
     common_1.Component(),
-    __param(0, typeorm_1.InjectRepository(user_entity_1.User)),
+    __param(0, typeorm_1.InjectRepository(entities_1.User)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;

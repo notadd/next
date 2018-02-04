@@ -1,6 +1,6 @@
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Setting } from "../entities/setting.entity";
-import { SettingService } from "../services/setting.service";
+import { Setting } from "../entities";
+import { SettingService } from "../services";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication";
 

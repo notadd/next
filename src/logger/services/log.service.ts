@@ -1,6 +1,6 @@
 import { Component } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Log } from "../entities/log.entity";
+import { Log } from "../entities";
 import { Repository } from "typeorm";
 
 @Component()

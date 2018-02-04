@@ -1,7 +1,7 @@
-import { AuthResolvers } from "../resolvers/auth.resolvers";
-import { AuthService } from "../services/auth.service";
+import { AuthResolvers } from "../resolvers";
+import { AuthService } from "../services";
 import { forwardRef, MiddlewaresConsumer, Module } from "@nestjs/common";
-import { JwtStrategy } from "../strategies/jwt.strategy";
+import { JwtStrategy } from "../strategies";
 import { UserModule } from "@notadd/user";
 
 @Module({

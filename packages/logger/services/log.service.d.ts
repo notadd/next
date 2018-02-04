@@ -1,4 +1,4 @@
-import { Log } from "../entities/log.entity";
+import { Log } from "../entities";
 import { Repository } from "typeorm";
 export declare class LogService {
     private readonly repository;
