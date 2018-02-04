@@ -1,4 +1,5 @@
 import { Component, Inject } from "@nestjs/common";
+import { createHmac } from "crypto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { User } from "../entities/user.entity";
@@ -24,7 +25,7 @@ export class UserService {
         const user = await this.repository.create({
             username: obj.username,
             email: obj.email,
-            password: obj.password,
+            password: createHmac('sha256', obj.password).digest('hex'),
         });
 
         return await this.repository.save(user);

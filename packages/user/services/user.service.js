@@ -21,6 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const crypto_1 = require("crypto");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("../entities/user.entity");
@@ -33,7 +34,7 @@ let UserService = class UserService {
             const user = yield this.repository.create({
                 username: obj.username,
                 email: obj.email,
-                password: obj.password,
+                password: crypto_1.createHmac('sha256', obj.password).digest('hex'),
             });
             return yield this.repository.save(user);
         });
