@@ -166,13 +166,11 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     error={!this.state.title}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         标题
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         onChange={this.handleChange('title')}
                                         value={this.state.title}
@@ -188,13 +186,11 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     error={!this.state.describe}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         描述
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         onChange={this.handleChange('describe')}
                                         value={this.state.describe}
@@ -210,13 +206,11 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     error={!this.state.keywords}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         关键字
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         onChange={this.handleChange('keywords')}
                                         value={this.state.keywords}

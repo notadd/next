@@ -175,7 +175,8 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                     key,
                     value,
                     },  
-                    multiDomainOpen: setSetting(key: "global.multiDomainOpen", value: "${this.state.multiDomainOpen ? 1 : 0}")
+                    multiDomainOpen: setSetting(key: "global.multiDomainOpen",
+                     value: "${this.state.multiDomainOpen ? 1 : 0}")
                      {
                     key,
                     value,

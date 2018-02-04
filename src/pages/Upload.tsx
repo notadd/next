@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
@@ -138,7 +138,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                 });
             }
         });
-    };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -170,6 +170,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                     case 'videoNames': message = '允许上传视频的扩展名'; break;
                     case 'managementDocumentsNames': message = '允许管理文件的扩展名'; break;
                     case 'managementImagesNames': message = '允许管理图片的扩展名'; break;
+                    default: message = '';
                 }
             }
         });
@@ -284,7 +285,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.appendageSize}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -303,7 +308,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Grid>
                         <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.imgSize}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -319,7 +328,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.videoSize}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -337,7 +350,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Grid>
                         <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.extensionNames}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -353,7 +370,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.fileNames}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -371,7 +392,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Grid>
                         <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.videoNames}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -387,7 +412,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.managementDocumentsNames}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -405,7 +434,11 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Grid>
                         <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.managementImagesNames}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}

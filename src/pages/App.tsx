@@ -593,7 +593,10 @@ class App extends React.Component<Props, State> {
                                                                             root: this.props.classes.navBtn,
                                                                             label: this.props.classes.btnLabel,
                                                                             selected: this.props.classes.selectRoot,
-                                                                            selectedLabel: this.props.classes.selectedLabel,
+                                                                            selectedLabel: this.
+                                                                                props.
+                                                                                classes.
+                                                                                selectedLabel,
                                                                         }}
                                                                         key={index}
                                                                         label={item.name}
@@ -698,7 +701,10 @@ class App extends React.Component<Props, State> {
                                                                             root: this.props.classes.navBtn,
                                                                             label: this.props.classes.btnLabel,
                                                                             selected: this.props.classes.selectRoot,
-                                                                            selectedLabel: this.props.classes.selectedLabel,
+                                                                            selectedLabel: this
+                                                                                .props
+                                                                                .classes
+                                                                                .selectedLabel,
                                                                         }}
                                                                         key={index}
                                                                         label={item.name}
