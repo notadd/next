@@ -10,27 +10,12 @@
 
 ## 第二步
 
-修改数据库配置文件（`ormconfig.yml`）：
+执行数据库配置安装：
 
-参考如下：
+> yarn run:install
 
-```yaml
-default:
-    type: "postgres"
-    host: "192.168.109.120"
-    port: 5432
-    username: "postgres"
-    password: "123qwe"
-    database: "new"
-    entities:
-        - '**/*.entity.js'
-    migrations:
-        - '**/*.migration.js'
-    logging: true
-    migrationsRun: true
-    subscribers:
-        - '**/*.entity.subscriber.js'
-    synchronize: false
-```
+## 第三步
+
+运行
 
 > yarn run dev
