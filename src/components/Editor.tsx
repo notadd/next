@@ -70,10 +70,9 @@ class Editor extends React.Component<Props, State> {
                     };
                 } else {
                     configScriptTag.onload = () => {
-                        // resolve(configScriptTag);
-                        if (configScriptTag !== null) {
-                            configScriptTag.addEventListener('load', () => resolve(configScriptTag));
-                        }
+                       if (configScriptTag !== null) {
+                            resolve(configScriptTag);
+                       }
                     };
                 }
                 configScriptTag.onerror = () => {
@@ -98,9 +97,8 @@ class Editor extends React.Component<Props, State> {
                     };
                 } else {
                     editorScriptTag.onload = () => {
-                        // resolve(editorScriptTag);
                         if (editorScriptTag !== null) {
-                            editorScriptTag.addEventListener('load', () => resolve(editorScriptTag));
+                            resolve(editorScriptTag);
                         }
                     };
                 }
@@ -112,9 +110,7 @@ class Editor extends React.Component<Props, State> {
         }
         Promise.all(loading).then(() => {
             // 等待代码加载完成后初始化编辑器
-            window.console.log('loading');
             setTimeout(() => {
-                window.console.log('initEditor');
                 self.initEditor();
             }, 300);
         });
