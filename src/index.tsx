@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import App from './pages/App';
+import App from './layouts/App';
 import './assets/css/main.css';
 
 render(

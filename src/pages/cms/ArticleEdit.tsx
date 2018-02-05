@@ -2,7 +2,7 @@ import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-import Editor from '../Editor';
+import Editor from '../../components/Editor';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Switch from 'material-ui/Switch';
@@ -130,7 +130,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     handleDateChange = (date: any) => {
         let currentTime = new Date(date).toLocaleDateString();
         this.setState({ time: currentTime });
-    }
+    };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
