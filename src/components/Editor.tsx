@@ -58,7 +58,7 @@ class Editor extends React.Component<Props, State> {
             loading.push(new Promise((resolve, reject) => {
                 let configScriptTag: HTMLElement = document.createElement('script');
                 configScriptTag['type'] = 'text/javascript';
-                configScriptTag['src'] = `${self.props.path}neditor.config.js`;
+                configScriptTag['src'] = `${self.props.path}neditor.config.js?v=${new Date().getTime()}`;
                 configScriptTag['id'] = 'configScriptTag';
                 if (configScriptTag['readyState']) {
                     configScriptTag['onreadystatechange'] = () => {
@@ -86,7 +86,7 @@ class Editor extends React.Component<Props, State> {
             loading.push(new Promise((resolve, reject) => {
                 let editorScriptTag: HTMLElement = document.createElement('script');
                 editorScriptTag['type'] = 'text/javascript';
-                editorScriptTag['src'] = `${self.props.path}neditor.all.min.js`;
+                editorScriptTag['src'] = `${self.props.path}neditor.all.min.js?v=${new Date().getTime()}`;
                 editorScriptTag['id'] = 'editorScriptTag';
                 if (editorScriptTag['readyState']) {
                     editorScriptTag['onreadystatechange'] = () => {
@@ -110,14 +110,17 @@ class Editor extends React.Component<Props, State> {
                 document.body.appendChild(editorScriptTag);
             }));
         }
-        // 等待代码加载完成后初始化编辑器
         Promise.all(loading).then(() => {
+            // 等待代码加载完成后初始化编辑器
+            window.console.log('loading');
             setTimeout(() => {
+                window.console.log('initEditor');
                 self.initEditor();
             }, 300);
         });
     }
     initEditor() {
+        window.console.log('initEditor');
         const self = this;
         if (self.state.instance === null) {
             self.setState({
