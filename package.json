@@ -31,6 +31,7 @@
     "prop-types": "^15.6.0",
     "rc-color-picker": "^1.2.3",
     "react": "latest",
+    "react-dazzle": "^1.2.7",
     "react-dnd-html5-backend": "^2.5.4",
     "react-dnd-touch-backend": "^0.3.20",
     "react-dom": "latest",
