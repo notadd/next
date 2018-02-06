@@ -123,10 +123,10 @@ const styles = (theme: Theme): StyleRules => ({
     },
     navBtn: {
         flex: 'none',
-        padding: '0 3px',
         width: 'auto',
         fontSize: '14px',
         'min-width': '88px',
+        'padding': '0 25px',
         '&:hover': {
             background: '#3949a3',
         },
