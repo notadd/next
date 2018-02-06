@@ -1,8 +1,11 @@
 import * as React from 'react';
-import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import withStyles, {WithStyles} from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
@@ -24,9 +27,26 @@ const styles = {
         'color': '#3f51b5 !important',
     },
 };
-type State = {
-};
+type State = {};
 
+const mySwiper = (obj: any) =>
+    (
+        obj.map((item: object, index: number) => {
+            return (
+                <div key={index} className="team-item">
+                    <div className="img">
+                        <img src={item['img']}/>
+                    </div>
+                    <div className="intro">
+                        <h3>{item['name']}</h3>
+                        <p>
+                            <a href={item['link']} target="_blank">{item['link']}</a>
+                        </p>
+                    </div>
+                </div>
+            )
+        })
+    );
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     state = {
         value: 0,
@@ -113,10 +133,10 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
         ],
     };
     handleChange = (event: any, value: any) => {
-        this.setState({ value });
+        this.setState({value});
     };
     handleClickOpen = (value: any) => {
-        this.setState({ value });
+        this.setState({value});
     };
     render() {
         return (
@@ -127,22 +147,9 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                             <div className="home-bg">
                                 <div>
                                     <h4>开发团队</h4>
-                                    {this.state.list.map((item, index) => {
-                                        return (
-                                            this.state.value === index &&
-                                            <div key={index}>
-                                                <div className="img">
-                                                    <img src={item.img} />
-                                                </div>
-                                                <div className="intro">
-                                                    <h3>{item.name}</h3>
-                                                    <p>
-                                                        <a href={item.link} target="_blank">{item.link}</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+                                    <AutoPlaySwipeableViews>
+                                        {mySwiper(this.state.list)}
+                                    </AutoPlaySwipeableViews>
                                 </div>
                             </div>
                             <Grid className="teamBox" container spacing={40}>
