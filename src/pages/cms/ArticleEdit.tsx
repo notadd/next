@@ -73,7 +73,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
         }
-        window.console.log(localStorage.getItem('editor_path'));
         this.state = {
             webName: 'NotAdd',
             img: 'LOGO.png',
@@ -161,7 +160,13 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
-                            <Grid item xs={12} sm={7}>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={8}
+                                style={{paddingRight: '40px'}}
+                                className="grid-editor-module"
+                            >
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
@@ -186,7 +191,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     <Editor path={this.state.path} value={this.state.content} />
                                 </div>
                             </Grid>
-                            <Grid item xs={12} sm={5}>
+                            <Grid item xs={12} sm={4}>
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}

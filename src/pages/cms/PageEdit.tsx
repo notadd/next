@@ -105,7 +105,6 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleRemoveEditor = (index: number) => {
-        window.console.log(index);
         const arr = Object.assign([], this.state.list);
         arr.splice(index, 1);
         this.setState({
@@ -130,7 +129,13 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                 <Paper className={this.props.classes.root}>
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={24}>
-                            <Grid item xs={12} sm={7}>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={8}
+                                style={{paddingRight: '40px'}}
+                                className="grid-editor-module"
+                            >
                                 <FormControl
                                     fullWidth
                                     required
@@ -166,7 +171,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     })
                                 }
                             </Grid>
-                            <Grid item xs={12} sm={5}>
+                            <Grid item xs={12} sm={4}>
                                 <FormControl
                                     fullWidth
                                     required

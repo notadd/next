@@ -235,11 +235,13 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         <IconButton
                             className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
+                            title="删除"
                         >
                             <DeleteIcon />
                         </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            title="刷新"
                         >
                             <Cached />
                         </IconButton>
