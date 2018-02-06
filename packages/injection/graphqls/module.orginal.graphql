@@ -1,0 +1,18 @@
+input ModuleFilter {
+    identification: String,
+    installed: Boolean,
+    enabled: Boolean,
+}
+
+type Query {
+    getModule(identification: String): Module,
+    getModules(filter: ModuleFilter): [Module],
+}
+
+type Module {
+    identification: String,
+}
+
+type Mutation {
+    installModule: Module,
+}

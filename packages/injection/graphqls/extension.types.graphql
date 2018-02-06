@@ -1,0 +1,21 @@
+type Extension {
+    identification: String,
+}
+
+input ExtensionFilter {
+    identification: String,
+    installed: Boolean,
+    enabled: Boolean,
+}
+
+type Query {
+    getExtension(identification: String): Extension,
+    getExtensions(filter: ExtensionFilter): [Extension],
+}
+
+type Mutation {
+    disableExtension: Extension,
+    enableExtension: Extension,
+    installExtension: Extension,
+    uninstallExtension: Extension,
+}

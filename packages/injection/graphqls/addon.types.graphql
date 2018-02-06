@@ -1,0 +1,21 @@
+type Addon {
+    identification: String,
+}
+
+input AddonFilter {
+    identification: String,
+    installed: Boolean,
+    enabled: Boolean,
+}
+
+type Query {
+    getAddon(identification: String): Addon,
+    getAddons(filter: AddonFilter): [Addon],
+}
+
+type Mutation {
+    disableAddon: Addon,
+    enableAddon: Addon,
+    installAddon: Addon,
+    uninstallAddon: Addon,
+}
