@@ -2,6 +2,8 @@ import * as http from 'http';
 import * as optional from 'optional';
 import * as bodyParser from 'body-parser';
 import iterate from 'iterare';
+import { AddonsContainer } from "./containers/addons.container";
+import { ApplicationConfig } from "@nestjs/core/application-config";
 import {
     CanActivate,
     ExceptionFilter,
@@ -13,6 +15,9 @@ import {
     PipeTransform,
     WebSocketAdapter,
 } from '@nestjs/common';
+import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
+import { ExtensionsContainer } from "./containers/extensions.container";
+import { InjectionMetadata } from "@notadd/injection/metadatas/injection.metadata";
 import { Logger } from '@nestjs/common/services/logger.service';
 import {
     isNil,
@@ -20,21 +25,17 @@ import {
     validatePath,
 } from '@nestjs/common/utils/shared.utils';
 import { MicroserviceConfiguration } from '@nestjs/common/interfaces/microservices/microservice-configuration.interface';
-import { NestApplicationContext } from "@nestjs/core";
-import { MiddlewaresModule } from "@nestjs/core/middlewares/middlewares-module";
-import { MiddlewaresContainer } from "@nestjs/core/middlewares/container";
-import { Resolver } from "@nestjs/core/router/interfaces/resolver.interface";
-import { ApplicationConfig } from "@nestjs/core/application-config";
-import { NestContainer } from "@nestjs/core/injector/container";
-import { RoutesResolver } from "@nestjs/core/router/routes-resolver";
-import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
-import { Module } from "@nestjs/core/injector/module";
 import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/exceptions/microservices-package-not-found.exception";
+import { MiddlewaresContainer } from "@nestjs/core/middlewares/container";
+import { MiddlewaresModule } from "@nestjs/core/middlewares/middlewares-module";
+import { Module } from "@nestjs/core/injector/module";
+import { ModulesContainer } from "./containers/modules.container";
+import { NestApplicationContext } from "@nestjs/core";
+import { NestContainer } from "@nestjs/core/injector/container";
 import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
-import { AddonsContainer } from "./containers/addons.container";
-import { ExtensionsContainer } from "./containers/extensions.container";
-import { ModulesContainer } from "./containers/modules.container";
+import { Resolver } from "@nestjs/core/router/interfaces/resolver.interface";
+import { RoutesResolver } from "@nestjs/core/router/routes-resolver";
 
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || ({} as any);
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || ({} as any);
@@ -253,7 +254,7 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
     }
 
     private async callInitWithInjectionHook(): Promise<void> {
-        let injections: object[] = [];
+        let injections: InjectionMetadata[] = [];
         let targets: object[] = [];
         const modules = this.container.getModules();
         modules.forEach((module: Module) => {
@@ -273,7 +274,9 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
             });
             key ++;
         }
-        console.log(injections);
+        this.extensionsContainer.build(injections, this.container);
+        this.modulesContainer.build(injections, this.container);
+        this.addonsContainer.build(injections, this.container);
     }
 
     private callModuleInitHook(module: Module) {

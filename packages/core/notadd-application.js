@@ -12,18 +12,18 @@ const http = require("http");
 const optional = require("optional");
 const bodyParser = require("body-parser");
 const iterare_1 = require("iterare");
+const addons_container_1 = require("./containers/addons.container");
+const application_config_1 = require("@nestjs/core/application-config");
+const express_adapter_1 = require("@nestjs/core/adapters/express-adapter");
+const extensions_container_1 = require("./containers/extensions.container");
 const logger_service_1 = require("@nestjs/common/services/logger.service");
 const shared_utils_1 = require("@nestjs/common/utils/shared.utils");
-const core_1 = require("@nestjs/core");
-const middlewares_module_1 = require("@nestjs/core/middlewares/middlewares-module");
-const container_1 = require("@nestjs/core/middlewares/container");
-const application_config_1 = require("@nestjs/core/application-config");
-const routes_resolver_1 = require("@nestjs/core/router/routes-resolver");
-const express_adapter_1 = require("@nestjs/core/adapters/express-adapter");
 const microservices_package_not_found_exception_1 = require("@nestjs/core/errors/exceptions/microservices-package-not-found.exception");
-const addons_container_1 = require("./containers/addons.container");
-const extensions_container_1 = require("./containers/extensions.container");
+const container_1 = require("@nestjs/core/middlewares/container");
+const middlewares_module_1 = require("@nestjs/core/middlewares/middlewares-module");
 const modules_container_1 = require("./containers/modules.container");
+const core_1 = require("@nestjs/core");
+const routes_resolver_1 = require("@nestjs/core/router/routes-resolver");
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || {};
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || {};
 const { NestMicroservice } = optional('@nestjs/microservices/nest-microservice') || {};
@@ -201,7 +201,9 @@ class NotaddApplication extends core_1.NestApplicationContext {
                 });
                 key++;
             }
-            console.log(injections);
+            this.extensionsContainer.build(injections, this.container);
+            this.modulesContainer.build(injections, this.container);
+            this.addonsContainer.build(injections, this.container);
         });
     }
     callModuleInitHook(module) {
