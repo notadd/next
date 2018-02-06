@@ -5,65 +5,22 @@
     width: 100% !important;
     z-index: 0 !important;
 }
-.editor .edui-notadd .edui-toolbar .edui-button .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-icon {
-    padding: 0 4px !important;
-    width: 18px !important;
-    height: 18px !important;
-}
-.editor .edui-notadd .edui-toolbar .edui-button .edui-state-hover .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-state-hover .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-state-hover .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-button .edui-state-checked .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-state-checked .edui-icon,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-state-checked .edui-icon {
-    line-height: 18px !important;
-}
-.editor .edui-notadd .edui-toolbar .edui-button .edui-state-checked .edui-icon::before,
-.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-state-checked .edui-icon::before,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-state-checked .edui-icon::before {
-    width: 0.8em;
-    height: 0.8em;
-    font-size: 12px;
-}
-.editor .edui-notadd .edui-toolbar .edui-button .edui-state-hover .edui-icon::before,
-.editor .edui-notadd .edui-toolbar .edui-menubutton .edui-state-hover .edui-icon::before,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton .edui-state-hover .edui-icon::before {
-    width: 0.8em;
-    height: 0.8em;
-    font-size: 12px;
-}
-.editor .edui-iconfont {
-    width: 0.8em;
-    height: 0.8em;
-}
 .editor .edui-notadd .edui-toolbar .edui-combox .edui-combox-body {
-    height: 20px;
-    margin: 0 3px;
+    height: 24px;
 }
 .editor .edui-notadd .edui-toolbar .edui-combox-body .edui-arrow::after {
-    height: 17px;
+    height: 22px;
+    line-height: 20px;
 }
 .editor .edui-notadd .edui-toolbar .edui-combox-body .edui-arrow {
     line-height: 0.5 !important;
 }
-.editor .edui-notadd .edui-toolbar .edui-button,
-.editor .edui-notadd .edui-toolbar .edui-splitbutton,
-.editor .editor .edui-notadd .edui-toolbar .edui-menubutton,
-.editor .edui-notadd .edui-toolbar .edui-combox {
-    padding: 2px 0 !important;
-}
 .editor .edui-notadd .edui-editor-toolbarbox {
     position: relative !important;
 }
-.editor .edui-notadd .edui-toolbar .edui-for-fullscreen {
-    margin-top: 2px;
-    margin-right: 2px;
-}
 .editor .edui-notadd .edui-editor-iframeholder {
     width: 100% !important;
-    height: 251px !important;
+    height: 340px !important;
 }
 .editor > span {
     display: block;
@@ -72,4 +29,9 @@
     margin-bottom: 34px;
     font-size: 12px;
     cursor: pointer;
+}
+@media (max-width: 479px) {
+    .grid-editor-module {
+        padding-right: 12px !important;
+    }
 }
