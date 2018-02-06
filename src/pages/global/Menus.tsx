@@ -156,12 +156,14 @@ class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <Link to={'/menu/edit/' + 'add'}>
                             <IconButton
                                 className={this.props.classes.menuBtn}
+                                title="新增"
                             >
                                 <Add />
                             </IconButton>
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            title="刷新"
                         >
                             <Cached />
                         </IconButton>

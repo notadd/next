@@ -273,6 +273,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 <IconButton
                                     className={this.props.classes.menuBtn}
                                     onClick={this.handleOpenSearch}
+                                    title="搜索"
                                 >
                                     <Search />
                                 </IconButton>
@@ -280,18 +281,21 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <IconButton
                             className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
+                            title="删除"
                         >
                             <DeleteIcon />
                         </IconButton>
                         <Link to={'/cms/page/edit/' + 'add'}>
                             <IconButton
                                 className={this.props.classes.menuBtn}
+                                title="新增"
                             >
                                 <Add />
                             </IconButton>
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            title="刷新"
                         >
                             <Cached />
                         </IconButton>

@@ -157,12 +157,14 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                             <Link to={'/cms/page/type/edit/' + 'add'}>
                                 <IconButton
                                     className={this.props.classes.menuBtn}
+                                    title="新增"
                                 >
                                     <Add />
                                 </IconButton>
                             </Link>
                             <IconButton
                                 className={this.props.classes.menuBtn}
+                                title="刷新"
                             >
                                 <Cached />
                             </IconButton>
