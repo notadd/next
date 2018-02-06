@@ -17,12 +17,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const injection_constants_1 = require("@notadd/core/constants/injection.constants");
-const common_1 = require("@nestjs/common");
-const setting_service_1 = require("@notadd/setting/services/setting.service");
-const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const utilities_1 = require("../utilities");
 const injection_metadata_1 = require("../metadatas/injection.metadata");
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
+const common_1 = require("@nestjs/common");
+const module_resolvers_1 = require("../resolvers/module.resolvers");
+const setting_service_1 = require("@notadd/setting/services/setting.service");
+const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let ModuleModule = class ModuleModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -52,6 +53,9 @@ let ModuleModule = class ModuleModule {
 };
 ModuleModule = __decorate([
     common_1.Module({
+        components: [
+            module_resolvers_1.ModuleResolvers,
+        ],
         imports: [
             setting_module_1.SettingModule,
         ],

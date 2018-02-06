@@ -17,12 +17,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const addon_resolvers_1 = require("../resolvers/addon.resolvers");
+const utilities_1 = require("../utilities");
+const metadatas_1 = require("../metadatas");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const utilities_1 = require("../utilities");
-const metadatas_1 = require("../metadatas");
 let AddonModule = class AddonModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -52,6 +53,9 @@ let AddonModule = class AddonModule {
 };
 AddonModule = __decorate([
     common_1.Module({
+        components: [
+            addon_resolvers_1.AddonResolvers,
+        ],
         imports: [
             setting_module_1.SettingModule,
         ],

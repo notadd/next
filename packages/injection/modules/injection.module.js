@@ -17,12 +17,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const addon_module_1 = require("./addon.module");
+const extension_module_1 = require("./extension.module");
 const common_1 = require("@nestjs/common");
+const module_module_1 = require("./module.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const user_service_1 = require("@notadd/user/services/user.service");
-const extension_module_1 = require("./extension.module");
-const addon_module_1 = require("./addon.module");
-const module_module_1 = require("./module.module");
 let InjectionModule = class InjectionModule {
     constructor(userService) {
         this.userService = userService;

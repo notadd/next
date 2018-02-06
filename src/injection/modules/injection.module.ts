@@ -1,13 +1,13 @@
+import { AddonModule } from "./addon.module";
+import { ExtensionModule } from "./extension.module";
 import {
     Logger,
     Module,
     OnModuleInit,
 } from "@nestjs/common";
+import { ModuleModule } from "./module.module";
 import { UserModule } from "@notadd/user/modules/user.module";
 import { UserService } from "@notadd/user/services/user.service";
-import { ExtensionModule } from "./extension.module";
-import { AddonModule } from "./addon.module";
-import { ModuleModule } from "./module.module";
 
 @Module({
     imports: [
