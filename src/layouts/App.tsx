@@ -86,6 +86,9 @@ const styles = (theme: Theme): StyleRules => ({
         zIndex: 1,
         transition: 'all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
     },
+    smDrawerPaperClose: {
+        top: 140,
+    },
     xsDrawerPaperClose: {
         width: 0,
         position: 'fixed',
@@ -123,7 +126,7 @@ const styles = (theme: Theme): StyleRules => ({
         padding: '0 3px',
         width: 'auto',
         fontSize: '14px',
-        'min-width': '56px',
+        'min-width': '88px',
         '&:hover': {
             background: '#3949a3',
         },
@@ -512,7 +515,7 @@ class App extends React.Component<Props, State> {
                             return (
                                 <div className="main-view">
                                     {
-                                        wd === 'xs' ?
+                                        (wd === 'xs' || wd === 'sm') ?
                                             <div className="mobile-header">
                                                 <div className="top-menu">
                                                     <IconButton
@@ -743,7 +746,8 @@ class App extends React.Component<Props, State> {
                                                         modal: classes.root,
                                                         docked: classNames(
                                                             classes.drawerDocked,
-                                                            !this.state.open && classes.drawerPaperClose
+                                                            (!this.state.open || open && wd === 'sm') ? classes.drawerPaperClose : '',
+                                                            wd === 'sm' && classes.smDrawerPaperClose
                                                         ),
                                                         paper: classes.drawerPaper
                                                     }}
