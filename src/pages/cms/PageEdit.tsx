@@ -105,7 +105,6 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleRemoveEditor = (index: number) => {
-        window.console.log(index);
         const arr = Object.assign([], this.state.list);
         arr.splice(index, 1);
         this.setState({
