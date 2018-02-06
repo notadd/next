@@ -22,7 +22,7 @@ const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const utilities_1 = require("../utilities");
-const injection_metadata_1 = require("../metadatas/injection.metadata");
+const metadatas_1 = require("../metadatas");
 let AddonModule = class AddonModule {
     constructor(settingService) {
         this.settingService = settingService;
@@ -41,7 +41,7 @@ let AddonModule = class AddonModule {
                 }
                 return false;
             }).map(instance => {
-                const metadata = new injection_metadata_1.InjectionMetadata();
+                const metadata = new metadatas_1.InjectionMetadata();
                 metadata.identification = instance.identification;
                 metadata.module = instance.module;
                 metadata.type = instance.type;

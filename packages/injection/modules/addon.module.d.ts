@@ -1,6 +1,6 @@
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
-import { InjectionMetadata } from "../metadatas/injection.metadata";
+import { InjectionMetadata } from "../metadatas";
 export declare class AddonModule implements OnModuleInitWithInjection {
     private readonly settingService;
     private logger;

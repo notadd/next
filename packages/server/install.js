@@ -71,6 +71,16 @@ function install() {
                 message: "Database Password:",
                 name: "databasePassword",
             },
+            {
+                type: "input",
+                message: "Administration Username:",
+                name: "username",
+            },
+            {
+                type: "input",
+                message: "Administration Password:",
+                name: "password",
+            },
         ]);
         fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
             default: {

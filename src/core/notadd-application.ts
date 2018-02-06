@@ -32,6 +32,9 @@ import { Module } from "@nestjs/core/injector/module";
 import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/exceptions/microservices-package-not-found.exception";
 import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
 import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
+import { AddonsContainer } from "./containers/addons.container";
+import { ExtensionsContainer } from "./containers/extensions.container";
+import { ModulesContainer } from "./containers/modules.container";
 
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || ({} as any);
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || ({} as any);
@@ -39,7 +42,19 @@ const { NestMicroservice } = optional('@nestjs/microservices/nest-microservice')
 const { IoAdapter } = optional('@nestjs/websockets/adapters/io-adapter') || ({} as any);
 
 export class NotaddApplication extends NestApplicationContext implements INestApplication {
+    private isInitialized = false;
+
+    private readonly addonsContainer = new AddonsContainer();
+
+    private readonly config: ApplicationConfig;
+
+    private readonly extensionsContainer = new ExtensionsContainer();
+
+    private readonly httpServer: http.Server;
+
     private readonly logger = new Logger(NotaddApplication.name, true);
+
+    private readonly microservices = new Array<any>();
 
     private readonly middlewaresModule = new MiddlewaresModule();
 
@@ -47,17 +62,11 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
 
     private readonly microservicesModule = MicroservicesModule ? new MicroservicesModule() : null;
 
-    private readonly socketModule = SocketModule ? new SocketModule() : null;
-
-    private readonly httpServer: http.Server;
+    private readonly modulesContainer = new ModulesContainer();
 
     private readonly routesResolver: Resolver;
 
-    private readonly config: ApplicationConfig;
-
-    private readonly microservices = new Array<any>();
-
-    private isInitialized = false;
+    private readonly socketModule = SocketModule ? new SocketModule() : null;
 
     constructor(container: NestContainer, private readonly express) {
         super(container, [], null);

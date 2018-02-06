@@ -21,6 +21,9 @@ const application_config_1 = require("@nestjs/core/application-config");
 const routes_resolver_1 = require("@nestjs/core/router/routes-resolver");
 const express_adapter_1 = require("@nestjs/core/adapters/express-adapter");
 const microservices_package_not_found_exception_1 = require("@nestjs/core/errors/exceptions/microservices-package-not-found.exception");
+const addons_container_1 = require("./containers/addons.container");
+const extensions_container_1 = require("./containers/extensions.container");
+const modules_container_1 = require("./containers/modules.container");
 const { SocketModule } = optional('@nestjs/websockets/socket-module') || {};
 const { MicroservicesModule } = optional('@nestjs/microservices/microservices-module') || {};
 const { NestMicroservice } = optional('@nestjs/microservices/nest-microservice') || {};
@@ -29,13 +32,16 @@ class NotaddApplication extends core_1.NestApplicationContext {
     constructor(container, express) {
         super(container, [], null);
         this.express = express;
+        this.isInitialized = false;
+        this.addonsContainer = new addons_container_1.AddonsContainer();
+        this.extensionsContainer = new extensions_container_1.ExtensionsContainer();
         this.logger = new logger_service_1.Logger(NotaddApplication.name, true);
+        this.microservices = new Array();
         this.middlewaresModule = new middlewares_module_1.MiddlewaresModule();
         this.middlewaresContainer = new container_1.MiddlewaresContainer();
         this.microservicesModule = MicroservicesModule ? new MicroservicesModule() : null;
+        this.modulesContainer = new modules_container_1.ModulesContainer();
         this.socketModule = SocketModule ? new SocketModule() : null;
-        this.microservices = new Array();
-        this.isInitialized = false;
         const modules = this.container.getModules().values();
         this.contextModule = modules.next().value;
         this.httpServer = http.createServer(express);
