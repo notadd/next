@@ -183,3 +183,6 @@
 .home .bottom-content > div > div {
     min-height: 385px;
 }
+.spanActive {
+    color: #3f51b5 !important;
+}
