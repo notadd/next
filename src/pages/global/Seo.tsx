@@ -34,16 +34,19 @@ type State = {
 };
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        title: '',
-        describe: '',
-        keywords: '',
-        loading: false,
-        transition: undefined,
-        open: false,
-        errorMessage: '',
-        error: false,
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            title: '',
+            describe: '',
+            keywords: '',
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
+        };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
