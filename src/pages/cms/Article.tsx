@@ -85,71 +85,74 @@ type State = {
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        checkedAll: false,
-        rowsPerPage: 3,
-        currentPage: 0,
-        open: false,
-        modalId: '',
-        modalName: '',
-        modalType: 0,
-        modalNum: 0,
-        openMessageTip: false,
-        openSearch: false,
-        searchValue: '',
-        list: [
-            {
-                id: 1,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯1',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 2,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯2',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 3,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯3',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 4,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯4',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 5,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯5',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 6,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯4',
-                time: '2017-12-01 13:20:59',
-            },
-            {
-                id: 7,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                type: '新闻资讯5',
-                time: '2017-12-01 13:20:59',
-            },
-        ],
-        message: '',
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            checkedAll: false,
+            rowsPerPage: 3,
+            currentPage: 0,
+            open: false,
+            modalId: '',
+            modalName: '',
+            modalType: 0,
+            modalNum: 0,
+            openMessageTip: false,
+            openSearch: false,
+            searchValue: '',
+            list: [
+                {
+                    id: 1,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯1',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 2,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯2',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 3,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯3',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 4,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯4',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 5,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯5',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 6,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯4',
+                    time: '2017-12-01 13:20:59',
+                },
+                {
+                    id: 7,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    type: '新闻资讯5',
+                    time: '2017-12-01 13:20:59',
+                },
+            ],
+            message: '',
+        };
+    }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -173,15 +176,16 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
-        this.state.checkedAll = true;
-        pro.check = true;
-        if (!event.target.checked) {
-            pro.check = false;
-        }
+        this.setState({
+            checkedAll: true
+        });
+        pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
                 if (this.state.list[i].check === false) {
-                    this.state.checkedAll = false;
+                    this.setState({
+                        checkedAll: false
+                    });
                 }
             }
         }
@@ -190,9 +194,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleClickRemove = (pro: any) => {
-        this.state.modalName = pro.name;
-        this.state.modalId = pro.id;
         this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
             open: true,
             modalType: 0,
         });

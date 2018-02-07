@@ -85,52 +85,55 @@ type State = {
 };
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        checkedAll: false,
-        rowsPerPage: 2,
-        currentPage: 0,
-        open: false,
-        modalId: '',
-        modalName: '',
-        modalType: 0,
-        modalNum: 0,
-        openMessageTip: false,
-        openSearch: false,
-        searchValue: '',
-        message: '',
-        list: [
-            {
-                id: 1,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                author: '新闻资讯1',
-            },
-            {
-                id: 2,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                author: '新闻资讯2',
-            },
-            {
-                id: 3,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                author: '新闻资讯3',
-            },
-            {
-                id: 4,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                author: '新闻资讯4',
-            },
-            {
-                id: 5,
-                check: false,
-                name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                author: '新闻资讯5',
-            },
-        ],
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            checkedAll: false,
+            rowsPerPage: 2,
+            currentPage: 0,
+            open: false,
+            modalId: '',
+            modalName: '',
+            modalType: 0,
+            modalNum: 0,
+            openMessageTip: false,
+            openSearch: false,
+            searchValue: '',
+            message: '',
+            list: [
+                {
+                    id: 1,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    author: '新闻资讯1',
+                },
+                {
+                    id: 2,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    author: '新闻资讯2',
+                },
+                {
+                    id: 3,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    author: '新闻资讯3',
+                },
+                {
+                    id: 4,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    author: '新闻资讯4',
+                },
+                {
+                    id: 5,
+                    check: false,
+                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
+                    author: '新闻资讯5',
+                },
+            ],
+        };
+    }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -154,15 +157,16 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
-        this.state.checkedAll = true;
-        pro.check = true;
-        if (!event.target.checked) {
-            pro.check = false;
-        }
+        this.setState({
+            checkedAll: true
+        });
+        pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
                 if (this.state.list[i].check === false) {
-                    this.state.checkedAll = false;
+                    this.setState({
+                        checkedAll: false
+                    });
                 }
             }
         }
@@ -171,9 +175,9 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleClickRemove = (pro: any) => {
-        this.state.modalName = pro.name;
-        this.state.modalId = pro.id;
         this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
             open: true,
             modalType: 0,
         });

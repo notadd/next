@@ -356,6 +356,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         className="data-picker"
                                         keyboard
                                         clearable
+                                        value={this.state.time}
                                         onChange={this.handleDateChange}
                                         animateYearScrolling={false}
                                     />
