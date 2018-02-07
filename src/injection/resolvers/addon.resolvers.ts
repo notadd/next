@@ -1,6 +1,8 @@
-import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Addon } from "@notadd/core/injectors/addon.injector";
 import { AddonService } from "../services/addon.service";
-import { Addon } from "../../../packages/core/injectors/addon.injector";
+import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
 @Resolver("Addon")
 export class AddonResolvers {
@@ -12,6 +14,7 @@ export class AddonResolvers {
      * @returns { Addon }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async disableAddon(identification: string): Addon {
         return await this.addonService.disableAddon(identification);
     }
@@ -21,6 +24,7 @@ export class AddonResolvers {
      * @returns { Addon }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async enableAddon(identification: string): Addon {
         return await this.addonService.enableAddon(identification);
     }
@@ -30,6 +34,7 @@ export class AddonResolvers {
      * @returns { Addon }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getAddon(identification: string): Addon {
         return await this.addonService.getAddon(identification);
     }
@@ -39,6 +44,7 @@ export class AddonResolvers {
      * @returns { Array<Addon> }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getAddons(filter): Array<Addon> {
         return await this.addonService.getAddons(filter);
     }
@@ -48,6 +54,7 @@ export class AddonResolvers {
      * @returns { Addon }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async installAddon(identification: string): Addon {
         return await this.addonService.installAddon(identification);
     }
@@ -57,6 +64,7 @@ export class AddonResolvers {
      * @returns { Addon }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async uninstallAddon(identification: string): Addon {
         return await this.addonService.uninstallAddon(identification);
     }

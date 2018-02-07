@@ -1,6 +1,6 @@
+import { Addon } from "@notadd/core/injectors/addon.injector";
 import { Component } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { Addon } from "@notadd/core/injectors/addon.injector";
 
 @Component()
 export class AddonService {

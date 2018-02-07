@@ -1,6 +1,6 @@
 import { Component } from "@nestjs/common";
-import { SettingService } from "@notadd/setting/services/setting.service";
 import { Extension } from "../../../packages/core/injectors/extension.injector";
+import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class ExtensionService {

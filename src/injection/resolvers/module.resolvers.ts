@@ -1,6 +1,8 @@
-import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { ModuleService } from "../services/module.service";
 import { Module } from "../../../packages/core/injectors/module.injector";
+import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
 @Resolver("Module")
 export class ModuleResolvers {
@@ -12,6 +14,7 @@ export class ModuleResolvers {
      * @returns { Module }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async disableModule(identification: string): Module {
         return await this.moduleService.disableModule(identification);
     }
@@ -21,6 +24,7 @@ export class ModuleResolvers {
      * @returns { Module }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async enableModule(identification: string): Module {
         return await this.moduleService.enableModule(identification);
     }
@@ -30,6 +34,7 @@ export class ModuleResolvers {
      * @returns { Module }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getModule(identification: string): Module {
         return await this.moduleService.getModule(identification);
     }
@@ -39,6 +44,7 @@ export class ModuleResolvers {
      * @returns { Module }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getModules(filter: object): Module {
         return await this.moduleService.getModules(filter);
     }
@@ -48,6 +54,7 @@ export class ModuleResolvers {
      * @returns { Module }enableModule
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async installModule(identification: string): Module {
         return await this.moduleService.installModule(identification);
     }
@@ -57,6 +64,7 @@ export class ModuleResolvers {
      * @returns { Module }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async uninstallModule(identification: string): Module {
         return await this.moduleService.uninstallModule(identification);
     }

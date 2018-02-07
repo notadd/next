@@ -1,6 +1,8 @@
-import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Extension } from "@notadd/core/injectors/extension.injector";
 import { ExtensionService } from "../services/extension.service";
-import { Extension } from "../../../packages/core/injectors/extension.injector";
+import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
 @Resolver("Extension")
 export class ExtensionResolvers {
@@ -12,6 +14,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async disableExtension(identification: string): Extension {
         return await this.extensionService.disableExtension(identification);
     }
@@ -21,6 +24,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async enableExtension(identification: string): Extension {
         return await this.extensionService.enableExtension(identification);
     }
@@ -30,6 +34,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getExtension(identification: string): Extension {
         return await this.extensionService.getExtension(identification);
     }
@@ -39,6 +44,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Query()
+    @UseGuards(UserGuard)
     public async getExtensions(filter: object): Extension {
         return await this.extensionService.getExtensions(filter);
     }
@@ -48,6 +54,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async installExtension(identification: string): Extension {
         return await this.extensionService.installExtension(identification);
     }
@@ -57,6 +64,7 @@ export class ExtensionResolvers {
      * @returns { Extension }
      */
     @Mutation()
+    @UseGuards(UserGuard)
     public async uninstallExtension(identification: string): Extension {
         return await this.extensionService.uninstallExtension(identification);
     }

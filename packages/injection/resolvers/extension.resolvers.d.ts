@@ -1,5 +1,5 @@
+import { Extension } from "@notadd/core/injectors/extension.injector";
 import { ExtensionService } from "../services/extension.service";
-import { Extension } from "../../../packages/core/injectors/extension.injector";
 export declare class ExtensionResolvers {
     private readonly extensionService;
     constructor(extensionService: ExtensionService);
