@@ -3,10 +3,9 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import SwipeableViews from 'react-swipeable-views';
-// import { autoPlay } from 'react-swipeable-views-utils';
-// import SupportTouch from 'docs/src/modules/components/SupportTouch';
+import { autoPlay } from 'react-swipeable-views-utils';
 
-// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
@@ -155,73 +154,73 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
         return (
             <div className="home">
                 <Grid container spacing={24} className="bottom-content">
-                    <Grid item xs={12} md={8} sm={12}>
-                        <Paper className={this.props.classes.leftPaper}>
-                            <div className="home-bg">
-                                <div>
-                                    <h4>开发团队</h4>
-                                    <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
-                                        {mySwiper(this.state.list)}
-                                    </SwipeableViews>
+                        <Grid item xs={12} md={8} sm={12}>
+                            <Paper className={this.props.classes.leftPaper}>
+                                <div className="home-bg">
+                                    <div>
+                                        <h4>开发团队</h4>
+                                        <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+                                            {mySwiper(this.state.list)}
+                                        </AutoPlaySwipeableViews>
+                                    </div>
                                 </div>
-                            </div>
-                            <Grid className="teamBox" container spacing={40}>
-                                {this.state.list.map((item: any, val: number) => {
-                                    return (
-                                        <Grid
-                                            item
-                                            xs={1}
-                                            md={1}
-                                            sm={1}
-                                            key={val}
-                                            className={
-                                                val === index ? this.props.classes.spanActive : ''
-                                            }
-                                            onClick={() => this.handleChange(event, val)}
-                                        >
-                                            {item.name}
-                                        </Grid>
-                                    );
-                                })}
-                            </Grid>
-                            <div className="thank-content">
-                                感谢：
-                                <span>
-                                    <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
-                                </span>
-                                <span>
-                                    <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
-                                </span>
-                                <span>
-                                    <a href="https://github.com/Seevil" target="_blank">Intern</a>
-                                </span>
-                                <span className="line">/</span>
-                                <span>
-                                    <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
-                                </span>
-                            </div>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4}>
-                        <Paper className={this.props.classes.rightPaper}>
-                            <div className="version-information" style={{paddingBottom: 25}}>
-                                <p>
-                                    <span>Notadd版本</span>
-                                    <span style={{color: '#3f51b5'}}>1.16.30</span>
-                                </p>
-                                <div>
-                                    {this.state.version.map((item: any, val: number) => {
+                                <Grid className="teamBox" container spacing={40}>
+                                    {this.state.list.map((item: any, val: number) => {
                                         return (
-                                            <p key={val}>
-                                                <span>{item.name}</span>
-                                                <span>{item.intro}</span>
-                                            </p>
+                                            <Grid
+                                                item
+                                                xs={1}
+                                                md={1}
+                                                sm={1}
+                                                key={val}
+                                                className={
+                                                    val === index ? this.props.classes.spanActive : ''
+                                                }
+                                                onClick={() => this.handleChange(event, val)}
+                                            >
+                                                {item.name}
+                                            </Grid>
                                         );
                                     })}
+                                </Grid>
+                                <div className="thank-content">
+                                    感谢：
+                                    <span>
+                                        <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
+                                    </span>
+                                    <span>
+                                        <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
+                                    </span>
+                                    <span>
+                                        <a href="https://github.com/Seevil" target="_blank">Intern</a>
+                                    </span>
+                                    <span className="line">/</span>
+                                    <span>
+                                        <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
+                                    </span>
                                 </div>
-                            </div>
-                        </Paper>
-                    </Grid>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4}>
+                            <Paper className={this.props.classes.rightPaper}>
+                                <div className="version-information" style={{paddingBottom: 25}}>
+                                    <p>
+                                        <span>Notadd版本</span>
+                                        <span style={{color: '#3f51b5'}}>1.16.30</span>
+                                    </p>
+                                    <div>
+                                        {this.state.version.map((item: any, val: number) => {
+                                            return (
+                                                <p key={val}>
+                                                    <span>{item.name}</span>
+                                                    <span>{item.intro}</span>
+                                                </p>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </Paper>
+                        </Grid>
                 </Grid>
             </div>
         );
