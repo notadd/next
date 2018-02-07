@@ -1,9 +1,9 @@
-import { AddonDemoModule } from "../modules/addon-demo.module";
+import { Addon } from "@notadd/injection/decorators/addon.decorator";
 
-import { InjectionType } from "@notadd/core/constants/injection.constants";
-
+@Addon({
+    identification: "",
+    version: "",
+})
 export class AddonDemoInjection {
-    static identification: string = "addon-demo";
-    static module: any = AddonDemoModule;
-    static type: string = InjectionType.Addon;
+
 }
