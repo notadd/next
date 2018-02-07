@@ -14,8 +14,8 @@ type Query {
 }
 
 type Mutation {
-    disableAddon: Addon,
-    enableAddon: Addon,
-    installAddon: Addon,
-    uninstallAddon: Addon,
+    disableAddon(identification: String): Addon,
+    enableAddon(identification: String): Addon,
+    installAddon(identification: String): Addon,
+    uninstallAddon(identification: String): Addon,
 }
