@@ -114,6 +114,7 @@ body {
 .data-picker {
     position: absolute !important;
     width: 100%;
+    bottom: 0;
 }
 .data-picker > div:before {
     background-color: #dfdfdf;
@@ -121,8 +122,10 @@ body {
 }
 .data-picker > div > div {
     margin-left: 8px;
-    margin-top: 6px;
-    height: 30px;
+    height: 34px;
+}
+.data-picker > div > div > button {
+    height: inherit;
 }
 .data-picker input {
     font-size: 16px;

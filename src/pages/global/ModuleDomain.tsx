@@ -91,10 +91,9 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                 },
             ],
         };
-
     }
-    handleChange = (pro: any) => (event: any, check: any) => {
-        pro.status = check;
+    handleChange = (pro: any) => (event: any, check: boolean) => {
+        pro.use = check;
         this.setState({
             [pro]: check,
         });
