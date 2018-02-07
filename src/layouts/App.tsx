@@ -448,41 +448,43 @@ class App extends React.Component<Props, State> {
     handleFullScreen = () => {
         this.setState({ fullScreen: !this.state.fullScreen });
         if (this.state.fullScreen) {
-            const el = document;
+            const el: any = document;
             let cfs;
             if (el.webkitCancelFullScreen) {
                 cfs = el.webkitCancelFullScreen;
-            } else if (el['mozCancelFullScreen']) {
-                cfs = el['mozCancelFullScreen'];
-            } else if (el['exitFullScreen']) {
-                cfs = el['exitFullScreen'];
-            } else if (el['cancelFullScreen']) {
-                cfs = el['cancelFullScreen'];
+            } else if (el.mozCancelFullScreen) {
+                cfs = el.mozCancelFullScreen;
+            } else if (el.exitFullScreen) {
+                cfs = el.exitFullScreen;
+            } else if (el.cancelFullScreen) {
+                cfs = el.cancelFullScreen;
             }
             let wscript;
             if (typeof cfs !== 'undefined' && cfs) {
                 cfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            const w: any = window;
+            if (typeof w.ActiveXObject !== 'undefined') {
+                wscript = new w.ActiveXObject('WScript.Shell');
                 if (wscript !== null) {
                     wscript.SendKeys('{F11}');
                 }
             }
         } else {
-            const el = document.documentElement;
+            const el: any = document.documentElement;
             const rfs = el.webkitRequestFullScreen
-                || el['mozRequestFullScreen']
-                || el['msRequestFullScreen']
-                || el['requestFullScreen'];
+                || el.mozRequestFullScreen
+                || el.msRequestFullScreen
+                || el.requestFullScreen;
             let wscript;
             if (typeof rfs !== 'undefined' && rfs) {
                 rfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            const w: any = window;
+            if (typeof w.ActiveXObject !== 'undefined') {
+                wscript = new w.ActiveXObject('WScript.Shell');
                 if (wscript) {
                     wscript.SendKeys('{F11}');
                 }
@@ -494,9 +496,9 @@ class App extends React.Component<Props, State> {
             openSearch: false,
         });
     };
-    handleChangeSelect = (selectedOption: object) => {
+    handleChangeSelect = (selectedOption: any) => {
         this.setState({ selectedOption });
-        createHashHistory().push(selectedOption['url']);
+        createHashHistory().push(selectedOption.url);
     };
     render() {
         const { current, openSearch, selectedOption, selectOptions, open } = this.state;
@@ -643,7 +645,7 @@ class App extends React.Component<Props, State> {
                                                         onClick={this.toggleDrawer}
                                                     >
                                                         {
-                                                            open ? <Close/> :<MenuIcon/>
+                                                            open ? <Close/> : <MenuIcon/>
                                                         }
                                                     </IconButton>
                                                     <IconButton
@@ -746,7 +748,11 @@ class App extends React.Component<Props, State> {
                                                         modal: classes.root,
                                                         docked: classNames(
                                                             classes.drawerDocked,
-                                                            (!this.state.open || open && wd === 'sm') ? classes.drawerPaperClose : '',
+                                                            (!this.state.open || open && wd === 'sm')
+                                                                ?
+                                                                classes.drawerPaperClose
+                                                                :
+                                                                '',
                                                             wd === 'sm' && classes.smDrawerPaperClose
                                                         ),
                                                         paper: classes.drawerPaper

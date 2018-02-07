@@ -1,5 +1,5 @@
 import * as React from 'react';
-import withStyles, {WithStyles} from 'material-ui/styles/withStyles';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import SwipeableViews from 'react-swipeable-views';
@@ -36,20 +36,20 @@ type State = {
 
 const mySwiper = (obj: any) =>
     (
-        obj.map((item: object, index: number) => {
+        obj.map((item: any, index: number) => {
             return (
                 <div key={index} className="team-item">
                     <div className="img">
-                        <img src={item['img']}/>
+                        <img src={item.img}/>
                     </div>
                     <div className="intro">
-                        <h3>{item['name']}</h3>
+                        <h3>{item.name}</h3>
                         <p>
-                            <a href={item['link']} target="_blank">{item['link']}</a>
+                            <a href={item.link} target="_blank">{item.link}</a>
                         </p>
                     </div>
                 </div>
-            )
+            );
         })
     );
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {

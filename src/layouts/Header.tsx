@@ -132,42 +132,44 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
     handleFullScreen = () => {
         this.setState({ fullScreen: !this.state.fullScreen });
         if (this.state.fullScreen) {
-            const el = document;
+            const el: any = document;
             let cfs;
 
             if (el.webkitCancelFullScreen) {
                 cfs = el.webkitCancelFullScreen;
-            } else if (el['mozCancelFullScreen']) {
-                cfs = el['mozCancelFullScreen'];
-            } else if (el['exitFullScreen']) {
-                cfs = el['exitFullScreen'];
-            } else if (el['cancelFullScreen']) {
-                cfs = el['cancelFullScreen'];
+            } else if (el.mozCancelFullScreen) {
+                cfs = el.mozCancelFullScreen;
+            } else if (el.exitFullScreen) {
+                cfs = el.exitFullScreen;
+            } else if (el.cancelFullScreen) {
+                cfs = el.cancelFullScreen;
             }
             let wscript;
             if (typeof cfs !== 'undefined' && cfs) {
                 cfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            const w: any = window;
+            if (typeof w.ActiveXObject !== 'undefined') {
+                wscript = new w.ActiveXObject('WScript.Shell');
                 if (wscript !== null) {
                     wscript.SendKeys('{F11}');
                 }
             }
         } else {
-            const el = document.documentElement;
+            const el: any = document.documentElement;
             const rfs = el.webkitRequestFullScreen
-                || el['mozRequestFullScreen']
-                || el['msRequestFullScreen']
-                || el['requestFullScreen'];
+                || el.mozRequestFullScreen
+                || el.msRequestFullScreen
+                || el.requestFullScreen;
             let wscript;
             if (typeof rfs !== 'undefined' && rfs) {
                 rfs.call(el);
                 return;
             }
-            if (typeof window['ActiveXObject'] !== 'undefined') {
-                wscript = new window['ActiveXObject']('WScript.Shell');
+            const w: any = window;
+            if (typeof w.ActiveXObject !== 'undefined') {
+                wscript = new w.ActiveXObject('WScript.Shell');
                 if (wscript) {
                     wscript.SendKeys('{F11}');
                 }

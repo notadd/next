@@ -10,13 +10,18 @@ type State = {
 };
 
 declare global {
-    interface Window { UE: any; }
+    interface Window {
+        UE: any;
+    }
 }
 
 interface Props {
     config?: object;
+
     path: string;
+
     value: string;
+
     // content: any;
 }
 
@@ -32,6 +37,7 @@ class Editor extends React.Component<Props, State> {
             ready: '',
         };
     }
+
     componentDidMount() {
         if (window.UE !== undefined) {
             // 如果全局对象存在，说明编辑器代码已经初始化完成，直接加载编辑器
@@ -41,37 +47,39 @@ class Editor extends React.Component<Props, State> {
             this.insertScriptTag();
         }
     }
+
     componentWillUnmount() {
         // 组件卸载后，清除放入库的id
         if (this.state.instance !== null && this.state.instance.destroy) {
             this.state.instance.destroy();
         }
     }
+
     insertScriptTag() {
         const loading = [];
         const self = this;
-        let configScriptTag = document.getElementById('configScriptTag');
-        let editorScriptTag = document.getElementById('editorScriptTag');
+        let configScriptTag: any = document.getElementById('configScriptTag');
+        let editorScriptTag: any = document.getElementById('editorScriptTag');
         // 如果这个tag不存在，则生成相关代码tag以加载代码
         if (configScriptTag === null) {
             loading.push(new Promise((resolve, reject) => {
-                let configScriptTag: HTMLElement = document.createElement('script');
-                configScriptTag['type'] = 'text/javascript';
-                configScriptTag['src'] = `${self.props.path}neditor.config.js?v=${new Date().getTime()}`;
-                configScriptTag['id'] = 'configScriptTag';
-                if (configScriptTag['readyState']) {
-                    configScriptTag['onreadystatechange'] = () => {
-                        if (configScriptTag && (configScriptTag['readyState'] === 'loaded' ||
-                            configScriptTag['readyState'] === 'complete')) {
-                            configScriptTag['onreadystatechange'] = null;
+                configScriptTag = document.createElement('script');
+                configScriptTag.type = 'text/javascript';
+                configScriptTag.src = `${self.props.path}neditor.config.js?v=${new Date().getTime()}`;
+                configScriptTag.id = 'configScriptTag';
+                if (configScriptTag.readyState) {
+                    configScriptTag.onreadystatechange = () => {
+                        if (configScriptTag && (configScriptTag.readyState === 'loaded' ||
+                                configScriptTag.readyState === 'complete')) {
+                            configScriptTag.onreadystatechange = null;
                             resolve(configScriptTag);
                         }
                     };
                 } else {
                     configScriptTag.onload = () => {
-                       if (configScriptTag !== null) {
+                        if (configScriptTag !== null) {
                             resolve(configScriptTag);
-                       }
+                        }
                     };
                 }
                 configScriptTag.onerror = () => {
@@ -82,15 +90,15 @@ class Editor extends React.Component<Props, State> {
         }
         if (editorScriptTag === null) {
             loading.push(new Promise((resolve, reject) => {
-                let editorScriptTag: HTMLElement = document.createElement('script');
-                editorScriptTag['type'] = 'text/javascript';
-                editorScriptTag['src'] = `${self.props.path}neditor.all.min.js?v=${new Date().getTime()}`;
-                editorScriptTag['id'] = 'editorScriptTag';
-                if (editorScriptTag['readyState']) {
-                    editorScriptTag['onreadystatechange'] = () => {
-                        if (editorScriptTag && (editorScriptTag['readyState'] === 'loaded' ||
-                            editorScriptTag['readyState'] === 'complete')) {
-                            editorScriptTag['onreadystatechange'] = null;
+                editorScriptTag = document.createElement('script');
+                editorScriptTag.type = 'text/javascript';
+                editorScriptTag.src = `${self.props.path}neditor.all.min.js?v=${new Date().getTime()}`;
+                editorScriptTag.id = 'editorScriptTag';
+                if (editorScriptTag.readyState) {
+                    editorScriptTag.onreadystatechange = () => {
+                        if (editorScriptTag && (editorScriptTag.readyState === 'loaded' ||
+                                editorScriptTag.readyState === 'complete')) {
+                            editorScriptTag.onreadystatechange = null;
                             resolve(editorScriptTag);
                         }
                     };
@@ -109,11 +117,15 @@ class Editor extends React.Component<Props, State> {
         }
         Promise.all(loading).then(() => {
             // 等待代码加载完成后初始化编辑器
-            setTimeout(() => {
-                self.initEditor();
-            }, 300);
+            window.setTimeout(
+                () => {
+                    self.initEditor();
+                },
+                300,
+            );
         });
     }
+
     initEditor() {
         const self = this;
         if (self.state.instance === null) {
@@ -136,10 +148,12 @@ class Editor extends React.Component<Props, State> {
             // });
         }
     }
+
     render() {
         return (
-            <div id={this.state.randomId} />
+            <div id={this.state.randomId}/>
         );
     }
 }
+
 export default Editor;
