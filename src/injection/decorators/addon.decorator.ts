@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { InjectionType } from "@notadd/core/constants/injection.constants";
 
 export function Addon(obj: {
     authors?: Author[],
@@ -18,5 +19,6 @@ export function Addon(obj: {
                 Reflect.defineMetadata(property, obj[property], target);
             }
         }
+        Reflect.defineMetadata("__injection_type__", InjectionType.Addon, target);
     };
 }
