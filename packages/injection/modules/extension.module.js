@@ -18,6 +18,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const extension_resolvers_1 = require("../resolvers/extension.resolvers");
+const extension_service_1 = require("../services/extension.service");
 const utilities_1 = require("../utilities");
 const injection_metadata_1 = require("../metadatas/injection.metadata");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
@@ -55,6 +56,7 @@ ExtensionModule = __decorate([
     common_1.Module({
         components: [
             extension_resolvers_1.ExtensionResolvers,
+            extension_service_1.ExtensionService,
         ],
         imports: [
             setting_module_1.SettingModule,

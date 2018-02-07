@@ -1,4 +1,5 @@
 import { AddonResolvers } from "../resolvers/addon.resolvers";
+import { AddonService } from "../services/addon.service";
 import { importClassesFromDirectories } from "../utilities";
 import { InjectionMetadata } from "../metadatas";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
@@ -10,6 +11,7 @@ import { SettingModule } from "@notadd/setting/modules/setting.module";
 @Module({
     components: [
         AddonResolvers,
+        AddonService,
     ],
     imports: [
         SettingModule,

@@ -22,6 +22,7 @@ const injection_metadata_1 = require("../metadatas/injection.metadata");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const common_1 = require("@nestjs/common");
 const module_resolvers_1 = require("../resolvers/module.resolvers");
+const module_service_1 = require("../services/module.service");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let ModuleModule = class ModuleModule {
@@ -55,6 +56,7 @@ ModuleModule = __decorate([
     common_1.Module({
         components: [
             module_resolvers_1.ModuleResolvers,
+            module_service_1.ModuleService,
         ],
         imports: [
             setting_module_1.SettingModule,

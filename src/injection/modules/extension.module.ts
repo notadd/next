@@ -1,4 +1,5 @@
 import { ExtensionResolvers } from "../resolvers/extension.resolvers";
+import { ExtensionService } from "../services/extension.service";
 import { importClassesFromDirectories } from "../utilities";
 import { InjectionMetadata } from "../metadatas/injection.metadata";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
@@ -10,6 +11,7 @@ import { SettingModule } from "@notadd/setting/modules/setting.module";
 @Module({
     components: [
         ExtensionResolvers,
+        ExtensionService,
     ],
     imports: [
         SettingModule,
