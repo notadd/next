@@ -1,7 +1,7 @@
-type Author = {
-    email?: string,
-    github?: string,
-    homepage: string,
-    username?: string,
-    weibo?: string,
+export type Author = {
+    email?: string;
+    github?: string;
+    homepage: string;
+    username?: string;
+    weibo?: string;
 };

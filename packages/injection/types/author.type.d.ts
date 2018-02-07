@@ -1,4 +1,4 @@
-declare type Author = {
+export declare type Author = {
     email?: string;
     github?: string;
     homepage: string;
