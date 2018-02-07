@@ -14,8 +14,8 @@ type Query {
 }
 
 type Mutation {
-    disableExtension: Extension,
-    enableExtension: Extension,
-    installExtension: Extension,
-    uninstallExtension: Extension,
+    disableExtension(identification: String): Extension,
+    enableExtension(identification: String): Extension,
+    installExtension(identification: String): Extension,
+    uninstallExtension(identification: String): Extension,
 }
