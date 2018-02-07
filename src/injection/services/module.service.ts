@@ -33,6 +33,7 @@ export class ModuleService {
      * @returns { Promise<Array<Module>> }
      */
     public async getModules(filter: object): Promise<Array<Module>> {
+        return [];
     }
 
     /**

@@ -18,7 +18,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const module_service_1 = require("../services/module.service");
-const module_injector_1 = require("../../../packages/core/injectors/module.injector");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const user_guard_1 = require("@notadd/authentication/guards/user.guard");
@@ -62,42 +61,42 @@ __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "disableModule", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "enableModule", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "getModule", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "getModules", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "installModule", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", module_injector_1.Module)
+    __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "uninstallModule", null);
 ModuleResolvers = __decorate([
     graphql_1.Resolver("Module"),

@@ -33,6 +33,7 @@ export class AddonService {
      * @returns { Promise<Array<Addon>> }
      */
     public async getAddons(filter): Promise<Array<Addon>> {
+        return [];
     }
 
     /**

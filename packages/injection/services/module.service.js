@@ -37,6 +37,7 @@ let ModuleService = class ModuleService {
     }
     getModules(filter) {
         return __awaiter(this, void 0, void 0, function* () {
+            return [];
         });
     }
     installModule(identification) {

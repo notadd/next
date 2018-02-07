@@ -37,6 +37,7 @@ let AddonService = class AddonService {
     }
     getAddons(filter) {
         return __awaiter(this, void 0, void 0, function* () {
+            return [];
         });
     }
     installAddon(identification) {

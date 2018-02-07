@@ -3,10 +3,10 @@ import { Module } from "../../../packages/core/injectors/module.injector";
 export declare class ModuleResolvers {
     private readonly moduleService;
     constructor(moduleService: ModuleService);
-    disableModule(identification: string): Module;
-    enableModule(identification: string): Module;
-    getModule(identification: string): Module;
-    getModules(filter: object): Module;
-    installModule(identification: string): Module;
-    uninstallModule(identification: string): Module;
+    disableModule(identification: string): Promise<Module>;
+    enableModule(identification: string): Promise<Module>;
+    getModule(identification: string): Promise<Module>;
+    getModules(filter: object): Promise<Array<Module>>;
+    installModule(identification: string): Promise<Module>;
+    uninstallModule(identification: string): Promise<Module>;
 }

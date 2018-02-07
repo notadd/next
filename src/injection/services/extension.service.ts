@@ -33,6 +33,7 @@ export class ExtensionService {
      * @returns { Promise<Array<Extension>> }
      */
     public async getExtensions(filter: object): Promise<Array<Extension>> {
+        return [];
     }
 
     /**
