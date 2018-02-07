@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { Author } from "../types/author.type";
 
 export function Addon(obj: {
     authors?: Author[],

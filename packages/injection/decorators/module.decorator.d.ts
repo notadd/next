@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { Author } from "../types/author.type";
 export declare function Module(obj: {
     authors?: Author[];
     exports?: any[];
