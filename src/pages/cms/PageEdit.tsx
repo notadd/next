@@ -55,6 +55,7 @@ type State = {
     list: Array<any>,
     num: number,
     value: any,
+    ready: any,
 };
 
 class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -86,6 +87,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             pageType: type,
             num: 0,
             value: '',
+            ready: '',
             list: [
                 {
                     id: 0,
@@ -94,6 +96,9 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
         };
     }
+    handleInput = () => {
+        window.console.log(this.state.ready);
+    };
     handleAddEditor = () => {
         this.state.list.push({
             path: 'neditor/',
@@ -161,7 +166,11 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     this.state.list.map((item, index) => {
                                         return (
                                             <div className="editor" key={index}>
-                                                <Editor path={item.path} value={this.state.value}/>
+                                                <Editor
+                                                    path={item.path}
+                                                    value={this.state.value}
+                                                    ready={this.handleInput}
+                                                />
                                                 {
                                                     index === 0 ?
                                                         <span onClick={this.handleAddEditor}>添加</span> :
