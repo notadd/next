@@ -86,10 +86,10 @@ class SideBar extends React.Component<PropsWithStyles, State> {
             },
         };
     }
-    componentWillReceiveProps(nextProps: object) {
+    componentWillReceiveProps(nextProps: any) {
         this.setState({
-            open: nextProps['open'],
-            navs: nextProps['sideNav'],
+            open: nextProps.open,
+            navs: nextProps.sideNav,
         });
     }
     componentDidMount() {
@@ -99,7 +99,7 @@ class SideBar extends React.Component<PropsWithStyles, State> {
             window.location.reload();
         } else {
             const userState = Object.assign(this.state.user);
-            userState.name = JSON.parse(user)['username'];
+            userState.name = JSON.parse(user).username;
             this.setState({user: userState});
         }
     }

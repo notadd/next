@@ -4,9 +4,11 @@ import { createMuiTheme } from 'material-ui/styles';
 import { indigo, green } from 'material-ui/colors';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
+const ind: any = indigo;
+
 const theme = createMuiTheme({
   palette: {
-    primary: indigo['A500'],
+    primary: ind.A500,
     secondary: green,
   },
 });

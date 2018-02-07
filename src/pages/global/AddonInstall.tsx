@@ -112,6 +112,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         });
     };
     handleDownLoad = () => {
+        window.console.log('download');
     };
     handleClose = () => {
         this.setState({ open: false });

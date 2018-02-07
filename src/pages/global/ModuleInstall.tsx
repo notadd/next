@@ -112,6 +112,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
         });
     };
     handleDownLoad = () => {
+        window.console.log('download');
     };
     handleClose = () => {
         this.setState({ open: false });

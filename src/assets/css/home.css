@@ -32,10 +32,20 @@
     font-weight: 500;
 }
 
-.home .bottom-content .home-bg > div > div {
-    padding-left: 13%;
+.home .bottom-content .home-bg > div > h4 + div {
     margin-top: 56px;
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container {
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container div {
+    overflow: hidden;
+}
+
+.home .bottom-content .home-bg .team-item {
     display: flex;
+    padding-left: 13%;
 }
 
 .home .bottom-content .home-bg > div .img {
@@ -172,4 +182,7 @@
 
 .home .bottom-content > div > div {
     min-height: 385px;
+}
+.spanActive {
+    color: #3f51b5 !important;
 }

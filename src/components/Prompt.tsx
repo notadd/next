@@ -2,9 +2,9 @@ import * as React from 'react';
 import Popover from 'material-ui/Popover';
 import Typography from 'material-ui/Typography';
 
-interface Props extends  React.Component{
-    open?: boolean,
-    message?: string
+interface Props extends React.Component {
+    open?: boolean;
+    message?: string;
 }
 
 class Prompt extends React.Component<Props, {}> {
@@ -25,7 +25,7 @@ class Prompt extends React.Component<Props, {}> {
                     horizontal: 'right',
                 }}
             >
-                <Typography>{ message }</Typography>
+                <Typography>{message}</Typography>
             </Popover>
         );
     }
