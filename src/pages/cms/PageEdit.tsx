@@ -96,7 +96,9 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
         };
     }
-    handleInput = () => {};
+    handleInput = () => {
+        window.console.log(this.state.ready);
+    };
     handleAddEditor = () => {
         this.state.list.push({
             path: 'neditor/',

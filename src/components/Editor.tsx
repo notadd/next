@@ -131,23 +131,26 @@ class Editor extends React.Component<Props, State> {
         const self = this;
         if (self.state.instance === null) {
             // self.$nextTick(() => {});
-            self.setState({
-                instance: window.UE.getEditor(self.state.randomId),
-            }, () => {
-                window.console.log(self.state.instance);
-                // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
-                self.state.instance.addListener('contentChange', () => {
-                    self.setState({'input': self.state.instance.getContent()});
-                  // self.$emit('input', self.state.instance.getContent());
-                });
-                self.state.instance.addListener('ready', () => {
-                    self.state.instance.setContent(self.props.value);
-                    self.setState({
-                        'ready': self.state.instance,
+            self.setState(
+                {
+                    instance: window.UE.getEditor(self.state.randomId),
+                },
+                () => {
+                    window.console.log(self.state.instance);
+                    // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
+                    self.state.instance.addListener('contentChange', () => {
+                        self.setState({'input': self.state.instance.getContent()});
+                      // self.$emit('input', self.state.instance.getContent());
                     });
-                    // self.$emit('ready', self.state.instance);
-                });
-            });
+                    self.state.instance.addListener('ready', () => {
+                        self.state.instance.setContent(self.props.value);
+                        self.setState({
+                            'ready': self.state.instance,
+                        });
+                        // self.$emit('ready', self.state.instance);
+                    });
+                }
+            );
         }
     }
 
