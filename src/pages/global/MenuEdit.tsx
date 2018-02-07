@@ -61,8 +61,8 @@ type State = {
 };
 
 class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor (props: any) {
-        super(props);
+    constructor (props: any, state: any) {
+        super(props, state);
         let type = '';
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';

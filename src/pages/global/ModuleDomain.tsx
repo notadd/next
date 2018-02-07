@@ -38,74 +38,71 @@ type State = {
     open: boolean,
     rowsPerPage: number,
     currentPage: number,
+    list: any,
 };
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        open: false,
-        rowsPerPage: 2,
-        currentPage: 0,
-        list: [
-            {
-                id: 11,
-                name: 'notadd',
-                domain: '多域名功能未开启',
-                defaul: true,
-                other: '/',
-                use: true,
-            },
-            {
-                id: 12,
-                name: 'notadd',
-                domain: '多域名功能未开启',
-                defaul: false,
-                other: '/',
-                use: false,
-            },
-            {
-                id: 13,
-                name: 'notadd',
-                domain: '多域名功能未开启',
-                defaul: false,
-                other: '/',
-                use: false,
-            },
-            {
-                id: 14,
-                name: 'notadd',
-                domain: '多域名功能未开启',
-                defaul: false,
-                other: '/',
-                use: false,
-            },
-            {
-                id: 15,
-                name: 'notadd',
-                domain: '多域名功能未开启',
-                defaul: false,
-                other: '/',
-                use: false,
-            },
-        ],
-    };
-    handleChange = (pro: any) => (event: any, checked: any) => {
-        if (checked) {
-            pro.use = true;
-        } else {
-            pro.use = false;
-        }
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            open: false,
+            rowsPerPage: 2,
+            currentPage: 0,
+            list: [
+                {
+                    id: 11,
+                    name: 'notadd',
+                    domain: '多域名功能未开启',
+                    defaul: true,
+                    other: '/',
+                    use: true,
+                },
+                {
+                    id: 12,
+                    name: 'notadd',
+                    domain: '多域名功能未开启',
+                    defaul: false,
+                    other: '/',
+                    use: false,
+                },
+                {
+                    id: 13,
+                    name: 'notadd',
+                    domain: '多域名功能未开启',
+                    defaul: false,
+                    other: '/',
+                    use: false,
+                },
+                {
+                    id: 14,
+                    name: 'notadd',
+                    domain: '多域名功能未开启',
+                    defaul: false,
+                    other: '/',
+                    use: false,
+                },
+                {
+                    id: 15,
+                    name: 'notadd',
+                    domain: '多域名功能未开启',
+                    defaul: false,
+                    other: '/',
+                    use: false,
+                },
+            ],
+        };
+
+    }
+    handleChange = (pro: any) => (event: any, check: any) => {
+        pro.status = check;
         this.setState({
-            [pro]: checked,
+            [pro]: check,
         });
     };
     changeCheckBox = (pro: any) => (event: any) => {
-        if (event.target.checked) {
-            pro.defaul = true;
-        } else {
-            pro.defaul = false;
-        }
+        pro.defaul = event.target.checked;
         this.setState({
-            [name]: event.target.checked,
+            [pro]: event.target.checked,
         });
     };
     handlePageClick = (data: any) => {
@@ -133,7 +130,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                             </TableHead>
                             <TableBody className="table-body">
                                 {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                    .map((n: any, index: number) => {
                                         return (
                                             <TableRow
                                                 hover

@@ -156,6 +156,7 @@ class Upload extends React.Component<WithStyles<keyof typeof styles>, State> {
         delete obj.errorMessage;
         delete obj.error;
         delete obj.GDisOPen;
+        window.console.log(this.state);
         let pass = true;
         let message = '';
         Object.keys(obj).forEach(key => {

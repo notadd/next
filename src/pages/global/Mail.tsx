@@ -49,15 +49,18 @@ type State = {
 };
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        sendingMode: '',
-        encryptionMethod: '',
-        serverAddress: '',
-        serverPort: '',
-        SMTPAccount: '',
-        SMTPEmail: '',
-        SMTPPassword: '',
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            sendingMode: '',
+            encryptionMethod: '',
+            serverAddress: '',
+            serverPort: '',
+            SMTPAccount: '',
+            SMTPEmail: '',
+            SMTPPassword: '',
+        };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({

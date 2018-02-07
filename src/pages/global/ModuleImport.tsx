@@ -45,48 +45,51 @@ type State = {
 };
 
 class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        checkedAll: false,
-        rowsPerPage: 2,
-        currentPage: 0,
-        list: [
-            {
-                id: 11,
-                check: false,
-                name: 'notadd',
-                description: '一些说明',
-                version: '0.777',
-            },
-            {
-                id: 12,
-                check: false,
-                name: 'notadd1',
-                description: '一些说明',
-                version: '0.456',
-            },
-            {
-                id: 13,
-                check: false,
-                name: 'notadd2',
-                description: '一些说明',
-                version: '0.777',
-            },
-            {
-                id: 14,
-                check: false,
-                name: 'notadd3',
-                description: '一些说明',
-                version: '0.777',
-            },
-            {
-                id: 15,
-                check: false,
-                name: 'notadd4',
-                description: '一些说明',
-                version: '0.7777',
-            },
-        ],
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            checkedAll: false,
+            rowsPerPage: 2,
+            currentPage: 0,
+            list: [
+                {
+                    id: 11,
+                    check: false,
+                    name: 'notadd',
+                    description: '一些说明',
+                    version: '0.777',
+                },
+                {
+                    id: 12,
+                    check: false,
+                    name: 'notadd1',
+                    description: '一些说明',
+                    version: '0.456',
+                },
+                {
+                    id: 13,
+                    check: false,
+                    name: 'notadd2',
+                    description: '一些说明',
+                    version: '0.777',
+                },
+                {
+                    id: 14,
+                    check: false,
+                    name: 'notadd3',
+                    description: '一些说明',
+                    version: '0.777',
+                },
+                {
+                    id: 15,
+                    check: false,
+                    name: 'notadd4',
+                    description: '一些说明',
+                    version: '0.7777',
+                },
+            ],
+        };
+    }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
@@ -111,15 +114,16 @@ class ModuleImport extends React.Component<WithStyles<keyof typeof styles>, Stat
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
-        this.state.checkedAll = true;
-        pro.check = true;
-        if (!event.target.checked) {
-            pro.check = false;
-        }
+        this.setState({
+            checkedAll: true
+        });
+        pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
                 if (this.state.list[i].check === false) {
-                    this.state.checkedAll = false;
+                    this.setState({
+                        checkedAll: false
+                    });
                 }
             }
         }
