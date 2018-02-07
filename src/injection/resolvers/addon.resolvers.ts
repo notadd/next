@@ -11,61 +11,61 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableAddon(identification: string): Addon {
+    public async disableAddon(identification: string): Promise<Addon> {
         return await this.addonService.disableAddon(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableAddon(identification: string): Addon {
+    public async enableAddon(identification: string): Promise<Addon> {
         return await this.addonService.enableAddon(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getAddon(identification: string): Addon {
+    public async getAddon(identification: string): Promise<Addon> {
         return await this.addonService.getAddon(identification);
     }
 
     /**
      * @param filter
-     * @returns { Array<Addon> }
+     * @returns { Promise<Array<Addon>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getAddons(filter): Array<Addon> {
+    public async getAddons(filter): Promise<Array<Addon>> {
         return await this.addonService.getAddons(filter);
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installAddon(identification: string): Addon {
+    public async installAddon(identification: string): Promise<Addon> {
         return await this.addonService.installAddon(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallAddon(identification: string): Addon {
+    public async uninstallAddon(identification: string): Promise<Addon> {
         return await this.addonService.uninstallAddon(identification);
     }
 }

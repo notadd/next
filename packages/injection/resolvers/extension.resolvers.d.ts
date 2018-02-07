@@ -3,10 +3,10 @@ import { ExtensionService } from "../services/extension.service";
 export declare class ExtensionResolvers {
     private readonly extensionService;
     constructor(extensionService: ExtensionService);
-    disableExtension(identification: string): Extension;
-    enableExtension(identification: string): Extension;
-    getExtension(identification: string): Extension;
-    getExtensions(filter: object): Extension;
-    installExtension(identification: string): Extension;
-    uninstallExtension(identification: string): Extension;
+    disableExtension(identification: string): Promise<Extension>;
+    enableExtension(identification: string): Promise<Extension>;
+    getExtension(identification: string): Promise<Extension>;
+    getExtensions(filter: object): Promise<Array<Extension>>;
+    installExtension(identification: string): Promise<Extension>;
+    uninstallExtension(identification: string): Promise<Extension>;
 }

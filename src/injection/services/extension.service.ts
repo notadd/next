@@ -9,43 +9,43 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
-    public async disableExtension(identification: string): Extension {
+    public async disableExtension(identification: string): Promise<Extension> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
-    public async enableExtension(identification: string): Extension {
+    public async enableExtension(identification: string): Promise<Extension> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
-    public async getExtension(identification: string): Extension {
+    public async getExtension(identification: string): Promise<Extension> {
     }
 
     /**
      * @param { Object } filter
-     * @returns { Extension }
+     * @returns { Promise<Array<Extension>> }
      */
-    public async getExtensions(filter: object): Extension {
+    public async getExtensions(filter: object): Promise<Array<Extension>> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
-    public async installExtension(identification: string): Extension {
+    public async installExtension(identification: string): Promise<Extension> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
-    public async uninstallExtension(identification: string): Extension {
+    public async uninstallExtension(identification: string): Promise<Extension> {
     }
 }

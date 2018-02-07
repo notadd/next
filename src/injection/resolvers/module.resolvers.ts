@@ -11,11 +11,11 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableModule(identification: string): Module {
+    public async disableModule(identification: string): Promise<Module> {
         return await this.moduleService.disableModule(identification);
     }
 
@@ -25,47 +25,47 @@ export class ModuleResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableModule(identification: string): Module {
+    public async enableModule(identification: string): Promise<Module> {
         return await this.moduleService.enableModule(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getModule(identification: string): Module {
+    public async getModule(identification: string): Promise<Module> {
         return await this.moduleService.getModule(identification);
     }
 
     /**
      * @param { Object } filter
-     * @returns { Module }
+     * @returns { Promise<Array<Module>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getModules(filter: object): Module {
+    public async getModules(filter: object): Promise<Array<Module>> {
         return await this.moduleService.getModules(filter);
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }enableModule
+     * @returns { Promise<Module> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installModule(identification: string): Module {
+    public async installModule(identification: string): Promise<Module> {
         return await this.moduleService.installModule(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallModule(identification: string): Module {
+    public async uninstallModule(identification: string): Promise<Module> {
         return await this.moduleService.uninstallModule(identification);
     }
 }

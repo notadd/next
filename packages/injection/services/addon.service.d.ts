@@ -3,10 +3,10 @@ import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class AddonService {
     private readonly settingService;
     constructor(settingService: SettingService);
-    disableAddon(identification: string): Addon;
-    enableAddon(identification: string): Addon;
-    getAddon(identification: string): Addon;
-    getAddons(filter: any): Array<Addon>;
-    installAddon(identification: string): Addon;
-    uninstallAddon(identification: string): Addon;
+    disableAddon(identification: string): Promise<Addon>;
+    enableAddon(identification: string): Promise<Addon>;
+    getAddon(identification: string): Promise<Addon>;
+    getAddons(filter: any): Promise<Array<Addon>>;
+    installAddon(identification: string): Promise<Addon>;
+    uninstallAddon(identification: string): Promise<Addon>;
 }

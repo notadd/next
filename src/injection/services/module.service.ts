@@ -9,43 +9,43 @@ export class ModuleService {
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
-    public async disableModule(identification: string): Module {
+    public async disableModule(identification: string): Promise<Module> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
-    public async enableModule(identification: string): Module {
+    public async enableModule(identification: string): Promise<Module> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
-    public async getModule(identification: string): Module {
+    public async getModule(identification: string): Promise<Module> {
     }
 
     /**
      * @param { Object } filter
-     * @returns { Module }
+     * @returns { Promise<Array<Module>> }
      */
-    public async getModules(filter: object): Module {
+    public async getModules(filter: object): Promise<Array<Module>> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
-    public async installModule(identification: string): Module {
+    public async installModule(identification: string): Promise<Module> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Module }
+     * @returns { Promise<Module> }
      */
-    public async uninstallModule(identification: string): Module {
+    public async uninstallModule(identification: string): Promise<Module> {
     }
 }

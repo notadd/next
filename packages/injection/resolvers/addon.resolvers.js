@@ -17,7 +17,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const addon_injector_1 = require("@notadd/core/injectors/addon.injector");
 const addon_service_1 = require("../services/addon.service");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
@@ -62,42 +61,42 @@ __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", addon_injector_1.Addon)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "disableAddon", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", addon_injector_1.Addon)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "enableAddon", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", addon_injector_1.Addon)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "getAddon", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Array)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "getAddons", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", addon_injector_1.Addon)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "installAddon", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", addon_injector_1.Addon)
+    __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "uninstallAddon", null);
 AddonResolvers = __decorate([
     graphql_1.Resolver("Addon"),

@@ -17,7 +17,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const extension_injector_1 = require("@notadd/core/injectors/extension.injector");
 const extension_service_1 = require("../services/extension.service");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
@@ -62,42 +61,42 @@ __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "disableExtension", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "enableExtension", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "getExtension", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "getExtensions", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "installExtension", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", extension_injector_1.Extension)
+    __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "uninstallExtension", null);
 ExtensionResolvers = __decorate([
     graphql_1.Resolver("Extension"),

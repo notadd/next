@@ -11,61 +11,61 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableExtension(identification: string): Extension {
+    public async disableExtension(identification: string): Promise<Extension> {
         return await this.extensionService.disableExtension(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableExtension(identification: string): Extension {
+    public async enableExtension(identification: string): Promise<Extension> {
         return await this.extensionService.enableExtension(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getExtension(identification: string): Extension {
+    public async getExtension(identification: string): Promise<Extension> {
         return await this.extensionService.getExtension(identification);
     }
 
     /**
      * @param { Object } filter
-     * @returns { Extension }
+     * @returns { Promise<Array<Extension>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getExtensions(filter: object): Extension {
+    public async getExtensions(filter: object): Promise<Array<Extension>> {
         return await this.extensionService.getExtensions(filter);
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installExtension(identification: string): Extension {
+    public async installExtension(identification: string): Promise<Extension> {
         return await this.extensionService.installExtension(identification);
     }
 
     /**
      * @param { string } identification
-     * @returns { Extension }
+     * @returns { Promise<Extension> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallExtension(identification: string): Extension {
+    public async uninstallExtension(identification: string): Promise<Extension> {
         return await this.extensionService.uninstallExtension(identification);
     }
 }

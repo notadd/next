@@ -9,43 +9,43 @@ export class AddonService {
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
-    public async disableAddon(identification: string): Addon {
+    public async disableAddon(identification: string): Promise<Addon> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
-    public async enableAddon(identification: string): Addon {
+    public async enableAddon(identification: string): Promise<Addon> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
-    public async getAddon(identification: string): Addon {
+    public async getAddon(identification: string): Promise<Addon> {
     }
 
     /**
      * @param filter
-     * @returns { Array<Addon> }
+     * @returns { Promise<Array<Addon>> }
      */
-    public async getAddons(filter): Array<Addon> {
+    public async getAddons(filter): Promise<Array<Addon>> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
-    public async installAddon(identification: string): Addon {
+    public async installAddon(identification: string): Promise<Addon> {
     }
 
     /**
      * @param { string } identification
-     * @returns { Addon }
+     * @returns { Promise<Addon> }
      */
-    public async uninstallAddon(identification: string): Addon {
+    public async uninstallAddon(identification: string): Promise<Addon> {
     }
 }
