@@ -48,67 +48,67 @@ type State = {
     modalName: string,
     rowsPerPage: number,
     currentPage: number,
+    list: any,
 };
 
 class Extension extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        open: false,
-        modalId: '',
-        modalName: '',
-        rowsPerPage: 3,
-        currentPage: 0,
-        list: [
-            {
-                id: 11,
-                name: '用户中心',
-                author: 'Mark',
-                descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
-                status: true,
-            },
-            {
-                id: 12,
-                name: '商城',
-                author: 'Mark',
-                descri: 'fefreg',
-                status: true,
-            },
-            {
-                id: 13,
-                name: '商家',
-                author: 'Mark',
-                descri: 'fefreg',
-                status: false,
-            },
-            {
-                id: 14,
-                name: 'CMS',
-                author: 'Mark',
-                descri: 'fefreg',
-                status: false,
-            },
-            {
-                id: 15,
-                name: 'Notadd2',
-                author: 'Mark',
-                descri: 'fefreg',
-                status: true,
-            },
-        ],
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            open: false,
+            modalId: '',
+            modalName: '',
+            rowsPerPage: 3,
+            currentPage: 0,
+            list: [
+                {
+                    id: 11,
+                    name: '用户中心',
+                    author: 'Mark',
+                    descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
+                    status: true,
+                },
+                {
+                    id: 12,
+                    name: '商城',
+                    author: 'Mark',
+                    descri: 'fefreg',
+                    status: true,
+                },
+                {
+                    id: 13,
+                    name: '商家',
+                    author: 'Mark',
+                    descri: 'fefreg',
+                    status: false,
+                },
+                {
+                    id: 14,
+                    name: 'CMS',
+                    author: 'Mark',
+                    descri: 'fefreg',
+                    status: false,
+                },
+                {
+                    id: 15,
+                    name: 'Notadd2',
+                    author: 'Mark',
+                    descri: 'fefreg',
+                    status: true,
+                },
+            ],
+        };
+    }
     handleChange = (pro: any) => (event: any, checked: any) => {
-        if (checked) {
-            pro.status = true;
-        } else {
-            pro.status = false;
-        }
+        pro.status = checked;
         this.setState({
             [pro]: checked,
         });
     };
     handleClickOpen = (pro: any) => {
-        this.state.modalName = pro.name;
-        this.state.modalId = pro.id;
         this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
             open: true,
         });
     };
@@ -143,7 +143,7 @@ class Extension extends React.Component<WithStyles<keyof typeof styles>, State> 
                             </TableHead>
                             <TableBody className="table-body">
                                 {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                    .map((n: any, index: number) => {
                                     return (
                                         <TableRow
                                             hover

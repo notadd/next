@@ -73,8 +73,8 @@ type State = {
 };
 
 class Configurations extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor(props: any) {
-        super(props);
+    constructor(props: any, state: any) {
+        super(props, state);
         this.state = {
             webName: 'NotAdd',
             domainName: '',

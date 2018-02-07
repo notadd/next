@@ -38,10 +38,13 @@ type State = {
 };
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        debug: false,
-        test: false,
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            debug: false,
+            test: false,
+        };
+    }
     render() {
         return (
             <div className="configurations">
