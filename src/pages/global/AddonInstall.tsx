@@ -57,57 +57,61 @@ type State = {
     modalName: string,
     rowsPerPage: number,
     currentPage: number,
+    list: any,
 };
 
 class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        open: false,
-        modalId: '',
-        modalName: '',
-        rowsPerPage: 2,
-        currentPage: 0,
-        list: [
-            {
-                id: 11,
-                status: false,
-                author: 'Mark',
-                name: 'notadd',
-                descri: '一些说明',
-            },
-            {
-                id: 12,
-                status: true,
-                author: 'Mark',
-                name: 'notadd',
-                descri: '一些说明',
-            },
-            {
-                id: 13,
-                status: false,
-                author: 'Mark',
-                name: 'notadd',
-                descri: '一些说明',
-            },
-            {
-                id: 14,
-                status: true,
-                author: 'Mark',
-                name: 'notadd',
-                descri: '一些说明',
-            },
-            {
-                id: 15,
-                status: false,
-                author: 'Mark',
-                name: 'notadd',
-                descri: '一些说明',
-            },
-        ],
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            open: false,
+            modalId: '',
+            modalName: '',
+            rowsPerPage: 2,
+            currentPage: 0,
+            list: [
+                {
+                    id: 11,
+                    status: false,
+                    author: 'Mark',
+                    name: 'notadd',
+                    descri: '一些说明',
+                },
+                {
+                    id: 12,
+                    status: true,
+                    author: 'Mark',
+                    name: 'notadd',
+                    descri: '一些说明',
+                },
+                {
+                    id: 13,
+                    status: false,
+                    author: 'Mark',
+                    name: 'notadd',
+                    descri: '一些说明',
+                },
+                {
+                    id: 14,
+                    status: true,
+                    author: 'Mark',
+                    name: 'notadd',
+                    descri: '一些说明',
+                },
+                {
+                    id: 15,
+                    status: false,
+                    author: 'Mark',
+                    name: 'notadd',
+                    descri: '一些说明',
+                },
+            ],
+        };
+    }
     handleClickOpen = (pro: any) => {
-        this.state.modalName = pro.name;
-        this.state.modalId = pro.id;
         this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
             open: true,
         });
     };
@@ -141,7 +145,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                             </TableHead>
                             <TableBody className="table-body">
                                 {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                    .map((n: any, index: number) => {
                                         return (
                                             <TableRow
                                                 hover
