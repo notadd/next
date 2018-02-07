@@ -14,5 +14,8 @@ type Module {
 }
 
 type Mutation {
-    installModule: Module,
+    disableModule(identification: String): Module,
+    enableModule(identification: String): Module,
+    installModule(identification: String): Module,
+    uninstallModule(identification: String): Module,
 }

@@ -8,12 +8,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 let ModuleService = class ModuleService {
     constructor(settingService) {
         this.settingService = settingService;
+    }
+    disableModule(identification) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    enableModule(identification) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    getModule(identification) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    getModules(filter) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    installModule(identification) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    uninstallModule(identification) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
     }
 };
 ModuleService = __decorate([
