@@ -546,7 +546,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.isTop}
                                         onChange={this.handleChangeSearch('isTop')}
-                                        input={<Input name="isTop"/>}
+                                        input={<Input name="type"/>}
                                     >
                                         {
                                             this.state.isTops.map((item: any, index: number) => {

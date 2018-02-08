@@ -30,7 +30,7 @@ body {
     font-size: 16px;
 }
 
-/*表格顶部input搜索*/
+/*表格侧边栏input搜索*/
 .search-side {
     width: 0 !important;
 }
@@ -51,7 +51,39 @@ body {
 .move-cms {
     margin-right: 264px;
 }
-
+/*表格顶部input搜索*/
+.input-search-module {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    right: 0;
+}
+.input-search-module > button {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 18px;
+}
+.input-search-module > button svg{
+    color: #3f51b5;
+    width: 1.2em;
+    height: 1.2em;
+}
+.input-search-module .input-search:after,
+.input-search-module .input-search:before {
+    height: inherit !important;
+}
+.input-search-module .input-search input {
+    font-size: 12px;
+    width: 170px;
+    height: 32px;
+    border-radius: 16px;
+    border: solid 1px #3f51b5;
+    padding: 0 40px 0 12px;
+    color: #808080;
+}
 /*顶部搜索*/
 .header-search > div {
     top: 0 !important;
