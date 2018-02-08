@@ -11,11 +11,13 @@ const common_1 = require("@nestjs/common");
 const module_resolvers_1 = require("../resolvers/module.resolvers");
 const module_service_1 = require("../services/module.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const injection_service_1 = require("../services/injection.service");
 let ModuleModule = class ModuleModule {
 };
 ModuleModule = __decorate([
     common_1.Module({
         components: [
+            injection_service_1.InjectionService,
             module_resolvers_1.ModuleResolvers,
             module_service_1.ModuleService,
         ],
