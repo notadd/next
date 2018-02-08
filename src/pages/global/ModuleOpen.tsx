@@ -170,6 +170,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                                                     <IconButton
                                                         className={this.props.classes.menuBtn}
                                                         onClick={() => this.handleClickOpen(n)}
+                                                        title="删除"
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>

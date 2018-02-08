@@ -297,12 +297,14 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                     <IconButton
                                                         className={this.props.classes.btnEdit}
                                                         onClick={() => this.handleClickEdit(n)}
+                                                        title="还原"
                                                     >
                                                         <ReplyAll />
                                                     </IconButton>
                                                     <IconButton
                                                         className={this.props.classes.btnDelete}
                                                         onClick={() => this.handleClickRemove(n)}
+                                                        title="删除"
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>

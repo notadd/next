@@ -351,6 +351,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     <Link to={'/cms/page/edit/' + n.id}>
                                                         <IconButton
                                                             className={this.props.classes.btnEdit}
+                                                            title="编辑"
                                                         >
                                                             <ModeEdit />
                                                         </IconButton>
@@ -358,6 +359,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     <IconButton
                                                         className={this.props.classes.btnDelete}
                                                         onClick={() => this.handleClickRemove(n)}
+                                                        title="删除"
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>
