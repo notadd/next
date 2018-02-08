@@ -29,6 +29,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import * as classNames from 'classnames';
 
 const styles = {
     evenRow: {
@@ -286,15 +287,20 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
-    toggleDrawer = (side: any, open: boolean) => () => {
+    toggleDrawer = () => {
         this.setState({
-            [side]: open,
+            right: !this.state.right,
         });
     };
     handleChangeSearch = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
+        });
+    };
+    handleSubmitSearch = () => {
+        this.setState({
+            right: !this.state.right,
         });
     };
     handlePageClick = (data: any) => {
@@ -315,7 +321,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="cms">
+            <div
+                className={
+                     classNames('cms', this.state.right && 'move-cms')
+                }
+            >
                 <div className="top-action-module clearfix">
                     <div className="pull-left">
                         <p className="crumbs">
@@ -326,10 +336,12 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     <div className="btn-group pull-right">
                         <IconButton
                             className={this.props.classes.menuBtn}
-                            onClick={this.toggleDrawer('right', true)}
+                            onClick={this.toggleDrawer}
                             title="搜索"
                         >
-                            <Search />
+                            {
+                                this.state.right ? <Search /> : <Search />
+                            }
                         </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
@@ -483,7 +495,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     className="search-side"
                     anchor="right"
                     open={this.state.right}
-                    onClose={this.toggleDrawer('right', false)}
                 >
                     <div
                         className="search-side-content"
@@ -574,7 +585,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     raised
                                     color="primary"
                                     style={{marginTop: 2, fontSize: 12, borderRadius: 4}}
-                                    onClick={this.handleSubmit}
+                                    onClick={this.handleSubmitSearch}
                                 >
                                     搜索
                                 </Button>

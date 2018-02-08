@@ -38,18 +38,21 @@ body {
     width: 0;
 }
 .search-side > div:nth-child(2){
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
     top: 70px;
 }
 .search-side-content {
     width: 260px;
     height: 100%;
-    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .search-side-content > div {
     box-shadow: none;
 }
+.move-cms {
+    margin-right: 264px;
+}
 
-    /*顶部搜索*/
+/*顶部搜索*/
 .header-search > div {
     top: 0 !important;
     left: 0 !important;
@@ -164,5 +167,21 @@ body {
     }
     .input-search-module .input-search input {
         width: 135px;
+    }
+    /*搜索侧边栏*/
+    .search-side > div:first-child {
+        width: 100%;
+        top: 14rem;
+    }
+    .search-side > div:nth-child(2){
+        top: 14rem;
+    }
+    .move-cms {
+        margin-right: 0;
+    }
+}
+@media (max-width: 768px) {
+    .search-side > div:nth-child(2){
+        top: 140px;
     }
 }
