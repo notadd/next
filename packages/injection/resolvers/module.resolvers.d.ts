@@ -5,7 +5,7 @@ export declare class ModuleResolvers {
     constructor(moduleService: ModuleService);
     disableModule(identification: string): Promise<Module>;
     enableModule(identification: string): Promise<Module>;
-    getModule(identification: string): Promise<Module>;
+    getModule(identification: string): Promise<Module | undefined>;
     getModules(filter: object): Promise<Array<Module>>;
     installModule(identification: string): Promise<Module>;
     uninstallModule(identification: string): Promise<Module>;

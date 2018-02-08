@@ -31,11 +31,11 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getModule(identification: string): Promise<Module> {
+    public async getModule(identification: string): Promise<Module | undefined> {
         return await this.moduleService.getModule(identification);
     }
 
