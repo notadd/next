@@ -3,6 +3,7 @@ import { PlatformTools } from "./platform-tools";
 /**
  * @param { string[] } directories
  * @param { (string | string)[] } formats
+ *
  * @returns { T[] }
  */
 export function importClassesFromDirectories<T>(directories: string[], formats = [ ".js", ".ts"]): T[] {

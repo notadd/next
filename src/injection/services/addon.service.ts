@@ -36,7 +36,7 @@ export class AddonService {
      * @returns { Promise<Addon> }
      */
     public async disableAddon(identification: string): Promise<Addon> {
-        const addon: Addon = await this.getAddon(identification);
+        const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
@@ -50,7 +50,7 @@ export class AddonService {
      * @returns { Promise<Addon> }
      */
     public async enableAddon(identification: string): Promise<Addon> {
-        const addon: Addon = await this.getAddon(identification);
+        const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
@@ -60,16 +60,18 @@ export class AddonService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon | undefined> }
      */
     public async getAddon(identification: string): Promise<Addon | undefined> {
         return this.addons.find((addon: Addon) => {
-            return addon.identification = identification;
+            return addon.identification === identification;
         });
     }
 
     /**
      * @param filter
+     *
      * @returns { Promise<Array<Addon>> }
      */
     public async getAddons(filter): Promise<Array<Addon>> {
@@ -82,7 +84,7 @@ export class AddonService {
      * @returns { Promise<Addon> }
      */
     public async installAddon(identification: string): Promise<Addon> {
-        const addon: Addon = await this.getAddon(identification);
+        const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
@@ -96,7 +98,7 @@ export class AddonService {
      * @returns { Promise<Addon> }
      */
     public async uninstallAddon(identification: string): Promise<Addon> {
-        const addon: Addon = await this.getAddon(identification);
+        const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
         }

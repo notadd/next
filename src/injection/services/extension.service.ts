@@ -31,10 +31,11 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     public async disableExtension(identification: string): Promise<Extension> {
-        const extension: Extension = await this.getExtension(identification);
+        const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
         }
@@ -44,10 +45,11 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     public async enableExtension(identification: string): Promise<Extension> {
-        const extension: Extension = await this.getExtension(identification);
+        const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
         }
@@ -57,6 +59,7 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension | undefined> }
      */
     public async getExtension(identification: string): Promise<Extension | undefined> {
@@ -67,6 +70,7 @@ export class ExtensionService {
 
     /**
      * @param { Object } filter
+     *
      * @returns { Promise<Array<Extension>> }
      */
     public async getExtensions(filter: object): Promise<Array<Extension>> {
@@ -75,10 +79,11 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     public async installExtension(identification: string): Promise<Extension> {
-        const extension: Extension = await this.getExtension(identification);
+        const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
         }
@@ -88,10 +93,11 @@ export class ExtensionService {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     public async uninstallExtension(identification: string): Promise<Extension> {
-        const extension: Extension = await this.getExtension(identification);
+        const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
         }

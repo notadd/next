@@ -11,6 +11,7 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon> }
      */
     @Mutation()
@@ -21,6 +22,7 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon> }
      */
     @Mutation()
@@ -31,6 +33,7 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon | undefined> }
      */
     @Query()
@@ -41,6 +44,7 @@ export class AddonResolvers {
 
     /**
      * @param filter
+     *
      * @returns { Promise<Array<Addon>> }
      */
     @Query()
@@ -51,6 +55,7 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon> }
      */
     @Mutation()
@@ -61,6 +66,7 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Addon> }
      */
     @Mutation()

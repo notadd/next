@@ -35,7 +35,7 @@ export class ModuleService {
      * @returns { Promise<Module> }
      */
     public async disableModule(identification: string): Promise<Module> {
-        const module: Module = this.getModule(identification);
+        const module: Module | undefined = this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
         }
@@ -49,7 +49,7 @@ export class ModuleService {
      * @returns { Promise<Module> }
      */
     public async enableModule(identification: string): Promise<Module> {
-        const module: Module = await this.getModule(identification);
+        const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
         }
@@ -83,7 +83,7 @@ export class ModuleService {
      * @returns { Promise<Module> }
      */
     public async installModule(identification: string): Promise<Module> {
-        const module: Module = await this.getModule(identification);
+        const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
         }
@@ -97,7 +97,7 @@ export class ModuleService {
      * @returns { Promise<Module> }
      */
     public async uninstallModule(identification: string): Promise<Module> {
-        const module: Module = await this.getModule(identification);
+        const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
         }

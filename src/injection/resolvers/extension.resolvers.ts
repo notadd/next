@@ -11,6 +11,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     @Mutation()
@@ -21,6 +22,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     @Mutation()
@@ -31,6 +33,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension | undefined> }
      */
     @Query()
@@ -41,6 +44,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { Object } filter
+     *
      * @returns { Promise<Array<Extension>> }
      */
     @Query()
@@ -51,6 +55,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     @Mutation()
@@ -61,6 +66,7 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Extension> }
      */
     @Mutation()

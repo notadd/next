@@ -62,7 +62,7 @@ let AddonService = class AddonService {
     getAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.addons.find((addon) => {
-                return addon.identification = identification;
+                return addon.identification === identification;
             });
         });
     }

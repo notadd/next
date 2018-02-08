@@ -11,6 +11,7 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Module> }
      */
     @Mutation()
@@ -21,6 +22,7 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Module }
      */
     @Mutation()
@@ -31,6 +33,7 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Module | undefined> }
      */
     @Query()
@@ -41,6 +44,7 @@ export class ModuleResolvers {
 
     /**
      * @param { Object } filter
+     *
      * @returns { Promise<Array<Module>> }
      */
     @Query()
@@ -51,6 +55,7 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Module> }
      */
     @Mutation()
@@ -61,6 +66,7 @@ export class ModuleResolvers {
 
     /**
      * @param { string } identification
+     *
      * @returns { Promise<Module> }
      */
     @Mutation()
