@@ -1,4 +1,4 @@
-import { PlatformTools } from "./platform.tools";
+import { PlatformTools } from "./platform-tools";
 
 /**
  * @param { string[] } directories

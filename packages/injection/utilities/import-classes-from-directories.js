@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const platform_tools_1 = require("./platform.tools");
+const platform_tools_1 = require("./platform-tools");
 function importClassesFromDirectories(directories, formats = [".js", ".ts"]) {
     function loadFileClasses(exported, allLoaded) {
         if (typeof exported === "function") {
