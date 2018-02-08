@@ -9,7 +9,7 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
-import { DateTimePicker } from 'material-ui-pickers';
+import { DatePicker } from 'material-ui-pickers';
 
 const styles = {
     root: {
@@ -62,10 +62,7 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: any,
-    value: string,
     content: any,
-    ready: any,
-    selectedDate: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -124,10 +121,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
-            content: 'qefqwfqefqfqefqef',
-            value: '',
-            ready: '',
-            selectedDate: new Date(),
+            content: '',
         };
     }
     handleDateChange = (date: any) => {
@@ -147,18 +141,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     };
     handleSubmit = (event: any) => {
         event.preventDefault();
-        this.setState({
-           value: this.state.content,
-        });
-        window.console.log(this.state.content);
     };
     getImgURL = (event: any) => {
         this.setState({
             img: event.target.value.substr(12),
         });
-    };
-    handleDate = (date: any) => {
-        this.setState({ selectedDate: date });
     };
     render() {
         return (
@@ -339,13 +326,27 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                     style={{ position: 'relative'}}
                                 >
-                                    {/*<DatePicker*/}
-                                        {/*value={this.state.selectedDate}*/}
-                                        {/*onChange={this.handleDate}*/}
-                                    {/*/>*/}
-                                    <DateTimePicker
-                                        value={this.state.selectedDate}
-                                        onChange={this.handleDate}
+                                    <InputLabel
+                                        htmlFor="name-simple"
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        发布时间
+                                    </InputLabel>
+                                    <Input
+                                        id="name-simple"
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.time}
+                                    />
+                                    <DatePicker
+                                        className="data-picker"
+                                        keyboard
+                                        clearable
+                                        value={this.state.time}
+                                        onChange={this.handleDateChange}
+                                        animateYearScrolling={false}
                                     />
                                 </FormControl>
                                 <FormControl

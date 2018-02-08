@@ -9,8 +9,10 @@
     line-height: 50px;
 }
 .cms-message .table-body li .collapse-msg {
-    line-height: 50px;
     padding-left: 40px;
+}
+.cms-message .table-body li .collapse-msg > div > div {
+    padding: 18px 0;
 }
 .cms-message .table-body li > div:first-child > div{
     display: inline-block;

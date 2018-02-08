@@ -54,8 +54,8 @@ type State = {
 };
 
 class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor (props: any) {
-        super(props);
+    constructor (props: any, state: any) {
+        super(props, state);
         let type = '';
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
@@ -106,7 +106,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         分类名称
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -125,7 +124,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         别名
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -146,7 +144,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         内链
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -165,7 +162,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         描述
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -187,7 +183,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         颜色
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
