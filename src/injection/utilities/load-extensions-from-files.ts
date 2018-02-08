@@ -6,7 +6,7 @@ import { safeLoad } from "js-yaml";
 export function loadExtensionsFromFiles(): Array<Function> {
     const file = join(process.cwd(), "storages", "extensions", "enabled.yaml");
     if (existsSync(file)) {
-        const enabled: Array = safeLoad(readFileSync(file));
+        const enabled: Array<string> = safeLoad(readFileSync(file).toString());
 
         return importClassesFromDirectories(enabled);
     } else {
