@@ -130,7 +130,6 @@ class Editor extends React.Component<Props, State> {
                     });
                     self.state.instance.addListener('ready', () => {
                         self.state.instance.setContent(self.props.value);
-                        self.props.handleEditorChange(self.state.instance.getContent());
                     });
                 }
             );
