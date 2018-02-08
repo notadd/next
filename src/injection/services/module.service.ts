@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
 import { InjectionService } from "./injection.service";
+import { Injection } from "../types/injection.type";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Module } from "../types/module.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
@@ -17,15 +18,13 @@ export class ModuleService {
     ) {
         this.modules = this.injectionService
             .loadInjections()
-            .filter((instance: Function) => {
-                const injectionType = Reflect.getMetadata("__injection_type__", instance);
-
-                return injectionType === InjectionType.Module;
+            .filter((injection: Injection) => {
+                return InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
             })
-            .map((instance: Function) => {
+            .map((injection: Injection) => {
                 return {
-                    identification: Reflect.getMetadata("identification", instance),
-                    location: "",
+                    identification: Reflect.getMetadata("identification", injection.target),
+                    location: injection.location,
                 };
             });
         this.initialized = true;

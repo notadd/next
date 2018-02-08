@@ -1,9 +1,10 @@
 import "reflect-metadata";
 import { Addon } from "../types/addon.type";
 import { Component } from "@nestjs/common";
+import { Injection } from "../types/injection.type";
 import { InjectionService } from "./injection.service";
-import { SettingService } from "@notadd/setting/services/setting.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class AddonService {
@@ -17,15 +18,13 @@ export class AddonService {
     ) {
         this.addons = this.injectionService
             .loadInjections()
-            .filter((instance: Function) => {
-                const injectionType = Reflect.getMetadata("__injection_type__", instance);
-
-                return injectionType === InjectionType.Addon;
+            .filter((injection: Injection) => {
+                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
             })
-            .map((instance: Function) => {
+            .map((injection: Injection) => {
                 return {
-                    identification: Reflect.getMetadata("identification", instance),
-                    location: "",
+                    identification: Reflect.getMetadata("identification", injection.target),
+                    location: injection.location,
                 };
             });
         this.initialized = true;

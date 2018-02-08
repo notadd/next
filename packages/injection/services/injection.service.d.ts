@@ -1,5 +1,6 @@
+import { Injection } from "../types/injection.type";
 export declare class InjectionService {
     private injections;
-    loadInjections(): Function[];
+    loadInjections(): Injection[];
     refreshInjections(): void;
 }

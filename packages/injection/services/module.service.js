@@ -30,14 +30,13 @@ let ModuleService = class ModuleService {
         this.modules = [];
         this.modules = this.injectionService
             .loadInjections()
-            .filter((instance) => {
-            const injectionType = Reflect.getMetadata("__injection_type__", instance);
-            return injectionType === injection_constants_1.InjectionType.Module;
+            .filter((injection) => {
+            return injection_constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
         })
-            .map((instance) => {
+            .map((injection) => {
             return {
-                identification: Reflect.getMetadata("identification", instance),
-                location: "",
+                identification: Reflect.getMetadata("identification", injection.target),
+                location: injection.location,
             };
         });
         this.initialized = true;
