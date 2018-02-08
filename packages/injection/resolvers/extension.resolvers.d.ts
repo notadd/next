@@ -5,7 +5,7 @@ export declare class ExtensionResolvers {
     constructor(extensionService: ExtensionService);
     disableExtension(identification: string): Promise<Extension>;
     enableExtension(identification: string): Promise<Extension>;
-    getExtension(identification: string): Promise<Extension>;
+    getExtension(identification: string): Promise<Extension | undefined>;
     getExtensions(filter: object): Promise<Array<Extension>>;
     installExtension(identification: string): Promise<Extension>;
     uninstallExtension(identification: string): Promise<Extension>;

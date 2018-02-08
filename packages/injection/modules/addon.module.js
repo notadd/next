@@ -11,6 +11,7 @@ const addon_service_1 = require("../services/addon.service");
 const load_addons_from_files_1 = require("../utilities/load-addons-from-files");
 const common_1 = require("@nestjs/common");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const injection_service_1 = require("../services/injection.service");
 let AddonModule = class AddonModule {
 };
 AddonModule = __decorate([
@@ -18,6 +19,7 @@ AddonModule = __decorate([
         components: [
             addon_resolvers_1.AddonResolvers,
             addon_service_1.AddonService,
+            injection_service_1.InjectionService,
         ],
         imports: [
             ...load_addons_from_files_1.loadAddonsFromFiles(),

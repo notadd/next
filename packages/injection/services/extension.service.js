@@ -17,37 +17,74 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 const common_1 = require("@nestjs/common");
 const injection_service_1 = require("./injection.service");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
+const injection_constants_1 = require("../../../packages/core/constants/injection.constants");
 let ExtensionService = class ExtensionService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
         this.settingService = settingService;
+        this.initialized = false;
+        this.extensions = [];
+        this.extensions = this.injectionService
+            .loadInjections()
+            .filter((instance) => {
+            const injectionType = Reflect.getMetadata("__injection_type__", instance);
+            return injectionType === injection_constants_1.InjectionType.Addon;
+        })
+            .map((instance) => {
+            return {};
+        });
+        this.initialized = true;
     }
     disableExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const extension = yield this.getExtension(identification);
+            if (!extension) {
+                throw new Error("Extension do not exists!");
+            }
+            return extension;
         });
     }
     enableExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const extension = yield this.getExtension(identification);
+            if (!extension) {
+                throw new Error("Extension do not exists!");
+            }
+            return extension;
         });
     }
     getExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            return this.extensions.find((extension) => {
+                return extension.identification === identification;
+            });
         });
     }
     getExtensions(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return [];
+            return this.extensions;
         });
     }
     installExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const extension = yield this.getExtension(identification);
+            if (!extension) {
+                throw new Error("Extension do not exists!");
+            }
+            return extension;
         });
     }
     uninstallExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const extension = yield this.getExtension(identification);
+            if (!extension) {
+                throw new Error("Extension do not exists!");
+            }
+            return extension;
         });
     }
 };

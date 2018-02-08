@@ -31,11 +31,11 @@ export class ExtensionResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Promise<Extension> }
+     * @returns { Promise<Extension | undefined> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getExtension(identification: string): Promise<Extension> {
+    public async getExtension(identification: string): Promise<Extension | undefined> {
         return await this.extensionService.getExtension(identification);
     }
 
