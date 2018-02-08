@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Addon } from "@notadd/core/injectors/addon.injector";
+import { Addon } from "../types/addon.type";
 import { Component } from "@nestjs/common";
 import { InjectionService } from "./injection.service";
 import { SettingService } from "@notadd/setting/services/setting.service";
@@ -25,6 +25,7 @@ export class AddonService {
             .map((instance: Function) => {
                 return {
                     identification: Reflect.getMetadata("identification", instance),
+                    location: "",
                 };
             });
         this.initialized = true;

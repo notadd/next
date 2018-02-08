@@ -1,4 +1,4 @@
-import { Addon } from "@notadd/core/injectors/addon.injector";
+import { Addon } from "../types/addon.type";
 import { AddonService } from "../services/addon.service";
 export declare class AddonResolvers {
     private readonly addonService;

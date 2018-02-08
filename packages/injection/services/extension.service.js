@@ -20,8 +20,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const common_1 = require("@nestjs/common");
 const injection_service_1 = require("./injection.service");
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const injection_constants_1 = require("../../../packages/core/constants/injection.constants");
 let ExtensionService = class ExtensionService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
@@ -35,7 +35,10 @@ let ExtensionService = class ExtensionService {
             return injectionType === injection_constants_1.InjectionType.Addon;
         })
             .map((instance) => {
-            return {};
+            return {
+                identification: Reflect.getMetadata("identification", instance),
+                location: "",
+            };
         });
         this.initialized = true;
     }

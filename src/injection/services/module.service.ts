@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
 import { InjectionService } from "./injection.service";
-import { Module } from "@notadd/core/injectors/module.injector";
+import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { Module } from "../types/module.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { InjectionType } from "../../../packages/core/constants/injection.constants";
 
 @Component()
 export class ModuleService {
@@ -24,6 +24,8 @@ export class ModuleService {
             })
             .map((instance: Function) => {
                 return {
+                    identification: Reflect.getMetadata("identification", instance),
+                    location: "",
                 };
             });
         this.initialized = true;
@@ -32,10 +34,10 @@ export class ModuleService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
-    public async disableModule(identification: string): Promise<Module> {
-        const module: Module | undefined = this.getModule(identification);
+    public async disableModule(identification: string): Promise<Module | undefined> {
+        const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
         }
@@ -46,9 +48,9 @@ export class ModuleService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
-    public async enableModule(identification: string): Promise<Module> {
+    public async enableModule(identification: string): Promise<Module | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -80,9 +82,9 @@ export class ModuleService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
-    public async installModule(identification: string): Promise<Module> {
+    public async installModule(identification: string): Promise<Module | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -94,9 +96,9 @@ export class ModuleService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
-    public async uninstallModule(identification: string): Promise<Module> {
+    public async uninstallModule(identification: string): Promise<Module | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");

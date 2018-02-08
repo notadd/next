@@ -1,4 +1,4 @@
-import { Addon } from "@notadd/core/injectors/addon.injector";
+import { Addon } from "../types/addon.type";
 import { AddonService } from "../services/addon.service";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";

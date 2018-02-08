@@ -1,5 +1,5 @@
+import { Module } from "../types/module.type";
 import { ModuleService } from "../services/module.service";
-import { Module } from "../../../packages/core/injectors/module.injector";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
@@ -12,22 +12,22 @@ export class ModuleResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableModule(identification: string): Promise<Module> {
+    public async disableModule(identification: string): Promise<Module | undefined> {
         return await this.moduleService.disableModule(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Module }
+     * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableModule(identification: string): Promise<Module> {
+    public async enableModule(identification: string): Promise<Module | undefined> {
         return await this.moduleService.enableModule(identification);
     }
 
@@ -56,22 +56,22 @@ export class ModuleResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installModule(identification: string): Promise<Module> {
+    public async installModule(identification: string): Promise<Module | undefined> {
         return await this.moduleService.installModule(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Module> }
+     * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallModule(identification: string): Promise<Module> {
+    public async uninstallModule(identification: string): Promise<Module | undefined> {
         return await this.moduleService.uninstallModule(identification);
     }
 }

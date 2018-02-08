@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Addon } from "@notadd/core/injectors/addon.injector";
+import { Addon } from "../types/addon.type";
 import { InjectionService } from "./injection.service";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class AddonService {

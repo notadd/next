@@ -37,6 +37,7 @@ let AddonService = class AddonService {
             .map((instance) => {
             return {
                 identification: Reflect.getMetadata("identification", instance),
+                location: "",
             };
         });
         this.initialized = true;

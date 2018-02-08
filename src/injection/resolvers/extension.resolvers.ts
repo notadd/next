@@ -1,4 +1,4 @@
-import { Extension } from "@notadd/core/injectors/extension.injector";
+import { Extension } from "../types/extension.type";
 import { ExtensionService } from "../services/extension.service";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";

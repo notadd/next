@@ -1,4 +1,4 @@
-import { Extension } from "@notadd/core/injectors/extension.injector";
+import { Extension } from "../types/extension.type";
 import { ExtensionService } from "../services/extension.service";
 export declare class ExtensionResolvers {
     private readonly extensionService;

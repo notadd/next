@@ -20,8 +20,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const common_1 = require("@nestjs/common");
 const injection_service_1 = require("./injection.service");
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const injection_constants_1 = require("../../../packages/core/constants/injection.constants");
 let ModuleService = class ModuleService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
@@ -35,13 +35,16 @@ let ModuleService = class ModuleService {
             return injectionType === injection_constants_1.InjectionType.Module;
         })
             .map((instance) => {
-            return {};
+            return {
+                identification: Reflect.getMetadata("identification", instance),
+                location: "",
+            };
         });
         this.initialized = true;
     }
     disableModule(identification) {
         return __awaiter(this, void 0, void 0, function* () {
-            const module = this.getModule(identification);
+            const module = yield this.getModule(identification);
             if (!module) {
                 throw new Error("Module do not exists!");
             }

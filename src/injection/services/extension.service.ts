@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
-import { Extension } from "../../../packages/core/injectors/extension.injector";
+import { Extension } from "../types/extension.type";
 import { InjectionService } from "./injection.service";
+import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { InjectionType } from "../../../packages/core/constants/injection.constants";
 
 @Component()
 export class ExtensionService {
@@ -24,6 +24,8 @@ export class ExtensionService {
             })
             .map((instance: Function) => {
                 return {
+                    identification: Reflect.getMetadata("identification", instance),
+                    location: "",
                 };
             });
         this.initialized = true;
