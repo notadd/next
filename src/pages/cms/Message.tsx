@@ -22,64 +22,68 @@ type State = {
     open: boolean,
     modalId: string,
     modalName: string,
+    list: Array<any>,
 };
 
 class Message extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        checkedAll: false,
-        rowsPerPage: 4,
-        currentPage: 0,
-        open: false,
-        modalId: '',
-        modalName: '',
-        list: [
-            {
-                id: 1,
-                collapse: false,
-                name: '王先生1',
-                phone: '13999554621',
-                email: 'ibenchu@qq.com',
-                time: '2017-12-01 13:34:35',
-                msg: '你好，我对贵公司的产品很有兴趣',
-            },
-            {
-                id: 2,
-                collapse: false,
-                name: '王先生2',
-                phone: '13999554621',
-                email: 'ibenchu@qq.com',
-                time: '2017-12-01 13:34:35',
-                msg: '你好，我对贵公司的产品很有兴趣',
-            },
-            {
-                id: 3,
-                collapse: false,
-                name: '王先生3',
-                phone: '13999554621',
-                email: 'ibenchu@qq.com',
-                time: '2017-12-01 13:34:35',
-                msg: '你好，我对贵公司的产品很有兴趣',
-            },
-            {
-                id: 4,
-                collapse: false,
-                name: '王先生4',
-                phone: '13999554621',
-                email: 'ibenchu@qq.com',
-                time: '2017-12-01 13:34:35',
-                msg: '你好，我对贵公司的产品很有兴趣',
-            },
-            {
-                id: 5,
-                collapse: false,
-                name: '王先生5',
-                phone: '13999554621',
-                email: 'ibenchu@qq.com',
-                time: '2017-12-01 13:34:35',
-                msg: '你好，我对贵公司的产品很有兴趣',
-            },
-        ],
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            checkedAll: false,
+            rowsPerPage: 4,
+            currentPage: 0,
+            open: false,
+            modalId: '',
+            modalName: '',
+            list: [
+                {
+                    id: 1,
+                    collapse: false,
+                    name: '王先生1',
+                    phone: '13999554621',
+                    email: 'ibenchu@qq.com',
+                    time: '2017-12-01 13:34:35',
+                    msg: '你好，我对贵公司的产品很有兴趣',
+                },
+                {
+                    id: 2,
+                    collapse: false,
+                    name: '王先生2',
+                    phone: '13999554621',
+                    email: 'ibenchu@qq.com',
+                    time: '2017-12-01 13:34:35',
+                    msg: '你好，我对贵公司的产品很有兴趣',
+                },
+                {
+                    id: 3,
+                    collapse: false,
+                    name: '王先生3',
+                    phone: '13999554621',
+                    email: 'ibenchu@qq.com',
+                    time: '2017-12-01 13:34:35',
+                    msg: '你好，我对贵公司的产品很有兴趣',
+                },
+                {
+                    id: 4,
+                    collapse: false,
+                    name: '王先生4',
+                    phone: '13999554621',
+                    email: 'ibenchu@qq.com',
+                    time: '2017-12-01 13:34:35',
+                    msg: '你好，我对贵公司的产品很有兴趣',
+                },
+                {
+                    id: 5,
+                    collapse: false,
+                    name: '王先生5',
+                    phone: '13999554621',
+                    email: 'ibenchu@qq.com',
+                    time: '2017-12-01 13:34:35',
+                    msg: '你好，我对贵公司的产品很有兴趣',
+                },
+            ],
+        };
+    }
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
