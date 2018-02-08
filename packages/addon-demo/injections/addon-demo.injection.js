@@ -11,8 +11,8 @@ let AddonDemoInjection = class AddonDemoInjection {
 };
 AddonDemoInjection = __decorate([
     addon_decorator_1.Addon({
-        identification: "",
-        version: "",
+        identification: "addon-demo",
+        version: "v1.0.0",
     })
 ], AddonDemoInjection);
 exports.AddonDemoInjection = AddonDemoInjection;
