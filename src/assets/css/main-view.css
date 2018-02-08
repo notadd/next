@@ -29,6 +29,9 @@
     margin-left: 260px;
     transition: margin-left 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
+.main-view .sm-content {
+    margin-top: 140px;
+}
 @media (max-width: 479px) {
     .content {
         width: 100%;

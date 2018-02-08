@@ -739,7 +739,14 @@ class App extends React.Component<Props, State> {
                                                 </div>
                                             </div>
                                     }
-                                    <div className={classNames('view', condition && 'smallSide-view')}>
+                                    <div
+                                        className={
+                                        classNames(
+                                            'view',
+                                            condition && 'smallSide-view',
+                                            wd === 'sm' && 'sm-content')
+                                        }
+                                    >
                                         {
                                             condition ?
                                                 <Drawer
