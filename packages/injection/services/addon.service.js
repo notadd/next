@@ -17,37 +17,76 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 const common_1 = require("@nestjs/common");
 const injection_service_1 = require("./injection.service");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 let AddonService = class AddonService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
         this.settingService = settingService;
+        this.initialized = false;
+        this.addons = [];
+        this.addons = this.injectionService
+            .loadInjections()
+            .filter((instance) => {
+            const injectionType = Reflect.getMetadata("__injection_type__", instance);
+            return injectionType === injection_constants_1.InjectionType.Addon;
+        })
+            .map((instance) => {
+            return {
+                identification: Reflect.getMetadata("identification", instance),
+            };
+        });
+        this.initialized = true;
     }
     disableAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const addon = yield this.getAddon(identification);
+            if (!addon) {
+                throw new Error("Addon do not exists!");
+            }
+            return addon;
         });
     }
     enableAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const addon = yield this.getAddon(identification);
+            if (!addon) {
+                throw new Error("Addon do not exists!");
+            }
+            return addon;
         });
     }
     getAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            return this.addons.find((addon) => {
+                return addon.identification = identification;
+            });
         });
     }
     getAddons(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return [];
+            return this.addons;
         });
     }
     installAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const addon = yield this.getAddon(identification);
+            if (!addon) {
+                throw new Error("Addon do not exists!");
+            }
+            return addon;
         });
     }
     uninstallAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
+            const addon = yield this.getAddon(identification);
+            if (!addon) {
+                throw new Error("Addon do not exists!");
+            }
+            return addon;
         });
     }
 };

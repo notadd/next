@@ -31,11 +31,11 @@ export class AddonResolvers {
 
     /**
      * @param { string } identification
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getAddon(identification: string): Promise<Addon> {
+    public async getAddon(identification: string): Promise<Addon | undefined> {
         return await this.addonService.getAddon(identification);
     }
 
