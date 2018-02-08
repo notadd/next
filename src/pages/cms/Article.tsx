@@ -13,7 +13,7 @@ import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
 import Snackbar from 'material-ui/Snackbar';
-import Input from 'material-ui/Input';
+import Drawer from 'material-ui/Drawer';
 import Table, {
     TableBody,
     TableCell,
@@ -69,18 +69,17 @@ const styles = {
     },
 };
 type State = {
+    right: boolean,
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
     openMessageTip: boolean,
-    openSearch: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
     message: string,
-    searchValue: string,
     list: Array<any>,
 };
 
@@ -88,6 +87,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
         this.state = {
+            right: false,
             checkedAll: false,
             rowsPerPage: 3,
             currentPage: 0,
@@ -97,8 +97,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             modalType: 0,
             modalNum: 0,
             openMessageTip: false,
-            openSearch: false,
-            searchValue: '',
             list: [
                 {
                     id: 1,
@@ -232,21 +230,11 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
-    handleOpenSearch = () => {
-        this.setState({ openSearch: true });
-    };
-    handleCloseSearch = () => {
-        if (this.state.searchValue.length < 1) {
-            this.setState({ openSearch: false });
-        }
-    };
-    handleChangeSearch = (name: any) => (event: any) => {
+    toggleDrawer = (side: any, open: boolean) => () => {
         this.setState({
-            searchValue: event.target.value,
+            [side]: open,
         });
-    };
-    handleSearch = () => {
-        window.console.log(this.state.searchValue);
+        window.console.log(open);
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -275,31 +263,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <h4 className="title">全部文章</h4>
                     </div>
                     <div className="btn-group pull-right">
-                        {
-                            this.state.openSearch ?
-                                <div className="input-search-module">
-                                    <Input
-                                        placeholder="请输入要搜索的内容"
-                                        className="input-search"
-                                        value={this.state.searchValue}
-                                        onChange={this.handleChangeSearch('searchValue')}
-                                        onKeyUp={this.handleSearch}
-                                        onBlur={this.handleCloseSearch}
-                                    />
-                                    <IconButton
-                                        onClick={this.handleSearch}
-                                    >
-                                        <Search />
-                                    </IconButton>
-                                </div> :
-                                <IconButton
-                                    className={this.props.classes.menuBtn}
-                                    onClick={this.handleOpenSearch}
-                                    title="搜索"
-                                >
-                                    <Search />
-                                </IconButton>
-                        }
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.toggleDrawer('right', true)}
+                            title="搜索"
+                        >
+                            <Search />
+                        </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
@@ -448,6 +418,22 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Drawer
+                    className="search-side"
+                    anchor="right"
+                    open={this.state.right}
+                    onClose={this.toggleDrawer('right', false)}
+                >
+                    <div
+                        className="search-side-content"
+                        tabIndex={0}
+                        role="button"
+                        onClick={this.toggleDrawer('right', false)}
+                        onKeyDown={this.toggleDrawer('right', false)}
+                    >
+                        122333
+                    </div>
+                </Drawer>
             </div>
         );
     }
