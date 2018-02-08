@@ -12,22 +12,22 @@ export class ExtensionResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Extension> }
+     * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableExtension(identification: string): Promise<Extension> {
+    public async disableExtension(identification: string): Promise<Extension | undefined> {
         return await this.extensionService.disableExtension(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Extension> }
+     * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableExtension(identification: string): Promise<Extension> {
+    public async enableExtension(identification: string): Promise<Extension | undefined> {
         return await this.extensionService.enableExtension(identification);
     }
 
@@ -56,22 +56,22 @@ export class ExtensionResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Extension> }
+     * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installExtension(identification: string): Promise<Extension> {
+    public async installExtension(identification: string): Promise<Extension | undefined> {
         return await this.extensionService.installExtension(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Extension> }
+     * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallExtension(identification: string): Promise<Extension> {
+    public async uninstallExtension(identification: string): Promise<Extension | undefined> {
         return await this.extensionService.uninstallExtension(identification);
     }
 }

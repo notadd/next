@@ -12,22 +12,22 @@ export class AddonResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableAddon(identification: string): Promise<Addon> {
+    public async disableAddon(identification: string): Promise<Addon | undefined> {
         return await this.addonService.disableAddon(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableAddon(identification: string): Promise<Addon> {
+    public async enableAddon(identification: string): Promise<Addon | undefined> {
         return await this.addonService.enableAddon(identification);
     }
 
@@ -56,22 +56,22 @@ export class AddonResolvers {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installAddon(identification: string): Promise<Addon> {
+    public async installAddon(identification: string): Promise<Addon | undefined> {
         return await this.addonService.installAddon(identification);
     }
 
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallAddon(identification: string): Promise<Addon> {
+    public async uninstallAddon(identification: string): Promise<Addon | undefined> {
         return await this.addonService.uninstallAddon(identification);
     }
 }

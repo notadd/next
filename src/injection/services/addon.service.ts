@@ -34,9 +34,9 @@ export class AddonService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
-    public async disableAddon(identification: string): Promise<Addon> {
+    public async disableAddon(identification: string): Promise<Addon | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -48,9 +48,9 @@ export class AddonService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
-    public async enableAddon(identification: string): Promise<Addon> {
+    public async enableAddon(identification: string): Promise<Addon | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -82,9 +82,9 @@ export class AddonService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
-    public async installAddon(identification: string): Promise<Addon> {
+    public async installAddon(identification: string): Promise<Addon | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -96,9 +96,9 @@ export class AddonService {
     /**
      * @param { string } identification
      *
-     * @returns { Promise<Addon> }
+     * @returns { Promise<Addon | undefined> }
      */
-    public async uninstallAddon(identification: string): Promise<Addon> {
+    public async uninstallAddon(identification: string): Promise<Addon | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
