@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const extension_resolvers_1 = require("../resolvers/extension.resolvers");
 const extension_service_1 = require("../services/extension.service");
+const load_extensions_from_files_1 = require("../utilities/load-extensions-from-files");
 const common_1 = require("@nestjs/common");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let ExtensionModule = class ExtensionModule {
@@ -19,6 +20,7 @@ ExtensionModule = __decorate([
             extension_service_1.ExtensionService,
         ],
         imports: [
+            ...load_extensions_from_files_1.loadExtensionsFromFiles(),
             setting_module_1.SettingModule,
         ],
     })

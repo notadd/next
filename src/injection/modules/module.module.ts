@@ -1,5 +1,5 @@
+import { loadModulesFromFiles } from "../utilities/load-modules-from-files";
 import { Module } from "@nestjs/common";
-import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
 import { ModuleResolvers } from "../resolvers/module.resolvers";
 import { ModuleService } from "../services/module.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
@@ -10,8 +10,9 @@ import { SettingModule } from "@notadd/setting/modules/setting.module";
         ModuleService,
     ],
     imports: [
+        ...loadModulesFromFiles(),
         SettingModule,
     ],
 })
-export class ModuleModule implements OnModuleInitWithInjection {
+export class ModuleModule {
 }

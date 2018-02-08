@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const load_modules_from_files_1 = require("../utilities/load-modules-from-files");
 const common_1 = require("@nestjs/common");
 const module_resolvers_1 = require("../resolvers/module.resolvers");
 const module_service_1 = require("../services/module.service");
@@ -19,6 +20,7 @@ ModuleModule = __decorate([
             module_service_1.ModuleService,
         ],
         imports: [
+            ...load_modules_from_files_1.loadModulesFromFiles(),
             setting_module_1.SettingModule,
         ],
     })
