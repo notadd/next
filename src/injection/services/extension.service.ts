@@ -1,10 +1,14 @@
 import { Component } from "@nestjs/common";
 import { Extension } from "../../../packages/core/injectors/extension.injector";
+import { InjectionService } from "./injection.service";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class ExtensionService {
-    constructor(private readonly settingService: SettingService) {
+    constructor(
+        private readonly injectionService: InjectionService,
+        private readonly settingService: SettingService,
+    ) {
     }
 
     /**

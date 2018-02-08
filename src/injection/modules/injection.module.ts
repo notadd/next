@@ -1,5 +1,6 @@
 import { AddonModule } from "./addon.module";
 import { ExtensionModule } from "./extension.module";
+import { InjectionService } from "../services/injection.service";
 import {
     Logger,
     Module,
@@ -10,6 +11,9 @@ import { UserModule } from "@notadd/user/modules/user.module";
 import { UserService } from "@notadd/user/services/user.service";
 
 @Module({
+    components: [
+        InjectionService,
+    ],
     imports: [
         ExtensionModule,
         ModuleModule,

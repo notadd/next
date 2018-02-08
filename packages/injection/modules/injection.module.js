@@ -19,6 +19,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const addon_module_1 = require("./addon.module");
 const extension_module_1 = require("./extension.module");
+const injection_service_1 = require("../services/injection.service");
 const common_1 = require("@nestjs/common");
 const module_module_1 = require("./module.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
@@ -48,6 +49,9 @@ let InjectionModule = class InjectionModule {
 };
 InjectionModule = __decorate([
     common_1.Module({
+        components: [
+            injection_service_1.InjectionService,
+        ],
         imports: [
             extension_module_1.ExtensionModule,
             module_module_1.ModuleModule,

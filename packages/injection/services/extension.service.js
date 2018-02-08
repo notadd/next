@@ -18,9 +18,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const injection_service_1 = require("./injection.service");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 let ExtensionService = class ExtensionService {
-    constructor(settingService) {
+    constructor(injectionService, settingService) {
+        this.injectionService = injectionService;
         this.settingService = settingService;
     }
     disableExtension(identification) {
@@ -51,6 +53,7 @@ let ExtensionService = class ExtensionService {
 };
 ExtensionService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [setting_service_1.SettingService])
+    __metadata("design:paramtypes", [injection_service_1.InjectionService,
+        setting_service_1.SettingService])
 ], ExtensionService);
 exports.ExtensionService = ExtensionService;

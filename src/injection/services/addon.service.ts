@@ -1,10 +1,14 @@
 import { Addon } from "@notadd/core/injectors/addon.injector";
 import { Component } from "@nestjs/common";
+import { InjectionService } from "./injection.service";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class AddonService {
-    constructor(private readonly settingService: SettingService) {
+    constructor(
+        private readonly injectionService: InjectionService,
+        private readonly settingService: SettingService,
+    ) {
     }
 
     /**
