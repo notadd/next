@@ -14,6 +14,10 @@ import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
 import Snackbar from 'material-ui/Snackbar';
 import Drawer from 'material-ui/Drawer';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 import Table, {
     TableBody,
     TableCell,
@@ -67,6 +71,22 @@ const styles = {
         'text-align': 'left',
         'padding': '0',
     },
+    container: {
+        display: 'flex',
+        'flex-wrap': 'wrap',
+        'margin': '0',
+    },
+    formLabelFont: {
+        'font-size': '16px',
+    },
+    formControlMargin: {
+        'margin-bottom': '34px',
+    },
+    underline: {
+        '&:before': {
+            background: '#dfdfdf',
+        }
+    },
 };
 type State = {
     right: boolean,
@@ -81,6 +101,11 @@ type State = {
     modalNum: number,
     message: string,
     list: Array<any>,
+    type: string,
+    keyword: string,
+    types: Array<any>,
+    isTop: string,
+    isTops: Array<any>,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -149,6 +174,37 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 },
             ],
             message: '',
+            type: '',
+            isTop: '',
+            types: [
+                {
+                    id: '12',
+                    type: '新闻1',
+                },
+                {
+                    id: '13',
+                    type: '新闻2',
+                },
+                {
+                    id: '14',
+                    type: '新闻3',
+                },
+            ],
+            isTops: [
+                {
+                    id: '12',
+                    type: '无',
+                },
+                {
+                    id: '13',
+                    type: '是',
+                },
+                {
+                    id: '14',
+                    type: '否',
+                },
+            ],
+            keyword: '',
         };
     }
     handleChangeAll = (name: any) => (event: any) => {
@@ -234,7 +290,12 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({
             [side]: open,
         });
-        window.console.log(open);
+    };
+    handleChangeSearch = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
+        });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -428,10 +489,97 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         className="search-side-content"
                         tabIndex={0}
                         role="button"
-                        onClick={this.toggleDrawer('right', false)}
-                        onKeyDown={this.toggleDrawer('right', false)}
                     >
-                        122333
+                        <Paper className={this.props.classes.root}>
+                            <form className={this.props.classes.container} noValidate autoComplete="off">
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        文章分类
+                                    </InputLabel>
+                                    <Select
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.type}
+                                        onChange={this.handleChangeSearch('type')}
+                                        input={<Input name="type"/>}
+                                    >
+                                        {
+                                            this.state.types.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
+                                </FormControl>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        是否置顶
+                                    </InputLabel>
+                                    <Select
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.isTop}
+                                        onChange={this.handleChangeSearch('isTop')}
+                                        input={<Input name="isTop"/>}
+                                    >
+                                        {
+                                            this.state.isTops.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
+                                </FormControl>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        关键字
+                                    </InputLabel>
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        onChange={this.handleChangeSearch('keyword')}
+                                        value={this.state.keyword}
+                                    />
+                                </FormControl>
+                                <Button
+                                    raised
+                                    color="primary"
+                                    style={{marginTop: 2, fontSize: 12, borderRadius: 4}}
+                                    onClick={this.handleSubmit}
+                                >
+                                    搜索
+                                </Button>
+                            </form>
+                        </Paper>
                     </div>
                 </Drawer>
             </div>
