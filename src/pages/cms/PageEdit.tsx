@@ -54,7 +54,7 @@ type State = {
     isOpen: boolean,
     list: Array<any>,
     num: number,
-    value: any,
+    content: any,
     ready: any,
 };
 
@@ -86,7 +86,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             isOpen: false,
             pageType: type,
             num: 0,
-            value: '',
+            content: '',
             ready: '',
             list: [
                 {
@@ -96,8 +96,10 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
         };
     }
-    handleInput = () => {
-        window.console.log(this.state.ready);
+    handleEditorChange = (content: any) => {
+        this.setState({
+            content: content
+        });
     };
     handleAddEditor = () => {
         this.state.list.push({
@@ -168,8 +170,8 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             <div className="editor" key={index}>
                                                 <Editor
                                                     path={item.path}
-                                                    value={this.state.value}
-                                                    ready={this.handleInput}
+                                                    value={this.state.content}
+                                                    handleEditorChange={this.handleEditorChange}
                                                 />
                                                 {
                                                     index === 0 ?

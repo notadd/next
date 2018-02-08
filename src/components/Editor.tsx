@@ -1,12 +1,8 @@
 import * as React from 'react';
 
 type State = {
-    id: string;
     randomId: string;
     instance: any,
-    height: string;
-    input: any,
-    ready: any,
 };
 
 declare global {
@@ -17,13 +13,9 @@ declare global {
 
 interface Props {
     config?: object;
-
     path: string;
-
     value: any;
-
-    ready: any;
-    // content: any;
+    handleEditorChange: any;
 }
 
 class Editor extends React.Component<Props, State> {
@@ -31,11 +23,7 @@ class Editor extends React.Component<Props, State> {
         super(props);
         this.state = {
             randomId: `editor_${(Math.random() * 100000000000000000)}`,
-            id: `editor_${(Math.random() * 100000000000000000)}`,
             instance: null,
-            height: '300',
-            input: '',
-            ready: '',
         };
     }
 
@@ -130,7 +118,6 @@ class Editor extends React.Component<Props, State> {
     initEditor() {
         const self = this;
         if (self.state.instance === null) {
-            // self.$nextTick(() => {});
             self.setState(
                 {
                     instance: window.UE.getEditor(self.state.randomId),
@@ -139,15 +126,11 @@ class Editor extends React.Component<Props, State> {
                     window.console.log(self.state.instance);
                     // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
                     self.state.instance.addListener('contentChange', () => {
-                        self.setState({'input': self.state.instance.getContent()});
-                      // self.$emit('input', self.state.instance.getContent());
+                        self.props.handleEditorChange(self.state.instance.getContent());
                     });
                     self.state.instance.addListener('ready', () => {
                         self.state.instance.setContent(self.props.value);
-                        self.setState({
-                            'ready': self.state.instance,
-                        });
-                        // self.$emit('ready', self.state.instance);
+                        self.props.handleEditorChange(self.state.instance.getContent());
                     });
                 }
             );

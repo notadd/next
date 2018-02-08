@@ -9,7 +9,7 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
-import { DatePicker } from 'material-ui-pickers';
+import { DateTimePicker } from 'material-ui-pickers';
 
 const styles = {
     root: {
@@ -65,11 +65,12 @@ type State = {
     value: string,
     content: any,
     ready: any,
+    selectedDate: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor (props: any) {
-        super(props);
+    constructor (props: any, state: any) {
+        super(props, state);
         let type = '';
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
@@ -123,9 +124,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
-            content: '',
+            content: 'qefqwfqefqfqefqef',
             value: '',
             ready: '',
+            selectedDate: new Date(),
         };
     }
     handleDateChange = (date: any) => {
@@ -138,8 +140,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             [name]: val,
         });
     };
-    handleInput = () => {
-        window.console.log(this.state.content);
+    handleEditorChange = (content: any) => {
+        this.setState({
+           content: content
+        });
     };
     handleSubmit = (event: any) => {
         event.preventDefault();
@@ -152,6 +156,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         this.setState({
             img: event.target.value.substr(12),
         });
+    };
+    handleDate = (date: any) => {
+        this.setState({ selectedDate: date });
     };
     render() {
         return (
@@ -177,13 +184,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         文章标题
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -196,7 +201,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     <Editor
                                         path={this.state.path}
                                         value={this.state.content}
-                                        ready={this.handleInput}
+                                        handleEditorChange={this.handleEditorChange}
                                     />
                                 </div>
                             </Grid>
@@ -207,13 +212,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     style={{ position: 'relative'}}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         缩略图
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -222,7 +225,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     />
                                     <Input
                                         type="file"
-                                        id="name-simple"
                                         className="upload-image"
                                         onChange={this.getImgURL}
                                         classes={{
@@ -235,7 +237,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         分类
@@ -244,7 +245,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.type}
                                         onChange={this.handleChange('type')}
-                                        input={<Input name="type" id="type-simple" />}
+                                        input={<Input name="type"/>}
                                     >
                                         {
                                             this.state.types.map((item: any, index: number) => {
@@ -266,13 +267,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         摘要
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         multiline={true}
                                         rowsMax="3"
                                         rows="3"
@@ -289,7 +288,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         置顶
@@ -328,7 +326,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                                 root: this.props.classes.switchHeight,
                                                 default: this.props.classes.switchDefault,
                                             }}
-                                            onChange={(event, checked) => this.setState({ isHidden: checked })}
+                                            onChange={
+                                                (event: any, checked: boolean) => {
+                                                    this.setState({ isHidden: checked});
+                                                }}
                                             checked={this.state.isHidden}
                                         />
                                     }
@@ -338,26 +339,13 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                     style={{ position: 'relative'}}
                                 >
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        发布时间
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        value={this.state.time}
-                                    />
-                                    <DatePicker
-                                        className="data-picker"
-                                        keyboard
-                                        clearable
-                                        onChange={this.handleDateChange}
-                                        animateYearScrolling={false}
+                                    {/*<DatePicker*/}
+                                        {/*value={this.state.selectedDate}*/}
+                                        {/*onChange={this.handleDate}*/}
+                                    {/*/>*/}
+                                    <DateTimePicker
+                                        value={this.state.selectedDate}
+                                        onChange={this.handleDate}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -365,13 +353,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         来源
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -385,13 +371,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
-                                        htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
                                     >
                                         来源链接
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
