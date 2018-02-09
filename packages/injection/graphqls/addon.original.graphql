@@ -1,25 +1,41 @@
 type Addon {
+    # authors info for addon
     authors: [Author],
+    # description info for addon
     description: String,
+    # identification info for addon
     identification: String,
+    # location info for addon
     location: String,
+    # name info for addon
+    name: String,
+    # version info for addon
     version: String,
 }
 
 input AddonFilter {
+    # identification for a addond
     identification: String,
+    # install status for a addon
     installed: Boolean,
+    # enable status for a addon
     enabled: Boolean,
 }
 
 type Query {
+    # get a addon by identification
     getAddon(identification: String): Addon,
+    # get all addons, can be fileted by identification, installed, and enabled
     getAddons(filter: AddonFilter): [Addon],
 }
 
 type Mutation {
+    # disable a addon by identification
     disableAddon(identification: String): Addon,
+    # enable a addon by identification
     enableAddon(identification: String): Addon,
+    # install a addon by identification
     installAddon(identification: String): Addon,
+    # uninstall a addon by identification
     uninstallAddon(identification: String): Addon,
 }
