@@ -817,16 +817,16 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/addon/install" component={AddonInstall}/>
                                                 <Route exact path="/cms/article" component={Article}/>
                                                 <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
-                                                <Route
-                                                    exact
-                                                    path="/cms/article/edit/message"
-                                                    component={ArticleEditMessage}
-                                                />
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
                                                 <Route
                                                     exact
                                                     path="/cms/article/type/edit/:id"
                                                     component={ArticleTypeEdit}
+                                                />
+                                                <Route
+                                                    exact
+                                                    path="/cms/article/type/message"
+                                                    component={ArticleEditMessage}
                                                 />
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>

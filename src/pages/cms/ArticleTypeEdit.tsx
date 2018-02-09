@@ -557,7 +557,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                                             />
                                                         </TableCell>
                                                         <TableCell className="table-action-btn" numeric>
-                                                            <Link to={'/cms/article/edit/message'}>
+                                                            <Link to={'/cms/article/type/message'}>
                                                                 <IconButton
                                                                     className={this.props.classes.btnEdit}
                                                                     title="编辑"
