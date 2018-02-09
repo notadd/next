@@ -87,7 +87,6 @@ const styles = {
     },
     createBtn: {
         padding: 0,
-        color: '#808080',
         'line-height': '24px',
         'border-radius': '2px',
         'background-color': '#e0e0e0',
@@ -517,67 +516,87 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                         this.state.tab === 1 &&
                         <div className={this.props.classes.container}>
                             <Button className={this.props.classes.createBtn}>
-                                添加信息项
+                                <Link
+                                    to={'/cms/article/type/message/add'}
+                                    style={{color: '#808080'}}
+                                >
+                                    添加信息项
+                                </Link>
                             </Button>
-                            <div className="table-hidden">
-                                <Table className={this.props.classes.table}>
-                                    <TableHead className="table-head">
-                                        <TableRow>
-                                            <TableCell className={this.props.classes.tableCell} numeric>排序</TableCell>
-                                            <TableCell
-                                                className={this.props.classes.tableCell}
-                                                numeric
-                                            >
-                                                信息项名称
-                                            </TableCell>
-                                            <TableCell className={this.props.classes.tableCell} numeric>是否必填</TableCell>
-                                            <TableCell numeric/>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody className="table-body">
-                                        {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                            .map((n: any, index: number) => {
-                                                return (
-                                                    <TableRow
-                                                        hover
-                                                        className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                                        key={n.id}
-                                                    >
-                                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                                            {n.sort}
-                                                        </TableCell>
-                                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                                            {n.name}
-                                                        </TableCell>
-                                                        <TableCell className={this.props.classes.tableCell} numeric>
-                                                            <Switch
-                                                                checked={n.status}
-                                                                onChange={this.handleChange(n)}
-                                                                aria-label="n.status"
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell className="table-action-btn" numeric>
-                                                            <Link to={'/cms/article/type/message'}>
+                            <div className="root-paper" style={{ padding: 0 }}>
+                                <div className="table-hidden">
+                                    <Table className={this.props.classes.table}>
+                                        <TableHead className="table-head">
+                                            <TableRow>
+                                                <TableCell
+                                                    className={this.props.classes.tableCell}
+                                                    numeric
+                                                >
+                                                    排序
+                                                </TableCell>
+                                                <TableCell
+                                                    className={this.props.classes.tableCell}
+                                                    numeric
+                                                >
+                                                    信息项名称
+                                                </TableCell>
+                                                <TableCell
+                                                    className={this.props.classes.tableCell}
+                                                    numeric
+                                                >
+                                                    是否必填
+                                                </TableCell>
+                                                <TableCell numeric/>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody className="table-body">
+                                            {list.
+                                            slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
+                                                .map((n: any, index: number) => {
+                                                    return (
+                                                        <TableRow
+                                                            hover
+                                                            className={
+                                                                index % 2 === 0 ? this.props.classes.evenRow : ''
+                                                            }
+                                                            key={n.id}
+                                                        >
+                                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                                                {n.sort}
+                                                            </TableCell>
+                                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                                                {n.name}
+                                                            </TableCell>
+                                                            <TableCell className={this.props.classes.tableCell} numeric>
+                                                                <Switch
+                                                                    checked={n.status}
+                                                                    onChange={this.handleChange(n)}
+                                                                    aria-label="n.status"
+                                                                />
+                                                            </TableCell>
+                                                            <TableCell className="table-action-btn" numeric>
+                                                                <Link to={'/cms/article/type/message/edit'}>
+                                                                    <IconButton
+                                                                        className={this.props.classes.btnEdit}
+                                                                        title="编辑"
+                                                                    >
+                                                                        <ModeEdit />
+                                                                    </IconButton>
+                                                                </Link>
                                                                 <IconButton
-                                                                    className={this.props.classes.btnEdit}
-                                                                    title="编辑"
+                                                                    className={this.props.classes.btnDelete}
+                                                                    onClick={() => this.handleClickOpen(n)}
+                                                                    title="删除"
                                                                 >
-                                                                    <ModeEdit />
+                                                                    <DeleteIcon />
                                                                 </IconButton>
-                                                            </Link>
-                                                            <IconButton
-                                                                className={this.props.classes.btnDelete}
-                                                                onClick={() => this.handleClickOpen(n)}
-                                                                title="删除"
-                                                            >
-                                                                <DeleteIcon />
-                                                            </IconButton>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                );
-                                            })}
-                                    </TableBody>
-                                </Table>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    );
+                                                })}
+                                        </TableBody>
+                                    </Table>
+                                </div>
                             </div>
                             <div className="table-pagination">
                                 <ReactPaginate

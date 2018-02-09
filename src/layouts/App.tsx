@@ -825,7 +825,7 @@ class App extends React.Component<Props, State> {
                                                 />
                                                 <Route
                                                     exact
-                                                    path="/cms/article/type/message"
+                                                    path="/cms/article/type/message/:type"
                                                     component={ArticleEditMessage}
                                                 />
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
