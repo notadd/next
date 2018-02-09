@@ -131,6 +131,7 @@
         "packages/extension-demo",
         "packages/injection",
         "packages/logger",
+        "packages/module-demo",
         "packages/react-scripts",
         "packages/server",
         "packages/setting",
