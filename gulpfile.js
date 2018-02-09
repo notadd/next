@@ -11,6 +11,7 @@ const packages = {
     'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
     configuration: ts.createProject('src/configuration/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
+    'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
     injection: ts.createProject('src/injection/tsconfig.json'),
     logger: ts.createProject('src/logger/tsconfig.json'),
     server: ts.createProject('src/server/tsconfig.json'),
