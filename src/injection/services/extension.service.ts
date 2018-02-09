@@ -42,6 +42,9 @@ export class ExtensionService {
         if (!extension) {
             throw new Error("Extension do not exists!");
         }
+        if (!await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
+            throw new Error(`Extension [${extension.identification}] is not installed!`);
+        }
 
         return extension;
     }
@@ -55,6 +58,9 @@ export class ExtensionService {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
+        }
+        if (!await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
+            throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
 
         return extension;
@@ -90,6 +96,9 @@ export class ExtensionService {
         if (!extension) {
             throw new Error("Extension do not exists!");
         }
+        if (await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
+            throw new Error(`Extension [${extension.identification}] has been installed!`);
+        }
 
         return extension;
     }
@@ -103,6 +112,9 @@ export class ExtensionService {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
+        }
+        if (!await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
+            throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
 
         return extension;

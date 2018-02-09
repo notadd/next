@@ -56,6 +56,9 @@ export class AddonService {
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
+        if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+                throw new Error(`Addon [${addon.identification}] is not installed!`);
+        }
 
         return addon;
     }
@@ -90,6 +93,9 @@ export class AddonService {
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
+        if(await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+            throw new Error(`Addon [${addon.identification}] has been installed!`);
+        }
 
         return addon;
     }
@@ -103,6 +109,9 @@ export class AddonService {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
+        }
+        if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+            throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
 
         return addon;

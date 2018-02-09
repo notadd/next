@@ -49,6 +49,9 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
+            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
+                throw new Error(`Module [${module.identification}] is not installed!`);
+            }
             return module;
         });
     }
@@ -57,6 +60,9 @@ let ModuleService = class ModuleService {
             const module = yield this.getModule(identification);
             if (!module) {
                 throw new Error("Module do not exists!");
+            }
+            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
+                throw new Error(`Module [${module.identification}] is not installed!`);
             }
             return module;
         });
@@ -79,6 +85,9 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
+            if (yield this.settingService.get(`module.${module.identification}.installed`, false)) {
+                throw new Error(`Module [${module.identification}] has been installed!`);
+            }
             return module;
         });
     }
@@ -87,6 +96,9 @@ let ModuleService = class ModuleService {
             const module = yield this.getModule(identification);
             if (!module) {
                 throw new Error("Module do not exists!");
+            }
+            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
+                throw new Error(`Module [${module.identification}] is not installed!`);
             }
             return module;
         });

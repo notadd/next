@@ -49,6 +49,9 @@ let ExtensionService = class ExtensionService {
             if (!extension) {
                 throw new Error("Extension do not exists!");
             }
+            if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
+                throw new Error(`Extension [${extension.identification}] is not installed!`);
+            }
             return extension;
         });
     }
@@ -57,6 +60,9 @@ let ExtensionService = class ExtensionService {
             const extension = yield this.getExtension(identification);
             if (!extension) {
                 throw new Error("Extension do not exists!");
+            }
+            if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
+                throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
             return extension;
         });
@@ -79,6 +85,9 @@ let ExtensionService = class ExtensionService {
             if (!extension) {
                 throw new Error("Extension do not exists!");
             }
+            if (yield this.settingService.get(`extension.${extension.identification}.installed`, false)) {
+                throw new Error(`Extension [${extension.identification}] has been installed!`);
+            }
             return extension;
         });
     }
@@ -87,6 +96,9 @@ let ExtensionService = class ExtensionService {
             const extension = yield this.getExtension(identification);
             if (!extension) {
                 throw new Error("Extension do not exists!");
+            }
+            if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
+                throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
             return extension;
         });

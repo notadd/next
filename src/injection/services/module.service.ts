@@ -42,6 +42,9 @@ export class ModuleService {
         if (!module) {
             throw new Error("Module do not exists!");
         }
+        if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+            throw new Error(`Module [${module.identification}] is not installed!`);
+        }
 
         return module;
     }
@@ -55,6 +58,9 @@ export class ModuleService {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
+        }
+        if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+            throw new Error(`Module [${module.identification}] is not installed!`);
         }
 
         return module;
@@ -90,6 +96,9 @@ export class ModuleService {
         if (!module) {
             throw new Error("Module do not exists!");
         }
+        if (await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+            throw new Error(`Module [${module.identification}] has been installed!`);
+        }
 
         return module;
     }
@@ -103,6 +112,9 @@ export class ModuleService {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
+        }
+        if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+            throw new Error(`Module [${module.identification}] is not installed!`);
         }
 
         return module;
