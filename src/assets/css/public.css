@@ -123,6 +123,15 @@ body {
     padding: 15px 30px;
 }
 /*表单下拉框*/
+.form-select-underline {
+    font-size: 16px !important;
+}
+.form-select-underline:before {
+    background-color: #dfdfdf !important;
+}
+.form-select-underline:hover:before {
+    background-color: rgba(0, 0, 0, 0.87) !important;
+}
 #menu-type > div > ul {
     max-height: 300px;
 }
@@ -187,6 +196,14 @@ body {
 }
 .error-prompt > div{
     background: #ff1744 !important;
+}
+/*tab样式*/
+.paper-tabs .paper-tab{
+    min-height: 54px;
+    min-width: 96px;
+}
+.paper-tab > span > div > span {
+    font-size: 14px;
 }
 @media (max-width: 479px) {
     /*顶部按钮操作*/

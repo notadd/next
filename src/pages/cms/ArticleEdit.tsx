@@ -229,7 +229,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         分类
                                     </InputLabel>
                                     <Select
-                                        className={this.props.classes.formLabelFont}
+                                        className="form-select-underline"
                                         value={this.state.type}
                                         onChange={this.handleChange('type')}
                                         input={<Input name="type"/>}
@@ -280,7 +280,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         置顶
                                     </InputLabel>
                                     <Select
-                                        className={this.props.classes.formLabelFont}
+                                        className="form-select-underline"
                                         value={this.state.topType}
                                         onChange={this.handleChange('topType')}
                                         input={<Input name="type" id="type-simple" />}
