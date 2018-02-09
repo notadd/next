@@ -1,6 +1,8 @@
 type Addon {
     authors: [Author],
+    description: String,
     identification: String,
+    location: String,
     version: String,
 }
 

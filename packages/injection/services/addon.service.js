@@ -36,8 +36,10 @@ let AddonService = class AddonService {
             .map((injection) => {
             return {
                 authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
                 identification: Reflect.getMetadata("identification", injection.target),
                 location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
                 version: Reflect.getMetadata("version", injection.target),
             };
         });

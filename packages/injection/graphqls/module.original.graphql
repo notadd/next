@@ -11,7 +11,10 @@ type Query {
 
 type Module {
     authors: [Author],
+    description: String,
     identification: String,
+    location: String,
+    name: String,
     version: String,
 }
 

@@ -4,12 +4,14 @@ import { Author } from "../types/author.type";
 
 export function Addon(obj: {
     authors?: Author[],
+    description?: string,
     exports?: any[],
     identification: string,
     imports?: any[],
     components?: any[],
     controllers?: any[],
     modules?: any[],
+    name: string,
     version: string,
 }): ClassDecorator {
     obj.modules = obj.imports && !obj.modules ? obj.imports : obj.modules;
