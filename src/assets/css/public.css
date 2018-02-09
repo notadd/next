@@ -198,6 +198,9 @@ body {
     background: #ff1744 !important;
 }
 /*tab样式*/
+.paper-tabs {
+    border-bottom: 1px solid #e0e0e0;
+}
 .paper-tabs .paper-tab{
     min-height: 54px;
     min-width: 96px;

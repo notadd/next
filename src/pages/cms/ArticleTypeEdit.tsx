@@ -544,7 +544,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                                         key={n.id}
                                                     >
                                                         <TableCell className={this.props.classes.tableCell} numeric>
-                                                            {index + 1}
+                                                            {n.sort}
                                                         </TableCell>
                                                         <TableCell className={this.props.classes.tableCell} numeric>
                                                             {n.name}
@@ -557,7 +557,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                                             />
                                                         </TableCell>
                                                         <TableCell className="table-action-btn" numeric>
-                                                            <Link to={'/cms/article/edit/' + n.id}>
+                                                            <Link to={'/cms/article/edit/message'}>
                                                                 <IconButton
                                                                     className={this.props.classes.btnEdit}
                                                                     title="编辑"

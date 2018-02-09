@@ -25,6 +25,7 @@ import AddonInstall from '../pages/global/AddonInstall';
 
 import Article from '../pages/cms/Article';
 import ArticleEdit from '../pages/cms/ArticleEdit';
+import ArticleEditMessage from '../pages/cms/ArticleEditMessage';
 import ArticleType from '../pages/cms/ArticleType';
 import ArticleTypeEdit from '../pages/cms/ArticleTypeEdit';
 import ArticleRecycle from '../pages/cms/ArticleRecycle';
@@ -816,6 +817,11 @@ class App extends React.Component<Props, State> {
                                                 <Route exact path="/addon/install" component={AddonInstall}/>
                                                 <Route exact path="/cms/article" component={Article}/>
                                                 <Route exact path="/cms/article/edit/:id" component={ArticleEdit}/>
+                                                <Route
+                                                    exact
+                                                    path="/cms/article/edit/message"
+                                                    component={ArticleEditMessage}
+                                                />
                                                 <Route exact path="/cms/article/type" component={ArticleType}/>
                                                 <Route
                                                     exact
