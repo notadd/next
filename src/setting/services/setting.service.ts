@@ -17,6 +17,30 @@ export class SettingService {
     ) {
     }
 
+    public async get<T>(key: string, defaultValue: T): Promise<T> {
+        const setting: Setting | undefined = await this.getSettingByKey(key);
+        if (!setting) {
+            return defaultValue;
+        }
+        let result;
+        switch(typeof defaultValue) {
+            case "boolean":
+                result = setting.value == "1";
+                break;
+            case "string":
+                result = setting.value;
+                break;
+            case "number":
+                result = Number(setting.value);
+                break;
+            default:
+                result = setting.value;
+                break;
+        }
+
+        return result as T;
+    }
+
     /**
      * @returns { Promise<Setting[]> }
      */

@@ -30,6 +30,30 @@ let SettingService = class SettingService {
         this.isInitialized = false;
         this.settings = [];
     }
+    get(key, defaultValue) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const setting = yield this.getSettingByKey(key);
+            if (!setting) {
+                return defaultValue;
+            }
+            let result;
+            switch (typeof defaultValue) {
+                case "boolean":
+                    result = setting.value == "1";
+                    break;
+                case "string":
+                    result = setting.value;
+                    break;
+                case "number":
+                    result = Number(setting.value);
+                    break;
+                default:
+                    result = setting.value;
+                    break;
+            }
+            return result;
+        });
+    }
     getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.isInitialized) {
