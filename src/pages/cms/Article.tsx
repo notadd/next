@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+// import Cascader from 'react-web-cascader';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
@@ -106,7 +107,10 @@ type State = {
     keyword: string,
     types: Array<any>,
     isTop: string,
+    childType: string,
     isTops: Array<any>,
+    options: any,
+    current: number,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -177,18 +181,31 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             message: '',
             type: '',
             isTop: '',
+            childType: '',
             types: [
                 {
                     id: '12',
                     type: '新闻1',
+                    children: [
+                        {
+                            id: '121',
+                            type: '新闻1-1',
+                        },
+                        {
+                            id: '122',
+                            type: '新闻1-2',
+                        },
+                    ],
                 },
                 {
                     id: '13',
                     type: '新闻2',
+                    children: [],
                 },
                 {
                     id: '14',
                     type: '新闻3',
+                    children: [],
                 },
             ],
             isTops: [
@@ -206,6 +223,59 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 },
             ],
             keyword: '',
+            options: [
+                {
+                    value: '110000',
+                    label: '北京',
+                    children: [
+                        {
+                            value: '110000',
+                            label: '北京市',
+                            children: [
+                                {
+                                    value: '110101',
+                                    label: '东城区'
+                                },
+                                {
+                                    value: '110102',
+                                    label: '西城区'
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    value: '130000',
+                    label: '河北省',
+                    children: [
+                        {
+                            value: '130100',
+                            label: '石家庄市',
+                            children: [
+                                {
+                                    value: '130102',
+                                    label: '长安区'
+                                },
+                                {
+                                    value: '130104',
+                                    label: '桥西区'
+                                },
+                            ],
+                        },
+                        {
+                            value: '130200',
+                            label: '唐山市',
+                            children: [
+                                {
+                                    value: '130202',
+                                    label: '路南区',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+            current: 1,
         };
     }
     handleChangeAll = (name: any) => (event: any) => {
@@ -296,6 +366,19 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         let val = event.target.value;
         this.setState({
             [name]: val,
+            current: val,
+        });
+    };
+    handleChangeIsTop = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
+        });
+    };
+    handleChangeChild = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
         });
     };
     handleSubmitSearch = () => {
@@ -318,6 +401,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             checkedAll: false,
         });
     };
+    // displayRender = (labels: any) => {
+    //     window.console.log(labels);
+    //     return labels.join('/');
+    // };
+    // onChangeCascader = (option: any) => {
+    //     window.console.log(option);
+    // };
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
@@ -532,7 +622,48 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             })
                                         }
                                     </Select>
+                                    {
+                                        this.state.types[this.state.current].children.length > 0 ?
+                                            <FormControl
+                                                fullWidth
+                                                style={{ marginTop: '4px' }}
+                                            >
+                                                <Select
+                                                    className={this.props.classes.formLabelFont}
+                                                    value={this.state.childType}
+                                                    onChange={this.handleChangeChild('childType')}
+                                                    input={<Input name="type"/>}
+                                                >
+                                                    {
+                                                        this.state.types[this.state.current]
+                                                            .children.map((sub: any, i: number) => {
+                                                            return (
+                                                                <MenuItem
+                                                                    className="input-drop-paper"
+                                                                    value={i}
+                                                                    key={i}
+                                                                >
+                                                                    {sub.type}
+                                                                </MenuItem>
+                                                            );
+                                                        })
+                                                    }
+                                                </Select>
+                                            </FormControl> : <div/>
+                                    }
                                 </FormControl>
+                                {/* <div>
+                                       <Cascader
+                                           options={this.state.options}
+                                           defaultValue={['130000', '130200', '130202']}
+                                           displayRender={(labels: string) => this.displayRender(labels)}
+                                           allowClear={true}
+                                           placeholder="请选择"
+                                           onChange={(option: any) => {
+                                               this.onChangeCascader(option);
+                                           }}
+                                       />
+                                </div>*/}
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
@@ -545,7 +676,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Select
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.isTop}
-                                        onChange={this.handleChangeSearch('isTop')}
+                                        onChange={this.handleChangeIsTop('isTop')}
                                         input={<Input name="type"/>}
                                     >
                                         {

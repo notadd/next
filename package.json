@@ -45,6 +45,7 @@
     "react-select": "^1.2.1",
     "react-sortable-tree": "^1.7.0",
     "react-swipeable-views": "^0.12.12",
+    "react-web-cascader": "^0.3.0",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "typescript": "^2.7.1"
