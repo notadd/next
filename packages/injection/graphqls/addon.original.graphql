@@ -31,11 +31,11 @@ type Query {
 
 type Mutation {
     # disable a addon by identification
-    disableAddon(identification: String): Addon,
+    disableAddon(identification: String): Result,
     # enable a addon by identification
-    enableAddon(identification: String): Addon,
+    enableAddon(identification: String): Result,
     # install a addon by identification
-    installAddon(identification: String): Addon,
+    installAddon(identification: String): Result,
     # uninstall a addon by identification
-    uninstallAddon(identification: String): Addon,
+    uninstallAddon(identification: String): Result,
 }

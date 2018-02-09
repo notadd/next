@@ -31,11 +31,11 @@ type Module {
 
 type Mutation {
     # disable a module by identification
-    disableModule(identification: String): Module,
+    disableModule(identification: String): Result,
     # enable a module by identification
-    enableModule(identification: String): Module,
+    enableModule(identification: String): Result,
     # install a module by identification
-    installModule(identification: String): Module,
+    installModule(identification: String): Result,
     # uninstall a module by identification
-    uninstallModule(identification: String): Module,
+    uninstallModule(identification: String): Result,
 }

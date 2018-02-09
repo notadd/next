@@ -31,11 +31,11 @@ type Query {
 
 type Mutation {
     # disable a extension by identification
-    disableExtension(identification: String): Extension,
+    disableExtension(identification: String): Result,
     # enable a extension by identification
-    enableExtension(identification: String): Extension,
+    enableExtension(identification: String): Result,
     # install a extension by identification
-    installExtension(identification: String): Extension,
+    installExtension(identification: String): Result,
     # uninstall a extension by identification
-    uninstallExtension(identification: String): Extension,
+    uninstallExtension(identification: String): Result,
 }
