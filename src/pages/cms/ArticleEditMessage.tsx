@@ -86,16 +86,44 @@ class ArticleEditMessage extends React.Component<WithStyles<keyof typeof styles>
             type: '',
             types: [
                 {
+                    id: '10',
+                    type: '单行文本框',
+                },
+                {
+                    id: '11',
+                    type: '多行文本框',
+                },
+                {
                     id: '12',
-                    type: '信息项1',
+                    type: '单选框',
                 },
                 {
                     id: '13',
-                    type: '信息项2',
+                    type: '多选框',
                 },
                 {
                     id: '14',
-                    type: '信息项3',
+                    type: '复选框',
+                },
+                {
+                    id: '15',
+                    type: '日期时间选择',
+                },
+                {
+                    id: '16',
+                    type: '日期时间范围选择',
+                },
+                {
+                    id: '17',
+                    type: '下拉菜单',
+                },
+                {
+                    id: '18',
+                    type: '上传图片',
+                },
+                {
+                    id: '19',
+                    type: '上传文件',
                 },
             ],
         };
