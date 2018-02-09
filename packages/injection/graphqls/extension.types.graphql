@@ -1,5 +1,7 @@
 type Extension {
+    authors: [Author],
     identification: String,
+    version: String,
 }
 
 input ExtensionFilter {

@@ -3,4 +3,5 @@ export declare type Addon = {
     authors?: Array<Author>;
     identification: string;
     location: string;
+    version: string;
 };

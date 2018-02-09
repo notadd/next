@@ -23,8 +23,10 @@ export class AddonService {
             })
             .map((injection: Injection) => {
                 return {
+                    authors: Reflect.getMetadata("authors", injection.target),
                     identification: Reflect.getMetadata("identification", injection.target),
                     location: injection.location,
+                    version: Reflect.getMetadata("version", injection.target),
                 };
             });
         this.initialized = true;

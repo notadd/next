@@ -10,7 +10,9 @@ type Query {
 }
 
 type Module {
+    authors: [Author],
     identification: String,
+    version: String,
 }
 
 type Mutation {

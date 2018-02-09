@@ -1,5 +1,7 @@
 type Addon {
+    authors: [Author],
     identification: String,
+    version: String,
 }
 
 input AddonFilter {

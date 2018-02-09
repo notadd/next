@@ -1,0 +1,7 @@
+type Author {
+    email: String,
+    github: String,
+    homepage: String,
+    username: String,
+    weibo: String,
+}
