@@ -1,26 +1,41 @@
 input ModuleFilter {
+    # identification for a module
     identification: String,
+    # install status for a module
     installed: Boolean,
+    # enable status for a module
     enabled: Boolean,
 }
 
 type Query {
+    # get a module by identification
     getModule(identification: String): Module,
+    # get all modules, can be fileted by identification, installed, and enabled
     getModules(filter: ModuleFilter): [Module],
 }
 
 type Module {
+    # authors info for module
     authors: [Author],
+    # description info for module
     description: String,
+    # identification info for module
     identification: String,
+    # location info for module
     location: String,
+    # name info for module
     name: String,
+    # version info for module
     version: String,
 }
 
 type Mutation {
+    # disable a module by identification
     disableModule(identification: String): Module,
+    # enable a module by identification
     enableModule(identification: String): Module,
+    # install a module by identification
     installModule(identification: String): Module,
+    # uninstall a module by identification
     uninstallModule(identification: String): Module,
 }
