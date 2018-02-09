@@ -11,6 +11,12 @@ let ModuleDemoInjection = class ModuleDemoInjection {
 };
 ModuleDemoInjection = __decorate([
     module_decorator_1.Module({
+        authors: [
+            {
+                email: "admin@notadd.com",
+                username: "notadd",
+            },
+        ],
         identification: "module-demo",
         version: "2.0.0",
     })

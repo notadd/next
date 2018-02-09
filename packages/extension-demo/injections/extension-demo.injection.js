@@ -11,6 +11,12 @@ let ExtensionDemoInjection = class ExtensionDemoInjection {
 };
 ExtensionDemoInjection = __decorate([
     extension_decorator_1.Extension({
+        authors: [
+            {
+                email: "admin@notadd.com",
+                username: "notadd",
+            },
+        ],
         identification: "extension-demo",
         version: "2.0.0",
     })
