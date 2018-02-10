@@ -9,6 +9,7 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
+import { StyleRules } from 'material-ui/styles';
 
 const styles = {
     root: {
@@ -58,7 +59,13 @@ type State = {
     ready: any,
 };
 
-class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
+const stylesType = {} as StyleRules;
+
+interface Props extends WithStyles<keyof typeof stylesType> {
+    num: number;
+}
+
+class PageEdit extends React.Component<Props, State> {
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
@@ -97,8 +104,12 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
         };
     }
-    handleEditorChange = (content: any) => {
-        window.console.log(content);
+    handleEditorChange = (content: any, pro: any) => {
+        window.console.log(pro);
+        this.state.list[this.state.num].content = content;
+        this.setState({
+            list: this.state.list,
+        });
     };
     handleAddEditor = () => {
         this.state.list.push({
