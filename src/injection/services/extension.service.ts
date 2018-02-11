@@ -4,6 +4,7 @@ import { Extension } from "../types/extension.type";
 import { Injection } from "../types/injection.type";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
@@ -39,7 +40,7 @@ export class ExtensionService {
      *
      * @returns { Promise<Extension | undefined> }
      */
-    public async disableExtension(identification: string): Promise<Extension | undefined> {
+    public async disableExtension(identification: string): Promise<Result | undefined> {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
@@ -49,7 +50,9 @@ export class ExtensionService {
         }
         await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "0");
 
-        return extension;
+        return {
+            message: `Disable extension [${extension.identification}] successfully!`,
+        };
     }
 
     /**
@@ -57,7 +60,7 @@ export class ExtensionService {
      *
      * @returns { Promise<Extension | undefined> }
      */
-    public async enableExtension(identification: string): Promise<Extension | undefined> {
+    public async enableExtension(identification: string): Promise<Result | undefined> {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
@@ -67,7 +70,9 @@ export class ExtensionService {
         }
         await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "1");
 
-        return extension;
+        return {
+            message: `Enable extension [${extension.identification}] successfully!`,
+        };
     }
 
     /**
@@ -95,7 +100,7 @@ export class ExtensionService {
      *
      * @returns { Promise<Extension | undefined> }
      */
-    public async installExtension(identification: string): Promise<Extension | undefined> {
+    public async installExtension(identification: string): Promise<Result | undefined> {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
@@ -105,7 +110,9 @@ export class ExtensionService {
         }
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
 
-        return extension;
+        return {
+            message: `Install extension [${extension.identification}] successfully!`,
+        };
     }
 
     /**
@@ -113,7 +120,7 @@ export class ExtensionService {
      *
      * @returns { Promise<Extension | undefined> }
      */
-    public async uninstallExtension(identification: string): Promise<Extension | undefined> {
+    public async uninstallExtension(identification: string): Promise<Result | undefined> {
         const extension: Extension | undefined = await this.getExtension(identification);
         if (!extension) {
             throw new Error("Extension do not exists!");
@@ -123,6 +130,8 @@ export class ExtensionService {
         }
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
 
-        return extension;
+        return {
+            message: `Uninstall extension [${extension.identification}] successfully!`,
+        };
     }
 }

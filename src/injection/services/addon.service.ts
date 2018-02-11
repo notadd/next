@@ -4,6 +4,7 @@ import { Component } from "@nestjs/common";
 import { Injection } from "../types/injection.type";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
@@ -39,14 +40,16 @@ export class AddonService {
      *
      * @returns { Promise<Addon | undefined> }
      */
-    public async disableAddon(identification: string): Promise<Addon | undefined> {
+    public async disableAddon(identification: string): Promise<Result | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
 
-        return addon;
+        return {
+            message: `Disable addon [${addon.identification}] successfully!`,
+        };
     }
 
     /**
@@ -54,7 +57,7 @@ export class AddonService {
      *
      * @returns { Promise<Addon | undefined> }
      */
-    public async enableAddon(identification: string): Promise<Addon | undefined> {
+    public async enableAddon(identification: string): Promise<Result | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -64,7 +67,9 @@ export class AddonService {
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
 
-        return addon;
+        return {
+            message: `Enable addon [${addon.identification}] successfully!`,
+        };
     }
 
     /**
@@ -92,7 +97,7 @@ export class AddonService {
      *
      * @returns { Promise<Addon | undefined> }
      */
-    public async installAddon(identification: string): Promise<Addon | undefined> {
+    public async installAddon(identification: string): Promise<Result | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -102,7 +107,9 @@ export class AddonService {
         }
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
 
-        return addon;
+        return {
+            message: `Install addon [${addon.identification}] successfully!`,
+        };
     }
 
     /**
@@ -110,7 +117,7 @@ export class AddonService {
      *
      * @returns { Promise<Addon | undefined> }
      */
-    public async uninstallAddon(identification: string): Promise<Addon | undefined> {
+    public async uninstallAddon(identification: string): Promise<Result | undefined> {
         const addon: Addon | undefined = await this.getAddon(identification);
         if (!addon) {
             throw new Error("Addon do not exists!");
@@ -120,6 +127,8 @@ export class AddonService {
         }
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
 
-        return addon;
+        return {
+            message: `Uninstall addon [${addon.identification}] successfully!`,
+        };
     }
 }

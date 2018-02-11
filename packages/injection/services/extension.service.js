@@ -55,7 +55,9 @@ let ExtensionService = class ExtensionService {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.enabled`, "0");
-            return extension;
+            return {
+                message: `Disable extension [${extension.identification}] successfully!`,
+            };
         });
     }
     enableExtension(identification) {
@@ -68,7 +70,9 @@ let ExtensionService = class ExtensionService {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.enabled`, "1");
-            return extension;
+            return {
+                message: `Enable extension [${extension.identification}] successfully!`,
+            };
         });
     }
     getExtension(identification) {
@@ -93,7 +97,9 @@ let ExtensionService = class ExtensionService {
                 throw new Error(`Extension [${extension.identification}] has been installed!`);
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
-            return extension;
+            return {
+                message: `Install extension [${extension.identification}] successfully!`,
+            };
         });
     }
     uninstallExtension(identification) {
@@ -106,7 +112,9 @@ let ExtensionService = class ExtensionService {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
-            return extension;
+            return {
+                message: `Uninstall extension [${extension.identification}] successfully!`,
+            };
         });
     }
 };

@@ -1,6 +1,7 @@
 import { Extension } from "../types/extension.type";
 import { ExtensionService } from "../services/extension.service";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
@@ -16,7 +17,7 @@ export class ExtensionResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableExtension(identification: string): Promise<Extension | undefined> {
+    public async disableExtension(identification: string): Promise<Result | undefined> {
         return await this.extensionService.disableExtension(identification);
     }
 
@@ -27,7 +28,7 @@ export class ExtensionResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableExtension(identification: string): Promise<Extension | undefined> {
+    public async enableExtension(identification: string): Promise<Result | undefined> {
         return await this.extensionService.enableExtension(identification);
     }
 
@@ -60,7 +61,7 @@ export class ExtensionResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installExtension(identification: string): Promise<Extension | undefined> {
+    public async installExtension(identification: string): Promise<Result | undefined> {
         return await this.extensionService.installExtension(identification);
     }
 
@@ -71,7 +72,7 @@ export class ExtensionResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallExtension(identification: string): Promise<Extension | undefined> {
+    public async uninstallExtension(identification: string): Promise<Result | undefined> {
         return await this.extensionService.uninstallExtension(identification);
     }
 }

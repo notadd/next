@@ -55,7 +55,9 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
-            return module;
+            return {
+                message: `Disable module [${module.identification}] successfully!`,
+            };
         });
     }
     enableModule(identification) {
@@ -68,7 +70,9 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
-            return module;
+            return {
+                message: `Enable module [${module.identification}] successfully!`,
+            };
         });
     }
     getModule(identification) {
@@ -93,7 +97,9 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] has been installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "1");
-            return module;
+            return {
+                message: `Install module [${module.identification}] successfully!`,
+            };
         });
     }
     uninstallModule(identification) {
@@ -106,7 +112,9 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "0");
-            return module;
+            return {
+                message: `Uninstall module [${module.identification}] successfully!`,
+            };
         });
     }
 };

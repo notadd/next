@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { Extension } from "../types/extension.type";
 import { InjectionService } from "./injection.service";
+import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class ExtensionService {
     private readonly injectionService;
@@ -8,10 +9,10 @@ export declare class ExtensionService {
     private initialized;
     private extensions;
     constructor(injectionService: InjectionService, settingService: SettingService);
-    disableExtension(identification: string): Promise<Extension | undefined>;
-    enableExtension(identification: string): Promise<Extension | undefined>;
+    disableExtension(identification: string): Promise<Result | undefined>;
+    enableExtension(identification: string): Promise<Result | undefined>;
     getExtension(identification: string): Promise<Extension | undefined>;
     getExtensions(filter: object): Promise<Array<Extension>>;
-    installExtension(identification: string): Promise<Extension | undefined>;
-    uninstallExtension(identification: string): Promise<Extension | undefined>;
+    installExtension(identification: string): Promise<Result | undefined>;
+    uninstallExtension(identification: string): Promise<Result | undefined>;
 }

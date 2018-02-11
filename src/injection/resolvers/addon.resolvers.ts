@@ -1,6 +1,7 @@
 import { Addon } from "../types/addon.type";
 import { AddonService } from "../services/addon.service";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
@@ -16,7 +17,7 @@ export class AddonResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableAddon(identification: string): Promise<Addon | undefined> {
+    public async disableAddon(identification: string): Promise<Result | undefined> {
         return await this.addonService.disableAddon(identification);
     }
 
@@ -27,7 +28,7 @@ export class AddonResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableAddon(identification: string): Promise<Addon | undefined> {
+    public async enableAddon(identification: string): Promise<Result | undefined> {
         return await this.addonService.enableAddon(identification);
     }
 
@@ -60,7 +61,7 @@ export class AddonResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installAddon(identification: string): Promise<Addon | undefined> {
+    public async installAddon(identification: string): Promise<Result | undefined> {
         return await this.addonService.installAddon(identification);
     }
 
@@ -71,7 +72,7 @@ export class AddonResolvers {
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallAddon(identification: string): Promise<Addon | undefined> {
+    public async uninstallAddon(identification: string): Promise<Result | undefined> {
         return await this.addonService.uninstallAddon(identification);
     }
 }

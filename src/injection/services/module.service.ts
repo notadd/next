@@ -4,6 +4,7 @@ import { InjectionService } from "./injection.service";
 import { Injection } from "../types/injection.type";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Module } from "../types/module.type";
+import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
@@ -39,7 +40,7 @@ export class ModuleService {
      *
      * @returns { Promise<Module | undefined> }
      */
-    public async disableModule(identification: string): Promise<Module | undefined> {
+    public async disableModule(identification: string): Promise<Result | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -49,7 +50,9 @@ export class ModuleService {
         }
         await this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
 
-        return module;
+        return {
+            message: `Disable module [${module.identification}] successfully!`,
+        };
     }
 
     /**
@@ -57,7 +60,7 @@ export class ModuleService {
      *
      * @returns { Promise<Module | undefined> }
      */
-    public async enableModule(identification: string): Promise<Module | undefined> {
+    public async enableModule(identification: string): Promise<Result | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -67,7 +70,9 @@ export class ModuleService {
         }
         await this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
 
-        return module;
+        return {
+            message: `Enable module [${module.identification}] successfully!`,
+        };
     }
 
     /**
@@ -95,7 +100,7 @@ export class ModuleService {
      *
      * @returns { Promise<Module | undefined> }
      */
-    public async installModule(identification: string): Promise<Module | undefined> {
+    public async installModule(identification: string): Promise<Result | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -105,7 +110,9 @@ export class ModuleService {
         }
         await this.settingService.setSetting(`module.${module.identification}.installed`, "1");
 
-        return module;
+        return {
+            message: `Install module [${module.identification}] successfully!`,
+        };
     }
 
     /**
@@ -113,7 +120,7 @@ export class ModuleService {
      *
      * @returns { Promise<Module | undefined> }
      */
-    public async uninstallModule(identification: string): Promise<Module | undefined> {
+    public async uninstallModule(identification: string): Promise<Result | undefined> {
         const module: Module | undefined = await this.getModule(identification);
         if (!module) {
             throw new Error("Module do not exists!");
@@ -123,6 +130,8 @@ export class ModuleService {
         }
         await this.settingService.setSetting(`module.${module.identification}.installed`, "0");
 
-        return module;
+        return {
+            message: `Uninstall module [${module.identification}] successfully!`,
+        };
     }
 }
