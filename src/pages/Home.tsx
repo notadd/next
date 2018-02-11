@@ -4,6 +4,8 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { Chart, Geom }  from 'bizcharts';
+// import { DataSet } from '@antv/data-set';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
@@ -30,7 +32,7 @@ const styles = {
 type State = {
     index: number,
     list: any,
-    version: any
+    version: any,
 };
 
 const mySwiper = (obj: any) =>
@@ -51,6 +53,25 @@ const mySwiper = (obj: any) =>
             );
         })
     );
+const data = [
+    { year: '1991', value: 15000 },
+    { year: '1992', value: 16100 },
+    { year: '1993', value: 15900 },
+    { year: '1994', value: 17409 },
+    { year: '1995', value: 17000 },
+    { year: '1996', value: 16800 },
+    { year: '1997', value: 16300 },
+    { year: '1998', value: 16100 },
+    { year: '1999', value: 15000 }
+];
+const cols = {
+    value: {
+        min: 15000
+    },
+    year: {
+        range: [ 0 , 1 ]
+    },
+};
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any) {
         super(props);
@@ -153,74 +174,84 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
         const { index } = this.state;
         return (
             <div className="home">
+                <Grid container spacing={24}>
+                    <Grid item md={3}>
+                        <Paper>
+                            <Chart data={data} scale={cols}>
+                                <Geom type="area" position="year*value" />
+                                <Geom type="line" position="year*value" size={2} />
+                            </Chart>
+                        </Paper>
+                    </Grid>
+                </Grid>
                 <Grid container spacing={24} className="bottom-content">
-                        <Grid item xs={12} md={8} sm={12}>
-                            <Paper className={this.props.classes.leftPaper}>
-                                <div className="home-bg">
-                                    <div>
-                                        <h4>开发团队</h4>
-                                        <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
-                                            {mySwiper(this.state.list)}
-                                        </AutoPlaySwipeableViews>
-                                    </div>
+                    <Grid item xs={12} md={8} sm={12}>
+                        <Paper className={this.props.classes.leftPaper}>
+                            <div className="home-bg">
+                                <div>
+                                    <h4>开发团队</h4>
+                                    <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+                                        {mySwiper(this.state.list)}
+                                    </AutoPlaySwipeableViews>
                                 </div>
-                                <Grid className="teamBox" container spacing={40}>
-                                    {this.state.list.map((item: any, val: number) => {
+                            </div>
+                            <Grid className="teamBox" container spacing={40}>
+                                {this.state.list.map((item: any, val: number) => {
+                                    return (
+                                        <Grid
+                                            item
+                                            xs={1}
+                                            md={1}
+                                            sm={1}
+                                            key={val}
+                                            className={
+                                                val === index ? this.props.classes.spanActive : ''
+                                            }
+                                            onClick={() => this.handleChange(event, val)}
+                                        >
+                                            {item.name}
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                            <div className="thank-content">
+                                感谢：
+                                <span>
+                                    <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
+                                </span>
+                                <span>
+                                    <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
+                                </span>
+                                <span>
+                                    <a href="https://github.com/Seevil" target="_blank">Intern</a>
+                                </span>
+                                <span className="line">/</span>
+                                <span>
+                                    <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
+                                </span>
+                            </div>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={4}>
+                        <Paper className={this.props.classes.rightPaper}>
+                            <div className="version-information" style={{paddingBottom: 25}}>
+                                <p>
+                                    <span>Notadd版本</span>
+                                    <span style={{color: '#3f51b5'}}>1.16.30</span>
+                                </p>
+                                <div>
+                                    {this.state.version.map((item: any, val: number) => {
                                         return (
-                                            <Grid
-                                                item
-                                                xs={1}
-                                                md={1}
-                                                sm={1}
-                                                key={val}
-                                                className={
-                                                    val === index ? this.props.classes.spanActive : ''
-                                                }
-                                                onClick={() => this.handleChange(event, val)}
-                                            >
-                                                {item.name}
-                                            </Grid>
+                                            <p key={val}>
+                                                <span>{item.name}</span>
+                                                <span>{item.intro}</span>
+                                            </p>
                                         );
                                     })}
-                                </Grid>
-                                <div className="thank-content">
-                                    感谢：
-                                    <span>
-                                        <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
-                                    </span>
-                                    <span>
-                                        <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
-                                    </span>
-                                    <span>
-                                        <a href="https://github.com/Seevil" target="_blank">Intern</a>
-                                    </span>
-                                    <span className="line">/</span>
-                                    <span>
-                                        <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
-                                    </span>
                                 </div>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={4}>
-                            <Paper className={this.props.classes.rightPaper}>
-                                <div className="version-information" style={{paddingBottom: 25}}>
-                                    <p>
-                                        <span>Notadd版本</span>
-                                        <span style={{color: '#3f51b5'}}>1.16.30</span>
-                                    </p>
-                                    <div>
-                                        {this.state.version.map((item: any, val: number) => {
-                                            return (
-                                                <p key={val}>
-                                                    <span>{item.name}</span>
-                                                    <span>{item.intro}</span>
-                                                </p>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </Paper>
-                        </Grid>
+                            </div>
+                        </Paper>
+                    </Grid>
                 </Grid>
             </div>
         );

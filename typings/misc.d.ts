@@ -8,3 +8,6 @@ declare module 'material-ui-pickers'
 declare module 'rc-color-picker'
 declare module 'react-swipeable-views'
 declare module 'react-swipeable-views-utils'
+declare module 'react-dazzle';
+declare module 'bizcharts';
+declare module '@antv/data-set';
