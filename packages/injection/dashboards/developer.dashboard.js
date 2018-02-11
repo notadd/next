@@ -10,26 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const setting_service_1 = require("@notadd/setting/services/setting.service");
-let DashboardService = class DashboardService {
-    constructor(settingService) {
-        this.settingService = settingService;
-        this.initialized = false;
-        this.dashboards = [];
-    }
-    initialize(metadatas) {
-        this.dashboards = metadatas.map(metadata => {
-            return {
-                data: metadata.callback ? metadata.callback() : [],
-                name: metadata.name,
-            };
-        });
-        console.log(this.dashboards);
-        this.initialized = true;
+const dashboard_decorator_1 = require("../decorators/dashboard.decorator");
+let DeveloperDashboard = class DeveloperDashboard {
+    getDashboard() {
+        return [
+            {
+                a: "sdsfsfsf",
+                b: "sdsdfsffds",
+            },
+        ];
     }
 };
-DashboardService = __decorate([
-    common_1.Component(),
-    __metadata("design:paramtypes", [setting_service_1.SettingService])
-], DashboardService);
-exports.DashboardService = DashboardService;
+__decorate([
+    dashboard_decorator_1.Dashboard("developers"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], DeveloperDashboard.prototype, "getDashboard", null);
+DeveloperDashboard = __decorate([
+    common_1.Component()
+], DeveloperDashboard);
+exports.DeveloperDashboard = DeveloperDashboard;

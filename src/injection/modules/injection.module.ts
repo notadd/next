@@ -15,12 +15,14 @@ import { DashboardExplorerService } from "../services/dashboard-explorer.service
 import { DashboardResolvers } from "../resolvers/dashboard.resolvers";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
+import { DeveloperDashboard } from "../dashboards/developer.dashboard";
 
 @Module({
     components: [
         DashboardExplorerService,
         DashboardResolvers,
         DashboardService,
+        DeveloperDashboard,
         InjectionService,
         MetadataScanner,
     ],
@@ -39,13 +41,20 @@ export class InjectionModule implements OnModuleInit {
     private logger: Logger;
 
     /**
+     * @param { DashboardExplorerService } dashboardExplorerService
+     * @param { DashboardService } dashboardService
      * @param { UserService } userService
      */
-    constructor(private readonly userService: UserService) {
+    constructor(
+        private readonly dashboardExplorerService: DashboardExplorerService,
+        private readonly dashboardService: DashboardService,
+        private readonly userService: UserService,
+    ) {
         this.logger = new Logger("NotaddExtension", true);
     }
 
     async onModuleInit(): Promise<void> {
+        this.dashboardService.initialize(this.dashboardExplorerService.explore());
         const administration = this.userService.getUserById(1);
         if (!administration) {
             await this.userService.createUser({

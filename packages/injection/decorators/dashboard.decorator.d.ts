@@ -1,2 +1,2 @@
 import 'reflect-metadata';
-export declare function Dashboard(name: string): MethodDecorator;
+export declare function Dashboard(name?: string): MethodDecorator;

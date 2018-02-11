@@ -29,13 +29,17 @@ const dashboard_explorer_service_1 = require("../services/dashboard-explorer.ser
 const dashboard_resolvers_1 = require("../resolvers/dashboard.resolvers");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const developer_dashboard_1 = require("../dashboards/developer.dashboard");
 let InjectionModule = class InjectionModule {
-    constructor(userService) {
+    constructor(dashboardExplorerService, dashboardService, userService) {
+        this.dashboardExplorerService = dashboardExplorerService;
+        this.dashboardService = dashboardService;
         this.userService = userService;
         this.logger = new common_1.Logger("NotaddExtension", true);
     }
     onModuleInit() {
         return __awaiter(this, void 0, void 0, function* () {
+            this.dashboardService.initialize(this.dashboardExplorerService.explore());
             const administration = this.userService.getUserById(1);
             if (!administration) {
                 yield this.userService.createUser({
@@ -58,6 +62,7 @@ InjectionModule = __decorate([
             dashboard_explorer_service_1.DashboardExplorerService,
             dashboard_resolvers_1.DashboardResolvers,
             dashboard_service_1.DashboardService,
+            developer_dashboard_1.DeveloperDashboard,
             injection_service_1.InjectionService,
             metadata_scanner_1.MetadataScanner,
         ],
@@ -72,6 +77,8 @@ InjectionModule = __decorate([
             user_module_1.UserModule,
         ],
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [dashboard_explorer_service_1.DashboardExplorerService,
+        dashboard_service_1.DashboardService,
+        user_service_1.UserService])
 ], InjectionModule);
 exports.InjectionModule = InjectionModule;
