@@ -93,12 +93,7 @@ class PageEdit extends React.Component<Props, State> {
             list: [
                 {
                     id: 0,
-                    content: 'ww',
-                    path: 'neditor/',
-                },
-                {
-                    id: 1,
-                    content: 'rr',
+                    content: '',
                     path: 'neditor/',
                 },
             ],
