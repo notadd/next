@@ -51,6 +51,7 @@ let AddonService = class AddonService {
             if (!addon) {
                 throw new Error("Addon do not exists!");
             }
+            yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
             return addon;
         });
     }
@@ -63,6 +64,7 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
             return addon;
         });
     }
@@ -87,6 +89,7 @@ let AddonService = class AddonService {
             if (yield this.settingService.get(`addon.${addon.identification}.installed`, false)) {
                 throw new Error(`Addon [${addon.identification}] has been installed!`);
             }
+            yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
             return addon;
         });
     }
@@ -99,6 +102,7 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
             return addon;
         });
     }
