@@ -11,18 +11,18 @@ const common_1 = require("@nestjs/common");
 const module_resolvers_1 = require("../resolvers/module.resolvers");
 const module_service_1 = require("../services/module.service");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const injection_service_1 = require("../services/injection.service");
+const injection_module_1 = require("./injection.module");
 let ModuleModule = class ModuleModule {
 };
 ModuleModule = __decorate([
     common_1.Module({
         components: [
-            injection_service_1.InjectionService,
             module_resolvers_1.ModuleResolvers,
             module_service_1.ModuleService,
         ],
         imports: [
             ...load_modules_from_files_1.loadModulesFromFiles(),
+            common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],
     })

@@ -2,6 +2,7 @@ import { AddonModule } from "./addon.module";
 import { ExtensionModule } from "./extension.module";
 import { InjectionService } from "../services/injection.service";
 import {
+    forwardRef,
     Logger,
     Module,
     OnModuleInit,
@@ -14,10 +15,13 @@ import { UserService } from "@notadd/user/services/user.service";
     components: [
         InjectionService,
     ],
+    exports: [
+        InjectionService,
+    ],
     imports: [
-        ExtensionModule,
-        ModuleModule,
-        AddonModule,
+        forwardRef(() => ExtensionModule),
+        forwardRef(() => ModuleModule),
+        forwardRef(() => AddonModule),
         UserModule,
     ],
 })

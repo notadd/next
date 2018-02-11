@@ -52,10 +52,13 @@ InjectionModule = __decorate([
         components: [
             injection_service_1.InjectionService,
         ],
+        exports: [
+            injection_service_1.InjectionService,
+        ],
         imports: [
-            extension_module_1.ExtensionModule,
-            module_module_1.ModuleModule,
-            addon_module_1.AddonModule,
+            common_1.forwardRef(() => extension_module_1.ExtensionModule),
+            common_1.forwardRef(() => module_module_1.ModuleModule),
+            common_1.forwardRef(() => addon_module_1.AddonModule),
             user_module_1.UserModule,
         ],
     }),
