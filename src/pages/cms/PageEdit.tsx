@@ -55,14 +55,11 @@ type State = {
     isOpen: boolean,
     list: Array<any>,
     num: number,
-    content: any,
-    ready: any,
 };
 
 const stylesType = {} as StyleRules;
 
 interface Props extends WithStyles<keyof typeof stylesType> {
-    num: number;
 }
 
 class PageEdit extends React.Component<Props, State> {
@@ -93,32 +90,35 @@ class PageEdit extends React.Component<Props, State> {
             isOpen: false,
             pageType: type,
             num: 0,
-            content: '',
-            ready: '',
             list: [
                 {
                     id: 0,
-                    content: '',
+                    content: 'ww',
+                    path: 'neditor/',
+                },
+                {
+                    id: 1,
+                    content: 'rr',
                     path: 'neditor/',
                 },
             ],
         };
     }
-    handleEditorChange = (content: any, pro: any) => {
-        window.console.log(pro);
-        this.state.list[this.state.num].content = content;
+    handleEditorChange = (content: any, id: any) => {
+        this.state.list[id].content = content;
         this.setState({
             list: this.state.list,
         });
     };
     handleAddEditor = () => {
-        this.state.list.push({
+        const newArr = Object.assign([], this.state.list);
+        newArr.push({
             id: this.state.num + 1,
             content: '',
             path: 'neditor/',
         });
         this.setState({
-            list: this.state.list,
+            list: newArr,
             num: this.state.num + 1,
         });
     };
@@ -184,7 +184,7 @@ class PageEdit extends React.Component<Props, State> {
                                             <div className="editor" key={index}>
                                                 <Editor
                                                     path={item.path}
-                                                    value={item.content}
+                                                    editor={item}
                                                     handleEditorChange={this.handleEditorChange}
                                                 />
                                                 {
