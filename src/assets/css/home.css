@@ -1,7 +1,9 @@
 .home .top-statistics > div {
     padding: 14px;
 }
-
+.home .bottom-content {
+    margin-top: 20px;
+}
 .home .bottom-content .home-bg {
     height: 250px;
     background: url(../images/teambg.png) no-repeat center;

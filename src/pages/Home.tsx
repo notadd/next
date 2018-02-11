@@ -4,6 +4,9 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { Chart, Geom }  from 'bizcharts';
+import { DataSet } from '@antv/data-set';
+import Icon from 'material-ui/Icon';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
@@ -11,7 +14,7 @@ const styles = {
         'background': '#f7f7f7',
     },
     paper: {
-        'padding': '16px',
+        'padding': '28px 20px',
         'text-align': 'center',
     },
     leftPaper: {
@@ -30,7 +33,7 @@ const styles = {
 type State = {
     index: number,
     list: any,
-    version: any
+    version: any,
 };
 
 const mySwiper = (obj: any) =>
@@ -51,6 +54,41 @@ const mySwiper = (obj: any) =>
             );
         })
     );
+const table = {
+    name: '用户',
+    icon: 'person',
+    trend: 'down',
+    percentage: '15%',
+    num: 1253,
+    data: [
+        { month: 'Jan', Tokyo: 7.0, London: 1.9 },
+        { month: 'Feb', Tokyo: 6.9, London: 2.2 },
+        { month: 'Mar', Tokyo: 9.5, London: 3.7 },
+        { month: 'Apr', Tokyo: 14.5, London: 4.5 },
+        { month: 'May', Tokyo: 18.4, London: 5.9 },
+        { month: 'Jun', Tokyo: 21.5, London: 4.2 },
+        { month: 'Jul', Tokyo: 25.2, London: 3.0 },
+        { month: 'Aug', Tokyo: 26.5, London: 4.6 },
+        { month: 'Sep', Tokyo: 23.3, London: 3.2 },
+        { month: 'Oct', Tokyo: 18.3, London: 5.3 },
+        { month: 'Nov', Tokyo: 13.9, London: 2.6 },
+        { month: 'Dec', Tokyo: 9.6, London: 1.8 }
+    ]
+};
+const ds = new DataSet();
+const dv = ds.createView().source(table.data);
+dv.transform({
+    type: 'fold',
+    fields: [ 'London' ], // 展开字段集
+    key: 'city', // key字段
+    value: 'temperature', // value字段
+});
+const cols = {
+    month: {
+        range: [ 0, 1 ]
+    }
+};
+let chartWidth: number;
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any) {
         super(props);
@@ -151,76 +189,125 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     render() {
         const { index } = this.state;
+        const { classes } = this.props;
         return (
             <div className="home">
+                <Grid container spacing={24}>
+                    <Grid item md={3}>
+                        <Paper classes={{root: classes.paper}}>
+                            <div
+                                ref={(div) => {
+                                    if (div !== null) {
+                                        chartWidth = div.offsetWidth;
+                                    }
+                                }}
+                                className="table-head"
+                                style={{'textAlign': 'left', 'lineHeight': '30px', 'marginBottom': 30}}
+                            >
+                                <p
+                                    style={{
+                                        'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between'
+                                    }}
+                                >
+                                    <span style={{'display': 'flex', 'alignItems': 'center', 'color': '#37474f'}}>
+                                        <Icon>{table.icon}</Icon>
+                                        {table.name}
+                                    </span>
+                                     <span style={{'fontSize': 30, 'color': '#333'}}>{table.num}</span>
+                                </p>
+                                <p style={{'display': 'flex', 'alignItems': 'center', 'color': '#808080'}}>
+                                    <Icon style={{'color': table.trend === 'up' ? '#f44336' : '#4caf50'}}>
+                                        {table.trend === 'up' ? 'arrow_upward' : 'arrow_downward'}
+                                    </Icon>
+                                     同比{table.trend === 'up' ? '增长' : '下降'} {table.percentage}
+                                </p>
+                            </div>
+                            <Chart
+                                width={chartWidth}
+                                padding={0}
+                                height={46}
+                                data={dv}
+                                scale={cols}
+                            >
+                                <Geom
+                                    type="area"
+                                    position="month*temperature"
+                                    color={'#7987CC'}
+                                    opacity={1}
+                                    shape={'smooth'}
+                                />
+                            </Chart>
+                        </Paper>
+                    </Grid>
+                </Grid>
                 <Grid container spacing={24} className="bottom-content">
-                        <Grid item xs={12} md={8} sm={12}>
-                            <Paper className={this.props.classes.leftPaper}>
-                                <div className="home-bg">
-                                    <div>
-                                        <h4>开发团队</h4>
-                                        <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
-                                            {mySwiper(this.state.list)}
-                                        </AutoPlaySwipeableViews>
-                                    </div>
+                    <Grid item xs={12} md={8} sm={12}>
+                        <Paper className={this.props.classes.leftPaper}>
+                            <div className="home-bg">
+                                <div>
+                                    <h4>开发团队</h4>
+                                    <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+                                        {mySwiper(this.state.list)}
+                                    </AutoPlaySwipeableViews>
                                 </div>
-                                <Grid className="teamBox" container spacing={40}>
-                                    {this.state.list.map((item: any, val: number) => {
+                            </div>
+                            <Grid className="teamBox" container spacing={40}>
+                                {this.state.list.map((item: any, val: number) => {
+                                    return (
+                                        <Grid
+                                            item
+                                            xs={1}
+                                            md={1}
+                                            sm={1}
+                                            key={val}
+                                            className={
+                                                val === index ? this.props.classes.spanActive : ''
+                                            }
+                                            onClick={() => this.handleChange(event, val)}
+                                        >
+                                            {item.name}
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                            <div className="thank-content">
+                                感谢：
+                                <span>
+                                    <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
+                                </span>
+                                <span>
+                                    <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
+                                </span>
+                                <span>
+                                    <a href="https://github.com/Seevil" target="_blank">Intern</a>
+                                </span>
+                                <span className="line">/</span>
+                                <span>
+                                    <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
+                                </span>
+                            </div>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={4}>
+                        <Paper className={this.props.classes.rightPaper}>
+                            <div className="version-information" style={{paddingBottom: 25}}>
+                                <p>
+                                    <span>Notadd版本</span>
+                                    <span style={{color: '#3f51b5'}}>1.16.30</span>
+                                </p>
+                                <div>
+                                    {this.state.version.map((item: any, val: number) => {
                                         return (
-                                            <Grid
-                                                item
-                                                xs={1}
-                                                md={1}
-                                                sm={1}
-                                                key={val}
-                                                className={
-                                                    val === index ? this.props.classes.spanActive : ''
-                                                }
-                                                onClick={() => this.handleChange(event, val)}
-                                            >
-                                                {item.name}
-                                            </Grid>
+                                            <p key={val}>
+                                                <span>{item.name}</span>
+                                                <span>{item.intro}</span>
+                                            </p>
                                         );
                                     })}
-                                </Grid>
-                                <div className="thank-content">
-                                    感谢：
-                                    <span>
-                                        <a href="https://github.com/ganlanshu0211" target="_blank">半缕阳光、</a>
-                                    </span>
-                                    <span>
-                                        <a href="https://github.com/mustangzhong" target="_blank">加菲猫、</a>
-                                    </span>
-                                    <span>
-                                        <a href="https://github.com/Seevil" target="_blank">Intern</a>
-                                    </span>
-                                    <span className="line">/</span>
-                                    <span>
-                                        <a href="https://blog.notadd.com/categories/月报/" target="_blank">捐赠名单</a>
-                                    </span>
                                 </div>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={4}>
-                            <Paper className={this.props.classes.rightPaper}>
-                                <div className="version-information" style={{paddingBottom: 25}}>
-                                    <p>
-                                        <span>Notadd版本</span>
-                                        <span style={{color: '#3f51b5'}}>1.16.30</span>
-                                    </p>
-                                    <div>
-                                        {this.state.version.map((item: any, val: number) => {
-                                            return (
-                                                <p key={val}>
-                                                    <span>{item.name}</span>
-                                                    <span>{item.intro}</span>
-                                                </p>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </Paper>
-                        </Grid>
+                            </div>
+                        </Paper>
+                    </Grid>
                 </Grid>
             </div>
         );
