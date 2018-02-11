@@ -10,10 +10,19 @@ import {
 import { ModuleModule } from "./module.module";
 import { UserModule } from "@notadd/user/modules/user.module";
 import { UserService } from "@notadd/user/services/user.service";
+import { DashboardService } from "../services/dashboard.service";
+import { DashboardExplorerService } from "../services/dashboard-explorer.service";
+import { DashboardResolvers } from "../resolvers/dashboard.resolvers";
+import { MetadataScanner } from "@nestjs/core/metadata-scanner";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
     components: [
+        DashboardExplorerService,
+        DashboardResolvers,
+        DashboardService,
         InjectionService,
+        MetadataScanner,
     ],
     exports: [
         InjectionService,
@@ -22,6 +31,7 @@ import { UserService } from "@notadd/user/services/user.service";
         forwardRef(() => ExtensionModule),
         forwardRef(() => ModuleModule),
         forwardRef(() => AddonModule),
+        SettingModule,
         UserModule,
     ],
 })

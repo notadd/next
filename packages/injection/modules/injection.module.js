@@ -24,6 +24,11 @@ const common_1 = require("@nestjs/common");
 const module_module_1 = require("./module.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const user_service_1 = require("@notadd/user/services/user.service");
+const dashboard_service_1 = require("../services/dashboard.service");
+const dashboard_explorer_service_1 = require("../services/dashboard-explorer.service");
+const dashboard_resolvers_1 = require("../resolvers/dashboard.resolvers");
+const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let InjectionModule = class InjectionModule {
     constructor(userService) {
         this.userService = userService;
@@ -50,7 +55,11 @@ let InjectionModule = class InjectionModule {
 InjectionModule = __decorate([
     common_1.Module({
         components: [
+            dashboard_explorer_service_1.DashboardExplorerService,
+            dashboard_resolvers_1.DashboardResolvers,
+            dashboard_service_1.DashboardService,
             injection_service_1.InjectionService,
+            metadata_scanner_1.MetadataScanner,
         ],
         exports: [
             injection_service_1.InjectionService,
@@ -59,6 +68,7 @@ InjectionModule = __decorate([
             common_1.forwardRef(() => extension_module_1.ExtensionModule),
             common_1.forwardRef(() => module_module_1.ModuleModule),
             common_1.forwardRef(() => addon_module_1.AddonModule),
+            setting_module_1.SettingModule,
             user_module_1.UserModule,
         ],
     }),
