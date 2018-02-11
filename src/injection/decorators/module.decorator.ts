@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Author } from "../types/author.type";
+import { INJECTION_TYPE } from "../constants/injection.constants";
 
 export function Module(obj: {
     authors?: Author[],
@@ -22,6 +23,6 @@ export function Module(obj: {
                 Reflect.defineMetadata(property, obj[property], target);
             }
         }
-        Reflect.defineMetadata("__injection_type__", InjectionType.Module, target);
+        Reflect.defineMetadata(INJECTION_TYPE, InjectionType.Module, target);
     };
 }
