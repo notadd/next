@@ -30,6 +30,27 @@ body {
     font-size: 16px;
 }
 
+/*表格侧边栏input搜索*/
+.search-side {
+    width: 0 !important;
+}
+.search-side > div:first-child{
+    width: 0;
+}
+.search-side > div:nth-child(2){
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
+    top: 70px;
+}
+.search-side-content {
+    width: 260px;
+    height: 100%;
+}
+.search-side-content > div {
+    box-shadow: none;
+}
+.move-cms {
+    margin-right: 264px;
+}
 /*表格顶部input搜索*/
 .input-search-module {
     display: inline-block;
@@ -102,6 +123,15 @@ body {
     padding: 15px 30px;
 }
 /*表单下拉框*/
+.form-select-underline {
+    font-size: 16px !important;
+}
+.form-select-underline:before {
+    background-color: #dfdfdf !important;
+}
+.form-select-underline:hover:before {
+    background-color: rgba(0, 0, 0, 0.87) !important;
+}
 #menu-type > div > ul {
     max-height: 300px;
 }
@@ -167,6 +197,17 @@ body {
 .error-prompt > div{
     background: #ff1744 !important;
 }
+/*tab样式*/
+.paper-tabs {
+    border-bottom: 1px solid #e0e0e0;
+}
+.paper-tabs .paper-tab{
+    min-height: 54px;
+    min-width: 96px;
+}
+.paper-tab > span > div > span {
+    font-size: 14px;
+}
 @media (max-width: 479px) {
     /*顶部按钮操作*/
     .top-action-module .title {
@@ -178,5 +219,21 @@ body {
     }
     .input-search-module .input-search input {
         width: 135px;
+    }
+    /*搜索侧边栏*/
+    .search-side > div:first-child {
+        width: 100%;
+        top: 14rem;
+    }
+    .search-side > div:nth-child(2){
+        top: 14rem;
+    }
+    .move-cms {
+        margin-right: 0;
+    }
+}
+@media (max-width: 768px) {
+    .search-side > div:nth-child(2){
+        top: 140px;
     }
 }

@@ -25,6 +25,7 @@ import AddonInstall from '../pages/global/AddonInstall';
 
 import Article from '../pages/cms/Article';
 import ArticleEdit from '../pages/cms/ArticleEdit';
+import ArticleEditMessage from '../pages/cms/ArticleEditMessage';
 import ArticleType from '../pages/cms/ArticleType';
 import ArticleTypeEdit from '../pages/cms/ArticleTypeEdit';
 import ArticleRecycle from '../pages/cms/ArticleRecycle';
@@ -739,7 +740,14 @@ class App extends React.Component<Props, State> {
                                                 </div>
                                             </div>
                                     }
-                                    <div className={classNames('view', condition && 'smallSide-view')}>
+                                    <div
+                                        className={
+                                        classNames(
+                                            'view',
+                                            condition && 'smallSide-view',
+                                            wd === 'sm' && 'sm-content')
+                                        }
+                                    >
                                         {
                                             condition ?
                                                 <Drawer
@@ -814,6 +822,11 @@ class App extends React.Component<Props, State> {
                                                     exact
                                                     path="/cms/article/type/edit/:id"
                                                     component={ArticleTypeEdit}
+                                                />
+                                                <Route
+                                                    exact
+                                                    path="/cms/article/type/message/:type"
+                                                    component={ArticleEditMessage}
                                                 />
                                                 <Route exact path="/cms/article/recycle" component={ArticleRecycle}/>
                                                 <Route exact path="/cms/page" component={Page}/>

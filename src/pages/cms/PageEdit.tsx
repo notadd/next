@@ -9,6 +9,7 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
+import { StyleRules } from 'material-ui/styles';
 
 const styles = {
     root: {
@@ -58,9 +59,15 @@ type State = {
     ready: any,
 };
 
-class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
-    constructor (props: any) {
-        super(props);
+const stylesType = {} as StyleRules;
+
+interface Props extends WithStyles<keyof typeof stylesType> {
+    num: number;
+}
+
+class PageEdit extends React.Component<Props, State> {
+    constructor (props: any, state: any) {
+        super(props, state);
         let type = '';
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
@@ -91,25 +98,32 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
             list: [
                 {
                     id: 0,
+                    content: '',
                     path: 'neditor/',
                 },
             ],
         };
     }
-    handleEditorChange = (content: any) => {
+    handleEditorChange = (content: any, pro: any) => {
+        window.console.log(pro);
+        this.state.list[this.state.num].content = content;
         this.setState({
-            content: content
+            list: this.state.list,
         });
     };
     handleAddEditor = () => {
         this.state.list.push({
-            path: 'neditor/',
             id: this.state.num + 1,
+            content: '',
+            path: 'neditor/',
         });
         this.setState({
             list: this.state.list,
             num: this.state.num + 1,
         });
+    };
+    handelSubmit = () => {
+        window.console.log(this.state.list);
     };
     handleRemoveEditor = (index: number) => {
         const arr = Object.assign([], this.state.list);
@@ -170,7 +184,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             <div className="editor" key={index}>
                                                 <Editor
                                                     path={item.path}
-                                                    value={this.state.content}
+                                                    value={item.content}
                                                     handleEditorChange={this.handleEditorChange}
                                                 />
                                                 {
@@ -259,6 +273,7 @@ class PageEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                             raised
                             color="primary"
                             style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                            onClick={this.handelSubmit}
                         >
                             确认提交
                         </Button>

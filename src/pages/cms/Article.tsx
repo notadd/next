@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+// import Cascader from 'react-web-cascader';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
@@ -13,7 +14,11 @@ import Search from 'material-ui-icons/Search';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
 import Snackbar from 'material-ui/Snackbar';
-import Input from 'material-ui/Input';
+import Drawer from 'material-ui/Drawer';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 import Table, {
     TableBody,
     TableCell,
@@ -25,6 +30,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import * as classNames from 'classnames';
 
 const styles = {
     evenRow: {
@@ -67,27 +73,51 @@ const styles = {
         'text-align': 'left',
         'padding': '0',
     },
+    container: {
+        display: 'flex',
+        'flex-wrap': 'wrap',
+        'margin': '0',
+    },
+    formLabelFont: {
+        'font-size': '16px',
+    },
+    formControlMargin: {
+        'margin-bottom': '34px',
+    },
+    underline: {
+        '&:before': {
+            background: '#dfdfdf',
+        }
+    },
 };
 type State = {
+    right: boolean,
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
     open: boolean,
     openMessageTip: boolean,
-    openSearch: boolean,
     modalId: string,
     modalName: string,
     modalType: number,
     modalNum: number,
     message: string,
-    searchValue: string,
     list: Array<any>,
+    type: string,
+    keyword: string,
+    types: Array<any>,
+    isTop: string,
+    childType: string,
+    isTops: Array<any>,
+    options: any,
+    current: number,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
         this.state = {
+            right: false,
             checkedAll: false,
             rowsPerPage: 3,
             currentPage: 0,
@@ -97,8 +127,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             modalType: 0,
             modalNum: 0,
             openMessageTip: false,
-            openSearch: false,
-            searchValue: '',
             list: [
                 {
                     id: 1,
@@ -151,6 +179,103 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 },
             ],
             message: '',
+            type: '',
+            isTop: '',
+            childType: '',
+            types: [
+                {
+                    id: '12',
+                    type: '新闻1',
+                    children: [
+                        {
+                            id: '121',
+                            type: '新闻1-1',
+                        },
+                        {
+                            id: '122',
+                            type: '新闻1-2',
+                        },
+                    ],
+                },
+                {
+                    id: '13',
+                    type: '新闻2',
+                    children: [],
+                },
+                {
+                    id: '14',
+                    type: '新闻3',
+                    children: [],
+                },
+            ],
+            isTops: [
+                {
+                    id: '12',
+                    type: '无',
+                },
+                {
+                    id: '13',
+                    type: '是',
+                },
+                {
+                    id: '14',
+                    type: '否',
+                },
+            ],
+            keyword: '',
+            options: [
+                {
+                    value: '110000',
+                    label: '北京',
+                    children: [
+                        {
+                            value: '110000',
+                            label: '北京市',
+                            children: [
+                                {
+                                    value: '110101',
+                                    label: '东城区'
+                                },
+                                {
+                                    value: '110102',
+                                    label: '西城区'
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    value: '130000',
+                    label: '河北省',
+                    children: [
+                        {
+                            value: '130100',
+                            label: '石家庄市',
+                            children: [
+                                {
+                                    value: '130102',
+                                    label: '长安区'
+                                },
+                                {
+                                    value: '130104',
+                                    label: '桥西区'
+                                },
+                            ],
+                        },
+                        {
+                            value: '130200',
+                            label: '唐山市',
+                            children: [
+                                {
+                                    value: '130202',
+                                    label: '路南区',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+            current: 1,
         };
     }
     handleChangeAll = (name: any) => (event: any) => {
@@ -232,21 +357,34 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
-    handleOpenSearch = () => {
-        this.setState({ openSearch: true });
-    };
-    handleCloseSearch = () => {
-        if (this.state.searchValue.length < 1) {
-            this.setState({ openSearch: false });
-        }
-    };
-    handleChangeSearch = (name: any) => (event: any) => {
+    toggleDrawer = () => {
         this.setState({
-            searchValue: event.target.value,
+            right: !this.state.right,
         });
     };
-    handleSearch = () => {
-        window.console.log(this.state.searchValue);
+    handleChangeSearch = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
+            current: val,
+        });
+    };
+    handleChangeIsTop = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
+        });
+    };
+    handleChangeChild = (name: any) => (event: any) => {
+        let val = event.target.value;
+        this.setState({
+            [name]: val,
+        });
+    };
+    handleSubmitSearch = () => {
+        this.setState({
+            right: !this.state.right,
+        });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -263,10 +401,21 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             checkedAll: false,
         });
     };
+    // displayRender = (labels: any) => {
+    //     window.console.log(labels);
+    //     return labels.join('/');
+    // };
+    // onChangeCascader = (option: any) => {
+    //     window.console.log(option);
+    // };
     render() {
         const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
-            <div className="cms">
+            <div
+                className={
+                     classNames('cms', this.state.right && 'move-cms')
+                }
+            >
                 <div className="top-action-module clearfix">
                     <div className="pull-left">
                         <p className="crumbs">
@@ -275,31 +424,15 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         <h4 className="title">全部文章</h4>
                     </div>
                     <div className="btn-group pull-right">
-                        {
-                            this.state.openSearch ?
-                                <div className="input-search-module">
-                                    <Input
-                                        placeholder="请输入要搜索的内容"
-                                        className="input-search"
-                                        value={this.state.searchValue}
-                                        onChange={this.handleChangeSearch('searchValue')}
-                                        onKeyUp={this.handleSearch}
-                                        onBlur={this.handleCloseSearch}
-                                    />
-                                    <IconButton
-                                        onClick={this.handleSearch}
-                                    >
-                                        <Search />
-                                    </IconButton>
-                                </div> :
-                                <IconButton
-                                    className={this.props.classes.menuBtn}
-                                    onClick={this.handleOpenSearch}
-                                    title="搜索"
-                                >
-                                    <Search />
-                                </IconButton>
-                        }
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.toggleDrawer}
+                            title="搜索"
+                        >
+                            {
+                                this.state.right ? <Search /> : <Search />
+                            }
+                        </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
@@ -448,6 +581,149 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Drawer
+                    className="search-side"
+                    anchor="right"
+                    open={this.state.right}
+                >
+                    <div
+                        className="search-side-content"
+                        tabIndex={0}
+                        role="button"
+                    >
+                        <Paper className={this.props.classes.root}>
+                            <form className={this.props.classes.container} noValidate autoComplete="off">
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        文章分类
+                                    </InputLabel>
+                                    <Select
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.type}
+                                        onChange={this.handleChangeSearch('type')}
+                                        input={<Input name="type"/>}
+                                    >
+                                        {
+                                            this.state.types.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
+                                    {
+                                        this.state.types[this.state.current].children.length > 0 ?
+                                            <FormControl
+                                                fullWidth
+                                                style={{ marginTop: '4px' }}
+                                            >
+                                                <Select
+                                                    className={this.props.classes.formLabelFont}
+                                                    value={this.state.childType}
+                                                    onChange={this.handleChangeChild('childType')}
+                                                    input={<Input name="type"/>}
+                                                >
+                                                    {
+                                                        this.state.types[this.state.current]
+                                                            .children.map((sub: any, i: number) => {
+                                                            return (
+                                                                <MenuItem
+                                                                    className="input-drop-paper"
+                                                                    value={i}
+                                                                    key={i}
+                                                                >
+                                                                    {sub.type}
+                                                                </MenuItem>
+                                                            );
+                                                        })
+                                                    }
+                                                </Select>
+                                            </FormControl> : <div/>
+                                    }
+                                </FormControl>
+                                {/* <div>
+                                       <Cascader
+                                           options={this.state.options}
+                                           defaultValue={['130000', '130200', '130202']}
+                                           displayRender={(labels: string) => this.displayRender(labels)}
+                                           allowClear={true}
+                                           placeholder="请选择"
+                                           onChange={(option: any) => {
+                                               this.onChangeCascader(option);
+                                           }}
+                                       />
+                                </div>*/}
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        是否置顶
+                                    </InputLabel>
+                                    <Select
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.isTop}
+                                        onChange={this.handleChangeIsTop('isTop')}
+                                        input={<Input name="type"/>}
+                                    >
+                                        {
+                                            this.state.isTops.map((item: any, index: number) => {
+                                                return (
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={index}
+                                                        key={index}
+                                                    >
+                                                        {item.type}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </Select>
+                                </FormControl>
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        关键字
+                                    </InputLabel>
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        onChange={this.handleChangeSearch('keyword')}
+                                        value={this.state.keyword}
+                                    />
+                                </FormControl>
+                                <Button
+                                    raised
+                                    color="primary"
+                                    style={{marginTop: 2, fontSize: 12, borderRadius: 4}}
+                                    onClick={this.handleSubmitSearch}
+                                >
+                                    搜索
+                                </Button>
+                            </form>
+                        </Paper>
+                    </div>
+                </Drawer>
             </div>
         );
     }
