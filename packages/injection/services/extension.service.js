@@ -51,9 +51,10 @@ let ExtensionService = class ExtensionService {
             if (!extension) {
                 throw new Error("Extension do not exists!");
             }
-            if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
+            if (!(yield this.settingService.get(`extension.${extension.identification}.enabled`, false))) {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`extension.${addon.identification}.enabled`, "0");
             return extension;
         });
     }
@@ -63,9 +64,10 @@ let ExtensionService = class ExtensionService {
             if (!extension) {
                 throw new Error("Extension do not exists!");
             }
-            if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
+            if (!(yield this.settingService.get(`extension.${extension.identification}.enabled`, false))) {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`extension.${addon.identification}.enabled`, "1");
             return extension;
         });
     }
@@ -90,6 +92,7 @@ let ExtensionService = class ExtensionService {
             if (yield this.settingService.get(`extension.${extension.identification}.installed`, false)) {
                 throw new Error(`Extension [${extension.identification}] has been installed!`);
             }
+            yield this.settingService.setSetting(`extension.${addon.identification}.installed`, "1");
             return extension;
         });
     }
@@ -102,6 +105,7 @@ let ExtensionService = class ExtensionService {
             if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`extension.${addon.identification}.installed`, "0");
             return extension;
         });
     }
