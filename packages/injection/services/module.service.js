@@ -51,9 +51,10 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
-            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
+            if (!(yield this.settingService.get(`module.${module.identification}.enabled`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
             return module;
         });
     }
@@ -63,9 +64,10 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
-            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
+            if (!(yield this.settingService.get(`module.${module.identification}.enabled`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
             return module;
         });
     }
@@ -90,6 +92,7 @@ let ModuleService = class ModuleService {
             if (yield this.settingService.get(`module.${module.identification}.installed`, false)) {
                 throw new Error(`Module [${module.identification}] has been installed!`);
             }
+            yield this.settingService.setSetting(`module.${module.identification}.installed`, "1");
             return module;
         });
     }
@@ -102,6 +105,7 @@ let ModuleService = class ModuleService {
             if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
+            yield this.settingService.setSetting(`module.${module.identification}.installed`, "0");
             return module;
         });
     }

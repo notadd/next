@@ -47,7 +47,7 @@ export class ExtensionService {
         if (!await this.settingService.get<boolean>(`extension.${extension.identification}.enabled`, false)) {
             throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
-        await this.settingService.setSetting(`extension.${addon.identification}.enabled`, "0");
+        await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "0");
 
         return extension;
     }
@@ -65,7 +65,7 @@ export class ExtensionService {
         if (!await this.settingService.get<boolean>(`extension.${extension.identification}.enabled`, false)) {
             throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
-        await this.settingService.setSetting(`extension.${addon.identification}.enabled`, "1");
+        await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "1");
 
         return extension;
     }
@@ -103,7 +103,7 @@ export class ExtensionService {
         if (await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
             throw new Error(`Extension [${extension.identification}] has been installed!`);
         }
-        await this.settingService.setSetting(`extension.${addon.identification}.installed`, "1");
+        await this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
 
         return extension;
     }
@@ -121,7 +121,7 @@ export class ExtensionService {
         if (!await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
             throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
-        await this.settingService.setSetting(`extension.${addon.identification}.installed`, "0");
+        await this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
 
         return extension;
     }

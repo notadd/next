@@ -44,9 +44,10 @@ export class ModuleService {
         if (!module) {
             throw new Error("Module do not exists!");
         }
-        if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+        if (!await this.settingService.get<boolean>(`module.${module.identification}.enabled`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
+        await this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
 
         return module;
     }
@@ -61,9 +62,10 @@ export class ModuleService {
         if (!module) {
             throw new Error("Module do not exists!");
         }
-        if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
+        if (!await this.settingService.get<boolean>(`module.${module.identification}.enabled`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
+        await this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
 
         return module;
     }
@@ -101,6 +103,7 @@ export class ModuleService {
         if (await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] has been installed!`);
         }
+        await this.settingService.setSetting(`module.${module.identification}.installed`, "1");
 
         return module;
     }
@@ -118,6 +121,7 @@ export class ModuleService {
         if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
+        await this.settingService.setSetting(`module.${module.identification}.installed`, "0");
 
         return module;
     }
