@@ -124,7 +124,6 @@ class Editor extends React.Component<Props, State> {
                     instance: window.UE.getEditor(self.state.randomId),
                 },
                 () => {
-                    window.console.log(self.state.instance);
                     // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
                     self.state.instance.addListener('contentChange', () => {
                         self.props.handleEditorChange(self.state.instance.getContent(), self.props.editor.id);
