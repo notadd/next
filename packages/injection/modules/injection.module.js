@@ -18,15 +18,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const addon_module_1 = require("./addon.module");
+const dashboard_module_1 = require("./dashboard.module");
+const developer_dashboard_1 = require("../dashboards/developer.dashboard");
 const extension_module_1 = require("./extension.module");
-const injection_service_1 = require("../services/injection.service");
 const common_1 = require("@nestjs/common");
+const injection_service_1 = require("../services/injection.service");
 const module_module_1 = require("./module.module");
+const page_module_1 = require("./page.module");
+const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const user_service_1 = require("@notadd/user/services/user.service");
-const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const developer_dashboard_1 = require("../dashboards/developer.dashboard");
-const dashboard_module_1 = require("./dashboard.module");
 let InjectionModule = class InjectionModule {
     constructor(userService) {
         this.userService = userService;
@@ -64,6 +65,7 @@ InjectionModule = __decorate([
             common_1.forwardRef(() => module_module_1.ModuleModule),
             common_1.forwardRef(() => addon_module_1.AddonModule),
             dashboard_module_1.DashboardModule,
+            page_module_1.PageModule,
             setting_module_1.SettingModule,
             user_module_1.UserModule,
         ],

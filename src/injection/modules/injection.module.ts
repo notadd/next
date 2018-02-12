@@ -1,18 +1,19 @@
 import { AddonModule } from "./addon.module";
+import { DashboardModule } from "./dashboard.module";
+import { DeveloperDashboard } from "../dashboards/developer.dashboard";
 import { ExtensionModule } from "./extension.module";
-import { InjectionService } from "../services/injection.service";
 import {
     forwardRef,
     Logger,
     Module,
     OnModuleInit,
 } from "@nestjs/common";
+import { InjectionService } from "../services/injection.service";
 import { ModuleModule } from "./module.module";
+import { PageModule } from "./page.module";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { UserModule } from "@notadd/user/modules/user.module";
 import { UserService } from "@notadd/user/services/user.service";
-import { SettingModule } from "@notadd/setting/modules/setting.module";
-import { DeveloperDashboard } from "../dashboards/developer.dashboard";
-import { DashboardModule } from "./dashboard.module";
 
 @Module({
     components: [
@@ -27,6 +28,7 @@ import { DashboardModule } from "./dashboard.module";
         forwardRef(() => ModuleModule),
         forwardRef(() => AddonModule),
         DashboardModule,
+        PageModule,
         SettingModule,
         UserModule,
     ],

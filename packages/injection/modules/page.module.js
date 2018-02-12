@@ -9,34 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dashboard_service_1 = require("../services/dashboard.service");
-const dashboard_resolvers_1 = require("../resolvers/dashboard.resolvers");
-const dashboard_explorer_service_1 = require("../services/dashboard-explorer.service");
-const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const common_1 = require("@nestjs/common");
+const page_service_1 = require("../services/page.service");
+const page_explorer_service_1 = require("../services/page-explorer.service");
+const page_resolvers_1 = require("../resolvers/page.resolvers");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-let DashboardModule = class DashboardModule {
-    constructor(dashboardExplorerService, dashboardService) {
-        this.dashboardExplorerService = dashboardExplorerService;
-        this.dashboardService = dashboardService;
+let PageModule = class PageModule {
+    constructor(pageExplorerService, pageService) {
+        this.pageExplorerService = pageExplorerService;
+        this.pageService = pageService;
     }
     onModuleInit() {
-        this.dashboardService.initialize(this.dashboardExplorerService.explore());
     }
 };
-DashboardModule = __decorate([
+PageModule = __decorate([
     common_1.Module({
         components: [
-            dashboard_explorer_service_1.DashboardExplorerService,
-            dashboard_resolvers_1.DashboardResolvers,
-            dashboard_service_1.DashboardService,
-            metadata_scanner_1.MetadataScanner,
+            page_explorer_service_1.PageExplorerService,
+            page_resolvers_1.PageResolvers,
+            page_service_1.PageService,
         ],
         imports: [
             setting_module_1.SettingModule,
         ],
     }),
-    __metadata("design:paramtypes", [dashboard_explorer_service_1.DashboardExplorerService,
-        dashboard_service_1.DashboardService])
-], DashboardModule);
-exports.DashboardModule = DashboardModule;
+    __metadata("design:paramtypes", [page_explorer_service_1.PageExplorerService,
+        page_service_1.PageService])
+], PageModule);
+exports.PageModule = PageModule;
