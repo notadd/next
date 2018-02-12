@@ -9,7 +9,26 @@ export class DashboardService {
 
     private dashboards: Array<Dashboard> = [];
 
+    /**
+     * @param { SettingService } settingService
+     */
     constructor(private readonly settingService: SettingService) {
+    }
+
+    /**
+     * @param { string } name
+     *
+     * @returns { Dashboard }
+     */
+    public getDashboard(name: string): Dashboard {
+        return this.dashboards.find(dashboard => dashboard.name == name);
+    }
+
+    /**
+     * @returns { Array<Dashboard> }
+     */
+    public getDashboards(): Array<Dashboard> {
+        return this.dashboards;
     }
 
     public initialize(metadatas: Array<DashboardMetadata>) {
@@ -19,7 +38,6 @@ export class DashboardService {
                 name: metadata.name,
             };
         });
-        console.log(this.dashboards);
         this.initialized = true;
     }
 }

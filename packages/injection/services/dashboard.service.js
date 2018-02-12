@@ -17,6 +17,12 @@ let DashboardService = class DashboardService {
         this.initialized = false;
         this.dashboards = [];
     }
+    getDashboard(name) {
+        return this.dashboards.find(dashboard => dashboard.name == name);
+    }
+    getDashboards() {
+        return this.dashboards;
+    }
     initialize(metadatas) {
         this.dashboards = metadatas.map(metadata => {
             return {
@@ -24,7 +30,6 @@ let DashboardService = class DashboardService {
                 name: metadata.name,
             };
         });
-        console.log(this.dashboards);
         this.initialized = true;
     }
 };
