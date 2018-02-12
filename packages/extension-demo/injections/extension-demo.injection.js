@@ -18,6 +18,7 @@ ExtensionDemoInjection = __decorate([
             },
         ],
         identification: "extension-demo",
+        name: "Extension Demo",
         version: "2.0.0",
     })
 ], ExtensionDemoInjection);

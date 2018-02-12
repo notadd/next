@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const glob = require("glob");
 const fs = require("fs");
 const common_1 = require("@nestjs/common");
-const resolvers_explorer_service_1 = require("@nestjs/graphql/resolvers-explorer.service");
 const graphql_tools_1 = require("graphql-tools");
 const merge_graphql_schemas_1 = require("merge-graphql-schemas");
+const resolvers_explorer_service_1 = require("@nestjs/graphql/resolvers-explorer.service");
 let GraphqlFactory = class GraphqlFactory {
     constructor(resolversExplorerService) {
         this.resolversExplorerService = resolversExplorerService;

@@ -1,11 +1,10 @@
 import * as glob from 'glob';
 import * as fs from 'fs';
 import { Component } from "@nestjs/common";
-import { ResolversExplorerService } from "@nestjs/graphql/resolvers-explorer.service";
 import { IExecutableSchemaDefinition, MergeInfo } from "graphql-tools/dist/Interfaces";
 import { makeExecutableSchema } from "graphql-tools";
 import { mergeTypes } from 'merge-graphql-schemas';
-import { groupBy, mapValues } from 'lodash';
+import { ResolversExplorerService } from "@nestjs/graphql/resolvers-explorer.service";
 
 @Component()
 export class GraphqlFactory {

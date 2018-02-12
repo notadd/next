@@ -8,6 +8,7 @@ import { Extension } from "@notadd/injection/decorators/extension.decorator";
         },
     ],
     identification: "extension-demo",
+    name: "Extension Demo",
     version: "2.0.0",
 })
 export class ExtensionDemoInjection {

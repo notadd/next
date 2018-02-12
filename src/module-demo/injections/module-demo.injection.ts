@@ -8,6 +8,7 @@ import { Module } from "@notadd/injection/decorators/module.decorator";
         },
     ],
     identification: "module-demo",
+    name: "Module Demo",
     version: "2.0.0",
 })
 export class ModuleDemoInjection {

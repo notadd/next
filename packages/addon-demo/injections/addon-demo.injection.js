@@ -18,6 +18,7 @@ AddonDemoInjection = __decorate([
             },
         ],
         identification: "addon-demo",
+        name: "Addon Demo",
         version: "v1.0.0",
     })
 ], AddonDemoInjection);
