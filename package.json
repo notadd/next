@@ -28,6 +28,7 @@
         "fast-safe-stringify": "^1.2.0",
         "graphql": "^0.11.7",
         "graphql-tools": "^2.11.0",
+        "graphql-type-json": "^0.1.4",
         "iterare": "0.0.8",
         "js-yaml": "^3.10.0",
         "json-socket": "^0.2.1",
