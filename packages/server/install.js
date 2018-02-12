@@ -14,6 +14,9 @@ const fs_1 = require("fs");
 const js_yaml_1 = require("js-yaml");
 const child_process_1 = require("child_process");
 const inquirer_1 = require("inquirer");
+const typeorm_1 = require("typeorm");
+const user_entity_1 = require("../../packages/user/entities/user.entity");
+const crypto_1 = require("crypto");
 function install() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`
@@ -78,6 +81,11 @@ function install() {
             },
             {
                 type: "input",
+                message: "Administration Email:",
+                name: "email",
+            },
+            {
+                type: "input",
                 message: "Administration Password:",
                 name: "password",
             },
@@ -114,6 +122,8 @@ function install() {
                 break;
         }
         addPackageForDatabase(wanted);
+        yield addAdministrationUser(result.username, result.email, result.password);
+        console.log(clc.blue("Notadd install successfully!"));
     });
 }
 function addPackageForDatabase(engine) {
@@ -124,5 +134,17 @@ function addPackageForDatabase(engine) {
         stdio: ["ignore", process.stdout, process.stderr],
     });
     console.log(clc.blue(`Installed package ${engine}`));
+}
+function addAdministrationUser(username, email, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const connection = yield typeorm_1.createConnection();
+        const repository = connection.getRepository(user_entity_1.User);
+        const user = repository.create({
+            username: username,
+            email: email,
+            password: crypto_1.createHmac('sha256', password).digest('hex'),
+        });
+        yield repository.save(user);
+    });
 }
 install();

@@ -4,6 +4,9 @@ import { writeFileSync } from "fs";
 import { safeDump } from "js-yaml";
 import { execSync } from 'child_process';
 import { prompt } from "inquirer";
+import { createConnection } from "typeorm";
+import { User } from "../../packages/user/entities/user.entity";
+import { createHmac } from "crypto";
 
 async function install() {
     console.log(`
@@ -69,6 +72,11 @@ async function install() {
         },
         {
             type: "input",
+            message: "Administration Email:",
+            name: "email",
+        },
+        {
+            type: "input",
             message: "Administration Password:",
             name: "password",
         },
@@ -107,6 +115,9 @@ async function install() {
     }
 
     addPackageForDatabase(wanted);
+    await addAdministrationUser(result.username, result.email, result.password);
+
+    console.log(clc.blue("Notadd install successfully!"));
 }
 
 function addPackageForDatabase(engine: string) {
@@ -120,6 +131,17 @@ function addPackageForDatabase(engine: string) {
     });
 
     console.log(clc.blue(`Installed package ${engine}`));
+}
+
+async function addAdministrationUser(username: string, email: string, password: string) {
+    const connection = await createConnection();
+    const repository = connection.getRepository(User);
+    const user = repository.create({
+        username: username,
+        email: email,
+        password: createHmac('sha256', password).digest('hex'),
+    });
+    await repository.save(user);
 }
 
 install();
