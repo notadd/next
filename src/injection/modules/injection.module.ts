@@ -10,7 +10,6 @@ import {
 import { ModuleModule } from "./module.module";
 import { UserModule } from "@notadd/user/modules/user.module";
 import { UserService } from "@notadd/user/services/user.service";
-import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { DeveloperDashboard } from "../dashboards/developer.dashboard";
 import { DashboardModule } from "./dashboard.module";
@@ -19,7 +18,6 @@ import { DashboardModule } from "./dashboard.module";
     components: [
         DeveloperDashboard,
         InjectionService,
-        MetadataScanner,
     ],
     exports: [
         InjectionService,

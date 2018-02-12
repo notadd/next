@@ -24,7 +24,6 @@ const common_1 = require("@nestjs/common");
 const module_module_1 = require("./module.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const user_service_1 = require("@notadd/user/services/user.service");
-const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const developer_dashboard_1 = require("../dashboards/developer.dashboard");
 const dashboard_module_1 = require("./dashboard.module");
@@ -56,7 +55,6 @@ InjectionModule = __decorate([
         components: [
             developer_dashboard_1.DeveloperDashboard,
             injection_service_1.InjectionService,
-            metadata_scanner_1.MetadataScanner,
         ],
         exports: [
             injection_service_1.InjectionService,
