@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
 const dashboard_service_1 = require("../services/dashboard.service");
+const graphql_1 = require("@nestjs/graphql");
 let DashboardResolvers = class DashboardResolvers {
     constructor(dashboardService) {
         this.dashboardService = dashboardService;
     }
-    getDashboard(name) {
-        return this.dashboardService.getDashboard(name);
+    getDashboard(context, args) {
+        return this.dashboardService.getDashboard(args.name);
     }
     getDashboards() {
         return this.dashboardService.getDashboards();
@@ -25,7 +25,7 @@ let DashboardResolvers = class DashboardResolvers {
 __decorate([
     graphql_1.Query(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Object)
 ], DashboardResolvers.prototype, "getDashboard", null);
 __decorate([

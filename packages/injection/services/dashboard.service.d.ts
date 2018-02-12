@@ -1,12 +1,12 @@
-import { SettingService } from "@notadd/setting/services/setting.service";
-import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
 import { Dashboard } from "../types/dashboard.type";
+import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
+import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class DashboardService {
     private readonly settingService;
     private initialized;
     private dashboards;
     constructor(settingService: SettingService);
-    getDashboard(name: string): Dashboard;
+    getDashboard(name: string): Dashboard | undefined;
     getDashboards(): Array<Dashboard>;
     initialize(metadatas: Array<DashboardMetadata>): void;
 }

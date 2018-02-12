@@ -25,19 +25,19 @@ let AddonResolvers = class AddonResolvers {
     constructor(addonService) {
         this.addonService = addonService;
     }
-    disableAddon(identification) {
+    disableAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.disableAddon(identification);
+            return yield this.addonService.disableAddon(args.identification);
         });
     }
-    enableAddon(identification) {
+    enableAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.enableAddon(identification);
+            return yield this.addonService.enableAddon(args.identification);
         });
     }
-    getAddon(identification) {
+    getAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.getAddon(identification);
+            return yield this.addonService.getAddon(args.identification);
         });
     }
     getAddons(filter) {
@@ -45,14 +45,14 @@ let AddonResolvers = class AddonResolvers {
             return yield this.addonService.getAddons(filter);
         });
     }
-    installAddon(identification) {
+    installAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.installAddon(identification);
+            return yield this.addonService.installAddon(args.identification);
         });
     }
-    uninstallAddon(identification) {
+    uninstallAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.uninstallAddon(identification);
+            return yield this.addonService.uninstallAddon(args.identification);
         });
     }
 };
@@ -60,21 +60,21 @@ __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "disableAddon", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "enableAddon", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "getAddon", null);
 __decorate([
@@ -88,14 +88,14 @@ __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "installAddon", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "uninstallAddon", null);
 AddonResolvers = __decorate([

@@ -25,19 +25,19 @@ let ModuleResolvers = class ModuleResolvers {
     constructor(moduleService) {
         this.moduleService = moduleService;
     }
-    disableModule(identification) {
+    disableModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.disableModule(identification);
+            return yield this.moduleService.disableModule(args.identification);
         });
     }
-    enableModule(identification) {
+    enableModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.enableModule(identification);
+            return yield this.moduleService.enableModule(args.identification);
         });
     }
-    getModule(identification) {
+    getModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.getModule(identification);
+            return yield this.moduleService.getModule(args.identification);
         });
     }
     getModules(filter) {
@@ -45,14 +45,14 @@ let ModuleResolvers = class ModuleResolvers {
             return yield this.moduleService.getModules(filter);
         });
     }
-    installModule(identification) {
+    installModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.installModule(identification);
+            return yield this.moduleService.installModule(args.identification);
         });
     }
-    uninstallModule(identification) {
+    uninstallModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.uninstallModule(identification);
+            return yield this.moduleService.uninstallModule(args.identification);
         });
     }
 };
@@ -60,21 +60,21 @@ __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "disableModule", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "enableModule", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "getModule", null);
 __decorate([
@@ -88,14 +88,14 @@ __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "installModule", null);
 __decorate([
     graphql_1.Mutation(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "uninstallModule", null);
 ModuleResolvers = __decorate([

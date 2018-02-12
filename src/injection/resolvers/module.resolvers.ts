@@ -11,36 +11,39 @@ export class ModuleResolvers {
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableModule(identification: string): Promise<Result | undefined> {
-        return await this.moduleService.disableModule(identification);
+    public async disableModule(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.moduleService.disableModule(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableModule(identification: string): Promise<Result | undefined> {
-        return await this.moduleService.enableModule(identification);
+    public async enableModule(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.moduleService.enableModule(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Module | undefined> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getModule(identification: string): Promise<Module | undefined> {
-        return await this.moduleService.getModule(identification);
+    public async getModule(context, args: { identification: string }): Promise<Module | undefined> {
+        return await this.moduleService.getModule(args.identification);
     }
 
     /**
@@ -55,24 +58,26 @@ export class ModuleResolvers {
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installModule(identification: string): Promise<Result | undefined> {
-        return await this.moduleService.installModule(identification);
+    public async installModule(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.moduleService.installModule(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Module | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallModule(identification: string): Promise<Result | undefined> {
-        return await this.moduleService.uninstallModule(identification);
+    public async uninstallModule(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.moduleService.uninstallModule(args.identification);
     }
 }

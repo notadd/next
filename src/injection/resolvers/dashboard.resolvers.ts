@@ -1,6 +1,6 @@
-import { Query, Resolver } from "@nestjs/graphql";
-import { DashboardService } from "../services/dashboard.service";
 import { Dashboard } from "../types/dashboard.type";
+import { DashboardService } from "../services/dashboard.service";
+import { Query, Resolver } from "@nestjs/graphql";
 
 @Resolver("Dashboard")
 export class DashboardResolvers {
@@ -8,12 +8,14 @@ export class DashboardResolvers {
     }
 
     /**
-     * @param { string } name
-     * @returns { Dashboard }
+     * @param context
+     * @param args
+     *
+     * @returns { Dashboard | undefined }
      */
     @Query()
-    public getDashboard(name: string): Dashboard {
-        return this.dashboardService.getDashboard(name);
+    public getDashboard(context, args: { name: string }): Dashboard | undefined {
+        return this.dashboardService.getDashboard(args.name);
     }
 
     /**

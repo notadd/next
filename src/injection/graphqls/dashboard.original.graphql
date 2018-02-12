@@ -4,6 +4,6 @@ type Dashboard {
 }
 
 type Query {
-    getDashboard: Dashboard,
+    getDashboard(name: String): Dashboard,
     getDashboards: [Dashboard],
 }

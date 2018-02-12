@@ -11,36 +11,39 @@ export class ExtensionResolvers {
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async disableExtension(identification: string): Promise<Result | undefined> {
-        return await this.extensionService.disableExtension(identification);
+    public async disableExtension(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.extensionService.disableExtension(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async enableExtension(identification: string): Promise<Result | undefined> {
-        return await this.extensionService.enableExtension(identification);
+    public async enableExtension(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.extensionService.enableExtension(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Extension | undefined> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getExtension(identification: string): Promise<Extension | undefined> {
-        return await this.extensionService.getExtension(identification);
+    public async getExtension(context, args: { identification: string }): Promise<Extension | undefined> {
+        return await this.extensionService.getExtension(args.identification);
     }
 
     /**
@@ -55,24 +58,26 @@ export class ExtensionResolvers {
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async installExtension(identification: string): Promise<Result | undefined> {
-        return await this.extensionService.installExtension(identification);
+    public async installExtension(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.extensionService.installExtension(args.identification);
     }
 
     /**
-     * @param { string } identification
+     * @param context
+     * @param { {identification: string} } args
      *
      * @returns { Promise<Extension | undefined> }
      */
     @Mutation()
     @UseGuards(UserGuard)
-    public async uninstallExtension(identification: string): Promise<Result | undefined> {
-        return await this.extensionService.uninstallExtension(identification);
+    public async uninstallExtension(context, args: { identification: string }): Promise<Result | undefined> {
+        return await this.extensionService.uninstallExtension(args.identification);
     }
 }

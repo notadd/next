@@ -1,0 +1,12 @@
+type Page {
+    form: Json,
+    schema: Json,
+}
+
+type Query {
+    getPage: Page,
+    getPages: [Page],
+}
+
+type Mutation {
+}
