@@ -21,6 +21,8 @@ const setting_1 = require("@notadd/setting");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
+const graphql_factory_1 = require("@notadd/core/factories/graphql.factory");
+const GraphQLJSON = require("graphql-type-json");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -35,12 +37,19 @@ let ApplicationModule = class ApplicationModule {
     }
     createSchema() {
         const typeDefs = this.graphQLFactory.mergeTypesByPaths("./**/*.types.graphql");
-        const schema = this.graphQLFactory.createSchema({ typeDefs });
-        return this.graphQLFactory.createSchema({ typeDefs });
+        return this.graphQLFactory.createSchema({
+            typeDefs,
+            resolvers: {
+                Json: GraphQLJSON,
+            },
+        });
     }
 };
 ApplicationModule = __decorate([
     common_1.Module({
+        components: [
+            graphql_factory_1.GraphqlFactory,
+        ],
         imports: [
             typeorm_1.TypeOrmModule.forRoot(),
             graphql_1.GraphQLModule,
@@ -54,6 +63,6 @@ ApplicationModule = __decorate([
             authentication_1.AuthenticationModule,
         ],
     }),
-    __metadata("design:paramtypes", [graphql_1.GraphQLFactory])
+    __metadata("design:paramtypes", [graphql_factory_1.GraphqlFactory])
 ], ApplicationModule);
 exports.ApplicationModule = ApplicationModule;
