@@ -1,34 +1,76 @@
 import * as React from 'react';
+import { Chart, Geom } from 'bizcharts';
+import Icon from 'material-ui/Icon';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 
-class AreaChart extends React.Component<State> {
+interface Props {
+    chart: any;
+}
+
+let chartWidth: number;
+
+class AreaChart extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-        this.state = {
-            table: {
-                name: '用户',
-                icon: 'person',
-                trend: 'down',
-                percentage: '15%',
-                num: 1253,
-                data: [
-                    { month: 'Jan', Tokyo: 7.0, London: 1.9 },
-                    { month: 'Feb', Tokyo: 6.9, London: 2.2 },
-                    { month: 'Mar', Tokyo: 9.5, London: 3.7 },
-                    { month: 'Apr', Tokyo: 14.5, London: 4.5 },
-                    { month: 'May', Tokyo: 18.4, London: 5.9 },
-                    { month: 'Jun', Tokyo: 21.5, London: 4.2 },
-                    { month: 'Jul', Tokyo: 25.2, London: 3.0 },
-                    { month: 'Aug', Tokyo: 26.5, London: 4.6 },
-                    { month: 'Sep', Tokyo: 23.3, London: 3.2 },
-                    { month: 'Oct', Tokyo: 18.3, London: 5.3 },
-                    { month: 'Nov', Tokyo: 13.9, London: 2.6 },
-                    { month: 'Dec', Tokyo: 9.6, London: 1.8 }
-                ]
-            };
-        };
     }
+
     render() {
-
+        const {chart} = this.props;
+        return (
+            <Grid item md={3}>
+                <Paper
+                    style={{
+                        'padding': '28px 20px',
+                        'text-align': 'center',
+                    }}
+                >
+                    <div
+                        ref={(div) => {
+                            if (div !== null) {
+                                chartWidth = div.offsetWidth;
+                            }
+                        }}
+                        className="table-head"
+                        style={{'textAlign': 'left', 'lineHeight': '30px', 'marginBottom': 30}}
+                    >
+                        <p
+                            style={{
+                                'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between'
+                            }}
+                        >
+                                    <span style={{'display': 'flex', 'alignItems': 'center', 'color': '#37474f'}}>
+                                        <Icon>{chart.icon}</Icon>
+                                        {chart.name}
+                                    </span>
+                            <span style={{'fontSize': 30, 'color': '#333'}}>{chart.num}</span>
+                        </p>
+                        <p style={{'display': 'flex', 'alignItems': 'center', 'color': '#808080'}}>
+                            <Icon style={{'color': chart.trend === 'up' ? '#f44336' : '#4caf50'}}>
+                                {chart.trend === 'up' ? 'arrow_upward' : 'arrow_downward'}
+                            </Icon>
+                            同比{chart.trend === 'up' ? '增长' : '下降'} {chart.percentage}
+                        </p>
+                    </div>
+                    <Chart
+                        width={chartWidth}
+                        padding={0}
+                        height={46}
+                        data={chart.data}
+                        scale={chart.scale}
+                    >
+                        <Geom
+                            type="area"
+                            position={chart.position}
+                            color={chart.color}
+                            opacity="1"
+                            shape={'smooth'}
+                        />
+                    </Chart>
+                </Paper>
+            </Grid>
+        );
     }
-
 }
+
+export default AreaChart;
