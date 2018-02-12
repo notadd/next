@@ -104,21 +104,21 @@ class PageEdit extends React.Component<Props, State> {
             ],
         };
     }
-    handleEditorChange = (content: any, pro: any) => {
-        window.console.log(pro);
-        this.state.list[this.state.num].content = content;
+    handleEditorChange = (content: any, id: any) => {
+        this.state.list[id].content = content;
         this.setState({
             list: this.state.list,
         });
     };
     handleAddEditor = () => {
-        this.state.list.push({
+        const arr = Object.assign([], this.state.list);
+        arr.push({
             id: this.state.num + 1,
             content: '',
             path: 'neditor/',
         });
         this.setState({
-            list: this.state.list,
+            list: arr,
             num: this.state.num + 1,
         });
     };
@@ -184,7 +184,7 @@ class PageEdit extends React.Component<Props, State> {
                                             <div className="editor" key={index}>
                                                 <Editor
                                                     path={item.path}
-                                                    value={item.content}
+                                                    editor={item}
                                                     handleEditorChange={this.handleEditorChange}
                                                 />
                                                 {

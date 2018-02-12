@@ -62,7 +62,7 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: any,
-    content: any,
+    editor: any,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -121,7 +121,10 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
-            content: '',
+            editor: {
+                id: 0,
+                content: '',
+            },
         };
     }
     handleDateChange = (date: any) => {
@@ -134,9 +137,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             [name]: val,
         });
     };
-    handleEditorChange = (content: any) => {
+    handleEditorChange = (content: any, id: any) => {
         this.setState({
-           content: content
+            editor: {
+                content: content,
+            }
         });
     };
     handleSubmit = (event: any) => {
@@ -187,7 +192,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 <div className="editor">
                                     <Editor
                                         path={this.state.path}
-                                        value={this.state.content}
+                                        editor={this.state.editor}
                                         handleEditorChange={this.handleEditorChange}
                                     />
                                 </div>

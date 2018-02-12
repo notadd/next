@@ -14,7 +14,7 @@ declare global {
 interface Props {
     config?: object;
     path: string;
-    value: any;
+    editor: any;
     handleEditorChange(a: any, b: any): any;
 }
 
@@ -25,6 +25,7 @@ class Editor extends React.Component<Props, State> {
             randomId: `editor_${(Math.random() * 100000000000000000)}`,
             instance: null,
         };
+        window.console.log(this.props);
     }
 
     componentDidMount() {
@@ -126,10 +127,10 @@ class Editor extends React.Component<Props, State> {
                     window.console.log(self.state.instance);
                     // 绑定事件，当 UEditor 初始化完成后，将编辑器实例通过自定义的 ready 事件交出去
                     self.state.instance.addListener('contentChange', () => {
-                        self.props.handleEditorChange(self.state.instance.getContent(), self.state.randomId);
+                        self.props.handleEditorChange(self.state.instance.getContent(), self.props.editor.id);
                     });
                     self.state.instance.addListener('ready', () => {
-                        self.state.instance.setContent(self.props.value);
+                        self.state.instance.setContent(self.props.editor.content);
                     });
                 }
             );
