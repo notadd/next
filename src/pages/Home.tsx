@@ -6,15 +6,12 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 // import { DataSet } from '@antv/data-set';
 import AreaChart from '../components/AreaChart';
+// import axios from 'axios';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
-    },
-    paper: {
-        'padding': '28px 20px',
-        'text-align': 'center',
     },
     leftPaper: {
         'padding': '0',
@@ -33,6 +30,7 @@ type State = {
     index: number,
     list: any,
     version: any,
+    chart: any
 };
 
 const mySwiper = (obj: any) =>
@@ -53,35 +51,6 @@ const mySwiper = (obj: any) =>
             );
         })
     );
-const chart = {
-    name: '用户',
-    icon: 'person',
-    trend: 'down',
-    percentage: '15%',
-    num: 1253,
-    data: [
-        { month: 'Jan', London: 1.9 },
-        { month: 'Feb', London: 2.2 },
-        { month: 'Mar', London: 3.7 },
-        { month: 'Apr', London: 4.5 },
-        { month: 'May', London: 5.9 },
-        { month: 'Jun', London: 4.2 },
-        { month: 'Jul', London: 3.0 },
-        { month: 'Aug', London: 4.6 },
-        { month: 'Sep', London: 3.2 },
-        { month: 'Oct', London: 5.3 },
-        { month: 'Nov', London: 2.6 },
-        { month: 'Dec', London: 1.8 }
-    ],
-    color: 'rgba(121, 135, 204, 1)',
-    opacity: '1',
-    position: 'month*London', // X轴和Y轴
-    scale: {
-        month: {
-            range: [ 0, 1 ]
-        }
-    }
-};
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any) {
         super(props);
@@ -168,6 +137,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                     intro: 'PRC',
                 },
             ],
+            chart: require('../assets/data/areaChart.json'),
         };
     }
     handleChange = (event: any, value: any) => {
@@ -180,11 +150,19 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
             index: index,
         });
     };
+    // componentDidMount() {
+    //     axios.get('../assets/data.areaChart.json').then((response: any) => {
+    //         window.console.log(response);
+    //     });
+    // };
     render() {
-        const { index } = this.state;
+        const { index, chart } = this.state;
         return (
             <div className="home">
                 <Grid container spacing={24}>
+                    <AreaChart chart={chart}/>
+                    <AreaChart chart={chart}/>
+                    <AreaChart chart={chart}/>
                     <AreaChart chart={chart}/>
                 </Grid>
                 <Grid container spacing={24} className="bottom-content">

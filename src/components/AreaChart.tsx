@@ -18,11 +18,11 @@ class AreaChart extends React.Component<Props> {
     render() {
         const {chart} = this.props;
         return (
-            <Grid item md={3}>
+            <Grid item xs={12} md={4}>
                 <Paper
                     style={{
                         'padding': '28px 20px',
-                        'text-align': 'center',
+                        'textAlign': 'center',
                     }}
                 >
                     <div
@@ -39,10 +39,10 @@ class AreaChart extends React.Component<Props> {
                                 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between'
                             }}
                         >
-                                    <span style={{'display': 'flex', 'alignItems': 'center', 'color': '#37474f'}}>
-                                        <Icon>{chart.icon}</Icon>
-                                        {chart.name}
-                                    </span>
+                            <span style={{'display': 'flex', 'alignItems': 'center', 'color': '#37474f'}}>
+                                <Icon>{chart.icon}</Icon>
+                                {chart.name}
+                            </span>
                             <span style={{'fontSize': 30, 'color': '#333'}}>{chart.num}</span>
                         </p>
                         <p style={{'display': 'flex', 'alignItems': 'center', 'color': '#808080'}}>
