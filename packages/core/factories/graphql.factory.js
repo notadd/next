@@ -19,8 +19,9 @@ let GraphqlFactory = class GraphqlFactory {
     constructor(resolversExplorerService) {
         this.resolversExplorerService = resolversExplorerService;
     }
-    createSchema(schemaDefinition = { typeDefs: {} }) {
-        console.log(Object.assign({}, this.resolversExplorerService.explore(), (schemaDefinition.resolvers || {})));
+    createSchema(schemaDefinition = {
+            typeDefs: {},
+        }) {
         return graphql_tools_1.makeExecutableSchema(Object.assign({}, schemaDefinition, { resolvers: Object.assign({}, this.resolversExplorerService.explore(), (schemaDefinition.resolvers || {})) }));
     }
     createDelegates() {

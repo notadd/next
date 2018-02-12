@@ -11,16 +11,13 @@ import { groupBy, mapValues } from 'lodash';
 export class GraphqlFactory {
     constructor(
         private readonly resolversExplorerService: ResolversExplorerService,
-    ) {}
-
-    createSchema(
-        schemaDefinition: IExecutableSchemaDefinition = { typeDefs: {} },
     ) {
-        console.log({
-            ...this.resolversExplorerService.explore(),
-            ...(schemaDefinition.resolvers || {}),
-        });
+    }
 
+    public createSchema(schemaDefinition: IExecutableSchemaDefinition = {
+        typeDefs: {
+        },
+    }) {
         return makeExecutableSchema({
             ...schemaDefinition,
             resolvers: {
@@ -30,11 +27,11 @@ export class GraphqlFactory {
         });
     }
 
-    createDelegates(): (mergeInfo: MergeInfo) => any {
+    public createDelegates(): (mergeInfo: MergeInfo) => any {
         return this.resolversExplorerService.exploreDelegates();
     }
 
-    mergeTypesByPaths(...pathsToTypes: string[]): string {
+    public mergeTypesByPaths(...pathsToTypes: string[]): string {
         return mergeTypes(
             ...pathsToTypes.map(pattern => this.loadFiles(pattern)),
         );
