@@ -2,18 +2,12 @@ import { AddonModule } from "./addon.module";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards/developer.dashboard";
 import { ExtensionModule } from "./extension.module";
-import {
-    forwardRef,
-    Logger,
-    Module,
-    OnModuleInit,
-} from "@nestjs/common";
-import { InjectionService } from "../services/injection.service";
+import { forwardRef, Module } from "@nestjs/common";
+import { InjectionService } from "../services";
 import { ModuleModule } from "./module.module";
 import { PageModule } from "./page.module";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { UserModule } from "@notadd/user/modules/user.module";
-import { UserService } from "@notadd/user/services/user.service";
 
 @Module({
     components: [
@@ -33,30 +27,5 @@ import { UserService } from "@notadd/user/services/user.service";
         UserModule,
     ],
 })
-export class InjectionModule implements OnModuleInit {
-    private logger: Logger;
-
-    /**
-     * @param { UserService } userService
-     */
-    constructor(
-        private readonly userService: UserService,
-    ) {
-        this.logger = new Logger("NotaddExtension", true);
-    }
-
-    async onModuleInit(): Promise<void> {
-        const administration = this.userService.getUserById(1);
-        if (!administration) {
-            await this.userService.createUser({
-                username: "admin",
-                email: "admin@notadd.com",
-                password: "123qwe",
-            });
-            this.logger.log("Administration Username: admin");
-            this.logger.log("Administration Password: 123qwe");
-        } else {
-            this.logger.log("Administration exists!");
-        }
-    }
+export class InjectionModule {
 }
