@@ -3,8 +3,12 @@ type Extension {
     authors: [Author],
     # description info for extension
     description: String,
+    # enabled status for extension
+    enabled: Boolean,
     # identification info for extension
     identification: String,
+    # installed status for extension
+    installed: Boolean,
     # location info for module
     location: String,
     # name info for extension
@@ -26,7 +30,7 @@ type Query {
     # get a extension by identification
     getExtension(identification: String): Extension,
     # get all extensions, can be fileted by identification, installed, and enabled
-    getExtensions(filter: ExtensionFilter): [Extension],
+    getExtensions(filters: ExtensionFilter): [Extension],
 }
 
 type Mutation {

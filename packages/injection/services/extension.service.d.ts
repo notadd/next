@@ -12,7 +12,10 @@ export declare class ExtensionService {
     disableExtension(identification: string): Promise<Result | undefined>;
     enableExtension(identification: string): Promise<Result | undefined>;
     getExtension(identification: string): Promise<Extension | undefined>;
-    getExtensions(filter: object): Promise<Array<Extension>>;
+    getExtensions(filter: {
+        enabled?: boolean;
+        installed?: boolean;
+    }): Promise<Array<Extension>>;
     installExtension(identification: string): Promise<Result | undefined>;
     uninstallExtension(identification: string): Promise<Result | undefined>;
 }

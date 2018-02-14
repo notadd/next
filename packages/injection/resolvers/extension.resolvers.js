@@ -40,9 +40,9 @@ let ExtensionResolvers = class ExtensionResolvers {
             return yield this.extensionService.getExtension(args.identification);
         });
     }
-    getExtensions(filter) {
+    getExtensions(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.getExtensions(filter);
+            return yield this.extensionService.getExtensions(args.filters);
         });
     }
     installExtension(context, args) {
@@ -81,7 +81,7 @@ __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ExtensionResolvers.prototype, "getExtensions", null);
 __decorate([

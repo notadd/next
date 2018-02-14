@@ -28,21 +28,24 @@ let ExtensionService = class ExtensionService {
         this.settingService = settingService;
         this.initialized = false;
         this.extensions = [];
-        this.extensions = this.injectionService
+        this.injectionService
             .loadInjections()
             .filter((injection) => {
             return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
         })
-            .map((injection) => {
-            return {
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.extensions.push({
                 authors: Reflect.getMetadata("authors", injection.target),
                 description: Reflect.getMetadata("description", injection.target),
-                identification: Reflect.getMetadata("identification", injection.target),
+                enabled: yield this.settingService.get(`extension.${identification}.enabeld`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`extension.${identification}.installed`, false),
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
                 version: Reflect.getMetadata("version", injection.target),
-            };
-        });
+            });
+        }));
         this.initialized = true;
     }
     disableExtension(identification) {
@@ -84,7 +87,33 @@ let ExtensionService = class ExtensionService {
     }
     getExtensions(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.extensions;
+            if (filter && typeof filter.enabled !== "undefined") {
+                if (filter.enabled) {
+                    return this.extensions.filter(extension => {
+                        return extension.enabled === true;
+                    });
+                }
+                else {
+                    return this.extensions.filter(extension => {
+                        return !extension.enabled;
+                    });
+                }
+            }
+            else if (filter && typeof filter.installed !== "undefined") {
+                if (filter.installed) {
+                    return this.extensions.filter(extension => {
+                        return extension.installed === true;
+                    });
+                }
+                else {
+                    return this.extensions.filter(extension => {
+                        return !extension.installed;
+                    });
+                }
+            }
+            else {
+                return this.extensions;
+            }
         });
     }
     installExtension(identification) {

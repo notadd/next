@@ -13,7 +13,9 @@ export declare class ExtensionResolvers {
     getExtension(context: any, args: {
         identification: string;
     }): Promise<Extension | undefined>;
-    getExtensions(filter: object): Promise<Array<Extension>>;
+    getExtensions(context: any, args: {
+        filters: any;
+    }): Promise<Array<Extension>>;
     installExtension(context: any, args: {
         identification: string;
     }): Promise<Result | undefined>;

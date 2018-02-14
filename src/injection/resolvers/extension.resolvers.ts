@@ -47,14 +47,15 @@ export class ExtensionResolvers {
     }
 
     /**
-     * @param { Object } filter
+     * @param context
+     * @param { {filters: any} } args
      *
      * @returns { Promise<Array<Extension>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getExtensions(filter: object): Promise<Array<Extension>> {
-        return await this.extensionService.getExtensions(filter);
+    public async getExtensions(context, args: { filters: any }): Promise<Array<Extension>> {
+        return await this.extensionService.getExtensions(args.filters);
     }
 
     /**
