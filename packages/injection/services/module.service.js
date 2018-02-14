@@ -28,21 +28,24 @@ let ModuleService = class ModuleService {
         this.settingService = settingService;
         this.initialized = false;
         this.modules = [];
-        this.modules = this.injectionService
+        this.injectionService
             .loadInjections()
             .filter((injection) => {
             return injection_constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
         })
-            .map((injection) => {
-            return {
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.modules.push({
                 authors: Reflect.getMetadata("authors", injection.target),
                 description: Reflect.getMetadata("description", injection.target),
-                identification: Reflect.getMetadata("identification", injection.target),
+                enabled: yield this.settingService.get(`module.${identification}.enabled`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`module.${identification}.installed`, false),
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
                 version: Reflect.getMetadata("version", injection.target),
-            };
-        });
+            });
+        }));
         this.initialized = true;
     }
     disableModule(identification) {
@@ -84,7 +87,34 @@ let ModuleService = class ModuleService {
     }
     getModules(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.modules;
+            console.log(typeof filter);
+            if (filter && typeof filter.installed !== "undefined") {
+                if (filter.installed) {
+                    return this.modules.filter(module => {
+                        return module.installed == true;
+                    });
+                }
+                else {
+                    return this.modules.filter(module => {
+                        return !module.installed;
+                    });
+                }
+            }
+            else if (filter && typeof filter.enabled !== "undefined") {
+                if (filter.enabled) {
+                    return this.modules.filter(module => {
+                        return module.installed == true && module.enabled == true;
+                    });
+                }
+                else {
+                    return this.modules.filter(module => {
+                        return module.installed == true && !module.enabled;
+                    });
+                }
+            }
+            else {
+                return this.modules;
+            }
         });
     }
     installModule(identification) {

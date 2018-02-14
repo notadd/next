@@ -12,7 +12,10 @@ export declare class ModuleService {
     disableModule(identification: string): Promise<Result | undefined>;
     enableModule(identification: string): Promise<Result | undefined>;
     getModule(identification: string): Promise<Module | undefined>;
-    getModules(filter: object): Promise<Array<Module>>;
+    getModules(filter: {
+        installed?: boolean;
+        enabled?: boolean;
+    }): Promise<Array<Module>>;
     installModule(identification: string): Promise<Result | undefined>;
     uninstallModule(identification: string): Promise<Result | undefined>;
 }

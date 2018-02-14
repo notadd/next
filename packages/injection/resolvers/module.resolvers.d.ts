@@ -13,7 +13,9 @@ export declare class ModuleResolvers {
     getModule(context: any, args: {
         identification: string;
     }): Promise<Module | undefined>;
-    getModules(filter: object): Promise<Array<Module>>;
+    getModules(context: any, args: {
+        filters: any;
+    }): Promise<Array<Module>>;
     installModule(context: any, args: {
         identification: string;
     }): Promise<Result | undefined>;

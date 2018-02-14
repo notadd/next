@@ -40,9 +40,9 @@ let ModuleResolvers = class ModuleResolvers {
             return yield this.moduleService.getModule(args.identification);
         });
     }
-    getModules(filter) {
+    getModules(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.getModules(filter);
+            return yield this.moduleService.getModules(args.filters);
         });
     }
     installModule(context, args) {
@@ -81,7 +81,7 @@ __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ModuleResolvers.prototype, "getModules", null);
 __decorate([

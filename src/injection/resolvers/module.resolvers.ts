@@ -47,14 +47,15 @@ export class ModuleResolvers {
     }
 
     /**
-     * @param { Object } filter
+     * @param context
+     * @param { {filters: any} } args
      *
      * @returns { Promise<Array<Module>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getModules(filter: object): Promise<Array<Module>> {
-        return await this.moduleService.getModules(filter);
+    public async getModules(context, args: { filters: any }): Promise<Array<Module>> {
+        return await this.moduleService.getModules(args.filters);
     }
 
     /**
