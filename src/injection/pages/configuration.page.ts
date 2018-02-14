@@ -2,7 +2,8 @@ import { Form, Page, Schema } from "../decorators/page.decorator";
 
 @Page({
     description: "",
-    name: "configuration",
+    identification: "configuration",
+    name: "Configuration Page",
 })
 export class ConfigurationPage {
     @Form()

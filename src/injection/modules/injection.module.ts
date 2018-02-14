@@ -1,3 +1,4 @@
+import { ConfigurationPage } from "../pages/configuration.page";
 import { AddonModule } from "./addon.module";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards/developer.dashboard";
@@ -11,6 +12,7 @@ import { UserModule } from "@notadd/user/modules/user.module";
 
 @Module({
     components: [
+        ConfigurationPage,
         DeveloperDashboard,
         InjectionService,
     ],

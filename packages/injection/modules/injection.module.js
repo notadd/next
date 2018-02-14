@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const configuration_page_1 = require("../pages/configuration.page");
 const addon_module_1 = require("./addon.module");
 const dashboard_module_1 = require("./dashboard.module");
 const developer_dashboard_1 = require("../dashboards/developer.dashboard");
@@ -21,6 +22,7 @@ let InjectionModule = class InjectionModule {
 InjectionModule = __decorate([
     common_1.Module({
         components: [
+            configuration_page_1.ConfigurationPage,
             developer_dashboard_1.DeveloperDashboard,
             services_1.InjectionService,
         ],

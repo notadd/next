@@ -33,7 +33,8 @@ __decorate([
 ConfigurationPage = __decorate([
     page_decorator_1.Page({
         description: "",
-        name: "configuration",
+        identification: "configuration",
+        name: "Configuration Page",
     })
 ], ConfigurationPage);
 exports.ConfigurationPage = ConfigurationPage;

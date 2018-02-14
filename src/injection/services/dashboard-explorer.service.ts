@@ -2,13 +2,18 @@ import { Component } from "@nestjs/common";
 import { DASHBOARD_NAME_METADATA } from "../constants/dashboard.constants";
 import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
 import { ExternalContextCreator } from "@nestjs/core/helpers/external-context-creator";
-import { flattenDeep, mapValues, groupBy } from 'lodash';
+import { flattenDeep } from 'lodash';
 import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 
 @Component()
 export class DashboardExplorerService {
+    /**
+     * @param { ModulesContainer } modulesContainer
+     * @param { MetadataScanner } metadataScanner
+     * @param { ExternalContextCreator } externalContextCreator
+     */
     constructor(
         private readonly modulesContainer: ModulesContainer,
         private readonly metadataScanner: MetadataScanner,

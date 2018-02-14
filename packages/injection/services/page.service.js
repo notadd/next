@@ -10,14 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const page_explorer_service_1 = require("./page-explorer.service");
+const setting_service_1 = require("@notadd/setting/services/setting.service");
 let PageService = class PageService {
-    constructor(pageExplorerService) {
-        this.pageExplorerService = pageExplorerService;
+    constructor(settingService) {
+        this.settingService = settingService;
+        this.initialized = false;
+        this.pages = [];
+    }
+    getPage(identification) {
+        return this.pages.find(page => {
+            return page.identification == identification;
+        });
+    }
+    getPages() {
+        return this.pages;
+    }
+    initialize(metadatas) {
+        this.pages = metadatas
+            .filter(metadata => {
+            return metadata.form
+                && metadata.identification
+                && metadata.name
+                && metadata.schema;
+        })
+            .map(metadata => {
+            return {
+                description: metadata.description ? metadata.description : "",
+                form: metadata.form && metadata.form.callback ? metadata.form.callback() : [],
+                identification: metadata.identification ? metadata.identification : "",
+                name: metadata.name ? metadata.name : "",
+                schema: metadata.schema && metadata.schema.callback ? metadata.schema.callback() : {},
+            };
+        });
+        this.initialized = true;
     }
 };
 PageService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [page_explorer_service_1.PageExplorerService])
+    __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], PageService);
 exports.PageService = PageService;

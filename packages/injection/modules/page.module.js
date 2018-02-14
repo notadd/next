@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const page_service_1 = require("../services/page.service");
 const page_explorer_service_1 = require("../services/page-explorer.service");
 const page_resolvers_1 = require("../resolvers/page.resolvers");
@@ -20,11 +21,13 @@ let PageModule = class PageModule {
         this.pageService = pageService;
     }
     onModuleInit() {
+        this.pageService.initialize(this.pageExplorerService.explore());
     }
 };
 PageModule = __decorate([
     common_1.Module({
         components: [
+            metadata_scanner_1.MetadataScanner,
             page_explorer_service_1.PageExplorerService,
             page_resolvers_1.PageResolvers,
             page_service_1.PageService,

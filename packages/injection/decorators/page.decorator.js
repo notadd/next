@@ -14,6 +14,9 @@ function Page(obj) {
         if (obj.description && obj.hasOwnProperty("description")) {
             Reflect.defineMetadata(page_constants_1.PAGE_DESCRIPTION, obj.description, target);
         }
+        if (obj.identification && obj.hasOwnProperty("identification")) {
+            Reflect.defineMetadata(page_constants_1.PAGE_IDENTIFICATION, obj.identification, target);
+        }
         if (obj.name && obj.hasOwnProperty("name")) {
             Reflect.defineMetadata(page_constants_1.PAGE_NAME, obj.name, target);
         }
