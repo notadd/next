@@ -1,14 +1,31 @@
 import { Query, Resolver } from "@nestjs/graphql";
+import { PageService } from "../services/page.service";
+import { Page } from "../types/page.type";
 
 @Resolver("Page")
 export class PageResolvers {
-    @Query()
-    public getPage() {
-
+    /**
+     * @param { PageService } pageService
+     */
+    constructor(private readonly pageService: PageService) {
     }
 
+    /**
+     * @param context
+     * @param { {identification: string} } args
+     *
+     * @returns {Page | undefined}
+     */
     @Query()
-    public getPages() {
+    public getPage(context, args: { identification: string }): Page | undefined {
+        return this.pageService.getPage(args.identification);
+    }
 
+    /**
+     * @returns { Array<Page> }
+     */
+    @Query()
+    public getPages(): Array<Page> {
+        return this.pageService.getPages();
     }
 }
