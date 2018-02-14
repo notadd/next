@@ -28,21 +28,24 @@ let AddonService = class AddonService {
         this.settingService = settingService;
         this.initialized = false;
         this.addons = [];
-        this.addons = this.injectionService
+        this.injectionService
             .loadInjections()
             .filter((injection) => {
             return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
         })
-            .map((injection) => {
-            return {
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.addons.push({
                 authors: Reflect.getMetadata("authors", injection.target),
                 description: Reflect.getMetadata("description", injection.target),
-                identification: Reflect.getMetadata("identification", injection.target),
+                enabled: yield this.settingService.get(`addon.${identification}.enabled`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`addon.${identification}.installed`, false),
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
                 version: Reflect.getMetadata("version", injection.target),
-            };
-        });
+            });
+        }));
         this.initialized = true;
     }
     disableAddon(identification) {
@@ -81,7 +84,33 @@ let AddonService = class AddonService {
     }
     getAddons(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.addons;
+            if (filter && typeof filter.enabled !== "undefined") {
+                if (filter.enabled) {
+                    return this.addons.filter(addon => {
+                        return addon.enabled === true;
+                    });
+                }
+                else {
+                    return this.addons.filter(addon => {
+                        return !addon.enabled;
+                    });
+                }
+            }
+            else if (filter && typeof filter.installed !== "undefined") {
+                if (filter.installed) {
+                    return this.addons.filter(addon => {
+                        return addon.installed === true;
+                    });
+                }
+                else {
+                    return this.addons.filter(addon => {
+                        return !addon.installed;
+                    });
+                }
+            }
+            else {
+                return this.addons;
+            }
         });
     }
     installAddon(identification) {

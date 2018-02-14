@@ -87,7 +87,6 @@ let ModuleService = class ModuleService {
     }
     getModules(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(typeof filter);
             if (filter && typeof filter.installed !== "undefined") {
                 if (filter.installed) {
                     return this.modules.filter(module => {

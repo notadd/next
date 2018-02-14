@@ -47,14 +47,15 @@ export class AddonResolvers {
     }
 
     /**
-     * @param filter
+     * @param context
+     * @param { {filters: any} } args
      *
      * @returns { Promise<Array<Addon>> }
      */
     @Query()
     @UseGuards(UserGuard)
-    public async getAddons(filter): Promise<Array<Addon>> {
-        return await this.addonService.getAddons(filter);
+    public async getAddons(context, args: { filters: any }): Promise<Array<Addon>> {
+        return await this.addonService.getAddons(args.filters);
     }
 
     /**

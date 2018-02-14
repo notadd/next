@@ -12,7 +12,10 @@ export declare class AddonService {
     disableAddon(identification: string): Promise<Result | undefined>;
     enableAddon(identification: string): Promise<Result | undefined>;
     getAddon(identification: string): Promise<Addon | undefined>;
-    getAddons(filter: any): Promise<Array<Addon>>;
+    getAddons(filter: {
+        enabled?: boolean;
+        installed?: boolean;
+    }): Promise<Array<Addon>>;
     installAddon(identification: string): Promise<Result | undefined>;
     uninstallAddon(identification: string): Promise<Result | undefined>;
 }

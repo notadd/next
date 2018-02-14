@@ -13,7 +13,9 @@ export declare class AddonResolvers {
     getAddon(context: any, args: {
         identification: string;
     }): Promise<Addon | undefined>;
-    getAddons(filter: any): Promise<Array<Addon>>;
+    getAddons(context: any, args: {
+        filters: any;
+    }): Promise<Array<Addon>>;
     installAddon(context: any, args: {
         identification: string;
     }): Promise<Result | undefined>;

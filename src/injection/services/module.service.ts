@@ -96,7 +96,6 @@ export class ModuleService {
      * @returns { Promise<Array<Module>> }
      */
     public async getModules(filter: { installed?: boolean, enabled?: boolean }): Promise<Array<Module>> {
-        console.log(typeof filter);
         if (filter && typeof filter.installed !== "undefined") {
             if (filter.installed) {
                 return this.modules.filter(module => {

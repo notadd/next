@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { async } from "rxjs/scheduler/async";
 import { Addon } from "../types/addon.type";
 import { Component } from "@nestjs/common";
 import { Injection } from "../types/injection.type";
@@ -13,24 +14,31 @@ export class AddonService {
 
     private addons: Array<Addon> = [];
 
+    /**
+     * @param { InjectionService } injectionService
+     * @param { SettingService } settingService
+     */
     constructor(
         private readonly injectionService: InjectionService,
         private readonly settingService: SettingService,
     ) {
-        this.addons = this.injectionService
+        this.injectionService
             .loadInjections()
             .filter((injection: Injection) => {
                 return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
             })
-            .map((injection: Injection) => {
-                return {
+            .forEach(async (injection: Injection) => {
+                const identification = Reflect.getMetadata("identification", injection.target);
+                this.addons.push({
                     authors: Reflect.getMetadata("authors", injection.target),
                     description: Reflect.getMetadata("description", injection.target),
-                    identification: Reflect.getMetadata("identification", injection.target),
+                    enabled: await this.settingService.get(`addon.${identification}.enabled`, false),
+                    identification: identification,
+                    installed: await this.settingService.get(`addon.${identification}.installed`, false),
                     location: injection.location,
                     name: Reflect.getMetadata("name", injection.target),
                     version: Reflect.getMetadata("version", injection.target),
-                };
+                });
             });
         this.initialized = true;
     }
@@ -88,8 +96,30 @@ export class AddonService {
      *
      * @returns { Promise<Array<Addon>> }
      */
-    public async getAddons(filter): Promise<Array<Addon>> {
-        return this.addons;
+    public async getAddons(filter: { enabled?: boolean, installed?: boolean}): Promise<Array<Addon>> {
+        if (filter && typeof filter.enabled !== "undefined") {
+            if (filter.enabled) {
+                return this.addons.filter(addon => {
+                    return addon.enabled === true;
+                });
+            } else {
+                return this.addons.filter(addon => {
+                    return !addon.enabled;
+                });
+            }
+        } else if (filter && typeof filter.installed !== "undefined") {
+            if (filter.installed) {
+                return this.addons.filter(addon => {
+                    return addon.installed === true;
+                });
+            } else {
+                return this.addons.filter(addon => {
+                    return !addon.installed;
+                });
+            }
+        } else {
+            return this.addons;
+        }
     }
 
     /**

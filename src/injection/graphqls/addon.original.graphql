@@ -3,8 +3,12 @@ type Addon {
     authors: [Author],
     # description info for addon
     description: String,
+    # enabled status for addon
+    enabled: Boolean,
     # identification info for addon
     identification: String,
+    # installed status for addon
+    installed: Boolean,
     # location info for addon
     location: String,
     # name info for addon
@@ -26,7 +30,7 @@ type Query {
     # get a addon by identification
     getAddon(identification: String): Addon,
     # get all addons, can be fileted by identification, installed, and enabled
-    getAddons(filter: AddonFilter): [Addon],
+    getAddons(filters: AddonFilter): [Addon],
 }
 
 type Mutation {

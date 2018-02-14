@@ -40,9 +40,9 @@ let AddonResolvers = class AddonResolvers {
             return yield this.addonService.getAddon(args.identification);
         });
     }
-    getAddons(filter) {
+    getAddons(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.getAddons(filter);
+            return yield this.addonService.getAddons(args.filters);
         });
     }
     installAddon(context, args) {
@@ -81,7 +81,7 @@ __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AddonResolvers.prototype, "getAddons", null);
 __decorate([
