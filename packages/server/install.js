@@ -90,24 +90,25 @@ function install() {
                 name: "password",
             },
         ]);
+        const options = {
+            type: result.engine,
+            host: result.databaseHost,
+            port: result.databasePort,
+            username: result.databaseUsername,
+            password: result.databasePassword,
+            database: result.database,
+            entities: [
+                "**/*.entity.js",
+            ],
+            migrations: [
+                "**/*.migration.js",
+            ],
+            logging: true,
+            migrationsRun: false,
+            synchronize: false,
+        };
         fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
-            default: {
-                type: result.engine,
-                host: result.databaseHost,
-                port: result.databasePort,
-                username: result.databaseUsername,
-                password: result.databasePassword,
-                database: result.database,
-                entities: [
-                    "**/*.entity.js",
-                ],
-                migrations: [
-                    "**/*.migration.js",
-                ],
-                logging: true,
-                migrationsRun: false,
-                synchronize: true,
-            },
+            default: options,
         }));
         let wanted = "";
         switch (result.engine) {
@@ -122,7 +123,7 @@ function install() {
                 break;
         }
         addPackageForDatabase(wanted);
-        yield addAdministrationUser(result.username, result.email, result.password);
+        yield addAdministrationUser(result.username, result.email, result.password, options);
         console.log(clc.blue("Notadd install successfully!"));
     });
 }
@@ -135,9 +136,9 @@ function addPackageForDatabase(engine) {
     });
     console.log(clc.blue(`Installed package ${engine}`));
 }
-function addAdministrationUser(username, email, password) {
+function addAdministrationUser(username, email, password, options) {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield typeorm_1.createConnection();
+        const connection = yield typeorm_1.createConnection(options);
         yield connection.synchronize(false);
         const repository = connection.getRepository(user_entity_1.User);
         const user = repository.create({

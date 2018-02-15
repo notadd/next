@@ -82,24 +82,27 @@ async function install() {
         },
     ]);
 
+    const options = {
+        type: result.engine,
+        host: result.databaseHost,
+        port: result.databasePort,
+        username: result.databaseUsername,
+        password: result.databasePassword,
+        database: result.database,
+        entities: [
+            "**/*.entity.js",
+        ],
+        migrations: [
+            "**/*.migration.js",
+        ],
+        logging: true,
+        migrationsRun: false,
+        synchronize: false,
+
+    };
+
     writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-        default: {
-            type: result.engine,
-            host: result.databaseHost,
-            port: result.databasePort,
-            username: result.databaseUsername,
-            password: result.databasePassword,
-            database: result.database,
-            entities: [
-                "**/*.entity.js",
-            ],
-            migrations: [
-                "**/*.migration.js",
-            ],
-            logging: true,
-            migrationsRun: false,
-            synchronize: true,
-        },
+        default: options,
     }));
     let wanted = "";
     switch(result.engine) {
@@ -115,7 +118,7 @@ async function install() {
     }
 
     addPackageForDatabase(wanted);
-    await addAdministrationUser(result.username, result.email, result.password);
+    await addAdministrationUser(result.username, result.email, result.password, options);
 
     console.log(clc.blue("Notadd install successfully!"));
 }
@@ -133,8 +136,8 @@ function addPackageForDatabase(engine: string) {
     console.log(clc.blue(`Installed package ${engine}`));
 }
 
-async function addAdministrationUser(username: string, email: string, password: string) {
-    const connection = await createConnection();
+async function addAdministrationUser(username: string, email: string, password: string, options: any) {
+    const connection = await createConnection(options);
     await connection.synchronize(false);
     const repository = connection.getRepository(User);
     const user = repository.create({
