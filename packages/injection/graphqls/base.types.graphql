@@ -1,7 +1,12 @@
 type Author {
+    # email for author
     email: String,
+    # github link for author
     github: String,
+    # homepage for author
     homepage: String,
+    # username for author
     username: String,
+    # weibo link for author
     weibo: String,
 }

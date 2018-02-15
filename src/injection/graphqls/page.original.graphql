@@ -1,12 +1,13 @@
 type Page {
+    # form data for page
     form: Json,
+    # schema data for page
     schema: Json,
 }
 
 type Query {
-    getPage: Page,
+    # get a page by identification
+    getPage(identification: String): Page,
+    # get all pages
     getPages: [Page],
-}
-
-type Mutation {
 }

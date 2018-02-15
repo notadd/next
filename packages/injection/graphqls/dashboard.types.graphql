@@ -1,9 +1,13 @@
 type Dashboard {
+    # name for dashboard
     name: String,
+    # data for dashboard
     data: Json,
 }
 
 type Query {
+    # get a dashbord data by name
     getDashboard(name: String): Dashboard,
+    # get all dashboards
     getDashboards: [Dashboard],
 }
