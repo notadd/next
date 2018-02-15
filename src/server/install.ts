@@ -4,8 +4,8 @@ import { writeFileSync } from "fs";
 import { safeDump } from "js-yaml";
 import { execSync } from 'child_process';
 import { prompt } from "inquirer";
-import { createConnection } from "typeorm";
-import { User } from "../../packages/user/entities/user.entity";
+import { createConnection, ConnectionOptionsReader } from "typeorm";
+import { User } from "@notadd/user/entities/user.entity";
 import { createHmac } from "crypto";
 
 async function install() {
@@ -82,27 +82,25 @@ async function install() {
         },
     ]);
 
-    const options = {
-        type: result.engine,
-        host: result.databaseHost,
-        port: result.databasePort,
-        username: result.databaseUsername,
-        password: result.databasePassword,
-        database: result.database,
-        entities: [
-            "**/*.entity.js",
-        ],
-        migrations: [
-            "**/*.migration.js",
-        ],
-        logging: true,
-        migrationsRun: false,
-        synchronize: false,
-
-    };
-
     writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-        default: options,
+        default: {
+            type: result.engine,
+            host: result.databaseHost,
+            port: result.databasePort,
+            username: result.databaseUsername,
+            password: result.databasePassword,
+            database: result.database,
+            entities: [
+                "**/*.entity.js",
+            ],
+            migrations: [
+                "**/*.migration.js",
+            ],
+            logging: true,
+            migrationsRun: false,
+            synchronize: false,
+
+        },
     }));
     let wanted = "";
     switch(result.engine) {
@@ -118,7 +116,7 @@ async function install() {
     }
 
     addPackageForDatabase(wanted);
-    await addAdministrationUser(result.username, result.email, result.password, options);
+    await addAdministrationUser(result.username, result.email, result.password);
 
     console.log(clc.blue("Notadd install successfully!"));
 }
@@ -136,8 +134,8 @@ function addPackageForDatabase(engine: string) {
     console.log(clc.blue(`Installed package ${engine}`));
 }
 
-async function addAdministrationUser(username: string, email: string, password: string, options: any) {
-    const connection = await createConnection(options);
+async function addAdministrationUser(username: string, email: string, password: string) {
+    const connection = await createConnection();
     await connection.synchronize(false);
     const repository = connection.getRepository(User);
     const user = repository.create({
