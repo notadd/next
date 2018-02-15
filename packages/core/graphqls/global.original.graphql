@@ -1,6 +1,0 @@
-type Result {
-    # status code for result
-    code: Int,
-    # mssage for result
-    message: String!,
-}

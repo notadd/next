@@ -1,9 +1,0 @@
-type Dashboard {
-    name: String,
-    data: Json,
-}
-
-type Query {
-    getDashboard(name: String): Dashboard,
-    getDashboards: [Dashboard],
-}
