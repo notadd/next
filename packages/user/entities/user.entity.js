@@ -18,7 +18,8 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column({
-        length: 20,
+        length: 100,
+        type: "varchar",
     }),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
