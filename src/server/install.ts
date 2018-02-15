@@ -116,6 +116,7 @@ async function install() {
     }
 
     addPackageForDatabase(wanted);
+    console.log(result);
     await addAdministrationUser(result.username, result.email, result.password);
 
     console.log(clc.blue("Notadd install successfully!"));
