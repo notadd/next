@@ -24,7 +24,10 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({
+        length: 100,
+        type: "varchar",
+    }),
     typeorm_1.Index({
         unique: true,
     }),

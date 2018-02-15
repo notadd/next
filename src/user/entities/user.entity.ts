@@ -18,7 +18,10 @@ export class User {
     })
     username: string;
 
-    @Column()
+    @Column({
+        length: 100,
+        type: "varchar",
+    })
     @Index({
         unique: true,
     })
