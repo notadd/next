@@ -138,6 +138,7 @@ function addPackageForDatabase(engine) {
 function addAdministrationUser(username, email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const connection = yield typeorm_1.createConnection();
+        yield connection.synchronize(false);
         const repository = connection.getRepository(user_entity_1.User);
         const user = repository.create({
             username: username,
@@ -145,6 +146,7 @@ function addAdministrationUser(username, email, password) {
             password: crypto_1.createHmac('sha256', password).digest('hex'),
         });
         yield repository.save(user);
+        yield connection.close();
     });
 }
 install();
