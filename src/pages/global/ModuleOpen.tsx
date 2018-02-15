@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
 import Switch from 'material-ui/Switch';
-import axios from "axios";
+import axios from 'axios';
 import Table, {
     TableBody,
     TableCell,
@@ -135,7 +135,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                 window.console.log(results);
             }
         });
-    };
+    }
     handleClickOpen = (pro: any) => {
         this.setState({
             modalName: pro.name,
