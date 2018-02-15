@@ -16,7 +16,9 @@ export class Setting {
     @IsString()
     key: string;
 
-    @Column()
+    @Column({
+        type: "text",
+    })
     @IsString()
     value: string;
 

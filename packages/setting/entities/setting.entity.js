@@ -22,7 +22,9 @@ __decorate([
     __metadata("design:type", String)
 ], Setting.prototype, "key", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({
+        type: "text",
+    }),
     class_validator_1.IsString(),
     __metadata("design:type", String)
 ], Setting.prototype, "value", void 0);
