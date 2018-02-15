@@ -64,13 +64,6 @@ modules.forEach(module => {
                 `${source}/${module}/*.js`,
             ]).pipe(gulp.dest(`${dist}/${module}`));
         } else {
-            gulp.src([
-                `${source}/${module}/**/*.graphql`,
-                `${source}/${module}/*.graphql`,
-            ]).pipe(rename(function (path) {
-                path.basename = path.basename.replace('.original', '.types');
-            })).pipe(gulp.dest(`${dist}/${module}`));
-
             return packages[module]
                 .src()
                 .pipe(packages[module]())
@@ -133,7 +126,9 @@ function watchGraphql(source, module) {
         gulp.src([
             `${source}/${module}/**/*.graphql`,
             `${source}/${module}/*.graphql`,
-        ]).pipe(gulp.dest(`${dist}/${module}`));
+        ]).pipe(rename(function (path) {
+            path.basename = path.basename.replace('.original', '.types');
+        })).pipe(gulp.dest(`${dist}/${module}`));
     });
 }
 
