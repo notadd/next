@@ -27,7 +27,10 @@ export class User {
     })
     email: string;
 
-    @Column()
+    @Column({
+        length: 300,
+        type: "varchar",
+    })
     password: string;
 
     @CreateDateColumn()
