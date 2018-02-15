@@ -18,7 +18,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Log.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({
+        type: "text",
+    }),
     class_validator_1.IsString(),
     __metadata("design:type", String)
 ], Log.prototype, "content", void 0);
