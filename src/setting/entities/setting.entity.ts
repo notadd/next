@@ -9,7 +9,10 @@ import { IsString } from "class-validator";
 
 @Entity("settings")
 export class Setting {
-    @PrimaryColumn()
+    @PrimaryColumn({
+        length: 500,
+        type: "varchar",
+    })
     @IsString()
     key: string;
 
