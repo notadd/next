@@ -7,12 +7,14 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ClearIcon from 'material-ui-icons/Clear';
 import Switch from 'material-ui/Switch';
+import axios from "axios";
 import Table, {
     TableBody,
     TableCell,
     TableHead,
     TableRow,
 } from 'material-ui/Table';
+import Snackbar from 'material-ui/Snackbar';
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -49,6 +51,9 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     list: any,
+    transition: any,
+    snackOPen: boolean,
+    errorMessage: string,
 };
 
 class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -97,12 +102,38 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
             modalName: '',
             rowsPerPage: 3,
             currentPage: 0,
+            transition: undefined,
+            snackOPen: false,
+            errorMessage: '',
         };
     }
     handleChange = (pro: any) => (event: any, check: boolean) => {
         pro.status = check;
         this.setState({
             [pro]: check,
+        });
+    };
+    componentDidMount() {
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    getAddons(installed: true) {
+                    authors,
+                    description,
+                    enabled,
+                    identification,
+                    installed,
+                    location,
+                    name,
+                    version
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data;
+                window.console.log(results);
+            }
         });
     };
     handleClickOpen = (pro: any) => {
@@ -185,7 +216,7 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                         <ReactPaginate
                             previousLabel={'<'}
                             nextLabel={'>'}
-                            breakLabel={<a href="javascript:;">...</a>}
+                            breakLabel={<a href="javascript: void (0);">...</a>}
                             breakClassName={'break-me'}
                             pageCount={list.length / rowsPerPage}
                             marginPagesDisplayed={2}
@@ -224,6 +255,19 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Snackbar
+                    classes={{
+                        // root: !this.state.webName ? 'error-prompt' : ''
+                    }}
+                    open={this.state.snackOPen}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleClose}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
