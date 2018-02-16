@@ -1,6 +1,6 @@
 {
     "name": "@notadd/setting",
-    "version": "2.2.5",
+    "version": "2.2.7",
     "description": "Notadd Setting Package.",
     "main": "main.js",
     "scripts": {

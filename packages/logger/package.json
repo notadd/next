@@ -1,6 +1,6 @@
 {
     "name": "@notadd/logger",
-    "version": "2.2.3",
+    "version": "2.2.7",
     "description": "Notadd Logger Package.",
     "main": "main.js",
     "scripts": {
