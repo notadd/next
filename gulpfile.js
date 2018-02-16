@@ -15,6 +15,7 @@ const packages = {
     injection: ts.createProject('src/injection/tsconfig.json'),
     logger: ts.createProject('src/logger/tsconfig.json'),
     'module-demo': ts.createProject('src/module-demo/tsconfig.json'),
+    rpc: ts.createProject('src/rpc/tsconfig.json'),
     server: ts.createProject('src/server/tsconfig.json'),
     setting: ts.createProject('src/setting/tsconfig.json'),
     user: ts.createProject('src/user/tsconfig.json'),
