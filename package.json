@@ -67,6 +67,7 @@
         "@notadd/extension-demo": "^2.2.0",
         "@notadd/injection": "^2.2.0",
         "@notadd/logger": "^2.2.0",
+        "@notadd/module-demo": "^2.2.0",
         "@notadd/react-scripts": "^2.1.1",
         "@notadd/rpc": "^2.2.0",
         "@notadd/server": "^2.2.0",
