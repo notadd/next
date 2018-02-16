@@ -29,6 +29,7 @@
         "graphql": "^0.11.7",
         "graphql-tools": "^2.11.0",
         "graphql-type-json": "^0.1.4",
+        "grpc": "^1.9.1",
         "iterare": "0.0.8",
         "js-yaml": "^3.10.0",
         "json-socket": "^0.2.1",
@@ -42,6 +43,7 @@
         "redis": "^2.7.1",
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.4.2",
+        "rxjs-grpc": "^0.1.6",
         "socket.io": "^2.0.3",
         "typeorm": "^0.1.9",
         "typescript": "^2.4.2"
