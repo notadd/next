@@ -2,3 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var injection_metadata_1 = require("./injection.metadata");
 exports.InjectionMetadata = injection_metadata_1.InjectionMetadata;
+var page_metadata_1 = require("./page.metadata");
+exports.PageMetadata = page_metadata_1.PageMetadata;
+var page_form_metadata_1 = require("./page-form.metadata");
+exports.PageFormMetadata = page_form_metadata_1.PageFormMetadata;
+var page_schema_metadata_1 = require("./page-schema.metadata");
+exports.PageSchemaMetadata = page_schema_metadata_1.PageSchemaMetadata;

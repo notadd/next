@@ -1,6 +1,11 @@
 import { Injection } from "../types/injection.type";
 import { PlatformTools } from "./platform-tools";
 
+/**
+ * @param { string[] } directories
+ * @param { string[] } formats
+ * @returns { Array<Injection> }
+ */
 export function importInjectionsFromDirectories(directories: string[], formats = [ ".js", ".ts" ]): Array<Injection> {
     return directories
         .reduce((allDirs, dir) => {

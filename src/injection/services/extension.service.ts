@@ -14,6 +14,10 @@ export class ExtensionService {
 
     private extensions: Array<Extension> = [];
 
+    /**
+     * @param { InjectionService } injectionService
+     * @param { SettingService } settingService
+     */
     constructor(
         private readonly injectionService: InjectionService,
         private readonly settingService: SettingService,

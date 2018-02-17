@@ -36,6 +36,12 @@ export class PageExplorerService {
         );
     }
 
+    /**
+     * @param instance
+     * @param prototype
+     * @param { string } methodName
+     * @returns { any }
+     */
     protected extractMetadata(instance, prototype, methodName: string) {
         const callback = prototype[ methodName ];
 
@@ -51,6 +57,11 @@ export class PageExplorerService {
         };
     }
 
+    /**
+     * @param { Injectable } instance
+     * @param metatype
+     * @returns { Array<PageMetadata> }
+     */
     protected filterPages(instance: Injectable, metatype: any): Array<PageMetadata> {
         const pageMetadata: PageMetadata = {
             description: Reflect.getMetadata(PAGE_DESCRIPTION, metatype),

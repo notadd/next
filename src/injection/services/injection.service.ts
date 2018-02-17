@@ -6,6 +6,9 @@ import { importInjectionsFromDirectories } from "../utilities/import-injections-
 export class InjectionService {
     private injections: Array<Injection> = [];
 
+    /**
+     * @returns { Array<Injection> }
+     */
     public loadInjections() {
         if (this.injections.length === 0) {
             this.injections = importInjectionsFromDirectories([

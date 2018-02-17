@@ -1,5 +1,5 @@
 import { Addon } from "../types/addon.type";
-import { AddonService } from "../services/addon.service";
+import { AddonService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";

@@ -1,5 +1,5 @@
 import { Addon } from "../types/addon.type";
-import { AddonService } from "../services/addon.service";
+import { AddonService } from "../services";
 import { Result } from "@notadd/core/types/result.type";
 export declare class AddonResolvers {
     private readonly addonService;

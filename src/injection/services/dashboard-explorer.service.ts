@@ -21,12 +21,21 @@ export class DashboardExplorerService {
     ) {
     }
 
+    /**
+     * @returns { any }
+     */
     public explore() {
         const components = [ ...this.modulesContainer.values() ].map(module => module.components);
 
         return this.flatMap(components, instance => this.filterDashboards(instance));
     }
 
+    /**
+     * @param instance
+     * @param prototype
+     * @param { string } methodName
+     * @returns { DashboardMetadata }
+     */
     protected extractMetadata(instance, prototype, methodName: string): DashboardMetadata {
         const callback = prototype[ methodName ];
 
@@ -36,6 +45,10 @@ export class DashboardExplorerService {
         }
     }
 
+    /**
+     * @param { Injectable } instance
+     * @returns { Array<DashboardMetadata> }
+     */
     protected filterDashboards(instance: Injectable): Array<DashboardMetadata> {
         const prototype = Object.getPrototypeOf(instance);
         const components = this.metadataScanner.scanFromPrototype(
@@ -58,6 +71,11 @@ export class DashboardExplorerService {
             });
     }
 
+    /**
+     * @param { Map<any, any>[] } components
+     * @param { (instance: any) => Array<DashboardMetadata> } callback
+     * @returns { any }
+     */
     protected flatMap(components: Map<any, any>[], callback: (instance: any) => Array<DashboardMetadata>) {
         return flattenDeep(
             components.map(component =>

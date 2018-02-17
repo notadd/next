@@ -17,7 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const addon_service_1 = require("../services/addon.service");
+const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const user_guard_1 = require("@notadd/authentication/guards/user.guard");
@@ -100,6 +100,6 @@ __decorate([
 ], AddonResolvers.prototype, "uninstallAddon", null);
 AddonResolvers = __decorate([
     graphql_1.Resolver("Addon"),
-    __metadata("design:paramtypes", [addon_service_1.AddonService])
+    __metadata("design:paramtypes", [services_1.AddonService])
 ], AddonResolvers);
 exports.AddonResolvers = AddonResolvers;
