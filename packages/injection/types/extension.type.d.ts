@@ -1,3 +1,4 @@
+import { ExtensionShellMetadata } from "../metadatas";
 import { Author } from "./author.type";
 export declare type Extension = {
     authors?: Array<Author>;
@@ -7,5 +8,6 @@ export declare type Extension = {
     installed: boolean;
     location: string;
     name: string;
+    shell?: ExtensionShellMetadata;
     version: string;
 };

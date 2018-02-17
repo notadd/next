@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import { Author } from "../types/author.type";
+import { ExtensionShellMetadata } from "../metadatas";
+import { Author } from "../types";
 export declare function Extension(obj: {
     authors?: Author[];
     description?: string;
@@ -10,5 +11,6 @@ export declare function Extension(obj: {
     controllers?: any[];
     modules?: any[];
     name: string;
+    shell?: ExtensionShellMetadata;
     version: string;
 }): ClassDecorator;

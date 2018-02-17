@@ -1,3 +1,4 @@
+import { ExtensionShellMetadata } from "../metadatas";
 import { Author } from "./author.type";
 
 export type Extension = {
@@ -8,5 +9,6 @@ export type Extension = {
     installed: boolean,
     location: string;
     name: string;
+    shell?: ExtensionShellMetadata;
     version: string;
 };

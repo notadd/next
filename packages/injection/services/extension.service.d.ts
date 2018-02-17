@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Extension } from "../types/extension.type";
+import { Extension } from "../types";
 import { InjectionService } from "./injection.service";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";

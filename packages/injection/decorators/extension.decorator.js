@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
-const injection_constants_2 = require("../constants/injection.constants");
+const constants_1 = require("../constants");
 function Extension(obj) {
     obj.modules = obj.imports && !obj.modules ? obj.imports : obj.modules;
     return (target) => {
@@ -11,7 +11,7 @@ function Extension(obj) {
                 Reflect.defineMetadata(property, obj[property], target);
             }
         }
-        Reflect.defineMetadata(injection_constants_2.INJECTION_TYPE, injection_constants_1.InjectionType.Extension, target);
+        Reflect.defineMetadata(constants_1.INJECTION_TYPE, injection_constants_1.InjectionType.Extension, target);
     };
 }
 exports.Extension = Extension;

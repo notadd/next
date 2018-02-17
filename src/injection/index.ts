@@ -7,5 +7,4 @@ export * from "./modules";
 export * from "./pages";
 export * from "./resolvers";
 export * from "./services";
-export * from "./types";
 export * from "./utilities";

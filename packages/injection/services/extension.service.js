@@ -19,6 +19,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const common_1 = require("@nestjs/common");
+const child_process_1 = require("child_process");
 const injection_service_1 = require("./injection.service");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
@@ -43,6 +44,7 @@ let ExtensionService = class ExtensionService {
                 installed: yield this.settingService.get(`extension.${identification}.installed`, false),
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
+                shell: Reflect.getMetadata("shell", injection.target),
                 version: Reflect.getMetadata("version", injection.target),
             });
         }));
@@ -95,9 +97,17 @@ let ExtensionService = class ExtensionService {
             if (yield this.settingService.get(`extension.${extension.identification}.installed`, false)) {
                 throw new Error(`Extension [${extension.identification}] has been installed!`);
             }
+            let shell = "";
+            if (extension.shell && extension.shell.install) {
+                shell = extension.shell.install;
+            }
+            let result = "";
+            if (shell.length > 0) {
+                result = child_process_1.execFileSync(shell, []).toString();
+            }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
             return {
-                message: `Install extension [${extension.identification}] successfully!`,
+                message: `Install extension [${extension.identification}] successfully!\n${result}`,
             };
         });
     }
@@ -110,9 +120,17 @@ let ExtensionService = class ExtensionService {
             if (!(yield this.settingService.get(`extension.${extension.identification}.installed`, false))) {
                 throw new Error(`Extension [${extension.identification}] is not installed!`);
             }
+            let shell = "";
+            if (extension.shell && extension.shell.uninstall) {
+                shell = extension.shell.uninstall;
+            }
+            let result = "";
+            if (shell.length > 0) {
+                result = child_process_1.execFileSync(shell, []).toString();
+            }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
             return {
-                message: `Uninstall extension [${extension.identification}] successfully!`,
+                message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
             };
         });
     }

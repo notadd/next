@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
-import { async } from "rxjs/scheduler/async";
-import { Extension } from "../types/extension.type";
-import { Injection } from "../types/injection.type";
+import { execFileSync } from "child_process";
+import { Extension } from "../types";
+import { Injection } from "../types";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Result } from "@notadd/core/types/result.type";
@@ -37,6 +37,7 @@ export class ExtensionService {
                     installed: await this.settingService.get(`extension.${identification}.installed`, false),
                     location: injection.location,
                     name: Reflect.getMetadata("name", injection.target),
+                    shell: Reflect.getMetadata("shell", injection.target),
                     version: Reflect.getMetadata("version", injection.target),
                 });
             });
@@ -98,10 +99,20 @@ export class ExtensionService {
         if (await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
             throw new Error(`Extension [${extension.identification}] has been installed!`);
         }
+        let shell = "";
+        if (extension.shell && extension.shell.install) {
+            shell = extension.shell.install;
+        }
+        let result = "";
+        if (shell.length > 0) {
+            // TODO: Add system information as options.
+            result = execFileSync(shell, []).toString();
+        }
+
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
 
         return {
-            message: `Install extension [${extension.identification}] successfully!`,
+            message: `Install extension [${extension.identification}] successfully!\n${result}`,
         };
     }
 
@@ -118,10 +129,20 @@ export class ExtensionService {
         if (!await this.settingService.get<boolean>(`extension.${extension.identification}.installed`, false)) {
             throw new Error(`Extension [${extension.identification}] is not installed!`);
         }
+        let shell = "";
+        if (extension.shell && extension.shell.uninstall) {
+            shell = extension.shell.uninstall;
+        }
+        let result = "";
+        if (shell.length > 0) {
+            // TODO: Add system information as options.
+            result = execFileSync(shell, []).toString();
+        }
+
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
 
         return {
-            message: `Uninstall extension [${extension.identification}] successfully!`,
+            message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
         };
     }
 }

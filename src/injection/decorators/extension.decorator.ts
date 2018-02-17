@@ -1,7 +1,8 @@
 import 'reflect-metadata';
 import { InjectionType } from "@notadd/core/constants/injection.constants";
-import { Author } from "../types/author.type";
-import { INJECTION_TYPE } from "../constants/injection.constants";
+import { ExtensionShellMetadata } from "../metadatas";
+import { Author } from "../types";
+import { INJECTION_TYPE } from "../constants";
 
 export function Extension(obj: {
     authors?: Author[],
@@ -13,6 +14,7 @@ export function Extension(obj: {
     controllers?: any[],
     modules?: any[],
     name: string,
+    shell?: ExtensionShellMetadata,
     version: string,
 }): ClassDecorator {
     obj.modules = obj.imports && !obj.modules ? obj.imports : obj.modules;
