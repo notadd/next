@@ -48,36 +48,6 @@ let ExtensionService = class ExtensionService {
         }));
         this.initialized = true;
     }
-    disableExtension(identification) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const extension = yield this.getExtension(identification);
-            if (!extension) {
-                throw new Error("Extension do not exists!");
-            }
-            if (!(yield this.settingService.get(`extension.${extension.identification}.enabled`, false))) {
-                throw new Error(`Extension [${extension.identification}] is not installed!`);
-            }
-            yield this.settingService.setSetting(`extension.${extension.identification}.enabled`, "0");
-            return {
-                message: `Disable extension [${extension.identification}] successfully!`,
-            };
-        });
-    }
-    enableExtension(identification) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const extension = yield this.getExtension(identification);
-            if (!extension) {
-                throw new Error("Extension do not exists!");
-            }
-            if (!(yield this.settingService.get(`extension.${extension.identification}.enabled`, false))) {
-                throw new Error(`Extension [${extension.identification}] is not installed!`);
-            }
-            yield this.settingService.setSetting(`extension.${extension.identification}.enabled`, "1");
-            return {
-                message: `Enable extension [${extension.identification}] successfully!`,
-            };
-        });
-    }
     getExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.extensions.find((extension) => {

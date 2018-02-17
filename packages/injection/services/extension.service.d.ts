@@ -9,8 +9,6 @@ export declare class ExtensionService {
     private initialized;
     private extensions;
     constructor(injectionService: InjectionService, settingService: SettingService);
-    disableExtension(identification: string): Promise<Result | undefined>;
-    enableExtension(identification: string): Promise<Result | undefined>;
     getExtension(identification: string): Promise<Extension | undefined>;
     getExtensions(filter: {
         enabled?: boolean;

@@ -3,8 +3,6 @@ type Extension {
     authors: [Author],
     # description info for extension
     description: String,
-    # enabled status for extension
-    enabled: Boolean,
     # identification info for extension
     identification: String,
     # installed status for extension
@@ -22,8 +20,6 @@ input ExtensionFilter {
     identification: String,
     # install status for a extension
     installed: Boolean,
-    # enable status for a extension
-    enabled: Boolean,
 }
 
 type Query {
@@ -34,10 +30,6 @@ type Query {
 }
 
 type Mutation {
-    # disable a extension by identification
-    disableExtension(identification: String): Result,
-    # enable a extension by identification
-    enableExtension(identification: String): Result,
     # install a extension by identification
     installExtension(identification: String): Result,
     # uninstall a extension by identification

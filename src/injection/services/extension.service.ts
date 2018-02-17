@@ -44,46 +44,6 @@ export class ExtensionService {
      *
      * @returns { Promise<Extension | undefined> }
      */
-    public async disableExtension(identification: string): Promise<Result | undefined> {
-        const extension: Extension | undefined = await this.getExtension(identification);
-        if (!extension) {
-            throw new Error("Extension do not exists!");
-        }
-        if (!await this.settingService.get<boolean>(`extension.${extension.identification}.enabled`, false)) {
-            throw new Error(`Extension [${extension.identification}] is not installed!`);
-        }
-        await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "0");
-
-        return {
-            message: `Disable extension [${extension.identification}] successfully!`,
-        };
-    }
-
-    /**
-     * @param { string } identification
-     *
-     * @returns { Promise<Extension | undefined> }
-     */
-    public async enableExtension(identification: string): Promise<Result | undefined> {
-        const extension: Extension | undefined = await this.getExtension(identification);
-        if (!extension) {
-            throw new Error("Extension do not exists!");
-        }
-        if (!await this.settingService.get<boolean>(`extension.${extension.identification}.enabled`, false)) {
-            throw new Error(`Extension [${extension.identification}] is not installed!`);
-        }
-        await this.settingService.setSetting(`extension.${extension.identification}.enabled`, "1");
-
-        return {
-            message: `Enable extension [${extension.identification}] successfully!`,
-        };
-    }
-
-    /**
-     * @param { string } identification
-     *
-     * @returns { Promise<Extension | undefined> }
-     */
     public async getExtension(identification: string): Promise<Extension | undefined> {
         return this.extensions.find((extension: Extension) => {
             return extension.identification === identification;

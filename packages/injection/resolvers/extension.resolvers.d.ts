@@ -4,12 +4,6 @@ import { Result } from "@notadd/core/types/result.type";
 export declare class ExtensionResolvers {
     private readonly extensionService;
     constructor(extensionService: ExtensionService);
-    disableExtension(context: any, args: {
-        identification: string;
-    }): Promise<Result | undefined>;
-    enableExtension(context: any, args: {
-        identification: string;
-    }): Promise<Result | undefined>;
     getExtension(context: any, args: {
         identification: string;
     }): Promise<Extension | undefined>;

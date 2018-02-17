@@ -25,16 +25,6 @@ let ExtensionResolvers = class ExtensionResolvers {
     constructor(extensionService) {
         this.extensionService = extensionService;
     }
-    disableExtension(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.disableExtension(args.identification);
-        });
-    }
-    enableExtension(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.enableExtension(args.identification);
-        });
-    }
     getExtension(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.extensionService.getExtension(args.identification);
@@ -56,20 +46,6 @@ let ExtensionResolvers = class ExtensionResolvers {
         });
     }
 };
-__decorate([
-    graphql_1.Mutation(),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], ExtensionResolvers.prototype, "disableExtension", null);
-__decorate([
-    graphql_1.Mutation(),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], ExtensionResolvers.prototype, "enableExtension", null);
 __decorate([
     graphql_1.Query(),
     common_1.UseGuards(user_guard_1.UserGuard),
