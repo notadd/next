@@ -13,9 +13,11 @@ import { WebsocketModule } from "@notadd/websocket";
 import { mergeTypes } from 'merge-graphql-schemas';
 import { GraphqlFactory } from "@notadd/core/factories/graphql.factory";
 import * as GraphQLJSON from 'graphql-type-json';
+import { Informations } from "@notadd/core/informations";
 
 @Module({
     components: [
+        ...Informations,
         GraphqlFactory,
     ],
     imports: [

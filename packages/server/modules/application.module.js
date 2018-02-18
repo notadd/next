@@ -23,6 +23,7 @@ const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const graphql_factory_1 = require("@notadd/core/factories/graphql.factory");
 const GraphQLJSON = require("graphql-type-json");
+const informations_1 = require("@notadd/core/informations");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -48,6 +49,7 @@ let ApplicationModule = class ApplicationModule {
 ApplicationModule = __decorate([
     common_1.Module({
         components: [
+            ...informations_1.Informations,
             graphql_factory_1.GraphqlFactory,
         ],
         imports: [
