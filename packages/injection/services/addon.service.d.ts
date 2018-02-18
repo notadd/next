@@ -18,4 +18,6 @@ export declare class AddonService {
     }): Promise<Array<Addon>>;
     installAddon(identification: string): Promise<Result | undefined>;
     uninstallAddon(identification: string): Promise<Result | undefined>;
+    protected dropSchema(addon: Addon): Promise<void>;
+    protected syncSchema(addon: Addon): Promise<void>;
 }

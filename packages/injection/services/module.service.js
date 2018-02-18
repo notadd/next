@@ -125,6 +125,7 @@ let ModuleService = class ModuleService {
             if (yield this.settingService.get(`module.${module.identification}.installed`, false)) {
                 throw new Error(`Module [${module.identification}] has been installed!`);
             }
+            yield this.syncSchema(module);
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "1");
             return {
                 message: `Install module [${module.identification}] successfully!`,
@@ -140,10 +141,19 @@ let ModuleService = class ModuleService {
             if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
+            yield this.dropSchema(module);
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "0");
             return {
                 message: `Uninstall module [${module.identification}] successfully!`,
             };
+        });
+    }
+    dropSchema(module) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    syncSchema(module) {
+        return __awaiter(this, void 0, void 0, function* () {
         });
     }
 };

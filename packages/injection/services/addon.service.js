@@ -122,6 +122,7 @@ let AddonService = class AddonService {
             if (yield this.settingService.get(`addon.${addon.identification}.installed`, false)) {
                 throw new Error(`Addon [${addon.identification}] has been installed!`);
             }
+            yield this.syncSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
             return {
                 message: `Install addon [${addon.identification}] successfully!`,
@@ -137,10 +138,19 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
+            yield this.dropSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
             return {
                 message: `Uninstall addon [${addon.identification}] successfully!`,
             };
+        });
+    }
+    dropSchema(addon) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    syncSchema(addon) {
+        return __awaiter(this, void 0, void 0, function* () {
         });
     }
 };

@@ -18,4 +18,6 @@ export declare class ModuleService {
     }): Promise<Array<Module>>;
     installModule(identification: string): Promise<Result | undefined>;
     uninstallModule(identification: string): Promise<Result | undefined>;
+    protected dropSchema(module: Module): Promise<void>;
+    protected syncSchema(module: Module): Promise<void>;
 }

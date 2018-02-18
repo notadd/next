@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
+import { Addon } from "../types/addon.type";
 import { InjectionService } from "./injection.service";
 import { Injection } from "../types/injection.type";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
@@ -138,6 +139,7 @@ export class ModuleService {
         if (await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] has been installed!`);
         }
+        await this.syncSchema(module);
         await this.settingService.setSetting(`module.${module.identification}.installed`, "1");
 
         return {
@@ -158,10 +160,27 @@ export class ModuleService {
         if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
+        await this.dropSchema(module);
         await this.settingService.setSetting(`module.${module.identification}.installed`, "0");
 
         return {
             message: `Uninstall module [${module.identification}] successfully!`,
         };
+    }
+
+    /**
+     * @param { Module } module
+     * @returns { Promise<void> }
+     */
+    protected async dropSchema(module: Module): Promise<void> {
+
+    }
+
+    /**
+     * @param { Module } module
+     * @returns { Promise<void> }
+     */
+    protected async syncSchema(module: Module): Promise<void> {
+
     }
 }

@@ -135,6 +135,7 @@ export class AddonService {
         if(await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
             throw new Error(`Addon [${addon.identification}] has been installed!`);
         }
+        await this.syncSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
 
         return {
@@ -155,10 +156,27 @@ export class AddonService {
         if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
             throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
+        await this.dropSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
 
         return {
             message: `Uninstall addon [${addon.identification}] successfully!`,
         };
+    }
+
+    /**
+     * @param { Addon } addon
+     * @returns { Promise<void> }
+     */
+    protected async dropSchema(addon: Addon): Promise<void> {
+
+    }
+
+    /**
+     * @param { Addon } addon
+     * @returns { Promise<void> }
+     */
+    protected async syncSchema(addon: Addon): Promise<void> {
+
     }
 }
