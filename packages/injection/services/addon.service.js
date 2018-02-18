@@ -18,10 +18,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+const schema_builder_1 = require("../builders/schema.builder");
 const common_1 = require("@nestjs/common");
+const get_package_path_by_addon_1 = require("../utilities/get-package-path-by-addon");
 const injection_service_1 = require("./injection.service");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
+const path_1 = require("path");
 let AddonService = class AddonService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
@@ -147,10 +150,28 @@ let AddonService = class AddonService {
     }
     dropSchema(addon) {
         return __awaiter(this, void 0, void 0, function* () {
+            const path = get_package_path_by_addon_1.getPackagePathByAddon(addon);
+            if (path.length) {
+                const builder = new schema_builder_1.SchemaBuilder();
+                builder.buildMetadatas([
+                    path_1.join(path, "*/*.entity.js"),
+                    path_1.join(path, "**/*.entity.js"),
+                ]);
+                yield builder.drop();
+            }
         });
     }
     syncSchema(addon) {
         return __awaiter(this, void 0, void 0, function* () {
+            const path = get_package_path_by_addon_1.getPackagePathByAddon(addon);
+            if (path.length) {
+                const builder = new schema_builder_1.SchemaBuilder();
+                builder.buildMetadatas([
+                    path_1.join(path, "*/*.entity.js"),
+                    path_1.join(path, "**/*.entity.js"),
+                ]);
+                yield builder.sync();
+            }
         });
     }
 };

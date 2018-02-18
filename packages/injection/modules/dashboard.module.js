@@ -9,9 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dashboard_service_1 = require("../services/dashboard.service");
-const dashboard_resolvers_1 = require("../resolvers/dashboard.resolvers");
-const dashboard_explorer_service_1 = require("../services/dashboard-explorer.service");
+const services_1 = require("../services");
+const resolvers_1 = require("../resolvers");
+const services_2 = require("../services");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const common_1 = require("@nestjs/common");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
@@ -27,16 +27,16 @@ let DashboardModule = class DashboardModule {
 DashboardModule = __decorate([
     common_1.Module({
         components: [
-            dashboard_explorer_service_1.DashboardExplorerService,
-            dashboard_resolvers_1.DashboardResolvers,
-            dashboard_service_1.DashboardService,
+            services_2.DashboardExplorerService,
+            resolvers_1.DashboardResolvers,
+            services_1.DashboardService,
             metadata_scanner_1.MetadataScanner,
         ],
         imports: [
             setting_module_1.SettingModule,
         ],
     }),
-    __metadata("design:paramtypes", [dashboard_explorer_service_1.DashboardExplorerService,
-        dashboard_service_1.DashboardService])
+    __metadata("design:paramtypes", [services_2.DashboardExplorerService,
+        services_1.DashboardService])
 ], DashboardModule);
 exports.DashboardModule = DashboardModule;

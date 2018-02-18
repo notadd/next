@@ -1,5 +1,5 @@
-import { DashboardService } from "../services/dashboard.service";
-import { DashboardExplorerService } from "../services/dashboard-explorer.service";
+import { DashboardService } from "../services";
+import { DashboardExplorerService } from "../services";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 export declare class DashboardModule implements OnModuleInit {
     private readonly dashboardExplorerService;

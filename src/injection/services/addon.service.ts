@@ -1,12 +1,14 @@
 import "reflect-metadata";
-import { async } from "rxjs/scheduler/async";
-import { Addon } from "../types/addon.type";
+import { SchemaBuilder } from "../builders/schema.builder";
+import { Addon } from "../types";
 import { Component } from "@nestjs/common";
-import { Injection } from "../types/injection.type";
+import { Injection } from "../types";
+import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { join } from "path";
 
 @Component()
 export class AddonService {
@@ -169,7 +171,16 @@ export class AddonService {
      * @returns { Promise<void> }
      */
     protected async dropSchema(addon: Addon): Promise<void> {
+        const path = getPackagePathByAddon(addon);
 
+        if (path.length) {
+            const builder = new SchemaBuilder();
+            builder.buildMetadatas([
+                join(path, "*/*.entity.js"),
+                join(path, "**/*.entity.js"),
+            ]);
+            await builder.drop();
+        }
     }
 
     /**
@@ -177,6 +188,15 @@ export class AddonService {
      * @returns { Promise<void> }
      */
     protected async syncSchema(addon: Addon): Promise<void> {
+        const path = getPackagePathByAddon(addon);
 
+        if (path.length) {
+            const builder = new SchemaBuilder();
+            builder.buildMetadatas([
+                join(path, "*/*.entity.js"),
+                join(path, "**/*.entity.js"),
+            ]);
+            await builder.sync();
+        }
     }
 }

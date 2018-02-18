@@ -1,12 +1,14 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
-import { Addon } from "../types/addon.type";
+import { SchemaBuilder } from "../builders/schema.builder";
+import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { InjectionService } from "./injection.service";
-import { Injection } from "../types/injection.type";
+import { Injection } from "../types";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
-import { Module } from "../types/module.type";
+import { Module } from "../types";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { join } from "path";
 
 @Component()
 export class ModuleService {
@@ -170,17 +172,37 @@ export class ModuleService {
 
     /**
      * @param { Module } module
+     *
      * @returns { Promise<void> }
      */
     protected async dropSchema(module: Module): Promise<void> {
+        const path = getPackagePathByModule(module);
 
+        if (path.length) {
+            const builder = new SchemaBuilder();
+            builder.buildMetadatas([
+                join(path, "*/*.entity.js"),
+                join(path, "**/*.entity.js"),
+            ]);
+            await builder.drop();
+        }
     }
 
     /**
      * @param { Module } module
+     *
      * @returns { Promise<void> }
      */
     protected async syncSchema(module: Module): Promise<void> {
+        const path = getPackagePathByModule(module);
 
+        if (path.length) {
+            const builder = new SchemaBuilder();
+            builder.buildMetadatas([
+                join(path, "*/*.entity.js"),
+                join(path, "**/*.entity.js"),
+            ]);
+            await builder.sync();
+        }
     }
 }
