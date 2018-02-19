@@ -23,9 +23,12 @@ let WorkflowService = class WorkflowService {
     constructor() {
         this.host = workflow_es_1.configureWorkflow().getHost();
     }
+    getHost() {
+        return this.host;
+    }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.start();
+            yield this.host.start();
         });
     }
 };

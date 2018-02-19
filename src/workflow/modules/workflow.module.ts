@@ -5,6 +5,9 @@ import { WorkflowService } from "../services";
     components: [
         WorkflowService,
     ],
+    exports: [
+        WorkflowService,
+    ],
 })
 export class WorkflowModule {
     /**

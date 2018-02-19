@@ -1,6 +1,5 @@
 import { Component } from "@nestjs/common";
-import { configureWorkflow } from "workflow-es";
-import { IWorkflowHost } from "workflow-es/src/abstractions";
+import { configureWorkflow, IWorkflowHost } from "workflow-es";
 
 @Component()
 export class WorkflowService {
@@ -10,7 +9,14 @@ export class WorkflowService {
         this.host = configureWorkflow().getHost();
     }
 
+    /**
+     * @returns { IWorkflowHost }
+     */
+    public getHost(): IWorkflowHost {
+        return this.host;
+    }
+
     public async start() {
-        await this.start();
+        await this.host.start();
     }
 }

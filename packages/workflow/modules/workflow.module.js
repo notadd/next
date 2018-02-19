@@ -34,6 +34,9 @@ WorkflowModule = __decorate([
         components: [
             services_1.WorkflowService,
         ],
+        exports: [
+            services_1.WorkflowService,
+        ],
     }),
     __metadata("design:paramtypes", [services_1.WorkflowService])
 ], WorkflowModule);
