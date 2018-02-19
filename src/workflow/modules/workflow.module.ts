@@ -1,13 +1,22 @@
 import { MiddlewaresConsumer, Module } from "@nestjs/common";
-import { configureWorkflow } from "workflow-es";
+import { WorkflowService } from "../services";
 
-@Module({})
+@Module({
+    components: [
+        WorkflowService,
+    ],
+})
 export class WorkflowModule {
+    /**
+     * @param { WorkflowService } workflowService
+     */
+    constructor(private readonly workflowService: WorkflowService) {
+    }
+
     /**
      * @param { MiddlewaresConsumer } consumer
      */
     async configure(consumer: MiddlewaresConsumer) {
-        const host = configureWorkflow().getHost();
-        await host.start();
+        await this.workflowService.start();
     }
 }

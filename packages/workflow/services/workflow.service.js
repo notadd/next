@@ -18,23 +18,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const services_1 = require("../services");
-let WorkflowModule = class WorkflowModule {
-    constructor(workflowService) {
-        this.workflowService = workflowService;
+const workflow_es_1 = require("workflow-es");
+let WorkflowService = class WorkflowService {
+    constructor() {
+        this.host = workflow_es_1.configureWorkflow().getHost();
     }
-    configure(consumer) {
+    start() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.workflowService.start();
+            yield this.start();
         });
     }
 };
-WorkflowModule = __decorate([
-    common_1.Module({
-        components: [
-            services_1.WorkflowService,
-        ],
-    }),
-    __metadata("design:paramtypes", [services_1.WorkflowService])
-], WorkflowModule);
-exports.WorkflowModule = WorkflowModule;
+WorkflowService = __decorate([
+    common_1.Component(),
+    __metadata("design:paramtypes", [])
+], WorkflowService);
+exports.WorkflowService = WorkflowService;
