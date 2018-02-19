@@ -5648,6 +5648,10 @@ invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.1, invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
+inversify@^4.1.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.10.0.tgz#06b97792e69220dd150b986cde9a445b3bcb9482"
+
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
@@ -10812,6 +10816,10 @@ undefsafe@^2.0.1:
   dependencies:
     debug "^2.2.0"
 
+underscore@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+
 underscore@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
@@ -11315,6 +11323,14 @@ worker-farm@^1.3.1:
   dependencies:
     errno "^0.1.4"
     xtend "^4.0.1"
+
+workflow-es@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/workflow-es/-/workflow-es-2.0.2.tgz#4b558f15ef86303732358d8eb9584f0988b7a752"
+  dependencies:
+    inversify "^4.1.0"
+    reflect-metadata "^0.1.10"
+    underscore "^1.8.3"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
