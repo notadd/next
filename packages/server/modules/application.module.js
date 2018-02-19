@@ -9,11 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const GraphQLJSON = require("graphql-type-json");
 const authentication_1 = require("@notadd/authentication");
 const backend_1 = require("@notadd/backend");
 const configuration_1 = require("@notadd/configuration");
 const apollo_server_express_1 = require("apollo-server-express");
+const graphql_factory_1 = require("@notadd/core/factories/graphql.factory");
 const graphql_1 = require("@nestjs/graphql");
+const informations_1 = require("@notadd/core/informations");
 const injection_1 = require("@notadd/injection");
 const logger_1 = require("@notadd/logger");
 const common_1 = require("@nestjs/common");
@@ -21,9 +24,7 @@ const setting_1 = require("@notadd/setting");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
-const graphql_factory_1 = require("@notadd/core/factories/graphql.factory");
-const GraphQLJSON = require("graphql-type-json");
-const informations_1 = require("@notadd/core/informations");
+const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -60,6 +61,7 @@ ApplicationModule = __decorate([
             logger_1.LoggerModule,
             setting_1.SettingModule,
             injection_1.InjectionModule,
+            workflow_module_1.WorkflowModule,
             backend_1.BackendModule,
             user_1.UserModule,
             authentication_1.AuthenticationModule,
