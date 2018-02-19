@@ -20,6 +20,7 @@ const packages = {
     setting: ts.createProject('src/setting/tsconfig.json'),
     user: ts.createProject('src/user/tsconfig.json'),
     websocket: ts.createProject('src/websocket/tsconfig.json'),
+    workflow: ts.createProject('src/workflow/tsconfig.json'),
 };
 
 const modules = Object.keys(packages).concat([
