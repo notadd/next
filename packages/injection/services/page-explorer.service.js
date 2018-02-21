@@ -14,7 +14,7 @@ const external_context_creator_1 = require("@nestjs/core/helpers/external-contex
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const lodash_1 = require("lodash");
-const page_constants_1 = require("../constants/page.constants");
+const constants_1 = require("../constants");
 let PageExplorerService = class PageExplorerService {
     constructor(modulesContainer, metadataScanner, externalContextCreator) {
         this.modulesContainer = modulesContainer;
@@ -35,19 +35,19 @@ let PageExplorerService = class PageExplorerService {
         return {
             form: {
                 callback: instance[methodName].bind(instance),
-                name: Reflect.getMetadata(page_constants_1.PAGE_FORM, callback),
+                name: Reflect.getMetadata(constants_1.PAGE_FORM, callback),
             },
             schema: {
                 callback: instance[methodName].bind(instance),
-                name: Reflect.getMetadata(page_constants_1.PAGE_SCHEMA, callback),
+                name: Reflect.getMetadata(constants_1.PAGE_SCHEMA, callback),
             },
         };
     }
     filterPages(instance, metatype) {
         const pageMetadata = {
-            description: Reflect.getMetadata(page_constants_1.PAGE_DESCRIPTION, metatype),
-            identification: Reflect.getMetadata(page_constants_1.PAGE_IDENTIFICATION, metatype),
-            name: Reflect.getMetadata(page_constants_1.PAGE_NAME, metatype),
+            description: Reflect.getMetadata(constants_1.PAGE_DESCRIPTION, metatype),
+            identification: Reflect.getMetadata(constants_1.PAGE_IDENTIFICATION, metatype),
+            name: Reflect.getMetadata(constants_1.PAGE_NAME, metatype),
         };
         if (pageMetadata.identification && pageMetadata.name) {
             const prototype = Object.getPrototypeOf(instance);

@@ -4,8 +4,8 @@ import { ExternalContextCreator } from "@nestjs/core/helpers/external-context-cr
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { flattenDeep, mapValues, groupBy } from 'lodash';
-import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants/page.constants";
-import { PageMetadata } from "../metadatas/page.metadata";
+import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
+import { PageMetadata } from "../metadatas";
 
 @Component()
 export class PageExplorerService {
