@@ -1,1 +1,1 @@
-export { IS_WORKFLOW } from "./workflow.constants";
+export { IS_WORKFLOW, WORKFLOW_CATEGORY } from "./workflow.constants";
