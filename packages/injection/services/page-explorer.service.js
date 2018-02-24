@@ -10,16 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const external_context_creator_1 = require("@nestjs/core/helpers/external-context-creator");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const lodash_1 = require("lodash");
 const constants_1 = require("../constants");
 let PageExplorerService = class PageExplorerService {
-    constructor(modulesContainer, metadataScanner, externalContextCreator) {
+    constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
-        this.externalContextCreator = externalContextCreator;
     }
     explore() {
         const components = [
@@ -74,7 +72,6 @@ let PageExplorerService = class PageExplorerService {
 PageExplorerService = __decorate([
     common_1.Component(),
     __metadata("design:paramtypes", [injector_1.ModulesContainer,
-        metadata_scanner_1.MetadataScanner,
-        external_context_creator_1.ExternalContextCreator])
+        metadata_scanner_1.MetadataScanner])
 ], PageExplorerService);
 exports.PageExplorerService = PageExplorerService;

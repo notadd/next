@@ -19,12 +19,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const services_1 = require("../services");
+const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const workflow_explorer_service_1 = require("../services/workflow-explorer.service");
+const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let WorkflowModule = class WorkflowModule {
-    constructor(workflowService) {
+    constructor(workflowExplorerService, workflowService) {
+        this.workflowExplorerService = workflowExplorerService;
         this.workflowService = workflowService;
     }
     configure(consumer) {
         return __awaiter(this, void 0, void 0, function* () {
+            this.workflowService.initialize(this.workflowExplorerService.explore());
             yield this.workflowService.start();
         });
     }
@@ -32,12 +37,18 @@ let WorkflowModule = class WorkflowModule {
 WorkflowModule = __decorate([
     common_1.Module({
         components: [
+            metadata_scanner_1.MetadataScanner,
+            workflow_explorer_service_1.WorkflowExplorerService,
             services_1.WorkflowService,
         ],
         exports: [
             services_1.WorkflowService,
         ],
+        imports: [
+            setting_module_1.SettingModule,
+        ],
     }),
-    __metadata("design:paramtypes", [services_1.WorkflowService])
+    __metadata("design:paramtypes", [workflow_explorer_service_1.WorkflowExplorerService,
+        services_1.WorkflowService])
 ], WorkflowModule);
 exports.WorkflowModule = WorkflowModule;

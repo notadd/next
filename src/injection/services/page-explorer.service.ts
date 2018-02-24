@@ -1,6 +1,5 @@
 import { Component } from "@nestjs/common";
 import { Injectable } from "@nestjs/common/interfaces";
-import { ExternalContextCreator } from "@nestjs/core/helpers/external-context-creator";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { flattenDeep, mapValues, groupBy } from 'lodash';
@@ -12,12 +11,10 @@ export class PageExplorerService {
     /**
      * @param { ModulesContainer } modulesContainer
      * @param { MetadataScanner } metadataScanner
-     * @param { ExternalContextCreator } externalContextCreator
      */
     constructor(
         private readonly modulesContainer: ModulesContainer,
         private readonly metadataScanner: MetadataScanner,
-        private readonly externalContextCreator: ExternalContextCreator,
     ) {
     }
 

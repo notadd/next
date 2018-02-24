@@ -1,5 +1,6 @@
 import { Component } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { WorkflowMetadata } from "../metadatas/workflow.metadata";
 
 @Component()
 export class WorkflowExplorerService {
@@ -9,7 +10,10 @@ export class WorkflowExplorerService {
     constructor(private readonly settingService: SettingService) {
     }
 
-    public explore() {
-
+    /**
+     * @returns { Array<WorkflowMetadata> }
+     */
+    public explore(): Array<WorkflowMetadata> {
+        return [];
     }
 }

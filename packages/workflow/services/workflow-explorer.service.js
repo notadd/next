@@ -16,6 +16,7 @@ let WorkflowExplorerService = class WorkflowExplorerService {
         this.settingService = settingService;
     }
     explore() {
+        return [];
     }
 };
 WorkflowExplorerService = __decorate([

@@ -21,13 +21,20 @@ const common_1 = require("@nestjs/common");
 const workflow_es_1 = require("workflow-es");
 let WorkflowService = class WorkflowService {
     constructor() {
+        this.workflows = [];
         this.host = workflow_es_1.configureWorkflow().getHost();
     }
     getHost() {
         return this.host;
     }
+    initialize(metadatas) {
+        this.workflows = metadatas;
+    }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
+            this.workflows.forEach(workflow => {
+                this.host.registerWorkflow(workflow);
+            });
             yield this.host.start();
         });
     }
