@@ -46,7 +46,7 @@
         "rxjs-grpc": "^0.1.6",
         "socket.io": "^2.0.3",
         "typeorm": "^0.1.9",
-        "typescript": "^2.4.2",
+        "typescript": "2.4.0",
         "workflow-es": "^2.0.2"
     },
     "devDependencies": {

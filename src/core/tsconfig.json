@@ -5,6 +5,13 @@
         "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "lib": [
+            "DOM",
+            "ES2015",
+            "ES2016",
+            "ES2017",
+            "ESNEXT.ASYNCITERABLE"
+        ],
         "module": "commonjs",
         "noImplicitAny": false,
         "noLib": false,
