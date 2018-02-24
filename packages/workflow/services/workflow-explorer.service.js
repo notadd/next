@@ -10,17 +10,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const lodash_1 = require("lodash");
+const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const injector_1 = require("@nestjs/core/injector");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
+const workflow_constants_1 = require("../constants/workflow.constants");
 let WorkflowExplorerService = class WorkflowExplorerService {
-    constructor(settingService) {
+    constructor(modulesContainer, metadataScanner, settingService) {
+        this.modulesContainer = modulesContainer;
+        this.metadataScanner = metadataScanner;
         this.settingService = settingService;
     }
     explore() {
-        return [];
+        const components = [
+            ...this.modulesContainer.values(),
+        ].map(module => module.components);
+        return lodash_1.flattenDeep(components.map(component => [
+            ...component.values(),
+        ]
+            .map(({ instance, metatype }) => this.filterWorkflows(instance, metatype))));
+    }
+    filterWorkflows(instance, metatype) {
+        const isWorkflow = Reflect.getMetadata(workflow_constants_1.IS_WORKFLOW, metatype);
+        const workflowMeta = {
+            category: Reflect.getMetadata("category", metatype),
+            identification: Reflect.getMetadata("identification", metatype),
+        };
+        if (isWorkflow && workflowMeta.identification) {
+            workflowMeta.target = instance;
+            return [
+                workflowMeta,
+            ];
+        }
+        else {
+            return [];
+        }
     }
 };
 WorkflowExplorerService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [setting_service_1.SettingService])
+    __metadata("design:paramtypes", [injector_1.ModulesContainer,
+        metadata_scanner_1.MetadataScanner,
+        setting_service_1.SettingService])
 ], WorkflowExplorerService);
 exports.WorkflowExplorerService = WorkflowExplorerService;

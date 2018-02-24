@@ -2,7 +2,7 @@ import { Component } from "@nestjs/common";
 import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { flattenDeep, mapValues, groupBy } from 'lodash';
+import { flattenDeep } from 'lodash';
 import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
 import { PageMetadata } from "../metadatas";
 
