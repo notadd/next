@@ -55,11 +55,14 @@ type State = {
     isOpen: boolean,
     list: Array<any>,
     num: number,
+    content: any,
+    ready: any,
 };
 
 const stylesType = {} as StyleRules;
 
 interface Props extends WithStyles<keyof typeof stylesType> {
+    num: number;
 }
 
 class PageEdit extends React.Component<Props, State> {
@@ -90,6 +93,8 @@ class PageEdit extends React.Component<Props, State> {
             isOpen: false,
             pageType: type,
             num: 0,
+            content: '',
+            ready: '',
             list: [
                 {
                     id: 0,
@@ -106,14 +111,14 @@ class PageEdit extends React.Component<Props, State> {
         });
     };
     handleAddEditor = () => {
-        const newArr = Object.assign([], this.state.list);
-        newArr.push({
+        const arr = Object.assign([], this.state.list);
+        arr.push({
             id: this.state.num + 1,
             content: '',
             path: 'neditor/',
         });
         this.setState({
-            list: newArr,
+            list: arr,
             num: this.state.num + 1,
         });
     };

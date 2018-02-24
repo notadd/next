@@ -62,7 +62,6 @@ type State = {
     pageType: string,
     isHidden: boolean,
     path: any,
-    articleContent: any,
     editor: any,
 };
 
@@ -122,9 +121,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             isHidden: false,
             pageType: type,
             path: 'neditor/',
-            articleContent: '',
             editor: {
-                id: '123',
+                id: 0,
                 content: '',
             },
         };
@@ -141,12 +139,13 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     };
     handleEditorChange = (content: any, id: any) => {
         this.setState({
-            articleContent: content,
+            editor: {
+                content: content,
+            }
         });
     };
     handleSubmit = (event: any) => {
         event.preventDefault();
-        window.console.log(this.state.articleContent);
     };
     getImgURL = (event: any) => {
         this.setState({

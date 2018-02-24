@@ -4,18 +4,14 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { Chart, Geom }  from 'bizcharts';
-import { DataSet } from '@antv/data-set';
-import Icon from 'material-ui/Icon';
+// import { DataSet } from '@antv/data-set';
+import AreaChart from '../components/AreaChart';
+// import axios from 'axios';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
     evenRow: {
         'background': '#f7f7f7',
-    },
-    paper: {
-        'padding': '28px 20px',
-        'text-align': 'center',
     },
     leftPaper: {
         'padding': '0',
@@ -34,6 +30,7 @@ type State = {
     index: number,
     list: any,
     version: any,
+    chart: any
 };
 
 const mySwiper = (obj: any) =>
@@ -54,41 +51,6 @@ const mySwiper = (obj: any) =>
             );
         })
     );
-const table = {
-    name: '用户',
-    icon: 'person',
-    trend: 'down',
-    percentage: '15%',
-    num: 1253,
-    data: [
-        { month: 'Jan', Tokyo: 7.0, London: 1.9 },
-        { month: 'Feb', Tokyo: 6.9, London: 2.2 },
-        { month: 'Mar', Tokyo: 9.5, London: 3.7 },
-        { month: 'Apr', Tokyo: 14.5, London: 4.5 },
-        { month: 'May', Tokyo: 18.4, London: 5.9 },
-        { month: 'Jun', Tokyo: 21.5, London: 4.2 },
-        { month: 'Jul', Tokyo: 25.2, London: 3.0 },
-        { month: 'Aug', Tokyo: 26.5, London: 4.6 },
-        { month: 'Sep', Tokyo: 23.3, London: 3.2 },
-        { month: 'Oct', Tokyo: 18.3, London: 5.3 },
-        { month: 'Nov', Tokyo: 13.9, London: 2.6 },
-        { month: 'Dec', Tokyo: 9.6, London: 1.8 }
-    ]
-};
-const ds = new DataSet();
-const dv = ds.createView().source(table.data);
-dv.transform({
-    type: 'fold',
-    fields: [ 'London' ], // 展开字段集
-    key: 'city', // key字段
-    value: 'temperature', // value字段
-});
-const cols = {
-    month: {
-        range: [ 0, 1 ]
-    }
-};
-let chartWidth: number;
 class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any) {
         super(props);
@@ -175,6 +137,7 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
                     intro: 'PRC',
                 },
             ],
+            chart: require('../assets/data/areaChart.json'),
         };
     }
     handleChange = (event: any, value: any) => {
@@ -187,58 +150,20 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
             index: index,
         });
     };
+    // componentDidMount() {
+    //     axios.get('../assets/data.areaChart.json').then((response: any) => {
+    //         window.console.log(response);
+    //     });
+    // };
     render() {
-        const { index } = this.state;
-        const { classes } = this.props;
+        const { index, chart } = this.state;
         return (
             <div className="home">
                 <Grid container spacing={24}>
-                    <Grid item md={3}>
-                        <Paper classes={{root: classes.paper}}>
-                            <div
-                                ref={(div) => {
-                                    if (div !== null) {
-                                        chartWidth = div.offsetWidth;
-                                    }
-                                }}
-                                className="table-head"
-                                style={{'textAlign': 'left', 'lineHeight': '30px', 'marginBottom': 30}}
-                            >
-                                <p
-                                    style={{
-                                        'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between'
-                                    }}
-                                >
-                                    <span style={{'display': 'flex', 'alignItems': 'center', 'color': '#37474f'}}>
-                                        <Icon>{table.icon}</Icon>
-                                        {table.name}
-                                    </span>
-                                     <span style={{'fontSize': 30, 'color': '#333'}}>{table.num}</span>
-                                </p>
-                                <p style={{'display': 'flex', 'alignItems': 'center', 'color': '#808080'}}>
-                                    <Icon style={{'color': table.trend === 'up' ? '#f44336' : '#4caf50'}}>
-                                        {table.trend === 'up' ? 'arrow_upward' : 'arrow_downward'}
-                                    </Icon>
-                                     同比{table.trend === 'up' ? '增长' : '下降'} {table.percentage}
-                                </p>
-                            </div>
-                            <Chart
-                                width={chartWidth}
-                                padding={0}
-                                height={46}
-                                data={dv}
-                                scale={cols}
-                            >
-                                <Geom
-                                    type="area"
-                                    position="month*temperature"
-                                    color={'#7987CC'}
-                                    opacity={1}
-                                    shape={'smooth'}
-                                />
-                            </Chart>
-                        </Paper>
-                    </Grid>
+                    <AreaChart chart={chart}/>
+                    <AreaChart chart={chart}/>
+                    <AreaChart chart={chart}/>
+                    <AreaChart chart={chart}/>
                 </Grid>
                 <Grid container spacing={24} className="bottom-content">
                     <Grid item xs={12} md={8} sm={12}>

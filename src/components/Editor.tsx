@@ -25,6 +25,7 @@ class Editor extends React.Component<Props, State> {
             randomId: `editor_${(Math.random() * 100000000000000000)}`,
             instance: null,
         };
+        window.console.log(this.props);
     }
 
     componentDidMount() {
