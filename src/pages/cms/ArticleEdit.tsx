@@ -328,20 +328,18 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         />
                                     }
                                 />
-                                <FormControl
-                                    fullWidth
-                                    className={this.props.classes.formControlMargin}
-                                >
-                                    <DatePicker
-                                        className="data-picker"
-                                        keyboard
-                                        clearable
-                                        label="发布时间"
-                                        value={this.state.time}
-                                        onChange={this.handleDateChange}
-                                        animateYearScrolling={false}
-                                    />
-                                </FormControl>
+                                <DatePicker
+                                    className="data-picker"
+                                    style={{marginBottom: '32px'}}
+                                    keyboard
+                                    clearable
+                                    returnMoment
+                                    format="MMMM Do, YYYY"
+                                    label="发布时间"
+                                    value={this.state.time}
+                                    onChange={this.handleDateChange}
+                                    animateYearScrolling={false}
+                                />
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
