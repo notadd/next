@@ -9,6 +9,7 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
+import moment from 'moment';
 import { DatePicker } from 'material-ui-pickers';
 
 const styles = {
@@ -55,7 +56,7 @@ type State = {
     types: Array<any>,
     topTypes: Array<any>,
     abstract: string,
-    time: string,
+    time: any,
     link: string,
     origin: string,
     kind: string,
@@ -114,7 +115,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 },
             ],
             abstract: '',
-            time: '',
+            time: moment(),
             link: 'http://',
             origin: 'www.ibenchu.com',
             kind: '新闻资讯',
@@ -128,8 +129,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         };
     }
     handleDateChange = (date: any) => {
-        let currentTime = new Date(date).toLocaleDateString();
-        this.setState({ time: currentTime });
+        // let currentTime = new Date(date).toLocaleDateString();
+        // window.console.log(currentTime);
+        this.setState({ time: date });
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -329,26 +331,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
-                                    style={{ position: 'relative'}}
                                 >
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        发布时间
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        value={this.state.time}
-                                    />
                                     <DatePicker
                                         className="data-picker"
                                         keyboard
                                         clearable
+                                        label="发布时间"
                                         value={this.state.time}
                                         onChange={this.handleDateChange}
                                         animateYearScrolling={false}

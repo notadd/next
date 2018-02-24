@@ -142,13 +142,17 @@ body {
 }
 /*日期组件*/
 .data-picker {
-    position: absolute !important;
     width: 100%;
     bottom: 0;
 }
+.data-picker label {
+    font-size: 16px;
+}
 .data-picker > div:before {
-    background-color: #dfdfdf;
-    height: 0;
+    background-color: #dfdfdf !important;
+}
+.data-picker > div:hover:before {
+    background-color: rgba(0, 0, 0, 0.87) !important;
 }
 .data-picker > div > div {
     margin-left: 8px;
@@ -159,7 +163,6 @@ body {
 }
 .data-picker input {
     font-size: 16px;
-    opacity: 0;
 }
 /*颜色选择组件*/
 .form-color-picker > span {
