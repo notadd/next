@@ -4,7 +4,7 @@ import { writeFileSync } from "fs";
 import { safeDump } from "js-yaml";
 import { execSync } from 'child_process';
 import { prompt } from "inquirer";
-import { createConnection, ConnectionOptionsReader } from "typeorm";
+import { createConnection } from "typeorm";
 import { User } from "@notadd/user/entities/user.entity";
 import { createHmac } from "crypto";
 
@@ -122,7 +122,6 @@ async function install() {
 }
 
 function addPackageForDatabase(engine: string) {
-
     console.log(clc.blue(`Install package for database engine ${engine}...`));
 
     execSync(`yarn add ${engine} -W`, {

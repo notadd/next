@@ -23,6 +23,7 @@
         "removeComments": true,
         "strict": true,
         "strictNullChecks": true,
+        "strictPropertyInitialization": false,
         "suppressImplicitAnyIndexErrors": true,
         "target": "ES2017"
     },

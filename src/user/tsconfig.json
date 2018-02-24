@@ -11,6 +11,7 @@
         "noUnusedLocals": false,
         "removeComments": true,
         "strict": true,
+        "strictPropertyInitialization": false,
         "target": "ES2015"
     },
     "include": [
