@@ -122,7 +122,6 @@ function install() {
                 break;
         }
         addPackageForDatabase(wanted);
-        console.log(result);
         yield addAdministrationUser(result.username, result.email, result.password);
         console.log(clc.blue("Notadd install successfully!"));
     });
