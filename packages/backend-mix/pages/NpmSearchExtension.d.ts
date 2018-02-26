@@ -1,2 +1,0 @@
-declare const _default: "\nimport fetch from \"unfetch\";\nconst URL = \"https://api.npms.io/v2/search/suggestions\";\nexport default function NpmSearchExtension(query) {\n    const prom = fetch(`${URL}?q=${query}&size=10`);\n    return prom\n        .then(packages => packages.map(\n            item => ({\n                title: item.package.name,\n                url: item.package.links.npm,\n            }),\n        ));\n}\n";
-export default _default;

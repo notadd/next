@@ -1,13 +1,13 @@
 import * as React from 'react';
 import withStyles from 'material-ui/styles/withStyles';
-import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
+import { Link } from 'react-router-dom';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-import ClearIcon from 'material-ui-icons/Clear';
 import DeleteIcon from 'material-ui-icons/Delete';
+import ClearIcon from 'material-ui-icons/Clear';
 import ErrorIcon from 'material-ui-icons/ErrorOutline';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
@@ -30,7 +30,7 @@ const styles = {
         'margin-left': '10px',
     },
 };
-class PageType extends React.Component {
+class Menus extends React.Component {
     constructor(props, state) {
         super(props, state);
         this.handleClose = () => {
@@ -129,29 +129,28 @@ class PageType extends React.Component {
                 nodeLength: pro.node.children.length,
             });
         };
-        return (React.createElement("div", null,
+        return (React.createElement("div", { className: "configurations" },
             React.createElement("div", { className: "top-action-module clearfix" },
                 React.createElement("div", { className: "pull-left" },
                     React.createElement("p", { className: "crumbs" },
-                        "CMS ",
+                        "\u5168\u5C40 ",
                         React.createElement("b", null, "/"),
-                        " \u9875\u9762\u7BA1\u7406"),
-                    React.createElement("h4", { className: "title" }, "\u5206\u7C7B\u7BA1\u7406")),
+                        " \u7CFB\u7EDF\u63D2\u4EF6"),
+                    React.createElement("h4", { className: "title" }, "\u83DC\u5355\u7BA1\u7406")),
                 React.createElement("div", { className: "btn-group pull-right" },
-                    React.createElement("div", { className: "btn-group" },
-                        React.createElement(Link, { to: '/cms/page/type/edit/' + 'add' },
-                            React.createElement(IconButton, { className: this.props.classes.menuBtn, title: "\u65B0\u589E" },
-                                React.createElement(Add, null))),
-                        React.createElement(IconButton, { className: this.props.classes.menuBtn, title: "\u5237\u65B0" },
-                            React.createElement(Cached, null))))),
+                    React.createElement(Link, { to: '/menu/edit/' + 'add' },
+                        React.createElement(IconButton, { className: this.props.classes.menuBtn, title: "\u65B0\u589E" },
+                            React.createElement(Add, null))),
+                    React.createElement(IconButton, { className: this.props.classes.menuBtn, title: "\u5237\u65B0" },
+                        React.createElement(Cached, null)))),
             React.createElement(Paper, { className: this.props.classes.root },
                 React.createElement("div", { className: "menus-manager" },
                     React.createElement(SortableTree, { treeData: this.state.treeData, onChange: treeData => this.setState({ treeData }), rowHeight: 40, generateNodeProps: (rowInfo) => ({
                             buttons: [
-                                React.createElement(IconButton, { key: rowInfo.node.id, title: "\u7F16\u8F91" },
-                                    React.createElement(Link, { to: '/cms/page/type/edit/' + rowInfo.node.id },
+                                React.createElement(IconButton, { key: rowInfo.node.id },
+                                    React.createElement(Link, { to: '/menu/edit/' + rowInfo.node.id },
                                         React.createElement(ModeEdit, null))),
-                                React.createElement(IconButton, { key: rowInfo.node.id, onClick: () => handleClickRemove(rowInfo), title: "\u5220\u9664" },
+                                React.createElement(IconButton, { key: rowInfo.node.id, onClick: () => handleClickRemove(rowInfo) },
                                     React.createElement(DeleteIcon, null)),
                             ],
                         }) }))),
@@ -179,4 +178,4 @@ class PageType extends React.Component {
                     React.createElement("p", null, "\u8981\u5220\u9664\u6B64\u5206\u7C7B\u5FC5\u987B\u5148\u5220\u9664\u5B50\u5C42\u7EA7\uFF01")))));
     }
 }
-export default withStyles(styles)(PageType);
+export default withStyles(styles)(Menus);
