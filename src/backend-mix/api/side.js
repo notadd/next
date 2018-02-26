@@ -1,7 +1,7 @@
 /**
  * Mocking client-server processing
  */
-import _sides from "./side.json";
+import _sides from './side.json';
 
 const TIMEOUT = 100;
 

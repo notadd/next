@@ -1,41 +1,41 @@
-import * as React from "react";
-import withStyles, { WithStyles } from "material-ui/styles/withStyles";
-import Paper from "material-ui/Paper";
-import { FormLabel, FormControlLabel, FormControl } from "material-ui/Form";
-import Grid from "material-ui/Grid";
-import Button from "material-ui/Button";
-import Input, { InputLabel } from "material-ui/Input";
-import Radio, { RadioGroup } from "material-ui/Radio";
+import * as React from 'react';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import Paper from 'material-ui/Paper';
+import { FormLabel, FormControlLabel, FormControl } from 'material-ui/Form';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import Input, { InputLabel } from 'material-ui/Input';
+import Radio, { RadioGroup } from 'material-ui/Radio';
 
 const styles = {
     root: {
-        "padding": "40px 30px",
+        'padding': '40px 30px',
     },
     container: {
-        "display": "flex",
-        "flex-wrap": "wrap",
-        "margin": "0",
+        'display': 'flex',
+        'flex-wrap': 'wrap',
+        'margin': '0',
     },
     formLabel: {
-        "color": "#808080",
-        "flex-direction": "row-reverse",
-        "font-size": "16px !important",
-        "margin": "0",
-        "width": "100%",
+        'color': '#808080',
+        'flex-direction': 'row-reverse',
+        'font-size': '16px !important',
+        'margin': '0',
+        'width': '100%',
     },
     FormControlLabel: {
-        "font-size": "12px",
+        'font-size': '12px',
     },
     FormControlRoot: {
-        "margin-left": "0",
-        "margin-right": "40px",
+        'margin-left': '0',
+        'margin-right': '40px',
     },
     radioDefault: {
-        "margin-right": "5px",
-        "width": "auto",
+        'margin-right': '5px',
+        'width': 'auto',
     },
     radioRoot: {
-        "flex-direction": "row"
+        'flex-direction': 'row'
     },
 };
 type State = {
@@ -49,15 +49,18 @@ type State = {
 };
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        sendingMode: "",
-        encryptionMethod: "",
-        serverAddress: "",
-        serverPort: "",
-        SMTPAccount: "",
-        SMTPEmail: "",
-        SMTPPassword: "",
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            sendingMode: '',
+            encryptionMethod: '',
+            serverAddress: '',
+            serverPort: '',
+            SMTPAccount: '',
+            SMTPEmail: '',
+            SMTPPassword: '',
+        };
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -84,7 +87,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             root: this.props.classes.radioRoot,
                                         }}
                                         value={this.state.sendingMode}
-                                        onChange={this.handleChange("sendingMode")}
+                                        onChange={this.handleChange('sendingMode')}
                                     >
                                         <FormControlLabel
                                             classes={{
@@ -127,7 +130,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                             root: this.props.classes.radioRoot,
                                         }}
                                         value={this.state.encryptionMethod}
-                                        onChange={this.handleChange("encryptionMethod")}
+                                        onChange={this.handleChange('encryptionMethod')}
                                     >
                                         <FormControlLabel
                                             classes={{
@@ -159,7 +162,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "0px"}}>
+                        <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -171,7 +174,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabel}
-                                        onChange={this.handleChange("serverAddress")}
+                                        onChange={this.handleChange('serverAddress')}
                                         value={this.state.serverAddress}
                                     />
                                 </FormControl>
@@ -187,13 +190,13 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabel}
-                                        onChange={this.handleChange("serverPort")}
+                                        onChange={this.handleChange('serverPort')}
                                         value={this.state.serverPort}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "10px"}}>
+                        <Grid container spacing={40} style={{marginTop: '10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -205,7 +208,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabel}
-                                        onChange={this.handleChange("SMTPAccount")}
+                                        onChange={this.handleChange('SMTPAccount')}
                                         value={this.state.SMTPAccount}
                                     />
                                 </FormControl>
@@ -221,13 +224,13 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabel}
-                                        onChange={this.handleChange("SMTPEmail")}
+                                        onChange={this.handleChange('SMTPEmail')}
                                         value={this.state.SMTPEmail}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "10px"}}>
+                        <Grid container spacing={40} style={{marginTop: '10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -239,7 +242,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     <Input
                                         id="name-simple"
                                         className={this.props.classes.formLabel}
-                                        onChange={this.handleChange("SMTPPassword")}
+                                        onChange={this.handleChange('SMTPPassword')}
                                         value={this.state.SMTPPassword}
                                     />
                                 </FormControl>
@@ -252,7 +255,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                             raised
                             style={{
                                 borderRadius: 4,
-                                background: "#ededed",
+                                background: '#ededed',
                                 fontSize: 12,
                                 marginLeft: 6,
                                 marginTop: 34

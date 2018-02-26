@@ -3,24 +3,15 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ClearIcon from 'material-ui-icons/Clear';
-import ReplyAll from 'material-ui-icons/ReplyAll';
-import Cached from 'material-ui-icons/Cached';
-import Snackbar from 'material-ui/Snackbar';
+import FileDownload from 'material-ui-icons/FileDownload';
+import FileUpload from 'material-ui-icons/FileUpload';
 import Table, {
     TableBody,
     TableCell,
     TableHead,
     TableRow,
 } from 'material-ui/Table';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-} from 'material-ui/Dialog';
 
 const styles = {
     evenRow: {
@@ -33,24 +24,6 @@ const styles = {
         'background-color': '#3f51b5',
         'color': '#fff',
         'margin-left': '10px',
-    },
-    btnEdit: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#3f51b5',
-        'color': '#fff',
-        'margin-left': '10px',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
-    },
-    btnDelete: {
-        'width': '32px',
-        'height': '32px',
-        'border-radius': '50%',
-        'background-color': '#fff',
-        'color': '#808080',
-        'margin-left': '10px',
-        'box-shadow': '0px 2px 4px 0 rgba(0, 0, 0, 0.3)',
     },
     root: {
         'padding': '40px 30px',
@@ -68,60 +41,51 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
-    open: boolean,
-    openMessageTip: boolean,
-    message: string,
-    modalId: string,
-    modalName: string,
-    modalType: number,
-    modalNum: number,
     list: Array<any>,
 };
 
-class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, State> {
+class AddonImport extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
         this.state = {
             checkedAll: false,
             rowsPerPage: 2,
             currentPage: 0,
-            open: false,
-            modalId: '',
-            modalName: '',
-            modalType: 0,
-            modalNum: 0,
-            openMessageTip: false,
-            message: '',
             list: [
                 {
-                    id: 1,
+                    id: 11,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯1',
+                    name: 'notadd',
+                    description: '一些说明',
+                    version: '0.777',
                 },
                 {
-                    id: 2,
+                    id: 12,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯2',
+                    name: 'notadd1',
+                    description: '一些说明',
+                    version: '0.456',
                 },
                 {
-                    id: 3,
+                    id: 13,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯3',
+                    name: 'notadd2',
+                    description: '一些说明',
+                    version: '0.777',
                 },
                 {
-                    id: 4,
+                    id: 14,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯4',
+                    name: 'notadd3',
+                    description: '一些说明',
+                    version: '0.777',
                 },
                 {
-                    id: 5,
+                    id: 15,
                     check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯5',
+                    name: 'notadd4',
+                    description: '一些说明',
+                    version: '0.7777',
                 },
             ],
         };
@@ -138,6 +102,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
                 if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
+                    window.console.log(i);
                     this.state.list[i].check = false;
                 }
             }
@@ -146,21 +111,21 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             [name]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
-    }
     handleChange = (pro: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
         const currentPage = this.state.currentPage + 1;
         this.setState({
-            checkedAll: true
+            checkedAll: true,
         });
-        pro.check = event.target.checked;
+        pro.check = true;
+        if (!event.target.checked) {
+            pro.check = false;
+        }
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
                 if (this.state.list[i].check === false) {
                     this.setState({
-                        checkedAll: false
+                        checkedAll: false,
                     });
                 }
             }
@@ -168,45 +133,6 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         this.setState({
             [pro]: event.target.checked,
         });
-    };
-    handleClickRemove = (pro: any) => {
-        this.setState({
-            modalName: pro.name,
-            modalId: pro.id,
-            open: true,
-            modalType: 0,
-        });
-    };
-    handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        const arr = new Array();
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
-                    this.setState({
-                        open: true,
-                        modalType: 1,
-                        modalNum: arr.length,
-                    });
-                } else {
-                    this.setState({
-                        openMessageTip: true,
-                        message: '请选择要删除的文章',
-                    });
-                }
-            }
-        }
-    };
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-    handleSubmit = () => {
-        this.setState({ open: false });
-    };
-    handleCloseTip = () => {
-        this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -225,29 +151,28 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { currentPage, rowsPerPage, list } = this.state;
         return (
-            <div className="cms">
+            <div>
                 <div className="top-action-module clearfix">
-                    <div className="left-title pull-left">
+                    <div className="pull-left">
                         <p className="crumbs">
-                            CMS / 文章管理
+                            全局 / 应用管理 / 插件配置
                         </p>
-                        <h4 className="title">回收站</h4>
+                        <h4 className="title">导入/导出</h4>
                     </div>
                     <div className="btn-group pull-right">
                         <IconButton
                             className={this.props.classes.menuBtn}
-                            onClick={this.handleBatchRemove}
-                            title="删除"
+                            title="导入"
                         >
-                            <DeleteIcon />
+                            <FileUpload />
                         </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
-                            title="刷新"
+                            title="导出"
                         >
-                            <Cached />
+                            <FileDownload />
                         </IconButton>
                     </div>
                 </div>
@@ -263,9 +188,9 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                             value="checkedAll"
                                         />
                                     </TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
-                                    <TableCell numeric/>
+                                    <TableCell className={this.props.classes.tableCell} numeric>插件名称</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>描述</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>版本</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody className="table-body">
@@ -291,23 +216,10 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {n.description}
                                                 </TableCell>
-                                                <TableCell className="table-action-btn" numeric>
-                                                    <IconButton
-                                                        className={this.props.classes.btnEdit}
-                                                        onClick={() => this.handleClickEdit(n)}
-                                                        title="还原"
-                                                    >
-                                                        <ReplyAll />
-                                                    </IconButton>
-                                                    <IconButton
-                                                        className={this.props.classes.btnDelete}
-                                                        onClick={() => this.handleClickRemove(n)}
-                                                        title="删除"
-                                                    >
-                                                        <DeleteIcon />
-                                                    </IconButton>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.version}
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -315,16 +227,6 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                             </TableBody>
                         </Table>
                     </div>
-                    <Snackbar
-                        className="message-snack-bar"
-                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                        open={openMessageTip}
-                        onClose={this.handleCloseTip}
-                        SnackbarContentProps={{
-                            'aria-describedby': 'message-id',
-                        }}
-                        message={<span id="message-id">{message}</span>}
-                    />
                     <div className="table-pagination">
                         <ReactPaginate
                             previousLabel={'<'}
@@ -340,38 +242,8 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         />
                     </div>
                 </Paper>
-                <Dialog
-                    open={this.state.open}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    className="dialog-content-action"
-                >
-                    <DialogTitle
-                        id="alert-dialog-title"
-                        className="dialog-title"
-                    >
-                        <IconButton
-                            onClick={this.handleClose}
-                        >
-                            <ClearIcon />
-                        </IconButton>
-                    </DialogTitle>
-                    <DialogContent className="dialog-content">
-                        {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
-                                <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
-                    </DialogContent>
-                    <DialogActions className="dialog-actions">
-                        <Button onClick={this.handleClose}>
-                            取消
-                        </Button>
-                        <Button onClick={this.handleSubmit} autoFocus>
-                            确认提交
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         );
     }
 }
-export default withStyles(styles)(ArticleRecycle);
+export default withStyles(styles)(AddonImport);

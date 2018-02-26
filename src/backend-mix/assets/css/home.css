@@ -1,11 +1,13 @@
 .home .top-statistics > div {
     padding: 14px;
 }
-
+.home .bottom-content {
+    margin-top: 20px;
+}
 .home .bottom-content .home-bg {
     height: 250px;
     background: url(../images/teambg.png) no-repeat center;
-    background-size: auto 100%;
+    background-size: 100% 100%;
 }
 
 .home .bottom-content .home-bg > div {
@@ -32,10 +34,20 @@
     font-weight: 500;
 }
 
-.home .bottom-content .home-bg > div > div {
-    padding-left: 13%;
+.home .bottom-content .home-bg > div > h4 + div {
     margin-top: 56px;
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container {
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container div {
+    overflow: hidden;
+}
+
+.home .bottom-content .home-bg .team-item {
     display: flex;
+    padding-left: 13%;
 }
 
 .home .bottom-content .home-bg > div .img {
@@ -71,15 +83,16 @@
 }
 
 .home .bottom-content .teamBox {
+    padding: 20px 30px;
     min-height: 72px;
-    padding: 0 30px;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .home .bottom-content .teamBox div {
-    padding: 10px 19px;
+    padding: 0 30px;
     width: auto;
+    line-height: 2.5;
     max-width: none;
     flex-basis: auto;
     display: flex;
@@ -89,13 +102,18 @@
 }
 
 .home .bottom-content .teamBox div:after {
-    content: "|";
+    content: '';
     position: absolute;
     right: 0;
+    width: 1px;
+    height: 12px;
+    background: #333;
+    top: 50%;
+    margin-top: -6px;
 }
 
 .home .bottom-content .teamBox div:last-child:after {
-    content: "";
+    content: '';
 }
 
 .home .bottom-content ul li span {
@@ -166,4 +184,7 @@
 
 .home .bottom-content > div > div {
     min-height: 385px;
+}
+.spanActive {
+    color: #3f51b5 !important;
 }

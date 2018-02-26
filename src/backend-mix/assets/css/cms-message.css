@@ -1,14 +1,18 @@
+/*信息管理-客户留言 表格下拉折叠*/
 .cms-message .table-body li {
     border-bottom: 1px solid rgba(235, 235, 235, 1);
 }
 .cms-message .table-body li > div:first-child {
     width: 100%;
     position: relative;
-}
-.cms-message .table-body li .collapse-msg {
     height: 50px;
     line-height: 50px;
+}
+.cms-message .table-body li .collapse-msg {
     padding-left: 40px;
+}
+.cms-message .table-body li .collapse-msg > div > div {
+    padding: 18px 0;
 }
 .cms-message .table-body li > div:first-child > div{
     display: inline-block;
@@ -19,7 +23,7 @@
     width: 40px;
     padding-left: 12px;
     position: absolute;
-    top: 5px;
+    top: 6px;
     left: 10px;
 }
 .cms-message .table-head {
@@ -57,4 +61,29 @@
 }
 .cms-message .table-body li > div:first-child > div:nth-child(5) {
     width: 22.9%
+}
+@media (max-width: 479px) {
+    .cms-message .table-head,
+    .cms-message .table-body {
+        width: 180%;
+    }
+    .cms-message .table-head li:nth-child(2),
+    .cms-message .table-head li:nth-child(3),
+    .cms-message .table-head li:nth-child(4),
+    .cms-message .table-head li:nth-child(5) {
+        width: 120px;
+    }
+    .cms-message .table-body li > div:first-child > div:nth-child(2) {
+        width: 120px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+    .cms-message .table-body li > div:first-child > div:nth-child(n + 3) {
+        padding: 0 4px;
+        width: 120px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
 }

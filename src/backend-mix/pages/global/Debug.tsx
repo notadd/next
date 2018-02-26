@@ -1,35 +1,35 @@
-import * as React from "react";
-import withStyles, { WithStyles } from "material-ui/styles/withStyles";
-import Paper from "material-ui/Paper";
-import { FormControlLabel } from "material-ui/Form";
-import Grid from "material-ui/Grid";
-import Button from "material-ui/Button";
-import Switch from "material-ui/Switch";
+import * as React from 'react';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
+import Paper from 'material-ui/Paper';
+import { FormControlLabel } from 'material-ui/Form';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import Switch from 'material-ui/Switch';
 
 const styles = {
     root: {
-        "padding": "40px 30px",
+        'padding': '40px 30px',
     },
     container: {
-        "display": "flex",
-        "flex-wrap": "wrap",
-        "margin": "0",
+        'display': 'flex',
+        'flex-wrap': 'wrap',
+        'margin': '0',
     },
     formLabel: {
-        "color": "#333",
-        "flex-direction": "row-reverse",
-        "font-size": "16px !important",
-        "margin": "0",
-        "width": "100%",
+        'color': '#333',
+        'flex-direction': 'row-reverse',
+        'font-size': '16px !important',
+        'margin': '0',
+        'width': '100%',
     },
     smallBtn: {
-        "border-radius": "4px",
-        "font-size": "12px",
-        "height": "24px",
-        "min-height": "24px",
-        "min-width": "48px",
-        "padding": "0",
-        "width": "48px",
+        'border-radius': '4px',
+        'font-size': '12px',
+        'height': '24px',
+        'min-height': '24px',
+        'min-width': '48px',
+        'padding': '0',
+        'width': '48px',
     }
 };
 type State = {
@@ -38,10 +38,13 @@ type State = {
 };
 
 class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        debug: false,
-        test: false,
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            debug: false,
+            test: false,
+        };
+    }
     render() {
         return (
             <div className="configurations">
@@ -66,7 +69,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "-10px"}}>
+                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControlLabel
                                     label="Debug模式"
@@ -83,7 +86,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "-10px"}}>
+                        <Grid container spacing={40} style={{marginTop: '-10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControlLabel
                                     label="测试模式"

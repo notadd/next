@@ -1,8 +1,8 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import SortableTree from 'react-sortable-tree';
+import { Link } from 'react-router-dom';
 import ModeEdit from 'material-ui-icons/ModeEdit';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -38,16 +38,15 @@ const styles = {
 type State = {
     modalName: string,
     modalId: string,
+    nodeLength: number,
     open: boolean,
     openTip: boolean,
-    nodeLength: number,
     treeData: Array<any>,
 };
 
-class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State> {
+class Menus extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
-
         this.state = {
             open: false,
             openTip: false,
@@ -144,16 +143,16 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
             });
         };
         return (
-            <div>
+            <div className="configurations">
                 <div className="top-action-module clearfix">
                     <div className="pull-left">
                         <p className="crumbs">
-                            CMS <b>/</b> 文章管理
+                            全局 <b>/</b> 系统插件
                         </p>
-                        <h4 className="title">分类管理</h4>
+                        <h4 className="title">菜单管理</h4>
                     </div>
                     <div className="btn-group pull-right">
-                        <Link to={'/cms/article/type/edit/' + 'add'}>
+                        <Link to={'/menu/edit/' + 'add'}>
                             <IconButton
                                 className={this.props.classes.menuBtn}
                                 title="新增"
@@ -177,18 +176,14 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             rowHeight={40}
                             generateNodeProps={(rowInfo) => ({
                                 buttons: [
-                                    <IconButton
-                                        key={rowInfo.node.id}
-                                        title="编辑"
-                                    >
-                                        <Link to={'/cms/article/type/edit/' + rowInfo.node.id}>
+                                    <IconButton key={rowInfo.node.id}>
+                                        <Link to={'/menu/edit/' + rowInfo.node.id}>
                                             <ModeEdit />
                                         </Link>
                                     </IconButton>,
                                     <IconButton
                                         key={rowInfo.node.id}
                                         onClick={() => handleClickRemove(rowInfo)}
-                                        title="删除"
                                     >
                                         <DeleteIcon />
                                     </IconButton>,
@@ -256,4 +251,4 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         );
     }
 }
-export default withStyles(styles)(ArticleType);
+export default withStyles(styles)(Menus);

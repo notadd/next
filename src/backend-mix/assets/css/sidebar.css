@@ -40,16 +40,17 @@
     display: flex;
     justify-content: center;
 }
-.sideBar .small-userBox {
+.smallSide-view .sideBar .userBox {
     background: none;
     height: 90px;
+    margin-bottom: 0;
 }
-.sideBar .small-userBox > div {
+.smallSide-view .sideBar .userBox > div {
     align-items: center;
     background: none;
     border-bottom: 1px solid #e0e0e0;
 }
-.sideBar .small-userBox .bigAvatar {
+.smallSide-view .sideBar .userBox .bigAvatar {
     margin: 0;
 }
 
@@ -58,7 +59,7 @@
     margin-top: 39px;
 }
 
-.small-userBox .user-right {
+.smallSide-view .user-right {
     display: none;
 }
 
@@ -71,6 +72,10 @@
 
 .sideBar .user-right > div:last-child {
     margin-top: 15px;
+}
+.sideBar .list-item {
+    padding: 0px 25px 0px 23px;
+    height: 52px;
 }
 
 .sideBar .badgeIcon svg {
@@ -97,7 +102,9 @@
     background: #ededed;
     position: absolute;
 }
-
+.sideBar > ul > li:first-child {
+    border-bottom: none;
+}
 .sideBar .selectBtn h3,
 .sideBar .selectFirstLevelMenu h3,
 .sideBar .innerRootSelect h3,
@@ -107,4 +114,40 @@
 
 .sideBar > div > h3 {
     color: #333333;
+}
+
+.smallSide-view .list-item {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    padding: initial;
+}
+.smallSide-view .list-item .list-text h3 {
+    text-align: center;
+}
+.smallSide-view .list-item .list-text {
+    text-align: center;
+    display: none;
+}
+.smallSide-view .list-item:hover {
+    background: #ededed;
+}
+.smallSide-view .list-item:hover .list-icon {
+    display: none;
+}
+.smallSide-view .list-item:hover .list-text {
+    display: block;
+}
+.smallSide-view .sideBar > ul {
+    position: relative;
+}
+.smallSide-view .sideBar > ul > li:nth-child(2) {
+    background-color: #ffffff;
+    box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.05);
+    left: 90px;
+    padding: 10px 0;
+    position: absolute;
+    top: 0;
+    width: 260px;
+    z-index: 500;
 }

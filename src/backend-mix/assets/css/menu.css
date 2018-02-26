@@ -1,3 +1,4 @@
+/*菜单管理*/
 .menus-manager {
     height: 600px;
 }
@@ -66,7 +67,34 @@
 .rst__rowToolbar {
     display: none;
 }
+.rst__rowToolbar .rst__toolbarButton {
+    position: absolute;
+    z-index: 100;
+}
+.rst__rowToolbar .rst__toolbarButton > button {
+    width: 28px;
+}
+.rst__rowToolbar .rst__toolbarButton a {
+    color: rgba(0, 0, 0, 0.54);
+}
+.rst__rowToolbar .rst__toolbarButton a svg{
+    width: 1em;
+    height: 1em;
+}
+.rst__rowToolbar .rst__toolbarButton:first-child {
+    right: 28px;
+    top: -12px;
+}
+.rst__rowToolbar .rst__toolbarButton:last-child {
+    right: 0;
+    top: -14px;
+}
 .rst__rowWrapper:hover .rst__rowToolbar {
     display: block;
     cursor: pointer;
+}
+@media (max-width: 479px) {
+    .rst__rowContents {
+        min-width: 100%;
+    }
 }

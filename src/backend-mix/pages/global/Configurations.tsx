@@ -1,55 +1,58 @@
-import * as React from "react";
-import withStyles, { WithStyles } from "material-ui/styles/withStyles";
-import Paper from "material-ui/Paper";
-import { FormControlLabel, FormControl, FormHelperText } from "material-ui/Form";
-import Switch from "material-ui/Switch";
-import Input, { InputLabel } from "material-ui/Input";
-import Grid from "material-ui/Grid";
-import Button from "material-ui/Button";
+import * as React from 'react';
+import Paper from 'material-ui/Paper';
+import { FormControlLabel, FormControl, FormHelperText } from 'material-ui/Form';
+import Switch from 'material-ui/Switch';
+import Input, { InputLabel } from 'material-ui/Input';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
+import { CircularProgress } from 'material-ui/Progress';
+import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 
 const styles = {
     root: {
-        "padding": "40px 30px",
+        'padding': '40px 30px',
     },
     container: {
-        display: "flex",
-        "flex-wrap": "wrap",
-        "margin": "0",
+        display: 'flex',
+        'flex-wrap': 'wrap',
+        'margin': '0',
     },
     labelClass: {
-        "color": "#b8b8b8",
+        'color': '#b8b8b8',
     },
     menu: {
-        "width": "200px",
+        'width': '200px',
     },
     formLabel: {
-        "flex-direction": "row-reverse",
-        "margin": "0",
-        "font-size": "16px !important",
-        "color": "#333",
-        "width": "100%",
+        'flex-direction': 'row-reverse',
+        'margin': '0',
+        'font-size': '16px !important',
+        'color': '#333',
+        'width': '100%',
     },
     formLabelFont: {
-        "font-size": "16px",
+        'font-size': '16px',
     },
     subLabel: {
-        "font-size": "12px",
-        "color": "#808080",
+        'font-size': '12px',
+        'color': '#808080',
     },
     switchHeight: {
-        "height": "20px",
+        'height': '20px',
     },
     switchDefault: {
-        "height": "inherit",
+        'height': 'inherit',
     },
     helpText: {
-        color: "#808080",
-        fontSize: "12px",
+        color: '#808080',
+        fontSize: '12px',
         marginTop: 0,
     },
     underline: {
-        "&:before": {
-            background: "#dfdfdf",
+        '&:before': {
+            background: '#dfdfdf',
         }
     },
 };
@@ -63,24 +66,167 @@ type State = {
     companyName: string,
     copyright: string,
     statisticalCode: string,
+    loading: boolean,
+    transition: any,
+    open: boolean,
+    errorMessage: string,
 };
 
 class Configurations extends React.Component<WithStyles<keyof typeof styles>, State> {
-    state = {
-        webName: "NotAdd",
-        domainName: "",
-        siteOpen: true,
-        multiDomainOpen: false,
-        keepRecord: "",
-        companyName: "",
-        copyright: "",
-        statisticalCode: "",
-    };
+    constructor(props: any, state: any) {
+        super(props, state);
+        this.state = {
+            webName: 'NotAdd',
+            domainName: '',
+            siteOpen: true,
+            multiDomainOpen: false,
+            keepRecord: '',
+            companyName: '',
+            copyright: '',
+            statisticalCode: '',
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+        };
+    }
+    componentDidMount() {
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    webName: getSettingByKey(key: "global.webName") {
+                    key,
+                    value,
+                    },
+                    domainName: getSettingByKey(key: "global.domainName") {
+                    key,
+                    value,
+                    },  
+                    siteOpen: getSettingByKey(key: "global.siteOpen") {
+                    key,
+                    value,
+                    },  
+                    multiDomainOpen: getSettingByKey(key: "global.multiDomainOpen") {
+                    key,
+                    value,
+                    },  
+                    keepRecord: getSettingByKey(key: "global.keepRecord") {
+                    key,
+                    value,
+                    },  
+                    companyName: getSettingByKey(key: "global.companyName") {
+                    key,
+                    value,
+                    },  
+                    copyright: getSettingByKey(key: "global.copyright") {
+                    key,
+                    value,
+                    },  
+                    statisticalCode: getSettingByKey(key: "global.statisticalCode") {
+                    key,
+                    value,
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data;
+                Object.keys(results).forEach((a: string) => {
+                    if (results[a] !== null) {
+                        const d = {};
+                        d[a] = results[a].value;
+                        if (results[a].key === 'global.siteOpen' || results[a].key === 'global.multiDomainOpen') {
+                            Number(results[a].value) === 1 ? d[a] = true : d[a] = false;
+                        }
+                        this.setState(d);
+                    }
+                });
+            }
+        });
+    }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
             [name]: val,
         });
+    };
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleSubmit = () => {
+        if (this.state.webName) {
+            this.setState(
+                {
+                    loading: true,
+                },
+            );
+            axios.post('http://localhost:3000/graphql?', {
+                query: `
+                mutation {
+                    webName: setSetting(key: "global.webName", value: "${this.state.webName}") {
+                    key,
+                    value,
+                    },
+                    domainName: setSetting(key: "global.domainName", value: "${this.state.domainName}") {
+                    key,
+                    value,
+                    },  
+                    siteOpen: setSetting(key: "global.siteOpen", value: "${this.state.siteOpen ? 1 : 0}") {
+                    key,
+                    value,
+                    },  
+                    multiDomainOpen: setSetting(key: "global.multiDomainOpen",
+                     value: "${this.state.multiDomainOpen ? 1 : 0}")
+                     {
+                    key,
+                    value,
+                    },  
+                    keepRecord: setSetting(key: "global.keepRecord", value: "${this.state.keepRecord}") {
+                    key,
+                    value,
+                    },  
+                    companyName: setSetting(key: "global.companyName", value: "${this.state.companyName}") {
+                    key,
+                    value,
+                    },  
+                    copyright: setSetting(key: "global.copyright", value: "${this.state.copyright}") {
+                    key,
+                    value,
+                    },  
+                    statisticalCode: setSetting(key: "global.statisticalCode", value: "${this.state.statisticalCode}") {
+                    key,
+                    value,
+                    },
+                }
+            `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    this.setState(
+                        {
+                            open: true,
+                            loading: false,
+                            errorMessage: '提交成功！!',
+                        },
+                    );
+                } else {
+                    this.setState(
+                        {
+                            open: true,
+                            loading: false,
+                            errorMessage: response.data.errors[0].message,
+                        },
+                    );
+                }
+            });
+        } else {
+            this.setState(
+                {
+                    open: true,
+                    loading: false,
+                    errorMessage: '请输入网站名称!',
+                },
+            );
+        }
     };
     render() {
         return (
@@ -93,7 +239,11 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={40}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.webName}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -106,7 +256,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange("webName")}
+                                        onChange={this.handleChange('webName')}
                                         value={this.state.webName}
                                     />
                                 </FormControl>
@@ -125,13 +275,13 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange("domainName")}
+                                        onChange={this.handleChange('domainName')}
                                         value={this.state.domainName}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "16px"}}>
+                        <Grid container spacing={40} style={{marginTop: '16px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControlLabel
                                     label="站点开启"
@@ -177,7 +327,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                 </FormHelperText>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "0px"}}>
+                        <Grid container spacing={40} style={{marginTop: '0px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -192,7 +342,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange("keepRecord")}
+                                        onChange={this.handleChange('keepRecord')}
                                         value={this.state.keepRecord}
                                     />
                                 </FormControl>
@@ -211,13 +361,13 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange("companyName")}
+                                        onChange={this.handleChange('companyName')}
                                         value={this.state.companyName}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={40} style={{marginTop: "10px"}}>
+                        <Grid container spacing={40} style={{marginTop: '10px'}}>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
                                     <InputLabel
@@ -235,7 +385,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                             underline: this.props.classes.underline,
                                         }}
                                         className={this.props.classes.formLabelFont}
-                                        onChange={this.handleChange("statisticalCode")}
+                                        onChange={this.handleChange('statisticalCode')}
                                         value={this.state.statisticalCode}
                                     />
                                 </FormControl>
@@ -254,16 +404,45 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange("copyright")}
+                                        onChange={this.handleChange('copyright')}
                                         value={this.state.copyright}
                                     />
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
-                            确认提交
+                        <Button
+                            raised
+                            color="primary"
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                'disabled-btn' : ''
+                            }
+                            onClick={this.handleSubmit}
+                        >
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: !this.state.webName ? 'error-prompt' : ''
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleClose}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );

@@ -1,8 +1,10 @@
 .login {
-background: #3f51b5;
-width: 100%;
-height: 100%;
+    background: #3f51b5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
+
 .login .wrapBox {
     background: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
@@ -13,6 +15,7 @@ height: 100%;
     width: 388px;
     margin-left: -199px;
 }
+
 .login .innerBox {
     position: absolute;
     top: 8px;
@@ -22,24 +25,48 @@ height: 100%;
     border-radius: 10px;
     padding: 40px;
 }
+
 .login .boxTitle {
     color: #e91e63;
     font-size: 24px;
     position: relative;
 }
+
 .login .boxTitle:before {
     background: #e91e63;
-    content: "";
+    content: '';
     position: absolute;
     top: 4px;
     left: -40px;
     width: 4px;
     height: 24px;
 }
+
 .login .absolute {
     flip: false;
     top: 56px;
     right: -30px;
     position: absolute;
     box-shadow: 0px 7px 20px 0 rgba(233, 30, 99, 0.3)
+}
+@media (max-width: 479px) {
+    .login .wrapBox {
+        height: 55.25%;
+        top: 50%;
+        left: 50%;
+        width: 81.64%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        margin-left: 0;
+    }
+
+    .login .innerBox {
+        width: 104.73%;
+        height: 104.95%;
+        padding: 2.2rem;
+        position: absolute;
+    }
+    .login .boxTitle:before {
+        left: -24px;
+    }
 }
