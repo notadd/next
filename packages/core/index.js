@@ -7,7 +7,6 @@ __export(require("./constants"));
 __export(require("./containers"));
 __export(require("./decorators"));
 __export(require("./factories"));
-__export(require("./informations"));
 __export(require("./injectors"));
 __export(require("./notadd-application"));
 __export(require("./notadd-factory"));

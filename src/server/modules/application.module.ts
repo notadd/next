@@ -5,7 +5,6 @@ import { ConfigurationModule } from "@notadd/configuration";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { GraphqlFactory } from "@notadd/core/factories/graphql.factory";
 import { GraphQLModule } from "@nestjs/graphql";
-import { Informations } from "@notadd/core/informations";
 import { InjectionModule } from "@notadd/injection";
 import { LoggerModule } from "@notadd/logger";
 import { mergeTypes } from 'merge-graphql-schemas';
@@ -15,10 +14,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from "@notadd/user";
 import { WebsocketModule } from "@notadd/websocket";
 import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
+import { SystemInformation } from "../informations";
 
 @Module({
     components: [
-        ...Informations,
+        SystemInformation,
         GraphqlFactory,
     ],
     imports: [

@@ -1,1 +1,1 @@
-export declare function Information(name: string): MethodDecorator;
+export declare function Information(name?: string): MethodDecorator;

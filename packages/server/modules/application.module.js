@@ -16,7 +16,6 @@ const configuration_1 = require("@notadd/configuration");
 const apollo_server_express_1 = require("apollo-server-express");
 const graphql_factory_1 = require("@notadd/core/factories/graphql.factory");
 const graphql_1 = require("@nestjs/graphql");
-const informations_1 = require("@notadd/core/informations");
 const injection_1 = require("@notadd/injection");
 const logger_1 = require("@notadd/logger");
 const common_1 = require("@nestjs/common");
@@ -25,6 +24,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
+const informations_1 = require("../informations");
 let ApplicationModule = class ApplicationModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
@@ -50,7 +50,7 @@ let ApplicationModule = class ApplicationModule {
 ApplicationModule = __decorate([
     common_1.Module({
         components: [
-            ...informations_1.Informations,
+            informations_1.SystemInformation,
             graphql_factory_1.GraphqlFactory,
         ],
         imports: [
