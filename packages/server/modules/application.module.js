@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const authentication_1 = require("@notadd/authentication");
 const backend_1 = require("@notadd/backend");
-const configuration_1 = require("@notadd/configuration");
 const injection_1 = require("@notadd/injection");
 const modules_1 = require("@notadd/graphql/modules");
 const logger_1 = require("@notadd/logger");
@@ -30,7 +29,6 @@ ApplicationModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot(),
             modules_1.GraphqlModule,
             websocket_1.WebsocketModule,
-            configuration_1.ConfigurationModule,
             logger_1.LoggerModule,
             setting_1.SettingModule,
             injection_1.InjectionModule,

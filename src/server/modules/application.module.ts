@@ -1,6 +1,5 @@
 import { AuthenticationModule } from "@notadd/authentication";
 import { BackendModule } from "@notadd/backend";
-import { ConfigurationModule } from "@notadd/configuration";
 import { InjectionModule } from "@notadd/injection";
 import { GraphqlModule } from "@notadd/graphql/modules";
 import { LoggerModule } from "@notadd/logger";
@@ -21,7 +20,6 @@ import { SystemInformation } from "../informations";
         TypeOrmModule.forRoot(),
         GraphqlModule,
         WebsocketModule,
-        ConfigurationModule,
         LoggerModule,
         SettingModule,
         InjectionModule,
