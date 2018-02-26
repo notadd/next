@@ -12,6 +12,7 @@ const packages = {
     configuration: ts.createProject('src/configuration/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
     'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
+    graphql: ts.createProject('src/graphql/tsconfig.json'),
     injection: ts.createProject('src/injection/tsconfig.json'),
     logger: ts.createProject('src/logger/tsconfig.json'),
     'module-demo': ts.createProject('src/module-demo/tsconfig.json'),
