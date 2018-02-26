@@ -9,7 +9,6 @@ const packages = {
     authentication: ts.createProject('src/authentication/tsconfig.json'),
     backend: ts.createProject('src/backend/tsconfig.json'),
     // 'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
-    configuration: ts.createProject('src/configuration/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
     'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
     graphql: ts.createProject('src/graphql/tsconfig.json'),
