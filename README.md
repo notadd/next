@@ -1,3 +1,9 @@
+
+<p align="center">
+<a href="https://travis-ci.org/notadd/next" title="Build Status"><img src="https://img.shields.io/travis/notadd/next/master.svg?style=flat-square"></a>
+</p>
+
+
 # 如何安装
 
 ## 第一步
