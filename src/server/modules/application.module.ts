@@ -1,14 +1,11 @@
-import * as GraphQLJSON from 'graphql-type-json';
 import { AuthenticationModule } from "@notadd/authentication";
 import { BackendModule } from "@notadd/backend";
 import { ConfigurationModule } from "@notadd/configuration";
-import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
-import { GraphqlFactory } from "@notadd/core/factories/graphql.factory";
-import { GraphQLModule } from "@nestjs/graphql";
 import { InjectionModule } from "@notadd/injection";
+import { GraphqlModule } from "@notadd/graphql/modules";
 import { LoggerModule } from "@notadd/logger";
 import { mergeTypes } from 'merge-graphql-schemas';
-import { MiddlewaresConsumer, Module, RequestMethod } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { SettingModule } from "@notadd/setting";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from "@notadd/user";
@@ -19,11 +16,10 @@ import { SystemInformation } from "../informations";
 @Module({
     components: [
         SystemInformation,
-        GraphqlFactory,
     ],
     imports: [
         TypeOrmModule.forRoot(),
-        GraphQLModule,
+        GraphqlModule,
         WebsocketModule,
         ConfigurationModule,
         LoggerModule,
@@ -36,32 +32,4 @@ import { SystemInformation } from "../informations";
     ],
 })
 export class ApplicationModule {
-    /**
-     * @param { GraphqlFactory } graphQLFactory
-     */
-    constructor(private readonly graphQLFactory: GraphqlFactory) {
-    }
-
-    /**
-     * @param { MiddlewaresConsumer } consumer
-     */
-    configure(consumer: MiddlewaresConsumer) {
-        const schema = this.createSchema();
-        consumer
-            .apply(graphiqlExpress({ endpointURL: "/graphql" }))
-            .forRoutes({ path: "/graphiql", method: RequestMethod.GET })
-            .apply(graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes({ path: "/graphql", method: RequestMethod.ALL });
-    }
-
-    createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths("./**/*.types.graphql");
-
-        return this.graphQLFactory.createSchema({
-            typeDefs,
-            resolvers: {
-                Json: GraphQLJSON,
-            },
-        });
-    }
 }

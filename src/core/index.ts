@@ -1,7 +1,6 @@
 export * from "./constants";
 export * from "./containers";
 export * from "./decorators";
-export * from "./factories";
 export * from "./injectors";
 export * from "./interfaces";
 export * from "./notadd-application";

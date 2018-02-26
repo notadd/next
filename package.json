@@ -6,13 +6,13 @@
     "main": "index.js",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "gulp build",
-        "build:packages": "gulp build --dist packages",
-        "build:watch": "gulp watch --dist packages",
-        "dev": "gulp --dist packages",
+        "build": "node --max-old-space-size=2000 ./node_modules/.bin/gulp build",
+        "build:packages": "node --max-old-space-size=2000 ./node_modules/.bin/gulp build --dist packages",
+        "build:watch": "node --max-old-space-size=2000 ./node_modules/.bin/gulp watch --dist packages",
+        "dev": "node --max-old-space-size=2000 ./node_modules/.bin/gulp --dist packages",
         "dev:backend-mix": "gulp backend-mix-server --dist packages",
         "prepublish": "npm run build:packages",
-        "publish": "./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
+        "publish": "node --max-old-space-size=2000 ./node_modules/.bin/lerna publish -m \"chore(release): publish %s\"",
         "run:install": "node ./node_modules/@notadd/server/install.js",
         "server": "node ./node_modules/@notadd/server/bootstrap.js",
         "react-scripts": "./node_modules/.bin/react-scripts"
