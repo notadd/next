@@ -6,15 +6,15 @@ const ts = require('gulp-typescript');
 
 const packages = {
     'addon-demo': ts.createProject('src/addon-demo/tsconfig.json'),
+    'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
+    'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
+    'module-demo': ts.createProject('src/module-demo/tsconfig.json'),
     authentication: ts.createProject('src/authentication/tsconfig.json'),
     backend: ts.createProject('src/backend/tsconfig.json'),
-    // 'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
-    'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
     graphql: ts.createProject('src/graphql/tsconfig.json'),
     injection: ts.createProject('src/injection/tsconfig.json'),
     logger: ts.createProject('src/logger/tsconfig.json'),
-    'module-demo': ts.createProject('src/module-demo/tsconfig.json'),
     rpc: ts.createProject('src/rpc/tsconfig.json'),
     server: ts.createProject('src/server/tsconfig.json'),
     setting: ts.createProject('src/setting/tsconfig.json'),

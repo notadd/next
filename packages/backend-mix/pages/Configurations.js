@@ -96,7 +96,7 @@ class Configurations extends React.Component {
                                     }, onChange: this.handleChange("domainName"), value: this.state.domainName })))),
                     React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: "16px" } },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "站点开启", classes: {
+                            React.createElement(FormControlLabel, { label: "\u7AD9\u70B9\u5F00\u542F", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { classes: {
@@ -105,7 +105,7 @@ class Configurations extends React.Component {
                                     }, onChange: (event, checked) => this.setState({ siteOpen: checked }), checked: this.state.siteOpen }) }),
                             React.createElement(FormHelperText, { classes: { root: this.props.classes.helpText } }, "\u5173\u95ED\u540E\u7F51\u7AD9\u5C06\u4E0D\u80FD\u8BBF\u95EE")),
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "开启多域名", classes: {
+                            React.createElement(FormControlLabel, { label: "\u5F00\u542F\u591A\u57DF\u540D", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { classes: {

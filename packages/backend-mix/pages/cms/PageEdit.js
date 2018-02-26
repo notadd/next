@@ -82,7 +82,7 @@ class PageEdit extends React.Component {
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
                                     }, onChange: this.handleChange("type"), value: this.state.type })),
-                            React.createElement(FormControlLabel, { label: "开启", classes: {
+                            React.createElement(FormControlLabel, { label: "\u5F00\u542F", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, className: this.props.classes.formControlMargin, control: React.createElement(Switch, { classes: {

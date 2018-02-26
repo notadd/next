@@ -306,7 +306,7 @@ class App extends React.Component {
                                             paper: classes.popPaper
                                         }, onClose: this.handleClose },
                                         React.createElement(Search, { className: "search-icon" }),
-                                        React.createElement(Select, { name: "form-field-name", className: "searchSelect", value: selectValue, placeholder: "请输入关键词...", onChange: this.handleChangeSelect, options: selectOptions })),
+                                        React.createElement(Select, { name: "form-field-name", className: "searchSelect", value: selectValue, placeholder: "\u8BF7\u8F93\u5165\u5173\u952E\u8BCD...", onChange: this.handleChangeSelect, options: selectOptions })),
                                     React.createElement(BottomNavigation, { value: value, onChange: this.handleChange, showLabels: true, className: this.props.classes.root }, this.state.navs.map((item, index) => {
                                         return (React.createElement(BottomNavigationButton, { classes: {
                                                 root: this.props.classes.navBtn,

@@ -75,9 +75,9 @@ class Seo extends React.Component {
                                     React.createElement(FormControlLabel, { classes: {
                                             root: this.props.classes.FormControlRoot,
                                             label: this.props.classes.FormControlLabel
-                                        }, value: "Send Mail 函数", control: React.createElement(Radio, { classes: {
+                                        }, value: "Send Mail \u51FD\u6570", control: React.createElement(Radio, { classes: {
                                                 default: this.props.classes.radioDefault,
-                                            } }), label: "Send Mail 函数" }),
+                                            } }), label: "Send Mail \u51FD\u6570" }),
                                     React.createElement(FormControlLabel, { classes: {
                                             root: this.props.classes.FormControlRoot,
                                             label: this.props.classes.FormControlLabel
@@ -93,9 +93,9 @@ class Seo extends React.Component {
                                     React.createElement(FormControlLabel, { classes: {
                                             root: this.props.classes.FormControlRoot,
                                             label: this.props.classes.FormControlLabel
-                                        }, value: "不加密", control: React.createElement(Radio, { classes: {
+                                        }, value: "\u4E0D\u52A0\u5BC6", control: React.createElement(Radio, { classes: {
                                                 default: this.props.classes.radioDefault,
-                                            } }), label: "不加密" }),
+                                            } }), label: "\u4E0D\u52A0\u5BC6" }),
                                     React.createElement(FormControlLabel, { classes: {
                                             root: this.props.classes.FormControlRoot,
                                             label: this.props.classes.FormControlLabel

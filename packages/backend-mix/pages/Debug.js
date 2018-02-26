@@ -50,19 +50,19 @@ class Seo extends React.Component {
                 React.createElement("form", { className: this.props.classes.container, noValidate: true, autoComplete: "off" },
                     React.createElement(Grid, { container: true, spacing: 40 },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "缓存清除", classes: {
+                            React.createElement(FormControlLabel, { label: "\u7F13\u5B58\u6E05\u9664", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Button, { color: "primary", className: this.props.classes.smallBtn, raised: true, dense: true }, "\u6E05\u9664") }))),
                     React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: "-10px" } },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "Debug模式", classes: {
+                            React.createElement(FormControlLabel, { label: "Debug\u6A21\u5F0F", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { onChange: (event, checked) => this.setState({ debug: checked }), checked: this.state.debug }) }))),
                     React.createElement(Grid, { container: true, spacing: 40, style: { marginTop: "-10px" } },
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "测试模式", classes: {
+                            React.createElement(FormControlLabel, { label: "\u6D4B\u8BD5\u6A21\u5F0F", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { onChange: (event, checked) => this.setState({ test: checked }), checked: this.state.test }) }))),

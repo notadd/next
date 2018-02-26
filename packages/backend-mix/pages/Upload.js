@@ -76,7 +76,7 @@ class Upload extends React.Component {
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControl, { fullWidth: true },
                                 React.createElement(FormLabel, null, "\u56FE\u7247\u5904\u7406\u5F15\u64CE"),
-                                React.createElement(FormControlLabel, { value: "GD", control: React.createElement(Radio, null), label: "GD库" }))),
+                                React.createElement(FormControlLabel, { value: "GD", control: React.createElement(Radio, null), label: "GD\u5E93" }))),
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
                             React.createElement(FormControl, { fullWidth: true, required: true },
                                 React.createElement(InputLabel, { htmlFor: "name-simple", className: this.props.classes.formLabelFont }, "\u9644\u4EF6\u5927\u5C0F"),

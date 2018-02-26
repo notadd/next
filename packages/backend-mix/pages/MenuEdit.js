@@ -89,7 +89,7 @@ class MenuEdit extends React.Component {
                                         underline: this.props.classes.underline,
                                     }, onChange: this.handleChange("webName"), value: this.state.webName }))),
                         React.createElement(Grid, { item: true, xs: 12, sm: 6 },
-                            React.createElement(FormControlLabel, { label: "是否开启", classes: {
+                            React.createElement(FormControlLabel, { label: "\u662F\u5426\u5F00\u542F", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, control: React.createElement(Switch, { classes: {

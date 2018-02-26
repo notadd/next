@@ -159,7 +159,7 @@ class Home extends React.Component {
                                 React.createElement("a", { href: "https://github.com/Seevil", target: "_blank" }, "Intern")),
                             React.createElement("span", { className: "line" }, "/"),
                             React.createElement("span", null,
-                                React.createElement("a", { href: "https://blog.notadd.com/categories/月报/", target: "_blank" }, "\u6350\u8D60\u540D\u5355"))))),
+                                React.createElement("a", { href: "https://blog.notadd.com/categories/\u6708\u62A5/", target: "_blank" }, "\u6350\u8D60\u540D\u5355"))))),
                 React.createElement(Grid, { item: true, xs: 12, sm: 12, md: 4 },
                     React.createElement(Paper, { className: this.props.classes.rightPaper },
                         React.createElement("div", { className: "version-information", style: { paddingBottom: 25 } },

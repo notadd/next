@@ -97,7 +97,7 @@ class ArticleEdit extends React.Component {
                                 React.createElement(Input, { id: "name-simple", className: this.props.classes.formLabelFont, classes: {
                                         underline: this.props.classes.underline,
                                     }, onChange: this.handleChange("kind"), value: this.state.kind })),
-                            React.createElement(FormControlLabel, { label: "隐藏", classes: {
+                            React.createElement(FormControlLabel, { label: "\u9690\u85CF", classes: {
                                     root: this.props.classes.formLabel,
                                     label: this.props.classes.formLabel
                                 }, className: this.props.classes.formControlMargin, control: React.createElement(Switch, { classes: {
