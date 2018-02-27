@@ -25,6 +25,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -104,6 +105,46 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             message: '',
             list: [],
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getPagesLimit;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
     }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -210,14 +251,49 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                 }
             }
         }
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getPagesLimit;
+                this.setState({
+                    list: res.pages,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
+            }
         });
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { totalItems, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="cms">
                 <div className="top-action-module clearfix">
@@ -289,13 +365,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         />
                                     </TableCell>
                                     <TableCell className={this.props.classes.tableCell} numeric>页面名称</TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
                                     <TableCell numeric/>
                                 </TableRow>
                             </TableHead>
                             <TableBody className="table-body">
-                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                {list.map((n, index) => {
                                         return (
                                             <TableRow
                                                 hover
@@ -313,10 +389,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     />
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.name}
+                                                    {n.title}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {n.alias}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.classify}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/page/edit/' + n.id}>
@@ -357,7 +436,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={list.length / rowsPerPage}
+                            pageCount={totalItems / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
