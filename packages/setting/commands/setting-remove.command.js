@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class RemoveSettingCommand {
+class SettingRemoveCommand {
     constructor(key) {
         this.key = key;
     }
 }
-exports.RemoveSettingCommand = RemoveSettingCommand;
+exports.SettingRemoveCommand = SettingRemoveCommand;

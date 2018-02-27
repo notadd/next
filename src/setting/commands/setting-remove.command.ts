@@ -1,6 +1,6 @@
 import { ICommand } from "@nestjs/cqrs";
 
-export class RemoveSettingCommand implements ICommand {
+export class SettingRemoveCommand implements ICommand {
     constructor(
         public readonly key: string,
     ) {

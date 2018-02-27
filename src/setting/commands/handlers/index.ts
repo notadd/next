@@ -1,10 +1,10 @@
-import { UpdateSettingHandler } from "./update.setting.handler";
-import { RemoveSettingHandler } from "./remove.setting.handler";
+import { SettingUpdateHandler } from "./setting-update.handler";
+import { SettingRemoveHandler } from "./setting-remove.handler";
 
 /**
- * @type { [RemoveSettingHandler , UpdateSettingHandler] }
+ * @type { [SettingRemoveHandler , SettingUpdateHandler] }
  */
 export const CommandHandlers = [
-    RemoveSettingHandler,
-    UpdateSettingHandler,
+    SettingRemoveHandler,
+    SettingUpdateHandler,
 ];

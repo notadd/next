@@ -1,2 +1,2 @@
-import { UpdateSettingHandler } from "./update.setting.handler";
-export declare const CommandHandlers: (typeof UpdateSettingHandler)[];
+import { SettingUpdateHandler } from "./setting-update.handler";
+export declare const CommandHandlers: (typeof SettingUpdateHandler)[];

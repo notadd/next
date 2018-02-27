@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const update_setting_handler_1 = require("./update.setting.handler");
-const remove_setting_handler_1 = require("./remove.setting.handler");
+const setting_update_handler_1 = require("./setting-update.handler");
+const setting_remove_handler_1 = require("./setting-remove.handler");
 exports.CommandHandlers = [
-    remove_setting_handler_1.RemoveSettingHandler,
-    update_setting_handler_1.UpdateSettingHandler,
+    setting_remove_handler_1.SettingRemoveHandler,
+    setting_update_handler_1.SettingUpdateHandler,
 ];

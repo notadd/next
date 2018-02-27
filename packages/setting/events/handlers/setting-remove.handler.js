@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
-const setting_remove_event_1 = require("../setting.remove.event");
+const setting_remove_event_1 = require("../setting-remove.event");
 let SettingRemoveHandler = class SettingRemoveHandler {
     handle(event) {
     }

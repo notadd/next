@@ -15,15 +15,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
-const update_setting_command_1 = require("../update.setting.command");
-let UpdateSettingHandler = class UpdateSettingHandler {
+const setting_update_command_1 = require("../setting-update.command");
+let SettingUpdateHandler = class SettingUpdateHandler {
     execute(command, resolve) {
         return __awaiter(this, void 0, void 0, function* () {
             resolve();
         });
     }
 };
-UpdateSettingHandler = __decorate([
-    cqrs_1.CommandHandler(update_setting_command_1.UpdateSettingCommand)
-], UpdateSettingHandler);
-exports.UpdateSettingHandler = UpdateSettingHandler;
+SettingUpdateHandler = __decorate([
+    cqrs_1.CommandHandler(setting_update_command_1.SettingUpdateCommand)
+], SettingUpdateHandler);
+exports.SettingUpdateHandler = SettingUpdateHandler;

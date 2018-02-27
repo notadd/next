@@ -15,15 +15,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
-const remove_setting_command_1 = require("../remove.setting.command");
-let RemoveSettingHandler = class RemoveSettingHandler {
+const setting_remove_command_1 = require("../setting-remove.command");
+let SettingRemoveHandler = class SettingRemoveHandler {
     execute(command, resolve) {
         return __awaiter(this, void 0, void 0, function* () {
             resolve();
         });
     }
 };
-RemoveSettingHandler = __decorate([
-    cqrs_1.CommandHandler(remove_setting_command_1.RemoveSettingCommand)
-], RemoveSettingHandler);
-exports.RemoveSettingHandler = RemoveSettingHandler;
+SettingRemoveHandler = __decorate([
+    cqrs_1.CommandHandler(setting_remove_command_1.SettingRemoveCommand)
+], SettingRemoveHandler);
+exports.SettingRemoveHandler = SettingRemoveHandler;
