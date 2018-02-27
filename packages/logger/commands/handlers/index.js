@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const create_logger_handler_1 = require("./create.logger.handler");
-const list_logger_handler_1 = require("./list.logger.handler");
-const remove_logger_handler_1 = require("./remove.logger.handler");
+const logger_create_handler_1 = require("./logger-create.handler");
+const logger_list_handler_1 = require("./logger-list.handler");
+const logger_remove_handler_1 = require("./logger-remove.handler");
 exports.CommandHandlers = [
-    create_logger_handler_1.CreateLoggerHandler,
-    list_logger_handler_1.ListLoggerHandler,
-    remove_logger_handler_1.RemoveLoggerHandler,
+    logger_create_handler_1.LoggerCreateHandler,
+    logger_list_handler_1.LoggerListHandler,
+    logger_remove_handler_1.LoggerRemoveHandler,
 ];

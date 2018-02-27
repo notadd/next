@@ -1,2 +1,2 @@
-import { CreateLoggerHandler } from "./create.logger.handler";
-export declare const CommandHandlers: (typeof CreateLoggerHandler)[];
+import { LoggerCreateHandler } from "./logger-create.handler";
+export declare const CommandHandlers: (typeof LoggerCreateHandler)[];
