@@ -1,0 +1,16 @@
+export { AddonAfterEnableEvent } from "./addon-after-enable.event";
+export { AddonAfterInstallEvent } from "./addon-after-install.event";
+export { AddonAfterUninstallEvent } from "./addon-after-uninstall.event";
+export { AddonBeforeEnableEvent } from "./addon-before-enable.event";
+export { AddonBeforeInstallEvent } from "./addon-before-install.event";
+export { AddonBeforeUninstallEvent } from "./addon-before-uninstall.event";
+export { ExtensionAfterInstallEvent } from "./extension-after-install.event";
+export { ExtensionAfterUninstallEvent } from "./extension-after-uninstall.event";
+export { ExtensionBeforeInstallEvent } from "./extension-before-install.event";
+export { ExtensionBeforeUninstallEvent } from "./extension-before-uninstall.event";
+export { ModuleAfterEnableEvent } from "./module-after-enable.event";
+export { ModuleAfterInstallEvent } from "./module-after-install.event";
+export { ModuleAfterUninstallEvent } from "./module-after-uninstall.event";
+export { ModuleBeforeEnableEvent } from "./module-before-enable.event";
+export { ModuleBeforeInstallEvent } from "./module-before-install.event";
+export { ModuleBeforeUninstallEvent } from "./module-before-uninstall.event";
