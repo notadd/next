@@ -31,6 +31,7 @@ import Dialog, {
     DialogTitle,
 } from 'material-ui/Dialog';
 import * as classNames from 'classnames';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -95,6 +96,7 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
     openMessageTip: boolean,
     modalId: string,
@@ -119,65 +121,16 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.state = {
             right: false,
             checkedAll: false,
-            rowsPerPage: 3,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
             modalId: '',
             modalName: '',
             modalType: 0,
             modalNum: 0,
             openMessageTip: false,
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯1',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯2',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯3',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯4',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯5',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 6,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯4',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 7,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯5',
-                    time: '2017-12-01 13:20:59',
-                },
-            ],
+            list: [],
             message: '',
             type: '',
             isTop: '',
@@ -277,6 +230,46 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             ],
             current: 1,
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        hidden: true,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                });
+            }
+        });
     }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -409,7 +402,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     //     window.console.log(option);
     // };
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { currentPage, rowsPerPage, totalItems, list, modalType, openMessageTip, message } = this.state;
         return (
             <div
                 className={
@@ -497,10 +490,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.type}
+                                                    {n.classify}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.time}
+                                                    {n.publishedTime}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/article/edit/' + n.id}>
@@ -541,7 +534,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={list.length / rowsPerPage}
+                            pageCount={totalItems / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
