@@ -237,7 +237,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 query {
                     getArticlesLimit(getArticleAll: {
                         limitNum: 10,
-                        hidden: true,
                         pages: 1,
                     }){
                         pagination{
@@ -267,6 +266,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     list: data.articles,
                     totalItems: data.pagination.totalItems,
                     rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
                 });
             }
         });
@@ -389,9 +389,44 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 }
             }
         }
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: res.articles,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
+            }
         });
     };
     // displayRender = (labels: any) => {
@@ -402,7 +437,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     //     window.console.log(option);
     // };
     render() {
-        const { currentPage, rowsPerPage, totalItems, list, modalType, openMessageTip, message } = this.state;
+        const { rowsPerPage, totalItems, list, modalType, openMessageTip, message } = this.state;
         return (
             <div
                 className={
@@ -468,8 +503,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </TableRow>
                             </TableHead>
                             <TableBody className="table-body">
-                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                {list.map((n, index) => {
                                         return (
                                             <TableRow
                                                 hover

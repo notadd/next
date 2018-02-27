@@ -72,6 +72,7 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
     openMessageTip: boolean,
     openSearch: boolean,
@@ -89,8 +90,9 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         super(props, state);
         this.state = {
             checkedAll: false,
-            rowsPerPage: 2,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
             modalId: '',
             modalName: '',
@@ -100,38 +102,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             openSearch: false,
             searchValue: '',
             message: '',
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯1',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯2',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯3',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯4',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯5',
-                },
-            ],
+            list: [],
         };
     }
     handleChangeAll = (name: any) => (event: any) => {
