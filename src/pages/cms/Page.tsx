@@ -128,6 +128,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         pages{
                             id,
                             title,
+                            check,
                             alias,
                             classify,
                         }
@@ -146,20 +147,58 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
+    refreshData() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getPagesLimit;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
+    }
+    refreshPage() {
+        this.refreshData();
+    }
     handleChangeAll = (name: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = true;
-                }
+                this.state.list[i].check = true;
             }
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = false;
-                }
+                this.state.list[i].check = false;
             }
         }
         this.setState({
@@ -167,19 +206,15 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -195,24 +230,20 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
-                    this.setState({
-                        open: true,
-                        modalType: 1,
-                        modalNum: arr.length,
-                    });
-                } else {
-                    this.setState({
-                        openMessageTip: true,
-                        message: '请选择要删除的页面',
-                    });
-                }
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                });
+            } else {
+                this.setState({
+                    openMessageTip: true,
+                    message: '请选择要删除的页面',
+                });
             }
         }
     };
@@ -242,15 +273,6 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         window.console.log(this.state.searchValue);
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
-                }
-            }
-        }
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -272,6 +294,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         pages{
                             id,
                             title,
+                            check,
                             alias,
                             classify,
                         }
@@ -346,6 +369,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />

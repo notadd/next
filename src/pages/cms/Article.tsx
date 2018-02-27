@@ -252,6 +252,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         },
                         articles{
                             id,
+                            check,
                             name,
                             classify,
                             publishedTime,
@@ -272,19 +273,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     }
     handleChangeAll = (name: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = true;
-                }
+                this.state.list[i].check = true;
             }
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = false;
-                }
+                this.state.list[i].check = false;
             }
         }
         this.setState({
@@ -292,19 +287,15 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -320,24 +311,20 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
-                    this.setState({
-                        open: true,
-                        modalType: 1,
-                        modalNum: arr.length,
-                    });
-                } else {
-                    this.setState({
-                        openMessageTip: true,
-                        message: '请选择要删除的文章',
-                    });
-                }
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                });
+            } else {
+                this.setState({
+                    openMessageTip: true,
+                    message: '请选择要删除的文章',
+                });
             }
         }
     };
@@ -380,15 +367,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
-                }
-            }
-        }
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -409,6 +387,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         },
                         articles{
                             id,
+                            check,
                             name,
                             classify,
                             publishedTime,
