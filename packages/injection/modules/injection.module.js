@@ -5,11 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const configuration_page_1 = require("../pages/configuration.page");
+const pages_1 = require("../pages");
 const addon_module_1 = require("./addon.module");
 const dashboard_module_1 = require("./dashboard.module");
-const developer_dashboard_1 = require("../dashboards/developer.dashboard");
+const dashboards_1 = require("../dashboards");
 const extension_module_1 = require("./extension.module");
 const common_1 = require("@nestjs/common");
 const services_1 = require("../services");
@@ -17,14 +20,41 @@ const module_module_1 = require("./module.module");
 const page_module_1 = require("./page.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
+const core_1 = require("@nestjs/core");
+const cqrs_1 = require("@nestjs/cqrs");
+const handlers_1 = require("../events/handlers");
+const handlers_2 = require("../commands/handlers");
+const addon_sagas_1 = require("../sagas/addon.sagas");
+const extension_sagas_1 = require("../sagas/extension.sagas");
+const module_sagas_1 = require("../sagas/module.sagas");
 let InjectionModule = class InjectionModule {
+    constructor(addonSagas, command$, event$, extensionSagas, moduleRef, moduleSagas) {
+        this.addonSagas = addonSagas;
+        this.command$ = command$;
+        this.event$ = event$;
+        this.extensionSagas = extensionSagas;
+        this.moduleRef = moduleRef;
+        this.moduleSagas = moduleSagas;
+    }
+    onModuleInit() {
+        this.command$.register(handlers_2.CommandHandlers);
+        this.command$.setModuleRef(this.moduleRef);
+        this.event$.register(handlers_1.EventHandlers);
+        this.event$.setModuleRef(this.moduleRef);
+        this.event$.combineSagas([]);
+    }
 };
 InjectionModule = __decorate([
     common_1.Module({
         components: [
-            configuration_page_1.ConfigurationPage,
-            developer_dashboard_1.DeveloperDashboard,
+            ...handlers_2.CommandHandlers,
+            ...handlers_1.EventHandlers,
+            addon_sagas_1.AddonSagas,
+            pages_1.ConfigurationPage,
+            dashboards_1.DeveloperDashboard,
+            extension_sagas_1.ExtensionSagas,
             services_1.InjectionService,
+            module_sagas_1.ModuleSagas,
         ],
         exports: [
             services_1.InjectionService,
@@ -33,11 +63,18 @@ InjectionModule = __decorate([
             common_1.forwardRef(() => extension_module_1.ExtensionModule),
             common_1.forwardRef(() => module_module_1.ModuleModule),
             common_1.forwardRef(() => addon_module_1.AddonModule),
+            cqrs_1.CQRSModule,
             dashboard_module_1.DashboardModule,
             page_module_1.PageModule,
             setting_module_1.SettingModule,
             user_module_1.UserModule,
         ],
-    })
+    }),
+    __metadata("design:paramtypes", [addon_sagas_1.AddonSagas,
+        cqrs_1.CommandBus,
+        cqrs_1.EventBus,
+        extension_sagas_1.ExtensionSagas,
+        core_1.ModuleRef,
+        module_sagas_1.ModuleSagas])
 ], InjectionModule);
 exports.InjectionModule = InjectionModule;
