@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./../../",
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "DOM",
+            "ES2016",
+            "ES2017"
+        ],
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "noLib": false,
+        "noUnusedLocals": false,
+        "removeComments": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "target": "ES2015"
+    },
+    "include": [
+        "*.ts",
+        "**/*.ts"
+    ],
+    "exclude": [
+        "./**/*.spec.ts",
+        "./../../node_modules"
+    ]
+}

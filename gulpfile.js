@@ -13,6 +13,7 @@ const packages = {
     backend: ts.createProject('src/backend/tsconfig.json'),
     core: ts.createProject('src/core/tsconfig.json'),
     graphql: ts.createProject('src/graphql/tsconfig.json'),
+    i18n: ts.createProject('src/i18n/tsconfig.json'),
     injection: ts.createProject('src/injection/tsconfig.json'),
     logger: ts.createProject('src/logger/tsconfig.json'),
     rpc: ts.createProject('src/rpc/tsconfig.json'),
