@@ -84,12 +84,12 @@ type State = {
     modalNum: number,
     searchValue: string,
     list: Array<any>,
+    selection: Array<any>,
 };
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
-        this.refreshPage = this.refreshData.bind(this);
         this.state = {
             checkedAll: false,
             rowsPerPage: 0,
@@ -105,6 +105,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             searchValue: '',
             message: '',
             list: [],
+            selection: [],
         };
     }
     componentDidMount() {
@@ -148,7 +149,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
-    refreshData() {
+    refreshPage = () => {
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -186,13 +187,10 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
                     openMessageTip: true,
-                    message: '刷新数据成功',
+                    message: '刷新数据完成',
                 });
             }
         });
-    }
-    refreshPage() {
-        this.refreshData();
     }
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -226,7 +224,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleClickRemove = (pro: any) => {
         this.setState({
-            modalName: pro.name,
+            modalName: pro.title,
             modalId: pro.id,
             open: true,
             modalType: 0,
@@ -234,19 +232,26 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleBatchRemove = () => {
         const arr = new Array();
+        const arr1 = new Array();
+        const ids = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
                 this.setState({
                     open: true,
                     modalType: 1,
                     modalNum: arr.length,
+                    selection: ids,
                 });
             } else {
-                this.setState({
-                    openMessageTip: true,
-                    message: '请选择要删除的页面',
-                });
+                arr1.push(!this.state.list[i].check);
+                if (arr1.length === this.state.rowsPerPage) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的页面',
+                    });
+                }
             }
         }
     };
@@ -254,7 +259,61 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    PageCUD(deletePages:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.PageCUD;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除页面成功！',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });

@@ -21,6 +21,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -77,6 +78,7 @@ type State = {
     modalType: number,
     modalNum: number,
     list: Array<any>,
+    selection: Array<any>,
 };
 
 class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -95,7 +97,92 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             openMessageTip: false,
             message: '',
             list: [],
+            selection: [],
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
+    }
+    refreshPage = () => {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
     }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -117,23 +204,19 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             [name]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
+    handleClickReduction = (pro: any) => {
         window.console.log(pro);
     }
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -149,19 +232,22 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
+        const arr1 = new Array();
+        const ids = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
-                    this.setState({
-                        open: true,
-                        modalType: 1,
-                        modalNum: arr.length,
-                    });
-                } else {
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                this.setState({
+                    open: true,
+                    modalType: 1,
+                    modalNum: arr.length,
+                    selection: ids,
+                });
+            } else {
+                arr1.push(!this.state.list[i].check);
+                if (arr1.length === this.state.rowsPerPage) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',
@@ -174,21 +260,42 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(recycleDelete:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
-                }
-            }
-        }
         this.setState({
             currentPage: data.selected,
             checkedAll: false,
@@ -216,6 +323,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
@@ -271,7 +379,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                 <TableCell className="table-action-btn" numeric>
                                                     <IconButton
                                                         className={this.props.classes.btnEdit}
-                                                        onClick={() => this.handleClickEdit(n)}
+                                                        onClick={() => this.handleClickReduction(n)}
                                                         title="还原"
                                                     >
                                                         <ReplyAll />
@@ -333,7 +441,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除文章"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">

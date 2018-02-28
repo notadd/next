@@ -119,7 +119,6 @@ type State = {
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
-        this.refreshPage = this.refreshData.bind(this);
         this.state = {
             right: false,
             checkedAll: false,
@@ -275,7 +274,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
-    refreshData() {
+    refreshPage = () => {
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -313,13 +312,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
                     openMessageTip: true,
-                    message: '刷新数据成功',
+                    message: '刷新数据完成',
                 });
             }
         });
-    }
-    refreshPage() {
-        this.refreshData();
     }
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -411,8 +407,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     open: false,
                     message: '删除数据成功',
                 });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
             }
-            this.refreshData();
         });
     };
     handleCloseTip = () => {
