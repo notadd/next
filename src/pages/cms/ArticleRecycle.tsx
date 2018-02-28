@@ -68,6 +68,7 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
     openMessageTip: boolean,
     message: string,
@@ -83,8 +84,9 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         super(props, state);
         this.state = {
             checkedAll: false,
-            rowsPerPage: 2,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
             modalId: '',
             modalName: '',
@@ -92,38 +94,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             modalNum: 0,
             openMessageTip: false,
             message: '',
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯1',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯2',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯3',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯4',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯5',
-                },
-            ],
+            list: [],
         };
     }
     handleChangeAll = (name: any) => (event: any) => {
@@ -264,7 +235,8 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                         />
                                     </TableCell>
                                     <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>发布时间</TableCell>
                                     <TableCell numeric/>
                                 </TableRow>
                             </TableHead>
@@ -291,7 +263,10 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {n.classify}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.publishedTime}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <IconButton

@@ -394,7 +394,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         } else {
             ids = this.state.selection;
         }
-        window.console.log(ids);
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 mutation {
@@ -402,42 +401,18 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         id: [${ids}],
                         pages: ${this.state.currentPage + 1},
                         limitNum: 10,
-                    }){
-                        pagination{
-                            totalItems,
-                            currentPage,
-                            pageSize,
-                            totalPages,
-                            startPage,
-                            endPage,
-                            startIndex,
-                            endIndex,
-                            pages,
-                        },
-                        articles{
-                            id,
-                            check,
-                            name,
-                            classify,
-                            publishedTime,
-                        }
-                    }
+                    })
                 }
             `,
         }).then(response => {
             if (!response.data.errors) {
-                const data = response.data.data.ArticleCU;
                 this.setState({
-                    list: data.articles,
-                    totalItems: data.pagination.totalItems,
-                    rowsPerPage: data.pagination.pageSize,
-                    currentPage: data.pagination.currentPage - 1,
                     openMessageTip: true,
                     open: false,
                     message: '删除数据成功',
                 });
-                this.refreshData();
             }
+            this.refreshData();
         });
     };
     handleCloseTip = () => {
