@@ -71,11 +71,13 @@ type State = {
     currentPage: number,
     totalItems: number,
     open: boolean,
+    reduction: boolean,
     openMessageTip: boolean,
     message: string,
     modalId: string,
     modalName: string,
     modalType: number,
+    reductionType: number,
     modalNum: number,
     list: Array<any>,
     selection: Array<any>,
@@ -90,9 +92,11 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             currentPage: 0,
             totalItems: 0,
             open: false,
+            reduction: false,
             modalId: '',
             modalName: '',
             modalType: 0,
+            reductionType: 0,
             modalNum: 0,
             openMessageTip: false,
             message: '',
@@ -205,7 +209,12 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         });
     };
     handleClickReduction = (pro: any) => {
-        window.console.log(pro);
+        this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
+            reduction: true,
+            reductionType: 0,
+        });
     }
     handleChange = (pro: any) => (event: any) => {
         this.setState({
@@ -233,7 +242,6 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
     handleBatchRemove = () => {
         const arr = new Array();
-        const arr1 = new Array();
         const ids = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
@@ -246,8 +254,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                     selection: ids,
                 });
             } else {
-                arr1.push(!this.state.list[i].check);
-                if (arr1.length === this.state.rowsPerPage) {
+                if (ids.length === 0) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',
@@ -256,8 +263,35 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             }
         }
     };
-    handleClose = () => {
-        this.setState({ open: false });
+    handleBatchReduction = () => {
+        const arr = new Array();
+        const ids = new Array();
+        for (let i = 0; i < this.state.list.length; i += 1) {
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                this.setState({
+                    reduction: true,
+                    reductionType: 1,
+                    modalNum: arr.length,
+                    selection: ids,
+                });
+            } else {
+                if (ids.length === 0) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要还原的文章',
+                    });
+                }
+            }
+        }
+    };
+    handleClose = (pro: any) => {
+        if (pro === 1) {
+            this.setState({ open: false });
+        } else if (pro === 2) {
+            this.setState({ reduction: false });
+        }
     };
     handleSubmit = () => {
         let ids = new Array();
@@ -292,6 +326,39 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             }
         });
     };
+    handleSubmitReduc = () => {
+        let ids = new Array();
+        if (this.state.reductionType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(reductionArticle:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    reduction: false,
+                    message: '还原数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
+    }
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
@@ -303,7 +370,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, reductionType, openMessageTip, message } = this.state;
         return (
             <div className="cms">
                 <div className="top-action-module clearfix">
@@ -314,6 +381,13 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         <h4 className="title">回收站</h4>
                     </div>
                     <div className="btn-group pull-right">
+                        <IconButton
+                            className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchReduction}
+                            title="还原"
+                        >
+                            <ReplyAll />
+                        </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
@@ -434,7 +508,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={() => this.handleClose(1)}
                         >
                             <ClearIcon />
                         </IconButton>
@@ -445,10 +519,40 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">
-                        <Button onClick={this.handleClose}>
+                        <Button onClick={() => this.handleClose(1)}>
                             取消
                         </Button>
                         <Button onClick={this.handleSubmit} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={this.state.reduction}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content-action"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={() => this.handleClose(2)}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        {
+                            reductionType === 0 ? <h4>确定要还原文章"{this.state.modalName}"吗?</h4> :
+                                <h4>确定要还原这"{this.state.modalNum}"个文章吗?</h4>}
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={() => this.handleClose(2)}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleSubmitReduc} autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>

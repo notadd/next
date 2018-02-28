@@ -357,7 +357,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleBatchRemove = () => {
         const arr = new Array();
-        const arr1 = new Array();
         const ids = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
@@ -370,8 +369,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     selection: ids,
                 });
             } else {
-                arr1.push(!this.state.list[i].check);
-                if (arr1.length === this.state.rowsPerPage) {
+                if (ids.length === 0) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',
@@ -657,7 +655,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除文章"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
 
                     </DialogContent>
