@@ -363,9 +363,45 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: res.articles,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
+            }
         });
     };
 

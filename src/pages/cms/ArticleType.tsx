@@ -16,6 +16,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     root: {
@@ -117,6 +118,28 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 },
             ],
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        classifyName,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        childrens,
+                    }
+                }
+            `,
+        }).then(response => {
+            window.console.log(response);
+        });
     }
     handleClose = () => {
         this.setState({ open: false });
