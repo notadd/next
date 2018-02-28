@@ -10,6 +10,7 @@ const authentication_1 = require("@notadd/authentication");
 const backend_1 = require("@notadd/backend");
 const injection_1 = require("@notadd/injection");
 const modules_1 = require("@notadd/graphql/modules");
+const modules_2 = require("@notadd/internationalization/modules");
 const logger_1 = require("@notadd/logger");
 const common_1 = require("@nestjs/common");
 const setting_1 = require("@notadd/setting");
@@ -29,6 +30,7 @@ ApplicationModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot(),
             modules_1.GraphqlModule,
             websocket_1.WebsocketModule,
+            modules_2.InternationalizationModule,
             logger_1.LoggerModule,
             setting_1.SettingModule,
             injection_1.InjectionModule,

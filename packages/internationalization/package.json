@@ -1,5 +1,5 @@
 {
-    "name": "@notadd/i18n",
+    "name": "@notadd/internationalization",
     "version": "2.2.0",
     "description": "Notadd Workflow Package.",
     "main": "main.js",
