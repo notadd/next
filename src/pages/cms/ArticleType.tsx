@@ -104,6 +104,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 item.title = item.classifyName;
                 item.id = item.id;
                 const children = item.childrens;
+                window.console.log(children);
                 if (item.childrens !== null) {
                     item.children = Object.keys(children).map(i => {
                         const sub = children[i];

@@ -117,11 +117,11 @@ const styles = {
 
 type State = {
     tab: number,
-    typeName: string,
-    otherName: string,
+    classifyName: string,
+    classifyAlias: string,
     color: string,
-    description: string,
-    link: string,
+    describe: string,
+    chainUrl: string,
     pageType: string,
     types: Array<any>,
     type: string,
@@ -147,11 +147,11 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
         }
         this.state = {
             tab: 0,
-            typeName: 'NotAdd',
-            otherName: 'news',
+            classifyName: '',
+            classifyAlias: '',
             color: '',
-            description: '',
-            link: 'www.baidu.com',
+            describe: '',
+            chainUrl: '',
             pageType: type,
             type: '',
             types: [
@@ -292,8 +292,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                            onChange={this.handleChangeInput('typeName')}
-                                            value={this.state.typeName}
+                                            onChange={this.handleChangeInput('classifyName')}
+                                            value={this.state.classifyName}
                                         />
                                     </FormControl>
                                 </Grid>
@@ -310,8 +310,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                            onChange={this.handleChangeInput('otherName')}
-                                            value={this.state.otherName}
+                                            onChange={this.handleChangeInput('classifyAlias')}
+                                            value={this.state.classifyAlias}
                                         />
                                     </FormControl>
                                 </Grid>
@@ -330,8 +330,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                            onChange={this.handleChangeInput('link')}
-                                            value={this.state.link}
+                                            onChange={this.handleChangeInput('chainUrl')}
+                                            value={this.state.chainUrl}
                                         />
                                     </FormControl>
                                 </Grid>
@@ -348,8 +348,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                            onChange={this.handleChangeInput('description')}
-                                            value={this.state.description}
+                                            onChange={this.handleChangeInput('describe')}
+                                            value={this.state.describe}
                                         />
                                     </FormControl>
                                 </Grid>
