@@ -7,16 +7,13 @@ import { NestContainer } from "@nestjs/core/injector/container";
 export declare class NotaddApplication extends NestApplicationContext implements INestApplication {
     private readonly express;
     private isInitialized;
-    private readonly addonsContainer;
     private readonly config;
-    private readonly extensionsContainer;
     private readonly httpServer;
     private readonly logger;
     private readonly microservices;
     private readonly middlewaresModule;
     private readonly middlewaresContainer;
     private readonly microservicesModule;
-    private readonly modulesContainer;
     private readonly routesResolver;
     private readonly socketModule;
     constructor(container: NestContainer, express: any);

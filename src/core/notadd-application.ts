@@ -2,7 +2,6 @@ import * as http from 'http';
 import * as optional from 'optional';
 import * as bodyParser from 'body-parser';
 import iterate from 'iterare';
-import { AddonsContainer } from "./containers/addons.container";
 import { ApplicationConfig } from "@nestjs/core/application-config";
 import {
     CanActivate,
@@ -16,7 +15,6 @@ import {
     WebSocketAdapter,
 } from '@nestjs/common';
 import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
-import { ExtensionsContainer } from "./containers/extensions.container";
 import { InjectionMetadata } from "@notadd/injection/metadatas/injection.metadata";
 import { Logger } from '@nestjs/common/services/logger.service';
 import {
@@ -29,11 +27,10 @@ import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/excep
 import { MiddlewaresContainer } from "@nestjs/core/middlewares/container";
 import { MiddlewaresModule } from "@nestjs/core/middlewares/middlewares-module";
 import { Module } from "@nestjs/core/injector/module";
-import { ModulesContainer } from "./containers/modules.container";
 import { NestApplicationContext } from "@nestjs/core";
 import { NestContainer } from "@nestjs/core/injector/container";
-import { OnModuleInitWithContainer } from "@notadd/core/interfaces/on-module-init-with-container.interface";
-import { OnModuleInitWithInjection } from "@notadd/core/interfaces/on-module-init-with-injection.interface";
+import { OnModuleInitWithContainer } from "./interfaces";
+import { OnModuleInitWithInjection } from "./interfaces";
 import { Resolver } from "@nestjs/core/router/interfaces/resolver.interface";
 import { RoutesResolver } from "@nestjs/core/router/routes-resolver";
 
@@ -45,11 +42,7 @@ const { IoAdapter } = optional('@nestjs/websockets/adapters/io-adapter') || ({} 
 export class NotaddApplication extends NestApplicationContext implements INestApplication {
     private isInitialized = false;
 
-    private readonly addonsContainer = new AddonsContainer();
-
     private readonly config: ApplicationConfig;
-
-    private readonly extensionsContainer = new ExtensionsContainer();
 
     private readonly httpServer: http.Server;
 
@@ -62,8 +55,6 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
     private readonly middlewaresContainer = new MiddlewaresContainer();
 
     private readonly microservicesModule = MicroservicesModule ? new MicroservicesModule() : null;
-
-    private readonly modulesContainer = new ModulesContainer();
 
     private readonly routesResolver: Resolver;
 
@@ -274,9 +265,6 @@ export class NotaddApplication extends NestApplicationContext implements INestAp
             });
             key ++;
         }
-        this.extensionsContainer.build(injections, this.container);
-        this.modulesContainer.build(injections, this.container);
-        this.addonsContainer.build(injections, this.container);
     }
 
     private callModuleInitHook(module: Module) {
