@@ -14,6 +14,7 @@
         "module": "commonjs",
         "noImplicitAny": false,
         "noLib": false,
+        "noStrictGenericChecks": true,
         "noUnusedLocals": false,
         "removeComments": true,
         "strict": true,
