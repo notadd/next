@@ -7,12 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const internationalization_resolvers_1 = require("../resolvers/internationalization.resolvers");
 const services_1 = require("../services");
 let InternationalizationModule = class InternationalizationModule {
 };
 InternationalizationModule = __decorate([
     common_1.Module({
         components: [
+            internationalization_resolvers_1.InternationalizationResolvers,
             services_1.InternationalizationService,
         ],
     })

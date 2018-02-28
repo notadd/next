@@ -1,0 +1,6 @@
+type Query {
+    # get all phrases
+    getPhrases: Json,
+    # translate a phrase to a string
+    translate(phrase: String, variables: Json): String,
+}

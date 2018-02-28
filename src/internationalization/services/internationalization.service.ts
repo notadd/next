@@ -9,6 +9,10 @@ export class InternationalizationService {
         this.polyglot = new Polyglot();
     }
 
+    public getPhrases() {
+        return this.polyglot.phrases;
+    }
+
     public setLocale(locale: string): void {
         if (this.polyglot.locale() !== locale) {
             this.polyglot.locale(locale);

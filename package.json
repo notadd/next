@@ -32,6 +32,7 @@
         "@nestjs/common": "^4.5.0",
         "@nestjs/core": "^4.5.0",
         "@nestjs/cqrs": "^4.0.0",
+        "@nestjs/graphql": "^2.0.0",
         "@nestjs/microservices": "^4.3.0",
         "@nestjs/swagger": "^1.1.2",
         "@nestjs/testing": "^4.3.0",

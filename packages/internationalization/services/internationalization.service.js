@@ -15,6 +15,9 @@ let InternationalizationService = class InternationalizationService {
     constructor() {
         this.polyglot = new Polyglot();
     }
+    getPhrases() {
+        return this.polyglot.phrases;
+    }
     setLocale(locale) {
         if (this.polyglot.locale() !== locale) {
             this.polyglot.locale(locale);
