@@ -89,6 +89,7 @@ type State = {
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
+        this.refreshPage = this.refreshData.bind(this);
         this.state = {
             checkedAll: false,
             rowsPerPage: 0,
@@ -153,7 +154,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                 query {
                     getPagesLimit(getAllPage: {
                         limitNum: 10,
-                        pages: 1,
+                        pages: ${this.state.currentPage + 1},
                     }){
                         pagination{
                             totalItems,
@@ -184,6 +185,8 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     totalItems: data.pagination.totalItems,
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据成功',
                 });
             }
         });

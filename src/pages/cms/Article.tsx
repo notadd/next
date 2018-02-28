@@ -104,6 +104,7 @@ type State = {
     modalType: number,
     modalNum: number,
     message: string,
+    selection: Array<any>,
     list: Array<any>,
     type: string,
     keyword: string,
@@ -118,6 +119,7 @@ type State = {
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor(props: any, state: any) {
         super(props, state);
+        this.refreshPage = this.refreshData.bind(this);
         this.state = {
             right: false,
             checkedAll: false,
@@ -129,6 +131,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             modalName: '',
             modalType: 0,
             modalNum: 0,
+            selection: [],
             openMessageTip: false,
             list: [],
             message: '',
@@ -272,6 +275,52 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
+    refreshData() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据成功',
+                });
+            }
+        });
+    }
+    refreshPage() {
+        this.refreshData();
+    }
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
@@ -312,19 +361,26 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleBatchRemove = () => {
         const arr = new Array();
+        const arr1 = new Array();
+        const ids = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
                 this.setState({
                     open: true,
                     modalType: 1,
                     modalNum: arr.length,
+                    selection: ids,
                 });
             } else {
-                this.setState({
-                    openMessageTip: true,
-                    message: '请选择要删除的文章',
-                });
+                arr1.push(!this.state.list[i].check);
+                if (arr1.length === this.state.rowsPerPage) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的文章',
+                    });
+                }
             }
         }
     };
@@ -332,7 +388,57 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        window.console.log(ids);
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(deleteById:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.ArticleCU;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除数据成功',
+                });
+                this.refreshData();
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
@@ -457,6 +563,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
