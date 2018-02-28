@@ -10,6 +10,7 @@ import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { StyleRules } from 'material-ui/styles';
+import axios from 'axios';
 
 const styles = {
     root: {
@@ -47,9 +48,9 @@ const styles = {
     },
 };
 type State = {
-    name: string,
-    otherName: string,
-    type: string,
+    title: string,
+    alias: string,
+    classify: string,
     types: Array<any>,
     pageType: string,
     isOpen: boolean,
@@ -87,9 +88,9 @@ class PageEdit extends React.Component<Props, State> {
                     type: '新闻3',
                 },
             ],
-            name: 'NotAdd',
-            otherName: '新闻资讯',
-            type: '',
+            title: '',
+            alias: '',
+            classify: '',
             isOpen: false,
             pageType: type,
             num: 0,
@@ -123,7 +124,25 @@ class PageEdit extends React.Component<Props, State> {
         });
     };
     handelSubmit = () => {
-        window.console.log(this.state.list);
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    PageCUD(createPages: {
+                        title: ${this.state.title},
+                        alias: '',
+                        content: '',
+                        classify: '',
+                        classifyId: 1,
+                        limitNum: 10,
+                        pages: 1,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                window.console.log(response);
+            }
+        });
     };
     handleRemoveEditor = (index: number) => {
         const arr = Object.assign([], this.state.list);
@@ -174,8 +193,8 @@ class PageEdit extends React.Component<Props, State> {
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('name')}
-                                        value={this.state.name}
+                                        onChange={this.handleChange('title')}
+                                        value={this.state.title}
                                     />
                                 </FormControl>
                                 {
@@ -214,8 +233,8 @@ class PageEdit extends React.Component<Props, State> {
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('otherName')}
-                                        value={this.state.otherName}
+                                        onChange={this.handleChange('alias')}
+                                        value={this.state.alias}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -230,8 +249,8 @@ class PageEdit extends React.Component<Props, State> {
                                     </InputLabel>
                                     <Select
                                         className={this.props.classes.formLabelFont}
-                                        value={this.state.type}
-                                        onChange={this.handleChange('type')}
+                                        value={this.state.classify}
+                                        onChange={this.handleChange('classify')}
                                         input={<Input name="type" id="type-simple" />}
                                     >
                                         {

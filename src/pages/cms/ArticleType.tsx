@@ -55,68 +55,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
             modalName: '产品中心',
             modalId: '',
             nodeLength: 0,
-            treeData: [
-                {
-                    id: 1,
-                    title: '产品中心',
-                    children: [],
-                },
-                {
-                    expanded: true,
-                    id: 2,
-                    title: '新闻资讯',
-                    children: [
-                        {
-                            id: 21,
-                            title: '媒体报道',
-                            children: [],
-                        },
-                        {
-                            id: 22,
-                            title: '行业资讯',
-                            children: [
-                                {
-                                    id: 221,
-                                    title: '资讯1-1',
-                                    children: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: 23,
-                            title: '企业公告',
-                            children: [],
-                        },
-                    ],
-                },
-                {
-                    id: 3,
-                    title: '视频中心',
-                    children: [
-                        {
-                            id: 31,
-                            title: '新闻XXX',
-                            children: [],
-                        },
-                    ],
-                },
-                {
-                    id: 4,
-                    title: '其他资讯',
-                    children: [
-                        {
-                            id: 41,
-                            title: '0109资讯1-1',
-                            children: [],
-                        },
-                        {
-                            id: 42,
-                            title: '0109资讯1-2',
-                            children: [],
-                        },
-                    ],
-                },
-            ],
+            treeData: [],
         };
     }
     componentDidMount() {
@@ -133,12 +72,76 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         describe,
                         color,
                         groupId,
-                        childrens,
+                        childrens{
+                            id,
+                            classifyName,
+                            childrens{
+                                id,
+                                classifyName,
+                                childrens{
+                                    id,
+                                    classifyName,
+                                    childrens{
+                                        id,
+                                        classifyName,
+                                        childrens{
+                                            id,
+                                            classifyName,
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             `,
         }).then(response => {
-            window.console.log(response);
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].childrens;
+            window.console.log(structures);
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.title = item.classifyName;
+                item.id = item.id;
+                const children = item.childrens;
+                if (item.childrens !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.title = sub.classifyName;
+                        sub.id = sub.id;
+                        const childs = sub.childrens;
+                        if (sub.childrens !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.title = su.classifyName;
+                                su.id = su.id;
+                                const childs2 = su.childrens;
+                                if (su.childrens !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.title = fours.classifyName;
+                                        fours.id = fours.id;
+                                        if (fours.childrens !== null) {
+                                            const childs3 = fours.childrens;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.title = five.classifyName;
+                                                five.id = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
+            });
+            this.setState({ treeData: arr });
         });
     }
     handleClose = () => {
