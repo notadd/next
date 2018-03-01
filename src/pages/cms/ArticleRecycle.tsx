@@ -21,6 +21,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -68,14 +69,18 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
+    reduction: boolean,
     openMessageTip: boolean,
     message: string,
     modalId: string,
     modalName: string,
     modalType: number,
+    reductionType: number,
     modalNum: number,
     list: Array<any>,
+    selection: Array<any>,
 };
 
 class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -83,48 +88,105 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         super(props, state);
         this.state = {
             checkedAll: false,
-            rowsPerPage: 2,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
+            reduction: false,
             modalId: '',
             modalName: '',
             modalType: 0,
+            reductionType: 0,
             modalNum: 0,
             openMessageTip: false,
             message: '',
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯1',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯2',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯3',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯4',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯5',
-                },
-            ],
+            list: [],
+            selection: [],
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
+    }
+    refreshPage = () => {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
     }
     handleChangeAll = (name: any) => (event: any) => {
         const rowPage = this.state.rowsPerPage;
@@ -146,23 +208,24 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             [name]: event.target.checked,
         });
     };
-    handleClickEdit = (pro: any) => {
-        window.console.log(pro);
+    handleClickReduction = (pro: any) => {
+        this.setState({
+            modalName: pro.name,
+            modalId: pro.id,
+            reduction: true,
+            reductionType: 0,
+        });
     }
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -178,19 +241,24 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
                     this.setState({
                         open: true,
                         modalType: 1,
                         modalNum: arr.length,
+                        selection: ids,
                     });
-                } else {
+                }
+            } else {
+                newIds.push(this.state.list[i].id);
+                if (ids.length <= 0 && newIds.length === this.state.list.length) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',
@@ -199,33 +267,154 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
             }
         }
     };
-    handleClose = () => {
-        this.setState({ open: false });
+    handleBatchReduction = () => {
+        const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
+        for (let i = 0; i < this.state.list.length; i += 1) {
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
+                    this.setState({
+                        reduction: true,
+                        reductionType: 1,
+                        modalNum: arr.length,
+                        selection: ids,
+                    });
+                }
+            } else {
+                newIds.push(this.state.list[i].id);
+                if (ids.length === 0 && newIds.length === this.state.list.length) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要还原的文章',
+                    });
+                }
+            }
+        }
+    };
+    handleClose = (pro: any) => {
+        if (pro === 1) {
+            this.setState({ open: false });
+        } else if (pro === 2) {
+            this.setState({ reduction: false });
+        }
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(recycleDelete:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
+    handleSubmitReduc = () => {
+        let ids = new Array();
+        if (this.state.reductionType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(reductionArticle:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    reduction: false,
+                    message: '还原数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
+    }
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(recycleFind: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
                 }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: res.articles,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
             }
-        }
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
         });
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { currentPage, rowsPerPage, list, modalType, reductionType, openMessageTip, message } = this.state;
         return (
             <div className="cms">
                 <div className="top-action-module clearfix">
@@ -238,6 +427,13 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                     <div className="btn-group pull-right">
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.handleBatchReduction}
+                            title="还原"
+                        >
+                            <ReplyAll />
+                        </IconButton>
+                        <IconButton
+                            className={this.props.classes.menuBtn}
                             onClick={this.handleBatchRemove}
                             title="删除"
                         >
@@ -245,6 +441,7 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         </IconButton>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
@@ -264,7 +461,8 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                         />
                                     </TableCell>
                                     <TableCell className={this.props.classes.tableCell} numeric>文章名称</TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>发布时间</TableCell>
                                     <TableCell numeric/>
                                 </TableRow>
                             </TableHead>
@@ -291,12 +489,15 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {n.classify}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.publishedTime}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <IconButton
                                                         className={this.props.classes.btnEdit}
-                                                        onClick={() => this.handleClickEdit(n)}
+                                                        onClick={() => this.handleClickReduction(n)}
                                                         title="还原"
                                                     >
                                                         <ReplyAll />
@@ -351,21 +552,51 @@ class ArticleRecycle extends React.Component<WithStyles<keyof typeof styles>, St
                         className="dialog-title"
                     >
                         <IconButton
-                            onClick={this.handleClose}
+                            onClick={() => this.handleClose(1)}
                         >
                             <ClearIcon />
                         </IconButton>
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除文章"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">
-                        <Button onClick={this.handleClose}>
+                        <Button onClick={() => this.handleClose(1)}>
                             取消
                         </Button>
                         <Button onClick={this.handleSubmit} autoFocus>
+                            确认提交
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={this.state.reduction}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    className="dialog-content-action"
+                >
+                    <DialogTitle
+                        id="alert-dialog-title"
+                        className="dialog-title"
+                    >
+                        <IconButton
+                            onClick={() => this.handleClose(2)}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent className="dialog-content">
+                        {
+                            reductionType === 0 ? <h4>确定要还原文章"{this.state.modalName}"吗?</h4> :
+                                <h4>确定要还原这"{this.state.modalNum}"个文章吗?</h4>}
+                    </DialogContent>
+                    <DialogActions className="dialog-actions">
+                        <Button onClick={() => this.handleClose(2)}>
+                            取消
+                        </Button>
+                        <Button onClick={this.handleSubmitReduc} autoFocus>
                             确认提交
                         </Button>
                     </DialogActions>

@@ -104,6 +104,7 @@ type State = {
     modalType: number,
     modalNum: number,
     message: string,
+    selection: Array<any>,
     list: Array<any>,
     type: string,
     keyword: string,
@@ -129,6 +130,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             modalName: '',
             modalType: 0,
             modalNum: 0,
+            selection: [],
             openMessageTip: false,
             list: [],
             message: '',
@@ -272,6 +274,49 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
+    refreshPage = () => {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
+    }
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
@@ -312,19 +357,28 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleBatchRemove = () => {
         const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
-                this.setState({
-                    open: true,
-                    modalType: 1,
-                    modalNum: arr.length,
-                });
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
+                    this.setState({
+                        open: true,
+                        modalType: 1,
+                        modalNum: arr.length,
+                        selection: ids,
+                    });
+                }
             } else {
-                this.setState({
-                    openMessageTip: true,
-                    message: '请选择要删除的文章',
-                });
+                newIds.push(this.state.list[i].id);
+                if (ids.length === 0 && newIds.length === this.state.list.length) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的文章',
+                    });
+                }
             }
         }
     };
@@ -332,7 +386,37 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(deleteById:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
@@ -457,6 +541,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
@@ -574,7 +659,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除文章"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
 
                     </DialogContent>

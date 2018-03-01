@@ -16,6 +16,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     root: {
@@ -54,69 +55,50 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
             modalName: '产品中心',
             modalId: '',
             nodeLength: 0,
-            treeData: [
-                {
-                    id: 1,
-                    title: '产品中心',
-                    children: [],
-                },
-                {
-                    expanded: true,
-                    id: 2,
-                    title: '新闻资讯',
-                    children: [
-                        {
-                            id: 21,
-                            title: '媒体报道',
-                            children: [],
-                        },
-                        {
-                            id: 22,
-                            title: '行业资讯',
-                            children: [
-                                {
-                                    id: 221,
-                                    title: '资讯1-1',
-                                    children: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: 23,
-                            title: '企业公告',
-                            children: [],
-                        },
-                    ],
-                },
-                {
-                    id: 3,
-                    title: '视频中心',
-                    children: [
-                        {
-                            id: 31,
-                            title: '新闻XXX',
-                            children: [],
-                        },
-                    ],
-                },
-                {
-                    id: 4,
-                    title: '其他资讯',
-                    children: [
-                        {
-                            id: 41,
-                            title: '0109资讯1-1',
-                            children: [],
-                        },
-                        {
-                            id: 42,
-                            title: '0109资讯1-2',
-                            children: [],
-                        },
-                    ],
-                },
-            ],
+            treeData: [],
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            const structures = response.data.data.getClassifys[0].children;
+            this.setState({ treeData: structures });
+        });
     }
     handleClose = () => {
         this.setState({ open: false });

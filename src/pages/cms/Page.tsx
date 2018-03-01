@@ -84,6 +84,7 @@ type State = {
     modalNum: number,
     searchValue: string,
     list: Array<any>,
+    selection: Array<any>,
 };
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -104,6 +105,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             searchValue: '',
             message: '',
             list: [],
+            selection: [],
         };
     }
     componentDidMount() {
@@ -147,13 +149,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     }
-    refreshData() {
+    refreshPage = () => {
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
                     getPagesLimit(getAllPage: {
                         limitNum: 10,
-                        pages: 1,
+                        pages: ${this.state.currentPage + 1},
                     }){
                         pagination{
                             totalItems,
@@ -184,12 +186,11 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     totalItems: data.pagination.totalItems,
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
                 });
             }
         });
-    }
-    refreshPage() {
-        this.refreshData();
     }
     handleChangeAll = (name: any) => (event: any) => {
         if (event.target.checked) {
@@ -223,7 +224,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleClickRemove = (pro: any) => {
         this.setState({
-            modalName: pro.name,
+            modalName: pro.title,
             modalId: pro.id,
             open: true,
             modalType: 0,
@@ -231,19 +232,31 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleBatchRemove = () => {
         const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
-                this.setState({
-                    open: true,
-                    modalType: 1,
-                    modalNum: arr.length,
-                });
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
+                    this.setState({
+                        open: true,
+                        modalType: 1,
+                        modalNum: arr.length,
+                        selection: ids,
+                    });
+                }
             } else {
-                this.setState({
-                    openMessageTip: true,
-                    message: '请选择要删除的页面',
-                });
+                window.console.log(this.state.list);
+                window.console.log(ids.length);
+                window.console.log(this.state.rowsPerPage);
+                newIds.push(this.state.list[i].id);
+                if (ids.length <= 0 && newIds.length === this.state.list.length) {
+                    this.setState({
+                        openMessageTip: true,
+                        message: '请选择要删除的页面',
+                    });
+                }
             }
         }
     };
@@ -251,7 +264,37 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    PageCUD(deletePages:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除页面成功！',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
@@ -487,7 +530,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除页面名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除页面"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个页面吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">
