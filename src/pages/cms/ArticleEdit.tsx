@@ -75,7 +75,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         }
         this.state = {
             webName: 'NotAdd',
-            img: 'LOGO.png',
+            img: '',
             type: '',
             topType: '',
             types: [
