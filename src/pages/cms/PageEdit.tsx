@@ -56,7 +56,7 @@ type State = {
     pageType: string,
     pageId: number,
     list: Array<any>,
-    num: number,
+    number: number,
     content: any,
     ready: any,
     loading: boolean,
@@ -87,12 +87,12 @@ class PageEdit extends React.Component<Props, State> {
             classifyId: 0,
             pageType: type,
             pageId: Number(proId),
-            num: 0,
+            number: 0,
             content: '',
             ready: '',
             list: [
                 {
-                    id: 0,
+                    num: 0,
                     content: '',
                     path: 'neditor/',
                 },
@@ -194,13 +194,13 @@ class PageEdit extends React.Component<Props, State> {
     handleAddEditor = () => {
         const arr = Object.assign([], this.state.list);
         arr.push({
-            id: this.state.num + 1,
+            num: this.state.number + 1,
             content: '',
             path: 'neditor/',
         });
         this.setState({
             list: arr,
-            num: this.state.num + 1,
+            number: this.state.number + 1,
         });
     };
     handelSubmit = () => {

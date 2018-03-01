@@ -123,7 +123,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             pageType: type,
             path: 'neditor/',
             editor: {
-                id: 0,
+                num: 0,
                 content: '',
             },
         };
