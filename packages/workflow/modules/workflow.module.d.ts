@@ -1,6 +1,6 @@
 import { MiddlewaresConsumer } from "@nestjs/common";
+import { WorkflowExplorerService } from "../services";
 import { WorkflowService } from "../services";
-import { WorkflowExplorerService } from "../services/workflow-explorer.service";
 export declare class WorkflowModule {
     private readonly workflowExplorerService;
     private readonly workflowService;

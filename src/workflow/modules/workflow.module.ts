@@ -1,8 +1,8 @@
 import { MiddlewaresConsumer, Module } from "@nestjs/common";
-import { WorkflowService } from "../services";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { WorkflowExplorerService } from "../services/workflow-explorer.service";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
+import { WorkflowExplorerService } from "../services";
+import { WorkflowService } from "../services";
 
 @Module({
     components: [
