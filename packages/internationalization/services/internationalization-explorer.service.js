@@ -10,15 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const constants_1 = require("../constants");
 let InternationalizationExplorerService = class InternationalizationExplorerService {
     constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
+        this.metadata = constants_1.PHRASE_DEFINITION;
     }
     explore() {
-        return [];
+        const components = [...this.modulesContainer.values()].map(module => module.components);
+        return this.flatMap(components, instance => this.filterPhrases(instance));
+    }
+    extractMetadata(instance, prototype, methodName) {
+        const callback = prototype[methodName];
+        return {
+            name: Reflect.getMetadata(this.metadata, callback),
+            methodName,
+        };
+    }
+    filterPhrases(instance) {
+        const prototype = Object.getPrototypeOf(instance);
+        const components = this.metadataScanner.scanFromPrototype(instance, prototype, name => this.extractMetadata(instance, prototype, name));
+        return components
+            .filter(dashboard => {
+            return dashboard.name && dashboard.methodName;
+        })
+            .map(dashboard => {
+            const callback = instance[dashboard.methodName].bind(instance);
+            return Object.assign({ callback }, dashboard);
+        });
+    }
+    flatMap(components, callback) {
+        return lodash_1.flattenDeep(components.map(component => [...component.values()].map(({ instance }) => callback(instance))));
     }
 };
 InternationalizationExplorerService = __decorate([

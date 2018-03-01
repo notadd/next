@@ -8,6 +8,8 @@ import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 
 @Component()
 export class DashboardExplorerService {
+    private metadata: string = DASHBOARD_NAME_METADATA;
+
     /**
      * @param { ModulesContainer } modulesContainer
      * @param { MetadataScanner } metadataScanner
@@ -37,7 +39,7 @@ export class DashboardExplorerService {
         const callback = prototype[ methodName ];
 
         return {
-            name: Reflect.getMetadata(DASHBOARD_NAME_METADATA, callback),
+            name: Reflect.getMetadata(this.metadata, callback),
             methodName,
         }
     }

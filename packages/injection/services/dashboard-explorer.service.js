@@ -10,16 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const dashboard_constants_1 = require("../constants/dashboard.constants");
-const external_context_creator_1 = require("@nestjs/core/helpers/external-context-creator");
+const constants_1 = require("../constants");
 const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 let DashboardExplorerService = class DashboardExplorerService {
-    constructor(modulesContainer, metadataScanner, externalContextCreator) {
+    constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
-        this.externalContextCreator = externalContextCreator;
+        this.metadata = constants_1.DASHBOARD_NAME_METADATA;
     }
     explore() {
         const components = [...this.modulesContainer.values()].map(module => module.components);
@@ -28,7 +27,7 @@ let DashboardExplorerService = class DashboardExplorerService {
     extractMetadata(instance, prototype, methodName) {
         const callback = prototype[methodName];
         return {
-            name: Reflect.getMetadata(dashboard_constants_1.DASHBOARD_NAME_METADATA, callback),
+            name: Reflect.getMetadata(this.metadata, callback),
             methodName,
         };
     }
@@ -51,7 +50,6 @@ let DashboardExplorerService = class DashboardExplorerService {
 DashboardExplorerService = __decorate([
     common_1.Component(),
     __metadata("design:paramtypes", [injector_1.ModulesContainer,
-        metadata_scanner_1.MetadataScanner,
-        external_context_creator_1.ExternalContextCreator])
+        metadata_scanner_1.MetadataScanner])
 ], DashboardExplorerService);
 exports.DashboardExplorerService = DashboardExplorerService;
