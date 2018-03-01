@@ -160,13 +160,21 @@ class Home extends React.Component<WithStyles<keyof typeof styles>, State> {
         return (
             <div className="home">
                 <Grid container spacing={24}>
-                    <AreaChart chart={chart}/>
-                    <AreaChart chart={chart}/>
-                    <AreaChart chart={chart}/>
-                    <AreaChart chart={chart}/>
+                    <Grid item xs={12} sm={12} md={3} >
+                        <AreaChart chart={chart}/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={3} >
+                        <AreaChart chart={chart}/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={3} >
+                        <AreaChart chart={chart}/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={3} >
+                        <AreaChart chart={chart}/>
+                    </Grid>
                 </Grid>
                 <Grid container spacing={24} className="bottom-content">
-                    <Grid item xs={12} md={8} sm={12}>
+                    <Grid item xs={12} sm={12} md={8} >
                         <Paper className={this.props.classes.leftPaper}>
                             <div className="home-bg">
                                 <div>
