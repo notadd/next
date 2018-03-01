@@ -3,14 +3,14 @@ import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Editor from '../../components/Editor';
-import { FormControlLabel, FormControl } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { StyleRules } from 'material-ui/styles';
+import { CircularProgress } from 'material-ui/Progress';
 import axios from 'axios';
+import Cascader from 'antd/lib/cascader';
+import 'antd/lib/cascader/style/css.js';
 
 const styles = {
     root: {
@@ -51,13 +51,15 @@ type State = {
     title: string,
     alias: string,
     classify: string,
+    classifyId: number,
     types: Array<any>,
     pageType: string,
-    isOpen: boolean,
+    pageId: number,
     list: Array<any>,
     num: number,
     content: any,
     ready: any,
+    loading: boolean,
 };
 
 const stylesType = {} as StyleRules;
@@ -70,29 +72,21 @@ class PageEdit extends React.Component<Props, State> {
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
+        let proId = '';
+        const str = props.location.pathname;
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
+        } else {
+            proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
-            types: [
-                {
-                    id: '12',
-                    type: '新闻1',
-                },
-                {
-                    id: '13',
-                    type: '新闻2',
-                },
-                {
-                    id: '14',
-                    type: '新闻3',
-                },
-            ],
+            types: [],
             title: '',
             alias: '',
             classify: '',
-            isOpen: false,
+            classifyId: 0,
             pageType: type,
+            pageId: Number(proId),
             num: 0,
             content: '',
             ready: '',
@@ -103,7 +97,93 @@ class PageEdit extends React.Component<Props, State> {
                     path: 'neditor/',
                 },
             ],
+            loading: false,
         };
+    }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: page,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
+            });
+            this.setState({ types: arr });
+        });
     }
     handleEditorChange = (content: any, id: any) => {
         this.state.list[id].content = content;
@@ -124,15 +204,17 @@ class PageEdit extends React.Component<Props, State> {
         });
     };
     handelSubmit = () => {
+        let newArr = JSON.stringify(this.state.list);
+        window.console.log(newArr);
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 mutation {
                     PageCUD(createPages: {
                         title: ${this.state.title},
-                        alias: '',
-                        content: '',
-                        classify: '',
-                        classifyId: 1,
+                        alias: ${this.state.alias},
+                        content: ${newArr},
+                        classify: ${this.state.classify},
+                        classifyId: ${this.state.classifyId},
                         limitNum: 10,
                         pages: 1,
                     })
@@ -155,6 +237,12 @@ class PageEdit extends React.Component<Props, State> {
         let val = event.target.value;
         this.setState({
             [name]: val,
+        });
+    };
+    handleChangeType = (value: any, select: any) => {
+        this.setState({
+            classify: select[select.length - 1].label,
+            classifyId: value[value.length - 1],
         });
     };
     render() {
@@ -188,7 +276,6 @@ class PageEdit extends React.Component<Props, State> {
                                         标题
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -228,7 +315,6 @@ class PageEdit extends React.Component<Props, State> {
                                         别名
                                     </InputLabel>
                                     <Input
-                                        id="name-simple"
                                         className={this.props.classes.formLabelFont}
                                         classes={{
                                             underline: this.props.classes.underline,
@@ -240,6 +326,7 @@ class PageEdit extends React.Component<Props, State> {
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
+                                    style={{ position: 'relative'}}
                                 >
                                     <InputLabel
                                         htmlFor="name-simple"
@@ -247,18 +334,31 @@ class PageEdit extends React.Component<Props, State> {
                                     >
                                         分类
                                     </InputLabel>
-                                    <Select
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.classify}
+                                    />
+                                    <Cascader
+                                        className="cascader-picker"
+                                        options={this.state.types}
+                                        onChange={this.handleChangeType}
+                                        notFoundContent="Not Found"
+                                    />
+                                    {/*<Select
                                         className={this.props.classes.formLabelFont}
                                         value={this.state.classify}
-                                        onChange={this.handleChange('classify')}
-                                        input={<Input name="type" id="type-simple" />}
+                                        onChange={this.handleChangeType}
+                                        input={<Input name="classify" id="type-simple" />}
                                     >
                                         {
                                             this.state.types.map((item: any, index: number) => {
                                                 return (
                                                     <MenuItem
                                                         className="input-drop-paper"
-                                                        value={index}
+                                                        value={item.id}
                                                         key={index}
                                                     >
                                                         {item.type}
@@ -266,35 +366,28 @@ class PageEdit extends React.Component<Props, State> {
                                                 );
                                             })
                                         }
-                                    </Select>
+                                    </Select>*/}
                                 </FormControl>
-                                <FormControlLabel
-                                    label="开启"
-                                    classes={{
-                                        root: this.props.classes.formLabel,
-                                        label: this.props.classes.formLabel
-                                    }}
-                                    className={this.props.classes.formControlMargin}
-                                    control={
-                                        <Switch
-                                            classes={{
-                                                root: this.props.classes.switchHeight,
-                                                default: this.props.classes.switchDefault,
-                                            }}
-                                            onChange={(event, checked) => this.setState({ isOpen: checked })}
-                                            checked={this.state.isOpen}
-                                        />
-                                    }
-                                />
                             </Grid>
                         </Grid>
                         <Button
                             raised
                             color="primary"
-                            style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                    'disabled-btn' : ''
+                            }
                             onClick={this.handelSubmit}
                         >
-                            确认提交
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
                 </Paper>
