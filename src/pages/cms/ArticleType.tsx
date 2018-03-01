@@ -66,27 +66,27 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         useFor: art,
                     }){
                         id,
-                        classifyName,
+                        title,
                         classifyAlias,
                         chainUrl,
                         describe,
                         color,
                         groupId,
-                        childrens{
+                        children{
                             id,
-                            classifyName,
-                            childrens{
+                            title,
+                            children{
                                 id,
-                                classifyName,
-                                childrens{
+                                title,
+                                children{
                                     id,
-                                    classifyName,
-                                    childrens{
+                                    title,
+                                    children{
                                         id,
-                                        classifyName,
-                                        childrens{
+                                        title,
+                                        children{
                                             id,
-                                            classifyName,
+                                            title,
                                         }
                                     }
                                 }
@@ -96,53 +96,8 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 }
             `,
         }).then(response => {
-            let arr = new Array();
-            const structures = response.data.data.getClassifys[0].childrens;
-            window.console.log(structures);
-            arr = Object.keys(structures).map(index => {
-                const item = structures[index];
-                item.title = item.classifyName;
-                item.id = item.id;
-                const children = item.childrens;
-                window.console.log(children);
-                if (item.childrens !== null) {
-                    item.children = Object.keys(children).map(i => {
-                        const sub = children[i];
-                        sub.title = sub.classifyName;
-                        sub.id = sub.id;
-                        const childs = sub.childrens;
-                        if (sub.childrens !== null) {
-                            sub.children = Object.keys(childs).map(s => {
-                                const su = childs[s];
-                                su.title = su.classifyName;
-                                su.id = su.id;
-                                const childs2 = su.childrens;
-                                if (su.childrens !== null) {
-                                    su.children = Object.keys(childs2).map(s2 => {
-                                        const fours = childs2[s2];
-                                        fours.title = fours.classifyName;
-                                        fours.id = fours.id;
-                                        if (fours.childrens !== null) {
-                                            const childs3 = fours.childrens;
-                                            fours.children = Object.keys(childs3).map(s3 => {
-                                                const five = childs3[s3];
-                                                five.title = five.classifyName;
-                                                five.id = five.id;
-                                                return five;
-                                            });
-                                        }
-                                        return fours;
-                                    });
-                                }
-                                return su;
-                            });
-                        }
-                        return sub;
-                    });
-                }
-                return item;
-            });
-            this.setState({ treeData: arr });
+            const structures = response.data.data.getClassifys[0].children;
+            this.setState({ treeData: structures });
         });
     }
     handleClose = () => {
