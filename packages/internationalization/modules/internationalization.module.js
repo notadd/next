@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const common_1 = require("@nestjs/common");
 let InternationalizationModule = class InternationalizationModule {
     constructor(internationalizationExplorerService, internationalizationService) {
         this.internationalizationExplorerService = internationalizationExplorerService;

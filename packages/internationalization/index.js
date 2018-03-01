@@ -4,6 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./decorators"));
+__export(require("./metadatas"));
 __export(require("./modules"));
 __export(require("./resolvers"));
 __export(require("./services"));

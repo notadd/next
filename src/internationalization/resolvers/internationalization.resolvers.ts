@@ -1,5 +1,5 @@
-import { Query, Resolver } from "@nestjs/graphql";
 import { InternationalizationService } from "../services";
+import { Query, Resolver } from "@nestjs/graphql";
 
 @Resolver()
 export class InternationalizationResolvers {

@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("@nestjs/graphql");
 const services_1 = require("../services");
+const graphql_1 = require("@nestjs/graphql");
 let InternationalizationResolvers = class InternationalizationResolvers {
     constructor(internationalizationService) {
         this.internationalizationService = internationalizationService;
