@@ -9,29 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Polyglot = require("node-polyglot");
 const common_1 = require("@nestjs/common");
-let InternationalizationService = class InternationalizationService {
-    constructor() {
-        this.polyglot = new Polyglot();
+const injector_1 = require("@nestjs/core/injector");
+const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+let InternationalizationExplorerService = class InternationalizationExplorerService {
+    constructor(modulesContainer, metadataScanner) {
+        this.modulesContainer = modulesContainer;
+        this.metadataScanner = metadataScanner;
     }
-    getPhrases() {
-        return this.polyglot.phrases;
-    }
-    initialize(metadatas) {
-        this.metadatas = metadatas;
-    }
-    setLocale(locale) {
-        if (this.polyglot.locale() !== locale) {
-            this.polyglot.locale(locale);
-        }
-    }
-    translate(phrase, variables) {
-        return this.polyglot.t(phrase, variables);
+    explore() {
+        return [];
     }
 };
-InternationalizationService = __decorate([
+InternationalizationExplorerService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [])
-], InternationalizationService);
-exports.InternationalizationService = InternationalizationService;
+    __metadata("design:paramtypes", [injector_1.ModulesContainer,
+        metadata_scanner_1.MetadataScanner])
+], InternationalizationExplorerService);
+exports.InternationalizationExplorerService = InternationalizationExplorerService;

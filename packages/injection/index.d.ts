@@ -6,5 +6,6 @@ export * from "./metadatas";
 export * from "./modules";
 export * from "./pages";
 export * from "./resolvers";
+export * from "./sagas";
 export * from "./services";
 export * from "./utilities";
