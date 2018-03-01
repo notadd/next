@@ -24,6 +24,11 @@ export class InternationalizationService {
      */
     public initialize(metadatas: Array<PhraseMetadata>) {
         this.metadatas = metadatas;
+        this.metadatas.forEach(metadata => {
+            if (metadata.callback) {
+                this.polyglot.extend(metadata.callback());
+            }
+        });
     }
 
     /**

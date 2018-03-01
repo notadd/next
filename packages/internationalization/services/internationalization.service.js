@@ -20,6 +20,11 @@ let InternationalizationService = class InternationalizationService {
     }
     initialize(metadatas) {
         this.metadatas = metadatas;
+        this.metadatas.forEach(metadata => {
+            if (metadata.callback) {
+                this.polyglot.extend(metadata.callback());
+            }
+        });
     }
     setLocale(locale) {
         if (this.polyglot.locale() !== locale) {
