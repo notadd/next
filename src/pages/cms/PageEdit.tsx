@@ -101,6 +101,30 @@ class PageEdit extends React.Component<Props, State> {
         };
     }
     componentDidMount() {
+        if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getPageById(findPageById: {
+                        id: ${this.state.pageId},
+                    }){
+                        id,
+                        title,
+                        alias,
+                        open,
+                        classify,
+                        classifyId,
+                        createAt,
+                        updateAt,
+                        contents,
+                        check,
+                    }
+                }
+            `,
+            }).then(response => {
+                window.console.log(response.data.data);
+            });
+        }
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -204,16 +228,20 @@ class PageEdit extends React.Component<Props, State> {
         });
     };
     handelSubmit = () => {
-        let newArr = JSON.stringify(this.state.list);
+        const newArr = new Array();
+        const arr = Object.assign([], this.state.list);
+        arr.forEach((item: any) => {
+           newArr.push(item.content);
+        });
         window.console.log(newArr);
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 mutation {
                     PageCUD(createPages: {
-                        title: ${this.state.title},
-                        alias: ${this.state.alias},
-                        content: ${newArr},
-                        classify: ${this.state.classify},
+                        title: "${this.state.title}",
+                        alias: "${this.state.alias}",
+                        content: ${newArr.join(',')},
+                        classify: "${this.state.classify}",
                         classifyId: ${this.state.classifyId},
                         limitNum: 10,
                         pages: 1,
