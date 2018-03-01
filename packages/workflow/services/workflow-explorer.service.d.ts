@@ -7,6 +7,8 @@ export declare class WorkflowExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;
     private readonly settingService;
+    private category;
+    private identification;
     constructor(modulesContainer: ModulesContainer, metadataScanner: MetadataScanner, settingService: SettingService);
     explore(): Array<WorkflowMetadata>;
     protected filterWorkflows(instance: Injectable, metatype: any): Array<WorkflowMetadata>;

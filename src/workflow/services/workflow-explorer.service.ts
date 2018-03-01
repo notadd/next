@@ -5,10 +5,14 @@ import { ModulesContainer } from "@nestjs/core/injector";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { WorkflowMetadata } from "../metadatas/workflow.metadata";
 import { Injectable } from "@nestjs/common/interfaces";
-import { IS_WORKFLOW } from "../constants/workflow.constants";
+import { IS_WORKFLOW } from "../constants";
 
 @Component()
 export class WorkflowExplorerService {
+    private category: string = "category";
+
+    private identification: string = "identification";
+
     /**
      * @param { ModulesContainer } modulesContainer
      * @param { MetadataScanner } metadataScanner
@@ -48,8 +52,8 @@ export class WorkflowExplorerService {
     protected filterWorkflows(instance: Injectable, metatype: any): Array<WorkflowMetadata> {
         const isWorkflow: boolean = Reflect.getMetadata(IS_WORKFLOW, metatype);
         const workflowMeta: WorkflowMetadata = {
-            category: Reflect.getMetadata("category", metatype),
-            identification: Reflect.getMetadata("identification", metatype),
+            category: Reflect.getMetadata(this.category, metatype),
+            identification: Reflect.getMetadata(this.identification, metatype),
         };
 
         if (isWorkflow && workflowMeta.identification) {

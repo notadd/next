@@ -33,7 +33,6 @@ let WorkflowService = class WorkflowService {
     start() {
         return __awaiter(this, void 0, void 0, function* () {
             this.workflows.forEach(workflow => {
-                this.host.registerWorkflow(workflow);
             });
             yield this.host.start();
         });

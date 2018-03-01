@@ -14,12 +14,14 @@ const lodash_1 = require("lodash");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const injector_1 = require("@nestjs/core/injector");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const workflow_constants_1 = require("../constants/workflow.constants");
+const constants_1 = require("../constants");
 let WorkflowExplorerService = class WorkflowExplorerService {
     constructor(modulesContainer, metadataScanner, settingService) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
         this.settingService = settingService;
+        this.category = "category";
+        this.identification = "identification";
     }
     explore() {
         const components = [
@@ -31,10 +33,10 @@ let WorkflowExplorerService = class WorkflowExplorerService {
             .map(({ instance, metatype }) => this.filterWorkflows(instance, metatype))));
     }
     filterWorkflows(instance, metatype) {
-        const isWorkflow = Reflect.getMetadata(workflow_constants_1.IS_WORKFLOW, metatype);
+        const isWorkflow = Reflect.getMetadata(constants_1.IS_WORKFLOW, metatype);
         const workflowMeta = {
-            category: Reflect.getMetadata("category", metatype),
-            identification: Reflect.getMetadata("identification", metatype),
+            category: Reflect.getMetadata(this.category, metatype),
+            identification: Reflect.getMetadata(this.identification, metatype),
         };
         if (isWorkflow && workflowMeta.identification) {
             workflowMeta.target = instance;

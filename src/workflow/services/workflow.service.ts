@@ -25,7 +25,7 @@ export class WorkflowService {
 
     public async start() {
         this.workflows.forEach(workflow => {
-            this.host.registerWorkflow(workflow);
+            // this.host.registerWorkflow(workflow);
         });
         await this.host.start();
     }
