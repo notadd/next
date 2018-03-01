@@ -358,18 +358,22 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleBatchRemove = () => {
         const arr = new Array();
         const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
                 ids.push(this.state.list[i].id);
-                this.setState({
-                    open: true,
-                    modalType: 1,
-                    modalNum: arr.length,
-                    selection: ids,
-                });
+                if (ids.length > 0) {
+                    this.setState({
+                        open: true,
+                        modalType: 1,
+                        modalNum: arr.length,
+                        selection: ids,
+                    });
+                }
             } else {
-                if (ids.length === 0) {
+                newIds.push(this.state.list[i].id);
+                if (ids.length === 0 && newIds.length === this.state.list.length) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',

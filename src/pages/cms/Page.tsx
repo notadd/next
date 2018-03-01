@@ -233,18 +233,25 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     handleBatchRemove = () => {
         const arr = new Array();
         const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
             if (this.state.list[i].check) {
                 arr.push(this.state.list[i].check);
                 ids.push(this.state.list[i].id);
-                this.setState({
-                    open: true,
-                    modalType: 1,
-                    modalNum: arr.length,
-                    selection: ids,
-                });
+                if (ids.length > 0) {
+                    this.setState({
+                        open: true,
+                        modalType: 1,
+                        modalNum: arr.length,
+                        selection: ids,
+                    });
+                }
             } else {
-                if (ids.length === 0) {
+                window.console.log(this.state.list);
+                window.console.log(ids.length);
+                window.console.log(this.state.rowsPerPage);
+                newIds.push(this.state.list[i].id);
+                if (ids.length <= 0 && newIds.length === this.state.list.length) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的页面',
@@ -270,36 +277,12 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         id: [${ids}],
                         pages: ${this.state.currentPage + 1},
                         limitNum: 10,
-                    }){
-                        pagination{
-                            totalItems,
-                            currentPage,
-                            pageSize,
-                            totalPages,
-                            startPage,
-                            endPage,
-                            startIndex,
-                            endIndex,
-                            pages,
-                        },
-                        pages{
-                            id,
-                            title,
-                            check,
-                            alias,
-                            classify,
-                        }
-                    }
+                    })
                 }
             `,
         }).then(response => {
             if (!response.data.errors) {
-                const data = response.data.data.PageCUD;
                 this.setState({
-                    list: data.pages,
-                    totalItems: data.pagination.totalItems,
-                    rowsPerPage: data.pagination.pageSize,
-                    currentPage: data.pagination.currentPage - 1,
                     openMessageTip: true,
                     open: false,
                     message: '删除页面成功！',
