@@ -26,7 +26,8 @@
         "react-swipeable-views": "^0.12.13",
         "react-swipeable-views-utils": "^0.12.13",
         "rxjs-grpc": "^0.1.6",
-        "typescript": "^2.7.0"
+        "typescript": "^2.7.0",
+        "webpack-hot-middleware": "^2.21.1"
     },
     "devDependencies": {
         "@nestjs/common": "^4.5.0",

@@ -1,0 +1,190 @@
+.home .top-statistics > div {
+    padding: 14px;
+}
+.home .bottom-content {
+    margin-top: 20px;
+}
+.home .bottom-content .home-bg {
+    height: 250px;
+    background: url(../images/teambg.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.home .bottom-content .home-bg > div {
+    background: rgba(60, 141, 209, .8);
+    height: 250px;
+    position: relative;
+}
+
+.home .bottom-content .home-bg > div > button {
+    position: absolute;
+    right: 30px;
+    bottom: -30px;
+    width: 60px;
+    height: 60px;
+    z-index: 5;
+}
+
+.home .bottom-content .home-bg > div > h4 {
+    color: rgb(255, 255, 255);
+    letter-spacing: 0.9px;
+    font-size: 18px;
+    padding-left: 30px;
+    padding-top: 24px;
+    font-weight: 500;
+}
+
+.home .bottom-content .home-bg > div > h4 + div {
+    margin-top: 56px;
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container {
+}
+
+.home .bottom-content .home-bg .react-swipeable-view-container div {
+    overflow: hidden;
+}
+
+.home .bottom-content .home-bg .team-item {
+    display: flex;
+    padding-left: 13%;
+}
+
+.home .bottom-content .home-bg > div .img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+
+.home .bottom-content .home-bg > div .img img {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.home .bottom-content .home-bg > div .intro {
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+    justify-content: center;
+}
+
+.home .bottom-content .home-bg > div .intro h3 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+}
+
+.home .bottom-content .home-bg > div .intro p a {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.home .bottom-content .teamBox {
+    padding: 20px 30px;
+    min-height: 72px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.home .bottom-content .teamBox div {
+    padding: 0 30px;
+    width: auto;
+    line-height: 2.5;
+    max-width: none;
+    flex-basis: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.home .bottom-content .teamBox div:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1px;
+    height: 12px;
+    background: #333;
+    top: 50%;
+    margin-top: -6px;
+}
+
+.home .bottom-content .teamBox div:last-child:after {
+    content: '';
+}
+
+.home .bottom-content ul li span {
+    font-size: 12px;
+    color: #808080;
+    min-height: inherit;
+    min-width: inherit;
+    border-radius: 0;
+    line-height: 12px;
+    cursor: pointer;
+    margin-right: 19px;
+}
+
+.home .bottom-content ul li span:hover {
+    color: #3f51b5;
+}
+
+.home .bottom-content .thank-content {
+    height: 62px;
+    line-height: 62px;
+    font-size: 12px;
+    margin: 0 30px;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.home .bottom-content .thank-content a {
+    color: #3f51b5;
+}
+
+.home .bottom-content .thank-content .line {
+    padding: 0 6px;
+}
+
+.home .version-information > p {
+    font-size: 24px;
+    height: 82px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home .version-information > p span {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.home .version-information > div {
+    padding-top: 20px;
+}
+
+.home .version-information > div p {
+    line-height: 32px;
+    color: #808080;
+    font-size: 12px;
+    display: flex;
+}
+
+.home .version-information > div p span:first-child {
+    display: inline-block;
+    min-width: 60px;
+    margin-right: 40px;
+}
+
+.home .version-information > div p span {
+    word-break: break-all;
+}
+
+.home .bottom-content > div > div {
+    min-height: 385px;
+}
+.spanActive {
+    color: #3f51b5 !important;
+}
