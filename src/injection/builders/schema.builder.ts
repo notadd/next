@@ -1,10 +1,11 @@
 import { Connection, getConnection, PromiseUtils } from "typeorm";
 import { ConnectionMetadataBuilder } from "typeorm/connection/ConnectionMetadataBuilder";
-import { MysqlDriver } from "typeorm/driver/mysql/MysqlDriver";
-import { SqlServerDriver } from "typeorm/driver/sqlserver/SqlServerDriver";
-import { EntityMetadataValidator } from "typeorm/metadata-builder/EntityMetadataValidator";
 import { EntityMetadata } from "typeorm/metadata/EntityMetadata";
+import { EntityMetadataValidator } from "typeorm/metadata-builder/EntityMetadataValidator";
+import { MysqlDriver } from "typeorm/driver/mysql/MysqlDriver";
 import { RdbmsSchemaBuilder } from "./rdbms-schema.builder";
+import { SqlServerDriver } from "typeorm/driver/sqlserver/SqlServerDriver";
+import { MongoSchemaBuilder } from "./mongo-schema.builder";
 
 export class SchemaBuilder {
     private readonly entityMetadatas: EntityMetadata[] = [];
@@ -49,6 +50,7 @@ export class SchemaBuilder {
     }
 
     public async sync() {
+        let builder;
         switch (this.connection.driver.constructor.name) {
             case "CordovaDriver":
             case "MysqlDriver":
@@ -58,11 +60,14 @@ export class SchemaBuilder {
             case "SqljsDriver":
             case "SqlServerDriver":
             case "WebsqlDriver":
-                const builder = new RdbmsSchemaBuilder(this.connection);
+                builder = new RdbmsSchemaBuilder(this.connection);
                 builder.setMetadatas(this.entityMetadatas);
                 await builder.build();
                 break;
             case "MongoDriver":
+                builder = new MongoSchemaBuilder(this.connection);
+                builder.setMetadatas(this.entityMetadatas);
+                await builder.build();
                 break;
             default:
                 break;

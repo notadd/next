@@ -10,10 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const ConnectionMetadataBuilder_1 = require("typeorm/connection/ConnectionMetadataBuilder");
-const MysqlDriver_1 = require("typeorm/driver/mysql/MysqlDriver");
-const SqlServerDriver_1 = require("typeorm/driver/sqlserver/SqlServerDriver");
 const EntityMetadataValidator_1 = require("typeorm/metadata-builder/EntityMetadataValidator");
+const MysqlDriver_1 = require("typeorm/driver/mysql/MysqlDriver");
 const rdbms_schema_builder_1 = require("./rdbms-schema.builder");
+const SqlServerDriver_1 = require("typeorm/driver/sqlserver/SqlServerDriver");
+const mongo_schema_builder_1 = require("./mongo-schema.builder");
 class SchemaBuilder {
     constructor() {
         this.entityMetadatas = [];
@@ -50,6 +51,7 @@ class SchemaBuilder {
     }
     sync() {
         return __awaiter(this, void 0, void 0, function* () {
+            let builder;
             switch (this.connection.driver.constructor.name) {
                 case "CordovaDriver":
                 case "MysqlDriver":
@@ -59,11 +61,14 @@ class SchemaBuilder {
                 case "SqljsDriver":
                 case "SqlServerDriver":
                 case "WebsqlDriver":
-                    const builder = new rdbms_schema_builder_1.RdbmsSchemaBuilder(this.connection);
+                    builder = new rdbms_schema_builder_1.RdbmsSchemaBuilder(this.connection);
                     builder.setMetadatas(this.entityMetadatas);
                     yield builder.build();
                     break;
                 case "MongoDriver":
+                    builder = new mongo_schema_builder_1.MongoSchemaBuilder(this.connection);
+                    builder.setMetadatas(this.entityMetadatas);
+                    yield builder.build();
                     break;
                 default:
                     break;
