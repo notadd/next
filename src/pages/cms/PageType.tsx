@@ -118,11 +118,17 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     render() {
         const handleClickRemove = ( pro: any ) => {
+            let _length = 0;
+            if (pro.node.children === null) {
+                _length = 0;
+            } else {
+                _length = pro.node.children.length;
+            }
             this.setState({
                 open: true,
                 modalName: pro.node.title,
                 modalId: pro.node.id,
-                nodeLength: pro.node.children.length,
+                nodeLength: _length,
             });
         };
         return (

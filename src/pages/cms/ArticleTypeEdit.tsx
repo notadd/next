@@ -136,14 +136,25 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     list: any,
+
+    pageId: number,
+    loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
+        let proId = '';
+        const str = props.location.pathname;
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
+        } else {
+            proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
             tab: 0,
@@ -153,6 +164,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             describe: '',
             chainUrl: '',
             pageType: type,
+            pageId: Number(proId),
             type: '',
             types: [
                 {
@@ -204,6 +216,12 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             modalName: '',
             rowsPerPage: 3,
             currentPage: 0,
+
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
     }
     handleChangeInput = (name: any) => (event: any) => {
