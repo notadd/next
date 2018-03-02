@@ -257,10 +257,10 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                 query: `
                     mutation {
                         ClassifyCU(createClass: {
-                            useFor: art,
+                            useFor: page,
                             id: 0,
                             createClass: {
-                                useFor: art,
+                                useFor: page,
                                 title: "${this.state.title}",
                                 classifyAlias: "${this.state.classifyAlias}",
                                 chainUrl: "${this.state.chainUrl}",
@@ -300,10 +300,10 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                 query: `
                     mutation {
                         ClassifyCU(updateClass: {
-                            useFor: art,
+                            useFor: page,
                             id: ${pageId},
                             createClass: {
-                                useFor: art,
+                                useFor: page,
                                 title: "${this.state.title}",
                                 classifyAlias: "${this.state.classifyAlias}",
                                 chainUrl: "${this.state.chainUrl}",

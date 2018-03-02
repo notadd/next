@@ -17,6 +17,9 @@ import Select from 'material-ui/Select';
 import Switch from 'material-ui/Switch';
 import { MenuItem } from 'material-ui/Menu';
 import 'rc-color-picker/assets/index.css';
+import { CircularProgress } from 'material-ui/Progress';
+import Cascader from 'antd/lib/cascader';
+import 'antd/lib/cascader/style/css.js';
 import Table, {
     TableBody,
     TableCell,
@@ -28,6 +31,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     root: {
@@ -116,8 +120,10 @@ const styles = {
 };
 
 type State = {
+    classify: string,
+    classifyId: number,
     tab: number,
-    classifyName: string,
+    title: string,
     classifyAlias: string,
     color: string,
     describe: string,
@@ -129,6 +135,8 @@ type State = {
     isChildType: boolean,
     isAllTop: boolean,
     isPreTop: boolean,
+
+    topPlace: string,
 
     modalOpen: boolean,
     modalId: string,
@@ -157,8 +165,10 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
+            classify: '',
+            classifyId: 0,
             tab: 0,
-            classifyName: '',
+            title: '',
             classifyAlias: '',
             color: '',
             describe: '',
@@ -166,20 +176,8 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             pageType: type,
             pageId: Number(proId),
             type: '',
-            types: [
-                {
-                    id: '12',
-                    type: '分类1',
-                },
-                {
-                    id: '13',
-                    type: '分类2',
-                },
-                {
-                    id: '14',
-                    type: '分类3',
-                },
-            ],
+            types: [],
+            topPlace: '无',
             isCurrentType: true,
             isChildType: false,
             isAllTop: true,
@@ -224,6 +222,123 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             error: false,
         };
     }
+    componentDidMount() {
+        if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        id: ${this.state.pageId},
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                    }
+                }
+            `,
+            }).then(response => {
+                const data = response.data.data.getClassifys[0];
+                window.console.log(data);
+                this.setState({
+                    title: data.title,
+                    chainUrl: data.chainUrl,
+                    classifyAlias: data.classifyAlias,
+                    describe: data.describe,
+                    color: data.color,
+                    classifyId: data.groupId,
+                    classify: data.classify,
+                });
+            });
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+            }).then(response => {
+                let arr = new Array();
+                const structures = response.data.data.getClassifys[0].children;
+                arr = Object.keys(structures).map(index => {
+                    const item = structures[index];
+                    item.label = item.title;
+                    item.value = item.id;
+                    const children = item.children;
+                    if (item.children !== null) {
+                        item.children = Object.keys(children).map(i => {
+                            const sub = children[i];
+                            sub.label = sub.title;
+                            sub.value = sub.id;
+                            const childs = sub.children;
+                            if (sub.children !== null) {
+                                sub.children = Object.keys(childs).map(s => {
+                                    const su = childs[s];
+                                    su.label = su.title;
+                                    su.value = su.id;
+                                    const childs2 = su.children;
+                                    if (su.children !== null) {
+                                        su.children = Object.keys(childs2).map(s2 => {
+                                            const fours = childs2[s2];
+                                            fours.label = fours.title;
+                                            fours.value = fours.id;
+                                            if (fours.children !== null) {
+                                                const childs3 = fours.children;
+                                                fours.children = Object.keys(childs3).map(s3 => {
+                                                    const five = childs3[s3];
+                                                    five.label = five.title;
+                                                    five.value = five.id;
+                                                    return five;
+                                                });
+                                            }
+                                            return fours;
+                                        });
+                                    }
+                                    return su;
+                                });
+                            }
+                            return sub;
+                        });
+                    }
+                    return item;
+                });
+                this.setState({ types: arr });
+            });
+        }
+    }
     handleChangeInput = (name: any) => (event: any) => {
         let val = event.target.value;
         this.setState({
@@ -260,8 +375,129 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
     handleClose = () => {
         this.setState({ modalOpen: false });
     };
-    handleSubmit = () => {
+    handleSubmitDialog = () => {
         this.setState({ modalOpen: false });
+    };
+    handleChangeType = (value: any, select: any) => {
+        this.setState({
+            classify: select[select.length - 1].label,
+            classifyId: value[value.length - 1],
+        });
+    };
+    handelSubmit = () => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        let pageId = 0;
+        if (this.state.pageType !== '1') {
+            pageId = this.state.pageId;
+        } else {
+            pageId = 0;
+        }
+        if (this.state.title && this.state.classifyAlias && this.state.pageType === '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ClassifyCU(createClass: {
+                            useFor: art,
+                            id: 0,
+                            createClass: {
+                                useFor: art,
+                                title: "${this.state.title}",
+                                classifyAlias: "${this.state.classifyAlias}",
+                                chainUrl: "${this.state.chainUrl}",
+                                describe: "${this.state.describe}",
+                                color: "${this.state.color}",
+                                groupId: 0,
+                            }
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ClassifyCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '提交成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else if (this.state.title && this.state.classifyAlias && this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ClassifyCU(updateClass: {
+                            useFor: art,
+                            id: ${pageId},
+                            createClass: {
+                                useFor: art,
+                                title: "${this.state.title}",
+                                classifyAlias: "${this.state.classifyAlias}",
+                                chainUrl: "${this.state.chainUrl}",
+                                describe: "${this.state.describe}",
+                                color: "${this.state.color}",
+                                groupId: ${this.state.classifyId},
+                            }
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ClassifyCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '修改信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else {
+            let message = '';
+            if (!this.state.title) {
+                message = '请输入分类名称';
+            } else if (!this.state.classifyAlias) {
+                message = '请输入别名';
+            }
+            this.setState(
+                {
+                    error: true,
+                    open: true,
+                    loading: false,
+                    errorMessage: message,
+                },
+            );
+        }
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -298,7 +534,11 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                         <form className={this.props.classes.container} noValidate autoComplete="off">
                             <Grid container spacing={40}>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth required>
+                                    <FormControl
+                                        fullWidth
+                                        required
+                                        error={!this.state.title}
+                                    >
                                         <InputLabel
                                             htmlFor="name-simple"
                                             className={this.props.classes.formLabelFont}
@@ -310,13 +550,17 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                             classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                            onChange={this.handleChangeInput('classifyName')}
-                                            value={this.state.classifyName}
+                                            onChange={this.handleChangeInput('title')}
+                                            value={this.state.title}
                                         />
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth required>
+                                    <FormControl
+                                        fullWidth
+                                        required
+                                        error={!this.state.classifyAlias}
+                                    >
                                         <InputLabel
                                             htmlFor="name-simple"
                                             className={this.props.classes.formLabelFont}
@@ -402,36 +646,55 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         </ColorPicker>
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth>
-                                        <InputLabel
-                                            htmlFor="name-simple"
-                                            className={this.props.classes.formLabelFont}
-                                        >
-                                            上级分类
-                                        </InputLabel>
-                                        <Select
-                                            className="form-select-underline"
-                                            value={this.state.type}
-                                            onChange={this.handleChangeInput('type')}
-                                            input={<Input name="type"/>}
-                                        >
-                                            {
-                                                this.state.types.map((item: any, index: number) => {
-                                                    return (
-                                                        <MenuItem
-                                                            className="input-drop-paper"
-                                                            value={index}
-                                                            key={index}
-                                                        >
-                                                            {item.type}
-                                                        </MenuItem>
-                                                    );
-                                                })
-                                            }
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
+                                {
+                                    this.state.pageType === '1' ?
+                                        <Grid item xs={12} sm={6}>
+                                            <FormControl fullWidth>
+                                                <InputLabel
+                                                    htmlFor="name-simple"
+                                                    className={this.props.classes.formLabelFont}
+                                                >
+                                                    上级分类
+                                                </InputLabel>
+                                                <Select
+                                                    className="form-select-underline"
+                                                    value={this.state.topPlace}
+                                                    onChange={this.handleChangeInput('topPlace')}
+                                                    input={<Input name="type" id="type-simple" />}
+                                                >
+                                                    <MenuItem
+                                                        className="input-drop-paper"
+                                                        value={this.state.topPlace}
+                                                    >
+                                                        无
+                                                    </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </Grid> :
+                                        <Grid item xs={12} sm={6}>
+                                            <FormControl fullWidth>
+                                                <InputLabel
+                                                    htmlFor="name-simple"
+                                                    className={this.props.classes.formLabelFont}
+                                                >
+                                                    上级分类
+                                                </InputLabel>
+                                                <Input
+                                                    className={this.props.classes.formLabelFont}
+                                                    classes={{
+                                                        underline: this.props.classes.underline,
+                                                    }}
+                                                    value={this.state.classify}
+                                                />
+                                                <Cascader
+                                                    className="cascader-picker"
+                                                    options={this.state.types}
+                                                    onChange={this.handleChangeType}
+                                                    notFoundContent="Not Found"
+                                                />
+                                            </FormControl>
+                                        </Grid>
+                                }
                             </Grid>
                             <Grid container spacing={40} style={{marginTop: '12px'}}>
                                 <Grid item xs={12} sm={6}>
@@ -525,8 +788,24 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                     />
                                 </Grid>
                             </Grid>
-                            <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
-                                确认提交
+                            <Button
+                                raised
+                                color="primary"
+                                style={{
+                                    marginTop: 34,
+                                    fontSize: 12,
+                                    borderRadius: 4
+                                }}
+                                disabled={
+                                    this.state.loading
+                                }
+                                className={
+                                    this.state.loading ?
+                                        'disabled-btn' : ''
+                                }
+                                onClick={this.handelSubmit}
+                            >
+                                {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                             </Button>
                         </form>
                     }
@@ -653,7 +932,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                     <Button onClick={this.handleClose}>
                                         取消
                                     </Button>
-                                    <Button onClick={this.handleSubmit} autoFocus>
+                                    <Button onClick={this.handleSubmitDialog} autoFocus>
                                         确认提交
                                     </Button>
                                 </DialogActions>
