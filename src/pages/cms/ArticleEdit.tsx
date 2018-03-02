@@ -11,6 +11,9 @@ import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
 import moment from 'moment';
 import { DatePicker } from 'material-ui-pickers';
+import Cascader from 'antd/lib/cascader';
+import 'antd/lib/cascader/style/css.js';
+import axios from 'axios';
 
 const styles = {
     root: {
@@ -49,19 +52,20 @@ const styles = {
     editor: {},
 };
 type State = {
-    webName: string,
+    name: string,
     img: string,
-    type: string,
-    topType: string,
+    classify: string,
+    classifyId: number,
+    topPlace: string,
     types: Array<any>,
     topTypes: Array<any>,
     abstract: string,
-    time: any,
-    link: string,
-    origin: string,
-    kind: string,
+    publishedTime: any,
+    sourceUrl: string,
+    source: string,
     pageType: string,
-    isHidden: boolean,
+    pageId: number,
+    hidden: boolean,
     path: any,
     editor: any,
 };
@@ -70,14 +74,19 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
+        let proId = '';
+        const str = props.location.pathname;
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
+        } else {
+            proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
-            webName: 'NotAdd',
+            name: '',
             img: '',
-            type: '',
-            topType: '',
+            classify: '',
+            classifyId: 0,
+            topPlace: '',
             types: [
                 {
                     id: '12',
@@ -115,12 +124,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 },
             ],
             abstract: '',
-            time: moment(),
-            link: 'http://',
-            origin: 'www.ibenchu.com',
-            kind: '新闻资讯',
-            isHidden: false,
+            publishedTime: moment(),
+            sourceUrl: '',
+            source: '',
+            hidden: false,
             pageType: type,
+            pageId: Number(proId),
             path: 'neditor/',
             editor: {
                 id: 0,
@@ -128,10 +137,157 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             },
         };
     }
+    componentDidMount() {
+        // if (this.state.pageType !== '1') {
+        //     axios.post('http://192.168.1.121:3000/graphql?', {
+        //         query: `
+        //         query {
+        //             getPageById(findPageById: {
+        //                 id: ${this.state.pageId},
+        //             }){
+        //                 id,
+        //                 title,
+        //                 alias,
+        //                 open,
+        //                 classify,
+        //                 classifyId,
+        //                 createAt,
+        //                 updateAt,
+        //                 contents{
+        //                     id,
+        //                     content,
+        //                 }
+        //                 check,
+        //             }
+        //         }
+        //     `,
+        //     }).then(response => {
+        //         const data = response.data.data.getPageById;
+        //         window.console.log(data);
+        //         const arr = new Array();
+        //         if (data.contents.length === 0) {
+        //             arr.push({
+        //                 id: 0,
+        //                 content: '',
+        //                 path: 'neditor/',
+        //             });
+        //         } else {
+        //             data.contents.forEach((item: any) => {
+        //                 arr.push({
+        //                     id: item.id,
+        //                     content: item.content,
+        //                     path: 'neditor/',
+        //                 });
+        //             });
+        //         }
+        //         this.setState({
+        //             title: data.title,
+        //             alias: data.alias,
+        //             classifyId: data.classifyId,
+        //             classify: data.classify,
+        //             list: arr,
+        //         });
+        //         window.console.log(this.state.list);
+        //     });
+        // } else {
+        //     const arr = Object.assign([], this.state.list);
+        //     arr.push({
+        //         id: 0,
+        //         content: '',
+        //         path: 'neditor/',
+        //     });
+        //     this.setState({
+        //         list: arr,
+        //     });
+        // }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
+            });
+            this.setState({ types: arr });
+        });
+    }
     handleDateChange = (date: any) => {
         // let currentTime = new Date(date).toLocaleDateString();
         // window.console.log(currentTime);
-        this.setState({ time: date });
+        this.setState({ publishedTime: date });
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -152,6 +308,12 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
     getImgURL = (event: any) => {
         this.setState({
             img: event.target.value.substr(12),
+        });
+    };
+    handleChangeType = (value: any, select: any) => {
+        this.setState({
+            classify: select[select.length - 1].label,
+            classifyId: value[value.length - 1],
         });
     };
     render() {
@@ -187,8 +349,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('webName')}
-                                        value={this.state.webName}
+                                        onChange={this.handleChange('name')}
+                                        value={this.state.name}
                                     />
                                 </FormControl>
                                 <div className="editor">
@@ -235,26 +397,19 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     >
                                         分类
                                     </InputLabel>
-                                    <Select
-                                        className="form-select-underline"
-                                        value={this.state.type}
-                                        onChange={this.handleChange('type')}
-                                        input={<Input name="type"/>}
-                                    >
-                                        {
-                                            this.state.types.map((item: any, index: number) => {
-                                                return (
-                                                    <MenuItem
-                                                        className="input-drop-paper"
-                                                        value={index}
-                                                        key={index}
-                                                    >
-                                                        {item.type}
-                                                    </MenuItem>
-                                                );
-                                            })
-                                        }
-                                    </Select>
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.classify}
+                                    />
+                                    <Cascader
+                                        className="cascader-picker"
+                                        options={this.state.types}
+                                        onChange={this.handleChangeType}
+                                        notFoundContent="Not Found"
+                                    />
                                 </FormControl>
                                 <FormControl
                                     fullWidth
@@ -288,8 +443,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     </InputLabel>
                                     <Select
                                         className="form-select-underline"
-                                        value={this.state.topType}
-                                        onChange={this.handleChange('topType')}
+                                        value={this.state.topPlace}
+                                        onChange={this.handleChange('topPlace')}
                                         input={<Input name="type" id="type-simple" />}
                                     >
                                         {
@@ -322,9 +477,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                             }}
                                             onChange={
                                                 (event: any, checked: boolean) => {
-                                                    this.setState({ isHidden: checked});
+                                                    this.setState({ hidden: checked});
                                                 }}
-                                            checked={this.state.isHidden}
+                                            checked={this.state.hidden}
                                         />
                                     }
                                 />
@@ -336,7 +491,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     returnMoment
                                     format="MMMM Do, YYYY"
                                     label="发布时间"
-                                    value={this.state.time}
+                                    value={this.state.publishedTime}
                                     onChange={this.handleDateChange}
                                     animateYearScrolling={false}
                                 />
@@ -354,8 +509,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('origin')}
-                                        value={this.state.origin}
+                                        onChange={this.handleChange('source')}
+                                        value={this.state.source}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -372,8 +527,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('link')}
-                                        value={this.state.link}
+                                        onChange={this.handleChange('sourceUrl')}
+                                        value={this.state.sourceUrl}
                                     />
                                 </FormControl>
                             </Grid>
