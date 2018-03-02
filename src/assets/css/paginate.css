@@ -38,6 +38,7 @@
 }
 .pagination li a {
     display: block;
+    color: inherit;
 }
 .pagination li:focus,
 .pagination li a:focus {

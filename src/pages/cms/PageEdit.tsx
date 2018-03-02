@@ -65,12 +65,13 @@ type State = {
     transition: any,
     errorMessage: string,
     error: boolean,
+    error1: boolean,
 };
 
 const stylesType = {} as StyleRules;
 
 interface Props extends WithStyles<keyof typeof stylesType> {
-    num: number;
+    id: number;
 }
 
 class PageEdit extends React.Component<Props, State> {
@@ -95,18 +96,13 @@ class PageEdit extends React.Component<Props, State> {
             number: 0,
             content: '',
             ready: '',
-            list: [
-                {
-                    num: 0,
-                    content: '',
-                    path: 'neditor/',
-                },
-            ],
+            list: [],
             loading: false,
             transition: undefined,
             open: false,
             errorMessage: '',
             error: false,
+            error1: false,
         };
     }
     componentDidMount() {
@@ -125,13 +121,51 @@ class PageEdit extends React.Component<Props, State> {
                         classifyId,
                         createAt,
                         updateAt,
-                        contents,
+                        contents{
+                            id,
+                            content,
+                        }
                         check,
                     }
                 }
             `,
             }).then(response => {
-                window.console.log(response.data.data);
+                const data = response.data.data.getPageById;
+                window.console.log(data);
+                const arr = new Array();
+                if (data.contents.length === 0) {
+                    arr.push({
+                        id: 0,
+                        content: '',
+                        path: 'neditor/',
+                    });
+                } else {
+                    data.contents.forEach((item: any) => {
+                        arr.push({
+                            id: item.id,
+                            content: item.content,
+                            path: 'neditor/',
+                        });
+                    });
+                }
+                this.setState({
+                    title: data.title,
+                    alias: data.alias,
+                    classifyId: data.classifyId,
+                    classify: data.classify,
+                    list: arr,
+                });
+                window.console.log(this.state.list);
+            });
+        } else {
+            const arr = Object.assign([], this.state.list);
+            arr.push({
+                id: 0,
+                content: '',
+                path: 'neditor/',
+            });
+            this.setState({
+                list: arr,
             });
         }
         axios.post('http://192.168.1.121:3000/graphql?', {
@@ -227,7 +261,7 @@ class PageEdit extends React.Component<Props, State> {
     handleAddEditor = () => {
         const arr = Object.assign([], this.state.list);
         arr.push({
-            num: this.state.number + 1,
+            id: this.state.number + 1,
             content: '',
             path: 'neditor/',
         });
@@ -238,20 +272,35 @@ class PageEdit extends React.Component<Props, State> {
     };
     handelSubmit = () => {
         const newArr = new Array();
+        const arrUpdate = new Array();
+        const arrUpdate1 = new Array();
+        let pageId = 0;
         const arr = Object.assign([], this.state.list);
         arr.forEach((item: any) => {
-            newArr.push({
+            newArr.push(item.content);
+        });
+        arr.forEach((item: any) => {
+            arrUpdate.push({
+                id: item.id,
                 content: item.content,
             });
+            arrUpdate.forEach((sub: any) => {
+                const ite = JSON.stringify(sub);
+                arrUpdate1.push(ite);
+            });
         });
-        window.console.log(​JSON.stringify(newArr));
-        window.console.log(​newArr.toString());
-        if (this.state.title && this.state.alias) {
+        window.console.log(arrUpdate1);
+        if (this.state.pageType !== '1') {
+            pageId = this.state.pageId;
+        } else {
+            pageId = 0;
+        }
+        if (this.state.title && this.state.alias && this.state.pageType === '1') {
             axios.post('http://192.168.1.121:3000/graphql?', {
                 query: `
                     mutation {
                         PageCUD(createPages: {
-                            id: 0,
+                            id: ${pageId},
                             title: "${this.state.title}",
                             alias: "${this.state.alias}",
                             content: ${JSON.stringify(newArr)},
@@ -263,8 +312,67 @@ class PageEdit extends React.Component<Props, State> {
                     }
                 `,
             }).then(response => {
+                const data = JSON.parse(response.data.data.PageCUD);
                 if (!response.data.errors) {
-                    window.console.log(response);
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '提交成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else if (this.state.title && this.state.alias && this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        PageCUD(updatePages: {
+                            id: ${pageId},
+                            title: "${this.state.title}",
+                            alias: "${this.state.alias}",
+                            content: ${arrUpdate1},
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            limitNum: 10,
+                            pages: 1,
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.PageCUD);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '修改信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
                 }
             });
         } else {
@@ -455,7 +563,7 @@ class PageEdit extends React.Component<Props, State> {
                     </form>
                     <Snackbar
                         classes={{
-                            root: this.state.error ? 'error-snack-bar' : ''
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
                         }}
                         open={this.state.open}
                         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
