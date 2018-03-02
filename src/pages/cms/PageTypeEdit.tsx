@@ -7,6 +7,9 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import ColorPicker from 'rc-color-picker';
 import 'rc-color-picker/assets/index.css';
+import axios from 'axios';
+import { CircularProgress } from 'material-ui/Progress';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
     root: {
@@ -45,29 +48,75 @@ const styles = {
 };
 
 type State = {
-    typeName: string,
-    otherName: string,
+    title: string,
+    classifyAlias: string,
     color: string,
-    description: string,
-    link: string,
+    describe: string,
+    chainUrl: string,
     pageType: string,
+    pageId: number,
+    loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
+        let proId = '';
+        const str = props.location.pathname;
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
+        } else {
+            proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
-            typeName: 'NotAdd',
-            otherName: 'news',
+            title: '',
+            classifyAlias: '',
             color: '',
-            description: '',
-            link: 'www.baidu.com',
+            describe: '',
+            chainUrl: '',
             pageType: type,
+            pageId: Number(proId),
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
+    }
+    componentDidMount() {
+        if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getPageById(findPageById: {
+                        id: ${this.state.pageId},
+                    }){
+                        id,
+                        title,
+                        alias,
+                        open,
+                        classify,
+                        classifyId,
+                        createAt,
+                        updateAt,
+                        contents{
+                            id,
+                            content,
+                        }
+                        check,
+                    }
+                }
+            `,
+            }).then(response => {
+                const data = response.data.data.getPageById;
+                window.console.log(data);
+            });
+        }
     }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -85,6 +134,124 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
             color: pro.color,
         });
     };
+    handleCloseTip = () => {
+        this.setState({ open: false });
+    };
+    handelSubmit = () => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        let pageId = 0;
+        if (this.state.pageType !== '1') {
+            pageId = this.state.pageId;
+        } else {
+            pageId = 0;
+        }
+        if (this.state.title && this.state.classifyAlias && this.state.pageType === '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ClassifyCU(createClass: {
+                            useFor: art,
+                            id: 0,
+                            createClass: {
+                                useFor: art,
+                                title: "${this.state.title}",
+                                classifyAlias: "${this.state.classifyAlias}",
+                                chainUrl: "${this.state.chainUrl}",
+                                describe: "${this.state.describe}",
+                                color: "${this.state.color}",
+                                groupId: 0,
+                            }
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ClassifyCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '提交成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else if (this.state.title && this.state.classifyAlias && this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ClassifyCU(updateClass: {
+                            useFor: art,
+                            id: ${pageId},
+                            createClass: {
+                                useFor: art,
+                                title: "${this.state.title}",
+                                classifyAlias: "${this.state.classifyAlias}",
+                                chainUrl: "${this.state.chainUrl}",
+                                describe: "${this.state.describe}",
+                                color: "${this.state.color}",
+                                groupId: 0,
+                            }
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ClassifyCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '修改信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else {
+            let message = '';
+            if (!this.state.title) {
+                message = '请输入分类名称';
+            } else if (!this.state.classifyAlias) {
+                message = '请输入别名';
+            }
+            this.setState(
+                {
+                    error: true,
+                    open: true,
+                    loading: false,
+                    errorMessage: message,
+                },
+            );
+        }
+    };
     render() {
         return (
             <div className="configurations">
@@ -98,7 +265,11 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                     <form className={this.props.classes.container} noValidate autoComplete="off">
                         <Grid container spacing={40}>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.title}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -110,13 +281,17 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                        onChange={this.handleChange('typeName')}
-                                        value={this.state.typeName}
+                                        onChange={this.handleChange('title')}
+                                        value={this.state.title}
                                     />
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth required>
+                                <FormControl
+                                    fullWidth
+                                    required
+                                    error={!this.state.classifyAlias}
+                                >
                                     <InputLabel
                                         htmlFor="name-simple"
                                         className={this.props.classes.formLabelFont}
@@ -128,8 +303,8 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                        onChange={this.handleChange('otherName')}
-                                        value={this.state.otherName}
+                                        onChange={this.handleChange('classifyAlias')}
+                                        value={this.state.classifyAlias}
                                     />
                                 </FormControl>
                             </Grid>
@@ -148,8 +323,8 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         classes={{
                                                 underline: this.props.classes.underline,
                                             }}
-                                        onChange={this.handleChange('link')}
-                                        value={this.state.link}
+                                        onChange={this.handleChange('chainUrl')}
+                                        value={this.state.chainUrl}
                                     />
                                 </FormControl>
                             </Grid>
@@ -166,8 +341,8 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('description')}
-                                        value={this.state.description}
+                                        onChange={this.handleChange('describe')}
+                                        value={this.state.describe}
                                     />
                                 </FormControl>
                             </Grid>
@@ -203,10 +378,39 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
-                            确认提交
+                        <Button
+                            raised
+                            color="primary"
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                    'disabled-btn' : ''
+                            }
+                            onClick={this.handelSubmit}
+                        >
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );

@@ -130,7 +130,7 @@ type State = {
     isAllTop: boolean,
     isPreTop: boolean,
 
-    open: boolean,
+    modalOpen: boolean,
     modalId: string,
     modalName: string,
     rowsPerPage: number,
@@ -199,7 +199,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                     status: false,
                 },
             ],
-            open: false,
+            modalOpen: false,
             modalId: '',
             modalName: '',
             rowsPerPage: 3,
@@ -236,14 +236,14 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
         this.setState({
             modalName: pro.name,
             modalId: pro.id,
-            open: true,
+            modalOpen: true,
         });
     };
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ modalOpen: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        this.setState({ modalOpen: false });
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -613,7 +613,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                 />
                             </div>
                             <Dialog
-                                open={this.state.open}
+                                open={this.state.modalOpen}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                                 className="dialog-content-action"
