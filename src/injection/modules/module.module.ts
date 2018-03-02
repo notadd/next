@@ -1,9 +1,9 @@
-import { loadModulesFromFiles } from "../utilities/load-modules-from-files";
 import { forwardRef, Module } from "@nestjs/common";
-import { ModuleResolvers } from "../resolvers/module.resolvers";
-import { ModuleService } from "../services/module.service";
-import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { InjectionModule } from "./injection.module";
+import { loadModulesFromFiles } from "../utilities";
+import { ModuleResolvers } from "../resolvers";
+import { ModuleService } from "../services";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
     components: [

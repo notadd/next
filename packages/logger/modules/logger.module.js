@@ -9,15 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const cqrs_1 = require("@nestjs/cqrs");
 const handlers_1 = require("../commands/handlers");
 const handlers_2 = require("../events/handlers");
 const entities_1 = require("../entities");
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const cqrs_1 = require("@nestjs/cqrs");
 const core_1 = require("@nestjs/core");
+const typeorm_1 = require("@nestjs/typeorm");
 let LoggerModule = class LoggerModule {
     constructor(moduleRef, command, event) {
         this.moduleRef = moduleRef;

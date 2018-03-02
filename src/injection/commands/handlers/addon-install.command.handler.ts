@@ -1,5 +1,5 @@
-import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { AddonInstallCommand } from "../";
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 @CommandHandler(AddonInstallCommand)
 export class AddonInstallCommandHandler implements ICommandHandler<AddonInstallCommand> {

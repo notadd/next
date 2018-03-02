@@ -1,9 +1,9 @@
 import * as GraphQLJSON from 'graphql-type-json';
-import { Module, RequestMethod } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
-import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { GraphqlFactory } from "../factories";
+import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
+import { Module, RequestMethod } from "@nestjs/common";
 
 @Module({
     components: [

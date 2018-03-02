@@ -3,7 +3,7 @@ import { flattenDeep } from 'lodash';
 import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { PhraseMetadata } from "../metadatas/phrase.metadata";
+import { PhraseMetadata } from "../metadatas";
 import { PHRASE_DEFINITION } from "../constants";
 
 @Component()

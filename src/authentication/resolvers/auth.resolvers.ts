@@ -1,5 +1,5 @@
-import { AuthService } from "../services";
 import { AuthDto } from "../dtos";
+import { AuthService } from "../services";
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "../guards";

@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
-const page_service_1 = require("../services/page.service");
-const page_explorer_service_1 = require("../services/page-explorer.service");
-const page_resolvers_1 = require("../resolvers/page.resolvers");
+const services_1 = require("../services");
+const services_2 = require("../services");
+const resolvers_1 = require("../resolvers");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let PageModule = class PageModule {
     constructor(pageExplorerService, pageService) {
@@ -28,15 +28,15 @@ PageModule = __decorate([
     common_1.Module({
         components: [
             metadata_scanner_1.MetadataScanner,
-            page_explorer_service_1.PageExplorerService,
-            page_resolvers_1.PageResolvers,
-            page_service_1.PageService,
+            services_2.PageExplorerService,
+            resolvers_1.PageResolvers,
+            services_1.PageService,
         ],
         imports: [
             setting_module_1.SettingModule,
         ],
     }),
-    __metadata("design:paramtypes", [page_explorer_service_1.PageExplorerService,
-        page_service_1.PageService])
+    __metadata("design:paramtypes", [services_2.PageExplorerService,
+        services_1.PageService])
 ], PageModule);
 exports.PageModule = PageModule;

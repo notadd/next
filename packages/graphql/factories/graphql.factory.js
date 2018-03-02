@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const glob = require("glob");
 const fs = require("fs");
+const glob = require("glob");
 const common_1 = require("@nestjs/common");
 const graphql_tools_1 = require("graphql-tools");
 const merge_graphql_schemas_1 = require("merge-graphql-schemas");

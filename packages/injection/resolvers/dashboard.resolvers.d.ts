@@ -1,5 +1,5 @@
-import { Dashboard } from "../types/dashboard.type";
-import { DashboardService } from "../services/dashboard.service";
+import { Dashboard } from "../types";
+import { DashboardService } from "../services";
 export declare class DashboardResolvers {
     private readonly dashboardService;
     constructor(dashboardService: DashboardService);

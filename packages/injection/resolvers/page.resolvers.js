@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
-const page_service_1 = require("../services/page.service");
+const services_1 = require("../services");
 let PageResolvers = class PageResolvers {
     constructor(pageService) {
         this.pageService = pageService;
@@ -36,6 +36,6 @@ __decorate([
 ], PageResolvers.prototype, "getPages", null);
 PageResolvers = __decorate([
     graphql_1.Resolver("Page"),
-    __metadata("design:paramtypes", [page_service_1.PageService])
+    __metadata("design:paramtypes", [services_1.PageService])
 ], PageResolvers);
 exports.PageResolvers = PageResolvers;

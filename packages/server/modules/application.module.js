@@ -8,17 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const authentication_1 = require("@notadd/authentication");
 const backend_1 = require("@notadd/backend");
-const injection_1 = require("@notadd/injection");
 const modules_1 = require("@notadd/graphql/modules");
+const injection_1 = require("@notadd/injection");
 const modules_2 = require("@notadd/internationalization/modules");
 const logger_1 = require("@notadd/logger");
 const common_1 = require("@nestjs/common");
 const setting_1 = require("@notadd/setting");
+const informations_1 = require("../informations");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
-const informations_1 = require("../informations");
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([

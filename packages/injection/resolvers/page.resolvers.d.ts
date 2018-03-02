@@ -1,5 +1,5 @@
-import { PageService } from "../services/page.service";
-import { Page } from "../types/page.type";
+import { Page } from "../types";
+import { PageService } from "../services";
 export declare class PageResolvers {
     private readonly pageService;
     constructor(pageService: PageService);

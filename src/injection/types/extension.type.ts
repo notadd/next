@@ -1,5 +1,5 @@
-import { ExtensionShellMetadata } from "../metadatas";
 import { Author } from "./author.type";
+import { ExtensionShellMetadata } from "../metadatas";
 
 export type Extension = {
     authors?: Array<Author>;

@@ -1,6 +1,6 @@
 import * as Polyglot from 'node-polyglot';
 import { Component } from "@nestjs/common";
-import { PhraseMetadata } from "../metadatas/phrase.metadata";
+import { PhraseMetadata } from "../metadatas";
 
 @Component()
 export class InternationalizationService {

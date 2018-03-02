@@ -17,7 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const extension_service_1 = require("../services/extension.service");
+const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const user_guard_1 = require("@notadd/authentication/guards/user.guard");
@@ -76,6 +76,6 @@ __decorate([
 ], ExtensionResolvers.prototype, "uninstallExtension", null);
 ExtensionResolvers = __decorate([
     graphql_1.Resolver("Extension"),
-    __metadata("design:paramtypes", [extension_service_1.ExtensionService])
+    __metadata("design:paramtypes", [services_1.ExtensionService])
 ], ExtensionResolvers);
 exports.ExtensionResolvers = ExtensionResolvers;

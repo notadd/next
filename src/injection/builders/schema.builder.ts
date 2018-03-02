@@ -2,10 +2,10 @@ import { Connection, getConnection, PromiseUtils } from "typeorm";
 import { ConnectionMetadataBuilder } from "typeorm/connection/ConnectionMetadataBuilder";
 import { EntityMetadata } from "typeorm/metadata/EntityMetadata";
 import { EntityMetadataValidator } from "typeorm/metadata-builder/EntityMetadataValidator";
+import { MongoSchemaBuilder } from "./mongo-schema.builder";
 import { MysqlDriver } from "typeorm/driver/mysql/MysqlDriver";
 import { RdbmsSchemaBuilder } from "./rdbms-schema.builder";
 import { SqlServerDriver } from "typeorm/driver/sqlserver/SqlServerDriver";
-import { MongoSchemaBuilder } from "./mongo-schema.builder";
 
 export class SchemaBuilder {
     private readonly entityMetadatas: EntityMetadata[] = [];

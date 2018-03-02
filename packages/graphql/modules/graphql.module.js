@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const GraphQLJSON = require("graphql-type-json");
-const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_server_express_1 = require("apollo-server-express");
 const factories_1 = require("../factories");
+const common_1 = require("@nestjs/common");
 let GraphqlModule = class GraphqlModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;

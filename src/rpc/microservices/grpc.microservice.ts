@@ -1,7 +1,7 @@
 import { CustomTransportStrategy, Server } from "@nestjs/microservices";
 import { Observable, Observer } from "rxjs";
-import { makeGrpcError } from "../errors/make-grpc.error";
-import { GrpcServerConfig } from "../interfaces/grpc-service-config.interface";
+import { makeGrpcError } from "../errors";
+import { GrpcServerConfig } from "../interfaces";
 
 export class GrpcMicroservice extends Server implements CustomTransportStrategy {
     private readonly server: any;

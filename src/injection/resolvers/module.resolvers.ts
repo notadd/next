@@ -1,5 +1,5 @@
-import { Module } from "../types/module.type";
-import { ModuleService } from "../services/module.service";
+import { Module } from "../types";
+import { ModuleService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";

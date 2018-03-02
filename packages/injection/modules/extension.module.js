@@ -6,22 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const extension_resolvers_1 = require("../resolvers/extension.resolvers");
-const extension_service_1 = require("../services/extension.service");
-const load_extensions_from_files_1 = require("../utilities/load-extensions-from-files");
+const resolvers_1 = require("../resolvers");
+const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
-const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const utilities_1 = require("../utilities");
 const injection_module_1 = require("./injection.module");
+const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let ExtensionModule = class ExtensionModule {
 };
 ExtensionModule = __decorate([
     common_1.Module({
         components: [
-            extension_resolvers_1.ExtensionResolvers,
-            extension_service_1.ExtensionService,
+            resolvers_1.ExtensionResolvers,
+            services_1.ExtensionService,
         ],
         imports: [
-            ...load_extensions_from_files_1.loadExtensionsFromFiles(),
+            ...utilities_1.loadExtensionsFromFiles(),
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],

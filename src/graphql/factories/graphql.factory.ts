@@ -1,5 +1,5 @@
-import * as glob from 'glob';
 import * as fs from 'fs';
+import * as glob from 'glob';
 import { Component } from "@nestjs/common";
 import { IExecutableSchemaDefinition, MergeInfo } from "graphql-tools/dist/Interfaces";
 import { makeExecutableSchema } from "graphql-tools";

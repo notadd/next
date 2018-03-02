@@ -1,12 +1,12 @@
+import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
 import { CommandHandlers } from "../commands/handlers";
 import { EventHandlers } from "../events/handlers";
 import { Log } from "../entities";
 import { LogResolvers } from "../resolvers";
 import { LogService } from "../services";
 import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
 import { ModuleRef } from "@nestjs/core";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
     components: [

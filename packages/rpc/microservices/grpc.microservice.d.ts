@@ -1,5 +1,5 @@
 import { CustomTransportStrategy, Server } from "@nestjs/microservices";
-import { GrpcServerConfig } from "../interfaces/grpc-service-config.interface";
+import { GrpcServerConfig } from "../interfaces";
 export declare class GrpcMicroservice extends Server implements CustomTransportStrategy {
     private readonly server;
     private readonly host;

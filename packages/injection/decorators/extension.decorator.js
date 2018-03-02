@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const constants_1 = require("../constants");
+const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 function Extension(obj) {
     obj.modules = obj.imports && !obj.modules ? obj.imports : obj.modules;
     return (target) => {

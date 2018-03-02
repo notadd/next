@@ -1,5 +1,5 @@
-import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { AddonUninstallCommand } from "../";
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 @CommandHandler(AddonUninstallCommand)
 export class AddonUninstallCommandHandler implements ICommandHandler<AddonUninstallCommand> {

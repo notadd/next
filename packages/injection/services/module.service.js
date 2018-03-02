@@ -19,12 +19,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const common_1 = require("@nestjs/common");
-const schema_builder_1 = require("../builders/schema.builder");
 const get_package_path_by_module_1 = require("../utilities/get-package-path-by-module");
 const injection_service_1 = require("./injection.service");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
-const setting_service_1 = require("@notadd/setting/services/setting.service");
 const path_1 = require("path");
+const setting_service_1 = require("@notadd/setting/services/setting.service");
+const builders_1 = require("../builders");
 let ModuleService = class ModuleService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
@@ -155,7 +155,7 @@ let ModuleService = class ModuleService {
         return __awaiter(this, void 0, void 0, function* () {
             const path = get_package_path_by_module_1.getPackagePathByModule(module);
             if (path.length) {
-                const builder = new schema_builder_1.SchemaBuilder();
+                const builder = new builders_1.SchemaBuilder();
                 builder.buildMetadatas([
                     path_1.join(path, "*/*.entity.js"),
                     path_1.join(path, "**/*.entity.js"),
@@ -168,7 +168,7 @@ let ModuleService = class ModuleService {
         return __awaiter(this, void 0, void 0, function* () {
             const path = get_package_path_by_module_1.getPackagePathByModule(module);
             if (path.length) {
-                const builder = new schema_builder_1.SchemaBuilder();
+                const builder = new builders_1.SchemaBuilder();
                 builder.buildMetadatas([
                     path_1.join(path, "*/*.entity.js"),
                     path_1.join(path, "**/*.entity.js"),

@@ -1,5 +1,5 @@
-import { Dashboard } from "../types/dashboard.type";
-import { DashboardService } from "../services/dashboard.service";
+import { Dashboard } from "../types";
+import { DashboardService } from "../services";
 import { Query, Resolver } from "@nestjs/graphql";
 
 @Resolver("Dashboard")

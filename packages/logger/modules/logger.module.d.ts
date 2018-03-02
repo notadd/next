@@ -1,5 +1,5 @@
-import { MiddlewaresConsumer, OnModuleInit } from "@nestjs/common";
 import { CommandBus, EventBus } from "@nestjs/cqrs";
+import { MiddlewaresConsumer, OnModuleInit } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 export declare class LoggerModule implements OnModuleInit {
     private readonly moduleRef;

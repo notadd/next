@@ -1,9 +1,9 @@
-import { ExtensionResolvers } from "../resolvers/extension.resolvers";
-import { ExtensionService } from "../services/extension.service";
-import { loadExtensionsFromFiles } from "../utilities/load-extensions-from-files";
+import { ExtensionResolvers } from "../resolvers";
+import { ExtensionService } from "../services";
 import { forwardRef, Module } from "@nestjs/common";
-import { SettingModule } from "@notadd/setting/modules/setting.module";
+import { loadExtensionsFromFiles } from "../utilities";
 import { InjectionModule } from "./injection.module";
+import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
     components: [

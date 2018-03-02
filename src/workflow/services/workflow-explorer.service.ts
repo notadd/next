@@ -1,11 +1,11 @@
 import { Component } from "@nestjs/common";
 import { flattenDeep } from 'lodash';
+import { Injectable } from "@nestjs/common/interfaces";
+import { IS_WORKFLOW } from "../constants";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { WorkflowMetadata } from "../metadatas/workflow.metadata";
-import { Injectable } from "@nestjs/common/interfaces";
-import { IS_WORKFLOW } from "../constants";
+import { WorkflowMetadata } from "../metadatas";
 
 @Component()
 export class WorkflowExplorerService {

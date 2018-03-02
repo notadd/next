@@ -1,5 +1,5 @@
-import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { AddonAfterUninstallEvent } from "../";
+import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 @EventsHandler(AddonAfterUninstallEvent)
 export class AddonAfterUninstallEventHandler implements IEventHandler<AddonAfterUninstallEvent> {

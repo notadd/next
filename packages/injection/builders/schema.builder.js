@@ -11,10 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const ConnectionMetadataBuilder_1 = require("typeorm/connection/ConnectionMetadataBuilder");
 const EntityMetadataValidator_1 = require("typeorm/metadata-builder/EntityMetadataValidator");
+const mongo_schema_builder_1 = require("./mongo-schema.builder");
 const MysqlDriver_1 = require("typeorm/driver/mysql/MysqlDriver");
 const rdbms_schema_builder_1 = require("./rdbms-schema.builder");
 const SqlServerDriver_1 = require("typeorm/driver/sqlserver/SqlServerDriver");
-const mongo_schema_builder_1 = require("./mongo-schema.builder");
 class SchemaBuilder {
     constructor() {
         this.entityMetadatas = [];

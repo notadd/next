@@ -1,22 +1,20 @@
-import { ConfigurationPage } from "../pages";
 import { AddonModule } from "./addon.module";
+import { AddonSagas, ExtensionSagas, ModuleSagas } from "../sagas";
+import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
+import { CommandHandlers } from "../commands/handlers";
+import { ConfigurationPage } from "../pages";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards";
+import { EventHandlers } from "../events/handlers";
 import { ExtensionModule } from "./extension.module";
 import { forwardRef, Module } from "@nestjs/common";
 import { InjectionService } from "../services";
 import { ModuleModule } from "./module.module";
+import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { PageModule } from "./page.module";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { UserModule } from "@notadd/user/modules/user.module";
-import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { ModuleRef } from "@nestjs/core";
-import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
-import { EventHandlers } from "../events/handlers";
-import { CommandHandlers } from "../commands/handlers";
-import { AddonSagas } from "../sagas/addon.sagas";
-import { ExtensionSagas } from "../sagas/extension.sagas";
-import { ModuleSagas } from "../sagas/module.sagas";
 
 @Module({
     components: [

@@ -9,10 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const pages_1 = require("../pages");
 const addon_module_1 = require("./addon.module");
+const sagas_1 = require("../sagas");
+const cqrs_1 = require("@nestjs/cqrs");
+const handlers_1 = require("../commands/handlers");
+const pages_1 = require("../pages");
 const dashboard_module_1 = require("./dashboard.module");
 const dashboards_1 = require("../dashboards");
+const handlers_2 = require("../events/handlers");
 const extension_module_1 = require("./extension.module");
 const common_1 = require("@nestjs/common");
 const services_1 = require("../services");
@@ -21,12 +25,6 @@ const page_module_1 = require("./page.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const core_1 = require("@nestjs/core");
-const cqrs_1 = require("@nestjs/cqrs");
-const handlers_1 = require("../events/handlers");
-const handlers_2 = require("../commands/handlers");
-const addon_sagas_1 = require("../sagas/addon.sagas");
-const extension_sagas_1 = require("../sagas/extension.sagas");
-const module_sagas_1 = require("../sagas/module.sagas");
 let InjectionModule = class InjectionModule {
     constructor(addonSagas, command$, event$, extensionSagas, moduleRef, moduleSagas) {
         this.addonSagas = addonSagas;
@@ -37,9 +35,9 @@ let InjectionModule = class InjectionModule {
         this.moduleSagas = moduleSagas;
     }
     onModuleInit() {
-        this.command$.register(handlers_2.CommandHandlers);
+        this.command$.register(handlers_1.CommandHandlers);
         this.command$.setModuleRef(this.moduleRef);
-        this.event$.register(handlers_1.EventHandlers);
+        this.event$.register(handlers_2.EventHandlers);
         this.event$.setModuleRef(this.moduleRef);
         this.event$.combineSagas([]);
     }
@@ -47,14 +45,14 @@ let InjectionModule = class InjectionModule {
 InjectionModule = __decorate([
     common_1.Module({
         components: [
-            ...handlers_2.CommandHandlers,
-            ...handlers_1.EventHandlers,
-            addon_sagas_1.AddonSagas,
+            ...handlers_1.CommandHandlers,
+            ...handlers_2.EventHandlers,
+            sagas_1.AddonSagas,
             pages_1.ConfigurationPage,
             dashboards_1.DeveloperDashboard,
-            extension_sagas_1.ExtensionSagas,
+            sagas_1.ExtensionSagas,
             services_1.InjectionService,
-            module_sagas_1.ModuleSagas,
+            sagas_1.ModuleSagas,
         ],
         exports: [
             services_1.InjectionService,
@@ -70,11 +68,11 @@ InjectionModule = __decorate([
             user_module_1.UserModule,
         ],
     }),
-    __metadata("design:paramtypes", [addon_sagas_1.AddonSagas,
+    __metadata("design:paramtypes", [sagas_1.AddonSagas,
         cqrs_1.CommandBus,
         cqrs_1.EventBus,
-        extension_sagas_1.ExtensionSagas,
+        sagas_1.ExtensionSagas,
         core_1.ModuleRef,
-        module_sagas_1.ModuleSagas])
+        sagas_1.ModuleSagas])
 ], InjectionModule);
 exports.InjectionModule = InjectionModule;

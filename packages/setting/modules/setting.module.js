@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
 const handlers_1 = require("../commands/handlers");
+const handlers_2 = require("../events/handlers");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const entities_1 = require("../entities");
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const typeorm_1 = require("@nestjs/typeorm");
-const handlers_2 = require("../events/handlers");
 let SettingModule = class SettingModule {
     constructor(moduleRef, command, event) {
         this.moduleRef = moduleRef;

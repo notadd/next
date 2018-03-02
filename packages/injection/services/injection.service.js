@@ -7,14 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const import_injections_from_directories_1 = require("../utilities/import-injections-from-directories");
+const utilities_1 = require("../utilities");
 let InjectionService = class InjectionService {
     constructor() {
         this.injections = [];
     }
     loadInjections() {
         if (this.injections.length === 0) {
-            this.injections = import_injections_from_directories_1.importInjectionsFromDirectories([
+            this.injections = utilities_1.importInjectionsFromDirectories([
                 "**/*.injection.js",
             ]);
         }

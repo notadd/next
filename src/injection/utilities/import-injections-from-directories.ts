@@ -1,4 +1,4 @@
-import { Injection } from "../types/injection.type";
+import { Injection } from "../types";
 import { PlatformTools } from "./platform-tools";
 
 /**

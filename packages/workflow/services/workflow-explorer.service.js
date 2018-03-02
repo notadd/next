@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const lodash_1 = require("lodash");
+const constants_1 = require("../constants");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const injector_1 = require("@nestjs/core/injector");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const constants_1 = require("../constants");
 let WorkflowExplorerService = class WorkflowExplorerService {
     constructor(modulesContainer, metadataScanner, settingService) {
         this.modulesContainer = modulesContainer;

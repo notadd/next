@@ -1,4 +1,4 @@
-import { PhraseMetadata } from "../metadatas/phrase.metadata";
+import { PhraseMetadata } from "../metadatas";
 export declare class InternationalizationService {
     private metadatas;
     private readonly polyglot;

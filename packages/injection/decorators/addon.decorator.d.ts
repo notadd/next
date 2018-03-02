@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Author } from "../types/author.type";
+import { Author } from "../types";
 export declare function Addon(obj: {
     authors?: Author[];
     description?: string;

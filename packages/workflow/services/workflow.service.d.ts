@@ -1,5 +1,5 @@
 import { IWorkflowHost } from "workflow-es";
-import { WorkflowMetadata } from "../metadatas/workflow.metadata";
+import { WorkflowMetadata } from "../metadatas";
 export declare class WorkflowService {
     private readonly host;
     private workflows;

@@ -1,6 +1,6 @@
-import {Component} from "@nestjs/common";
-import {Information} from "@notadd/core/decorators/information.decorator";
-import {platform, release} from "os";
+import { Component } from "@nestjs/common";
+import { Information } from "@notadd/core/decorators/information.decorator";
+import { platform, release } from "os";
 
 @Component()
 export class SystemInformation {

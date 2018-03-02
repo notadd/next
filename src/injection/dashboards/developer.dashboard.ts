@@ -1,5 +1,5 @@
 import { Component } from "@nestjs/common";
-import { Dashboard } from "../decorators/dashboard.decorator";
+import { Dashboard } from "../decorators";
 
 @Component()
 export class DeveloperDashboard {

@@ -1,6 +1,6 @@
-import { MongoSchemaBuilder as SchemaBuilder } from "typeorm/schema-builder/MongoSchemaBuilder";
-import { MongoDriver } from "typeorm/driver/mongodb/MongoDriver";
 import { EntityMetadata } from "typeorm/metadata/EntityMetadata";
+import { MongoDriver } from "typeorm/driver/mongodb/MongoDriver";
+import { MongoSchemaBuilder as SchemaBuilder } from "typeorm/schema-builder/MongoSchemaBuilder";
 
 export class MongoSchemaBuilder extends SchemaBuilder {
     protected metadatas: EntityMetadata[];

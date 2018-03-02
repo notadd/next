@@ -1,5 +1,5 @@
-import { Extension } from "../types/extension.type";
-import { ExtensionService } from "../services/extension.service";
+import { Extension } from "../types";
+import { ExtensionService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";

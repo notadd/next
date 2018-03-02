@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cqrs_1 = require("@nestjs/cqrs");
 const _1 = require("../");
+const cqrs_1 = require("@nestjs/cqrs");
 let AddonUninstallCommandHandler = class AddonUninstallCommandHandler {
     execute(command, resolve) {
         return undefined;

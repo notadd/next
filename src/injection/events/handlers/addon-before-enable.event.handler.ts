@@ -1,5 +1,5 @@
-import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { AddonBeforeEnableEvent } from "../";
+import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 @EventsHandler(AddonBeforeEnableEvent)
 export class AddonBeforeEnableEventHandler implements IEventHandler<AddonBeforeEnableEvent> {

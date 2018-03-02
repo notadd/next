@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import { InjectionType } from "@notadd/core/constants/injection.constants";
-import { ExtensionShellMetadata } from "../metadatas";
 import { Author } from "../types";
+import { ExtensionShellMetadata } from "../metadatas";
 import { INJECTION_TYPE } from "../constants";
+import { InjectionType } from "@notadd/core/constants/injection.constants";
 
 export function Extension(obj: {
     authors?: Author[],

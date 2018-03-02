@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { PhraseMetadata } from "../metadatas/phrase.metadata";
+import { PhraseMetadata } from "../metadatas";
 export declare class InternationalizationExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;

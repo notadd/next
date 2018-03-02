@@ -1,17 +1,17 @@
 import * as optional from 'optional';
+import { DependenciesScanner } from "@nestjs/core/scanner";
+import { ExceptionsZone } from "@nestjs/core/errors/exceptions-zone";
 import { ExpressAdapter } from "@nestjs/core/adapters/express-adapter";
 import { INestApplication, Logger } from "@nestjs/common";
-import { NestApplicationContext } from "@nestjs/core";
-import { NestContainer } from "@nestjs/core/injector/container";
+import { INestApplicationContext } from "@nestjs/common/interfaces/nest-application-context.interface";
+import { INestMicroservice } from "@nestjs/common/interfaces/nest-microservice.interface";
 import { InstanceLoader } from "@nestjs/core/injector/instance-loader";
-import { DependenciesScanner } from "@nestjs/core/scanner";
+import { isFunction } from "@nestjs/common/utils/shared.utils";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { MicroserviceConfiguration } from "@nestjs/common/interfaces/microservices/microservice-configuration.interface";
-import { INestMicroservice } from "@nestjs/common/interfaces/nest-microservice.interface";
 import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/exceptions/microservices-package-not-found.exception";
-import { ExceptionsZone } from "@nestjs/core/errors/exceptions-zone";
-import { isFunction } from "@nestjs/common/utils/shared.utils";
-import { INestApplicationContext } from "@nestjs/common/interfaces/nest-application-context.interface";
+import { NestApplicationContext } from "@nestjs/core";
+import { NestContainer } from "@nestjs/core/injector/container";
 import { NotaddApplication } from "./notadd-application";
 
 const { NestMicroservice } = optional("@nestjs/microservices/nest-microservice") || ({} as any);

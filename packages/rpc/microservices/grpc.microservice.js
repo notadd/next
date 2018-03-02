@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const microservices_1 = require("@nestjs/microservices");
 const rxjs_1 = require("rxjs");
-const make_grpc_error_1 = require("../errors/make-grpc.error");
+const errors_1 = require("../errors");
 class GrpcMicroservice extends microservices_1.Server {
     constructor(server, config) {
         super();
@@ -37,12 +37,12 @@ class GrpcMicroservice extends microservices_1.Server {
                 return response$.subscribe({
                     next(value) {
                         if (value && value.error && value instanceof rxjs_1.Observable) {
-                            return observer.error(make_grpc_error_1.makeGrpcError(value.error));
+                            return observer.error(errors_1.makeGrpcError(value.error));
                         }
                         observer.next(value);
                     },
                     error(error) {
-                        observer.error(make_grpc_error_1.makeGrpcError(error));
+                        observer.error(errors_1.makeGrpcError(error));
                     },
                     complete: observer.complete.bind(observer),
                 });

@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const gateways_1 = require("../gateways");
+const common_1 = require("@nestjs/common");
 let WebsocketModule = class WebsocketModule {
     configure(consumer) {
     }

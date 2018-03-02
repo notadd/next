@@ -1,4 +1,4 @@
-import { Addon } from "../types/addon.type";
+import { Addon } from "../types";
 import { AddonService } from "../services";
 import { Result } from "@notadd/core/types/result.type";
 export declare class AddonResolvers {

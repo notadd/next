@@ -1,14 +1,14 @@
 import "reflect-metadata";
-import { SchemaBuilder } from "../builders/schema.builder";
 import { Addon } from "../types";
 import { Component } from "@nestjs/common";
-import { Injection } from "../types";
 import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
+import { Injection } from "../types";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
-import { Result } from "@notadd/core/types/result.type";
-import { SettingService } from "@notadd/setting/services/setting.service";
 import { join } from "path";
+import { Result } from "@notadd/core/types/result.type";
+import { SchemaBuilder } from "../builders";
+import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class AddonService {

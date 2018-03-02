@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
-import { SchemaBuilder } from "../builders/schema.builder";
 import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { InjectionService } from "./injection.service";
 import { Injection } from "../types";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { join } from "path";
 import { Module } from "../types";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { join } from "path";
+import { SchemaBuilder } from "../builders";
 
 @Component()
 export class ModuleService {

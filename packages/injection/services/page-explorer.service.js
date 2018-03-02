@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
-const lodash_1 = require("lodash");
 const constants_1 = require("../constants");
 let PageExplorerService = class PageExplorerService {
     constructor(modulesContainer, metadataScanner) {

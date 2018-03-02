@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const optional = require("optional");
+const scanner_1 = require("@nestjs/core/scanner");
+const exceptions_zone_1 = require("@nestjs/core/errors/exceptions-zone");
 const express_adapter_1 = require("@nestjs/core/adapters/express-adapter");
 const common_1 = require("@nestjs/common");
-const core_1 = require("@nestjs/core");
-const container_1 = require("@nestjs/core/injector/container");
 const instance_loader_1 = require("@nestjs/core/injector/instance-loader");
-const scanner_1 = require("@nestjs/core/scanner");
+const shared_utils_1 = require("@nestjs/common/utils/shared.utils");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const microservices_package_not_found_exception_1 = require("@nestjs/core/errors/exceptions/microservices-package-not-found.exception");
-const exceptions_zone_1 = require("@nestjs/core/errors/exceptions-zone");
-const shared_utils_1 = require("@nestjs/common/utils/shared.utils");
+const core_1 = require("@nestjs/core");
+const container_1 = require("@nestjs/core/injector/container");
 const notadd_application_1 = require("./notadd-application");
 const { NestMicroservice } = optional("@nestjs/microservices/nest-microservice") || {};
 class NotaddFactoryStatic {

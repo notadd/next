@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var extension_shell_metadata_1 = require("./extension-shell.metadata");
 exports.ExtensionShellMetadata = extension_shell_metadata_1.ExtensionShellMetadata;
-var injection_metadata_1 = require("./injection.metadata");
-exports.InjectionMetadata = injection_metadata_1.InjectionMetadata;
 var page_metadata_1 = require("./page.metadata");
 exports.PageMetadata = page_metadata_1.PageMetadata;
 var page_form_metadata_1 = require("./page-form.metadata");

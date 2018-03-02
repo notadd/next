@@ -1,6 +1,6 @@
+import { PageMetadata } from "../metadatas";
+import { Page } from "../types";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { PageMetadata } from "../metadatas/page.metadata";
-import { Page } from "../types/page.type";
 export declare class PageService {
     private readonly settingService;
     private initialized;

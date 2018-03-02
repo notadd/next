@@ -1,8 +1,8 @@
+import { Injectable } from "@nestjs/common/interfaces";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { WorkflowMetadata } from "../metadatas/workflow.metadata";
-import { Injectable } from "@nestjs/common/interfaces";
+import { WorkflowMetadata } from "../metadatas";
 export declare class WorkflowExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;

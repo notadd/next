@@ -1,6 +1,6 @@
 import { Component } from "@nestjs/common";
 import { configureWorkflow, IWorkflowHost } from "workflow-es";
-import { WorkflowMetadata } from "../metadatas/workflow.metadata";
+import { WorkflowMetadata } from "../metadatas";
 
 @Component()
 export class WorkflowService {
