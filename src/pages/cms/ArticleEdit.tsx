@@ -14,6 +14,7 @@ import { DatePicker } from 'material-ui-pickers';
 import Cascader from 'antd/lib/cascader';
 import 'antd/lib/cascader/style/css.js';
 import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
     root: {
@@ -68,6 +69,11 @@ type State = {
     hidden: boolean,
     path: any,
     editor: any,
+    loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -135,6 +141,11 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                 id: 0,
                 content: '',
             },
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
     }
     componentDidMount() {
@@ -315,6 +326,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             classify: select[select.length - 1].label,
             classifyId: value[value.length - 1],
         });
+    };
+    handleCloseTip = () => {
+        this.setState({ open: false });
     };
     render() {
         return (
@@ -542,6 +556,19 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                             确认提交
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );

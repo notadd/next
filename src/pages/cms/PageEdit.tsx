@@ -65,7 +65,6 @@ type State = {
     transition: any,
     errorMessage: string,
     error: boolean,
-    error1: boolean,
 };
 
 const stylesType = {} as StyleRules;
@@ -102,7 +101,6 @@ class PageEdit extends React.Component<Props, State> {
             open: false,
             errorMessage: '',
             error: false,
-            error1: false,
         };
     }
     componentDidMount() {
