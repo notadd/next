@@ -6,6 +6,7 @@ import Editor from '../../components/Editor';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
+import Snackbar from 'material-ui/Snackbar';
 import { StyleRules } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 import axios from 'axios';
@@ -60,6 +61,10 @@ type State = {
     content: any,
     ready: any,
     loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 const stylesType = {} as StyleRules;
@@ -98,6 +103,10 @@ class PageEdit extends React.Component<Props, State> {
                 },
             ],
             loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
     }
     componentDidMount() {
@@ -231,28 +240,49 @@ class PageEdit extends React.Component<Props, State> {
         const newArr = new Array();
         const arr = Object.assign([], this.state.list);
         arr.forEach((item: any) => {
-           newArr.push(item.content);
+            newArr.push({
+                content: item.content,
+            });
         });
-        window.console.log(newArr);
-        axios.post('http://192.168.1.121:3000/graphql?', {
-            query: `
-                mutation {
-                    PageCUD(createPages: {
-                        title: "${this.state.title}",
-                        alias: "${this.state.alias}",
-                        content: ${newArr.join(',')},
-                        classify: "${this.state.classify}",
-                        classifyId: ${this.state.classifyId},
-                        limitNum: 10,
-                        pages: 1,
-                    })
+        window.console.log(​JSON.stringify(newArr));
+        window.console.log(​newArr.toString());
+        if (this.state.title && this.state.alias) {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        PageCUD(createPages: {
+                            id: 0,
+                            title: "${this.state.title}",
+                            alias: "${this.state.alias}",
+                            content: ${JSON.stringify(newArr)},
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            limitNum: 10,
+                            pages: 1,
+                        })
+                    }
+                `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    window.console.log(response);
                 }
-            `,
-        }).then(response => {
-            if (!response.data.errors) {
-                window.console.log(response);
+            });
+        } else {
+            let message = '';
+            if (!this.state.title) {
+                message = '请输入标题';
+            } else if (!this.state.alias) {
+                message = '请输入别名';
             }
-        });
+            this.setState(
+                {
+                    error: true,
+                    open: true,
+                    loading: false,
+                    errorMessage: message,
+                },
+            );
+        }
     };
     handleRemoveEditor = (index: number) => {
         const arr = Object.assign([], this.state.list);
@@ -272,6 +302,9 @@ class PageEdit extends React.Component<Props, State> {
             classify: select[select.length - 1].label,
             classifyId: value[value.length - 1],
         });
+    };
+    handleCloseTip = () => {
+        this.setState({ open: false });
     };
     render() {
         return (
@@ -295,6 +328,7 @@ class PageEdit extends React.Component<Props, State> {
                                 <FormControl
                                     fullWidth
                                     required
+                                    error={!this.state.title}
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
@@ -334,6 +368,7 @@ class PageEdit extends React.Component<Props, State> {
                                 <FormControl
                                     fullWidth
                                     required
+                                    error={!this.state.alias}
                                     className={this.props.classes.formControlMargin}
                                 >
                                     <InputLabel
@@ -418,6 +453,19 @@ class PageEdit extends React.Component<Props, State> {
                             {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: this.state.error ? 'error-snack-bar' : ''
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );

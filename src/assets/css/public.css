@@ -204,6 +204,10 @@ body {
     color: inherit;
     font-size: 14px;
 }
+.error-snack-bar > div {
+    background: #ff1744;
+    font-size: 14px;
+}
 /*disabled button*/
 
 .disabled-btn {
