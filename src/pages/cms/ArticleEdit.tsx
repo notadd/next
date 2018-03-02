@@ -9,12 +9,13 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
-import moment from 'moment';
+// import moment from 'moment';
 import { DatePicker } from 'material-ui-pickers';
 import Cascader from 'antd/lib/cascader';
 import 'antd/lib/cascader/style/css.js';
 import axios from 'axios';
 import Snackbar from 'material-ui/Snackbar';
+import { CircularProgress } from 'material-ui/Progress';
 
 const styles = {
     root: {
@@ -109,28 +110,28 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             ],
             topTypes: [
                 {
-                    id: '00',
+                    id: 'global',
                     type: '全局',
                 },
                 {
-                    id: '01',
+                    id: 'current',
+                    type: '当前分类',
+                },
+                {
+                    id: 'level1',
                     type: '一级分类',
                 },
                 {
-                    id: '02',
+                    id: 'level2',
                     type: '二级分类',
                 },
                 {
-                    id: '03',
+                    id: 'level3',
                     type: '三级分类',
-                },
-                {
-                    id: '04',
-                    type: '当前分类',
                 },
             ],
             abstract: '',
-            publishedTime: moment(),
+            publishedTime: '',
             sourceUrl: '',
             source: '',
             hidden: false,
@@ -149,68 +150,50 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         };
     }
     componentDidMount() {
-        // if (this.state.pageType !== '1') {
-        //     axios.post('http://192.168.1.121:3000/graphql?', {
-        //         query: `
-        //         query {
-        //             getPageById(findPageById: {
-        //                 id: ${this.state.pageId},
-        //             }){
-        //                 id,
-        //                 title,
-        //                 alias,
-        //                 open,
-        //                 classify,
-        //                 classifyId,
-        //                 createAt,
-        //                 updateAt,
-        //                 contents{
-        //                     id,
-        //                     content,
-        //                 }
-        //                 check,
-        //             }
-        //         }
-        //     `,
-        //     }).then(response => {
-        //         const data = response.data.data.getPageById;
-        //         window.console.log(data);
-        //         const arr = new Array();
-        //         if (data.contents.length === 0) {
-        //             arr.push({
-        //                 id: 0,
-        //                 content: '',
-        //                 path: 'neditor/',
-        //             });
-        //         } else {
-        //             data.contents.forEach((item: any) => {
-        //                 arr.push({
-        //                     id: item.id,
-        //                     content: item.content,
-        //                     path: 'neditor/',
-        //                 });
-        //             });
-        //         }
-        //         this.setState({
-        //             title: data.title,
-        //             alias: data.alias,
-        //             classifyId: data.classifyId,
-        //             classify: data.classify,
-        //             list: arr,
-        //         });
-        //         window.console.log(this.state.list);
-        //     });
-        // } else {
-        //     const arr = Object.assign([], this.state.list);
-        //     arr.push({
-        //         id: 0,
-        //         content: '',
-        //         path: 'neditor/',
-        //     });
-        //     this.setState({
-        //         list: arr,
-        //     });
-        // }
+        if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getArticlesNoLimit(getArticleById: {
+                        id: ${this.state.pageId},
+                    }){
+                        id,
+                        name,
+                        classify,
+                        classifyId,
+                        url,
+                        source,
+                        sourceUrl,
+                        topPlace,
+                        hidden,
+                        recycling,
+                        publishedTime,
+                        abstract,
+                        content,
+                        createAt,
+                        updateAt,
+                        check,
+                    }
+                }
+            `,
+            }).then(response => {
+                const data = response.data.data.getArticlesNoLimit[0];
+                window.console.log(data);
+                this.setState({
+                    name: data.name,
+                    abstract: data.abstract,
+                    classifyId: data.classifyId,
+                    classify: data.classify,
+                    publishedTime: data.publishedTime,
+                    source: data.source,
+                    sourceUrl: data.sourceUrl,
+                    topPlace: data.topPlace,
+                    editor: {
+                        content: data.content,
+                    },
+                });
+            });
+        }
         axios.post('http://192.168.1.121:3000/graphql?', {
             query: `
                 query {
@@ -313,8 +296,100 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             }
         });
     };
-    handleSubmit = (event: any) => {
-        event.preventDefault();
+    handleSubmit = () => {
+        let pageId = 0;
+        if (this.state.pageType !== '1') {
+            pageId = this.state.pageId;
+        } else {
+            pageId = 0;
+        }
+        window.console.log(this.state.hidden);
+        if (this.state.pageType === '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ArticleCU(createArt: {
+                            name: "${this.state.name}",
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            abstract: "${this.state.abstract}",
+                            content: "${this.state.editor.content}",
+                            topPlace: ${this.state.topPlace},
+                            hidden: ${this.state.hidden},
+                            publishedTime: "${this.state.publishedTime}",
+                            source: "${this.state.source}",
+                            sourceUrl: "${this.state.sourceUrl}",
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ArticleCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '提交成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                         ArticleCU(updateArt: {
+                            id: ${pageId},
+                            name: "${this.state.name}",
+                            content: "${this.state.editor.content}",
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            abstract: "${this.state.abstract}",
+                            topPlace: ${this.state.topPlace},
+                            hidden: ${this.state.hidden},
+                            publishedTime: "${this.state.publishedTime}",
+                            source: "${this.state.source}",
+                            sourceUrl: "${this.state.sourceUrl}",
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.PageCUD);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '修改信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        }
     };
     getImgURL = (event: any) => {
         this.setState({
@@ -466,7 +541,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                                 return (
                                                     <MenuItem
                                                         className="input-drop-paper"
-                                                        value={index}
+                                                        value={item.id}
                                                         key={index}
                                                     >
                                                         {item.type}
@@ -550,10 +625,21 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                         <Button
                             raised
                             color="primary"
-                            style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                    'disabled-btn' : ''
+                            }
                             onClick={this.handleSubmit}
                         >
-                            确认提交
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
                     <Snackbar

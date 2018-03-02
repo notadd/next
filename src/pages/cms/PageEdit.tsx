@@ -269,6 +269,11 @@ class PageEdit extends React.Component<Props, State> {
         });
     };
     handelSubmit = () => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
         const newArr = new Array();
         const arrUpdate = new Array();
         const arrUpdate1 = new Array();
