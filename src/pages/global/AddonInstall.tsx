@@ -7,7 +7,9 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import FileDownload from 'material-ui-icons/FileDownload';
+import { CircularProgress } from 'material-ui/Progress';
 import ClearIcon from 'material-ui-icons/Clear';
+import Snackbar from 'material-ui/Snackbar';
 import Table, {
     TableBody,
     TableCell,
@@ -59,6 +61,10 @@ type State = {
     rowsPerPage: number,
     currentPage: number,
     list: any,
+    loading: boolean,
+    transition: any,
+    messageOpen: boolean,
+    errorMessage: string,
 };
 
 class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -70,43 +76,11 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             modalName: '',
             rowsPerPage: 2,
             currentPage: 0,
-            list: [
-                {
-                    id: 11,
-                    status: false,
-                    author: 'Mark',
-                    name: 'notadd',
-                    descri: '一些说明',
-                },
-                {
-                    id: 12,
-                    status: true,
-                    author: 'Mark',
-                    name: 'notadd',
-                    descri: '一些说明',
-                },
-                {
-                    id: 13,
-                    status: false,
-                    author: 'Mark',
-                    name: 'notadd',
-                    descri: '一些说明',
-                },
-                {
-                    id: 14,
-                    status: true,
-                    author: 'Mark',
-                    name: 'notadd',
-                    descri: '一些说明',
-                },
-                {
-                    id: 15,
-                    status: false,
-                    author: 'Mark',
-                    name: 'notadd',
-                    descri: '一些说明',
-                },
-            ],
+            list: [],
+            loading: false,
+            transition: undefined,
+            messageOpen: false,
+            errorMessage: '',
         };
     }
     handleClickOpen = (pro: any) => {
@@ -121,7 +95,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 query {
-                    getModules(filters: {installed: false}) {
+                    getAddons(filters: {installed: false}) {
                     authors {
                         username,
                         email
@@ -138,15 +112,50 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             `,
         }).then(response => {
             if (!response.data.errors) {
-                const results: object = response.data.data.getModules;
+                const results: object = response.data.data.getAddons;
                 self.setState({
                     list: results
                 });
             }
         });
     }
-    handleDownLoad = () => {
-        window.console.log('download');
+    handleDownLoad = (name: string) => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                mutation {
+                    webName: installAddon(identification: "${name}") {
+                    code,
+                    message
+                    },
+                }
+            `,
+        }).then(response => {
+            window.console.log(response);
+            if (!response.data.errors) {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: '安装成功！',
+                    },
+                );
+                this.componentDidMount();
+            } else {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: response.data.errors[0].message,
+                    },
+                );
+                this.componentDidMount();
+            }
+        });
     };
     handleClose = () => {
         this.setState({ open: false });
@@ -225,10 +234,19 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                                                             <DeleteIcon />
                                                         </IconButton> : <IconButton
                                                             className={this.props.classes.downBtn}
-                                                            onClick={() => this.handleDownLoad()}
+                                                            onClick={() => this.handleDownLoad(n.identification)}
                                                             title="下载"
                                                         >
-                                                            <FileDownload />
+                                                            {
+                                                                this.state.loading ?
+                                                                    <CircularProgress
+                                                                        style={{
+                                                                            color: '#fff'
+                                                                        }}
+                                                                        size={20}
+                                                                    />
+                                                                    : <FileDownload />
+                                                            }
                                                         </IconButton>
                                                     }
                                                 </TableCell>
@@ -281,6 +299,16 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Snackbar
+                    open={this.state.messageOpen}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleClose}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
