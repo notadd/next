@@ -61,6 +61,7 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
+            this.loadInjections(true);
             return {
                 message: `Disable module [${module.identification}] successfully!`,
             };
@@ -76,6 +77,7 @@ let ModuleService = class ModuleService {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
+            this.loadInjections(true);
             return {
                 message: `Enable module [${module.identification}] successfully!`,
             };
@@ -130,6 +132,7 @@ let ModuleService = class ModuleService {
             }
             yield this.syncSchema(module);
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "1");
+            this.loadInjections(true);
             return {
                 message: `Install module [${module.identification}] successfully!`,
             };
@@ -146,6 +149,7 @@ let ModuleService = class ModuleService {
             }
             yield this.dropSchema(module);
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "0");
+            this.loadInjections(true);
             return {
                 message: `Uninstall module [${module.identification}] successfully!`,
             };
@@ -163,6 +167,30 @@ let ModuleService = class ModuleService {
                 yield builder.drop();
             }
         });
+    }
+    loadInjections(reload = false) {
+        if (reload) {
+            this.modules.splice(0, this.modules.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection) => {
+            return injection_constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
+        })
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.modules.push({
+                authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
+                enabled: yield this.settingService.get(`module.${identification}.enabled`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`module.${identification}.installed`, false),
+                location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
+                version: Reflect.getMetadata("version", injection.target),
+            });
+        }));
+        this.initialized = true;
     }
     syncSchema(module) {
         return __awaiter(this, void 0, void 0, function* () {
