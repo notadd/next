@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
@@ -69,43 +70,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
             modalName: '',
             rowsPerPage: 2,
             currentPage: 0,
-            list: [
-                {
-                    id: 11,
-                    name: '用户中心',
-                    author: 'Mark',
-                    descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
-                    status: true,
-                },
-                {
-                    id: 12,
-                    name: '商城',
-                    author: 'eref',
-                    descri: '一些描述',
-                    status: false,
-                },
-                {
-                    id: 13,
-                    name: '商家',
-                    author: 'eref',
-                    descri: 'retretrret',
-                    status: true,
-                },
-                {
-                    id: 14,
-                    name: 'CMS',
-                    author: 'eref',
-                    descri: '一些描述',
-                    status: false,
-                },
-                {
-                    id: 15,
-                    name: 'Notadd2',
-                    author: 'eref',
-                    descri: 'retretrret',
-                    status: true,
-                },
-            ],
+            list: [],
         };
     }
     handleClickOpen = (pro: any) => {
@@ -124,6 +89,35 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
+    componentDidMount() {
+        const self = this;
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    getModules(filters: {installed: false}) {
+                    authors {
+                        username,
+                        email
+                    },
+                    description,
+                    enabled,
+                    identification,
+                    installed,
+                    location,
+                    name,
+                    version
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data.getModules;
+                self.setState({
+                    list: results
+                });
+            }
+        });
+    }
     render() {
         const { currentPage, rowsPerPage, list } = this.state;
         return (
@@ -150,16 +144,27 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                            <TableRow
                                                hover
                                                className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                               key={n.id}
+                                               key={index}
                                            >
                                                <TableCell className={this.props.classes.tableCell} numeric>
                                                    {n.name}
                                                </TableCell>
                                                <TableCell className={this.props.classes.tableCell} numeric>
-                                                   {n.author}
+                                                   {
+                                                       () => {
+                                                           let authors: any = [];
+                                                           const arr: any = [];
+                                                           n.authors.forEach((item: any) => {
+                                                               arr.push(`${item.username}${(item.hasOwnProperty('email')
+                                                                   || item.email === null) ? '' : `<${item.email}>`}`);
+                                                           });
+                                                           authors = arr.join(',');
+                                                           return authors;
+                                                       }
+                                                   }
                                                </TableCell>
                                                <TableCell className={this.props.classes.tableCell} numeric>
-                                                   {n.descri}
+                                                   {n.description}
                                                </TableCell>
                                                <TableCell numeric>
                                                    {

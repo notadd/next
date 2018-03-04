@@ -108,6 +108,31 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         };
     }
     handleChange = (pro: any) => (event: any, check: boolean) => {
+        window.console.log(pro);
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                mutation {
+                    disableModule(identification: {installed: true}) {
+                    authors {
+                        username,
+                        email
+                    },
+                    description,
+                    enabled,
+                    identification,
+                    installed,
+                    location,
+                    name,
+                    version
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data;
+                window.console.log(results);
+            }
+        });
         pro.status = check;
         this.setState({
             [pro]: check,
@@ -117,8 +142,11 @@ class ModuleOpen extends React.Component<WithStyles<keyof typeof styles>, State>
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 query {
-                    getAddons(installed: true) {
-                    authors,
+                    getModules(filters: {installed: true}) {
+                    authors {
+                        username,
+                        email
+                    },
                     description,
                     enabled,
                     identification,
