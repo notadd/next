@@ -56,7 +56,7 @@ const styles = {
 };
 type State = {
     open: boolean,
-    modalId: string,
+    modalIdentification: string,
     modalName: string,
     rowsPerPage: number,
     currentPage: number,
@@ -72,7 +72,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         super(props, state);
         this.state = {
             open: false,
-            modalId: '',
+            modalIdentification: '',
             modalName: '',
             rowsPerPage: 2,
             currentPage: 0,
@@ -86,7 +86,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
     handleClickOpen = (pro: any) => {
         this.setState({
             modalName: pro.name,
-            modalId: pro.id,
+            modalIdentification: pro.identification,
             open: true,
         });
     };
@@ -128,14 +128,13 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 mutation {
-                    webName: installAddon(identification: "${name}") {
+                    installAddon(identification: "${name}") {
                     code,
                     message
                     },
                 }
             `,
         }).then(response => {
-            window.console.log(response);
             if (!response.data.errors) {
                 this.setState(
                     {
@@ -157,8 +156,49 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             }
         });
     };
+    handleDelete = (name: any) => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                mutation {
+                    uninstallAddon(identification: "${name}") {
+                    code,
+                    message
+                    },
+                }
+            `,
+        }).then(response => {
+            window.console.log(response);
+            if (!response.data.errors) {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: '删除成功！',
+                    },
+                );
+                this.componentDidMount();
+            } else {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: response.data.errors[0].message,
+                    },
+                );
+                this.componentDidMount();
+            }
+        });
+    };
     handleClose = () => {
         this.setState({ open: false });
+    };
+    handleSure = () => {
+        this.handleDelete(this.state.modalIdentification);
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
@@ -231,7 +271,17 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                                                             onClick={() => this.handleClickOpen(n)}
                                                             title="删除"
                                                         >
-                                                            <DeleteIcon />
+                                                            {
+                                                                this.state.loading ?
+                                                                    <CircularProgress
+                                                                        style={{
+                                                                            color: '#fff'
+                                                                        }}
+                                                                        size={20}
+                                                                    />
+                                                                    :
+                                                                    <DeleteIcon />
+                                                            }
                                                         </IconButton> : <IconButton
                                                             className={this.props.classes.downBtn}
                                                             onClick={() => this.handleDownLoad(n.identification)}
@@ -245,7 +295,8 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                                                                         }}
                                                                         size={20}
                                                                     />
-                                                                    : <FileDownload />
+                                                                    :
+                                                                    <FileDownload />
                                                             }
                                                         </IconButton>
                                                     }
@@ -294,8 +345,8 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                         <Button onClick={this.handleClose}>
                             取消
                         </Button>
-                        <Button onClick={this.handleClose} autoFocus>
-                            确认提交
+                        <Button onClick={this.handleSure} autoFocus>
+                            删除
                         </Button>
                     </DialogActions>
                 </Dialog>
