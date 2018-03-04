@@ -19,5 +19,6 @@ export declare class AddonService {
     installAddon(identification: string): Promise<Result | undefined>;
     uninstallAddon(identification: string): Promise<Result | undefined>;
     protected dropSchema(addon: Addon): Promise<void>;
+    protected loadInjections(reload?: boolean): void;
     protected syncSchema(addon: Addon): Promise<void>;
 }

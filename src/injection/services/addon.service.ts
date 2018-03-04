@@ -24,25 +24,7 @@ export class AddonService {
         private readonly injectionService: InjectionService,
         private readonly settingService: SettingService,
     ) {
-        this.injectionService
-            .loadInjections()
-            .filter((injection: Injection) => {
-                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-            })
-            .forEach(async (injection: Injection) => {
-                const identification = Reflect.getMetadata("identification", injection.target);
-                this.addons.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: await this.settingService.get(`addon.${identification}.enabled`, false),
-                    identification: identification,
-                    installed: await this.settingService.get(`addon.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
-            });
-        this.initialized = true;
+        this.loadInjections();
     }
 
     /**
@@ -56,6 +38,7 @@ export class AddonService {
             throw new Error("Addon do not exists!");
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Disable addon [${addon.identification}] successfully!`,
@@ -76,6 +59,7 @@ export class AddonService {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Enable addon [${addon.identification}] successfully!`,
@@ -139,6 +123,7 @@ export class AddonService {
         }
         await this.syncSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
+        this.loadInjections(true);
 
         return {
             message: `Install addon [${addon.identification}] successfully!`,
@@ -160,6 +145,7 @@ export class AddonService {
         }
         await this.dropSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Uninstall addon [${addon.identification}] successfully!`,
@@ -181,6 +167,31 @@ export class AddonService {
             ]);
             await builder.drop();
         }
+    }
+
+    protected loadInjections(reload: boolean = false) {
+        if (reload) {
+            this.addons.splice(0, this.addons.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection: Injection) => {
+                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
+            })
+            .forEach(async (injection: Injection) => {
+                const identification = Reflect.getMetadata("identification", injection.target);
+                this.addons.push({
+                    authors: Reflect.getMetadata("authors", injection.target),
+                    description: Reflect.getMetadata("description", injection.target),
+                    enabled: await this.settingService.get(`addon.${identification}.enabled`, false),
+                    identification: identification,
+                    installed: await this.settingService.get(`addon.${identification}.installed`, false),
+                    location: injection.location,
+                    name: Reflect.getMetadata("name", injection.target),
+                    version: Reflect.getMetadata("version", injection.target),
+                });
+            });
+        this.initialized = true;
     }
 
     /**
