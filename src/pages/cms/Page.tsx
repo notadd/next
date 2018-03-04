@@ -25,6 +25,7 @@ import Dialog, {
     DialogContent,
     DialogTitle,
 } from 'material-ui/Dialog';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -72,6 +73,7 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
     openMessageTip: boolean,
     openSearch: boolean,
@@ -82,6 +84,7 @@ type State = {
     modalNum: number,
     searchValue: string,
     list: Array<any>,
+    selection: Array<any>,
 };
 
 class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -89,8 +92,9 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         super(props, state);
         this.state = {
             checkedAll: false,
-            rowsPerPage: 2,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
             modalId: '',
             modalName: '',
@@ -100,54 +104,102 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             openSearch: false,
             searchValue: '',
             message: '',
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯1',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯2',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯3',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯4',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    author: '新闻资讯5',
-                },
-            ],
+            list: [],
+            selection: [],
         };
     }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getPagesLimit;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
+    }
+    refreshPage = () => {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getPagesLimit;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
+    }
     handleChangeAll = (name: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = true;
-                }
+                this.state.list[i].check = true;
             }
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = false;
-                }
+                this.state.list[i].check = false;
             }
         }
         this.setState({
@@ -155,19 +207,15 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -176,26 +224,34 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
     };
     handleClickRemove = (pro: any) => {
         this.setState({
-            modalName: pro.name,
+            modalName: pro.title,
             modalId: pro.id,
             open: true,
             modalType: 0,
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
                     this.setState({
                         open: true,
                         modalType: 1,
                         modalNum: arr.length,
+                        selection: ids,
                     });
-                } else {
+                }
+            } else {
+                window.console.log(this.state.list);
+                window.console.log(ids.length);
+                window.console.log(this.state.rowsPerPage);
+                newIds.push(this.state.list[i].id);
+                if (ids.length <= 0 && newIds.length === this.state.list.length) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的页面',
@@ -208,7 +264,37 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    PageCUD(deletePages:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除页面成功！',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
@@ -230,23 +316,50 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         window.console.log(this.state.searchValue);
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(getAllPage: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
                 }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getPagesLimit;
+                this.setState({
+                    list: res.pages,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
             }
-        }
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
         });
     };
 
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { totalItems, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
         return (
             <div className="cms">
                 <div className="top-action-module clearfix">
@@ -299,6 +412,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
@@ -318,13 +432,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         />
                                     </TableCell>
                                     <TableCell className={this.props.classes.tableCell} numeric>页面名称</TableCell>
-                                    <TableCell className={this.props.classes.tableCell} numeric>作者</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>别名</TableCell>
+                                    <TableCell className={this.props.classes.tableCell} numeric>分类</TableCell>
                                     <TableCell numeric/>
                                 </TableRow>
                             </TableHead>
                             <TableBody className="table-body">
-                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                {list.map((n, index) => {
                                         return (
                                             <TableRow
                                                 hover
@@ -342,10 +456,13 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     />
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.name}
+                                                    {n.title}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {n.alias}
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.tableCell} numeric>
+                                                    {n.classify}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/page/edit/' + n.id}>
@@ -386,7 +503,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={list.length / rowsPerPage}
+                            pageCount={totalItems / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
@@ -413,7 +530,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除页面名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除页面"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个页面吗?</h4>}
                     </DialogContent>
                     <DialogActions className="dialog-actions">

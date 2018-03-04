@@ -31,6 +31,7 @@ import Dialog, {
     DialogTitle,
 } from 'material-ui/Dialog';
 import * as classNames from 'classnames';
+import axios from 'axios';
 
 const styles = {
     evenRow: {
@@ -95,6 +96,7 @@ type State = {
     checkedAll: boolean,
     rowsPerPage: number,
     currentPage: number,
+    totalItems: number,
     open: boolean,
     openMessageTip: boolean,
     modalId: string,
@@ -102,6 +104,7 @@ type State = {
     modalType: number,
     modalNum: number,
     message: string,
+    selection: Array<any>,
     list: Array<any>,
     type: string,
     keyword: string,
@@ -119,65 +122,17 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.state = {
             right: false,
             checkedAll: false,
-            rowsPerPage: 3,
+            rowsPerPage: 0,
             currentPage: 0,
+            totalItems: 0,
             open: false,
             modalId: '',
             modalName: '',
             modalType: 0,
             modalNum: 0,
+            selection: [],
             openMessageTip: false,
-            list: [
-                {
-                    id: 1,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯1',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 2,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯2',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 3,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯3',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 4,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯4',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 5,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯5',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 6,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯4',
-                    time: '2017-12-01 13:20:59',
-                },
-                {
-                    id: 7,
-                    check: false,
-                    name: '标题名称测试标题名称测试标题名称测试标题名称测试',
-                    type: '新闻资讯5',
-                    time: '2017-12-01 13:20:59',
-                },
-            ],
+            list: [],
             message: '',
             type: '',
             isTop: '',
@@ -278,20 +233,98 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             current: 1,
         };
     }
+    componentDidMount() {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: 1,
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                });
+            }
+        });
+    }
+    refreshPage = () => {
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
+    }
     handleChangeAll = (name: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         if (event.target.checked) {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = true;
-                }
+                this.state.list[i].check = true;
             }
         } else {
             for (let i = 0; i < this.state.list.length; i += 1) {
-                if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                    this.state.list[i].check = false;
-                }
+                this.state.list[i].check = false;
             }
         }
         this.setState({
@@ -299,19 +332,15 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleChange = (pro: any) => (event: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         this.setState({
             checkedAll: true
         });
         pro.check = event.target.checked;
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === false) {
-                    this.setState({
-                        checkedAll: false
-                    });
-                }
+            if (this.state.list[i].check === false) {
+                this.setState({
+                    checkedAll: false
+                });
             }
         }
         this.setState({
@@ -327,19 +356,24 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleBatchRemove = () => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
         const arr = new Array();
+        const ids = new Array();
+        const newIds = new Array();
         for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check) {
-                    arr.push(this.state.list[i].check);
+            if (this.state.list[i].check) {
+                arr.push(this.state.list[i].check);
+                ids.push(this.state.list[i].id);
+                if (ids.length > 0) {
                     this.setState({
                         open: true,
                         modalType: 1,
                         modalNum: arr.length,
+                        selection: ids,
                     });
-                } else {
+                }
+            } else {
+                newIds.push(this.state.list[i].id);
+                if (ids.length === 0 && newIds.length === this.state.list.length) {
                     this.setState({
                         openMessageTip: true,
                         message: '请选择要删除的文章',
@@ -352,7 +386,37 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         this.setState({ open: false });
     };
     handleSubmit = () => {
-        this.setState({ open: false });
+        let ids = new Array();
+        if (this.state.modalType === 0) {
+            ids.push(this.state.modalId);
+        } else {
+            ids = this.state.selection;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                mutation {
+                    ArticleCU(deleteById:{
+                        id: [${ids}],
+                        pages: ${this.state.currentPage + 1},
+                        limitNum: 10,
+                    })
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState({
+                    openMessageTip: true,
+                    open: false,
+                    message: '删除数据成功',
+                });
+                window.setTimeout(
+                    () => {
+                        this.refreshPage();
+                    },
+                    1000,
+                );
+            }
+        });
     };
     handleCloseTip = () => {
         this.setState({ openMessageTip: false });
@@ -387,18 +451,45 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handlePageClick = (data: any) => {
-        const rowPage = this.state.rowsPerPage;
-        const currentPage = this.state.currentPage + 1;
-        for (let i = 0; i < this.state.list.length; i += 1) {
-            if (i < currentPage * rowPage && i >= (currentPage - 1) * rowPage) {
-                if (this.state.list[i].check === true) {
-                    this.state.list[i].check = false;
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(getArticleAll: {
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
                 }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const res = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: res.articles,
+                    totalItems: res.pagination.totalItems,
+                    rowsPerPage: res.pagination.pageSize,
+                    currentPage: res.pagination.currentPage - 1,
+                    checkedAll: false,
+                });
             }
-        }
-        this.setState({
-            currentPage: data.selected,
-            checkedAll: false,
         });
     };
     // displayRender = (labels: any) => {
@@ -409,7 +500,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
     //     window.console.log(option);
     // };
     render() {
-        const { currentPage, rowsPerPage, list, modalType, openMessageTip, message } = this.state;
+        const { rowsPerPage, totalItems, list, modalType, openMessageTip, message } = this.state;
         return (
             <div
                 className={
@@ -450,6 +541,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />
@@ -475,8 +567,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </TableRow>
                             </TableHead>
                             <TableBody className="table-body">
-                                {list.slice(currentPage * rowsPerPage, rowsPerPage * currentPage + rowsPerPage)
-                                    .map((n, index) => {
+                                {list.map((n, index) => {
                                         return (
                                             <TableRow
                                                 hover
@@ -497,10 +588,10 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.type}
+                                                    {n.classify}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.time}
+                                                    {n.publishedTime}
                                                 </TableCell>
                                                 <TableCell className="table-action-btn" numeric>
                                                     <Link to={'/cms/article/edit/' + n.id}>
@@ -541,7 +632,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                             nextLabel={'>'}
                             breakLabel={<a href="javascript:;">...</a>}
                             breakClassName={'break-me'}
-                            pageCount={list.length / rowsPerPage}
+                            pageCount={totalItems / rowsPerPage}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={2}
                             onPageChange={this.handlePageClick}
@@ -568,7 +659,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     </DialogTitle>
                     <DialogContent className="dialog-content">
                         {
-                            modalType === 0 ? <h4>确定要删除文章名称"{this.state.modalName}"吗?</h4> :
+                            modalType === 0 ? <h4>确定要删除文章"{this.state.modalName}"吗?</h4> :
                                 <h4>确定要删除这"{this.state.modalNum}"个文章吗?</h4>}
 
                     </DialogContent>

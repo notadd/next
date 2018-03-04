@@ -9,7 +9,13 @@ import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
+// import moment from 'moment';
 import { DatePicker } from 'material-ui-pickers';
+import Cascader from 'antd/lib/cascader';
+import 'antd/lib/cascader/style/css.js';
+import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
+import { CircularProgress } from 'material-ui/Progress';
 
 const styles = {
     root: {
@@ -48,35 +54,46 @@ const styles = {
     editor: {},
 };
 type State = {
-    webName: string,
+    name: string,
     img: string,
-    type: string,
-    topType: string,
+    classify: string,
+    classifyId: number,
+    topPlace: string,
     types: Array<any>,
     topTypes: Array<any>,
     abstract: string,
-    time: string,
-    link: string,
-    origin: string,
-    kind: string,
+    publishedTime: any,
+    sourceUrl: string,
+    source: string,
     pageType: string,
-    isHidden: boolean,
+    pageId: number,
+    hidden: boolean,
     path: any,
     editor: any,
+    loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
     constructor (props: any, state: any) {
         super(props, state);
         let type = '';
+        let proId = '';
+        const str = props.location.pathname;
         if (props.location.pathname.indexOf('/add') > 0) {
             type = '1';
+        } else {
+            proId = str.substring(str.lastIndexOf('\/') + 1, str.length);
         }
         this.state = {
-            webName: 'NotAdd',
-            img: 'LOGO.png',
-            type: '',
-            topType: '',
+            name: '',
+            img: '',
+            classify: '',
+            classifyId: 0,
+            topPlace: '',
             types: [
                 {
                     id: '12',
@@ -93,43 +110,178 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             ],
             topTypes: [
                 {
-                    id: '00',
+                    id: 'global',
                     type: '全局',
                 },
                 {
-                    id: '01',
+                    id: 'current',
+                    type: '当前分类',
+                },
+                {
+                    id: 'level1',
                     type: '一级分类',
                 },
                 {
-                    id: '02',
+                    id: 'level2',
                     type: '二级分类',
                 },
                 {
-                    id: '03',
+                    id: 'level3',
                     type: '三级分类',
-                },
-                {
-                    id: '04',
-                    type: '当前分类',
                 },
             ],
             abstract: '',
-            time: '',
-            link: 'http://',
-            origin: 'www.ibenchu.com',
-            kind: '新闻资讯',
-            isHidden: false,
+            publishedTime: '',
+            sourceUrl: '',
+            source: '',
+            hidden: false,
             pageType: type,
+            pageId: Number(proId),
             path: 'neditor/',
             editor: {
                 id: 0,
                 content: '',
             },
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
     }
+    componentDidMount() {
+        if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getArticlesNoLimit(getArticleById: {
+                        id: ${this.state.pageId},
+                    }){
+                        id,
+                        name,
+                        classify,
+                        classifyId,
+                        url,
+                        source,
+                        sourceUrl,
+                        topPlace,
+                        hidden,
+                        recycling,
+                        publishedTime,
+                        abstract,
+                        content,
+                        createAt,
+                        updateAt,
+                        check,
+                    }
+                }
+            `,
+            }).then(response => {
+                const data = response.data.data.getArticlesNoLimit[0];
+                window.console.log(data);
+                this.setState({
+                    name: data.name,
+                    abstract: data.abstract,
+                    classifyId: data.classifyId,
+                    classify: data.classify,
+                    publishedTime: data.publishedTime,
+                    source: data.source,
+                    sourceUrl: data.sourceUrl,
+                    topPlace: data.topPlace,
+                    editor: {
+                        content: data.content,
+                    },
+                });
+            });
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
+            });
+            this.setState({ types: arr });
+        });
+    }
     handleDateChange = (date: any) => {
-        let currentTime = new Date(date).toLocaleDateString();
-        this.setState({ time: currentTime });
+        // let currentTime = new Date(date).toLocaleDateString();
+        // window.console.log(currentTime);
+        this.setState({ publishedTime: date });
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -144,13 +296,114 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             }
         });
     };
-    handleSubmit = (event: any) => {
-        event.preventDefault();
+    handleSubmit = () => {
+        let pageId = 0;
+        if (this.state.pageType !== '1') {
+            pageId = this.state.pageId;
+        } else {
+            pageId = 0;
+        }
+        window.console.log(this.state.hidden);
+        if (this.state.pageType === '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ArticleCU(createArt: {
+                            name: "${this.state.name}",
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            abstract: "${this.state.abstract}",
+                            content: "${this.state.editor.content}",
+                            topPlace: ${this.state.topPlace},
+                            hidden: ${this.state.hidden},
+                            publishedTime: "${this.state.publishedTime}",
+                            source: "${this.state.source}",
+                            sourceUrl: "${this.state.sourceUrl}",
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ArticleCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '提交成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        } else if (this.state.pageType !== '1') {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                         ArticleCU(updateArt: {
+                            id: ${pageId},
+                            name: "${this.state.name}",
+                            content: "${this.state.editor.content}",
+                            classify: "${this.state.classify}",
+                            classifyId: ${this.state.classifyId},
+                            abstract: "${this.state.abstract}",
+                            topPlace: ${this.state.topPlace},
+                            hidden: ${this.state.hidden},
+                            publishedTime: "${this.state.publishedTime}",
+                            source: "${this.state.source}",
+                            sourceUrl: "${this.state.sourceUrl}",
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.PageCUD);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '修改信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+        }
     };
     getImgURL = (event: any) => {
         this.setState({
             img: event.target.value.substr(12),
         });
+    };
+    handleChangeType = (value: any, select: any) => {
+        this.setState({
+            classify: select[select.length - 1].label,
+            classifyId: value[value.length - 1],
+        });
+    };
+    handleCloseTip = () => {
+        this.setState({ open: false });
     };
     render() {
         return (
@@ -185,8 +438,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('webName')}
-                                        value={this.state.webName}
+                                        onChange={this.handleChange('name')}
+                                        value={this.state.name}
                                     />
                                 </FormControl>
                                 <div className="editor">
@@ -233,26 +486,19 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     >
                                         分类
                                     </InputLabel>
-                                    <Select
-                                        className="form-select-underline"
-                                        value={this.state.type}
-                                        onChange={this.handleChange('type')}
-                                        input={<Input name="type"/>}
-                                    >
-                                        {
-                                            this.state.types.map((item: any, index: number) => {
-                                                return (
-                                                    <MenuItem
-                                                        className="input-drop-paper"
-                                                        value={index}
-                                                        key={index}
-                                                    >
-                                                        {item.type}
-                                                    </MenuItem>
-                                                );
-                                            })
-                                        }
-                                    </Select>
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.classify}
+                                    />
+                                    <Cascader
+                                        className="cascader-picker"
+                                        options={this.state.types}
+                                        onChange={this.handleChangeType}
+                                        notFoundContent="Not Found"
+                                    />
                                 </FormControl>
                                 <FormControl
                                     fullWidth
@@ -286,8 +532,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     </InputLabel>
                                     <Select
                                         className="form-select-underline"
-                                        value={this.state.topType}
-                                        onChange={this.handleChange('topType')}
+                                        value={this.state.topPlace}
+                                        onChange={this.handleChange('topPlace')}
                                         input={<Input name="type" id="type-simple" />}
                                     >
                                         {
@@ -295,7 +541,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                                 return (
                                                     <MenuItem
                                                         className="input-drop-paper"
-                                                        value={index}
+                                                        value={item.id}
                                                         key={index}
                                                     >
                                                         {item.type}
@@ -320,40 +566,24 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                             }}
                                             onChange={
                                                 (event: any, checked: boolean) => {
-                                                    this.setState({ isHidden: checked});
+                                                    this.setState({ hidden: checked});
                                                 }}
-                                            checked={this.state.isHidden}
+                                            checked={this.state.hidden}
                                         />
                                     }
                                 />
-                                <FormControl
-                                    fullWidth
-                                    className={this.props.classes.formControlMargin}
-                                    style={{ position: 'relative'}}
-                                >
-                                    <InputLabel
-                                        htmlFor="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                    >
-                                        发布时间
-                                    </InputLabel>
-                                    <Input
-                                        id="name-simple"
-                                        className={this.props.classes.formLabelFont}
-                                        classes={{
-                                            underline: this.props.classes.underline,
-                                        }}
-                                        value={this.state.time}
-                                    />
-                                    <DatePicker
-                                        className="data-picker"
-                                        keyboard
-                                        clearable
-                                        value={this.state.time}
-                                        onChange={this.handleDateChange}
-                                        animateYearScrolling={false}
-                                    />
-                                </FormControl>
+                                <DatePicker
+                                    className="data-picker"
+                                    style={{marginBottom: '32px'}}
+                                    keyboard
+                                    clearable
+                                    returnMoment
+                                    format="MMMM Do, YYYY"
+                                    label="发布时间"
+                                    value={this.state.publishedTime}
+                                    onChange={this.handleDateChange}
+                                    animateYearScrolling={false}
+                                />
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
@@ -368,8 +598,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('origin')}
-                                        value={this.state.origin}
+                                        onChange={this.handleChange('source')}
+                                        value={this.state.source}
                                     />
                                 </FormControl>
                                 <FormControl
@@ -386,8 +616,8 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         classes={{
                                             underline: this.props.classes.underline,
                                         }}
-                                        onChange={this.handleChange('link')}
-                                        value={this.state.link}
+                                        onChange={this.handleChange('sourceUrl')}
+                                        value={this.state.sourceUrl}
                                     />
                                 </FormControl>
                             </Grid>
@@ -395,12 +625,36 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                         <Button
                             raised
                             color="primary"
-                            style={{marginTop: 34, fontSize: 12, borderRadius: 4}}
+                            style={{
+                                marginTop: 34,
+                                fontSize: 12,
+                                borderRadius: 4
+                            }}
+                            disabled={
+                                this.state.loading
+                            }
+                            className={
+                                this.state.loading ?
+                                    'disabled-btn' : ''
+                            }
                             onClick={this.handleSubmit}
                         >
-                            确认提交
+                            {this.state.loading ?  <div><CircularProgress size={24}/></div> : '确认提交'}
                         </Button>
                     </form>
+                    <Snackbar
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
             </div>
         );
