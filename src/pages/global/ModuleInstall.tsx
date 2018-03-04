@@ -170,16 +170,18 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                                    {
                                                        n.status ? <IconButton
                                                            className={this.props.classes.menuBtn}
-                                                           onClick={() => this.handleClickOpen(n)}
                                                            title="删除"
                                                        >
-                                                           <DeleteIcon />
+                                                           <DeleteIcon
+                                                               onClick={() => this.handleClickOpen(n)}
+                                                           />
                                                        </IconButton> : <IconButton
                                                            className={this.props.classes.downBtn}
-                                                           onClick={() => this.handleDownLoad()}
                                                            title="下载"
                                                        >
-                                                           <FileDownload />
+                                                           <FileDownload
+                                                               onClick={() => this.handleDownLoad()}
+                                                           />
                                                        </IconButton>
                                                    }
                                                </TableCell>
