@@ -1,5 +1,5 @@
 import { dirname, join } from "path";
-import { exists } from "fs";
+import { existsSync } from "fs";
 import { Module } from "../types";
 
 export function getPackagePathByModule(module: Module): string {
@@ -7,7 +7,7 @@ export function getPackagePathByModule(module: Module): string {
         if (base.length === 0) {
             return "";
         } else {
-            if (exists(join(base, "package.json"))) {
+            if (existsSync(join(base, "package.json"))) {
                 return base;
             } else {
                 return getPath(dirname(base));

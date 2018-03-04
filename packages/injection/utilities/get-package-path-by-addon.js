@@ -8,7 +8,7 @@ function getPackagePathByAddon(addon) {
             return "";
         }
         else {
-            if (fs_1.exists(path_1.join(base, "package.json"))) {
+            if (fs_1.existsSync(path_1.join(base, "package.json"))) {
                 return base;
             }
             else {
