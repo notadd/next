@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
@@ -115,6 +116,35 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
             open: true,
         });
     };
+    componentDidMount() {
+        const self = this;
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    getModules(filters: {installed: false}) {
+                    authors {
+                        username,
+                        email
+                    },
+                    description,
+                    enabled,
+                    identification,
+                    installed,
+                    location,
+                    name,
+                    version
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data.getModules;
+                self.setState({
+                    list: results
+                });
+            }
+        });
+    }
     handleDownLoad = () => {
         window.console.log('download');
     };
@@ -123,6 +153,30 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
     };
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
+    };
+    handleWithAuthors = (authors: any) => {
+        const data: Array<{email?: string, username?: string}> = [];
+        let result: Array<string> = [];
+        if (typeof authors === 'object') {
+            Object.keys(authors).map((value: string) => {
+                if (typeof authors[value] === 'object') {
+                    data.push(authors[value]);
+                }
+            });
+        }
+        data.forEach(value => {
+            let info: string = '';
+            if (value.username) {
+                info += value.username;
+                if (value.email) {
+                    info += `<${value.email}>`;
+                }
+            }
+            if (info.length) {
+                result.push(info);
+            }
+        });
+        return result.join(',');
     };
     render() {
         const { currentPage, rowsPerPage, list } = this.state;
@@ -150,20 +204,20 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                                             <TableRow
                                                 hover
                                                 className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                                key={n.id}
+                                                key={index}
                                             >
                                                 <TableCell className={this.props.classes.tableCell} numeric>
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {this.handleWithAuthors(n.authors)}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.descri}
+                                                    {n.description}
                                                 </TableCell>
                                                 <TableCell numeric>
                                                     {
-                                                        n.status ? <IconButton
+                                                        n.installed ? <IconButton
                                                             className={this.props.classes.menuBtn}
                                                             onClick={() => this.handleClickOpen(n)}
                                                             title="删除"
