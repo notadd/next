@@ -143,7 +143,7 @@ export class AddonService {
         if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
             throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
-        await this.dropSchema(addon);
+        // await this.dropSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
         this.loadInjections(true);
 

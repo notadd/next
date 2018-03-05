@@ -147,7 +147,6 @@ let ModuleService = class ModuleService {
             if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
-            yield this.dropSchema(module);
             yield this.settingService.setSetting(`module.${module.identification}.installed`, "0");
             this.loadInjections(true);
             return {

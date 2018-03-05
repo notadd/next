@@ -126,7 +126,6 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
-            yield this.dropSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
             this.loadInjections(true);
             return {

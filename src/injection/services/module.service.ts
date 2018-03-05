@@ -165,7 +165,7 @@ export class ModuleService {
         if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
-        await this.dropSchema(module);
+        // await this.dropSchema(module);
         await this.settingService.setSetting(`module.${module.identification}.installed`, "0");
         this.loadInjections(true);
 
