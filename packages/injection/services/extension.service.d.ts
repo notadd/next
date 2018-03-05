@@ -16,4 +16,5 @@ export declare class ExtensionService {
     }): Promise<Array<Extension>>;
     installExtension(identification: string): Promise<Result | undefined>;
     uninstallExtension(identification: string): Promise<Result | undefined>;
+    protected loadInjections(reload?: boolean): void;
 }

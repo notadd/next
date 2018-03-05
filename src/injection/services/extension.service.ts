@@ -22,26 +22,7 @@ export class ExtensionService {
         private readonly injectionService: InjectionService,
         private readonly settingService: SettingService,
     ) {
-        this.injectionService
-            .loadInjections()
-            .filter((injection: Injection) => {
-                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-            })
-            .forEach(async(injection: Injection) => {
-                const identification = Reflect.getMetadata("identification", injection.target);
-                this.extensions.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: await this.settingService.get(`extension.${identification}.enabeld`, false),
-                    identification: identification,
-                    installed: await this.settingService.get(`extension.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    shell: Reflect.getMetadata("shell", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
-            });
-        this.initialized = true;
+        this.loadInjections();
     }
 
     /**
@@ -110,6 +91,7 @@ export class ExtensionService {
         }
 
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
+        this.loadInjections(true);
 
         return {
             message: `Install extension [${extension.identification}] successfully!\n${result}`,
@@ -140,9 +122,36 @@ export class ExtensionService {
         }
 
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
         };
+    }
+
+    protected loadInjections(reload = false) {
+        if (reload) {
+            this.extensions.splice(0, this.extensions.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection: Injection) => {
+                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
+            })
+            .forEach(async(injection: Injection) => {
+                const identification = Reflect.getMetadata("identification", injection.target);
+                this.extensions.push({
+                    authors: Reflect.getMetadata("authors", injection.target),
+                    description: Reflect.getMetadata("description", injection.target),
+                    enabled: await this.settingService.get(`extension.${identification}.enabeld`, false),
+                    identification: identification,
+                    installed: await this.settingService.get(`extension.${identification}.installed`, false),
+                    location: injection.location,
+                    name: Reflect.getMetadata("name", injection.target),
+                    shell: Reflect.getMetadata("shell", injection.target),
+                    version: Reflect.getMetadata("version", injection.target),
+                });
+            });
+        this.initialized = true;
     }
 }
