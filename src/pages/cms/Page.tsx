@@ -313,7 +313,48 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleSearch = () => {
-        window.console.log(this.state.searchValue);
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getPagesLimit(serachPages: {
+                        keywords: "${this.state.searchValue}",
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getPagesLimit;
+                this.setState({
+                    list: data.pages,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    openMessageTip: true,
+                    message: '刷新数据完成',
+                });
+            }
+        });
     };
     handlePageClick = (data: any) => {
         axios.post('http://192.168.1.121:3000/graphql?', {

@@ -235,6 +235,10 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                             describe,
                             color,
                             groupId,
+                            isCurrentType,
+                            isChildType,
+                            isAllTop,
+                            isPreTop,
                         },
                         MessageCodeError
                     }
@@ -243,7 +247,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             }).then(response => {
                 const type = response.data.data.getClassifyById.classifyEntity[0];
                 const data = response.data.data.getClassifyById.classifyEntity[1];
-                window.console.log(data);
                 this.setState({
                     title: data.title,
                     chainUrl: data.chainUrl,
@@ -251,6 +254,10 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                     describe: data.describe,
                     color: data.color,
                     classifyId: data.groupId,
+                    isCurrentType: data.isCurrentType,
+                    isChildType: data.isChildType,
+                    isAllTop: data.isAllTop,
+                    isPreTop: data.isPreTop,
                     classify: type.title,
                 });
             });
@@ -415,6 +422,10 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                 describe: "${this.state.describe}",
                                 color: "${this.state.color}",
                                 groupId: ${this.state.classifyId},
+                                isCurrentType: ${this.state.isCurrentType},
+                                isChildType: ${this.state.isChildType},
+                                isAllTop: ${this.state.isAllTop},
+                                isPreTop: ${this.state.isPreTop},
                             }
                         })
                     }
@@ -428,7 +439,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                 error: false,
                                 open: true,
                                 loading: false,
-                                errorMessage: '提交成功!',
+                                errorMessage: '提交信息成功!',
                             },
                         );
                     } else if (!data.Continue) {
@@ -450,14 +461,18 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                         ClassifyCU(updateClass: {
                             useFor: art,
                             id: ${pageId},
-                            createClass: {
-                                useFor: art,
+                            updateClass: {
+                                id: ${pageId},
                                 title: "${this.state.title}",
                                 classifyAlias: "${this.state.classifyAlias}",
                                 chainUrl: "${this.state.chainUrl}",
                                 describe: "${this.state.describe}",
                                 color: "${this.state.color}",
                                 groupId: ${this.state.classifyId},
+                                isCurrentType: ${this.state.isCurrentType},
+                                isChildType: ${this.state.isChildType},
+                                isAllTop: ${this.state.isAllTop},
+                                isPreTop: ${this.state.isPreTop},
                             }
                         })
                     }
@@ -873,19 +888,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                     </Table>
                                 </div>
                             </div>
-                            <Snackbar
-                                classes={{
-                                    root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
-                                }}
-                                open={this.state.open}
-                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                onClose={this.handleCloseTip}
-                                transition={this.state.transition}
-                                SnackbarContentProps={{
-                                    'aria-describedby': 'message-id',
-                                }}
-                                message={<span id="message-id">{this.state.errorMessage}</span>}
-                            />
                             <div className="table-pagination">
                                 <ReactPaginate
                                     previousLabel={'<'}
@@ -931,6 +933,19 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                         </div>
                     }
                 </Paper>
+                <Snackbar
+                    classes={{
+                        root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                    }}
+                    open={this.state.open}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleCloseTip}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
