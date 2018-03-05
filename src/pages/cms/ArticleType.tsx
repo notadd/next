@@ -111,6 +111,9 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
             this.setState({ treeData: structures });
         });
     }
+    refreshPage = () => {
+        this.componentDidMount();
+    };
     handleClose = () => {
         this.setState({ openModal: false });
     };
@@ -145,6 +148,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                                 errorMessage: '删除分类信息成功!',
                             },
                         );
+                        this.componentDidMount();
                     } else if (!data.Continue) {
                         this.setState(
                             {
@@ -195,6 +199,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                         </Link>
                         <IconButton
                             className={this.props.classes.menuBtn}
+                            onClick={this.refreshPage}
                             title="刷新"
                         >
                             <Cached />

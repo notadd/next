@@ -101,28 +101,34 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
             axios.post('http://192.168.1.121:3000/graphql?', {
                 query: `
                 query {
-                    getClassifys(getClassifyById: {
+                    getClassifyById(getClassifyById: {
                         id: ${this.state.pageId},
                         useFor: page,
-                    }){
-                        id,
-                        title,
-                        classifyAlias,
-                        chainUrl,
-                        describe,
-                        color,
-                        groupId,
+                    }) {
+                        classifyEntity {
+                            id,
+                            title,
+                            classifyAlias,
+                            chainUrl,
+                            describe,
+                            color,
+                            groupId,
+                        },
+                        MessageCodeError
                     }
                 }
             `,
             }).then(response => {
-                const data = response.data.data.getClassifys[0];
+                const type = response.data.data.getClassifyById.classifyEntity[0];
+                const data = response.data.data.getClassifyById.classifyEntity[1];
                 this.setState({
                     title: data.title,
                     chainUrl: data.chainUrl,
                     classifyAlias: data.classifyAlias,
                     describe: data.describe,
                     color: data.color,
+                    classifyId: data.groupId,
+                    classify: type.title,
                 });
             });
         }
@@ -298,8 +304,8 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                         ClassifyCU(updateClass: {
                             useFor: page,
                             id: ${pageId},
-                            createClass: {
-                                useFor: page,
+                            updateClass: {
+                                id: ${pageId},
                                 title: "${this.state.title}",
                                 classifyAlias: "${this.state.classifyAlias}",
                                 chainUrl: "${this.state.chainUrl}",

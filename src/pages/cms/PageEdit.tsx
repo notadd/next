@@ -129,11 +129,10 @@ class PageEdit extends React.Component<Props, State> {
             `,
             }).then(response => {
                 const data = response.data.data.getPageById;
-                window.console.log(data);
                 const arr = new Array();
                 if (data.contents.length === 0) {
                     arr.push({
-                        id: 0,
+                        num: 0,
                         content: '',
                         path: 'neditor/',
                     });
@@ -153,12 +152,11 @@ class PageEdit extends React.Component<Props, State> {
                     classify: data.classify,
                     list: arr,
                 });
-                window.console.log(this.state.list);
             });
         } else {
             const arr = Object.assign([], this.state.list);
             arr.push({
-                id: 0,
+                num: 0,
                 content: '',
                 path: 'neditor/',
             });
@@ -250,8 +248,8 @@ class PageEdit extends React.Component<Props, State> {
             this.setState({ types: arr });
         });
     }
-    handleEditorChange = (content: any, id: any) => {
-        this.state.list[id].content = content;
+    handleEditorChange = (content: any, num: any) => {
+        // this.state.list[num].content = content;
         this.setState({
             list: this.state.list,
         });
@@ -259,7 +257,7 @@ class PageEdit extends React.Component<Props, State> {
     handleAddEditor = () => {
         const arr = Object.assign([], this.state.list);
         arr.push({
-            id: this.state.number + 1,
+            num: this.state.number + 1,
             content: '',
             path: 'neditor/',
         });
@@ -278,6 +276,7 @@ class PageEdit extends React.Component<Props, State> {
         const arrUpdate = new Array();
         const arrUpdate1 = new Array();
         let pageId = 0;
+        window.console.log(this.state.list);
         const arr = Object.assign([], this.state.list);
         arr.forEach((item: any) => {
             newArr.push(item.content);

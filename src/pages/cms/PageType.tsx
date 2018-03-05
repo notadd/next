@@ -11,6 +11,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import ErrorIcon from 'material-ui-icons/ErrorOutline';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Snackbar from 'material-ui/Snackbar';
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -111,6 +112,9 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
             this.setState({ treeData: structures });
         });
     }
+    refreshPage = () => {
+        this.componentDidMount();
+    };
     handleClose = () => {
         this.setState({ openModal: false });
     };
@@ -145,6 +149,7 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 errorMessage: '删除分类信息成功!',
                             },
                         );
+                        this.componentDidMount();
                     } else if (!data.Continue) {
                         this.setState(
                             {
@@ -196,6 +201,7 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                             </Link>
                             <IconButton
                                 className={this.props.classes.menuBtn}
+                                onClick={this.refreshPage}
                                 title="刷新"
                             >
                                 <Cached />
@@ -230,6 +236,19 @@ class PageType extends React.Component<WithStyles<keyof typeof styles>, State> {
                             })}
                         />
                     </div>
+                    <Snackbar
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
                 <Dialog
                     open={this.state.openModal}
