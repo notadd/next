@@ -577,7 +577,6 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     style={{marginBottom: '32px'}}
                                     keyboard
                                     clearable
-                                    returnMoment
                                     format="MMMM Do, YYYY"
                                     label="发布时间"
                                     value={this.state.publishedTime}
