@@ -8,6 +8,8 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import FileDownload from 'material-ui-icons/FileDownload';
 import ClearIcon from 'material-ui-icons/Clear';
+import { CircularProgress } from 'material-ui/Progress';
+import Snackbar from 'material-ui/Snackbar';
 import Table, {
     TableBody,
     TableCell,
@@ -54,11 +56,15 @@ const styles = {
 };
 type State = {
     open: boolean,
-    modalId: string,
+    modalIdentification: string,
     modalName: string,
     rowsPerPage: number,
     currentPage: number,
     list: any,
+    loading: boolean,
+    transition: any,
+    messageOpen: boolean,
+    errorMessage: string,
 };
 
 class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -66,22 +72,60 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
         super(props, state);
         this.state = {
             open: false,
-            modalId: '',
+            modalIdentification: '',
             modalName: '',
             rowsPerPage: 2,
             currentPage: 0,
             list: [],
+            loading: false,
+            transition: undefined,
+            messageOpen: false,
+            errorMessage: '',
         };
     }
     handleClickOpen = (pro: any) => {
         this.setState({
             modalName: pro.name,
-            modalId: pro.id,
+            modalIdentification: pro.identification,
             open: true,
         });
     };
-    handleDownLoad = () => {
-        window.console.log('download');
+    handleDownLoad = (name: string) => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                mutation {
+                    getModules(identification: "${name}") {
+                    code,
+                    message
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: '安装成功！',
+                    },
+                );
+                this.componentDidMount();
+            } else {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: response.data.errors[0].message,
+                    },
+                );
+                this.componentDidMount();
+            }
+        });
     };
     handleClose = () => {
         this.setState({ open: false });
@@ -89,12 +133,53 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
     handlePageClick = (data: any) => {
         this.setState({ currentPage: data.selected });
     };
+    handleSure = () => {
+        this.handleDelete(this.state.modalIdentification);
+    };
+    handleDelete = (name: any) => {
+        this.setState(
+            {
+                loading: true,
+            },
+        );
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                mutation {
+                    uninstallModules(identification: "${name}") {
+                    code,
+                    message
+                    },
+                }
+            `,
+        }).then(response => {
+            window.console.log(response);
+            if (!response.data.errors) {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: '删除成功！',
+                    },
+                );
+                this.componentDidMount();
+            } else {
+                this.setState(
+                    {
+                        messageOpen: true,
+                        loading: false,
+                        errorMessage: response.data.errors[0].message,
+                    },
+                );
+                this.componentDidMount();
+            }
+        });
+    };
     componentDidMount() {
         const self = this;
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 query {
-                    getModules(filters: {installed: false}) {
+                    getModules(filters: {}) {
                     authors {
                         username,
                         email
@@ -170,18 +255,38 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                                    {
                                                        n.status ? <IconButton
                                                            className={this.props.classes.menuBtn}
+                                                           onClick={() => this.handleClickOpen(n)}
                                                            title="删除"
                                                        >
-                                                           <DeleteIcon
-                                                               onClick={() => this.handleClickOpen(n)}
-                                                           />
-                                                       </IconButton> : <IconButton
+                                                               {
+                                                                   this.state.loading ?
+                                                                       <CircularProgress
+                                                                           style={{
+                                                                               color: '#fff'
+                                                                           }}
+                                                                           size={20}
+                                                                       />
+                                                                       :
+                                                                       <DeleteIcon />
+                                                               }
+                                                       </IconButton>
+                                                           :
+                                                       <IconButton
+                                                           onClick={() => this.handleDownLoad(n.identification)}
                                                            className={this.props.classes.downBtn}
                                                            title="下载"
                                                        >
-                                                           <FileDownload
-                                                               onClick={() => this.handleDownLoad()}
-                                                           />
+                                                           {
+                                                               this.state.loading ?
+                                                                   <CircularProgress
+                                                                       style={{
+                                                                           color: '#fff'
+                                                                       }}
+                                                                       size={20}
+                                                                   />
+                                                                   :
+                                                                   <FileDownload />
+                                                           }
                                                        </IconButton>
                                                    }
                                                </TableCell>
@@ -229,11 +334,21 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                         <Button onClick={this.handleClose}>
                             取消
                         </Button>
-                        <Button onClick={this.handleClose} autoFocus>
-                            确认提交
+                        <Button onClick={this.handleSure} autoFocus>
+                            删除
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Snackbar
+                    open={this.state.messageOpen}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    onClose={this.handleClose}
+                    transition={this.state.transition}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{this.state.errorMessage}</span>}
+                />
             </div>
         );
     }
