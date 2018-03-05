@@ -13,12 +13,11 @@ import ModeEdit from 'material-ui-icons/ModeEdit';
 import ClearIcon from 'material-ui-icons/Clear';
 import ColorPicker from 'rc-color-picker';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Select from 'material-ui/Select';
 import Switch from 'material-ui/Switch';
-import { MenuItem } from 'material-ui/Menu';
 import 'rc-color-picker/assets/index.css';
 import { CircularProgress } from 'material-ui/Progress';
 import Cascader from 'antd/lib/cascader';
+import Snackbar from 'material-ui/Snackbar';
 import 'antd/lib/cascader/style/css.js';
 import Table, {
     TableBody,
@@ -136,8 +135,6 @@ type State = {
     isAllTop: boolean,
     isPreTop: boolean,
 
-    topPlace: string,
-
     modalOpen: boolean,
     modalId: string,
     modalName: string,
@@ -166,7 +163,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
         }
         this.state = {
             classify: '',
-            classifyId: 0,
+            classifyId: 1,
             tab: 0,
             title: '',
             classifyAlias: '',
@@ -177,7 +174,6 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             pageId: Number(proId),
             type: '',
             types: [],
-            topPlace: '无',
             isCurrentType: true,
             isChildType: false,
             isAllTop: true,
@@ -254,8 +250,10 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                     classify: data.classify,
                 });
             });
-            axios.post('http://192.168.1.121:3000/graphql?', {
-                query: `
+        }
+
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
                 query {
                     getClassifys(getAllClassify: {
                         useFor: art,
@@ -290,54 +288,53 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                     }
                 }
             `,
-            }).then(response => {
-                let arr = new Array();
-                const structures = response.data.data.getClassifys[0].children;
-                arr = Object.keys(structures).map(index => {
-                    const item = structures[index];
-                    item.label = item.title;
-                    item.value = item.id;
-                    const children = item.children;
-                    if (item.children !== null) {
-                        item.children = Object.keys(children).map(i => {
-                            const sub = children[i];
-                            sub.label = sub.title;
-                            sub.value = sub.id;
-                            const childs = sub.children;
-                            if (sub.children !== null) {
-                                sub.children = Object.keys(childs).map(s => {
-                                    const su = childs[s];
-                                    su.label = su.title;
-                                    su.value = su.id;
-                                    const childs2 = su.children;
-                                    if (su.children !== null) {
-                                        su.children = Object.keys(childs2).map(s2 => {
-                                            const fours = childs2[s2];
-                                            fours.label = fours.title;
-                                            fours.value = fours.id;
-                                            if (fours.children !== null) {
-                                                const childs3 = fours.children;
-                                                fours.children = Object.keys(childs3).map(s3 => {
-                                                    const five = childs3[s3];
-                                                    five.label = five.title;
-                                                    five.value = five.id;
-                                                    return five;
-                                                });
-                                            }
-                                            return fours;
-                                        });
-                                    }
-                                    return su;
-                                });
-                            }
-                            return sub;
-                        });
-                    }
-                    return item;
-                });
-                this.setState({ types: arr });
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
             });
-        }
+            this.setState({ types: arr });
+        });
     }
     handleChangeInput = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -375,6 +372,9 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
     handleClose = () => {
         this.setState({ modalOpen: false });
     };
+    handleCloseTip = () => {
+        this.setState({ open: false });
+    };
     handleSubmitDialog = () => {
         this.setState({ modalOpen: false });
     };
@@ -410,7 +410,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                 chainUrl: "${this.state.chainUrl}",
                                 describe: "${this.state.describe}",
                                 color: "${this.state.color}",
-                                groupId: 0,
+                                groupId: ${this.state.classifyId},
                             }
                         })
                     }
@@ -646,55 +646,29 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                         </ColorPicker>
                                     </FormControl>
                                 </Grid>
-                                {
-                                    this.state.pageType === '1' ?
-                                        <Grid item xs={12} sm={6}>
-                                            <FormControl fullWidth>
-                                                <InputLabel
-                                                    htmlFor="name-simple"
-                                                    className={this.props.classes.formLabelFont}
-                                                >
-                                                    上级分类
-                                                </InputLabel>
-                                                <Select
-                                                    className="form-select-underline"
-                                                    value={this.state.topPlace}
-                                                    onChange={this.handleChangeInput('topPlace')}
-                                                    input={<Input name="type" id="type-simple" />}
-                                                >
-                                                    <MenuItem
-                                                        className="input-drop-paper"
-                                                        value={this.state.topPlace}
-                                                    >
-                                                        无
-                                                    </MenuItem>
-                                                </Select>
-                                            </FormControl>
-                                        </Grid> :
-                                        <Grid item xs={12} sm={6}>
-                                            <FormControl fullWidth>
-                                                <InputLabel
-                                                    htmlFor="name-simple"
-                                                    className={this.props.classes.formLabelFont}
-                                                >
-                                                    上级分类
-                                                </InputLabel>
-                                                <Input
-                                                    className={this.props.classes.formLabelFont}
-                                                    classes={{
-                                                        underline: this.props.classes.underline,
-                                                    }}
-                                                    value={this.state.classify}
-                                                />
-                                                <Cascader
-                                                    className="cascader-picker"
-                                                    options={this.state.types}
-                                                    onChange={this.handleChangeType}
-                                                    notFoundContent="Not Found"
-                                                />
-                                            </FormControl>
-                                        </Grid>
-                                }
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl fullWidth>
+                                        <InputLabel
+                                            htmlFor="name-simple"
+                                            className={this.props.classes.formLabelFont}
+                                        >
+                                            上级分类
+                                        </InputLabel>
+                                        <Input
+                                            className={this.props.classes.formLabelFont}
+                                            classes={{
+                                                underline: this.props.classes.underline,
+                                            }}
+                                            value={this.state.classify}
+                                        />
+                                        <Cascader
+                                            className="cascader-picker"
+                                            options={this.state.types}
+                                            onChange={this.handleChangeType}
+                                            notFoundContent="Not Found"
+                                        />
+                                    </FormControl>
+                                </Grid>
                             </Grid>
                             <Grid container spacing={40} style={{marginTop: '12px'}}>
                                 <Grid item xs={12} sm={6}>
@@ -895,6 +869,19 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                     </Table>
                                 </div>
                             </div>
+                            <Snackbar
+                                classes={{
+                                    root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                                }}
+                                open={this.state.open}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                onClose={this.handleCloseTip}
+                                transition={this.state.transition}
+                                SnackbarContentProps={{
+                                    'aria-describedby': 'message-id',
+                                }}
+                                message={<span id="message-id">{this.state.errorMessage}</span>}
+                            />
                             <div className="table-pagination">
                                 <ReactPaginate
                                     previousLabel={'<'}

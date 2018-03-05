@@ -10,8 +10,6 @@ import 'rc-color-picker/assets/index.css';
 import axios from 'axios';
 import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
-import { MenuItem } from 'material-ui/Menu';
-import Select from 'material-ui/Select';
 import Cascader from 'antd/lib/cascader';
 import 'antd/lib/cascader/style/css.js';
 
@@ -67,7 +65,6 @@ type State = {
     errorMessage: string,
     error: boolean,
     types: Array<any>,
-    topPlace: string,
 };
 
 class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -84,7 +81,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
         this.state = {
             types: [],
             classify: '',
-            classifyId: 0,
+            classifyId: 1,
             title: '',
             classifyAlias: '',
             color: '',
@@ -92,7 +89,6 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
             chainUrl: '',
             pageType: type,
             pageId: Number(proId),
-            topPlace: '无',
             loading: false,
             transition: undefined,
             open: false,
@@ -105,7 +101,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
             axios.post('http://192.168.1.121:3000/graphql?', {
                 query: `
                 query {
-                    getClassifys(getAllClassify: {
+                    getClassifys(getClassifyById: {
                         id: ${this.state.pageId},
                         useFor: page,
                     }){
@@ -121,7 +117,6 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
             `,
             }).then(response => {
                 const data = response.data.data.getClassifys[0];
-                window.console.log(data);
                 this.setState({
                     title: data.title,
                     chainUrl: data.chainUrl,
@@ -130,8 +125,10 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                     color: data.color,
                 });
             });
-            axios.post('http://192.168.1.121:3000/graphql?', {
-                query: `
+        }
+
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
                 query {
                     getClassifys(getAllClassify: {
                         useFor: page,
@@ -166,54 +163,53 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                     }
                 }
             `,
-            }).then(response => {
-                let arr = new Array();
-                const structures = response.data.data.getClassifys[0].children;
-                arr = Object.keys(structures).map(index => {
-                    const item = structures[index];
-                    item.label = item.title;
-                    item.value = item.id;
-                    const children = item.children;
-                    if (item.children !== null) {
-                        item.children = Object.keys(children).map(i => {
-                            const sub = children[i];
-                            sub.label = sub.title;
-                            sub.value = sub.id;
-                            const childs = sub.children;
-                            if (sub.children !== null) {
-                                sub.children = Object.keys(childs).map(s => {
-                                    const su = childs[s];
-                                    su.label = su.title;
-                                    su.value = su.id;
-                                    const childs2 = su.children;
-                                    if (su.children !== null) {
-                                        su.children = Object.keys(childs2).map(s2 => {
-                                            const fours = childs2[s2];
-                                            fours.label = fours.title;
-                                            fours.value = fours.id;
-                                            if (fours.children !== null) {
-                                                const childs3 = fours.children;
-                                                fours.children = Object.keys(childs3).map(s3 => {
-                                                    const five = childs3[s3];
-                                                    five.label = five.title;
-                                                    five.value = five.id;
-                                                    return five;
-                                                });
-                                            }
-                                            return fours;
-                                        });
-                                    }
-                                    return su;
-                                });
-                            }
-                            return sub;
-                        });
-                    }
-                    return item;
-                });
-                this.setState({ types: arr });
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
             });
-        }
+            this.setState({ types: arr });
+        });
     }
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -266,7 +262,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                 chainUrl: "${this.state.chainUrl}",
                                 describe: "${this.state.describe}",
                                 color: "${this.state.color}",
-                                groupId: 0,
+                                groupId: ${this.state.classifyId},
                             }
                         })
                     }
@@ -480,55 +476,29 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                                     </ColorPicker>
                                 </FormControl>
                             </Grid>
-                            {
-                                this.state.pageType === '1' ?
-                                    <Grid item xs={12} sm={6}>
-                                        <FormControl fullWidth>
-                                            <InputLabel
-                                                htmlFor="name-simple"
-                                                className={this.props.classes.formLabelFont}
-                                            >
-                                                上级分类
-                                            </InputLabel>
-                                            <Select
-                                                className="form-select-underline"
-                                                value={this.state.topPlace}
-                                                onChange={this.handleChange('topPlace')}
-                                                input={<Input name="type" id="type-simple" />}
-                                            >
-                                                <MenuItem
-                                                    className="input-drop-paper"
-                                                    value={this.state.topPlace}
-                                                >
-                                                    无
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </Grid> :
-                                    <Grid item xs={12} sm={6}>
-                                        <FormControl fullWidth>
-                                            <InputLabel
-                                                htmlFor="name-simple"
-                                                className={this.props.classes.formLabelFont}
-                                            >
-                                                上级分类
-                                            </InputLabel>
-                                            <Input
-                                                className={this.props.classes.formLabelFont}
-                                                classes={{
-                                                    underline: this.props.classes.underline,
-                                                }}
-                                                value={this.state.classify}
-                                            />
-                                            <Cascader
-                                                className="cascader-picker"
-                                                options={this.state.types}
-                                                onChange={this.handleChangeType}
-                                                notFoundContent="Not Found"
-                                            />
-                                        </FormControl>
-                                    </Grid>
-                            }
+                            <Grid item xs={12} sm={6}>
+                                <FormControl fullWidth>
+                                    <InputLabel
+                                        htmlFor="name-simple"
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        上级分类
+                                    </InputLabel>
+                                    <Input
+                                        className={this.props.classes.formLabelFont}
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.classify}
+                                    />
+                                    <Cascader
+                                        className="cascader-picker"
+                                        options={this.state.types}
+                                        onChange={this.handleChangeType}
+                                        notFoundContent="Not Found"
+                                    />
+                                </FormControl>
+                            </Grid>
                         </Grid>
                         <Button
                             raised
