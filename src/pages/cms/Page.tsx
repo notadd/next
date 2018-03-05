@@ -77,6 +77,7 @@ type State = {
     open: boolean,
     openMessageTip: boolean,
     openSearch: boolean,
+    pageStatus: boolean,
     message: string,
     modalId: string,
     modalName: string,
@@ -106,6 +107,7 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
             message: '',
             list: [],
             selection: [],
+            pageStatus: false,
         };
     }
     componentDidMount() {
@@ -186,6 +188,8 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     totalItems: data.pagination.totalItems,
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
+                    pageStatus: false,
+                    searchValue: '',
                     openMessageTip: true,
                     message: '刷新数据完成',
                 });
@@ -313,11 +317,98 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleSearch = () => {
-        window.console.log(this.state.searchValue);
+        if (this.state.searchValue.length > 0) {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getPagesLimit(serachPages: {
+                        keywords: "${this.state.searchValue}",
+                        limitNum: 10,
+                        pages: ${this.state.currentPage + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    const data = response.data.data.getPagesLimit;
+                    this.setState({
+                        list: data.pages,
+                        totalItems: data.pagination.totalItems,
+                        rowsPerPage: data.pagination.pageSize,
+                        currentPage: data.pagination.currentPage - 1,
+                        pageStatus: true,
+                    });
+                }
+            });
+        } else {
+            this.refreshPage();
+        }
     };
     handlePageClick = (data: any) => {
-        axios.post('http://192.168.1.121:3000/graphql?', {
-            query: `
+        if (this.state.pageStatus) {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getPagesLimit(serachPages: {
+                        keywords: "${this.state.searchValue}",
+                        limitNum: 10,
+                        pages: ${data.selected + 1},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        pages{
+                            id,
+                            title,
+                            check,
+                            alias,
+                            classify,
+                        }
+                    }
+                }
+            `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    const sub = response.data.data.getPagesLimit;
+                    this.setState({
+                        list: sub.pages,
+                        totalItems: sub.pagination.totalItems,
+                        rowsPerPage: sub.pagination.pageSize,
+                        currentPage: sub.pagination.currentPage - 1,
+                        pageStatus: true,
+                    });
+                }
+            });
+        } else {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
                 query {
                     getPagesLimit(getAllPage: {
                         limitNum: 10,
@@ -344,18 +435,19 @@ class Page extends React.Component<WithStyles<keyof typeof styles>, State> {
                     }
                 }
             `,
-        }).then(response => {
-            if (!response.data.errors) {
-                const res = response.data.data.getPagesLimit;
-                this.setState({
-                    list: res.pages,
-                    totalItems: res.pagination.totalItems,
-                    rowsPerPage: res.pagination.pageSize,
-                    currentPage: res.pagination.currentPage - 1,
-                    checkedAll: false,
-                });
-            }
-        });
+            }).then(response => {
+                if (!response.data.errors) {
+                    const res = response.data.data.getPagesLimit;
+                    this.setState({
+                        list: res.pages,
+                        totalItems: res.pagination.totalItems,
+                        rowsPerPage: res.pagination.pageSize,
+                        currentPage: res.pagination.currentPage - 1,
+                        checkedAll: false,
+                    });
+                }
+            });
+        }
     };
 
     render() {

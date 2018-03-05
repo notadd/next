@@ -683,7 +683,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                         </Table>
                     </div>
                     <Snackbar
-                        className="message-snack-bar"
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
                         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={openMessageTip}
                         onClose={this.handleCloseTip}
@@ -794,7 +796,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                                 return (
                                                     <MenuItem
                                                         className="input-drop-paper"
-                                                        value={index}
+                                                        value={item.id}
                                                         key={index}
                                                     >
                                                         {item.type}

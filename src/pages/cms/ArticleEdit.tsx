@@ -94,20 +94,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
             classify: '',
             classifyId: 0,
             topPlace: '',
-            types: [
-                {
-                    id: '12',
-                    type: '新闻1',
-                },
-                {
-                    id: '13',
-                    type: '新闻2',
-                },
-                {
-                    id: '14',
-                    type: '新闻3',
-                },
-            ],
+            types: [],
             topTypes: [
                 {
                     id: 'global',
@@ -279,9 +266,9 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
         });
     }
     handleDateChange = (date: any) => {
-        // let currentTime = new Date(date).toLocaleDateString();
-        // window.console.log(currentTime);
-        this.setState({ publishedTime: date });
+        let currentTime = new Date(date).toLocaleDateString();
+        window.console.log(currentTime);
+        this.setState({ publishedTime: currentTime });
     };
     handleChange = (name: any) => (event: any) => {
         let val = event.target.value;
@@ -572,7 +559,33 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                         />
                                     }
                                 />
-                                <DatePicker
+                                <FormControl
+                                    fullWidth
+                                    className={this.props.classes.formControlMargin}
+                                    style={{ position: 'relative'}}
+                                >
+                                    <InputLabel
+                                        className={this.props.classes.formLabelFont}
+                                    >
+                                        发布时间
+                                    </InputLabel>
+                                    <Input
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        className={this.props.classes.formLabelFont}
+                                        value={this.state.publishedTime}
+                                    />
+                                    <DatePicker
+                                        className="data-picker"
+                                        style={{marginBottom: '32px'}}
+                                        keyboard
+                                        clearable
+                                        onChange={this.handleDateChange}
+                                        animateYearScrolling={false}
+                                    />
+                                </FormControl>
+                                {/*<DatePicker
                                     className="data-picker"
                                     style={{marginBottom: '32px'}}
                                     keyboard
@@ -582,7 +595,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                                     value={this.state.publishedTime}
                                     onChange={this.handleDateChange}
                                     animateYearScrolling={false}
-                                />
+                                />*/}
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
