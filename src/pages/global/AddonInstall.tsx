@@ -95,7 +95,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 query {
-                    getAddons(filters: {installed: false}) {
+                    getAddons(filters: {}) {
                     authors {
                         username,
                         email
