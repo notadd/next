@@ -3,7 +3,7 @@ import Popover from 'material-ui/Popover';
 import Typography from 'material-ui/Typography';
 
 interface Props extends React.Component {
-    open?: boolean;
+    open: boolean;
     message?: string;
 }
 
@@ -14,7 +14,6 @@ class Prompt extends React.Component<Props, {}> {
         return (
             <Popover
                 open={open}
-                anchorEl="anchorPosition"
                 anchorPosition={{ top: 150, left: left }}
                 anchorOrigin={{
                     vertical: 'top',
