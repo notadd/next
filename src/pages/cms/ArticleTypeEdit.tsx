@@ -782,7 +782,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                                 </Grid>
                             </Grid>
                             <Button
-                                raised
+                                variant="raised"
                                 color="primary"
                                 style={{
                                     marginTop: 34,

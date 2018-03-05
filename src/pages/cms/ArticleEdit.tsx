@@ -635,7 +635,7 @@ class ArticleEdit extends React.Component<WithStyles<keyof typeof styles>, State
                             </Grid>
                         </Grid>
                         <Button
-                            raised
+                            variant="raised"
                             color="primary"
                             style={{
                                 marginTop: 34,

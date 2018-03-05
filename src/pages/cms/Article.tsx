@@ -825,7 +825,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     />
                                 </FormControl>
                                 <Button
-                                    raised
+                                    variant="raised"
                                     color="primary"
                                     style={{marginTop: 2, fontSize: 12, borderRadius: 4}}
                                     onClick={this.handleSubmitSearch}

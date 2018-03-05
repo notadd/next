@@ -507,7 +507,7 @@ class PageTypeEdit extends React.Component<WithStyles<keyof typeof styles>, Stat
                             </Grid>
                         </Grid>
                         <Button
-                            raised
+                            variant="raised"
                             color="primary"
                             style={{
                                 marginTop: 34,

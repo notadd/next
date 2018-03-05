@@ -411,7 +411,7 @@ class Configurations extends React.Component<WithStyles<keyof typeof styles>, St
                             </Grid>
                         </Grid>
                         <Button
-                            raised
+                            variant="raised"
                             color="primary"
                             style={{
                                 marginTop: 34,

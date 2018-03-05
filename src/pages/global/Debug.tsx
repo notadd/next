@@ -63,7 +63,12 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                         label: this.props.classes.formLabel
                                     } }
                                     control={
-                                        <Button color="primary" className={this.props.classes.smallBtn} raised dense>
+                                        <Button
+                                            color="primary"
+                                            className={this.props.classes.smallBtn}
+                                            variant="raised"
+                                            size="small"
+                                        >
                                             清除
                                         </Button>}
                                 />
@@ -103,7 +108,7 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 />
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button variant="raised" color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
                             确认提交
                         </Button>
                     </form>

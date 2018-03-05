@@ -248,11 +248,11 @@ class Seo extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button variant="raised" color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
                             确认提交
                         </Button>
                         <Button
-                            raised
+                            variant="raised"
                             style={{
                                 borderRadius: 4,
                                 background: '#ededed',

@@ -99,7 +99,7 @@ class Login extends React.Component<Props, State> {
                         <CardContent style={{padding: 0}}>
                             <h3 className="boxTitle">登录</h3>
                             <Tooltip placement="bottom" title="Login" onClick={this.handleSubmit}>
-                                <Button fab color="accent" className="absolute">
+                                <Button variant="fab" color="inherit" className="absolute">
                                     <KeyboardArrowRight />
                                 </Button>
                             </Tooltip>
@@ -142,7 +142,7 @@ class Login extends React.Component<Props, State> {
                         </CardContent>
                         <CardActions style={{marginTop: 30, padding: 0}}>
                             <Button
-                                raised
+                                variant="raised"
                                 disabled={
                                     this.state.userName === '' || this.state.password === '' || this.state.loading
                                 }

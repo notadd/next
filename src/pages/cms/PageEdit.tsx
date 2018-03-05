@@ -544,7 +544,7 @@ class PageEdit extends React.Component<Props, State> {
                             </Grid>
                         </Grid>
                         <Button
-                            raised
+                            variant="raised"
                             color="primary"
                             style={{
                                 marginTop: 34,

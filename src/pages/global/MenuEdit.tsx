@@ -130,7 +130,7 @@ class MenuEdit extends React.Component<WithStyles<keyof typeof styles>, State> {
                                 />
                             </Grid>
                         </Grid>
-                        <Button raised color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
+                        <Button variant="raised" color="primary" style={{marginTop: 34, fontSize: 12, borderRadius: 4}}>
                             确认提交
                         </Button>
                     </form>
