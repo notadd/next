@@ -99,7 +99,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 mutation {
-                    getModules(identification: "${name}") {
+                    installModule(identification: "${name}") {
                     code,
                     message
                     },
@@ -111,7 +111,7 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                     {
                         messageOpen: true,
                         loading: false,
-                        errorMessage: '安装成功！',
+                        errorMessage: response.data.data.installModule.message,
                     },
                 );
                 this.componentDidMount();
@@ -145,20 +145,19 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
         axios.post('http://localhost:3000/graphql?', {
             query: `
                 mutation {
-                    uninstallModules(identification: "${name}") {
+                    uninstallModule(identification: "${name}") {
                     code,
                     message
                     },
                 }
             `,
         }).then(response => {
-            window.console.log(response);
             if (!response.data.errors) {
                 this.setState(
                     {
                         messageOpen: true,
                         loading: false,
-                        errorMessage: '删除成功！',
+                        errorMessage: response.data.data.uninstallModule.message,
                     },
                 );
                 this.componentDidMount();
@@ -173,6 +172,30 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                 this.componentDidMount();
             }
         });
+    };
+    handleWithAuthors = (authors: any) => {
+        const data: Array<{email?: string, username?: string}> = [];
+        let result: Array<string> = [];
+        if (typeof authors === 'object') {
+            Object.keys(authors).map((value: string) => {
+                if (typeof authors[value] === 'object') {
+                    data.push(authors[value]);
+                }
+            });
+        }
+        data.forEach(value => {
+            let info: string = '';
+            if (value.username) {
+                info += value.username;
+                if (value.email) {
+                    info += `<${value.email}>`;
+                }
+            }
+            if (info.length) {
+                result.push(info);
+            }
+        });
+        return result.join(',');
     };
     componentDidMount() {
         const self = this;
@@ -235,25 +258,14 @@ class ModuleInstall extends React.Component<WithStyles<keyof typeof styles>, Sta
                                                    {n.name}
                                                </TableCell>
                                                <TableCell className={this.props.classes.tableCell} numeric>
-                                                   {
-                                                       () => {
-                                                           let authors: any = [];
-                                                           const arr: any = [];
-                                                           n.authors.forEach((item: any) => {
-                                                               arr.push(`${item.username}${(item.hasOwnProperty('email')
-                                                                   || item.email === null) ? '' : `<${item.email}>`}`);
-                                                           });
-                                                           authors = arr.join(',');
-                                                           return authors;
-                                                       }
-                                                   }
+                                                   {this.handleWithAuthors(n.authors)}
                                                </TableCell>
                                                <TableCell className={this.props.classes.tableCell} numeric>
                                                    {n.description}
                                                </TableCell>
                                                <TableCell numeric>
                                                    {
-                                                       n.status ? <IconButton
+                                                       n.installed ? <IconButton
                                                            className={this.props.classes.menuBtn}
                                                            onClick={() => this.handleClickOpen(n)}
                                                            title="删除"

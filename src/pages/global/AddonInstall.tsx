@@ -140,7 +140,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                     {
                         messageOpen: true,
                         loading: false,
-                        errorMessage: '安装成功！',
+                        errorMessage: response.data.data.installAddon.message,
                     },
                 );
                 this.componentDidMount();
@@ -178,7 +178,7 @@ class AddonInstall extends React.Component<WithStyles<keyof typeof styles>, Stat
                     {
                         messageOpen: true,
                         loading: false,
-                        errorMessage: '删除成功！',
+                        errorMessage: response.data.data.uninstallAddon.message,
                     },
                 );
                 this.componentDidMount();
