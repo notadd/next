@@ -11,6 +11,7 @@ import ClearIcon from 'material-ui-icons/Clear';
 import ErrorIcon from 'material-ui-icons/ErrorOutline';
 import Add from 'material-ui-icons/Add';
 import Cached from 'material-ui-icons/Cached';
+import Snackbar from 'material-ui/Snackbar';
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -39,10 +40,15 @@ const styles = {
 type State = {
     modalName: string,
     modalId: string,
-    open: boolean,
+    openModal: boolean,
     openTip: boolean,
     nodeLength: number,
     treeData: Array<any>,
+    loading: boolean,
+    open: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -50,12 +56,17 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         super(props, state);
 
         this.state = {
-            open: false,
+            openModal: false,
             openTip: false,
             modalName: '产品中心',
             modalId: '',
             nodeLength: 0,
             treeData: [],
+            loading: false,
+            transition: undefined,
+            open: false,
+            errorMessage: '',
+            error: false,
         };
     }
     componentDidMount() {
@@ -101,7 +112,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
         });
     }
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ openModal: false });
     };
     handleCloseTip = () => {
         this.setState({ openTip: false });
@@ -109,11 +120,44 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
     handleSubmit = () => {
         if (this.state.nodeLength > 0) {
             this.setState({
-                open: false,
+                openModal: false,
                 openTip: true,
             });
         } else {
-            this.setState({ open: false });
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                    mutation {
+                        ClassifyCU(deleteClassifyById: {
+                            useFor: art,
+                            id: ${this.state.modalId},
+                        })
+                    }
+                `,
+            }).then(response => {
+                const data = JSON.parse(response.data.data.ClassifyCU);
+                if (!response.data.errors) {
+                    if (data.Continue) {
+                        this.setState(
+                            {
+                                error: false,
+                                open: true,
+                                loading: false,
+                                errorMessage: '删除分类信息成功!',
+                            },
+                        );
+                    } else if (!data.Continue) {
+                        this.setState(
+                            {
+                                error: true,
+                                open: true,
+                                loading: false,
+                                errorMessage: data.MessageCodeError,
+                            },
+                        );
+                    }
+                }
+            });
+            this.setState({ openModal: false });
         }
     };
     render() {
@@ -125,7 +169,7 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                 _length = pro.node.children.length;
             }
             this.setState({
-                open: true,
+                openModal: true,
                 modalName: pro.node.title,
                 modalId: pro.node.id,
                 nodeLength: _length,
@@ -184,9 +228,22 @@ class ArticleType extends React.Component<WithStyles<keyof typeof styles>, State
                             })}
                         />
                     </div>
+                    <Snackbar
+                        classes={{
+                            root: (this.state.error ? 'error-snack-bar' : 'message-snack-bar'),
+                        }}
+                        open={this.state.open}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        onClose={this.handleCloseTip}
+                        transition={this.state.transition}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.errorMessage}</span>}
+                    />
                 </Paper>
                 <Dialog
-                    open={this.state.open}
+                    open={this.state.openModal}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                     className="dialog-content-action"

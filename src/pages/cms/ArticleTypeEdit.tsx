@@ -223,22 +223,26 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
             axios.post('http://192.168.1.121:3000/graphql?', {
                 query: `
                 query {
-                    getClassifys(getAllClassify: {
+                    getClassifyById(getClassifyById: {
                         id: ${this.state.pageId},
                         useFor: art,
-                    }){
-                        id,
-                        title,
-                        classifyAlias,
-                        chainUrl,
-                        describe,
-                        color,
-                        groupId,
+                    }) {
+                        classifyEntity {
+                            id,
+                            title,
+                            classifyAlias,
+                            chainUrl,
+                            describe,
+                            color,
+                            groupId,
+                        },
+                        MessageCodeError
                     }
                 }
             `,
             }).then(response => {
-                const data = response.data.data.getClassifys[0];
+                const type = response.data.data.getClassifyById.classifyEntity[0];
+                const data = response.data.data.getClassifyById.classifyEntity[1];
                 window.console.log(data);
                 this.setState({
                     title: data.title,
@@ -247,7 +251,7 @@ class ArticleTypeEdit extends React.Component<WithStyles<keyof typeof styles>, S
                     describe: data.describe,
                     color: data.color,
                     classifyId: data.groupId,
-                    classify: data.classify,
+                    classify: type.title,
                 });
             });
         }
