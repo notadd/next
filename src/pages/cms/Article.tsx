@@ -1,6 +1,5 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
-// import Cascader from 'react-web-cascader';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import Paper from 'material-ui/Paper';
@@ -19,6 +18,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
+import Cascader from 'antd/lib/cascader';
+import 'antd/lib/cascader/style/css.js';
 import Table, {
     TableBody,
     TableCell,
@@ -114,6 +115,13 @@ type State = {
     isTops: Array<any>,
     options: any,
     current: number,
+    classify: string,
+    classifyId: number,
+    loading: boolean,
+    tipOpen: boolean,
+    transition: any,
+    errorMessage: string,
+    error: boolean,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -137,32 +145,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             type: '',
             isTop: '',
             childType: '',
-            types: [
-                {
-                    id: '12',
-                    type: '新闻1',
-                    children: [
-                        {
-                            id: '121',
-                            type: '新闻1-1',
-                        },
-                        {
-                            id: '122',
-                            type: '新闻1-2',
-                        },
-                    ],
-                },
-                {
-                    id: '13',
-                    type: '新闻2',
-                    children: [],
-                },
-                {
-                    id: '14',
-                    type: '新闻3',
-                    children: [],
-                },
-            ],
+            types: [],
             isTops: [
                 {
                     id: '12',
@@ -231,6 +214,13 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                 },
             ],
             current: 1,
+            classify: '',
+            classifyId: 1,
+            loading: false,
+            transition: undefined,
+            tipOpen: false,
+            errorMessage: '',
+            error: false,
         };
     }
     componentDidMount() {
@@ -272,6 +262,89 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     currentPage: data.pagination.currentPage - 1,
                 });
             }
+        });
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getClassifys(getAllClassify: {
+                        useFor: art,
+                    }){
+                        id,
+                        title,
+                        classifyAlias,
+                        chainUrl,
+                        describe,
+                        color,
+                        groupId,
+                        children{
+                            id,
+                            title,
+                            children{
+                                id,
+                                title,
+                                children{
+                                    id,
+                                    title,
+                                    children{
+                                        id,
+                                        title,
+                                        children{
+                                            id,
+                                            title,
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            let arr = new Array();
+            const structures = response.data.data.getClassifys[0].children;
+            arr = Object.keys(structures).map(index => {
+                const item = structures[index];
+                item.label = item.title;
+                item.value = item.id;
+                const children = item.children;
+                if (item.children !== null) {
+                    item.children = Object.keys(children).map(i => {
+                        const sub = children[i];
+                        sub.label = sub.title;
+                        sub.value = sub.id;
+                        const childs = sub.children;
+                        if (sub.children !== null) {
+                            sub.children = Object.keys(childs).map(s => {
+                                const su = childs[s];
+                                su.label = su.title;
+                                su.value = su.id;
+                                const childs2 = su.children;
+                                if (su.children !== null) {
+                                    su.children = Object.keys(childs2).map(s2 => {
+                                        const fours = childs2[s2];
+                                        fours.label = fours.title;
+                                        fours.value = fours.id;
+                                        if (fours.children !== null) {
+                                            const childs3 = fours.children;
+                                            fours.children = Object.keys(childs3).map(s3 => {
+                                                const five = childs3[s3];
+                                                five.label = five.title;
+                                                five.value = five.id;
+                                                return five;
+                                            });
+                                        }
+                                        return fours;
+                                    });
+                                }
+                                return su;
+                            });
+                        }
+                        return sub;
+                    });
+                }
+                return item;
+            });
+            this.setState({ types: arr });
         });
     }
     refreshPage = () => {
@@ -439,12 +512,6 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             [name]: val,
         });
     };
-    handleChangeChild = (name: any) => (event: any) => {
-        let val = event.target.value;
-        this.setState({
-            [name]: val,
-        });
-    };
     handleSubmitSearch = () => {
         this.setState({
             right: !this.state.right,
@@ -492,13 +559,12 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             }
         });
     };
-    // displayRender = (labels: any) => {
-    //     window.console.log(labels);
-    //     return labels.join('/');
-    // };
-    // onChangeCascader = (option: any) => {
-    //     window.console.log(option);
-    // };
+    handleChangeType = (value: any, select: any) => {
+        this.setState({
+            classify: select[select.length - 1].label,
+            classifyId: value[value.length - 1],
+        });
+    };
     render() {
         const { rowsPerPage, totalItems, list, modalType, openMessageTip, message } = this.state;
         return (
@@ -693,68 +759,21 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                                     >
                                         文章分类
                                     </InputLabel>
-                                    <Select
+                                    <Input
                                         className={this.props.classes.formLabelFont}
-                                        value={this.state.type}
-                                        onChange={this.handleChangeSearch('type')}
-                                        input={<Input name="type"/>}
-                                    >
-                                        {
-                                            this.state.types.map((item: any, index: number) => {
-                                                return (
-                                                    <MenuItem
-                                                        className="input-drop-paper"
-                                                        value={index}
-                                                        key={index}
-                                                    >
-                                                        {item.type}
-                                                    </MenuItem>
-                                                );
-                                            })
-                                        }
-                                    </Select>
-                                    {
-                                        this.state.types[this.state.current].children.length > 0 ?
-                                            <FormControl
-                                                fullWidth
-                                                style={{ marginTop: '4px' }}
-                                            >
-                                                <Select
-                                                    className={this.props.classes.formLabelFont}
-                                                    value={this.state.childType}
-                                                    onChange={this.handleChangeChild('childType')}
-                                                    input={<Input name="type"/>}
-                                                >
-                                                    {
-                                                        this.state.types[this.state.current]
-                                                            .children.map((sub: any, i: number) => {
-                                                            return (
-                                                                <MenuItem
-                                                                    className="input-drop-paper"
-                                                                    value={i}
-                                                                    key={i}
-                                                                >
-                                                                    {sub.type}
-                                                                </MenuItem>
-                                                            );
-                                                        })
-                                                    }
-                                                </Select>
-                                            </FormControl> : <div/>
-                                    }
+                                        classes={{
+                                            underline: this.props.classes.underline,
+                                        }}
+                                        value={this.state.classify}
+                                    />
+                                    <Cascader
+                                        className="cascader-picker"
+                                        options={this.state.types}
+                                        onChange={this.handleChangeType}
+                                        notFoundContent="Not Found"
+                                        placeholder=""
+                                    />
                                 </FormControl>
-                                {/* <div>
-                                       <Cascader
-                                           options={this.state.options}
-                                           defaultValue={['130000', '130200', '130202']}
-                                           displayRender={(labels: string) => this.displayRender(labels)}
-                                           allowClear={true}
-                                           placeholder="请选择"
-                                           onChange={(option: any) => {
-                                               this.onChangeCascader(option);
-                                           }}
-                                       />
-                                </div>*/}
                                 <FormControl
                                     fullWidth
                                     className={this.props.classes.formControlMargin}
