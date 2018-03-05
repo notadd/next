@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from 'react';
 import withStyles, { WithStyles } from 'material-ui/styles/withStyles';
 import ReactPaginate from 'react-paginate';
@@ -60,47 +61,12 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
             modalName: '',
             rowsPerPage: 2,
             currentPage: 0,
-            list: [
-                {
-                    id: 11,
-                    name: '用户中心',
-                    author: 'Mark',
-                    descri: '一键分析项目源码，直观了解项目代码质量，提供代码安全扫描功能',
-                    status: true,
-                },
-                {
-                    id: 12,
-                    name: '商城',
-                    author: 'Mark',
-                    descri: 'fefreg',
-                    status: true,
-                },
-                {
-                    id: 13,
-                    name: '商家',
-                    author: 'Mark',
-                    descri: 'fefreg',
-                    status: false,
-                },
-                {
-                    id: 14,
-                    name: 'CMS',
-                    author: 'Mark',
-                    descri: 'fefreg',
-                    status: false,
-                },
-                {
-                    id: 15,
-                    name: 'Notadd2',
-                    author: 'Mark',
-                    descri: 'fefreg',
-                    status: true,
-                },
-            ],
+            list: [],
         };
     }
-    handleChange = (pro: any) => (event: any, checked: any) => {
-        pro.status = checked;
+    handleChange = (pro: any) => (checked: any) => {
+        window.console.log(checked);
+        pro.enabled = checked;
         this.setState({
             [pro]: checked,
         });
@@ -112,6 +78,59 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
             open: true,
         });
     };
+    handleWithAuthors = (authors: any) => {
+        const data: Array<{email?: string, username?: string}> = [];
+        let result: Array<string> = [];
+        if (typeof authors === 'object') {
+            Object.keys(authors).map((value: string) => {
+                if (typeof authors[value] === 'object') {
+                    data.push(authors[value]);
+                }
+            });
+        }
+        data.forEach(value => {
+            let info: string = '';
+            if (value.username) {
+                info += value.username;
+                if (value.email) {
+                    info += `<${value.email}>`;
+                }
+            }
+            if (info.length) {
+                result.push(info);
+            }
+        });
+        return result.join(',');
+    };
+    componentDidMount() {
+        const self = this;
+        axios.post('http://localhost:3000/graphql?', {
+            query: `
+                query {
+                    getAddons(filters: {installed: true}) {
+                    authors {
+                        username,
+                        email
+                    },
+                    description,
+                    enabled,
+                    identification,
+                    installed,
+                    location,
+                    name,
+                    version
+                    },
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const results: object = response.data.data.getAddons;
+                self.setState({
+                    list: results
+                });
+            }
+        });
+    }
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -145,22 +164,22 @@ class AddonOpen extends React.Component<WithStyles<keyof typeof styles>, State> 
                                             <TableRow
                                                 hover
                                                 className={index % 2 === 0 ? this.props.classes.evenRow : ''}
-                                                key={n.id}
+                                                key={index}
                                             >
                                                 <TableCell className={this.props.classes.tableCell} numeric>
                                                     {n.name}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.author}
+                                                    {this.handleWithAuthors(n.authors)}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
-                                                    {n.descri}
+                                                    {n.description}
                                                 </TableCell>
                                                 <TableCell className={this.props.classes.tableCell} numeric>
                                                     <Switch
-                                                        checked={n.status}
+                                                        value={n.enabled}
                                                         onChange={this.handleChange(n)}
-                                                        aria-label="n.status"
+                                                        aria-label="n.enabled"
                                                     />
                                                 </TableCell>
                                                 <TableCell numeric>

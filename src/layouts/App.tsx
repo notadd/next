@@ -36,7 +36,7 @@ import PageTypeEdit from '../pages/cms/PageTypeEdit';
 import Message from '../pages/cms/Message';
 
 import Drawer from 'material-ui/Drawer';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
 import Close from 'material-ui-icons/Close';
@@ -524,7 +524,7 @@ class App extends React.Component<Props, State> {
                                                     <IconButton
                                                         aria-haspopup="true"
                                                         className={this.props.classes.menuBtn}
-                                                        color="contrast"
+                                                        color="inherit"
                                                         onClick={this.toggleDrawer}
                                                     >
                                                         {
@@ -543,7 +543,7 @@ class App extends React.Component<Props, State> {
                                                             style={{marginLeft: '0'}}
                                                             className={this.props.classes.menuBtn}
                                                             onClick={this.handleOpenSearch}
-                                                            color="contrast"
+                                                            color="inherit"
                                                         >
                                                             <Search/>
                                                         </IconButton>
@@ -551,7 +551,7 @@ class App extends React.Component<Props, State> {
                                                             aria-haspopup="true"
                                                             style={{marginLeft: '0'}}
                                                             className={this.props.classes.menuBtn}
-                                                            color="contrast"
+                                                            color="inherit"
                                                         >
                                                             <MoreHoriz/>
                                                         </IconButton>
@@ -594,7 +594,7 @@ class App extends React.Component<Props, State> {
                                                         {
                                                             this.state.navs.map((item, index) => {
                                                                 return (
-                                                                    <BottomNavigationButton
+                                                                    <BottomNavigationAction
                                                                         classes={{
                                                                             root: this.props.classes.navBtn,
                                                                             label: this.props.classes.btnLabel,
@@ -616,7 +616,7 @@ class App extends React.Component<Props, State> {
                                                             aria-haspopup="true"
                                                             className={this.props.classes.iconBtn}
                                                             style={{marginRight: '30px'}}
-                                                            color="contrast"
+                                                            color="inherit"
                                                         >
                                                             <Tv/>
                                                         </IconButton>
@@ -624,7 +624,7 @@ class App extends React.Component<Props, State> {
                                                             aria-haspopup="true"
                                                             className={this.props.classes.iconBtn}
                                                             style={{marginRight: '10px'}}
-                                                            color="contrast"
+                                                            color="inherit"
                                                         >
                                                             <Setting/>
                                                         </IconButton>
@@ -642,7 +642,7 @@ class App extends React.Component<Props, State> {
                                                     <IconButton
                                                         aria-haspopup="true"
                                                         className={this.props.classes.menuBtn}
-                                                        color="contrast"
+                                                        color="inherit"
                                                         onClick={this.toggleDrawer}
                                                     >
                                                         {
@@ -654,7 +654,7 @@ class App extends React.Component<Props, State> {
                                                         style={{marginLeft: '0'}}
                                                         className={this.props.classes.menuBtn}
                                                         onClick={this.handleFullScreen}
-                                                        color="contrast"
+                                                        color="inherit"
                                                     >
                                                         <FullScreen/>
                                                     </IconButton>
@@ -663,7 +663,7 @@ class App extends React.Component<Props, State> {
                                                         style={{marginLeft: '0'}}
                                                         className={this.props.classes.menuBtn}
                                                         onClick={this.handleOpenSearch}
-                                                        color="contrast"
+                                                        color="inherit"
                                                     >
                                                         <Search/>
                                                     </IconButton>
@@ -702,7 +702,7 @@ class App extends React.Component<Props, State> {
                                                         {
                                                             this.state.navs.map((item, index) => {
                                                                 return (
-                                                                    <BottomNavigationButton
+                                                                    <BottomNavigationAction
                                                                         classes={{
                                                                             root: this.props.classes.navBtn,
                                                                             label: this.props.classes.btnLabel,
@@ -725,7 +725,7 @@ class App extends React.Component<Props, State> {
                                                         aria-haspopup="true"
                                                         className={this.props.classes.iconBtn}
                                                         style={{marginRight: '30px'}}
-                                                        color="contrast"
+                                                        color="inherit"
                                                     >
                                                         <Tv/>
                                                     </IconButton>
@@ -733,7 +733,7 @@ class App extends React.Component<Props, State> {
                                                         aria-haspopup="true"
                                                         className={this.props.classes.iconBtn}
                                                         style={{marginRight: '10px'}}
-                                                        color="contrast"
+                                                        color="inherit"
                                                     >
                                                         <Setting/>
                                                     </IconButton>
@@ -751,7 +751,6 @@ class App extends React.Component<Props, State> {
                                         {
                                             condition ?
                                                 <Drawer
-                                                    type="persistent"
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(
@@ -775,7 +774,6 @@ class App extends React.Component<Props, State> {
                                                 </Drawer>
                                                 :
                                                 <Drawer
-                                                    type="persistent"
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(

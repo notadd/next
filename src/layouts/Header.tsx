@@ -1,5 +1,5 @@
 import * as React from 'react';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Setting from 'material-ui-icons/Settings';
 import MenuIcon from 'material-ui-icons/Menu';
 import FullScreen from 'material-ui-icons/Fullscreen';
@@ -186,7 +186,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                     <IconButton
                         aria-haspopup="true"
                         className={this.props.classes.menuBtn}
-                        color="contrast"
+                        color="inherit"
                     >
                         <MenuIcon/>
                     </IconButton>
@@ -195,7 +195,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         style={{background: 'none', marginLeft: '0'}}
                         className={this.props.classes.menuBtn}
                         onClick={this.handleFullScreen}
-                        color="contrast"
+                        color="inherit"
                     >
                         <FullScreen/>
                     </IconButton>
@@ -204,13 +204,12 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         style={{background: 'none', marginLeft: '0'}}
                         className={this.props.classes.menuBtn}
                         onClick={this.handleOpenSearch}
-                        color="contrast"
+                        color="inherit"
                     >
                         <Search/>
                     </IconButton>
                     <Popover
                         open={openSearch}
-                        anchorEl="anchorPosition"
                         anchorPosition={{ top: 150, left: 0 }}
                         anchorOrigin={{
                             vertical: 'top',
@@ -243,7 +242,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         {
                             this.state.navs.map((item, index) => {
                                 return (
-                                    <BottomNavigationButton
+                                    <BottomNavigationAction
                                         classes={{
                                             root: this.props.classes.navBtn,
                                             label: this.props.classes.btnLabel,
@@ -263,7 +262,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         aria-haspopup="true"
                         className={this.props.classes.iconBtn}
                         style={{marginRight: '30px'}}
-                        color="contrast"
+                        color="inherit"
                     >
                         <Tv/>
                     </IconButton>
@@ -271,7 +270,7 @@ class HeaderLayout extends React.Component<WithStyles<keyof typeof styles>, Stat
                         aria-haspopup="true"
                         className={this.props.classes.iconBtn}
                         style={{marginRight: '10px'}}
-                        color="contrast"
+                        color="inherit"
                     >
                         <Setting/>
                     </IconButton>

@@ -181,33 +181,33 @@ class SideBar extends React.Component<PropsWithStyles, State> {
                                 <Badge
                                     className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={{
-                                        colorAccent: this.props.classes.badge,
+                                        colorPrimary: this.props.classes.badge,
                                     }}
                                     style={{border: 0}}
                                     badgeContent={4}
-                                    color="accent"
+                                    color="error"
                                 >
                                     <Notifications/>
                                 </Badge>
                                 <Badge
                                     className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={ {
-                                        colorAccent: this.props.classes.badge,
+                                        colorPrimary: this.props.classes.badge,
                                     } }
                                     style={{border: 0, marginLeft: 30}}
                                     badgeContent={4}
-                                    color="accent"
+                                    color="error"
                                 >
                                     <MailIcon/>
                                 </Badge>
                                 <Badge
                                     className={classNames(this.props.classes.badge, 'badgeIcon')}
                                     classes={{
-                                        colorAccent: this.props.classes.badge,
+                                        colorPrimary: this.props.classes.badge,
                                     }}
                                     style={{border: 0, marginLeft: 30}}
                                     badgeContent={4}
-                                    color="accent"
+                                    color="error"
                                 >
                                     <ChatBubble/>
                                 </Badge>
