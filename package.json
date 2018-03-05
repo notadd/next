@@ -129,6 +129,7 @@
         "packages/user",
         "packages/websocket",
         "packages/workflow",
-        "vendors/gulp-typescript"
+        "vendors/gulp-typescript",
+        "vendors/workflow-es"
     ]
 }
