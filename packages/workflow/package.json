@@ -1,6 +1,6 @@
 {
     "name": "@notadd/workflow",
-    "version": "2.3.3",
+    "version": "2.3.4",
     "description": "Notadd Workflow Package.",
     "main": "main.js",
     "scripts": {
