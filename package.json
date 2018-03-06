@@ -130,6 +130,7 @@
         "packages/websocket",
         "packages/workflow",
         "vendors/gulp-typescript",
+        "vendors/rxjs",
         "vendors/workflow-es"
     ]
 }
