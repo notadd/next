@@ -1,0 +1,55 @@
+/*表格*/
+.table-head {
+    font-size: 12px;
+    color: #808080;
+}
+.table-head tr {
+    height: 50px;
+}
+.table-head tr th {
+    font-size: 12px !important;
+    color: #808080 !important;
+}
+.table-body{
+    font-size: 12px !important;
+    color: #808080 !important;
+}
+.table-body .table-check-box{
+    width: inherit;
+    height: inherit;
+}
+/*表格第一列checkbox*/
+.root-paper .table-cell-status {
+    text-align: left;
+    padding: 0;
+    width: 40px;
+}
+/*表格最后一列两个操作按钮*/
+.root-paper .table-body tr .table-action-btn {
+    min-width: 120px;
+    padding: 0;
+    text-align: center;
+}
+/*表格外间距*/
+.root-paper {
+    padding: 40px 30px;
+}
+@media (max-width: 479px) {
+    .root-paper {
+        padding: 30px 20px;
+    }
+    .root-paper tr th,
+    .root-paper tr td {
+        padding: 0 4px;
+    }
+    .root-paper .table-hidden {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .root-paper .table-cell-status {
+        min-width: 40px !important;
+    }
+    .root-paper .table-head tr th {
+        min-width: 96px;
+    }
+}

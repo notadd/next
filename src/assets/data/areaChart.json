@@ -1,0 +1,29 @@
+{
+    "name": "用户",
+    "icon": "person",
+    "trend": "down",
+    "percentage": "15%",
+    "num": "1253",
+    "data": [
+        { "month": "Jan", "London": "1.9" },
+        { "month": "Feb", "London": "2.2" },
+        { "month": "Mar", "London": "3.7" },
+        { "month": "Apr", "London": "4.5" },
+        { "month": "May", "London": "5.9" },
+        { "month": "Jun", "London": "4.2" },
+        { "month": "Jul", "London": "3.0" },
+        { "month": "Aug", "London": "4.6" },
+        { "month": "Sep", "London": "3.2" },
+        { "month": "Oct", "London": "5.3" },
+        { "month": "Nov", "London": "2.6" },
+        { "month": "Dec", "London": "1.8" }
+    ],
+    "color": "rgba(121, 135, 204, 1)",
+    "opacity": "1",
+    "position": "month*London",
+    "scale": {
+        "month": {
+            "range": [ 0, 1 ]
+        }
+    }
+}

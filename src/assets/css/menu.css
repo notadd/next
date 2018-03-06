@@ -1,0 +1,100 @@
+/*菜单管理*/
+.menus-manager {
+    height: 600px;
+}
+.rst__lineHalfHorizontalRight::before,
+.rst__lineFullVertical::after,
+.rst__lineHalfVerticalTop::after,
+.rst__lineHalfVerticalBottom::after,
+.rst__lineChildren::after {
+    background-color: #e5e5e5;
+}
+.rst__collapseButton,
+.rst__expandButton {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border: solid 1px #e0e0e0;
+    -webkit-box-shadow: 0 0 0 0 #000;
+     box-shadow: 0 0 0 0 #000;
+}
+.rst__collapseButton:hover:not(:active) {
+    background-size: 10px 6px;
+}
+.rst__expandButton:hover:not(:active) {
+    background-size: 6px 10px;
+}
+.rst__collapseButton:focus,
+.rst__expandButton:focus {
+    -webkit-box-shadow: 0 0 0 0 #000, 0 0 0 0 #83bef9;
+    box-shadow: 0 0 0 0 #000, 0 0 0 0 #83bef9;
+}
+.rst__expandButton {
+    background: #fff url(../../assets/images/arrow_right.png) no-repeat center;
+}
+.rst__collapseButton {
+    background: #fff url(../../assets/images/arrow_bottom.png) no-repeat center;
+}
+.rst__moveHandle,
+.rst__loadingHandle {
+    position: absolute;
+    width: 100%;
+    background: inherit;
+    border: 0 none;
+    -webkit-box-shadow: 0 0 0 0;
+    box-shadow: 0 0 0 0;
+    cursor: inherit;
+}
+.rst__rowContents {
+    border: 0 none;
+    -webkit-box-shadow: 0 0 0 0;
+    box-shadow: 0 0 0 0;
+    min-width: 534px;
+}
+.rst__rowTitle {
+    font-weight: inherit;
+}
+.rst__rowLandingPad::before {
+    background-color: #fff;
+    border: dashed 1px #e0e0e0;
+}
+.rst__rowWrapper:hover {
+    background-color: #f7f7f7;
+}
+.rst__rowWrapper .rst__rowContents {
+    background-color: inherit;
+}
+.rst__rowToolbar {
+    display: none;
+}
+.rst__rowToolbar .rst__toolbarButton {
+    position: absolute;
+    z-index: 100;
+}
+.rst__rowToolbar .rst__toolbarButton > button {
+    width: 28px;
+}
+.rst__rowToolbar .rst__toolbarButton a {
+    color: rgba(0, 0, 0, 0.54);
+}
+.rst__rowToolbar .rst__toolbarButton a svg{
+    width: 1em;
+    height: 1em;
+}
+.rst__rowToolbar .rst__toolbarButton:first-child {
+    right: 28px;
+    top: -12px;
+}
+.rst__rowToolbar .rst__toolbarButton:last-child {
+    right: 0;
+    top: -14px;
+}
+.rst__rowWrapper:hover .rst__rowToolbar {
+    display: block;
+    cursor: pointer;
+}
+@media (max-width: 479px) {
+    .rst__rowContents {
+        min-width: 100%;
+    }
+}
