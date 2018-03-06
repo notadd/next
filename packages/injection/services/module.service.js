@@ -57,7 +57,7 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
-            if (!(yield this.settingService.get(`module.${module.identification}.enabled`, false))) {
+            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
@@ -73,7 +73,7 @@ let ModuleService = class ModuleService {
             if (!module) {
                 throw new Error("Module do not exists!");
             }
-            if (!(yield this.settingService.get(`module.${module.identification}.enabled`, false))) {
+            if (!(yield this.settingService.get(`module.${module.identification}.installed`, false))) {
                 throw new Error(`Module [${module.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
