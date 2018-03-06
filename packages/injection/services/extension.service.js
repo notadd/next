@@ -29,26 +29,7 @@ let ExtensionService = class ExtensionService {
         this.settingService = settingService;
         this.initialized = false;
         this.extensions = [];
-        this.injectionService
-            .loadInjections()
-            .filter((injection) => {
-            return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-        })
-            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
-            const identification = Reflect.getMetadata("identification", injection.target);
-            this.extensions.push({
-                authors: Reflect.getMetadata("authors", injection.target),
-                description: Reflect.getMetadata("description", injection.target),
-                enabled: yield this.settingService.get(`extension.${identification}.enabeld`, false),
-                identification: identification,
-                installed: yield this.settingService.get(`extension.${identification}.installed`, false),
-                location: injection.location,
-                name: Reflect.getMetadata("name", injection.target),
-                shell: Reflect.getMetadata("shell", injection.target),
-                version: Reflect.getMetadata("version", injection.target),
-            });
-        }));
-        this.initialized = true;
+        this.loadInjections();
     }
     getExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -106,6 +87,7 @@ let ExtensionService = class ExtensionService {
                 result = child_process_1.execFileSync(shell, []).toString();
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
+            this.loadInjections(true);
             return {
                 message: `Install extension [${extension.identification}] successfully!\n${result}`,
             };
@@ -129,10 +111,36 @@ let ExtensionService = class ExtensionService {
                 result = child_process_1.execFileSync(shell, []).toString();
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
+            this.loadInjections(true);
             return {
                 message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
             };
         });
+    }
+    loadInjections(reload = false) {
+        if (reload) {
+            this.extensions.splice(0, this.extensions.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection) => {
+            return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
+        })
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.extensions.push({
+                authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
+                enabled: yield this.settingService.get(`extension.${identification}.enabeld`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`extension.${identification}.installed`, false),
+                location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
+                shell: Reflect.getMetadata("shell", injection.target),
+                version: Reflect.getMetadata("version", injection.target),
+            });
+        }));
+        this.initialized = true;
     }
 };
 ExtensionService = __decorate([

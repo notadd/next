@@ -60,6 +60,7 @@ export class ModuleService {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`module.${module.identification}.enabled`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Disable module [${module.identification}] successfully!`,
@@ -80,6 +81,7 @@ export class ModuleService {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`module.${module.identification}.enabled`, "1");
+        this.loadInjections(true);
 
         return {
             message: `Enable module [${module.identification}] successfully!`,
@@ -143,6 +145,7 @@ export class ModuleService {
         }
         await this.syncSchema(module);
         await this.settingService.setSetting(`module.${module.identification}.installed`, "1");
+        this.loadInjections(true);
 
         return {
             message: `Install module [${module.identification}] successfully!`,
@@ -162,8 +165,9 @@ export class ModuleService {
         if (!await this.settingService.get<boolean>(`module.${module.identification}.installed`, false)) {
             throw new Error(`Module [${module.identification}] is not installed!`);
         }
-        await this.dropSchema(module);
+        // await this.dropSchema(module);
         await this.settingService.setSetting(`module.${module.identification}.installed`, "0");
+        this.loadInjections(true);
 
         return {
             message: `Uninstall module [${module.identification}] successfully!`,
@@ -186,6 +190,32 @@ export class ModuleService {
             ]);
             await builder.drop();
         }
+    }
+
+    protected loadInjections(reload: boolean = false) {
+        if (reload) {
+            this.modules.splice(0, this.modules.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection: Injection) => {
+                return InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
+            })
+            .forEach(async(injection: Injection) => {
+                const identification = Reflect.getMetadata("identification", injection.target);
+
+                this.modules.push({
+                    authors: Reflect.getMetadata("authors", injection.target),
+                    description: Reflect.getMetadata("description", injection.target),
+                    enabled: await this.settingService.get(`module.${identification}.enabled`, false),
+                    identification: identification,
+                    installed: await this.settingService.get(`module.${identification}.installed`, false),
+                    location: injection.location,
+                    name: Reflect.getMetadata("name", injection.target),
+                    version: Reflect.getMetadata("version", injection.target),
+                });
+            });
+        this.initialized = true;
     }
 
     /**

@@ -1,0 +1,29 @@
+{
+  "name": "workflow-es",
+  "version": "2.0.2",
+  "description": "A lightweight workflow engine for Node.js",
+  "main": "./build/src/index.js",
+  "typings": "./build/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "jasmine"
+  },
+  "keywords": [
+    "workflow"
+  ],
+  "author": {
+    "email": "daniel@gerlag.ca",
+    "name": "Daniel Gerlag"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielgerlag/workflow-es.git"
+  },
+  "dependencies": {
+    "inversify": "^4.1.0",
+    "reflect-metadata": "^0.1.10",
+    "underscore": "^1.8.3"
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",        
+        "target": "es5",
+        "outDir": "./build",
+        "declaration": true,
+        "noImplicitAny": false,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "lib": [
+            "es2017"
+        ],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "spec/**/*.ts"
+    ],
+    "files": [
+        "src/index.ts"
+    ]
+}

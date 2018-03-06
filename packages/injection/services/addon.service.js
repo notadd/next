@@ -31,25 +31,7 @@ let AddonService = class AddonService {
         this.settingService = settingService;
         this.initialized = false;
         this.addons = [];
-        this.injectionService
-            .loadInjections()
-            .filter((injection) => {
-            return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-        })
-            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
-            const identification = Reflect.getMetadata("identification", injection.target);
-            this.addons.push({
-                authors: Reflect.getMetadata("authors", injection.target),
-                description: Reflect.getMetadata("description", injection.target),
-                enabled: yield this.settingService.get(`addon.${identification}.enabled`, false),
-                identification: identification,
-                installed: yield this.settingService.get(`addon.${identification}.installed`, false),
-                location: injection.location,
-                name: Reflect.getMetadata("name", injection.target),
-                version: Reflect.getMetadata("version", injection.target),
-            });
-        }));
-        this.initialized = true;
+        this.loadInjections();
     }
     disableAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -58,6 +40,7 @@ let AddonService = class AddonService {
                 throw new Error("Addon do not exists!");
             }
             yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+            this.loadInjections(true);
             return {
                 message: `Disable addon [${addon.identification}] successfully!`,
             };
@@ -73,6 +56,7 @@ let AddonService = class AddonService {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+            this.loadInjections(true);
             return {
                 message: `Enable addon [${addon.identification}] successfully!`,
             };
@@ -127,6 +111,7 @@ let AddonService = class AddonService {
             }
             yield this.syncSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
+            this.loadInjections(true);
             return {
                 message: `Install addon [${addon.identification}] successfully!`,
             };
@@ -141,8 +126,8 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
-            yield this.dropSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
+            this.loadInjections(true);
             return {
                 message: `Uninstall addon [${addon.identification}] successfully!`,
             };
@@ -160,6 +145,30 @@ let AddonService = class AddonService {
                 yield builder.drop();
             }
         });
+    }
+    loadInjections(reload = false) {
+        if (reload) {
+            this.addons.splice(0, this.addons.length);
+        }
+        this.injectionService
+            .loadInjections()
+            .filter((injection) => {
+            return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
+        })
+            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.addons.push({
+                authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
+                enabled: yield this.settingService.get(`addon.${identification}.enabled`, false),
+                identification: identification,
+                installed: yield this.settingService.get(`addon.${identification}.installed`, false),
+                location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
+                version: Reflect.getMetadata("version", injection.target),
+            });
+        }));
+        this.initialized = true;
     }
     syncSchema(addon) {
         return __awaiter(this, void 0, void 0, function* () {
