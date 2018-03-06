@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const weblog = require("webpack-log");
-const prop_types_1 = require("prop-types");
 function ctx(compiler, options) {
     const context = {
         state: false,
@@ -11,7 +10,10 @@ function ctx(compiler, options) {
         compiler,
         watching: null,
         forceRebuild: false,
-        log: prop_types_1.any,
+        log: {
+            error: Function,
+        },
+        rebuild: () => { },
     };
     if (options.logger) {
         context.log = options.logger;
