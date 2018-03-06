@@ -58,7 +58,7 @@ export class AddonService {
         if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
-        await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+        await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
         this.loadInjections(true);
 
         return {

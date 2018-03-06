@@ -55,7 +55,7 @@ let AddonService = class AddonService {
             if (!(yield this.settingService.get(`addon.${addon.identification}.installed`, false))) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
-            yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
+            yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
             this.loadInjections(true);
             return {
                 message: `Enable addon [${addon.identification}] successfully!`,
