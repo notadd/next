@@ -751,6 +751,7 @@ class App extends React.Component<Props, State> {
                                         {
                                             condition ?
                                                 <Drawer
+                                                    variant="persistent"
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(
@@ -774,6 +775,7 @@ class App extends React.Component<Props, State> {
                                                 </Drawer>
                                                 :
                                                 <Drawer
+                                                    variant="persistent"
                                                     classes={{
                                                         modal: classes.root,
                                                         docked: classNames(
