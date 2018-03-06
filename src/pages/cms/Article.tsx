@@ -122,6 +122,7 @@ type State = {
     transition: any,
     errorMessage: string,
     error: boolean,
+    pageStatus: boolean,
 };
 
 class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
@@ -143,20 +144,20 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             list: [],
             message: '',
             type: '',
-            isTop: '',
+            isTop: '0',
             childType: '',
             types: [],
             isTops: [
                 {
-                    id: '12',
+                    id: '0',
                     type: '无',
                 },
                 {
-                    id: '13',
+                    id: '1',
                     type: '是',
                 },
                 {
-                    id: '14',
+                    id: '2',
                     type: '否',
                 },
             ],
@@ -221,6 +222,7 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
             tipOpen: false,
             errorMessage: '',
             error: false,
+            pageStatus: false,
         };
     }
     componentDidMount() {
@@ -385,6 +387,9 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     rowsPerPage: data.pagination.pageSize,
                     currentPage: data.pagination.currentPage - 1,
                     openMessageTip: true,
+                    pageStatus: false,
+                    keyword: '',
+                    classify: '',
                     message: '刷新数据完成',
                 });
             }
@@ -513,13 +518,112 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
         });
     };
     handleSubmitSearch = () => {
-        this.setState({
-            right: !this.state.right,
+        let param = false;
+        if (this.state.isTop === '0' || this.state.isTop === '2') {
+            param = false;
+        } else if (this.state.isTop === '1') {
+            param = true;
+        }
+        axios.post('http://192.168.1.121:3000/graphql?', {
+            query: `
+                query {
+                    getArticlesLimit(serachArticle: {
+                        limitNum: 10,
+                        pages: 1,
+                        keyWords: "${this.state.keyword}",
+                        classifyId: ${this.state.classifyId},
+                        topPlace: ${param},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+        }).then(response => {
+            if (!response.data.errors) {
+                const data = response.data.data.getArticlesLimit;
+                this.setState({
+                    list: data.articles,
+                    totalItems: data.pagination.totalItems,
+                    rowsPerPage: data.pagination.pageSize,
+                    currentPage: data.pagination.currentPage - 1,
+                    right: !this.state.right,
+                    pageStatus: true,
+                });
+            }
         });
     };
     handlePageClick = (data: any) => {
-        axios.post('http://192.168.1.121:3000/graphql?', {
-            query: `
+        let param = false;
+        if (this.state.isTop === '0' || this.state.isTop === '2') {
+            param = false;
+        } else if (this.state.isTop === '1') {
+            param = true;
+        }
+        if (this.state.pageStatus) {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
+                query {
+                    getArticlesLimit(serachArticle: {
+                        limitNum: 10,
+                        pages: 1,
+                        keyWords: "${this.state.keyword}",
+                        classifyId: ${this.state.classifyId},
+                        topPlace: ${param},
+                    }){
+                        pagination{
+                            totalItems,
+                            currentPage,
+                            pageSize,
+                            totalPages,
+                            startPage,
+                            endPage,
+                            startIndex,
+                            endIndex,
+                            pages,
+                        },
+                        articles{
+                            id,
+                            check,
+                            name,
+                            classify,
+                            publishedTime,
+                        }
+                    }
+                }
+            `,
+            }).then(response => {
+                if (!response.data.errors) {
+                    const sub = response.data.data.getArticlesLimit;
+                    this.setState({
+                        list: sub.articles,
+                        totalItems: sub.pagination.totalItems,
+                        rowsPerPage: sub.pagination.pageSize,
+                        currentPage: sub.pagination.currentPage - 1,
+                        right: !this.state.right,
+                        pageStatus: true,
+                    });
+                }
+            });
+        } else {
+            axios.post('http://192.168.1.121:3000/graphql?', {
+                query: `
                 query {
                     getArticlesLimit(getArticleAll: {
                         limitNum: 10,
@@ -546,18 +650,19 @@ class Article extends React.Component<WithStyles<keyof typeof styles>, State> {
                     }
                 }
             `,
-        }).then(response => {
-            if (!response.data.errors) {
-                const res = response.data.data.getArticlesLimit;
-                this.setState({
-                    list: res.articles,
-                    totalItems: res.pagination.totalItems,
-                    rowsPerPage: res.pagination.pageSize,
-                    currentPage: res.pagination.currentPage - 1,
-                    checkedAll: false,
-                });
-            }
-        });
+            }).then(response => {
+                if (!response.data.errors) {
+                    const res = response.data.data.getArticlesLimit;
+                    this.setState({
+                        list: res.articles,
+                        totalItems: res.pagination.totalItems,
+                        rowsPerPage: res.pagination.pageSize,
+                        currentPage: res.pagination.currentPage - 1,
+                        checkedAll: false,
+                    });
+                }
+            });
+        }
     };
     handleChangeType = (value: any, select: any) => {
         this.setState({
