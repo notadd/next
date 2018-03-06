@@ -37,12 +37,20 @@ let SettingResolvers = class SettingResolvers {
     }
     removeSetting(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.removeSetting(args.key);
+            yield this.service.removeSetting(args.key);
+            return {
+                code: 200,
+                message: "Remove setting successfully!",
+            };
         });
     }
     setSetting(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.setSetting(args.key, args.value);
+            yield this.service.setSetting(args.key, args.value);
+            return {
+                code: 200,
+                message: "Set setting successfully!",
+            };
         });
     }
 };
