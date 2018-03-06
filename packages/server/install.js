@@ -28,7 +28,8 @@ function install() {
 
     `);
         console.log(clc.blue("Please answer the following questions carefully:"));
-        const result = yield inquirer_1.prompt([
+        let result;
+        result = yield inquirer_1.prompt([
             {
                 type: "list",
                 message: "Please select which database engine you want use:",
@@ -49,68 +50,117 @@ function install() {
                 ],
                 default: 0,
             },
-            {
-                type: "input",
-                message: "Database Name:",
-                name: "database",
-            },
-            {
-                type: "input",
-                message: "Database Host:",
-                name: "databaseHost",
-            },
-            {
-                type: "input",
-                message: "Database Port:",
-                name: "databasePort",
-            },
-            {
-                type: "input",
-                message: "Database Username:",
-                name: "databaseUsername",
-            },
-            {
-                type: "input",
-                message: "Database Password:",
-                name: "databasePassword",
-            },
-            {
-                type: "input",
-                message: "Administration Username:",
-                name: "username",
-            },
-            {
-                type: "input",
-                message: "Administration Email:",
-                name: "email",
-            },
-            {
-                type: "input",
-                message: "Administration Password:",
-                name: "password",
-            },
         ]);
-        fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
-            default: {
-                type: result.engine,
-                host: result.databaseHost,
-                port: result.databasePort,
-                username: result.databaseUsername,
-                password: result.databasePassword,
-                database: result.database,
-                entities: [
-                    "**/*.entity.js",
-                ],
-                migrations: [
-                    "**/*.migration.js",
-                ],
-                logging: true,
-                migrationsRun: false,
-                synchronize: false,
-            },
-        }));
+        const engine = result.engine;
+        switch (engine) {
+            case "postgres":
+            case "mysql":
+                result = yield inquirer_1.prompt([
+                    {
+                        type: "input",
+                        message: "Database Name:",
+                        name: "database",
+                    },
+                    {
+                        type: "input",
+                        message: "Database Host:",
+                        name: "databaseHost",
+                    },
+                    {
+                        type: "input",
+                        message: "Database Port:",
+                        name: "databasePort",
+                    },
+                    {
+                        type: "input",
+                        message: "Database Username:",
+                        name: "databaseUsername",
+                    },
+                    {
+                        type: "input",
+                        message: "Database Password:",
+                        name: "databasePassword",
+                    },
+                    {
+                        type: "input",
+                        message: "Administration Username:",
+                        name: "username",
+                    },
+                    {
+                        type: "input",
+                        message: "Administration Email:",
+                        name: "email",
+                    },
+                    {
+                        type: "input",
+                        message: "Administration Password:",
+                        name: "password",
+                    },
+                ]);
+                break;
+            default:
+                result = yield inquirer_1.prompt([
+                    {
+                        type: "input",
+                        message: "Administration Username:",
+                        name: "username",
+                    },
+                    {
+                        type: "input",
+                        message: "Administration Email:",
+                        name: "email",
+                    },
+                    {
+                        type: "input",
+                        message: "Administration Password:",
+                        name: "password",
+                    },
+                ]);
+                break;
+        }
+        switch (engine) {
+            case "postgres":
+            case "mysql":
+                fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
+                    default: {
+                        type: engine,
+                        host: result.databaseHost,
+                        port: result.databasePort,
+                        username: result.databaseUsername,
+                        password: result.databasePassword,
+                        database: result.database,
+                        entities: [
+                            "**/*.entity.js",
+                        ],
+                        migrations: [
+                            "**/*.migration.js",
+                        ],
+                        logging: true,
+                        migrationsRun: false,
+                        synchronize: false,
+                    },
+                }));
+                break;
+            default:
+                fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
+                    default: {
+                        type: engine,
+                        database: "./notadd.sqlite",
+                        entities: [
+                            "**/*.entity.js",
+                        ],
+                        migrations: [
+                            "**/*.migration.js",
+                        ],
+                        logging: true,
+                        migrationsRun: false,
+                        synchronize: false,
+                    },
+                }));
+                break;
+        }
         let wanted = "";
-        switch (result.engine) {
+        switch (engine) {
             case "mysql":
                 wanted = "mysql";
                 break;
