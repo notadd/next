@@ -1,26 +1,7 @@
-import { DependenciesScanner } from "@nestjs/core/scanner";
-import { INestApplication } from "@nestjs/common";
-import { INestApplicationContext } from "@nestjs/common/interfaces/nest-application-context.interface";
-import { INestMicroservice } from "@nestjs/common/interfaces/nest-microservice.interface";
-import { InstanceLoader } from "@nestjs/core/injector/instance-loader";
-import { MicroserviceConfiguration } from "@nestjs/common/interfaces/microservices/microservice-configuration.interface";
-import { NestContainer } from "@nestjs/core/injector/container";
-import { NestApplicationOptions } from '@nestjs/common/interfaces/nest-application-options.interface';
-export declare class NotaddFactoryStatic {
-    private container;
-    private instanceLoader;
-    private logger;
-    private dependenciesScanner;
-    create(module: any): Promise<INestApplication>;
-    create(module: any, options: NestApplicationOptions): Promise<INestApplication>;
-    createMicroservice(module: any, config?: MicroserviceConfiguration): Promise<INestMicroservice>;
-    createApplicationContext(module: any): Promise<INestApplicationContext>;
-    getContainer(): NestContainer;
-    getLoader(): InstanceLoader;
-    getScanner(): DependenciesScanner;
-    private createApplicationInstance<T>(instance);
-    private createProxy(target);
-    private createExceptionProxy();
-    private initialize(module);
+import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
+import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-application-options.interface";
+import { NestFactoryStatic } from "@nestjs/core/nest-factory";
+export declare class NotaddFactoryStatic extends NestFactoryStatic {
+    start(module: any, options: NestApplicationOptions): Promise<INestApplication>;
 }
 export declare const NotaddFactory: NotaddFactoryStatic;

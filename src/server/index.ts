@@ -37,7 +37,7 @@ export async function bootstrap() {
     /**
      * @type { INestApplication }
      */
-    const application = await NotaddFactory.create(ApplicationModule);
+    const application = await NotaddFactory.start(ApplicationModule, {});
     application.use(express.static(process.cwd() + "/public/"));
     application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
