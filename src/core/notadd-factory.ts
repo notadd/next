@@ -13,6 +13,8 @@ import { MicroservicesPackageNotFoundException } from "@nestjs/core/errors/excep
 import { NestApplicationContext } from "@nestjs/core";
 import { NestContainer } from "@nestjs/core/injector/container";
 import { NotaddApplication } from "./notadd-application";
+import { NestApplicationOptions } from '@nestjs/common/interfaces/nest-application-options.interface';
+import { ApplicationConfig } from "@nestjs/core/application-config";
 
 const { NestMicroservice } = optional("@nestjs/microservices/nest-microservice") || ({} as any);
 
@@ -31,7 +33,9 @@ export class NotaddFactoryStatic {
      *
      * @returns { Promise<INestApplication> }
      */
-    public async create(module, express = ExpressAdapter.create()): Promise<INestApplication> {
+    public async create(module: any): Promise<INestApplication>;
+    public async create(module: any, options: NestApplicationOptions,): Promise<INestApplication>;
+    public async create(module: any, expressOrOptions?: any, options?: NestApplicationOptions): Promise<INestApplication> {
         console.log(`
                  _            _     _
      _ __   ___ | |_ __ _  __| | __| |
@@ -41,7 +45,11 @@ export class NotaddFactoryStatic {
 
         `);
         this.logger.log("Starting Notadd...");
+        const isExpressInstance = expressOrOptions && expressOrOptions.response;
+        const [expressInstance, appOptions] = isExpressInstance ? [expressOrOptions, options] : [ExpressAdapter.create(), expressOrOptions];
         await this.initialize(module);
+        const applicationConfig = new ApplicationConfig();
+        const container = new NestContainer(applicationConfig);
         let instance = this.createApplicationInstance<NotaddApplication>(
             new NotaddApplication(this.container, express),
         );
