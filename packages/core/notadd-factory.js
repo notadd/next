@@ -20,6 +20,7 @@ const microservices_package_not_found_exception_1 = require("@nestjs/core/errors
 const core_1 = require("@nestjs/core");
 const container_1 = require("@nestjs/core/injector/container");
 const notadd_application_1 = require("./notadd-application");
+const application_config_1 = require("@nestjs/core/application-config");
 const { NestMicroservice } = optional("@nestjs/microservices/nest-microservice") || {};
 class NotaddFactoryStatic {
     constructor() {
@@ -28,7 +29,7 @@ class NotaddFactoryStatic {
         this.logger = new common_1.Logger('NotaddFactory', true);
         this.dependenciesScanner = new scanner_1.DependenciesScanner(this.container, new metadata_scanner_1.MetadataScanner());
     }
-    create(module, express = express_adapter_1.ExpressAdapter.create()) {
+    create(module, expressOrOptions, options) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`
                  _            _     _
@@ -39,7 +40,11 @@ class NotaddFactoryStatic {
 
         `);
             this.logger.log("Starting Notadd...");
+            const isExpressInstance = expressOrOptions && expressOrOptions.response;
+            const [expressInstance, appOptions] = isExpressInstance ? [expressOrOptions, options] : [express_adapter_1.ExpressAdapter.create(), expressOrOptions];
             yield this.initialize(module);
+            const applicationConfig = new application_config_1.ApplicationConfig();
+            const container = new container_1.NestContainer(applicationConfig);
             let instance = this.createApplicationInstance(new notadd_application_1.NotaddApplication(this.container, express));
             this.logger.log("Notadd successfully started");
             return instance;

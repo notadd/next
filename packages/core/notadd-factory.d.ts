@@ -5,12 +5,14 @@ import { INestMicroservice } from "@nestjs/common/interfaces/nest-microservice.i
 import { InstanceLoader } from "@nestjs/core/injector/instance-loader";
 import { MicroserviceConfiguration } from "@nestjs/common/interfaces/microservices/microservice-configuration.interface";
 import { NestContainer } from "@nestjs/core/injector/container";
+import { NestApplicationOptions } from '@nestjs/common/interfaces/nest-application-options.interface';
 export declare class NotaddFactoryStatic {
     private container;
     private instanceLoader;
     private logger;
     private dependenciesScanner;
-    create(module: any, express?: any): Promise<INestApplication>;
+    create(module: any): Promise<INestApplication>;
+    create(module: any, options: NestApplicationOptions): Promise<INestApplication>;
     createMicroservice(module: any, config?: MicroserviceConfiguration): Promise<INestMicroservice>;
     createApplicationContext(module: any): Promise<INestApplicationContext>;
     getContainer(): NestContainer;
