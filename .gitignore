@@ -6,4 +6,5 @@ lerna-debug.log
 npm-debug.log
 npm-lock.json
 ormconfig.yml
+yarn.lock
 yarn-error.log
