@@ -19,6 +19,7 @@ const fs_1 = require("fs");
 const packages_1 = require("nestjs-flub/packages");
 const path_1 = require("path");
 const common_1 = require("@nestjs/common");
+const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
 const cross = (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -31,6 +32,7 @@ const cross = (req, res, next) => {
         next();
     }
 };
+__export(require("./modules/application.module"));
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const logger = new common_1.Logger("NotaddFactory", true);
@@ -42,7 +44,9 @@ function bootstrap() {
         const index = process.argv.indexOf("--port");
         const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
-        const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {});
+        const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {
+            logger: services_1.LogService,
+        });
         application.use(express.static(process.cwd() + "/public/"));
         application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
@@ -63,4 +67,3 @@ function bootstrap() {
     });
 }
 exports.bootstrap = bootstrap;
-__export(require("./modules/application.module"));

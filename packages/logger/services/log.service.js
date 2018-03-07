@@ -20,11 +20,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const clc = require("cli-color");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const entities_1 = require("../entities");
 const typeorm_2 = require("typeorm");
-let LogService = class LogService {
+const nest_environment_enum_1 = require("@nestjs/common/enums/nest-environment.enum");
+let LogService = LogService_1 = class LogService {
     constructor(repository) {
         this.repository = repository;
     }
@@ -43,10 +45,47 @@ let LogService = class LogService {
                 .getOne();
         });
     }
+    static log(message, context = '', isTimeDiffEnabled = true) {
+        this.printMessage(message, clc.green, context, isTimeDiffEnabled);
+    }
+    static error(message, trace = '', context = '', isTimeDiffEnabled = true) {
+        this.printMessage(message, clc.red, context, isTimeDiffEnabled);
+        this.printStackTrace(trace);
+    }
+    static warn(message, context = '', isTimeDiffEnabled = true) {
+        this.printMessage(message, clc.yellow, context, isTimeDiffEnabled);
+    }
+    static printMessage(message, color, context = '', isTimeDiffEnabled) {
+        if (LogService_1.contextEnv === nest_environment_enum_1.NestEnvironment.TEST)
+            return;
+        process.stdout.write(color(`[Notadd] ${process.pid}   - `));
+        process.stdout.write(`${new Date(Date.now()).toLocaleString()}   `);
+        process.stdout.write(this.yellow(`[${context}] `));
+        process.stdout.write(color(message));
+        this.printTimestamp(isTimeDiffEnabled);
+        process.stdout.write(`\n`);
+    }
+    static printTimestamp(isTimeDiffEnabled) {
+        const includeTimestamp = LogService_1.prevTimestamp && isTimeDiffEnabled;
+        if (includeTimestamp) {
+            process.stdout.write(this.yellow(` +${Date.now() - LogService_1.prevTimestamp}ms`));
+        }
+        LogService_1.prevTimestamp = Date.now();
+    }
+    static printStackTrace(trace) {
+        if (this.contextEnv === nest_environment_enum_1.NestEnvironment.TEST || !trace)
+            return;
+        process.stdout.write(trace);
+        process.stdout.write(`\n`);
+    }
 };
-LogService = __decorate([
+LogService.prevTimestamp = Date.now();
+LogService.contextEnv = nest_environment_enum_1.NestEnvironment.RUN;
+LogService.yellow = clc.xterm(3);
+LogService = LogService_1 = __decorate([
     common_1.Component(),
     __param(0, typeorm_1.InjectRepository(entities_1.Log)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], LogService);
 exports.LogService = LogService;
+var LogService_1;

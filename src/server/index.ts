@@ -6,6 +6,7 @@ import { existsSync } from 'fs';
 import { FlubErrorHandler } from "nestjs-flub/packages";
 import { join } from 'path';
 import { Logger, ValidationPipe } from "@nestjs/common";
+import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
 
 const cross = (req, res, next) => {
@@ -19,6 +20,8 @@ const cross = (req, res, next) => {
         next();
     }
 };
+
+export * from "./modules/application.module";
 
 export async function bootstrap() {
     /**
@@ -37,7 +40,9 @@ export async function bootstrap() {
     /**
      * @type { INestApplication }
      */
-    const application = await NotaddFactory.start(ApplicationModule, {});
+    const application = await NotaddFactory.start(ApplicationModule, {
+        logger: LogService,
+    });
     application.use(express.static(process.cwd() + "/public/"));
     application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
@@ -64,5 +69,3 @@ export async function bootstrap() {
         logger.log(`Server on: ${address}`);
     });
 }
-
-export * from "./modules/application.module";
