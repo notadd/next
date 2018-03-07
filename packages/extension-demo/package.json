@@ -1,6 +1,6 @@
 {
     "name": "@notadd/extension-demo",
-    "version": "2.2.8",
+    "version": "2.3.4",
     "description": "Notadd Extension Demo Package.",
     "main": "main.js",
     "scripts": {

@@ -19,7 +19,8 @@ async function install() {
     `);
     console.log(clc.blue("Please answer the following questions carefully:"));
 
-    const result = await prompt([
+    let result;
+    result = await prompt([
         {
             type: "list",
             message: "Please select which database engine you want use:",
@@ -40,70 +41,118 @@ async function install() {
             ],
             default: 0,
         },
-        {
-            type: "input",
-            message: "Database Name:",
-            name: "database",
-        },
-        {
-            type: "input",
-            message: "Database Host:",
-            name: "databaseHost",
-        },
-        {
-            type: "input",
-            message: "Database Port:",
-            name: "databasePort",
-        },
-        {
-            type: "input",
-            message: "Database Username:",
-            name: "databaseUsername",
-        },
-        {
-            type: "input",
-            message: "Database Password:",
-            name: "databasePassword",
-        },
-        {
-            type: "input",
-            message: "Administration Username:",
-            name: "username",
-        },
-        {
-            type: "input",
-            message: "Administration Email:",
-            name: "email",
-        },
-        {
-            type: "input",
-            message: "Administration Password:",
-            name: "password",
-        },
     ]);
+    const engine = result.engine;
+    switch (engine) {
+        case "postgres":
+        case "mysql":
+            result = await prompt([
+                {
+                    type: "input",
+                    message: "Database Name:",
+                    name: "database",
+                },
+                {
+                    type: "input",
+                    message: "Database Host:",
+                    name: "databaseHost",
+                },
+                {
+                    type: "input",
+                    message: "Database Port:",
+                    name: "databasePort",
+                },
+                {
+                    type: "input",
+                    message: "Database Username:",
+                    name: "databaseUsername",
+                },
+                {
+                    type: "input",
+                    message: "Database Password:",
+                    name: "databasePassword",
+                },
+                {
+                    type: "input",
+                    message: "Administration Username:",
+                    name: "username",
+                },
+                {
+                    type: "input",
+                    message: "Administration Email:",
+                    name: "email",
+                },
+                {
+                    type: "input",
+                    message: "Administration Password:",
+                    name: "password",
+                },
+            ]);
+            break;
+        default:
+            result = await prompt([
+                {
+                    type: "input",
+                    message: "Administration Username:",
+                    name: "username",
+                },
+                {
+                    type: "input",
+                    message: "Administration Email:",
+                    name: "email",
+                },
+                {
+                    type: "input",
+                    message: "Administration Password:",
+                    name: "password",
+                },
+            ]);
+            break;
+    }
+    switch (engine) {
+        case "postgres":
+        case "mysql":
+            writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
+                default: {
+                    type: engine,
+                    host: result.databaseHost,
+                    port: result.databasePort,
+                    username: result.databaseUsername,
+                    password: result.databasePassword,
+                    database: result.database,
+                    entities: [
+                        "**/*.entity.js",
+                    ],
+                    migrations: [
+                        "**/*.migration.js",
+                    ],
+                    logging: true,
+                    migrationsRun: false,
+                    synchronize: false,
+                },
+            }));
+            break;
+        default:
+            writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
+                default: {
+                    type: engine,
+                    database: "./notadd.sqlite",
+                    entities: [
+                        "**/*.entity.js",
+                    ],
+                    migrations: [
+                        "**/*.migration.js",
+                    ],
+                    logging: true,
+                    migrationsRun: false,
+                    synchronize: false,
 
-    writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-        default: {
-            type: result.engine,
-            host: result.databaseHost,
-            port: result.databasePort,
-            username: result.databaseUsername,
-            password: result.databasePassword,
-            database: result.database,
-            entities: [
-                "**/*.entity.js",
-            ],
-            migrations: [
-                "**/*.migration.js",
-            ],
-            logging: true,
-            migrationsRun: false,
-            synchronize: false,
-
-        },
-    }));
+                },
+            }));
+            break;
+    }
     let wanted = "";
-    switch(result.engine) {
+    switch (engine) {
         case "mysql":
             wanted = "mysql";
             break;
