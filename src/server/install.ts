@@ -49,11 +49,6 @@ async function install() {
             result = await prompt([
                 {
                     type: "input",
-                    message: "Database Name:",
-                    name: "database",
-                },
-                {
-                    type: "input",
                     message: "Database Host:",
                     name: "databaseHost",
                 },
@@ -71,6 +66,11 @@ async function install() {
                     type: "input",
                     message: "Database Password:",
                     name: "databasePassword",
+                },
+                {
+                    type: "input",
+                    message: "Database Name:",
+                    name: "database",
                 },
                 {
                     type: "input",
@@ -113,7 +113,7 @@ async function install() {
         case "postgres":
         case "mysql":
             writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-                default: {
+                "default": {
                     type: engine,
                     host: result.databaseHost,
                     port: result.databasePort,
@@ -134,7 +134,7 @@ async function install() {
             break;
         default:
             writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-                default: {
+                "default": {
                     type: engine,
                     database: "./notadd.sqlite",
                     entities: [
@@ -146,7 +146,6 @@ async function install() {
                     logging: true,
                     migrationsRun: false,
                     synchronize: false,
-
                 },
             }));
             break;

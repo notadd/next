@@ -58,11 +58,6 @@ function install() {
                 result = yield inquirer_1.prompt([
                     {
                         type: "input",
-                        message: "Database Name:",
-                        name: "database",
-                    },
-                    {
-                        type: "input",
                         message: "Database Host:",
                         name: "databaseHost",
                     },
@@ -80,6 +75,11 @@ function install() {
                         type: "input",
                         message: "Database Password:",
                         name: "databasePassword",
+                    },
+                    {
+                        type: "input",
+                        message: "Database Name:",
+                        name: "database",
                     },
                     {
                         type: "input",
@@ -122,7 +122,7 @@ function install() {
             case "postgres":
             case "mysql":
                 fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
-                    default: {
+                    "default": {
                         type: engine,
                         host: result.databaseHost,
                         port: result.databasePort,
@@ -143,7 +143,7 @@ function install() {
                 break;
             default:
                 fs_1.writeFileSync(path_1.join(process.cwd(), "ormconfig.yml"), js_yaml_1.safeDump({
-                    default: {
+                    "default": {
                         type: engine,
                         database: "./notadd.sqlite",
                         entities: [
