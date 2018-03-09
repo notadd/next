@@ -25,6 +25,7 @@ const page_module_1 = require("./page.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const user_module_1 = require("@notadd/user/modules/user.module");
 const core_1 = require("@nestjs/core");
+const utilities_1 = require("../utilities");
 let InjectionModule = class InjectionModule {
     constructor(addonSagas, command$, event$, extensionSagas, moduleRef, moduleSagas) {
         this.addonSagas = addonSagas;
@@ -35,10 +36,10 @@ let InjectionModule = class InjectionModule {
         this.moduleSagas = moduleSagas;
     }
     onModuleInit() {
-        this.command$.register(handlers_1.CommandHandlers);
         this.command$.setModuleRef(this.moduleRef);
-        this.event$.register(handlers_2.EventHandlers);
         this.event$.setModuleRef(this.moduleRef);
+        this.event$.register(handlers_2.EventHandlers);
+        this.command$.register(handlers_1.CommandHandlers);
         this.event$.combineSagas([]);
     }
 };
@@ -58,6 +59,9 @@ InjectionModule = __decorate([
             services_1.InjectionService,
         ],
         imports: [
+            ...utilities_1.loadExtensionsFromFiles(),
+            ...utilities_1.loadModulesFromFiles(),
+            ...utilities_1.loadAddonsFromFiles(),
             common_1.forwardRef(() => extension_module_1.ExtensionModule),
             common_1.forwardRef(() => module_module_1.ModuleModule),
             common_1.forwardRef(() => addon_module_1.AddonModule),

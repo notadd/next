@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const injection_module_1 = require("./injection.module");
-const utilities_1 = require("../utilities");
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
@@ -21,7 +20,6 @@ ModuleModule = __decorate([
             services_1.ModuleService,
         ],
         imports: [
-            ...utilities_1.loadModulesFromFiles(),
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],

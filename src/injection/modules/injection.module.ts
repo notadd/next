@@ -15,6 +15,7 @@ import { PageModule } from "./page.module";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { UserModule } from "@notadd/user/modules/user.module";
 import { ModuleRef } from "@nestjs/core";
+import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } from "../utilities";
 
 @Module({
     components: [
@@ -31,6 +32,9 @@ import { ModuleRef } from "@nestjs/core";
         InjectionService,
     ],
     imports: [
+        ...loadExtensionsFromFiles(),
+        ...loadModulesFromFiles(),
+        ...loadAddonsFromFiles(),
         forwardRef(() => ExtensionModule),
         forwardRef(() => ModuleModule),
         forwardRef(() => AddonModule),
@@ -53,10 +57,10 @@ export class InjectionModule implements OnModuleInit {
     }
 
     onModuleInit() {
-        this.command$.register(CommandHandlers);
         this.command$.setModuleRef(this.moduleRef);
-        this.event$.register(EventHandlers);
         this.event$.setModuleRef(this.moduleRef);
+        this.event$.register(EventHandlers);
+        this.command$.register(CommandHandlers);
         this.event$.combineSagas([
         ]);
     }

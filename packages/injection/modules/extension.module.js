@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
-const utilities_1 = require("../utilities");
 const injection_module_1 = require("./injection.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 let ExtensionModule = class ExtensionModule {
@@ -21,7 +20,6 @@ ExtensionModule = __decorate([
             services_1.ExtensionService,
         ],
         imports: [
-            ...utilities_1.loadExtensionsFromFiles(),
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],
