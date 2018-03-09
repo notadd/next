@@ -9,18 +9,6 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
 
-const cross = (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-
-    if ("OPTIONS" == req.method) {
-        res.sendStatus(200);
-    } else {
-        next();
-    }
-};
-
 export * from "./modules/application.module";
 
 export async function bootstrap() {
@@ -41,10 +29,11 @@ export async function bootstrap() {
      * @type { INestApplication }
      */
     const application = await NotaddFactory.start(ApplicationModule, {
+        bodyParser: true,
+        cors: true,
         logger: LogService,
     });
     application.use(express.static(process.cwd() + "/public/"));
-    application.use(cross);
     application.useGlobalFilters(new FlubErrorHandler());
     application.useGlobalPipes(new ValidationPipe());
     /**

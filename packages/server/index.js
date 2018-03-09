@@ -21,17 +21,6 @@ const path_1 = require("path");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
-const cross = (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-    if ("OPTIONS" == req.method) {
-        res.sendStatus(200);
-    }
-    else {
-        next();
-    }
-};
 __export(require("./modules/application.module"));
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -45,10 +34,11 @@ function bootstrap() {
         const port = index > -1 ? parseInt(process.argv[index + 1]) : 3000;
         const address = `http://${ip.address()}:${port}`;
         const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {
+            bodyParser: true,
+            cors: true,
             logger: services_1.LogService,
         });
         application.use(express.static(process.cwd() + "/public/"));
-        application.use(cross);
         application.useGlobalFilters(new packages_1.FlubErrorHandler());
         application.useGlobalPipes(new common_1.ValidationPipe());
         const options = new swagger_1.DocumentBuilder()
