@@ -5,9 +5,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const addon_decorator_1 = require("@notadd/injection/decorators/addon.decorator");
+const modules_1 = require("@notadd/setting/modules");
+const services_1 = require("@notadd/setting/services");
 let AddonDemoInjection = class AddonDemoInjection {
+    constructor(settingService) {
+        this.settingService = settingService;
+    }
+    onModuleInit() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const settings = yield this.settingService.getSettings();
+            console.log(settings);
+        });
+    }
 };
 AddonDemoInjection = __decorate([
     addon_decorator_1.Addon({
@@ -20,6 +42,10 @@ AddonDemoInjection = __decorate([
         identification: "addon-demo",
         name: "Addon Demo",
         version: "v1.0.0",
-    })
+        imports: [
+            modules_1.SettingModule,
+        ],
+    }),
+    __metadata("design:paramtypes", [services_1.SettingService])
 ], AddonDemoInjection);
 exports.AddonDemoInjection = AddonDemoInjection;
