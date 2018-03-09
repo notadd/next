@@ -10,6 +10,7 @@ const _1 = require("../");
 const cqrs_1 = require("@nestjs/cqrs");
 let AddonAfterEnableEventHandler = class AddonAfterEnableEventHandler {
     handle(event) {
+        console.log("Addon After Enable Event applied: " + event.identification);
         return undefined;
     }
 };

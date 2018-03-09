@@ -1,2 +1,2 @@
-import { AddonBeforeEnableEventHandler } from "./addon-before-enable.event.handler";
-export declare const EventHandlers: (typeof AddonBeforeEnableEventHandler)[];
+import { AddonAfterEnableEventHandler } from "./addon-after-enable.event.handler";
+export declare const EventHandlers: (typeof AddonAfterEnableEventHandler)[];

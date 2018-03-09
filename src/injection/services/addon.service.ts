@@ -1,12 +1,14 @@
 import "reflect-metadata";
 import { Addon } from "../types";
 import { Component } from "@nestjs/common";
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
 import { Injection } from "../types";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { join } from "path";
 import { Result } from "@notadd/core/types/result.type";
+import { safeDump, safeLoad } from "js-yaml";
 import { SchemaBuilder } from "../builders";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
@@ -38,7 +40,7 @@ export class AddonService {
             throw new Error("Addon do not exists!");
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
-        this.loadInjections(true);
+        await this.loadInjections(true);
 
         return {
             message: `Disable addon [${addon.identification}] successfully!`,
@@ -59,7 +61,7 @@ export class AddonService {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
-        this.loadInjections(true);
+        await this.loadInjections(true);
 
         return {
             message: `Enable addon [${addon.identification}] successfully!`,
@@ -123,7 +125,7 @@ export class AddonService {
         }
         await this.syncSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
-        this.loadInjections(true);
+        await this.loadInjections(true);
 
         return {
             message: `Install addon [${addon.identification}] successfully!`,
@@ -145,7 +147,7 @@ export class AddonService {
         }
         // await this.dropSchema(addon);
         await this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
-        this.loadInjections(true);
+        await this.loadInjections(true);
 
         return {
             message: `Uninstall addon [${addon.identification}] successfully!`,
@@ -154,6 +156,7 @@ export class AddonService {
 
     /**
      * @param { Addon } addon
+     *
      * @returns { Promise<void> }
      */
     protected async dropSchema(addon: Addon): Promise<void> {
@@ -169,28 +172,50 @@ export class AddonService {
         }
     }
 
-    protected loadInjections(reload: boolean = false) {
+    protected loadEnabledAddons() {
+        const path = join(process.cwd(), "storages", "addons", "enabled.yaml");
+        let exits: Array<string> = [];
+        if (existsSync(path)) {
+            exits = safeLoad(readFileSync(path).toString());
+        }
+        const enabled = this.addons.filter((addon: Addon) => {
+            return addon.enabled === true;
+        }).map((addon: Addon) => {
+            return addon.location;
+        });
+        if (exits.filter(data => {
+            return enabled.indexOf(data) === -1;
+        }).length || enabled.filter(data => {
+            return exits.indexOf(data) === -1;
+        }).length) {
+            writeFileSync(path, safeDump(enabled));
+        }
+    }
+
+    protected async loadInjections(reload: boolean = false) {
         if (reload) {
             this.addons.splice(0, this.addons.length);
         }
-        this.injectionService
+        const injections = this.injectionService
             .loadInjections()
             .filter((injection: Injection) => {
                 return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-            })
-            .forEach(async (injection: Injection) => {
-                const identification = Reflect.getMetadata("identification", injection.target);
-                this.addons.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: await this.settingService.get(`addon.${identification}.enabled`, false),
-                    identification: identification,
-                    installed: await this.settingService.get(`addon.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
             });
+        for(let i = 0; i < injections.length; i ++) {
+            const injection = injections[i];
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.addons.push({
+                authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
+                enabled: await this.settingService.get(`addon.${identification}.enabled`, false),
+                identification: identification,
+                installed: await this.settingService.get(`addon.${identification}.installed`, false),
+                location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
+                version: Reflect.getMetadata("version", injection.target),
+            });
+        }
+        this.loadEnabledAddons();
         this.initialized = true;
     }
 
