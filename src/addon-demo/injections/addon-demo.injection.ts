@@ -1,7 +1,6 @@
 import { Addon } from "@notadd/injection/decorators/addon.decorator";
-import { SettingModule } from "@notadd/setting/modules";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
-import { SettingService } from "@notadd/setting/services";
+import { Logger } from "@nestjs/common";
 
 @Addon({
     authors: [
@@ -13,16 +12,11 @@ import { SettingService } from "@notadd/setting/services";
     identification: "addon-demo",
     name: "Addon Demo",
     version: "v1.0.0",
-    imports: [
-        SettingModule,
-    ],
 })
 export class AddonDemoInjection implements OnModuleInit {
-    constructor(private readonly settingService: SettingService) {
-    }
+    private readonly logger = new Logger("AddonLoader");
 
-    public async onModuleInit() {
-        const settings = await this.settingService.getSettings();
-        console.log(settings);
+    public onModuleInit() {
+        this.logger.log("Addon demo initialized");
     }
 }

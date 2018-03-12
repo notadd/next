@@ -7,7 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const module_decorator_1 = require("@notadd/injection/decorators/module.decorator");
+const common_1 = require("@nestjs/common");
 let ModuleDemoInjection = class ModuleDemoInjection {
+    constructor() {
+        this.logger = new common_1.Logger("AddonLoader");
+    }
+    onModuleInit() {
+        this.logger.log("Module demo initialized");
+    }
 };
 ModuleDemoInjection = __decorate([
     module_decorator_1.Module({
