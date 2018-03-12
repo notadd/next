@@ -11,11 +11,11 @@ function getFilenameFromUrl(pubPath, compiler, url) {
     let filename;
     if (localPrefix.hostname !== null && urlObject.hostname !== null &&
         localPrefix.hostname !== urlObject.hostname) {
-        return false;
+        return "";
     }
     if (publicPath && localPrefix.hostname === urlObject.hostname &&
         url.indexOf(publicPath) !== 0) {
-        return false;
+        return "";
     }
     if (urlObject
         && urlObject.pathname
@@ -25,7 +25,7 @@ function getFilenameFromUrl(pubPath, compiler, url) {
     }
     if (!urlObject.hostname && localPrefix.hostname &&
         url.indexOf(localPrefix.path) !== 0) {
-        return false;
+        return "";
     }
     let uri = outputPath;
     if (filename) {
