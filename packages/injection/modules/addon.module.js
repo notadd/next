@@ -11,6 +11,7 @@ const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
 const injection_module_1 = require("./injection.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const test_module_1 = require("./test.module");
 let AddonModule = class AddonModule {
 };
 AddonModule = __decorate([
@@ -22,6 +23,7 @@ AddonModule = __decorate([
         imports: [
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
+            test_module_1.TestModule,
         ],
     })
 ], AddonModule);
