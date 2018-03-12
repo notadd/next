@@ -38,7 +38,7 @@ export function ctx(compiler, options) {
             });
             const cbs = context.callbacks;
             context.callbacks = [];
-            cbs.forEach((cb) => {
+            cbs.forEach((cb: Function) => {
                 cb(stats);
             });
         });

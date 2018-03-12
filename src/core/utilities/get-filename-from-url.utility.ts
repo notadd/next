@@ -16,7 +16,10 @@ export function getFilenameFromUrl(pubPath, compiler, url) {
         url.indexOf(publicPath) !== 0) {
         return false;
     }
-    if (urlObject.pathname.indexOf(localPrefix.pathname) === 0) {
+    if (urlObject
+        && urlObject.pathname
+        && localPrefix.pathname
+        && urlObject.pathname.indexOf(localPrefix.pathname) === 0) {
         filename = urlObject.pathname.substr(localPrefix.pathname.length);
     }
 
