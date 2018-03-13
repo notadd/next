@@ -47,7 +47,9 @@ export function webpackExpress(compiler: webpack.Compiler, options: WebpackConfi
             if (headers) {
                 for (const name in headers) {
                     if ({}.hasOwnProperty.call(headers, name)) {
-                        response.setHeader(name, options.headers[name]);
+                        if (options && options.headers && options.headers[name]) {
+                            response.setHeader(name, options.headers[name]);
+                        }
                     }
                 }
             }

@@ -46,7 +46,9 @@ function webpackExpress(compiler, options) {
             if (headers) {
                 for (const name in headers) {
                     if ({}.hasOwnProperty.call(headers, name)) {
-                        response.setHeader(name, options.headers[name]);
+                        if (options && options.headers && options.headers[name]) {
+                            response.setHeader(name, options.headers[name]);
+                        }
                     }
                 }
             }

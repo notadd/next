@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { InjectionService } from "./injection.service";
 import { Injection } from "../types";
@@ -7,8 +8,9 @@ import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { join } from "path";
 import { Module } from "../types";
 import { Result } from "@notadd/core/types/result.type";
-import { SettingService } from "@notadd/setting/services/setting.service";
 import { SchemaBuilder } from "../builders";
+import { SettingService } from "@notadd/setting/services/setting.service";
+import { safeDump, safeLoad } from "js-yaml";
 
 @Component()
 export class ModuleService {
@@ -192,29 +194,50 @@ export class ModuleService {
         }
     }
 
-    protected loadInjections(reload: boolean = false) {
+    protected loadEnabledAddons() {
+        const path = join(process.cwd(), "storages", "modules", "enabled.yaml");
+        let exits: Array<string> = [];
+        if (existsSync(path)) {
+            exits = safeLoad(readFileSync(path).toString());
+        }
+        const enabled = this.modules.filter((module: Module) => {
+            return module.enabled === true;
+        }).map((module: Module) => {
+            return module.location;
+        });
+        if (exits.filter(data => {
+                return enabled.indexOf(data) === -1;
+            }).length || enabled.filter(data => {
+                return exits.indexOf(data) === -1;
+            }).length) {
+            writeFileSync(path, safeDump(enabled));
+        }
+    }
+
+    protected async loadInjections(reload: boolean = false) {
         if (reload) {
             this.modules.splice(0, this.modules.length);
         }
-        this.injectionService
+        const injections = this.injectionService
             .loadInjections()
             .filter((injection: Injection) => {
                 return InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
-            })
-            .forEach(async(injection: Injection) => {
-                const identification = Reflect.getMetadata("identification", injection.target);
-
-                this.modules.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: await this.settingService.get(`module.${identification}.enabled`, false),
-                    identification: identification,
-                    installed: await this.settingService.get(`module.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
             });
+        for(let i = 0; i < injections.length; i ++) {
+            const injection = injections[i];
+            const identification = Reflect.getMetadata("identification", injection.target);
+            this.modules.push({
+                authors: Reflect.getMetadata("authors", injection.target),
+                description: Reflect.getMetadata("description", injection.target),
+                enabled: await this.settingService.get(`module.${identification}.enabled`, false),
+                identification: identification,
+                installed: await this.settingService.get(`module.${identification}.installed`, false),
+                location: injection.location,
+                name: Reflect.getMetadata("name", injection.target),
+                version: Reflect.getMetadata("version", injection.target),
+            });
+        }
+        this.loadEnabledAddons();
         this.initialized = true;
     }
 

@@ -19,12 +19,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const common_1 = require("@nestjs/common");
+const fs_1 = require("fs");
 const get_package_path_by_module_1 = require("../utilities/get-package-path-by-module");
 const injection_service_1 = require("./injection.service");
 const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const path_1 = require("path");
-const setting_service_1 = require("@notadd/setting/services/setting.service");
 const builders_1 = require("../builders");
+const setting_service_1 = require("@notadd/setting/services/setting.service");
+const js_yaml_1 = require("js-yaml");
 let ModuleService = class ModuleService {
     constructor(injectionService, settingService) {
         this.injectionService = injectionService;
@@ -167,29 +169,52 @@ let ModuleService = class ModuleService {
             }
         });
     }
-    loadInjections(reload = false) {
-        if (reload) {
-            this.modules.splice(0, this.modules.length);
+    loadEnabledAddons() {
+        const path = path_1.join(process.cwd(), "storages", "modules", "enabled.yaml");
+        let exits = [];
+        if (fs_1.existsSync(path)) {
+            exits = js_yaml_1.safeLoad(fs_1.readFileSync(path).toString());
         }
-        this.injectionService
-            .loadInjections()
-            .filter((injection) => {
-            return injection_constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
-        })
-            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
-            const identification = Reflect.getMetadata("identification", injection.target);
-            this.modules.push({
-                authors: Reflect.getMetadata("authors", injection.target),
-                description: Reflect.getMetadata("description", injection.target),
-                enabled: yield this.settingService.get(`module.${identification}.enabled`, false),
-                identification: identification,
-                installed: yield this.settingService.get(`module.${identification}.installed`, false),
-                location: injection.location,
-                name: Reflect.getMetadata("name", injection.target),
-                version: Reflect.getMetadata("version", injection.target),
+        const enabled = this.modules.filter((module) => {
+            return module.enabled === true;
+        }).map((module) => {
+            return module.location;
+        });
+        if (exits.filter(data => {
+            return enabled.indexOf(data) === -1;
+        }).length || enabled.filter(data => {
+            return exits.indexOf(data) === -1;
+        }).length) {
+            fs_1.writeFileSync(path, js_yaml_1.safeDump(enabled));
+        }
+    }
+    loadInjections(reload = false) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (reload) {
+                this.modules.splice(0, this.modules.length);
+            }
+            const injections = this.injectionService
+                .loadInjections()
+                .filter((injection) => {
+                return injection_constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);
             });
-        }));
-        this.initialized = true;
+            for (let i = 0; i < injections.length; i++) {
+                const injection = injections[i];
+                const identification = Reflect.getMetadata("identification", injection.target);
+                this.modules.push({
+                    authors: Reflect.getMetadata("authors", injection.target),
+                    description: Reflect.getMetadata("description", injection.target),
+                    enabled: yield this.settingService.get(`module.${identification}.enabled`, false),
+                    identification: identification,
+                    installed: yield this.settingService.get(`module.${identification}.installed`, false),
+                    location: injection.location,
+                    name: Reflect.getMetadata("name", injection.target),
+                    version: Reflect.getMetadata("version", injection.target),
+                });
+            }
+            this.loadEnabledAddons();
+            this.initialized = true;
+        });
     }
     syncSchema(module) {
         return __awaiter(this, void 0, void 0, function* () {

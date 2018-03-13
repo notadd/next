@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
-const webpack = require("webpack");
-const webpack_server_1 = require("@notadd/core/servers/webpack.server");
-const path_1 = require("path");
-const webpack_1 = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const path_1 = require("path");
+const common_1 = require("@nestjs/common");
+const webpack_server_1 = require("@notadd/core/servers/webpack.server");
+const webpack_1 = require("webpack");
 let BackendModule = class BackendModule {
     constructor() {
         this.logger = new common_1.Logger("NotaddApplication", true);
@@ -52,16 +52,16 @@ let BackendModule = class BackendModule {
             ]
         });
         compiler.plugin('done', () => {
-            console.log("done");
+            console.log(arguments);
         });
         compiler.plugin('invalid', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.plugin('watch-run', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.plugin('run', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.watch({}, error => {
             if (error) {

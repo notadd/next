@@ -19,6 +19,7 @@ export declare class ModuleService {
     installModule(identification: string): Promise<Result | undefined>;
     uninstallModule(identification: string): Promise<Result | undefined>;
     protected dropSchema(module: Module): Promise<void>;
-    protected loadInjections(reload?: boolean): void;
+    protected loadEnabledAddons(): void;
+    protected loadInjections(reload?: boolean): Promise<void>;
     protected syncSchema(module: Module): Promise<void>;
 }

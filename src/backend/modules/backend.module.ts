@@ -1,10 +1,10 @@
+import * as HTMLWebpackPlugin from 'html-webpack-plugin';
+import * as webpack from "webpack";
+import { join } from "path";
 import { Logger, MiddlewaresConsumer, Module, RequestMethod } from "@nestjs/common";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
-import * as webpack from "webpack";
 import { webpackExpress } from "@notadd/core/servers/webpack.server";
-import { join } from "path";
 import { DefinePlugin, HotModuleReplacementPlugin, NamedModulesPlugin } from "webpack";
-import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 
 @Module({
 })
@@ -49,16 +49,16 @@ export class BackendModule implements OnModuleInit {
             ]
         });
         compiler.plugin('done', () => {
-            console.log("done");
+            console.log(arguments);
         });
         compiler.plugin('invalid', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.plugin('watch-run', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.plugin('run', () => {
-            console.log("invalid");
+            console.log(arguments);
         });
         compiler.watch({}, error => {
             if (error) {
