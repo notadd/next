@@ -11,58 +11,51 @@ export function webpackExpress(compiler: webpack.Compiler, options: WebpackConfi
         if (!filename) {
             next();
         } else {
-            if (/[0-9a-f]{10,}/.test(filename)) {
-                try {
-                    let stat = compiler.outputFileSystem.statSync(filename);
+            console.log(filename);
+            let stat = compiler.outputFileSystem.statSync(filename);
+            if (!stat.isFile()) {
+                if (stat.isDirectory()) {
+                    let { index } = options;
+                    if (index === undefined) {
+                        index = 'index.html';
+                    } else if (!index) {
+                        throw new Error("next");
+                    }
+                    filename = urlJoin(filename, index);
+                    stat = compiler.outputFileSystem.statSync(filename);
                     if (!stat.isFile()) {
-                        if (stat.isDirectory()) {
-                            let { index } = options;
-                            if (index === undefined) {
-                                index = 'index.html';
-                            } else if (!index) {
-                                throw new Error("next");
-                            }
-                            filename = urlJoin(filename, index);
-                            stat = compiler.outputFileSystem.statSync(filename);
-                            if (!stat.isFile()) {
-                                throw new Error("next");
-                            }
-                        } else {
-                            throw new Error("next");
-                        }
+                        throw new Error("next");
                     }
-                } catch (e) {
-                    next();
-                }
-                let content = compiler.outputFileSystem.readFileSync(filename);
-                content = handleRangeHeaders(content, request, response);
-                let contentType = mime.getType(filename);
-                if (contentType === null) {
-                    contentType = "";
-                }
-                if (!/\.wasm$/.test(filename)) {
-                    contentType += '; charset=UTF-8';
-                }
-
-                response.setHeader('Content-Type', contentType);
-                response.setHeader('Content-Length', content.length);
-
-                const { headers } = options;
-                if (headers) {
-                    for (const name in headers) {
-                        if ({}.hasOwnProperty.call(headers, name)) {
-                            response.setHeader(name, options.headers[name]);
-                        }
-                    }
-                }
-                response.statusCode = response.statusCode || 200;
-                if (response.send) {
-                    response.send(content);
                 } else {
-                    response.end(content);
+                    throw new Error("next");
                 }
+            }
+            let content = compiler.outputFileSystem.readFileSync(filename);
+            content = handleRangeHeaders(content, request, response);
+            let contentType = mime.getType(filename);
+            if (contentType === null) {
+                contentType = "";
+            }
+            if (!/\.wasm$/.test(filename)) {
+                contentType += '; charset=UTF-8';
+            }
+
+            response.setHeader('Content-Type', contentType);
+            response.setHeader('Content-Length', content.length);
+
+            const { headers } = options;
+            if (headers) {
+                for (const name in headers) {
+                    if ({}.hasOwnProperty.call(headers, name)) {
+                        response.setHeader(name, options.headers[name]);
+                    }
+                }
+            }
+            response.statusCode = response.statusCode || 200;
+            if (response.send) {
+                response.send(content);
             } else {
-                next();
+                response.end(content);
             }
         }
     };

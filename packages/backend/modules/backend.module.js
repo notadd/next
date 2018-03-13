@@ -10,11 +10,70 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const webpack = require("webpack");
+const webpack_server_1 = require("@notadd/core/servers/webpack.server");
+const path_1 = require("path");
+const webpack_1 = require("webpack");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 let BackendModule = class BackendModule {
     constructor() {
         this.logger = new common_1.Logger("NotaddApplication", true);
     }
     configure(consumer) {
+        const compiler = webpack({
+            resolve: {
+                extensions: ['.js', '.json', '.js', '.jsx']
+            },
+            entry: {
+                main: [
+                    path_1.join(process.cwd(), 'node_modules', '@notadd', 'backend-mix', 'index.js')
+                ]
+            },
+            output: {
+                pathinfo: true,
+                filename: 'js/[name].js',
+                chunkFilename: 'js/[name].chunk.js'
+            },
+            module: {
+                rules: []
+            },
+            plugins: [
+                new webpack_1.NamedModulesPlugin(),
+                new webpack_1.HotModuleReplacementPlugin(),
+                new webpack_1.DefinePlugin({
+                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+                }),
+                new HTMLWebpackPlugin({
+                    template: path_1.join(process.cwd(), 'public', 'index.html'),
+                    inject: 'body',
+                    chunksSortMode: 'dependency',
+                    xhtml: true
+                }),
+            ]
+        });
+        compiler.plugin('done', () => {
+            console.log("done");
+        });
+        compiler.plugin('invalid', () => {
+            console.log("invalid");
+        });
+        compiler.plugin('watch-run', () => {
+            console.log("invalid");
+        });
+        compiler.plugin('run', () => {
+            console.log("invalid");
+        });
+        compiler.watch({}, error => {
+            if (error) {
+                console.log(error);
+            }
+        });
+        compiler.run(error => {
+            if (error) {
+                console.log(error);
+            }
+        });
+        consumer.apply(webpack_server_1.webpackExpress(compiler, {})).forRoutes({ path: "/admin", method: common_1.RequestMethod.ALL });
     }
     onModuleInit() {
     }

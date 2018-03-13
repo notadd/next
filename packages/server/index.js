@@ -16,7 +16,6 @@ const ip = require("ip");
 const modules_1 = require("./modules");
 const swagger_1 = require("@nestjs/swagger");
 const fs_1 = require("fs");
-const packages_1 = require("nestjs-flub/packages");
 const path_1 = require("path");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
@@ -39,7 +38,6 @@ function bootstrap() {
             logger: services_1.LogService,
         });
         application.use(express.static(process.cwd() + "/public/"));
-        application.useGlobalFilters(new packages_1.FlubErrorHandler());
         application.useGlobalPipes(new common_1.ValidationPipe());
         const options = new swagger_1.DocumentBuilder()
             .setTitle("Notadd")

@@ -34,7 +34,7 @@ export async function bootstrap() {
         logger: LogService,
     });
     application.use(express.static(process.cwd() + "/public/"));
-    application.useGlobalFilters(new FlubErrorHandler());
+    // application.useGlobalFilters(new FlubErrorHandler());
     application.useGlobalPipes(new ValidationPipe());
     /**
      * @type { SwaggerBaseConfig }

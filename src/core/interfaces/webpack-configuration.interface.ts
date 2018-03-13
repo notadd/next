@@ -1,4 +1,4 @@
 export interface WebpackConfiguration {
-    headers: Array<string>;
-    index: string;
+    headers?: Array<string>;
+    index?: string;
 }
