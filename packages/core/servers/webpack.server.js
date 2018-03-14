@@ -2,8 +2,65 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mime = require("mime");
 const urlJoin = require("url-join");
+const webpack = require("webpack");
 const utilities_1 = require("../utilities");
-function webpackExpress(compiler, options) {
+const webpack_1 = require("webpack");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const path_1 = require("path");
+function webpackExpress(options) {
+    const compiler = webpack({
+        resolve: {
+            extensions: [".js", ".json", ".js", ".jsx"]
+        },
+        entry: {
+            main: [
+                path_1.join(process.cwd(), "node_modules", "@notadd", "backend-mix", "index.js")
+            ]
+        },
+        output: {
+            pathinfo: true,
+            filename: "js/[name].js",
+            chunkFilename: "js/[name].chunk.js"
+        },
+        module: {
+            rules: []
+        },
+        plugins: [
+            new webpack_1.NamedModulesPlugin(),
+            new webpack_1.HotModuleReplacementPlugin(),
+            new webpack_1.DefinePlugin({
+                "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+            }),
+            new HTMLWebpackPlugin({
+                template: path_1.join(process.cwd(), "public", "index.html"),
+                inject: "body",
+                chunksSortMode: "dependency",
+                xhtml: true
+            }),
+        ]
+    });
+    compiler.plugin("done", () => {
+        console.log(arguments);
+    });
+    compiler.plugin("invalid", () => {
+        console.log(arguments);
+    });
+    compiler.plugin("watch-run", () => {
+        console.log(arguments);
+    });
+    compiler.plugin("run", () => {
+        console.log(arguments);
+    });
+    compiler.watch({}, error => {
+        if (error) {
+            console.log(error);
+        }
+    });
+    compiler.run(error => {
+        if (error) {
+            console.log(error);
+        }
+    });
     return (request, response, next) => {
         let filename = utilities_1.getFilenameFromUrl("/", compiler, request.url);
         if (!filename) {
