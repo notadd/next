@@ -5,6 +5,7 @@ graphql.schema.json
 lerna-debug.log
 npm-debug.log
 npm-lock.json
+ormconfig.json
 ormconfig.yml
 package-lock.json
 yarn.lock
