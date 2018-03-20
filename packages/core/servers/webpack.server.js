@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 const mime = require("mime");
 const urlJoin = require("url-join");
 const webpack = require("webpack");
-const utilities_1 = require("../utilities");
 const webpack_1 = require("webpack");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const utilities_1 = require("../utilities");
 const path_1 = require("path");
 function webpackExpress(options) {
     const compiler = webpack({
@@ -40,16 +40,12 @@ function webpackExpress(options) {
         ]
     });
     compiler.plugin("done", () => {
-        console.log(arguments);
     });
     compiler.plugin("invalid", () => {
-        console.log(arguments);
     });
     compiler.plugin("watch-run", () => {
-        console.log(arguments);
     });
     compiler.plugin("run", () => {
-        console.log(arguments);
     });
     compiler.watch({}, error => {
         if (error) {

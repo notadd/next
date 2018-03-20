@@ -45,7 +45,9 @@ SettingModule = __decorate([
             services_1.SettingService,
         ],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([entities_1.Setting]),
+            typeorm_1.TypeOrmModule.forFeature([
+                entities_1.Setting,
+            ]),
             cqrs_1.CQRSModule,
         ]
     }),

@@ -3,7 +3,6 @@ import * as ip from "ip";
 import { ApplicationModule } from "./modules";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { existsSync } from 'fs';
-import { FlubErrorHandler } from "nestjs-flub/packages";
 import { join } from 'path';
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
@@ -16,7 +15,7 @@ export async function bootstrap() {
      * @type { Logger }
      */
     const logger = new Logger("NotaddFactory", true);
-    if (!existsSync(join(process.cwd(), 'ormconfig.yml'))) {
+    if (!existsSync(join(process.cwd(), "configurations", "database.json"))) {
         logger.error("Database configuration do not exists!");
         logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
         process.exit(1);
@@ -34,7 +33,6 @@ export async function bootstrap() {
         logger: LogService,
     });
     application.use(express.static(process.cwd() + "/public/"));
-    // application.useGlobalFilters(new FlubErrorHandler());
     application.useGlobalPipes(new ValidationPipe());
     /**
      * @type { SwaggerBaseConfig }

@@ -24,7 +24,7 @@ __export(require("./modules/application.module"));
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const logger = new common_1.Logger("NotaddFactory", true);
-        if (!fs_1.existsSync(path_1.join(process.cwd(), 'ormconfig.yml'))) {
+        if (!fs_1.existsSync(path_1.join(process.cwd(), "configurations", "database.json"))) {
             logger.error("Database configuration do not exists!");
             logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
             process.exit(1);

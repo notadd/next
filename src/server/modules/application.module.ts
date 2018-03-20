@@ -12,13 +12,17 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from "@notadd/user";
 import { WebsocketModule } from "@notadd/websocket";
 import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
+import { join } from "path";
+import { ConnectionOptions } from 'typeorm';
+
+const configuration: ConnectionOptions = require(join(process.cwd(), "configurations", "database.json"));
 
 @Module({
     components: [
         SystemInformation,
     ],
     imports: [
-        TypeOrmModule.forRoot(),
+        TypeOrmModule.forRoot(configuration),
         GraphqlModule,
         WebsocketModule,
         InternationalizationModule,

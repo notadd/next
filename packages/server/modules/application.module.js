@@ -19,6 +19,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
+const path_1 = require("path");
+const configuration = require(path_1.join(process.cwd(), "configurations", "database.json"));
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
@@ -27,7 +29,7 @@ ApplicationModule = __decorate([
             informations_1.SystemInformation,
         ],
         imports: [
-            typeorm_1.TypeOrmModule.forRoot(),
+            typeorm_1.TypeOrmModule.forRoot(configuration),
             modules_1.GraphqlModule,
             websocket_1.WebsocketModule,
             modules_2.InternationalizationModule,

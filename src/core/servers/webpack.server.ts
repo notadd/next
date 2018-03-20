@@ -1,12 +1,12 @@
+import * as HTMLWebpackPlugin from "html-webpack-plugin";
 import * as mime from "mime";
 import * as urlJoin from "url-join";
 import * as webpack from "webpack";
+import { DefinePlugin, HotModuleReplacementPlugin, NamedModulesPlugin } from "webpack";
 import { getFilenameFromUrl, handleRangeHeaders } from "../utilities";
+import { join } from "path";
 import { Request, Response } from "express";
 import { WebpackConfiguration } from "../interfaces/webpack-configuration.interface";
-import { DefinePlugin, HotModuleReplacementPlugin, NamedModulesPlugin } from "webpack";
-import * as HTMLWebpackPlugin from "html-webpack-plugin";
-import { join } from "path";
 
 export function webpackExpress(options: WebpackConfiguration) {
     const compiler: webpack.Compiler = webpack({
@@ -42,16 +42,12 @@ export function webpackExpress(options: WebpackConfiguration) {
         ]
     });
     compiler.plugin("done", () => {
-        console.log(arguments);
     });
     compiler.plugin("invalid", () => {
-        console.log(arguments);
     });
     compiler.plugin("watch-run", () => {
-        console.log(arguments);
     });
     compiler.plugin("run", () => {
-        console.log(arguments);
     });
     compiler.watch({}, error => {
         if (error) {

@@ -19,7 +19,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
         SettingService,
     ],
     imports: [
-        TypeOrmModule.forFeature([Setting]),
+        TypeOrmModule.forFeature([
+            Setting,
+        ]),
         CQRSModule,
     ]
 })
