@@ -33,13 +33,21 @@ function bootstrap() {
             logger.error("Server configuration do not exists!");
         }
         const configuration = require(path_1.join(process.cwd(), "configurations", "server.json"));
-        const index = process.argv.indexOf("--port");
-        const port = index > -1 ? parseInt(process.argv[index + 1]) : configuration.http.port ? configuration.http.port : 3000;
-        const host = configuration.http.host
-            ? (configuration.http.host === "*"
-                ? ip.address()
-                : configuration.http.host)
-            : ip.address();
+        let index = process.argv.indexOf("--port");
+        const port = index > -1
+            ? parseInt(process.argv[index + 1])
+            : configuration.http.port ? configuration.http.port : 3000;
+        index = process.argv.indexOf("--host");
+        const host = index > -1
+            ?
+                process.argv[index + 1]
+            :
+                configuration.http.host
+                    ? (configuration.http.host === "*"
+                        ? ip.address()
+                        : configuration.http.host)
+                    :
+                        ip.address();
         const address = `http://${host}:${port}`;
         const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {
             bodyParser: true,
@@ -61,7 +69,11 @@ function bootstrap() {
             logger.log(`Swagger Server on: ${address}/api-doc`);
             logger.log(`Server on: ${address}`);
         };
-        if (configuration.http.host && configuration.http.host !== "*") {
+        index = process.argv.indexOf("--host");
+        if (index > -1) {
+            yield application.listen(port, process.argv[index + 1], callback);
+        }
+        else if (configuration.http.host && configuration.http.host !== "*") {
             yield application.listen(port, configuration.http.host, callback);
         }
         else {

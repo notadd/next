@@ -27,15 +27,23 @@ export async function bootstrap() {
 
     const configuration: ServerConfiguration = require(join(process.cwd(), "configurations", "server.json"));
 
-    const index = process.argv.indexOf("--port");
-    const port = index > -1 ? parseInt(process.argv[index + 1]) : configuration.http.port ? configuration.http.port : 3000;
-    const host = configuration.http.host
-        ? (
-            configuration.http.host === "*"
-                ? ip.address()
-                : configuration.http.host
-        )
-        : ip.address();
+    let index = process.argv.indexOf("--port");
+    const port = index > -1
+        ? parseInt(process.argv[index + 1])
+        : configuration.http.port ? configuration.http.port : 3000;
+    index = process.argv.indexOf("--host");
+    const host = index > -1
+        ?
+        process.argv[index + 1]
+        :
+            configuration.http.host
+            ? (
+                configuration.http.host === "*"
+                    ? ip.address()
+                    : configuration.http.host
+            )
+            :
+            ip.address();
     const address = `http://${host}:${port}`;
 
     /**
@@ -71,7 +79,11 @@ export async function bootstrap() {
         logger.log(`Server on: ${address}`);
     };
 
-    if (configuration.http.host && configuration.http.host !== "*") {
+    index = process.argv.indexOf("--host");
+
+    if (index > -1) {
+        await application.listen(port, process.argv[index + 1], callback);
+    } else if (configuration.http.host && configuration.http.host !== "*") {
         await application.listen(port, configuration.http.host, callback);
     } else {
         await application.listen(port, callback);
