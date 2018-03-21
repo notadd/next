@@ -1,68 +1,68 @@
-const gulp = require('gulp');
-const nodemon = require('gulp-nodemon');
-const rename = require('gulp-rename');
-const sequence = require('gulp-sequence');
-const ts = require('gulp-typescript');
+const gulp = require("gulp");
+const nodemon = require("gulp-nodemon");
+const rename = require("gulp-rename");
+const sequence = require("gulp-sequence");
+const ts = require("@notadd/gulp-typescript");
 
 const packages = {
-    'addon-demo': ts.createProject('src/addon-demo/tsconfig.json'),
-    'backend-mix': ts.createProject('src/backend-mix/tsconfig.json'),
-    'extension-demo': ts.createProject('src/extension-demo/tsconfig.json'),
-    'module-demo': ts.createProject('src/module-demo/tsconfig.json'),
-    authentication: ts.createProject('src/authentication/tsconfig.json'),
-    backend: ts.createProject('src/backend/tsconfig.json'),
-    core: ts.createProject('src/core/tsconfig.json'),
-    graphql: ts.createProject('src/graphql/tsconfig.json'),
-    injection: ts.createProject('src/injection/tsconfig.json'),
-    internationalization: ts.createProject('src/internationalization/tsconfig.json'),
-    logger: ts.createProject('src/logger/tsconfig.json'),
-    rpc: ts.createProject('src/rpc/tsconfig.json'),
-    server: ts.createProject('src/server/tsconfig.json'),
-    setting: ts.createProject('src/setting/tsconfig.json'),
-    user: ts.createProject('src/user/tsconfig.json'),
-    websocket: ts.createProject('src/websocket/tsconfig.json'),
-    workflow: ts.createProject('src/workflow/tsconfig.json'),
+    "addon-demo": ts.createProject("src/addon-demo/tsconfig.json"),
+    "backend-mix": ts.createProject("src/backend-mix/tsconfig.json"),
+    "extension-demo": ts.createProject("src/extension-demo/tsconfig.json"),
+    "module-demo": ts.createProject("src/module-demo/tsconfig.json"),
+    authentication: ts.createProject("src/authentication/tsconfig.json"),
+    backend: ts.createProject("src/backend/tsconfig.json"),
+    core: ts.createProject("src/core/tsconfig.json"),
+    graphql: ts.createProject("src/graphql/tsconfig.json"),
+    injection: ts.createProject("src/injection/tsconfig.json"),
+    internationalization: ts.createProject("src/internationalization/tsconfig.json"),
+    logger: ts.createProject("src/logger/tsconfig.json"),
+    rpc: ts.createProject("src/rpc/tsconfig.json"),
+    server: ts.createProject("src/server/tsconfig.json"),
+    setting: ts.createProject("src/setting/tsconfig.json"),
+    user: ts.createProject("src/user/tsconfig.json"),
+    websocket: ts.createProject("src/websocket/tsconfig.json"),
+    workflow: ts.createProject("src/workflow/tsconfig.json"),
 };
 
 const modules = Object.keys(packages).concat([
-    'react-scripts'
+    "react-scripts"
 ]);
-const source = 'src';
-const distId = process.argv.indexOf('--dist');
-const dist = distId < 0 ? 'node_modules/@notadd' : process.argv[distId + 1];
+const source = "src";
+const distId = process.argv.indexOf("--dist");
+const dist = distId < 0 ? "node_modules/@notadd" : process.argv[distId + 1];
 
-gulp.task('default', function () {
+gulp.task("default", function () {
     tasks();
     nodemon({
-        script: 'node_modules/@notadd/server/bootstrap.js',
+        script: "node_modules/@notadd/server/bootstrap.js",
         watch: [
             "ormconfig.yml",
             "packages/",
             "storages/addons/enabled.yaml",
         ],
-        ext: 'js'
+        ext: "js"
     });
 });
 
-gulp.task('backend-mix-server', function () {
+gulp.task("backend-mix-server", function () {
     tasks();
     nodemon({
-        script: 'node_modules/@notadd/react-scripts/bin/react-scripts.js',
+        script: "node_modules/@notadd/react-scripts/bin/react-scripts.js",
         args: [
-            'start',
-            '--index',
-            'node_modules/@notadd/backend-mix/index.js',
+            "start",
+            "--index",
+            "node_modules/@notadd/backend-mix/index.js",
         ],
         watch: [
-            'node_modules/@notadd/react-scripts/bin/react-scripts.js',
-            'node_modules/@notadd/backend-mix/package.json',
+            "node_modules/@notadd/react-scripts/bin/react-scripts.js",
+            "node_modules/@notadd/backend-mix/package.json",
         ],
     });
 });
 
 modules.forEach(module => {
     gulp.task(module, () => {
-        if (module === 'react-scripts') {
+        if (module === "react-scripts") {
             return gulp.src([
                 `${source}/${module}/**/*.js`,
                 `${source}/${module}/*.js`,
@@ -76,19 +76,19 @@ modules.forEach(module => {
     });
 });
 
-gulp.task('build', function (cb) {
-    sequence('authentication', modules.filter((module) => module !== 'common'), cb);
+gulp.task("build", function (cb) {
+    sequence("authentication", modules.filter((module) => module !== "common"), cb);
 });
 
-gulp.task('watch', function () {
+gulp.task("watch", function () {
     tasks();
 });
 
 function tasks() {
     modules.forEach(module => {
-        if (module === 'react-scripts') {
+        if (module === "react-scripts") {
             watchAny(source, module);
-        } else if (module === 'backend-mix') {
+        } else if (module === "backend-mix") {
             watchMedia(source, module);
             watchTypescript(source, module);
         } else {
@@ -107,8 +107,8 @@ function watchAny(source, module) {
         [
             module,
         ]
-    ).on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    ).on("change", function (event) {
+        console.log("File " + event.path + " was " + event.type + ", running tasks...");
         gulp.src([
             `${source}/${module}/**/*.*`,
             `${source}/${module}/*.*`,
@@ -125,13 +125,13 @@ function watchGraphql(source, module) {
         [
             module,
         ]
-    ).on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    ).on("change", function (event) {
+        console.log("File " + event.path + " was " + event.type + ", running tasks...");
         gulp.src([
             `${source}/${module}/**/*.graphql`,
             `${source}/${module}/*.graphql`,
         ]).pipe(rename(function (path) {
-            path.basename = path.basename.replace('.original', '.types');
+            path.basename = path.basename.replace(".original", ".types");
         })).pipe(gulp.dest(`${dist}/${module}`));
     });
 }
@@ -161,8 +161,8 @@ function watchMedia(source, module) {
         [
             module,
         ]
-    ).on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    ).on("change", function (event) {
+        console.log("File " + event.path + " was " + event.type + ", running tasks...");
         gulp.src([
             `${source}/${module}/**/*.css`,
             `${source}/${module}/*.css`,
@@ -189,7 +189,7 @@ function watchTypescript(source, module) {
         [
             module,
         ]
-    ).on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    ).on("change", function (event) {
+        console.log("File " + event.path + " was " + event.type + ", running tasks...");
     });
 }
