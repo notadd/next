@@ -39,6 +39,7 @@ gulp.task("default", function () {
             "ormconfig.yml",
             "packages/",
             "storages/addons/enabled.yaml",
+            "storages/modules/enabled.yaml",
         ],
         ext: "js"
     });
