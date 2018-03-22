@@ -7,7 +7,10 @@ const js_yaml_1 = require("js-yaml");
 function loadModulesFromFiles() {
     const file = path_1.join(process.cwd(), "storages", "modules", "enabled.yaml");
     if (fs_1.existsSync(file)) {
-        const enabled = js_yaml_1.safeLoad(fs_1.readFileSync(file).toString());
+        let enabled = js_yaml_1.safeLoad(fs_1.readFileSync(file).toString());
+        if (!enabled) {
+            enabled = [];
+        }
         return import_classes_from_directories_1.importClassesFromDirectories(enabled);
     }
     else {
