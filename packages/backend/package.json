@@ -18,7 +18,8 @@
     "author": "notadd",
     "license": "Apache-2.0",
     "dependencies": {
-        "@notadd/backend-mix": "^2.3.8"
+        "@notadd/backend-mix": "^2.3.8",
+        "url-join": "^4.0.0"
     },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"
