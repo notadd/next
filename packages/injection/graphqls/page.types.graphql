@@ -1,4 +1,4 @@
-type Page {
+type ConfigurationPage {
     # form data for page
     form: Json,
     # schema data for page
@@ -7,7 +7,7 @@ type Page {
 
 type Query {
     # get a page by identification
-    getPage(identification: String): Page,
+    getPage(identification: String): ConfigurationPage,
     # get all pages
-    getPages: [Page],
+    getPages: [ConfigurationPage],
 }
