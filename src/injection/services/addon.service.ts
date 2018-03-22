@@ -177,6 +177,9 @@ export class AddonService {
         let exits: Array<string> = [];
         if (existsSync(path)) {
             exits = safeLoad(readFileSync(path).toString());
+            if (!exits) {
+                exits = [];
+            }
         }
         const enabled = this.addons.filter((addon: Addon) => {
             return addon.enabled === true;

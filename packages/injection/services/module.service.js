@@ -174,6 +174,9 @@ let ModuleService = class ModuleService {
         let exits = [];
         if (fs_1.existsSync(path)) {
             exits = js_yaml_1.safeLoad(fs_1.readFileSync(path).toString());
+            if (!exits) {
+                exits = [];
+            }
         }
         const enabled = this.modules.filter((module) => {
             return module.enabled === true;

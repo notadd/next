@@ -153,6 +153,9 @@ let AddonService = class AddonService {
         let exits = [];
         if (fs_1.existsSync(path)) {
             exits = js_yaml_1.safeLoad(fs_1.readFileSync(path).toString());
+            if (!exits) {
+                exits = [];
+            }
         }
         const enabled = this.addons.filter((addon) => {
             return addon.enabled === true;

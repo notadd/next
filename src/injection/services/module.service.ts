@@ -199,6 +199,9 @@ export class ModuleService {
         let exits: Array<string> = [];
         if (existsSync(path)) {
             exits = safeLoad(readFileSync(path).toString());
+            if (!exits) {
+                exits = [];
+            }
         }
         const enabled = this.modules.filter((module: Module) => {
             return module.enabled === true;
