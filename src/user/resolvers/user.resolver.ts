@@ -7,6 +7,7 @@ import { UserDeleteDto } from "../dtos";
 import { UserQueryDto } from "../dtos";
 import { UserService } from "../services";
 import { UserUpdateDto } from "../dtos";
+import { Result } from "../../../packages/core/types/result.type";
 
 @Resolver("User")
 export class UserResolver {
@@ -15,8 +16,13 @@ export class UserResolver {
 
     @Mutation()
     @UseGuards(UserGuard)
-    async createUser(obj, args: { user: UserCreateDto }): Promise<User> {
-        return await this.service.createUser(args.user);
+    async createUser(obj, args: { user: UserCreateDto }): Promise<Result> {
+        await this.service.createUser(args.user);
+
+        return {
+            code: 200,
+            message: "Created a User successfully!",
+        };
     }
 
     @Mutation()

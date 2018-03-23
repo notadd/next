@@ -4,12 +4,13 @@ import { UserDeleteDto } from "../dtos";
 import { UserQueryDto } from "../dtos";
 import { UserService } from "../services";
 import { UserUpdateDto } from "../dtos";
+import { Result } from "../../../packages/core/types/result.type";
 export declare class UserResolver {
     private readonly service;
     constructor(service: UserService);
     createUser(obj: any, args: {
         user: UserCreateDto;
-    }): Promise<User>;
+    }): Promise<Result>;
     deleteUser(obj: any, args: {
         user: UserDeleteDto;
     }): Promise<Boolean>;

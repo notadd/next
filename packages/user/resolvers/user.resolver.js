@@ -29,7 +29,11 @@ let UserResolver = class UserResolver {
     }
     createUser(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.createUser(args.user);
+            yield this.service.createUser(args.user);
+            return {
+                code: 200,
+                message: "Created a User successfully!",
+            };
         });
     }
     deleteUser(obj, args) {
