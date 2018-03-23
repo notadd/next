@@ -27,26 +27,46 @@ export class UserResolver {
 
     @Mutation()
     @UseGuards(UserGuard)
-    async deleteUser(obj, args: { user: UserDeleteDto }): Promise<Boolean> {
-        return await this.service.deleteUser(args.user);
+    async deleteUser(obj, args: { user: UserDeleteDto }): Promise<Result> {
+        await this.service.deleteUser(args.user);
+
+        return {
+            code: 200,
+            message: "Deleted a User successfully!",
+        };
     }
 
     @Mutation()
     @UseGuards(UserGuard)
-    async deleteUserByEmail(obj, args: UserDeleteDto): Promise<Boolean> {
-        return await this.service.deleteUserByEmail(args.email);
+    async deleteUserByEmail(obj, args: UserDeleteDto): Promise<Result> {
+        await this.service.deleteUserByEmail(args.email);
+
+        return {
+            code: 200,
+            message: "Deleted a User by email successfully!",
+        };
     }
 
     @Mutation()
     @UseGuards(UserGuard)
-    async deleteUserById(obj, args: UserDeleteDto): Promise<Boolean> {
-        return await this.service.deleteUserById(args.id);
+    async deleteUserById(obj, args: UserDeleteDto): Promise<Result> {
+        await this.service.deleteUserById(args.id);
+
+        return {
+            code: 200,
+            message: "Deleted a User by id successfully!",
+        };
     }
 
     @Mutation()
     @UseGuards(UserGuard)
-    async deleteUserByUsername(obj, args: UserDeleteDto): Promise<Boolean> {
-        return await this.service.deleteUserByUsername(args.username);
+    async deleteUserByUsername(obj, args: UserDeleteDto): Promise<Result> {
+        await this.service.deleteUserByUsername(args.username);
+
+        return {
+            code: 200,
+            message: "Deleted a User by username successfully!",
+        };
     }
 
     @Query()

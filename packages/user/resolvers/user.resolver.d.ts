@@ -13,10 +13,10 @@ export declare class UserResolver {
     }): Promise<Result>;
     deleteUser(obj: any, args: {
         user: UserDeleteDto;
-    }): Promise<Boolean>;
-    deleteUserByEmail(obj: any, args: UserDeleteDto): Promise<Boolean>;
-    deleteUserById(obj: any, args: UserDeleteDto): Promise<Boolean>;
-    deleteUserByUsername(obj: any, args: UserDeleteDto): Promise<Boolean>;
+    }): Promise<Result>;
+    deleteUserByEmail(obj: any, args: UserDeleteDto): Promise<Result>;
+    deleteUserById(obj: any, args: UserDeleteDto): Promise<Result>;
+    deleteUserByUsername(obj: any, args: UserDeleteDto): Promise<Result>;
     getUsers(): Promise<User[]>;
     getUserByEmail(obj: any, args: UserQueryDto): Promise<User | undefined>;
     getUserById(obj: any, args: UserQueryDto): Promise<User | undefined>;

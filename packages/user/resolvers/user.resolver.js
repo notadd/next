@@ -38,22 +38,38 @@ let UserResolver = class UserResolver {
     }
     deleteUser(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.deleteUser(args.user);
+            yield this.service.deleteUser(args.user);
+            return {
+                code: 200,
+                message: "Deleted a User successfully!",
+            };
         });
     }
     deleteUserByEmail(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.deleteUserByEmail(args.email);
+            yield this.service.deleteUserByEmail(args.email);
+            return {
+                code: 200,
+                message: "Deleted a User by email successfully!",
+            };
         });
     }
     deleteUserById(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.deleteUserById(args.id);
+            yield this.service.deleteUserById(args.id);
+            return {
+                code: 200,
+                message: "Deleted a User by id successfully!",
+            };
         });
     }
     deleteUserByUsername(obj, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.deleteUserByUsername(args.username);
+            yield this.service.deleteUserByUsername(args.username);
+            return {
+                code: 200,
+                message: "Deleted a User by username successfully!",
+            };
         });
     }
     getUsers() {
