@@ -7,7 +7,8 @@ import { join } from 'path';
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
-import { ServerConfiguration } from "../core/configurations/server.configuration";
+import { ServerConfiguration } from "@notadd/core/configurations/server.configuration";
+import { GraphqlConfiguration } from "@notadd/core/configurations/graphql.configuration";
 
 export * from "./modules/application.module";
 
@@ -25,22 +26,23 @@ export async function bootstrap() {
         logger.error("Server configuration do not exists!");
     }
 
-    const configuration: ServerConfiguration = require(join(process.cwd(), "configurations", "server.json"));
+    const serverConfiguration: ServerConfiguration = require(join(process.cwd(), "configurations", "server.json"));
+    const graphqlConfiguration: GraphqlConfiguration = require(join(process.cwd(), "configurations", "graphql.json"));
 
     let index = process.argv.indexOf("--port");
     const port = index > -1
         ? parseInt(process.argv[index + 1])
-        : configuration.http.port ? configuration.http.port : 3000;
+        : serverConfiguration.http.port ? serverConfiguration.http.port : 3000;
     index = process.argv.indexOf("--host");
     const host = index > -1
         ?
         process.argv[index + 1]
         :
-            configuration.http.host
+            serverConfiguration.http.host
             ? (
-                configuration.http.host === "*"
+                serverConfiguration.http.host === "*"
                     ? ip.address()
-                    : configuration.http.host
+                    : serverConfiguration.http.host
             )
             :
             ip.address();
@@ -74,7 +76,9 @@ export async function bootstrap() {
 
     SwaggerModule.setup("/api-doc", application, document);
     const callback = () => {
-        logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+        if (graphqlConfiguration.ide) {
+            logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+        }
         logger.log(`Swagger Server on: ${address}/api-doc`);
         logger.log(`Server on: ${address}`);
     };
@@ -83,8 +87,8 @@ export async function bootstrap() {
 
     if (index > -1) {
         await application.listen(port, process.argv[index + 1], callback);
-    } else if (configuration.http.host && configuration.http.host !== "*") {
-        await application.listen(port, configuration.http.host, callback);
+    } else if (serverConfiguration.http.host && serverConfiguration.http.host !== "*") {
+        await application.listen(port, serverConfiguration.http.host, callback);
     } else {
         await application.listen(port, callback);
     }

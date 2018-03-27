@@ -4,6 +4,8 @@ import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { GraphqlFactory } from "../factories";
 import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
 import { Module, RequestMethod } from "@nestjs/common";
+import { GraphqlConfiguration } from "@notadd/core/configurations/graphql.configuration";
+import { join } from "path";
 
 @Module({
     components: [
@@ -14,10 +16,13 @@ import { Module, RequestMethod } from "@nestjs/common";
     ],
 })
 export class GraphqlModule {
+    private configuration: GraphqlConfiguration;
+
     /**
      * @param { GraphqlFactory } graphQLFactory
      */
     constructor(private readonly graphQLFactory: GraphqlFactory) {
+        this.configuration = require(join(process.cwd(), "configurations", "graphql.json"));
     }
 
     /**
@@ -25,15 +30,18 @@ export class GraphqlModule {
      */
     configure(consumer: MiddlewaresConsumer) {
         const schema = this.createSchema();
+        if (this.configuration.ide) {
+            consumer
+                .apply(graphiqlExpress({ endpointURL: "/graphql" }))
+                .forRoutes({ path: "/graphiql", method: RequestMethod.GET });
+        }
         consumer
-            .apply(graphiqlExpress({ endpointURL: "/graphql" }))
-            .forRoutes({ path: "/graphiql", method: RequestMethod.GET })
             .apply(graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes({ path: "/graphql", method: RequestMethod.ALL });
+            .forRoutes({ path: `/${this.configuration.endpoint}`, method: RequestMethod.ALL });
     }
 
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths("./**/*.types.graphql");
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths("**/*.types.graphql");
 
         return this.graphQLFactory.createSchema({
             typeDefs,

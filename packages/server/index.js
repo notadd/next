@@ -32,20 +32,21 @@ function bootstrap() {
         if (!fs_1.existsSync(path_1.join(process.cwd(), "configurations", "server.json"))) {
             logger.error("Server configuration do not exists!");
         }
-        const configuration = require(path_1.join(process.cwd(), "configurations", "server.json"));
+        const serverConfiguration = require(path_1.join(process.cwd(), "configurations", "server.json"));
+        const graphqlConfiguration = require(path_1.join(process.cwd(), "configurations", "graphql.json"));
         let index = process.argv.indexOf("--port");
         const port = index > -1
             ? parseInt(process.argv[index + 1])
-            : configuration.http.port ? configuration.http.port : 3000;
+            : serverConfiguration.http.port ? serverConfiguration.http.port : 3000;
         index = process.argv.indexOf("--host");
         const host = index > -1
             ?
                 process.argv[index + 1]
             :
-                configuration.http.host
-                    ? (configuration.http.host === "*"
+                serverConfiguration.http.host
+                    ? (serverConfiguration.http.host === "*"
                         ? ip.address()
-                        : configuration.http.host)
+                        : serverConfiguration.http.host)
                     :
                         ip.address();
         const address = `http://${host}:${port}`;
@@ -65,7 +66,9 @@ function bootstrap() {
         const document = swagger_1.SwaggerModule.createDocument(application, options);
         swagger_1.SwaggerModule.setup("/api-doc", application, document);
         const callback = () => {
-            logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+            if (graphqlConfiguration.ide) {
+                logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+            }
             logger.log(`Swagger Server on: ${address}/api-doc`);
             logger.log(`Server on: ${address}`);
         };
@@ -73,8 +76,8 @@ function bootstrap() {
         if (index > -1) {
             yield application.listen(port, process.argv[index + 1], callback);
         }
-        else if (configuration.http.host && configuration.http.host !== "*") {
-            yield application.listen(port, configuration.http.host, callback);
+        else if (serverConfiguration.http.host && serverConfiguration.http.host !== "*") {
+            yield application.listen(port, serverConfiguration.http.host, callback);
         }
         else {
             yield application.listen(port, callback);
