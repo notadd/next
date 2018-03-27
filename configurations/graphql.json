@@ -1,4 +1,7 @@
 {
     "endpoint": "graphql",
-    "ide": true
+    "ide": {
+        "enable": true,
+        "endpoint": "graphiql"
+    }
 }

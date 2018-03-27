@@ -1,12 +1,6 @@
+import { ServerHttpConfiguration } from "./server-http.configuration";
+import { ServerWebsocketConfiguration } from "./server-websocket.configuration";
 export declare type ServerConfiguration = {
-    http: {
-        host?: string;
-        port?: number;
-        protocol?: string;
-    };
-    websocket: {
-        host?: string;
-        port?: number;
-        protocol?: string;
-    };
+    http: ServerHttpConfiguration;
+    websocket: ServerWebsocketConfiguration;
 };

@@ -1,4 +1,5 @@
 import * as GraphQLJSON from 'graphql-type-json';
+import { Configuration } from "@notadd/core/loaders";
 import { GraphQLModule } from "@nestjs/graphql";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { GraphqlFactory } from "../factories";
@@ -16,7 +17,7 @@ import { join } from "path";
     ],
 })
 export class GraphqlModule {
-    private configuration: GraphqlConfiguration;
+    private configuration: GraphqlConfiguration = Configuration.loadGraphqlConfiguration();
 
     /**
      * @param { GraphqlFactory } graphQLFactory
@@ -30,10 +31,10 @@ export class GraphqlModule {
      */
     configure(consumer: MiddlewaresConsumer) {
         const schema = this.createSchema();
-        if (this.configuration.ide) {
+        if (this.configuration.ide.enable) {
             consumer
-                .apply(graphiqlExpress({ endpointURL: "/graphql" }))
-                .forRoutes({ path: "/graphiql", method: RequestMethod.GET });
+                .apply(graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
+                .forRoutes({ path: `/${this.configuration.ide.endpoint}`, method: RequestMethod.GET });
         }
         consumer
             .apply(graphqlExpress(req => ({ schema, rootValue: req })))
