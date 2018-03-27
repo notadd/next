@@ -9,6 +9,9 @@ import { SettingModule } from "@notadd/setting/modules/setting.module";
         AddonResolvers,
         AddonService,
     ],
+    exports: [
+        AddonService,
+    ],
     imports: [
         forwardRef(() => InjectionModule),
         SettingModule,

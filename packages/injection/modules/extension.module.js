@@ -19,6 +19,9 @@ ExtensionModule = __decorate([
             resolvers_1.ExtensionResolvers,
             services_1.ExtensionService,
         ],
+        exports: [
+            services_1.ExtensionService,
+        ],
         imports: [
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,

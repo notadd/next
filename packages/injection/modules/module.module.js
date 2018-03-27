@@ -19,6 +19,9 @@ ModuleModule = __decorate([
             resolvers_1.ModuleResolvers,
             services_1.ModuleService,
         ],
+        exports: [
+            services_1.ModuleService,
+        ],
         imports: [
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
