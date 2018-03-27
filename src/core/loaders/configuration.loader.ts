@@ -1,5 +1,6 @@
 import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { join } from "path";
+import { Json } from "./json.loader";
 import { existsSync } from "fs";
 
 export class ConfigurationLoader {
@@ -31,12 +32,12 @@ export class ConfigurationLoader {
     }
 
     /**
-     * @param path
+     * @param { string } path
      *
      * @returns { T }
      */
-    public load<T>(path): T {
-        return require(path);
+    public load<T>(path: string): T {
+        return Json.load<T>(path);
     }
 
     /**

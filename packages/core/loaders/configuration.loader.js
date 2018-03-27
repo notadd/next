@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
+const json_loader_1 = require("./json.loader");
 const fs_1 = require("fs");
 class ConfigurationLoader {
     constructor() {
@@ -18,7 +19,7 @@ class ConfigurationLoader {
         return fs_1.existsSync(this.pathForServerConfigurationFile);
     }
     load(path) {
-        return require(path);
+        return json_loader_1.Json.load(path);
     }
     loadDatabaseConfiguration() {
         return this.load(this.pathForDatabaseConfigurationFile);

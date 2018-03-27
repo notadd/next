@@ -6,7 +6,7 @@ export declare class ConfigurationLoader {
     existsDatabaseConfiguration(): boolean;
     existsGraphqlConfiguration(): boolean;
     existsServerConfiguration(): boolean;
-    load<T>(path: any): T;
+    load<T>(path: string): T;
     loadDatabaseConfiguration(): DatabaseConfiguration;
     loadGraphqlConfiguration(): GraphqlConfiguration;
     loadServerConfiguration(): ServerConfiguration;
