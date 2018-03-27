@@ -15,25 +15,24 @@ const express = require("express");
 const ip = require("ip");
 const modules_1 = require("./modules");
 const swagger_1 = require("@nestjs/swagger");
-const fs_1 = require("fs");
-const path_1 = require("path");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
+const loaders_1 = require("@notadd/core/loaders");
 __export(require("./modules/application.module"));
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const logger = new common_1.Logger("NotaddFactory", true);
-        if (!fs_1.existsSync(path_1.join(process.cwd(), "configurations", "database.json"))) {
+        if (!loaders_1.Configuration.existsDatabaseConfiguration()) {
             logger.error("Database configuration do not exists!");
             logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
             process.exit(1);
         }
-        if (!fs_1.existsSync(path_1.join(process.cwd(), "configurations", "server.json"))) {
+        if (!loaders_1.Configuration.existsServerConfiguration()) {
             logger.error("Server configuration do not exists!");
         }
-        const serverConfiguration = require(path_1.join(process.cwd(), "configurations", "server.json"));
-        const graphqlConfiguration = require(path_1.join(process.cwd(), "configurations", "graphql.json"));
+        const serverConfiguration = loaders_1.Configuration.loadServerConfiguration();
+        const graphqlConfiguration = loaders_1.Configuration.loadGraphqlConfiguration();
         let index = process.argv.indexOf("--port");
         const port = index > -1
             ? parseInt(process.argv[index + 1])
@@ -66,7 +65,7 @@ function bootstrap() {
         const document = swagger_1.SwaggerModule.createDocument(application, options);
         swagger_1.SwaggerModule.setup("/api-doc", application, document);
         const callback = () => {
-            if (graphqlConfiguration.ide) {
+            if (graphqlConfiguration.ide.enable) {
                 logger.log(`Graphql IDE Server on: ${address}/graphiql`);
             }
             logger.log(`Swagger Server on: ${address}/api-doc`);
