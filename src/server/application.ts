@@ -24,6 +24,10 @@ export class ApplicationStarter {
             this.logger.error("Server configuration do not exists!");
             result = false;
         }
+        if (!Configuration.existsSwaggerConfiguration()) {
+            this.logger.error("Swagger configuration do not exists!");
+            result = false;
+        }
         if (!result) {
             this.logger.error("Application environmental detection with error!");
             process.exit(1);
@@ -31,8 +35,11 @@ export class ApplicationStarter {
     }
 
     async start() {
-        const serverConfiguration = Configuration.loadServerConfiguration();
+        this.check();
+
         const graphqlConfiguration = Configuration.loadGraphqlConfiguration();
+        const serverConfiguration = Configuration.loadServerConfiguration();
+        const swaggerConfiguration = Configuration.loadSwaggerConfiguration;
 
         let index = process.argv.indexOf("--port");
         const port = index > -1
@@ -61,21 +68,25 @@ export class ApplicationStarter {
         application.use(express.static(process.cwd() + "/public/"));
         application.useGlobalPipes(new ValidationPipe());
 
-        const options = new DocumentBuilder()
-            .setTitle("Notadd")
-            .setDescription("API document for Notadd.")
-            .setVersion("2.0")
-            .addBearerAuth()
-            .build();
+        if (swaggerConfiguration.enable) {
+            const options = new DocumentBuilder()
+                .setTitle("Notadd")
+                .setDescription("API document for Notadd.")
+                .setVersion("2.0")
+                .addBearerAuth()
+                .build();
 
-        const document = SwaggerModule.createDocument(application, options);
+            const document = SwaggerModule.createDocument(application, options);
 
-        SwaggerModule.setup("/api-doc", application, document);
+            SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
+        }
         const callback = () => {
             if (graphqlConfiguration.ide.enable) {
                 this.logger.log(`Graphql IDE Server on: ${address}/graphiql`);
             }
-            this.logger.log(`Swagger Server on: ${address}/api-doc`);
+            if (swaggerConfiguration.enable) {
+                this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
+            }
             this.logger.log(`Server on: ${address}`);
         };
 

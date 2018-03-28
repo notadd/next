@@ -31,6 +31,10 @@ class ApplicationStarter {
             this.logger.error("Server configuration do not exists!");
             result = false;
         }
+        if (!loaders_1.Configuration.existsSwaggerConfiguration()) {
+            this.logger.error("Swagger configuration do not exists!");
+            result = false;
+        }
         if (!result) {
             this.logger.error("Application environmental detection with error!");
             process.exit(1);
@@ -38,8 +42,10 @@ class ApplicationStarter {
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
-            const serverConfiguration = loaders_1.Configuration.loadServerConfiguration();
+            this.check();
             const graphqlConfiguration = loaders_1.Configuration.loadGraphqlConfiguration();
+            const serverConfiguration = loaders_1.Configuration.loadServerConfiguration();
+            const swaggerConfiguration = loaders_1.Configuration.loadSwaggerConfiguration;
             let index = process.argv.indexOf("--port");
             const port = index > -1
                 ? parseInt(process.argv[index + 1])
@@ -63,19 +69,23 @@ class ApplicationStarter {
             });
             application.use(express.static(process.cwd() + "/public/"));
             application.useGlobalPipes(new common_1.ValidationPipe());
-            const options = new swagger_1.DocumentBuilder()
-                .setTitle("Notadd")
-                .setDescription("API document for Notadd.")
-                .setVersion("2.0")
-                .addBearerAuth()
-                .build();
-            const document = swagger_1.SwaggerModule.createDocument(application, options);
-            swagger_1.SwaggerModule.setup("/api-doc", application, document);
+            if (swaggerConfiguration.enable) {
+                const options = new swagger_1.DocumentBuilder()
+                    .setTitle("Notadd")
+                    .setDescription("API document for Notadd.")
+                    .setVersion("2.0")
+                    .addBearerAuth()
+                    .build();
+                const document = swagger_1.SwaggerModule.createDocument(application, options);
+                swagger_1.SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
+            }
             const callback = () => {
                 if (graphqlConfiguration.ide.enable) {
                     this.logger.log(`Graphql IDE Server on: ${address}/graphiql`);
                 }
-                this.logger.log(`Swagger Server on: ${address}/api-doc`);
+                if (swaggerConfiguration.enable) {
+                    this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
+                }
                 this.logger.log(`Server on: ${address}`);
             };
             index = process.argv.indexOf("--host");
