@@ -1,4 +1,4 @@
-import { Extension } from "../types";
+import { Extension } from "../interfaces";
 import { ExtensionService } from "../services";
 import { Result } from "@notadd/core/types/result.type";
 export declare class ExtensionResolvers {

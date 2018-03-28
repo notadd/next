@@ -39,4 +39,3 @@ PageResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.PageService])
 ], PageResolvers);
 exports.PageResolvers = PageResolvers;
-var _a;

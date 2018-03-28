@@ -1,6 +1,6 @@
 import { Component } from "@nestjs/common";
 import { PageMetadata } from "../metadatas";
-import { Page } from "../types";
+import { Page } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()

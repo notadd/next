@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { InjectionService } from "./injection.service";
-import { Module } from "../types";
+import { Module } from "../interfaces";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class ModuleService {

@@ -1,4 +1,4 @@
-import { Extension } from "../types";
+import { Extension } from "../interfaces";
 import { ExtensionService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Result } from "@notadd/core/types/result.type";

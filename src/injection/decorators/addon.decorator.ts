@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Author } from "../types";
+import { Author } from "../interfaces";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { INJECTION_TYPE } from "../constants";
 

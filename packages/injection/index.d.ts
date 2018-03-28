@@ -1,7 +1,6 @@
 export * from "./constants";
 export * from "./dashboards";
 export * from "./decorators";
-export * from "./interfaces";
 export * from "./metadatas";
 export * from "./modules";
 export * from "./pages";

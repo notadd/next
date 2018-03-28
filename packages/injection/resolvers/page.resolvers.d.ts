@@ -1,4 +1,4 @@
-import { Page } from "../types";
+import { Page } from "../interfaces";
 import { PageService } from "../services";
 export declare class PageResolvers {
     private readonly pageService;

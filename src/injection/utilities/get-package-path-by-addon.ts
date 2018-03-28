@@ -1,4 +1,4 @@
-import { Addon } from "../types";
+import { Addon } from "../interfaces";
 import { dirname, join } from "path";
 import { existsSync } from "fs";
 

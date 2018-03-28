@@ -1,8 +1,7 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
 import { execFileSync } from "child_process";
-import { Extension } from "../types";
-import { Injection } from "../types";
+import { Extension, Injection } from "../interfaces";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 import { Result } from "@notadd/core/types/result.type";

@@ -1,4 +1,4 @@
-import { Dashboard } from "../types";
+import { Dashboard } from "../interfaces";
 import { DashboardService } from "../services";
 export declare class DashboardResolvers {
     private readonly dashboardService;

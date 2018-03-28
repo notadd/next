@@ -1,4 +1,4 @@
-import { Dashboard } from "../types";
+import { Dashboard } from "../interfaces";
 import { DashboardMetadata } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class DashboardService {

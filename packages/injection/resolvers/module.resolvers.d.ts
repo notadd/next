@@ -1,4 +1,4 @@
-import { Module } from "../types";
+import { Module } from "../interfaces";
 import { ModuleService } from "../services";
 import { Result } from "@notadd/core/types/result.type";
 export declare class ModuleResolvers {

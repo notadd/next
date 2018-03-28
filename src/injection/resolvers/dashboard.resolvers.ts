@@ -1,4 +1,4 @@
-import { Dashboard } from "../types";
+import { Dashboard } from "../interfaces";
 import { DashboardService } from "../services";
 import { Query, Resolver } from "@nestjs/graphql";
 

@@ -1,5 +1,5 @@
 import { Query, Resolver } from "@nestjs/graphql";
-import { Page } from "../types";
+import { Page } from "../interfaces";
 import { PageService } from "../services";
 
 @Resolver("Page")
