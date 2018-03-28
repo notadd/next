@@ -1,6 +1,6 @@
 {
     "name": "@notadd/graphql",
-    "version": "2.3.6",
+    "version": "2.3.14",
     "description": "Notadd Graphql Package.",
     "main": "main.js",
     "scripts": {

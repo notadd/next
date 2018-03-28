@@ -1,6 +1,6 @@
 {
     "name": "@notadd/server",
-    "version": "2.3.9",
+    "version": "2.3.14",
     "description": "Notadd Server Package.",
     "main": "main.js",
     "scripts": {
