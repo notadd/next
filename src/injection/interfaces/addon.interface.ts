@@ -1,6 +1,6 @@
-import { Author } from "./author.type";
+import { Author } from "../types";
 
-export type Module = {
+export interface Addon {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
@@ -9,4 +9,4 @@ export type Module = {
     location: string;
     name: string;
     version: string;
-};
+}

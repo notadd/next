@@ -39,3 +39,4 @@ DashboardResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.DashboardService])
 ], DashboardResolvers);
 exports.DashboardResolvers = DashboardResolvers;
+var _a;

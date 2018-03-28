@@ -1,4 +1,4 @@
-export type Dashboard = {
+export interface Dashboard {
     data: any;
     name: string;
 }

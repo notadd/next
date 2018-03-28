@@ -1,5 +1,5 @@
-import { Author } from "./author.type";
-export declare type Addon = {
+import { Author } from "../types";
+export interface Addon {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
@@ -8,4 +8,4 @@ export declare type Addon = {
     location: string;
     name: string;
     version: string;
-};
+}

@@ -1,7 +1,7 @@
-export declare type Page = {
+export interface Page {
     description?: string;
     form: any;
     identification: string;
     name: string;
     schema: any;
-};
+}

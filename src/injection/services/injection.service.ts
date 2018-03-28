@@ -1,6 +1,6 @@
 import { Component } from "@nestjs/common";
-import { Injection } from "../types";
 import { importInjectionsFromDirectories } from "../utilities";
+import { Injection } from "../types";
 
 @Component()
 export class InjectionService {

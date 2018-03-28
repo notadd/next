@@ -1,6 +1,6 @@
-import { Author } from "./author.type";
+import { Author } from "./";
 import { ExtensionShellMetadata } from "../metadatas";
-export declare type Extension = {
+export interface Extension {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
@@ -10,4 +10,4 @@ export declare type Extension = {
     name: string;
     shell?: ExtensionShellMetadata;
     version: string;
-};
+}

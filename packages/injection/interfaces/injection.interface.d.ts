@@ -1,4 +1,4 @@
-export type Injection = {
+export interface Injection {
     location: string;
     target: Function;
-};
+}

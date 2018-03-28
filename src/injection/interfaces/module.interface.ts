@@ -1,5 +1,6 @@
-import { Author } from "./author.type";
-export declare type Module = {
+import { Author } from "./";
+
+export interface Module {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
@@ -8,4 +9,4 @@ export declare type Module = {
     location: string;
     name: string;
     version: string;
-};
+}
