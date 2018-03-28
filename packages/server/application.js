@@ -45,7 +45,7 @@ class ApplicationStarter {
             this.check();
             const graphqlConfiguration = loaders_1.Configuration.loadGraphqlConfiguration();
             const serverConfiguration = loaders_1.Configuration.loadServerConfiguration();
-            const swaggerConfiguration = loaders_1.Configuration.loadSwaggerConfiguration;
+            const swaggerConfiguration = loaders_1.Configuration.loadSwaggerConfiguration();
             let index = process.argv.indexOf("--port");
             const port = index > -1
                 ? parseInt(process.argv[index + 1])

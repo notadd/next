@@ -39,7 +39,7 @@ export class ApplicationStarter {
 
         const graphqlConfiguration = Configuration.loadGraphqlConfiguration();
         const serverConfiguration = Configuration.loadServerConfiguration();
-        const swaggerConfiguration = Configuration.loadSwaggerConfiguration;
+        const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
 
         let index = process.argv.indexOf("--port");
         const port = index > -1
