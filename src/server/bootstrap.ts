@@ -1,3 +1,3 @@
-import { bootstrap } from "./index";
+import { Application } from "./index";
 
-bootstrap();
+Application.start();

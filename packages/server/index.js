@@ -1,86 +1,9 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const ip = require("ip");
-const modules_1 = require("./modules");
-const swagger_1 = require("@nestjs/swagger");
-const common_1 = require("@nestjs/common");
-const services_1 = require("@notadd/logger/services");
-const core_1 = require("@notadd/core");
-const loaders_1 = require("@notadd/core/loaders");
 __export(require("./modules/application.module"));
-function bootstrap() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const logger = new common_1.Logger("NotaddFactory", true);
-        if (!loaders_1.Configuration.existsDatabaseConfiguration()) {
-            logger.error("Database configuration do not exists!");
-            logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
-            process.exit(1);
-        }
-        if (!loaders_1.Configuration.existsServerConfiguration()) {
-            logger.error("Server configuration do not exists!");
-        }
-        const serverConfiguration = loaders_1.Configuration.loadServerConfiguration();
-        const graphqlConfiguration = loaders_1.Configuration.loadGraphqlConfiguration();
-        let index = process.argv.indexOf("--port");
-        const port = index > -1
-            ? parseInt(process.argv[index + 1])
-            : serverConfiguration.http.port ? serverConfiguration.http.port : 3000;
-        index = process.argv.indexOf("--host");
-        const host = index > -1
-            ?
-                process.argv[index + 1]
-            :
-                serverConfiguration.http.host
-                    ? (serverConfiguration.http.host === "*"
-                        ? ip.address()
-                        : serverConfiguration.http.host)
-                    :
-                        ip.address();
-        const address = `http://${host}:${port}`;
-        const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {
-            bodyParser: true,
-            cors: true,
-            logger: services_1.LogService,
-        });
-        application.use(express.static(process.cwd() + "/public/"));
-        application.useGlobalPipes(new common_1.ValidationPipe());
-        const options = new swagger_1.DocumentBuilder()
-            .setTitle("Notadd")
-            .setDescription("API document for Notadd.")
-            .setVersion("2.0")
-            .addBearerAuth()
-            .build();
-        const document = swagger_1.SwaggerModule.createDocument(application, options);
-        swagger_1.SwaggerModule.setup("/api-doc", application, document);
-        const callback = () => {
-            if (graphqlConfiguration.ide.enable) {
-                logger.log(`Graphql IDE Server on: ${address}/graphiql`);
-            }
-            logger.log(`Swagger Server on: ${address}/api-doc`);
-            logger.log(`Server on: ${address}`);
-        };
-        index = process.argv.indexOf("--host");
-        if (index > -1) {
-            yield application.listen(port, process.argv[index + 1], callback);
-        }
-        else if (serverConfiguration.http.host && serverConfiguration.http.host !== "*") {
-            yield application.listen(port, serverConfiguration.http.host, callback);
-        }
-        else {
-            yield application.listen(port, callback);
-        }
-    });
-}
-exports.bootstrap = bootstrap;
+var application_1 = require("./application");
+exports.Application = application_1.Application;
+exports.ApplicationStarter = application_1.ApplicationStarter;
