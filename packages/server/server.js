@@ -16,7 +16,7 @@ const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
 const loaders_1 = require("@notadd/core/loaders");
-class ApplicationStarter {
+class ServerStarter {
     constructor() {
         this.logger = new common_1.Logger("NotaddFactory", true);
     }
@@ -101,5 +101,5 @@ class ApplicationStarter {
         });
     }
 }
-exports.ApplicationStarter = ApplicationStarter;
-exports.Application = new ApplicationStarter();
+exports.ServerStarter = ServerStarter;
+exports.Server = new ServerStarter();

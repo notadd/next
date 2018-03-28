@@ -1,3 +1,3 @@
-import { Application } from "./index";
+import { Server } from "./index";
 
-Application.start();
+Server.start();

@@ -8,7 +8,7 @@ import { NotaddFactory } from "@notadd/core";
 import { Configuration } from "@notadd/core/loaders";
 import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 
-export class ApplicationStarter {
+export class ServerStarter {
     protected instance: INestApplication;
 
     protected logger = new Logger("NotaddFactory", true);
@@ -102,4 +102,4 @@ export class ApplicationStarter {
     }
 }
 
-export const Application = new ApplicationStarter();
+export const Server = new ServerStarter();
