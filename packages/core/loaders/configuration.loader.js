@@ -8,6 +8,7 @@ class ConfigurationLoader {
         this.pathForDatabaseConfigurationFile = path_1.join(process.cwd(), "configurations", "database.json");
         this.pathForGraphqlConfigurationFile = path_1.join(process.cwd(), "configurations", "graphql.json");
         this.pathForServerConfigurationFile = path_1.join(process.cwd(), "configurations", "server.json");
+        this.pathForSwaggerConfigurationFile = path_1.join(process.cwd(), "configurations", "swagger.json");
     }
     existsDatabaseConfiguration() {
         return fs_1.existsSync(this.pathForDatabaseConfigurationFile);
@@ -17,6 +18,9 @@ class ConfigurationLoader {
     }
     existsServerConfiguration() {
         return fs_1.existsSync(this.pathForServerConfigurationFile);
+    }
+    existsSwaggerConfiguration() {
+        return fs_1.existsSync(this.pathForSwaggerConfigurationFile);
     }
     load(path) {
         return json_loader_1.Json.load(path);
@@ -29,6 +33,9 @@ class ConfigurationLoader {
     }
     loadServerConfiguration() {
         return this.load(this.pathForServerConfigurationFile);
+    }
+    loadSwaggerConfiguration() {
+        return this.load(this.pathForSwaggerConfigurationFile);
     }
 }
 exports.ConfigurationLoader = ConfigurationLoader;

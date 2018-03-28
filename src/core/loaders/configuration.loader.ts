@@ -2,6 +2,7 @@ import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from
 import { join } from "path";
 import { Json } from "./json.loader";
 import { existsSync } from "fs";
+import { SwaggerConfiguration } from "../configurations/swagger.configuration";
 
 export class ConfigurationLoader {
     private pathForDatabaseConfigurationFile = join(process.cwd(), "configurations", "database.json");
@@ -9,6 +10,8 @@ export class ConfigurationLoader {
     private pathForGraphqlConfigurationFile = join(process.cwd(), "configurations", "graphql.json");
 
     private pathForServerConfigurationFile = join(process.cwd(), "configurations", "server.json");
+
+    private pathForSwaggerConfigurationFile = join(process.cwd(), "configurations", "swagger.json");
 
     /**
      * @returns { boolean }
@@ -29,6 +32,13 @@ export class ConfigurationLoader {
      */
     public existsServerConfiguration(): boolean {
         return existsSync(this.pathForServerConfigurationFile);
+    }
+
+    /**
+     * @returns { boolean }
+     */
+    public existsSwaggerConfiguration(): boolean {
+        return existsSync(this.pathForSwaggerConfigurationFile);
     }
 
     /**
@@ -59,6 +69,13 @@ export class ConfigurationLoader {
      */
     public loadServerConfiguration(): ServerConfiguration {
         return this.load<ServerConfiguration>(this.pathForServerConfigurationFile);
+    }
+
+    /**
+     * @returns { SwaggerConfiguration }
+     */
+    public loadSwaggerConfiguration(): SwaggerConfiguration {
+        return this.load<SwaggerConfiguration>(this.pathForSwaggerConfigurationFile);
     }
 }
 
