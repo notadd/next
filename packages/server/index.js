@@ -4,6 +4,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./modules/application.module"));
-var application_1 = require("./application");
-exports.Server = application_1.Server;
-exports.ServerStarter = application_1.ServerStarter;
+var server_1 = require("./server");
+exports.Server = server_1.Server;
+exports.ServerStarter = server_1.ServerStarter;

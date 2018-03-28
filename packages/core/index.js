@@ -6,3 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./constants"));
 __export(require("./decorators"));
 __export(require("./notadd-factory"));
+var core_1 = require("./core");
+exports.Core = core_1.Core;
+exports.CoreFactory = core_1.CoreFactory;

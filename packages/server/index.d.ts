@@ -1,2 +1,2 @@
 export * from "./modules/application.module";
-export { Server, ServerStarter } from "./application";
+export { Server, ServerStarter } from "./server";
