@@ -133,7 +133,6 @@
         "packages/user",
         "packages/websocket",
         "packages/workflow",
-        "vendors/rxjs",
-        "vendors/workflow-es"
+        "vendors/rxjs"
     ]
 }
