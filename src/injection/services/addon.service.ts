@@ -175,7 +175,7 @@ export class AddonService {
         const path = join(process.cwd(), "storages", "addons", "enabled.yaml");
         let exits: Array<string> = [];
         if (existsSync(path)) {
-            exits = safeLoad(readFileSync(path).toString());
+            exits = safeLoad(readFileSync(path).toString()) as Array<string>;
             if (!exits) {
                 exits = [];
             }
