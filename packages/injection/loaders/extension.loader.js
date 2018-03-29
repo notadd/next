@@ -41,6 +41,7 @@ class ExtensionLoader {
         });
     }
     loadCaches() {
+        this.caches.splice(0, this.caches.length);
         this.caches = injection_loader_1.Injection
             .injections
             .filter((injection) => {

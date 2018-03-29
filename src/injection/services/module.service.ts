@@ -212,7 +212,7 @@ export class ModuleService {
             }).length || enabled.filter(data => {
                 return exits.indexOf(data) === -1;
             }).length) {
-            writeFileSync(path, safeDump(enabled));
+            // writeFileSync(path, safeDump(enabled));
         }
     }
 

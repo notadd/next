@@ -188,7 +188,6 @@ let ModuleService = class ModuleService {
         }).length || enabled.filter(data => {
             return exits.indexOf(data) === -1;
         }).length) {
-            fs_1.writeFileSync(path, js_yaml_1.safeDump(enabled));
         }
     }
     loadInjections(reload = false) {

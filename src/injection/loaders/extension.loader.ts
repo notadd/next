@@ -40,6 +40,7 @@ export class ExtensionLoader {
     }
 
     protected loadCaches() {
+        this.caches.splice(0, this.caches.length);
         this.caches = InjectionLoader
             .injections
             .filter((injection: Injection) => {
