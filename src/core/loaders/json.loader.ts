@@ -1,11 +1,13 @@
+import * as loadJsonFile from "load-json-file";
+
 export class JsonLoader {
     /**
      * @param { string } path
      *
      * @returns { T }
      */
-    load<T>(path: string): T {
-        return require(path);
+    public load<T>(path: string): T {
+        return loadJsonFile.sync(path);
     }
 }
 

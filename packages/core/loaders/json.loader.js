@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const loadJsonFile = require("load-json-file");
 class JsonLoader {
     load(path) {
-        return require(path);
+        return loadJsonFile.sync(path);
     }
 }
 exports.JsonLoader = JsonLoader;
