@@ -46,7 +46,9 @@
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.4.2",
         "socket.io": "^2.0.3",
-        "typeorm": "^0.1.9"
+        "typeorm": "^0.1.9",
+        "load-json-file": "^4.0.0",
+        "write-json-file": "^2.3.0"
     },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"

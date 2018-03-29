@@ -19,7 +19,9 @@
     "author": "notadd",
     "license": "Apache-2.0",
     "dependencies": {
-        "graphql-type-json": "^0.1.4"
+        "graphql-type-json": "^0.1.4",
+        "load-json-file": "^4.0.0",
+        "write-json-file": "^2.3.0"
     },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"
