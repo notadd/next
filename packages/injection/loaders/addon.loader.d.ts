@@ -1,8 +1,13 @@
 import { Addon as AddonInterface } from "../interfaces";
+import { SettingService } from "@notadd/setting/services";
 export declare class AddonLoader {
-    protected addons: Array<AddonInterface>;
+    protected caches: Array<AddonInterface>;
     protected filePathForEnabledCache: string;
-    constructor();
-    load(): void;
+    protected initialize(): void;
+    readonly addons: Array<AddonInterface>;
+    loadEnabledAddons(): AddonInterface[];
+    refresh(): void;
+    syncWithSetting(setting: SettingService): Promise<this>;
+    protected loadCaches(): this;
 }
 export declare const Addon: AddonLoader;
