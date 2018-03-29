@@ -21,11 +21,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
+const os = require("os");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const entities_1 = require("../entities");
 const typeorm_2 = require("typeorm");
 const nest_environment_enum_1 = require("@nestjs/common/enums/nest-environment.enum");
+const fs_1 = require("fs");
 let LogService = LogService_1 = class LogService {
     constructor(repository) {
         this.repository = repository;
@@ -56,10 +58,15 @@ let LogService = LogService_1 = class LogService {
         this.printMessage(message, clc.yellow, context, isTimeDiffEnabled);
     }
     static printMessage(message, color, context = '', isTimeDiffEnabled) {
-        if (LogService_1.contextEnv === nest_environment_enum_1.NestEnvironment.TEST)
+        if (LogService_1.contextEnv === nest_environment_enum_1.NestEnvironment.TEST) {
             return;
+        }
+        const date = new Date(Date.now());
+        const file = `${process.cwd()}/storages/logs/${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.log`;
+        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
+        fs_1.appendFileSync(file, text);
         process.stdout.write(color(`[Notadd] ${process.pid}   - `));
-        process.stdout.write(`${new Date(Date.now()).toLocaleString()}   `);
+        process.stdout.write(`${date.toLocaleString()}   `);
         process.stdout.write(this.yellow(`[${context}] `));
         process.stdout.write(color(message));
         this.printTimestamp(isTimeDiffEnabled);

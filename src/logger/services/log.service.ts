@@ -1,9 +1,11 @@
-import * as clc from 'cli-color';
+import * as clc from "cli-color";
+import * as os from "os";
 import { Component, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Log } from "../entities";
 import { Repository } from "typeorm";
 import { NestEnvironment } from "@nestjs/common/enums/nest-environment.enum";
+import { writeSync, openSync, appendFileSync } from "fs";
 
 @Component()
 export class LogService {
@@ -65,10 +67,17 @@ export class LogService {
         context: string = '',
         isTimeDiffEnabled?: boolean,
     ) {
-        if (LogService.contextEnv === NestEnvironment.TEST) return;
+        if (LogService.contextEnv === NestEnvironment.TEST){
+            return;
+        }
+
+        const date = new Date(Date.now());
+        const file = `${process.cwd()}/storages/logs/${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.log`;
+        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
+        appendFileSync(file, text);
 
         process.stdout.write(color(`[Notadd] ${process.pid}   - `));
-        process.stdout.write(`${new Date(Date.now()).toLocaleString()}   `);
+        process.stdout.write(`${date.toLocaleString()}   `);
         process.stdout.write(this.yellow(`[${context}] `));
         process.stdout.write(color(message));
 
