@@ -1,7 +1,6 @@
 import * as clc from "cli-color";
+import * as writeJsonFile from "write-json-file";
 import { join } from "path";
-import { writeFileSync } from "fs";
-import { safeDump } from "js-yaml";
 import { execSync } from 'child_process';
 import { prompt } from "inquirer";
 import { createConnection } from "typeorm";
@@ -112,42 +111,44 @@ async function install() {
     switch (engine) {
         case "postgres":
         case "mysql":
-            writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-                "default": {
-                    type: engine,
-                    host: result.databaseHost,
-                    port: result.databasePort,
-                    username: result.databaseUsername,
-                    password: result.databasePassword,
-                    database: result.database,
-                    entities: [
-                        "**/*.entity.js",
-                    ],
-                    migrations: [
-                        "**/*.migration.js",
-                    ],
-                    logging: true,
-                    migrationsRun: false,
-                    synchronize: false,
-                },
-            }));
+            writeJsonFile.sync(join(process.cwd(), "configurations", "database.json"), {
+                type: engine,
+                host: result.databaseHost,
+                port: result.databasePort,
+                username: result.databaseUsername,
+                password: result.databasePassword,
+                database: result.database,
+                entities: [
+                    "**/*.entity.js",
+                ],
+                migrations: [
+                    "**/*.migration.js",
+                ],
+                logging: true,
+                migrationsRun: false,
+                synchronize: false,
+            }, {
+                indent: 4,
+                sortKeys: true,
+            });
             break;
         default:
-            writeFileSync(join(process.cwd(), "ormconfig.yml"), safeDump({
-                "default": {
-                    type: engine,
-                    database: "./notadd.sqlite",
-                    entities: [
-                        "**/*.entity.js",
-                    ],
-                    migrations: [
-                        "**/*.migration.js",
-                    ],
-                    logging: true,
-                    migrationsRun: false,
-                    synchronize: false,
-                },
-            }));
+            writeJsonFile.sync(join(process.cwd(), "configurations", "database.json"), {
+                type: engine,
+                database: "./notadd.sqlite",
+                entities: [
+                    "**/*.entity.js",
+                ],
+                migrations: [
+                    "**/*.migration.js",
+                ],
+                logging: true,
+                migrationsRun: false,
+                synchronize: false,
+            }, {
+                indent: 4,
+                sortKeys: true,
+            });
             break;
     }
     let wanted = "";
