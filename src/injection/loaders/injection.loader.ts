@@ -1,23 +1,23 @@
 import { importInjectionsFromDirectories } from "../utilities";
-import { Injection as InjectionType } from "../interfaces";
+import { Injection as InjectionInterface } from "../interfaces";
 
 export class InjectionLoader {
-    protected injections: Array<InjectionType>;
+    protected caches: Array<InjectionInterface> = [];
 
-    protected pattern = [
+    protected patterns = [
         "**/*.injection.js",
     ];
 
-    public constructor() {
-        this.injections = importInjectionsFromDirectories(this.pattern);
-    }
+    public get injections(): Array<InjectionInterface> {
+        if (this.caches.length < 1) {
+            this.caches = importInjectionsFromDirectories(this.patterns);
+        }
 
-    public load(): Array<InjectionType> {
-        return this.injections;
+        return this.caches;
     }
 
     public refresh() {
-        this.injections = importInjectionsFromDirectories(this.pattern);
+        this.caches.splice(0, this.caches.length);
     }
 }
 

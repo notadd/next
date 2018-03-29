@@ -1,9 +1,8 @@
-import { Injection as InjectionType } from "../interfaces";
+import { Injection as InjectionInterface } from "../interfaces";
 export declare class InjectionLoader {
-    protected injections: Array<InjectionType>;
-    protected pattern: string[];
-    constructor();
-    load(): Array<InjectionType>;
+    protected caches: Array<InjectionInterface>;
+    protected patterns: string[];
+    readonly injections: Array<InjectionInterface>;
     refresh(): void;
 }
 export declare const Injection: InjectionLoader;
