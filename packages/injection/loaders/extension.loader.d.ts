@@ -1,8 +1,12 @@
 import { Extension as ExtensionInterface } from "../interfaces";
+import { SettingService } from "@notadd/setting/services";
 export declare class ExtensionLoader {
-    protected extensions: Array<ExtensionInterface>;
+    protected caches: Array<ExtensionInterface>;
     protected filePathForEnabledCache: string;
+    readonly extensions: Array<ExtensionInterface>;
     constructor();
-    load(): void;
+    refresh(): void;
+    syncWithSetting(setting: SettingService): Promise<this>;
+    protected loadCaches(): void;
 }
 export declare const Extension: ExtensionLoader;

@@ -8,16 +8,16 @@ export class AddonLoader {
 
     protected filePathForEnabledCache = `${process.cwd()}/storages/addons/enabled.json`;
 
-    protected initialize() {
-        this.addons.splice(0, this.addons.length);
-    }
-
     public get addons(): Array<AddonInterface> {
         if (!this.caches.length) {
             this.loadCaches();
         }
 
         return this.caches;
+    }
+
+    constructor() {
+        this.loadCaches();
     }
 
     public loadEnabledAddons() {
@@ -62,8 +62,6 @@ export class AddonLoader {
                     version: Reflect.getMetadata("version", injection.target),
                 };
             });
-
-        return this;
     }
 }
 

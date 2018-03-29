@@ -14,9 +14,7 @@ class AddonLoader {
     constructor() {
         this.caches = [];
         this.filePathForEnabledCache = `${process.cwd()}/storages/addons/enabled.json`;
-    }
-    initialize() {
-        this.addons.splice(0, this.addons.length);
+        this.loadCaches();
     }
     get addons() {
         if (!this.caches.length) {
@@ -64,7 +62,6 @@ class AddonLoader {
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
-        return this;
     }
 }
 exports.AddonLoader = AddonLoader;

@@ -3,11 +3,11 @@ import { SettingService } from "@notadd/setting/services";
 export declare class AddonLoader {
     protected caches: Array<AddonInterface>;
     protected filePathForEnabledCache: string;
-    protected initialize(): void;
     readonly addons: Array<AddonInterface>;
+    constructor();
     loadEnabledAddons(): AddonInterface[];
     refresh(): void;
     syncWithSetting(setting: SettingService): Promise<this>;
-    protected loadCaches(): this;
+    protected loadCaches(): void;
 }
 export declare const Addon: AddonLoader;
