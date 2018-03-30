@@ -5,7 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Log } from "../entities";
 import { Repository } from "typeorm";
 import { NestEnvironment } from "@nestjs/common/enums/nest-environment.enum";
-import { writeSync, openSync, appendFileSync } from "fs";
+import { appendFileSync } from "fs";
 
 @Component()
 export class LogService {

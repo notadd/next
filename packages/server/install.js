@@ -194,7 +194,7 @@ function addAdministrationUser(username, email, password) {
         const user = repository.create({
             username: username,
             email: email,
-            password: crypto_1.createHmac('sha256', password).digest('hex'),
+            password: crypto_1.createHmac("sha256", password).digest("hex"),
         });
         yield repository.save(user);
         yield connection.close();

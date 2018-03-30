@@ -20,7 +20,9 @@ const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
 const path_1 = require("path");
+const loggers_1 = require("@notadd/logger/loggers");
 const configuration = require(path_1.join(process.cwd(), "configurations", "database.json"));
+configuration.logger = new loggers_1.TypeormLogger("all");
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
