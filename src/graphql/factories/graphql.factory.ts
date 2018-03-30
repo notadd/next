@@ -1,9 +1,9 @@
-import * as fs from 'fs';
-import * as glob from 'glob';
+import * as fs from "fs";
+import * as glob from "glob";
 import { Component } from "@nestjs/common";
 import { IExecutableSchemaDefinition, MergeInfo } from "graphql-tools/dist/Interfaces";
 import { makeExecutableSchema } from "graphql-tools";
-import { mergeTypes } from 'merge-graphql-schemas';
+import { mergeTypes } from "merge-graphql-schemas";
 import { ResolversExplorerService } from "@nestjs/graphql/resolvers-explorer.service";
 
 @Component()
@@ -38,6 +38,6 @@ export class GraphqlFactory {
 
     private loadFiles(pattern: string): any[] {
         const paths = glob.sync(pattern);
-        return paths.map(path => fs.readFileSync(path, 'utf8'));
+        return paths.map(path => fs.readFileSync(path, "utf8"));
     }
 }

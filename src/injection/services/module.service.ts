@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { Component } from "@nestjs/common";
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { InjectionService } from "./injection.service";
 import { Injection, Module } from "../interfaces";

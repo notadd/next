@@ -47,17 +47,17 @@ let LogService = LogService_1 = class LogService {
                 .getOne();
         });
     }
-    static log(message, context = '', isTimeDiffEnabled = true) {
+    static log(message, context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.green, context, isTimeDiffEnabled);
     }
-    static error(message, trace = '', context = '', isTimeDiffEnabled = true) {
+    static error(message, trace = "", context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.red, context, isTimeDiffEnabled);
         this.printStackTrace(trace);
     }
-    static warn(message, context = '', isTimeDiffEnabled = true) {
+    static warn(message, context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.yellow, context, isTimeDiffEnabled);
     }
-    static printMessage(message, color, context = '', isTimeDiffEnabled) {
+    static printMessage(message, color, context = "", isTimeDiffEnabled) {
         if (LogService_1.contextEnv === nest_environment_enum_1.NestEnvironment.TEST) {
             return;
         }

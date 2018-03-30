@@ -4,7 +4,7 @@ import { GraphqlModule } from "@notadd/graphql/modules";
 import { InjectionModule } from "@notadd/injection";
 import { InternationalizationModule } from "@notadd/internationalization/modules";
 import { LoggerModule } from "@notadd/logger";
-import { mergeTypes } from 'merge-graphql-schemas';
+import { mergeTypes } from "merge-graphql-schemas";
 import { Module } from "@nestjs/common";
 import { SettingModule } from "@notadd/setting";
 import { SystemInformation } from "../informations";
@@ -13,7 +13,7 @@ import { UserModule } from "@notadd/user";
 import { WebsocketModule } from "@notadd/websocket";
 import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
 import { join } from "path";
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions } from "typeorm";
 
 const configuration: ConnectionOptions = require(join(process.cwd(), "configurations", "database.json"));
 

@@ -71,7 +71,7 @@ export function webpackExpress(options: WebpackConfiguration) {
                 if (stat.isDirectory()) {
                     let { index } = options;
                     if (index === undefined) {
-                        index = 'index.html';
+                        index = "index.html";
                     } else if (!index) {
                         throw new Error("next");
                     }
@@ -91,11 +91,11 @@ export function webpackExpress(options: WebpackConfiguration) {
                 contentType = "";
             }
             if (!/\.wasm$/.test(filename)) {
-                contentType += '; charset=UTF-8';
+                contentType += "; charset=UTF-8";
             }
 
-            response.setHeader('Content-Type', contentType);
-            response.setHeader('Content-Length', content.length);
+            response.setHeader("Content-Type", contentType);
+            response.setHeader("Content-Length", content.length);
 
             const { headers } = options;
             if (headers) {

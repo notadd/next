@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import { DASHBOARD_DATA_METADATA, DASHBOARD_NAME_METADATA } from "../constants";
 import { ReflectMetadata } from "@nestjs/common";
 

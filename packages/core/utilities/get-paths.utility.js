@@ -11,7 +11,7 @@ function getPaths(publicPath, compiler, url) {
                 && compilers[i].options.output
                 && compilers[i].options.output.publicPath;
             if (compilerPublicPath) {
-                if (compilerPublicPath.indexOf('/') === 0) {
+                if (compilerPublicPath.indexOf("/") === 0) {
                     compilerPublicPathBase = compilerPublicPath;
                 }
                 else {

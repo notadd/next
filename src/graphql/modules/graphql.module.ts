@@ -1,4 +1,4 @@
-import * as GraphQLJSON from 'graphql-type-json';
+import * as GraphQLJSON from "graphql-type-json";
 import { Configuration } from "@notadd/core/loaders";
 import { GraphQLModule } from "@nestjs/graphql";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";

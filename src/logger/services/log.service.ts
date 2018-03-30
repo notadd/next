@@ -43,28 +43,28 @@ export class LogService {
             .getOne();
     }
 
-    static log(message: string, context = '', isTimeDiffEnabled = true) {
+    static log(message: string, context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.green, context, isTimeDiffEnabled);
     }
 
     static error(
         message: string,
-        trace = '',
-        context = '',
+        trace = "",
+        context = "",
         isTimeDiffEnabled = true,
     ) {
         this.printMessage(message, clc.red, context, isTimeDiffEnabled);
         this.printStackTrace(trace);
     }
 
-    static warn(message: string, context = '', isTimeDiffEnabled = true) {
+    static warn(message: string, context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.yellow, context, isTimeDiffEnabled);
     }
 
     private static printMessage(
         message: string,
         color: (msg: string) => string,
-        context: string = '',
+        context: string = "",
         isTimeDiffEnabled?: boolean,
     ) {
         if (LogService.contextEnv === NestEnvironment.TEST){

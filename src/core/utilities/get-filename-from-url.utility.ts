@@ -5,7 +5,7 @@ import { parse } from "url";
 
 export function getFilenameFromUrl(pubPath, compiler, url): string {
     const { outputPath, publicPath } = getPaths(pubPath, compiler, url);
-    const localPrefix = parse(publicPath || '/', false, true);
+    const localPrefix = parse(publicPath || "/", false, true);
     const urlObject = parse(url);
     let filename;
     if (localPrefix.hostname !== null && urlObject.hostname !== null &&
@@ -31,9 +31,9 @@ export function getFilenameFromUrl(pubPath, compiler, url): string {
     let uri = outputPath;
 
     if (filename) {
-        uri = urlJoin((outputPath || ''), filename);
+        uri = urlJoin((outputPath || ""), filename);
 
-        if (!uri.startsWith('/')) {
+        if (!uri.startsWith("/")) {
             uri = `/${uri}`;
         }
     }

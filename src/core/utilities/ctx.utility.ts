@@ -18,8 +18,8 @@ export function ctx(compiler, options) {
         context.log = options.logger;
     } else {
         context.log = weblog({
-            level: options.logLevel || 'info',
-            name: 'wdm',
+            level: options.logLevel || "info",
+            name: "wdm",
             timestamp: options.logTime
         });
     }
@@ -55,7 +55,7 @@ export function ctx(compiler, options) {
             });
         }
         context.state = false;
-        if (callback && typeof callback === 'function') {
+        if (callback && typeof callback === "function") {
             callback();
         }
     }
@@ -76,10 +76,10 @@ export function ctx(compiler, options) {
     }
 
     context.rebuild = rebuild;
-    context.compiler.hooks.invalid.tap('WebpackDevMiddleware', invalid);
-    context.compiler.hooks.run.tap('WebpackDevMiddleware', invalid);
-    context.compiler.hooks.done.tap('WebpackDevMiddleware', done);
-    context.compiler.hooks.watchRun.tap('WebpackDevMiddleware', (comp, callback) => {
+    context.compiler.hooks.invalid.tap("WebpackDevMiddleware", invalid);
+    context.compiler.hooks.run.tap("WebpackDevMiddleware", invalid);
+    context.compiler.hooks.done.tap("WebpackDevMiddleware", done);
+    context.compiler.hooks.watchRun.tap("WebpackDevMiddleware", (comp, callback) => {
         invalid(callback);
     });
 

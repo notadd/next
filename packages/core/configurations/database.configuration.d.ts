@@ -1,2 +1,2 @@
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions } from "typeorm";
 export declare type DatabaseConfiguration = ConnectionOptions;

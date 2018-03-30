@@ -54,7 +54,7 @@ class GrpcMicroservice extends microservices_1.Server {
         const handles = this.getHandlers();
         const ret = [];
         Object.keys(handles).forEach(serializedPattern => {
-            if (serializedPattern !== 'undefined') {
+            if (serializedPattern !== "undefined") {
                 let pattern;
                 try {
                     pattern = JSON.parse(serializedPattern);

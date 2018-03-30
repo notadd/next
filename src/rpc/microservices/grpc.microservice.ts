@@ -72,7 +72,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
     }
 
     /**
-     * Returns any methods decorated with @MessagePattern({ rpc: 'rpcMethod' })
+     * Returns any methods decorated with @MessagePattern({ rpc: "rpcMethod" })
      * or @rpc.
      */
     private getGRPCDelegates() {
@@ -80,7 +80,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
         const ret: Array<{ rpc: any; name: string }> = [];
 
         Object.keys(handles).forEach(serializedPattern => {
-            if (serializedPattern !== 'undefined') {
+            if (serializedPattern !== "undefined") {
                 let pattern: { rpc?: string };
 
                 try {

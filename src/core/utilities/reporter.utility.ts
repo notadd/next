@@ -11,14 +11,14 @@ export function reporter(middlewareOptions, options) {
                 log.info(stats.toString(middlewareOptions.stats));
             }
         }
-        let message = 'Compiled successfully.';
+        let message = "Compiled successfully.";
         if (stats.hasErrors()) {
-            message = 'Failed to compile.';
+            message = "Failed to compile.";
         } else if (stats.hasWarnings()) {
-            message = 'Compiled with warnings.';
+            message = "Compiled with warnings.";
         }
         log.info(message);
     } else {
-        log.info('Compiling...');
+        log.info("Compiling...");
     }
 }

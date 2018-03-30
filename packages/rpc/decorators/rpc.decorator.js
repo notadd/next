@@ -8,7 +8,7 @@ function Rpc() {
         descriptor.value = function (...args) {
             return original.bind(this)(...args);
         };
-        Object.defineProperty(descriptor.value, 'name', {
+        Object.defineProperty(descriptor.value, "name", {
             value: original.name,
             writable: false,
         });

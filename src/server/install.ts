@@ -1,7 +1,7 @@
 import * as clc from "cli-color";
 import * as writeJsonFile from "write-json-file";
 import { join } from "path";
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 import { prompt } from "inquirer";
 import { createConnection } from "typeorm";
 import { User } from "@notadd/user/entities/user.entity";
@@ -189,7 +189,7 @@ async function addAdministrationUser(username: string, email: string, password: 
     const user = repository.create({
         username: username,
         email: email,
-        password: createHmac('sha256', password).digest('hex'),
+        password: createHmac("sha256", password).digest("hex"),
     });
     await repository.save(user);
     await connection.close();

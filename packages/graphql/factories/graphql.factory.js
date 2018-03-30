@@ -32,7 +32,7 @@ let GraphqlFactory = class GraphqlFactory {
     }
     loadFiles(pattern) {
         const paths = glob.sync(pattern);
-        return paths.map(path => fs.readFileSync(path, 'utf8'));
+        return paths.map(path => fs.readFileSync(path, "utf8"));
     }
 };
 GraphqlFactory = __decorate([

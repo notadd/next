@@ -1,5 +1,5 @@
 import { Component } from "@nestjs/common";
-import { flattenDeep } from 'lodash';
+import { flattenDeep } from "lodash";
 import { Injectable } from "@nestjs/common/interfaces";
 import { IS_WORKFLOW } from "../constants";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";

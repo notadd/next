@@ -1,7 +1,7 @@
 import { Component } from "@nestjs/common";
 import { DASHBOARD_NAME_METADATA } from "../constants";
 import { DashboardMetadata } from "../interfaces";
-import { flattenDeep } from 'lodash';
+import { flattenDeep } from "lodash";
 import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";

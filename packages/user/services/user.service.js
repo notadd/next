@@ -34,7 +34,7 @@ let UserService = class UserService {
             const user = yield this.repository.create({
                 username: obj.username,
                 email: obj.email,
-                password: crypto_1.createHmac('sha256', obj.password).digest('hex'),
+                password: crypto_1.createHmac("sha256", obj.password).digest("hex"),
             });
             return yield this.repository.save(user);
         });

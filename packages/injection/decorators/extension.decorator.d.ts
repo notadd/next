@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import { Author } from "../interfaces";
 import { ExtensionShellMetadata } from "../metadatas";
 export declare function Extension(obj: {

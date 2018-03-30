@@ -1,4 +1,4 @@
-import * as Polyglot from 'node-polyglot';
+import * as Polyglot from "node-polyglot";
 import { Component } from "@nestjs/common";
 import { PhraseMetadata } from "../metadatas";
 

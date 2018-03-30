@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import { Author } from "../interfaces";
 import { ExtensionShellMetadata } from "../metadatas";
 import { INJECTION_TYPE } from "../constants";

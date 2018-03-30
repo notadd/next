@@ -25,7 +25,7 @@ export class UserService {
         const user = await this.repository.create({
             username: obj.username,
             email: obj.email,
-            password: createHmac('sha256', obj.password).digest('hex'),
+            password: createHmac("sha256", obj.password).digest("hex"),
         });
 
         return await this.repository.save(user);

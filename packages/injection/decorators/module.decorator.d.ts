@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import { Author } from "../interfaces";
 export declare function Module(obj: {
     authors?: Author[];
