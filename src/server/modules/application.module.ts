@@ -17,7 +17,9 @@ import { ConnectionOptions } from "typeorm";
 import { TypeormLogger } from "@notadd/logger/loggers";
 
 const configuration: ConnectionOptions = require(join(process.cwd(), "configurations", "database.json"));
-configuration.logger = new TypeormLogger("all");
+Object.assign(configuration, {
+    logger: new TypeormLogger("all"),
+});
 
 @Module({
     components: [
