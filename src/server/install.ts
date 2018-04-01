@@ -108,10 +108,11 @@ async function install() {
             ]);
             break;
     }
+    let database = {};
     switch (engine) {
         case "postgres":
         case "mysql":
-            writeJsonFile.sync(join(process.cwd(), "configurations", "database.json"), {
+            database = {
                 type: engine,
                 host: result.databaseHost,
                 port: result.databasePort,
@@ -127,13 +128,10 @@ async function install() {
                 logging: true,
                 migrationsRun: false,
                 synchronize: false,
-            }, {
-                indent: 4,
-                sortKeys: true,
-            });
+            };
             break;
         default:
-            writeJsonFile.sync(join(process.cwd(), "configurations", "database.json"), {
+            database = {
                 type: engine,
                 database: "./notadd.sqlite",
                 entities: [
@@ -145,12 +143,13 @@ async function install() {
                 logging: true,
                 migrationsRun: false,
                 synchronize: false,
-            }, {
-                indent: 4,
-                sortKeys: true,
-            });
+            };
             break;
     }
+    writeJsonFile.sync(join(process.cwd(), "configurations", "database.json"), database, {
+        indent: 4,
+        sortKeys: true,
+    });
     let wanted = "";
     switch (engine) {
         case "mysql":
@@ -165,7 +164,7 @@ async function install() {
     }
 
     addPackageForDatabase(wanted);
-    await addAdministrationUser(result.username, result.email, result.password);
+    await addAdministrationUser(result.username, result.email, result.password, database);
 
     console.log(clc.blue("Notadd install successfully!"));
 }
@@ -182,8 +181,8 @@ function addPackageForDatabase(engine: string) {
     console.log(clc.blue(`Installed package ${engine}`));
 }
 
-async function addAdministrationUser(username: string, email: string, password: string) {
-    const connection = await createConnection();
+async function addAdministrationUser(username: string, email: string, password: string, database: any) {
+    const connection = await createConnection(database);
     await connection.synchronize(false);
     const repository = connection.getRepository(User);
     const user = repository.create({

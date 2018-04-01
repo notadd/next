@@ -117,10 +117,11 @@ function install() {
                 ]);
                 break;
         }
+        let database = {};
         switch (engine) {
             case "postgres":
             case "mysql":
-                writeJsonFile.sync(path_1.join(process.cwd(), "configurations", "database.json"), {
+                database = {
                     type: engine,
                     host: result.databaseHost,
                     port: result.databasePort,
@@ -136,13 +137,10 @@ function install() {
                     logging: true,
                     migrationsRun: false,
                     synchronize: false,
-                }, {
-                    indent: 4,
-                    sortKeys: true,
-                });
+                };
                 break;
             default:
-                writeJsonFile.sync(path_1.join(process.cwd(), "configurations", "database.json"), {
+                database = {
                     type: engine,
                     database: "./notadd.sqlite",
                     entities: [
@@ -154,12 +152,13 @@ function install() {
                     logging: true,
                     migrationsRun: false,
                     synchronize: false,
-                }, {
-                    indent: 4,
-                    sortKeys: true,
-                });
+                };
                 break;
         }
+        writeJsonFile.sync(path_1.join(process.cwd(), "configurations", "database.json"), database, {
+            indent: 4,
+            sortKeys: true,
+        });
         let wanted = "";
         switch (engine) {
             case "mysql":
@@ -173,7 +172,7 @@ function install() {
                 break;
         }
         addPackageForDatabase(wanted);
-        yield addAdministrationUser(result.username, result.email, result.password);
+        yield addAdministrationUser(result.username, result.email, result.password, database);
         console.log(clc.blue("Notadd install successfully!"));
     });
 }
@@ -186,9 +185,9 @@ function addPackageForDatabase(engine) {
     });
     console.log(clc.blue(`Installed package ${engine}`));
 }
-function addAdministrationUser(username, email, password) {
+function addAdministrationUser(username, email, password, database) {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield typeorm_1.createConnection();
+        const connection = yield typeorm_1.createConnection(database);
         yield connection.synchronize(false);
         const repository = connection.getRepository(user_entity_1.User);
         const user = repository.create({
