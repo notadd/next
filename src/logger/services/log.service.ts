@@ -72,7 +72,7 @@ export class LogService {
         }
 
         const date = new Date(Date.now());
-        const file = `${process.cwd()}/storages/logs/${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.log`;
+        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString("zh-CN")}.log`;
         const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
         appendFileSync(file, text);
 

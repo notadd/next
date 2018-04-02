@@ -62,7 +62,7 @@ let LogService = LogService_1 = class LogService {
             return;
         }
         const date = new Date(Date.now());
-        const file = `${process.cwd()}/storages/logs/${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.log`;
+        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString("zh-CN")}.log`;
         const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
         fs_1.appendFileSync(file, text);
         process.stdout.write(color(`[Notadd] ${process.pid}   - `));
