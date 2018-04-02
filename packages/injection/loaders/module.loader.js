@@ -10,33 +10,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const injection_loader_1 = require("./injection.loader");
 const constants_1 = require("@notadd/core/constants");
-class ModuleLoader {
+class ModuleLoader extends injection_loader_1.InjectionLoader {
     constructor() {
-        this.caches = [];
+        super();
+        this.cacheForModules = [];
         this.filePathForEnabledCache = `${process.cwd()}/storages/modules/enabled.json`;
-        this.loadCaches();
+        this.loadModulesFromCaches();
     }
-    refresh() {
-        this.caches.splice(0, this.caches.length);
+    refreshModules() {
+        this.cacheForModules.splice(0, this.cacheForModules.length);
     }
     syncWithSetting(setting) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!this.caches.length) {
-                this.loadCaches();
+            if (!this.cacheForModules.length) {
+                this.loadModulesFromCaches();
             }
-            for (let i = 0; i < this.caches.length; i++) {
-                const module = this.caches[i];
+            for (let i = 0; i < this.cacheForModules.length; i++) {
+                const module = this.cacheForModules[i];
                 const identification = module.identification;
                 module.enabled = yield setting.get(`module.${identification}.enabled`, false);
                 module.installed = yield setting.get(`module.${identification}.installed`, false);
-                this.caches.splice(i, 1, module);
+                this.cacheForModules.splice(i, 1, module);
             }
             return this;
         });
     }
-    loadCaches() {
-        this.caches.splice(0, this.caches.length);
-        this.caches = injection_loader_1.Injection
+    loadModulesFromCaches() {
+        this.cacheForModules.splice(0, this.cacheForModules.length);
+        this.cacheForModules = this
             .injections
             .filter((injection) => {
             return constants_1.InjectionType.Module === Reflect.getMetadata("__injection_type__", injection.target);

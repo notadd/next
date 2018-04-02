@@ -3,19 +3,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const utilities_1 = require("../utilities");
 class InjectionLoader {
     constructor() {
-        this.caches = [];
+        this.cacheForInjections = [];
         this.patterns = [
             "**/*.injection.js",
         ];
+        this.loadInjectionsFromCache();
     }
     get injections() {
-        if (this.caches.length < 1) {
-            this.caches = utilities_1.importInjectionsFromDirectories(this.patterns);
+        if (!this.cacheForInjections.length) {
+            this.loadInjectionsFromCache();
         }
-        return this.caches;
+        return this.cacheForInjections;
     }
-    refresh() {
-        this.caches.splice(0, this.caches.length);
+    refreshInjections() {
+        this.cacheForInjections.splice(0, this.cacheForInjections.length);
+    }
+    loadInjectionsFromCache() {
+        this.cacheForInjections = utilities_1.importInjectionsFromDirectories(this.patterns);
     }
 }
 exports.InjectionLoader = InjectionLoader;

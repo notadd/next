@@ -1,47 +1,48 @@
 import { Extension as ExtensionInterface, Injection } from "../interfaces";
-import { Injection as InjectionLoader } from "./injection.loader";
+import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
 
-export class ExtensionLoader {
-    protected caches: Array<ExtensionInterface> = [];
+export class ExtensionLoader extends InjectionLoader {
+    protected cacheForExtensions: Array<ExtensionInterface> = [];
 
     protected filePathForEnabledCache = `${process.cwd()}/storages/extensions/enabled.json`;
 
     public get extensions(): Array<ExtensionInterface> {
-        if (!this.caches.length) {
-            this.loadCaches();
+        if (!this.cacheForExtensions.length) {
+            this.loadExtensionsFromCache();
         }
 
-        return this.caches;
+        return this.cacheForExtensions;
     }
 
     constructor() {
-        this.loadCaches();
+        super();
+        this.loadExtensionsFromCache();
     }
 
-    public refresh() {
-        this.caches.splice(0, this.caches.length);
+    public refreshExtensions() {
+        this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
     }
 
     public async syncWithSetting(setting: SettingService) {
-        if (!this.caches.length) {
-            this.loadCaches();
+        if (!this.cacheForExtensions.length) {
+            this.loadExtensionsFromCache();
         }
-        for(let i = 0; i < this.caches.length; i ++) {
-            const extension = this.caches[i];
+        for(let i = 0; i < this.cacheForExtensions.length; i ++) {
+            const extension = this.cacheForExtensions[i];
             const identification = extension.identification;
             extension.enabled = await setting.get(`extension.${identification}.enabled`, false);
             extension.installed = await setting.get(`extension.${identification}.installed`, false);
-            this.caches.splice(i, 1, extension);
+            this.cacheForExtensions.splice(i, 1, extension);
         }
 
         return this;
     }
 
-    protected loadCaches() {
-        this.caches.splice(0, this.caches.length);
-        this.caches = InjectionLoader
+    protected loadExtensionsFromCache() {
+        this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
+        this.cacheForExtensions = this
             .injections
             .filter((injection: Injection) => {
                 return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);

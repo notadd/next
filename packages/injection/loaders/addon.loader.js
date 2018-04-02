@@ -10,42 +10,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const injection_loader_1 = require("./injection.loader");
 const constants_1 = require("@notadd/core/constants");
-class AddonLoader {
+class AddonLoader extends injection_loader_1.InjectionLoader {
     constructor() {
-        this.caches = [];
+        super();
+        this.cacheForAddons = [];
         this.filePathForCache = `${process.cwd()}/storages/caches/addon.json`;
-        this.loadCaches();
+        this.loadAddonsFromCache();
     }
     get addons() {
-        if (!this.caches.length) {
-            this.loadCaches();
+        if (!this.cacheForAddons.length) {
+            this.loadAddonsFromCache();
         }
-        return this.caches;
+        return this.cacheForAddons;
     }
-    loadEnabledAddons() {
-        return this.addons;
-    }
-    refresh() {
-        this.caches.splice(0, this.caches.length);
+    refreshAddons() {
+        this.cacheForAddons.splice(0, this.cacheForAddons.length);
     }
     syncWithSetting(setting) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!this.caches.length) {
-                this.loadCaches();
+            if (!this.cacheForAddons.length) {
+                this.loadAddonsFromCache();
             }
-            for (let i = 0; i < this.caches.length; i++) {
-                const addon = this.caches[i];
+            for (let i = 0; i < this.cacheForAddons.length; i++) {
+                const addon = this.cacheForAddons[i];
                 const identification = addon.identification;
                 addon.enabled = yield setting.get(`addon.${identification}.enabled`, false);
                 addon.installed = yield setting.get(`addon.${identification}.installed`, false);
-                this.caches.splice(i, 1, addon);
+                this.cacheForAddons.splice(i, 1, addon);
             }
             return this;
         });
     }
-    loadCaches() {
-        this.caches.splice(0, this.caches.length);
-        this.caches = injection_loader_1.Injection
+    loadAddonsFromCache() {
+        this.cacheForAddons.splice(0, this.cacheForAddons.length);
+        this.cacheForAddons = this
             .injections
             .filter((injection) => {
             return constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
