@@ -21,8 +21,10 @@ export class ModuleLoader extends InjectionLoader {
         this.loadModulesFromCaches();
     }
 
-    public refreshModules() {
+    public refresh() {
         this.cacheForModules.splice(0, this.cacheForModules.length);
+
+        return this;
     }
 
     public async syncWithSetting(setting: SettingService) {

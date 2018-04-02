@@ -1,14 +1,11 @@
-import "reflect-metadata";
-import { InjectionService } from "./injection.service";
 import { Module } from "../interfaces";
+import { ModuleLoader } from "../loaders";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class ModuleService {
-    private readonly injectionService;
     private readonly settingService;
-    private initialized;
-    private modules;
-    constructor(injectionService: InjectionService, settingService: SettingService);
+    protected loader: ModuleLoader;
+    constructor(settingService: SettingService);
     disableModule(identification: string): Promise<Result | undefined>;
     enableModule(identification: string): Promise<Result | undefined>;
     getModule(identification: string): Promise<Module | undefined>;
@@ -19,7 +16,5 @@ export declare class ModuleService {
     installModule(identification: string): Promise<Result | undefined>;
     uninstallModule(identification: string): Promise<Result | undefined>;
     protected dropSchema(module: Module): Promise<void>;
-    protected loadEnabledAddons(): void;
-    protected loadInjections(reload?: boolean): Promise<void>;
     protected syncSchema(module: Module): Promise<void>;
 }

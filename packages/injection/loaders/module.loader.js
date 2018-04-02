@@ -23,8 +23,9 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
         }
         return this.cacheForModules;
     }
-    refreshModules() {
+    refresh() {
         this.cacheForModules.splice(0, this.cacheForModules.length);
+        return this;
     }
     syncWithSetting(setting) {
         return __awaiter(this, void 0, void 0, function* () {

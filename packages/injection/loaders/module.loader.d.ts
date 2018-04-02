@@ -6,7 +6,7 @@ export declare class ModuleLoader extends InjectionLoader {
     protected filePathForCache: string;
     readonly modules: Array<ModuleInterface>;
     constructor();
-    refreshModules(): void;
+    refresh(): this;
     syncWithSetting(setting: SettingService): Promise<this>;
     loadCachesFromJson(): ModuleCache;
     protected loadModulesFromCaches(): void;
