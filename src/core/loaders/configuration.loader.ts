@@ -4,6 +4,7 @@ import { join } from "path";
 import { Json } from "./json.loader";
 import { existsSync } from "fs";
 import { SwaggerConfiguration } from "../configurations/swagger.configuration";
+import { TypeormLogger } from "../../../packages/logger/loggers/typeorm.logger";
 
 export class ConfigurationLoader {
     private pathForApplicationConfigurationFile = join(process.cwd(), "configurations", "application.json");
@@ -71,7 +72,12 @@ export class ConfigurationLoader {
      * @returns { DatabaseConfiguration }
      */
     public loadDatabaseConfiguration(): DatabaseConfiguration {
-        return this.load<DatabaseConfiguration>(this.pathForDatabaseConfigurationFile);
+        const configuration = this.load<DatabaseConfiguration>(this.pathForDatabaseConfigurationFile);
+        Object.assign(configuration, {
+            logger: new TypeormLogger("all"),
+        });
+
+        return configuration;
     }
 
     /**

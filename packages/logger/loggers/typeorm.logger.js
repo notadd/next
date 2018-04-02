@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
-const FileLogger_1 = require("typeorm/logger/FileLogger");
 const loaders_1 = require("@notadd/core/loaders");
+const FileLogger_1 = require("typeorm/logger/FileLogger");
 class TypeormLogger extends FileLogger_1.FileLogger {
     write(strings) {
         strings = strings instanceof Array ? strings : [strings];

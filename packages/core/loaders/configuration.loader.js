@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
 const json_loader_1 = require("./json.loader");
 const fs_1 = require("fs");
+const typeorm_logger_1 = require("../../../packages/logger/loggers/typeorm.logger");
 class ConfigurationLoader {
     constructor() {
         this.pathForApplicationConfigurationFile = path_1.join(process.cwd(), "configurations", "application.json");
@@ -33,7 +34,11 @@ class ConfigurationLoader {
         return this.load(this.pathForDatabaseConfigurationFile);
     }
     loadDatabaseConfiguration() {
-        return this.load(this.pathForDatabaseConfigurationFile);
+        const configuration = this.load(this.pathForDatabaseConfigurationFile);
+        Object.assign(configuration, {
+            logger: new typeorm_logger_1.TypeormLogger("all"),
+        });
+        return configuration;
     }
     loadGraphqlConfiguration() {
         return this.load(this.pathForGraphqlConfigurationFile);
