@@ -26,8 +26,9 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
     loadCachesFromJson() {
         return this.loadCachesFromJsonFile(this.filePathForCache);
     }
-    refreshAddons() {
+    refresh() {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
+        return this;
     }
     syncWithSetting(setting) {
         return __awaiter(this, void 0, void 0, function* () {

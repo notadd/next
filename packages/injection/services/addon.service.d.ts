@@ -1,14 +1,12 @@
 import "reflect-metadata";
 import { Addon } from "../interfaces";
-import { InjectionService } from "./injection.service";
+import { AddonLoader } from "../loaders";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class AddonService {
-    private readonly injectionService;
     private readonly settingService;
-    private initialized;
-    private addons;
-    constructor(injectionService: InjectionService, settingService: SettingService);
+    protected loader: AddonLoader;
+    constructor(settingService: SettingService);
     disableAddon(identification: string): Promise<Result | undefined>;
     enableAddon(identification: string): Promise<Result | undefined>;
     getAddon(identification: string): Promise<Addon | undefined>;
@@ -19,7 +17,5 @@ export declare class AddonService {
     installAddon(identification: string): Promise<Result | undefined>;
     uninstallAddon(identification: string): Promise<Result | undefined>;
     protected dropSchema(addon: Addon): Promise<void>;
-    protected loadEnabledAddons(): void;
-    protected loadInjections(reload?: boolean): Promise<void>;
     protected syncSchema(addon: Addon): Promise<void>;
 }

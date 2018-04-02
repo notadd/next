@@ -18,22 +18,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+const loaders_1 = require("../loaders");
 const common_1 = require("@nestjs/common");
-const fs_1 = require("fs");
 const get_package_path_by_addon_1 = require("../utilities/get-package-path-by-addon");
-const injection_service_1 = require("./injection.service");
-const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const path_1 = require("path");
-const js_yaml_1 = require("js-yaml");
 const builders_1 = require("../builders");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 let AddonService = class AddonService {
-    constructor(injectionService, settingService) {
-        this.injectionService = injectionService;
+    constructor(settingService) {
         this.settingService = settingService;
-        this.initialized = false;
-        this.addons = [];
-        this.loadInjections();
+        this.loader = new loaders_1.AddonLoader();
+        this.loader.syncWithSetting(this.settingService);
     }
     disableAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -42,7 +37,7 @@ let AddonService = class AddonService {
                 throw new Error("Addon do not exists!");
             }
             yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "0");
-            yield this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Disable addon [${addon.identification}] successfully!`,
             };
@@ -58,7 +53,7 @@ let AddonService = class AddonService {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
-            yield this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Enable addon [${addon.identification}] successfully!`,
             };
@@ -66,7 +61,7 @@ let AddonService = class AddonService {
     }
     getAddon(identification) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.addons.find((addon) => {
+            return this.loader.addons.find((addon) => {
                 return addon.identification === identification;
             });
         });
@@ -75,30 +70,30 @@ let AddonService = class AddonService {
         return __awaiter(this, void 0, void 0, function* () {
             if (filter && typeof filter.enabled !== "undefined") {
                 if (filter.enabled) {
-                    return this.addons.filter(addon => {
+                    return this.loader.addons.filter(addon => {
                         return addon.enabled === true;
                     });
                 }
                 else {
-                    return this.addons.filter(addon => {
+                    return this.loader.addons.filter(addon => {
                         return !addon.enabled;
                     });
                 }
             }
             else if (filter && typeof filter.installed !== "undefined") {
                 if (filter.installed) {
-                    return this.addons.filter(addon => {
+                    return this.loader.addons.filter(addon => {
                         return addon.installed === true;
                     });
                 }
                 else {
-                    return this.addons.filter(addon => {
+                    return this.loader.addons.filter(addon => {
                         return !addon.installed;
                     });
                 }
             }
             else {
-                return this.addons;
+                return this.loader.addons;
             }
         });
     }
@@ -113,7 +108,7 @@ let AddonService = class AddonService {
             }
             yield this.syncSchema(addon);
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "1");
-            yield this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Install addon [${addon.identification}] successfully!`,
             };
@@ -129,7 +124,7 @@ let AddonService = class AddonService {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
             }
             yield this.settingService.setSetting(`addon.${addon.identification}.installed`, "0");
-            yield this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Uninstall addon [${addon.identification}] successfully!`,
             };
@@ -148,55 +143,6 @@ let AddonService = class AddonService {
             }
         });
     }
-    loadEnabledAddons() {
-        const path = path_1.join(process.cwd(), "storages", "addons", "enabled.yaml");
-        let exits = [];
-        if (fs_1.existsSync(path)) {
-            exits = js_yaml_1.safeLoad(fs_1.readFileSync(path).toString());
-            if (!exits) {
-                exits = [];
-            }
-        }
-        const enabled = this.addons.filter((addon) => {
-            return addon.enabled === true;
-        }).map((addon) => {
-            return addon.location;
-        });
-        if (exits.filter(data => {
-            return enabled.indexOf(data) === -1;
-        }).length || enabled.filter(data => {
-            return exits.indexOf(data) === -1;
-        }).length) {
-        }
-    }
-    loadInjections(reload = false) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (reload) {
-                this.addons.splice(0, this.addons.length);
-            }
-            const injections = this.injectionService
-                .loadInjections()
-                .filter((injection) => {
-                return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-            });
-            for (let i = 0; i < injections.length; i++) {
-                const injection = injections[i];
-                const identification = Reflect.getMetadata("identification", injection.target);
-                this.addons.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: yield this.settingService.get(`addon.${identification}.enabled`, false),
-                    identification: identification,
-                    installed: yield this.settingService.get(`addon.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
-            }
-            this.loadEnabledAddons();
-            this.initialized = true;
-        });
-    }
     syncSchema(addon) {
         return __awaiter(this, void 0, void 0, function* () {
             const path = get_package_path_by_addon_1.getPackagePathByAddon(addon);
@@ -213,7 +159,6 @@ let AddonService = class AddonService {
 };
 AddonService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [injection_service_1.InjectionService,
-        setting_service_1.SettingService])
+    __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], AddonService);
 exports.AddonService = AddonService;

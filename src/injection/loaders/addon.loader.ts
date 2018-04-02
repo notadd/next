@@ -26,8 +26,10 @@ export class AddonLoader extends InjectionLoader {
         return this.loadCachesFromJsonFile<AddonCache>(this.filePathForCache);
     }
 
-    public refreshAddons() {
+    public refresh() {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
+
+        return this;
     }
 
     public async syncWithSetting(setting: SettingService) {

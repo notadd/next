@@ -8,7 +8,7 @@ export declare class AddonLoader extends InjectionLoader {
     readonly addons: Array<AddonInterface>;
     constructor();
     loadCachesFromJson(): AddonCache;
-    refreshAddons(): void;
+    refresh(): this;
     syncWithSetting(setting: SettingService): Promise<this>;
     protected loadAddonsFromCache(): void;
     protected syncCachesToFile(): void;
