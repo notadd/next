@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Addon, Injection } from "../interfaces";
 import { Component } from "@nestjs/common";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
 import { InjectionService } from "./injection.service";
 import { InjectionType } from "@notadd/core/constants/injection.constants";

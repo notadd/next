@@ -13,7 +13,7 @@ const constants_1 = require("@notadd/core/constants");
 class AddonLoader {
     constructor() {
         this.caches = [];
-        this.filePathForEnabledCache = `${process.cwd()}/storages/addons/enabled.json`;
+        this.filePathForCache = `${process.cwd()}/storages/caches/addon.json`;
         this.loadCaches();
     }
     get addons() {

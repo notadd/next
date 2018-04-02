@@ -38,8 +38,9 @@ gulp.task("default", function () {
         watch: [
             "ormconfig.yml",
             "packages/",
-            "storages/addons/enabled.yaml",
-            "storages/modules/enabled.yaml",
+            "storages/caches/addon.json",
+            "storages/caches/graphql.json",
+            "storages/caches/module.json",
         ],
         ext: "js"
     });
@@ -55,8 +56,8 @@ gulp.task("backend-mix-server", function () {
             "node_modules/@notadd/backend-mix/index.js",
         ],
         watch: [
-            "node_modules/@notadd/react-scripts/bin/react-scripts.js",
             "node_modules/@notadd/backend-mix/package.json",
+            "node_modules/@notadd/react-scripts/bin/react-scripts.js",
         ],
     });
 });

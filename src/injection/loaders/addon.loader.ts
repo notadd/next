@@ -6,7 +6,7 @@ import { SettingService } from "@notadd/setting/services";
 export class AddonLoader {
     protected caches: Array<AddonInterface> = [];
 
-    protected filePathForEnabledCache = `${process.cwd()}/storages/addons/enabled.json`;
+    protected filePathForCache = `${process.cwd()}/storages/caches/addon.json`;
 
     public get addons(): Array<AddonInterface> {
         if (!this.caches.length) {
