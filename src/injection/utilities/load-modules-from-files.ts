@@ -1,17 +1,15 @@
-import { existsSync, readFileSync } from "fs";
+import { existsSync } from "fs";
 import { importClassesFromDirectories } from "./import-classes-from-directories";
 import { join } from "path";
-import { safeLoad } from "js-yaml";
+import { Json } from "@notadd/core/loaders";
+import { ModuleCache } from "../interfaces";
 
 export function loadModulesFromFiles(): Array<Function> {
     const file = join(process.cwd(), "storages", "modules", "enabled.yaml");
     if (existsSync(file)) {
-        let enabled: Array<string> = safeLoad(readFileSync(file).toString()) as Array<string>;
-        if (!enabled) {
-            enabled = [];
-        }
+        let caches = Json.load<ModuleCache>(file);
 
-        return importClassesFromDirectories(enabled);
+        return importClassesFromDirectories(caches.enabled ? caches.enabled : []);
     } else {
         return [];
     }

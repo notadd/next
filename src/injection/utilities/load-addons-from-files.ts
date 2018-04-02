@@ -1,17 +1,15 @@
-import { existsSync, readFileSync } from "fs";
+import { AddonCache } from "../interfaces";
+import { existsSync } from "fs";
 import { importClassesFromDirectories } from "./import-classes-from-directories";
 import { join } from "path";
-import { safeLoad } from "js-yaml";
+import { Json } from "@notadd/core/loaders";
 
 export function loadAddonsFromFiles(): Array<Function> {
-    const file = join(process.cwd(), "storages", "addons", "enabled.yaml");
+    const file = join(process.cwd(), "storages", "caches", "addon.json");
     if (existsSync(file)) {
-        let enabled: Array<string> = safeLoad(readFileSync(file).toString()) as Array<string>;
-        if (!enabled) {
-            enabled = [];
-        }
+        let caches = Json.load<AddonCache>(file);
 
-        return importClassesFromDirectories(enabled);
+        return importClassesFromDirectories(caches.enabled ? caches.enabled : []);
     } else {
         return [];
     }
