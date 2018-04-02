@@ -7,6 +7,7 @@ export declare class InjectionLoader {
     readonly injections: Array<InjectionInterface>;
     constructor();
     refreshInjections(): void;
+    protected hasDiffBetweenArrays(one: Array<any>, two: Array<any>): boolean;
     protected loadCachesFromJsonFile<T>(path: string): T;
     protected loadInjectionsFromCache(): void;
     protected writeCachesToFile(path: string, data: any): void;

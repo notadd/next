@@ -41,8 +41,7 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
                 addon.installed = yield setting.get(`addon.${identification}.installed`, false);
                 this.cacheForAddons.splice(i, 1, addon);
             }
-            const caches = this.loadCachesFromJson();
-            console.log(caches);
+            this.syncCachesToFile();
             return this;
         });
     }
@@ -65,6 +64,19 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
+    }
+    syncCachesToFile() {
+        const caches = this.loadCachesFromJson();
+        const exists = caches.enabled ? caches.enabled : [];
+        const locations = this.addons.filter((addon) => {
+            return addon.enabled === true;
+        }).map((addon) => {
+            return addon.location;
+        });
+        if (this.hasDiffBetweenArrays(exists, locations)) {
+            caches.enabled = locations;
+            this.writeCachesToFile(this.filePathForCache, caches);
+        }
     }
 }
 exports.AddonLoader = AddonLoader;

@@ -1,15 +1,15 @@
-import { Extension as ExtensionInterface, Injection } from "../interfaces";
+import { Extension, Injection } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
 import { ExtensionCache } from "../interfaces";
 
 export class ExtensionLoader extends InjectionLoader {
-    protected cacheForExtensions: Array<ExtensionInterface> = [];
+    protected cacheForExtensions: Array<Extension> = [];
 
     protected filePathForCache = `${process.cwd()}/storages/caches/extension.json`;
 
-    public get extensions(): Array<ExtensionInterface> {
+    public get extensions(): Array<Extension> {
         if (!this.cacheForExtensions.length) {
             this.loadExtensionsFromCache();
         }
@@ -42,8 +42,7 @@ export class ExtensionLoader extends InjectionLoader {
             this.cacheForExtensions.splice(i, 1, extension);
         }
 
-        const caches = this.loadCachesFromJson();
-        console.log(caches);
+        this.syncCachesToFile();
 
         return this;
     }
@@ -68,6 +67,20 @@ export class ExtensionLoader extends InjectionLoader {
                     version: Reflect.getMetadata("version", injection.target),
                 }
             });
+    }
+
+    protected syncCachesToFile() {
+        const caches = this.loadCachesFromJson();
+        const exists: Array<string> = caches.enabled ? caches.enabled : [];
+        const locations = this.addons.filter((extension: Extension) => {
+            return extension.enabled === true;
+        }).map((extension: Extension) => {
+            return extension.location;
+        });
+        if (this.hasDiffBetweenArrays(exists, locations)) {
+            caches.enabled = locations;
+            this.writeCachesToFile(this.filePathForCache, caches);
+        }
     }
 }
 

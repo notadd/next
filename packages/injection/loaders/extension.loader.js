@@ -41,8 +41,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 extension.installed = yield setting.get(`extension.${identification}.installed`, false);
                 this.cacheForExtensions.splice(i, 1, extension);
             }
-            const caches = this.loadCachesFromJson();
-            console.log(caches);
+            this.syncCachesToFile();
             return this;
         });
     }
@@ -66,6 +65,19 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
+    }
+    syncCachesToFile() {
+        const caches = this.loadCachesFromJson();
+        const exists = caches.enabled ? caches.enabled : [];
+        const locations = this.addons.filter((extension) => {
+            return extension.enabled === true;
+        }).map((extension) => {
+            return extension.location;
+        });
+        if (this.hasDiffBetweenArrays(exists, locations)) {
+            caches.enabled = locations;
+            this.writeCachesToFile(this.filePathForCache, caches);
+        }
     }
 }
 exports.ExtensionLoader = ExtensionLoader;

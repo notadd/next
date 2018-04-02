@@ -24,7 +24,15 @@ class InjectionLoader {
     refreshInjections() {
         this.cacheForInjections.splice(0, this.cacheForInjections.length);
     }
+    hasDiffBetweenArrays(one, two) {
+        return one.filter(data => {
+            return two.indexOf(data) === -1;
+        }).length > 0 || two.filter(data => {
+            return one.indexOf(data) === -1;
+        }).length > 0;
+    }
     loadCachesFromJsonFile(path) {
+        this.logger.log("Load caches from file: " + path);
         return loaders_1.Json.load(path);
     }
     loadInjectionsFromCache() {

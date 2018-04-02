@@ -32,8 +32,7 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
                 module.installed = yield setting.get(`module.${identification}.installed`, false);
                 this.cacheForModules.splice(i, 1, module);
             }
-            const caches = this.loadCachesFromJson();
-            console.log(caches);
+            this.syncCachesToFile();
             return this;
         });
     }
@@ -60,6 +59,19 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
+    }
+    syncCachesToFile() {
+        const caches = this.loadCachesFromJson();
+        const exists = caches.enabled ? caches.enabled : [];
+        const locations = this.addons.filter((module) => {
+            return module.enabled === true;
+        }).map((module) => {
+            return module.location;
+        });
+        if (this.hasDiffBetweenArrays(exists, locations)) {
+            caches.enabled = locations;
+            this.writeCachesToFile(this.filePathForCache, caches);
+        }
     }
 }
 exports.ModuleLoader = ModuleLoader;

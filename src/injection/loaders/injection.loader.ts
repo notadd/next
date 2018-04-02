@@ -31,7 +31,17 @@ export class InjectionLoader {
         this.cacheForInjections.splice(0, this.cacheForInjections.length);
     }
 
+    protected hasDiffBetweenArrays(one: Array<any>, two: Array<any>): boolean {
+        return one.filter(data => {
+            return two.indexOf(data) === -1;
+        }).length > 0 || two.filter(data => {
+            return one.indexOf(data) === -1;
+        }).length > 0;
+    }
+
     protected loadCachesFromJsonFile<T>(path: string): T {
+        this.logger.log("Load caches from file: " + path);
+
         return Json.load<T>(path);
     }
 

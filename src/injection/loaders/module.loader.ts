@@ -1,10 +1,10 @@
-import { Injection, Module as ModuleInterface, ModuleCache } from "../interfaces";
+import { Injection, Module, ModuleCache } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
 
 export class ModuleLoader extends InjectionLoader {
-    protected cacheForModules: Array<ModuleInterface> = [];
+    protected cacheForModules: Array<Module> = [];
 
     protected filePathForCache = `${process.cwd()}/storages/caches/module.json`;
 
@@ -29,8 +29,7 @@ export class ModuleLoader extends InjectionLoader {
             this.cacheForModules.splice(i, 1, module);
         }
 
-        const caches = this.loadCachesFromJson();
-        console.log(caches);
+        this.syncCachesToFile();
 
         return this;
     }
@@ -60,6 +59,20 @@ export class ModuleLoader extends InjectionLoader {
                     version: Reflect.getMetadata("version", injection.target),
             };
             });
+    }
+
+    protected syncCachesToFile() {
+        const caches = this.loadCachesFromJson();
+        const exists: Array<string> = caches.enabled ? caches.enabled : [];
+        const locations = this.addons.filter((module: Module) => {
+            return module.enabled === true;
+        }).map((module: Module) => {
+            return module.location;
+        });
+        if (this.hasDiffBetweenArrays(exists, locations)) {
+            caches.enabled = locations;
+            this.writeCachesToFile(this.filePathForCache, caches);
+        }
     }
 }
 
