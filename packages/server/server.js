@@ -22,17 +22,22 @@ class ServerStarter {
     }
     check() {
         let result = true;
+        if (!loaders_1.Configuration.existsApplicationConfiguration()) {
+            this.logger.error("Application configuration do not exists!");
+            this.logger.warn("Your version of Notadd has expired. Application aborted!");
+            result = false;
+        }
         if (!loaders_1.Configuration.existsDatabaseConfiguration()) {
             this.logger.error("Database configuration do not exists!");
             this.logger.warn("Please usg command: [yarn run:install] to finish installation. Application aborted!");
             result = false;
         }
         if (!loaders_1.Configuration.existsServerConfiguration()) {
-            this.logger.error("Server configuration do not exists!");
+            this.logger.error("Your version of Notadd has expired. Application aborted!");
             result = false;
         }
         if (!loaders_1.Configuration.existsSwaggerConfiguration()) {
-            this.logger.error("Swagger configuration do not exists!");
+            this.logger.error("Your version of Notadd has expired. Application aborted!");
             result = false;
         }
         if (!result) {

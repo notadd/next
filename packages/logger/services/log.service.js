@@ -22,12 +22,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
 const os = require("os");
+const fs_1 = require("fs");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const entities_1 = require("../entities");
-const typeorm_2 = require("typeorm");
 const nest_environment_enum_1 = require("@nestjs/common/enums/nest-environment.enum");
-const fs_1 = require("fs");
+const typeorm_2 = require("typeorm");
+const loaders_1 = require("@notadd/core/loaders");
 let LogService = LogService_1 = class LogService {
     constructor(repository) {
         this.repository = repository;
@@ -61,9 +62,10 @@ let LogService = LogService_1 = class LogService {
         if (LogService_1.contextEnv === nest_environment_enum_1.NestEnvironment.TEST) {
             return;
         }
+        const configuration = loaders_1.Configuration.loadApplicationConfiguration();
         const date = new Date(Date.now());
-        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString("zh-CN")}.log`;
-        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
+        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString(configuration.timezone)}.log`;
+        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString(configuration.timezone)}   [${context}] ${message}${os.EOL}`;
         fs_1.appendFileSync(file, text);
         process.stdout.write(color(`[Notadd] ${process.pid}   - `));
         process.stdout.write(`${date.toLocaleString()}   `);

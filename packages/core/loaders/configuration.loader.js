@@ -5,10 +5,14 @@ const json_loader_1 = require("./json.loader");
 const fs_1 = require("fs");
 class ConfigurationLoader {
     constructor() {
+        this.pathForApplicationConfigurationFile = path_1.join(process.cwd(), "configurations", "application.json");
         this.pathForDatabaseConfigurationFile = path_1.join(process.cwd(), "configurations", "database.json");
         this.pathForGraphqlConfigurationFile = path_1.join(process.cwd(), "configurations", "graphql.json");
         this.pathForServerConfigurationFile = path_1.join(process.cwd(), "configurations", "server.json");
         this.pathForSwaggerConfigurationFile = path_1.join(process.cwd(), "configurations", "swagger.json");
+    }
+    existsApplicationConfiguration() {
+        return fs_1.existsSync(this.pathForApplicationConfigurationFile);
     }
     existsDatabaseConfiguration() {
         return fs_1.existsSync(this.pathForDatabaseConfigurationFile);
@@ -24,6 +28,9 @@ class ConfigurationLoader {
     }
     load(path) {
         return json_loader_1.Json.load(path);
+    }
+    loadApplicationConfiguration() {
+        return this.load(this.pathForDatabaseConfigurationFile);
     }
     loadDatabaseConfiguration() {
         return this.load(this.pathForDatabaseConfigurationFile);

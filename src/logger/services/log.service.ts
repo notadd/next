@@ -1,16 +1,19 @@
 import * as clc from "cli-color";
 import * as os from "os";
-import { Component, Logger } from "@nestjs/common";
+import { appendFileSync } from "fs";
+import { Component } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Log } from "../entities";
-import { Repository } from "typeorm";
 import { NestEnvironment } from "@nestjs/common/enums/nest-environment.enum";
-import { appendFileSync } from "fs";
+import { Repository } from "typeorm";
+import { Configuration } from "@notadd/core/loaders";
 
 @Component()
 export class LogService {
     private static prevTimestamp = Date.now();
+
     private static contextEnv = NestEnvironment.RUN;
+
     private static readonly yellow = clc.xterm(3);
 
     /**
@@ -67,13 +70,14 @@ export class LogService {
         context: string = "",
         isTimeDiffEnabled?: boolean,
     ) {
-        if (LogService.contextEnv === NestEnvironment.TEST){
+        if (LogService.contextEnv === NestEnvironment.TEST) {
             return;
         }
 
+        const configuration = Configuration.loadApplicationConfiguration();
         const date = new Date(Date.now());
-        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString("zh-CN")}.log`;
-        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString()}   [${context}] ${message}${os.EOL}`;
+        const file = `${process.cwd()}/storages/logs/${date.toLocaleDateString(configuration.timezone)}.log`;
+        const text = `[Notadd] ${process.pid}   - ${date.toLocaleString(configuration.timezone)}   [${context}] ${message}${os.EOL}`;
         appendFileSync(file, text);
 
         process.stdout.write(color(`[Notadd] ${process.pid}   - `));
