@@ -17,7 +17,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 const loaders_1 = require("../loaders");
 const common_1 = require("@nestjs/common");
 const get_package_path_by_addon_1 = require("../utilities/get-package-path-by-addon");

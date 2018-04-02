@@ -8,7 +8,7 @@ export declare class ExtensionLoader extends InjectionLoader {
     readonly extensions: Array<ExtensionInterface>;
     constructor();
     loadCachesFromJson(): ExtensionCache;
-    refreshExtensions(): void;
+    refresh(): this;
     syncWithSetting(setting: SettingService): Promise<this>;
     protected loadExtensionsFromCache(): void;
     protected syncCachesToFile(): void;

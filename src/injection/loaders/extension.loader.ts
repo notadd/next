@@ -26,8 +26,10 @@ export class ExtensionLoader extends InjectionLoader {
         return this.loadCachesFromJsonFile<ExtensionCache>(this.filePathForCache);
     }
 
-    public refreshExtensions() {
+    public refresh() {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
+
+        return this;
     }
 
     public async syncWithSetting(setting: SettingService) {

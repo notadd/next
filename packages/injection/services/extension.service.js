@@ -17,23 +17,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 const common_1 = require("@nestjs/common");
 const child_process_1 = require("child_process");
-const injection_service_1 = require("./injection.service");
-const injection_constants_1 = require("@notadd/core/constants/injection.constants");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
+const loaders_1 = require("../loaders");
 let ExtensionService = class ExtensionService {
-    constructor(injectionService, settingService) {
-        this.injectionService = injectionService;
+    constructor(settingService) {
         this.settingService = settingService;
-        this.initialized = false;
-        this.extensions = [];
-        this.loadInjections();
+        this.loader = new loaders_1.ExtensionLoader();
+        this.loader.syncWithSetting(this.settingService);
     }
     getExtension(identification) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.extensions.find((extension) => {
+            return this.loader.extensions.find((extension) => {
                 return extension.identification === identification;
             });
         });
@@ -42,30 +38,30 @@ let ExtensionService = class ExtensionService {
         return __awaiter(this, void 0, void 0, function* () {
             if (filter && typeof filter.enabled !== "undefined") {
                 if (filter.enabled) {
-                    return this.extensions.filter(extension => {
+                    return this.loader.extensions.filter(extension => {
                         return extension.enabled === true;
                     });
                 }
                 else {
-                    return this.extensions.filter(extension => {
+                    return this.loader.extensions.filter(extension => {
                         return !extension.enabled;
                     });
                 }
             }
             else if (filter && typeof filter.installed !== "undefined") {
                 if (filter.installed) {
-                    return this.extensions.filter(extension => {
+                    return this.loader.extensions.filter(extension => {
                         return extension.installed === true;
                     });
                 }
                 else {
-                    return this.extensions.filter(extension => {
+                    return this.loader.extensions.filter(extension => {
                         return !extension.installed;
                     });
                 }
             }
             else {
-                return this.extensions;
+                return this.loader.extensions;
             }
         });
     }
@@ -87,7 +83,7 @@ let ExtensionService = class ExtensionService {
                 result = child_process_1.execFileSync(shell, []).toString();
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
-            this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Install extension [${extension.identification}] successfully!\n${result}`,
             };
@@ -111,41 +107,15 @@ let ExtensionService = class ExtensionService {
                 result = child_process_1.execFileSync(shell, []).toString();
             }
             yield this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
-            this.loadInjections(true);
+            yield this.loader.refresh().syncWithSetting(this.settingService);
             return {
                 message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
             };
         });
     }
-    loadInjections(reload = false) {
-        if (reload) {
-            this.extensions.splice(0, this.extensions.length);
-        }
-        this.injectionService
-            .loadInjections()
-            .filter((injection) => {
-            return injection_constants_1.InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-        })
-            .forEach((injection) => __awaiter(this, void 0, void 0, function* () {
-            const identification = Reflect.getMetadata("identification", injection.target);
-            this.extensions.push({
-                authors: Reflect.getMetadata("authors", injection.target),
-                description: Reflect.getMetadata("description", injection.target),
-                enabled: yield this.settingService.get(`extension.${identification}.enabeld`, false),
-                identification: identification,
-                installed: yield this.settingService.get(`extension.${identification}.installed`, false),
-                location: injection.location,
-                name: Reflect.getMetadata("name", injection.target),
-                shell: Reflect.getMetadata("shell", injection.target),
-                version: Reflect.getMetadata("version", injection.target),
-            });
-        }));
-        this.initialized = true;
-    }
 };
 ExtensionService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [injection_service_1.InjectionService,
-        setting_service_1.SettingService])
+    __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], ExtensionService);
 exports.ExtensionService = ExtensionService;

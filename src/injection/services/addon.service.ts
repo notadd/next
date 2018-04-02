@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { Addon } from "../interfaces";
 import { AddonLoader } from "../loaders";
 import { Component } from "@nestjs/common";

@@ -1,14 +1,11 @@
-import "reflect-metadata";
 import { Extension } from "../interfaces";
-import { InjectionService } from "./injection.service";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { ExtensionLoader } from "../loaders";
 export declare class ExtensionService {
-    private readonly injectionService;
     private readonly settingService;
-    private initialized;
-    private extensions;
-    constructor(injectionService: InjectionService, settingService: SettingService);
+    protected loader: ExtensionLoader;
+    constructor(settingService: SettingService);
     getExtension(identification: string): Promise<Extension | undefined>;
     getExtensions(filter: {
         enabled?: boolean;
@@ -16,5 +13,4 @@ export declare class ExtensionService {
     }): Promise<Array<Extension>>;
     installExtension(identification: string): Promise<Result | undefined>;
     uninstallExtension(identification: string): Promise<Result | undefined>;
-    protected loadInjections(reload?: boolean): void;
 }

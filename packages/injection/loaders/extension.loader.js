@@ -26,8 +26,9 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
     loadCachesFromJson() {
         return this.loadCachesFromJsonFile(this.filePathForCache);
     }
-    refreshExtensions() {
+    refresh() {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
+        return this;
     }
     syncWithSetting(setting) {
         return __awaiter(this, void 0, void 0, function* () {

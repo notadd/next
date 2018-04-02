@@ -1,27 +1,21 @@
-import "reflect-metadata";
 import { Component } from "@nestjs/common";
 import { execFileSync } from "child_process";
-import { Extension, Injection } from "../interfaces";
-import { InjectionService } from "./injection.service";
-import { InjectionType } from "@notadd/core/constants/injection.constants";
+import { Extension } from "../interfaces";
 import { Result } from "@notadd/core/types/result.type";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { ExtensionLoader } from "../loaders";
 
 @Component()
 export class ExtensionService {
-    private initialized: boolean = false;
-
-    private extensions: Array<Extension> = [];
+    protected loader: ExtensionLoader = new ExtensionLoader();
 
     /**
-     * @param { InjectionService } injectionService
      * @param { SettingService } settingService
      */
     constructor(
-        private readonly injectionService: InjectionService,
         private readonly settingService: SettingService,
     ) {
-        this.loadInjections();
+        this.loader.syncWithSetting(this.settingService);
     }
 
     /**
@@ -30,7 +24,7 @@ export class ExtensionService {
      * @returns { Promise<Extension | undefined> }
      */
     public async getExtension(identification: string): Promise<Extension | undefined> {
-        return this.extensions.find((extension: Extension) => {
+        return this.loader.extensions.find((extension: Extension) => {
             return extension.identification === identification;
         });
     }
@@ -43,26 +37,26 @@ export class ExtensionService {
     public async getExtensions(filter: { enabled?:boolean, installed?: boolean }): Promise<Array<Extension>> {
         if (filter && typeof filter.enabled !== "undefined") {
             if (filter.enabled) {
-                return this.extensions.filter(extension => {
+                return this.loader.extensions.filter(extension => {
                     return extension.enabled === true;
                 });
             } else {
-                return this.extensions.filter(extension => {
+                return this.loader.extensions.filter(extension => {
                     return !extension.enabled;
                 });
             }
         } else if(filter && typeof filter.installed !== "undefined") {
             if (filter.installed) {
-                return this.extensions.filter(extension => {
+                return this.loader.extensions.filter(extension => {
                     return extension.installed === true;
                 });
             } else {
-                return this.extensions.filter(extension => {
+                return this.loader.extensions.filter(extension => {
                     return !extension.installed;
                 });
             }
         } else {
-            return this.extensions;
+            return this.loader.extensions;
         }
     }
 
@@ -90,7 +84,7 @@ export class ExtensionService {
         }
 
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "1");
-        this.loadInjections(true);
+        await this.loader.refresh().syncWithSetting(this.settingService);
 
         return {
             message: `Install extension [${extension.identification}] successfully!\n${result}`,
@@ -121,36 +115,10 @@ export class ExtensionService {
         }
 
         await this.settingService.setSetting(`extension.${extension.identification}.installed`, "0");
-        this.loadInjections(true);
+        await this.loader.refresh().syncWithSetting(this.settingService);
 
         return {
             message: `Uninstall extension [${extension.identification}] successfully!\n${result}`,
         };
-    }
-
-    protected loadInjections(reload = false) {
-        if (reload) {
-            this.extensions.splice(0, this.extensions.length);
-        }
-        this.injectionService
-            .loadInjections()
-            .filter((injection: Injection) => {
-                return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
-            })
-            .forEach(async(injection: Injection) => {
-                const identification = Reflect.getMetadata("identification", injection.target);
-                this.extensions.push({
-                    authors: Reflect.getMetadata("authors", injection.target),
-                    description: Reflect.getMetadata("description", injection.target),
-                    enabled: await this.settingService.get(`extension.${identification}.enabeld`, false),
-                    identification: identification,
-                    installed: await this.settingService.get(`extension.${identification}.installed`, false),
-                    location: injection.location,
-                    name: Reflect.getMetadata("name", injection.target),
-                    shell: Reflect.getMetadata("shell", injection.target),
-                    version: Reflect.getMetadata("version", injection.target),
-                });
-            });
-        this.initialized = true;
     }
 }
