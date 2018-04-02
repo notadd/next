@@ -69,7 +69,6 @@
         "@types/html-webpack-plugin": "^2.30.3",
         "@types/inquirer": "^0.0.36",
         "@types/ip": "^0.0.30",
-        "@types/js-yaml": "^3.10.1",
         "@types/load-json-file": "^2.0.7",
         "@types/mocha": "^2.2.38",
         "@types/node": "^9.4.7",
