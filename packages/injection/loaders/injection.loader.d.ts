@@ -2,6 +2,7 @@ import { Injection as InjectionInterface } from "../interfaces";
 import { Logger } from "@nestjs/common";
 export declare class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface>;
+    protected filePathForCache: string;
     protected logger: Logger;
     protected patterns: string[];
     readonly injections: Array<InjectionInterface>;

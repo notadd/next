@@ -1,15 +1,15 @@
-import { Addon, Injection } from "../interfaces";
+import { Addon as AddonInterface, Injection } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
 import { AddonCache } from "../interfaces";
 
 export class AddonLoader extends InjectionLoader {
-    protected cacheForAddons: Array<Addon> = [];
+    protected cacheForAddons: Array<AddonInterface> = [];
 
     protected filePathForCache = `${process.cwd()}/storages/caches/addon.json`;
 
-    public get addons(): Array<Addon> {
+    public get addons(): Array<AddonInterface> {
         if (!this.cacheForAddons.length) {
             this.loadAddonsFromCache();
         }
@@ -63,6 +63,7 @@ export class AddonLoader extends InjectionLoader {
                     installed: false,
                     location: injection.location,
                     name: Reflect.getMetadata("name", injection.target),
+                    target: injection.target,
                     version: Reflect.getMetadata("version", injection.target),
                 };
             });
@@ -71,9 +72,9 @@ export class AddonLoader extends InjectionLoader {
     protected syncCachesToFile() {
         const caches = this.loadCachesFromJson();
         const exists: Array<string> = caches.enabled ? caches.enabled : [];
-        const locations = this.addons.filter((addon: Addon) => {
+        const locations = this.addons.filter((addon: AddonInterface) => {
             return addon.enabled === true;
-        }).map((addon: Addon) => {
+        }).map((addon: AddonInterface) => {
             return addon.location;
         });
         if (this.hasDiffBetweenArrays(exists, locations)) {

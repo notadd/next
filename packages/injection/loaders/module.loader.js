@@ -17,6 +17,12 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
         this.filePathForCache = `${process.cwd()}/storages/caches/module.json`;
         this.loadModulesFromCaches();
     }
+    get modules() {
+        if (!this.cacheForModules.length) {
+            this.loadModulesFromCaches();
+        }
+        return this.cacheForModules;
+    }
     refreshModules() {
         this.cacheForModules.splice(0, this.cacheForModules.length);
     }
@@ -56,6 +62,7 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
                 installed: false,
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
+                target: injection.target,
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
@@ -63,7 +70,7 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
     syncCachesToFile() {
         const caches = this.loadCachesFromJson();
         const exists = caches.enabled ? caches.enabled : [];
-        const locations = this.addons.filter((module) => {
+        const locations = this.modules.filter((module) => {
             return module.enabled === true;
         }).map((module) => {
             return module.location;

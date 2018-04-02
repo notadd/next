@@ -61,6 +61,7 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
                 installed: false,
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
+                target: injection.target,
                 version: Reflect.getMetadata("version", injection.target),
             };
         });

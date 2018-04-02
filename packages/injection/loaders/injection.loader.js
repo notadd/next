@@ -9,6 +9,7 @@ const loaders_1 = require("@notadd/core/loaders");
 class InjectionLoader {
     constructor() {
         this.cacheForInjections = [];
+        this.filePathForCache = "";
         this.logger = new common_1.Logger("Injection");
         this.patterns = [
             "**/*.injection.js",

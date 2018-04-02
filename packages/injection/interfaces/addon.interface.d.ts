@@ -1,11 +1,11 @@
 import { Author } from "../interfaces";
-export interface Addon {
+import { Injection } from "./injection.interface";
+export interface Addon extends Injection {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
     identification: string;
     installed: boolean;
-    location: string;
     name: string;
     version: string;
 }

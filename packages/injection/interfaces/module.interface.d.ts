@@ -1,11 +1,11 @@
 import { Author } from "./";
-export interface Module {
+import { Injection } from "./injection.interface";
+export interface Module extends Injection {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean;
     identification: string;
     installed: boolean;
-    location: string;
     name: string;
     version: string;
 }

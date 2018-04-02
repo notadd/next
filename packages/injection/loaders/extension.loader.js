@@ -62,6 +62,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
                 shell: Reflect.getMetadata("shell", injection.target),
+                target: injection.target,
                 version: Reflect.getMetadata("version", injection.target),
             };
         });
@@ -69,7 +70,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
     syncCachesToFile() {
         const caches = this.loadCachesFromJson();
         const exists = caches.enabled ? caches.enabled : [];
-        const locations = this.addons.filter((extension) => {
+        const locations = this.extensions.filter((extension) => {
             return extension.enabled === true;
         }).map((extension) => {
             return extension.location;

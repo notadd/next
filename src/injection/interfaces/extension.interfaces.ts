@@ -1,13 +1,13 @@
 import { Author } from "./";
 import { ExtensionShellMetadata } from "../metadatas";
+import { Injection } from "./injection.interface";
 
-export interface Extension {
+export interface Extension extends Injection {
     authors?: Array<Author>;
     description?: string;
     enabled: boolean,
     identification: string;
     installed: boolean,
-    location: string;
     name: string;
     shell?: ExtensionShellMetadata;
     version: string;

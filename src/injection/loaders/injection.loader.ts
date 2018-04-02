@@ -9,6 +9,8 @@ import { Json } from "@notadd/core/loaders";
 export class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface> = [];
 
+    protected filePathForCache = "";
+
     protected logger = new Logger("Injection");
 
     protected patterns = [
