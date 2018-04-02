@@ -2,6 +2,7 @@ import { Addon as AddonInterface, Injection } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
+import { AddonCache } from "../interfaces";
 
 export class AddonLoader extends InjectionLoader {
     protected cacheForAddons: Array<AddonInterface> = [];
@@ -36,6 +37,9 @@ export class AddonLoader extends InjectionLoader {
             addon.installed = await setting.get(`addon.${identification}.installed`, false);
             this.cacheForAddons.splice(i, 1, addon);
         }
+
+        const caches = this.loadCachesFromJsonFile<AddonCache>(this.filePathForCache);
+        console.log(caches);
 
         return this;
     }

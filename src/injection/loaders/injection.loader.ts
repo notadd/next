@@ -1,8 +1,15 @@
+import * as writeJsonToFile from "write-json-file";
+import { dirname } from "path";
+import { existsSync } from "fs";
 import { importInjectionsFromDirectories } from "../utilities";
 import { Injection as InjectionInterface } from "../interfaces";
+import { Logger } from "@nestjs/common";
+import { Json } from "@notadd/core/loaders";
 
 export class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface> = [];
+
+    protected logger = new Logger("Injection");
 
     protected patterns = [
         "**/*.injection.js",
@@ -24,8 +31,21 @@ export class InjectionLoader {
         this.cacheForInjections.splice(0, this.cacheForInjections.length);
     }
 
+    protected loadCachesFromJsonFile<T>(path: string): T {
+        return Json.load<T>(path);
+    }
+
     protected loadInjectionsFromCache() {
         this.cacheForInjections = importInjectionsFromDirectories(this.patterns);
+    }
+
+    protected writeCachesToFile(path: string, data: any) {
+        if (existsSync(dirname(path))) {
+            writeJsonToFile.sync(path, data);
+            this.logger.log("Write caches to file: " + path);
+        } else {
+            this.logger.warn(`Path: \`${path}\` do not exists`);
+        }
     }
 }
 

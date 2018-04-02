@@ -14,7 +14,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
     constructor() {
         super();
         this.cacheForExtensions = [];
-        this.filePathForEnabledCache = `${process.cwd()}/storages/extensions/enabled.json`;
+        this.filePathForCache = `${process.cwd()}/storages/caches/extension.json`;
         this.loadExtensionsFromCache();
     }
     get extensions() {
@@ -38,6 +38,8 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 extension.installed = yield setting.get(`extension.${identification}.installed`, false);
                 this.cacheForExtensions.splice(i, 1, extension);
             }
+            const caches = this.loadCachesFromJsonFile(this.filePathForCache);
+            console.log(caches);
             return this;
         });
     }

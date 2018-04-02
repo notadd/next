@@ -1,4 +1,4 @@
-import { Module as ModuleInterface, Injection } from "../interfaces";
+import { Injection, Module as ModuleInterface, ModuleCache } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
@@ -28,6 +28,9 @@ export class ModuleLoader extends InjectionLoader {
             module.installed = await setting.get(`module.${identification}.installed`, false);
             this.cacheForModules.splice(i, 1, module);
         }
+
+        const caches = this.loadCachesFromJsonFile<ModuleCache>(this.filePathForCache);
+        console.log(caches);
 
         return this;
     }

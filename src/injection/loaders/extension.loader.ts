@@ -2,11 +2,12 @@ import { Extension as ExtensionInterface, Injection } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
+import { ExtensionCache } from "../interfaces";
 
 export class ExtensionLoader extends InjectionLoader {
     protected cacheForExtensions: Array<ExtensionInterface> = [];
 
-    protected filePathForEnabledCache = `${process.cwd()}/storages/extensions/enabled.json`;
+    protected filePathForCache = `${process.cwd()}/storages/caches/extension.json`;
 
     public get extensions(): Array<ExtensionInterface> {
         if (!this.cacheForExtensions.length) {
@@ -36,6 +37,9 @@ export class ExtensionLoader extends InjectionLoader {
             extension.installed = await setting.get(`extension.${identification}.installed`, false);
             this.cacheForExtensions.splice(i, 1, extension);
         }
+
+        const caches = this.loadCachesFromJsonFile<ExtensionCache>(this.filePathForCache);
+        console.log(caches);
 
         return this;
     }
