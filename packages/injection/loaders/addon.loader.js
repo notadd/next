@@ -23,6 +23,9 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
         }
         return this.cacheForAddons;
     }
+    loadCachesFromJson() {
+        return this.loadCachesFromJsonFile(this.filePathForCache);
+    }
     refreshAddons() {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
     }
@@ -38,6 +41,8 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
                 addon.installed = yield setting.get(`addon.${identification}.installed`, false);
                 this.cacheForAddons.splice(i, 1, addon);
             }
+            const caches = this.loadCachesFromJson();
+            console.log(caches);
             return this;
         });
     }

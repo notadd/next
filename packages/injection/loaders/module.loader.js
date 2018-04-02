@@ -14,7 +14,7 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
     constructor() {
         super();
         this.cacheForModules = [];
-        this.filePathForEnabledCache = `${process.cwd()}/storages/modules/enabled.json`;
+        this.filePathForCache = `${process.cwd()}/storages/caches/module.json`;
         this.loadModulesFromCaches();
     }
     refreshModules() {
@@ -32,8 +32,13 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
                 module.installed = yield setting.get(`module.${identification}.installed`, false);
                 this.cacheForModules.splice(i, 1, module);
             }
+            const caches = this.loadCachesFromJson();
+            console.log(caches);
             return this;
         });
+    }
+    loadCachesFromJson() {
+        return this.loadCachesFromJsonFile(this.filePathForCache);
     }
     loadModulesFromCaches() {
         this.cacheForModules.splice(0, this.cacheForModules.length);

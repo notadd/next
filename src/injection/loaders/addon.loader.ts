@@ -22,6 +22,10 @@ export class AddonLoader extends InjectionLoader {
         this.loadAddonsFromCache();
     }
 
+    public loadCachesFromJson(): AddonCache {
+        return this.loadCachesFromJsonFile<AddonCache>(this.filePathForCache);
+    }
+
     public refreshAddons() {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
     }
@@ -38,7 +42,7 @@ export class AddonLoader extends InjectionLoader {
             this.cacheForAddons.splice(i, 1, addon);
         }
 
-        const caches = this.loadCachesFromJsonFile<AddonCache>(this.filePathForCache);
+        const caches = this.loadCachesFromJson();
         console.log(caches);
 
         return this;

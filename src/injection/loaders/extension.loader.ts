@@ -22,6 +22,10 @@ export class ExtensionLoader extends InjectionLoader {
         this.loadExtensionsFromCache();
     }
 
+    public loadCachesFromJson(): ExtensionCache {
+        return this.loadCachesFromJsonFile<ExtensionCache>(this.filePathForCache);
+    }
+
     public refreshExtensions() {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
     }
@@ -38,7 +42,7 @@ export class ExtensionLoader extends InjectionLoader {
             this.cacheForExtensions.splice(i, 1, extension);
         }
 
-        const caches = this.loadCachesFromJsonFile<ExtensionCache>(this.filePathForCache);
+        const caches = this.loadCachesFromJson();
         console.log(caches);
 
         return this;

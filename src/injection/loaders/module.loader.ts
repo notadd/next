@@ -6,7 +6,7 @@ import { SettingService } from "@notadd/setting/services";
 export class ModuleLoader extends InjectionLoader {
     protected cacheForModules: Array<ModuleInterface> = [];
 
-    protected filePathForEnabledCache = `${process.cwd()}/storages/modules/enabled.json`;
+    protected filePathForCache = `${process.cwd()}/storages/caches/module.json`;
 
     constructor() {
         super();
@@ -29,10 +29,14 @@ export class ModuleLoader extends InjectionLoader {
             this.cacheForModules.splice(i, 1, module);
         }
 
-        const caches = this.loadCachesFromJsonFile<ModuleCache>(this.filePathForCache);
+        const caches = this.loadCachesFromJson();
         console.log(caches);
 
         return this;
+    }
+
+    public loadCachesFromJson(): ModuleCache {
+        return this.loadCachesFromJsonFile<ModuleCache>(this.filePathForCache);
     }
 
     protected loadModulesFromCaches() {

@@ -23,6 +23,9 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
         }
         return this.cacheForExtensions;
     }
+    loadCachesFromJson() {
+        return this.loadCachesFromJsonFile(this.filePathForCache);
+    }
     refreshExtensions() {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
     }
@@ -38,7 +41,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 extension.installed = yield setting.get(`extension.${identification}.installed`, false);
                 this.cacheForExtensions.splice(i, 1, extension);
             }
-            const caches = this.loadCachesFromJsonFile(this.filePathForCache);
+            const caches = this.loadCachesFromJson();
             console.log(caches);
             return this;
         });
