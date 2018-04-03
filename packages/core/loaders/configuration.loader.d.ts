@@ -1,3 +1,4 @@
+import { Logger } from "@nestjs/common";
 import { ApplicationConfiguration } from "../configurations";
 import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { SwaggerConfiguration } from "../configurations/swagger.configuration";
@@ -7,6 +8,7 @@ export declare class ConfigurationLoader {
     private pathForGraphqlConfigurationFile;
     private pathForServerConfigurationFile;
     private pathForSwaggerConfigurationFile;
+    protected logger: Logger;
     existsApplicationConfiguration(): boolean;
     existsDatabaseConfiguration(): boolean;
     existsGraphqlConfiguration(): boolean;

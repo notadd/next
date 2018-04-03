@@ -1,10 +1,14 @@
+import { Logger } from "@nestjs/common";
+import * as loadJsonFile from "load-json-file";
 import { ApplicationConfiguration } from "../configurations";
 import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { join } from "path";
 import { Json } from "./json.loader";
 import { existsSync } from "fs";
 import { SwaggerConfiguration } from "../configurations/swagger.configuration";
-import { TypeormLogger } from "../../../packages/logger/loggers/typeorm.logger";
+import { TypeormLogger } from "@notadd/logger/loggers";
+import { dirname } from "path";
+import { existsSync } from "fs";
 
 export class ConfigurationLoader {
     private pathForApplicationConfigurationFile = join(process.cwd(), "configurations", "application.json");
@@ -16,6 +20,8 @@ export class ConfigurationLoader {
     private pathForServerConfigurationFile = join(process.cwd(), "configurations", "server.json");
 
     private pathForSwaggerConfigurationFile = join(process.cwd(), "configurations", "swagger.json");
+
+    protected logger = new Logger("ConfigurationLoader");
 
     /**
      * @returns { boolean }
@@ -58,7 +64,11 @@ export class ConfigurationLoader {
      * @returns { T }
      */
     public load<T>(path: string): T {
-        return Json.load<T>(path);
+        if (!existsSync(dirname(path)) && !existsSync(path)) {
+            this.logger.error(`File \`${path}\` or its directory \`${dirname(path)}\` do not exists`);
+        } else {
+            return Json.load<T>(path);
+        }
     }
 
     /**
