@@ -1,23 +1,22 @@
-import { Logger } from "@nestjs/common";
 import { ApplicationConfiguration } from "../configurations";
+import { ConfigurationPath } from "../paths";
 import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
-import { dirname } from "path";
 import { existsSync } from "fs";
-import { join } from "path";
 import { Json } from "./json.loader";
+import { Logger } from "@nestjs/common";
 import { SwaggerConfiguration } from "../configurations/swagger.configuration";
 import { TypeormLogger } from "@notadd/logger/loggers";
 
 export class ConfigurationLoader {
-    private pathForApplicationConfigurationFile = join(process.cwd(), "configurations", "application.json");
+    private pathForApplicationConfigurationFile = ConfigurationPath.application;
 
-    private pathForDatabaseConfigurationFile = join(process.cwd(), "configurations", "database.json");
+    private pathForDatabaseConfigurationFile = ConfigurationPath.database;
 
-    private pathForGraphqlConfigurationFile = join(process.cwd(), "configurations", "graphql.json");
+    private pathForGraphqlConfigurationFile = ConfigurationPath.graphql;
 
-    private pathForServerConfigurationFile = join(process.cwd(), "configurations", "server.json");
+    private pathForServerConfigurationFile = ConfigurationPath.server;
 
-    private pathForSwaggerConfigurationFile = join(process.cwd(), "configurations", "swagger.json");
+    private pathForSwaggerConfigurationFile = ConfigurationPath.swagger;
 
     protected logger = new Logger("ConfigurationLoader");
 

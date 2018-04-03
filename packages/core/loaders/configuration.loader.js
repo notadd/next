@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
+const paths_1 = require("../paths");
 const fs_1 = require("fs");
-const path_1 = require("path");
 const json_loader_1 = require("./json.loader");
+const common_1 = require("@nestjs/common");
 const loggers_1 = require("@notadd/logger/loggers");
 class ConfigurationLoader {
     constructor() {
-        this.pathForApplicationConfigurationFile = path_1.join(process.cwd(), "configurations", "application.json");
-        this.pathForDatabaseConfigurationFile = path_1.join(process.cwd(), "configurations", "database.json");
-        this.pathForGraphqlConfigurationFile = path_1.join(process.cwd(), "configurations", "graphql.json");
-        this.pathForServerConfigurationFile = path_1.join(process.cwd(), "configurations", "server.json");
-        this.pathForSwaggerConfigurationFile = path_1.join(process.cwd(), "configurations", "swagger.json");
+        this.pathForApplicationConfigurationFile = paths_1.ConfigurationPath.application;
+        this.pathForDatabaseConfigurationFile = paths_1.ConfigurationPath.database;
+        this.pathForGraphqlConfigurationFile = paths_1.ConfigurationPath.graphql;
+        this.pathForServerConfigurationFile = paths_1.ConfigurationPath.server;
+        this.pathForSwaggerConfigurationFile = paths_1.ConfigurationPath.swagger;
         this.logger = new common_1.Logger("ConfigurationLoader");
     }
     existsApplicationConfiguration() {
