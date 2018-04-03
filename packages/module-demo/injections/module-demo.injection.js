@@ -10,7 +10,7 @@ const module_decorator_1 = require("@notadd/injection/decorators/module.decorato
 const common_1 = require("@nestjs/common");
 let ModuleDemoInjection = class ModuleDemoInjection {
     constructor() {
-        this.logger = new common_1.Logger("AddonLoader");
+        this.logger = new common_1.Logger("ModuleLoader");
     }
     onModuleInit() {
         this.logger.log("Module demo initialized");

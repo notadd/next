@@ -5,7 +5,7 @@ import { Json } from "@notadd/core/loaders";
 import { ModuleCache } from "../interfaces";
 
 export function loadModulesFromFiles(): Array<Function> {
-    const file = join(process.cwd(), "storages", "modules", "enabled.yaml");
+    const file = join(process.cwd(), "storages", "caches", "module.json");
     if (existsSync(file)) {
         let caches = Json.load<ModuleCache>(file);
 
