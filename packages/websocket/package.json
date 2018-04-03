@@ -1,6 +1,6 @@
 {
     "name": "@notadd/websocket",
-    "version": "2.3.17",
+    "version": "2.3.19",
     "description": "Notadd WebSocket Package.",
     "main": "main.js",
     "scripts": {
