@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const fs_1 = require("fs");
 const path_1 = require("path");
 const json_loader_1 = require("./json.loader");
-const fs_1 = require("fs");
 const loggers_1 = require("@notadd/logger/loggers");
-const path_2 = require("path");
 class ConfigurationLoader {
     constructor() {
         this.pathForApplicationConfigurationFile = path_1.join(process.cwd(), "configurations", "application.json");
@@ -31,12 +30,7 @@ class ConfigurationLoader {
         return fs_1.existsSync(this.pathForSwaggerConfigurationFile);
     }
     load(path) {
-        if (!fs_1.existsSync(path_2.dirname(path)) && !fs_1.existsSync(path)) {
-            this.logger.error(`File \`${path}\` or its directory \`${path_2.dirname(path)}\` do not exists`);
-        }
-        else {
-            return json_loader_1.Json.load(path);
-        }
+        return json_loader_1.Json.load(path);
     }
     loadApplicationConfiguration() {
         return this.load(this.pathForDatabaseConfigurationFile);

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = require("fs");
 const injection_loader_1 = require("./injection.loader");
 const constants_1 = require("@notadd/core/constants");
 class AddonLoader extends injection_loader_1.InjectionLoader {
@@ -68,7 +69,12 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
         });
     }
     syncCachesToFile() {
-        const caches = this.loadCachesFromJson();
+        let caches = {
+            enabled: [],
+        };
+        if (fs_1.existsSync(this.filePathForCache)) {
+            caches = this.loadCachesFromJson();
+        }
         const exists = caches.enabled ? caches.enabled : [];
         const locations = this.addons.filter((addon) => {
             return addon.enabled === true;

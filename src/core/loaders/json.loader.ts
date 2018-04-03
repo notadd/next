@@ -12,15 +12,7 @@ export class JsonLoader {
      * @returns { T }
      */
     public load<T>(path: string): T {
-        if (!existsSync(dirname(path)) && !existsSync(path)) {
-            this.logger.error(`File \`${path}\` or its directory \`${dirname(path)}\` do not exists`);
-        } else {
-            if (existsSync(path)) {
-                return loadJsonFile.sync(path);
-            } else {
-                return {};
-            }
-        }
+        return loadJsonFile.sync(path);
     }
 }
 

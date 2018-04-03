@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { Injection, Module as ModuleInterface, ModuleCache } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
@@ -73,15 +74,23 @@ export class ModuleLoader extends InjectionLoader {
     }
 
     protected syncCachesToFile() {
-        const caches = this.loadCachesFromJson();
+        let caches: ModuleCache = {
+            enabled: [],
+        };
+        if (existsSync(this.filePathForCache)) {
+            caches = this.loadCachesFromJson();
+        }
         const exists: Array<string> = caches.enabled ? caches.enabled : [];
         const locations = this.modules.filter((module: ModuleInterface) => {
             return module.enabled === true;
         }).map((module: ModuleInterface) => {
             return module.location;
         });
+        console.log(exists, locations, this.hasDiffBetweenArrays(exists, locations));
         if (this.hasDiffBetweenArrays(exists, locations)) {
             caches.enabled = locations;
+            console.log(caches);
+
             this.writeCachesToFile(this.filePathForCache, caches);
         }
     }

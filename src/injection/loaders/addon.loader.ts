@@ -1,8 +1,9 @@
 import { Addon as AddonInterface, Injection } from "../interfaces";
+import { AddonCache } from "../interfaces";
+import { existsSync } from "fs";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
-import { AddonCache } from "../interfaces";
 
 export class AddonLoader extends InjectionLoader {
     protected cacheForAddons: Array<AddonInterface> = [];
@@ -72,7 +73,12 @@ export class AddonLoader extends InjectionLoader {
     }
 
     protected syncCachesToFile() {
-        const caches = this.loadCachesFromJson();
+        let caches: AddonCache = {
+            enabled: [],
+        };
+        if (existsSync(this.filePathForCache)) {
+            caches = this.loadCachesFromJson();
+        }
         const exists: Array<string> = caches.enabled ? caches.enabled : [];
         const locations = this.addons.filter((addon: AddonInterface) => {
             return addon.enabled === true;

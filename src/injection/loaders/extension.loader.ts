@@ -1,8 +1,9 @@
+import { existsSync } from "fs";
 import { Extension as ExtensionInterface, Injection } from "../interfaces";
+import { ExtensionCache } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
-import { ExtensionCache } from "../interfaces";
 
 export class ExtensionLoader extends InjectionLoader {
     protected cacheForExtensions: Array<ExtensionInterface> = [];
@@ -73,7 +74,12 @@ export class ExtensionLoader extends InjectionLoader {
     }
 
     protected syncCachesToFile() {
-        const caches = this.loadCachesFromJson();
+        let caches: ExtensionCache = {
+            enabled: [],
+        };
+        if (existsSync(this.filePathForCache)) {
+            caches = this.loadCachesFromJson();
+        }
         const exists: Array<string> = caches.enabled ? caches.enabled : [];
         const locations = this.extensions.filter((extension: ExtensionInterface) => {
             return extension.enabled === true;
