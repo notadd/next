@@ -1,13 +1,13 @@
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Result } from "@notadd/core/types";
 import { UseGuards } from "@nestjs/common";
 import { User } from "../entities";
 import { UserCreateDto } from "../dtos";
-import { UserGuard } from "@notadd/authentication";
 import { UserDeleteDto } from "../dtos";
+import { UserGuard } from "@notadd/authentication";
 import { UserQueryDto } from "../dtos";
 import { UserService } from "../services";
 import { UserUpdateDto } from "../dtos";
-import { Result } from "../../../packages/core/types/result.type";
 
 @Resolver("User")
 export class UserResolver {

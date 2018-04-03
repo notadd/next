@@ -1,10 +1,10 @@
+import { Result } from "@notadd/core/types";
 import { User } from "../entities";
 import { UserCreateDto } from "../dtos";
 import { UserDeleteDto } from "../dtos";
 import { UserQueryDto } from "../dtos";
 import { UserService } from "../services";
 import { UserUpdateDto } from "../dtos";
-import { Result } from "../../../packages/core/types/result.type";
 export declare class UserResolver {
     private readonly service;
     constructor(service: UserService);
