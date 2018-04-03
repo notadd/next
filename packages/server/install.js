@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
 const writeJsonFile = require("write-json-file");
+const typeorm_1 = require("typeorm");
+const crypto_1 = require("crypto");
 const path_1 = require("path");
 const child_process_1 = require("child_process");
 const inquirer_1 = require("inquirer");
-const typeorm_1 = require("typeorm");
 const user_entity_1 = require("@notadd/user/entities/user.entity");
-const crypto_1 = require("crypto");
 function install() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`

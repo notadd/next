@@ -82,10 +82,8 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
         }).map((module) => {
             return module.location;
         });
-        console.log(exists, locations, this.hasDiffBetweenArrays(exists, locations));
         if (this.hasDiffBetweenArrays(exists, locations)) {
             caches.enabled = locations;
-            console.log(caches);
             this.writeCachesToFile(this.filePathForCache, caches);
         }
     }

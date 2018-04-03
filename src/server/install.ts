@@ -1,11 +1,11 @@
 import * as clc from "cli-color";
 import * as writeJsonFile from "write-json-file";
+import { createConnection } from "typeorm";
+import { createHmac } from "crypto";
 import { join } from "path";
 import { execSync } from "child_process";
 import { prompt } from "inquirer";
-import { createConnection } from "typeorm";
 import { User } from "@notadd/user/entities/user.entity";
-import { createHmac } from "crypto";
 
 async function install() {
     console.log(`

@@ -11,11 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const ip = require("ip");
 const modules_1 = require("./modules");
+const loaders_1 = require("@notadd/core/loaders");
 const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
-const loaders_1 = require("@notadd/core/loaders");
 class ServerStarter {
     constructor() {
         this.logger = new common_1.Logger("NotaddFactory", true);

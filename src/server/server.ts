@@ -1,12 +1,12 @@
 import * as express from "express";
 import * as ip from "ip";
 import { ApplicationModule } from "./modules";
+import { Configuration } from "@notadd/core/loaders";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
-import { Configuration } from "@notadd/core/loaders";
-import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 
 export class ServerStarter {
     protected instance: INestApplication;

@@ -1,5 +1,5 @@
-import { ConfigurationLoader } from "./loaders";
 import { AddonLoader, ExtensionLoader, ModuleLoader } from "@notadd/injection/loaders";
+import { ConfigurationLoader } from "./loaders";
 
 export class CoreFactory {
     /**
