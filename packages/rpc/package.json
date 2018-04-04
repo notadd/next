@@ -1,6 +1,6 @@
 {
     "name": "@notadd/rpc",
-    "version": "2.3.19",
+    "version": "2.3.23",
     "description": "Notadd Rpc Package.",
     "main": "main.js",
     "scripts": {
