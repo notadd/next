@@ -6,8 +6,8 @@
     "main": "index.js",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "node --max_old_space_size=2000 ./node_modules/gulp/bin/gulp.js build --dist packages",
-        "build:watch": "node --max_old_space_size=2000 ./node_modules/gulp/bin/gulp.js watch --dist packages",
+        "build": "node --max_old_space_size=4096 ./node_modules/gulp/bin/gulp.js build --dist packages",
+        "build:watch": "node --max_old_space_size=4096 ./node_modules/gulp/bin/gulp.js watch --dist packages",
         "dev": "node ./node_modules/gulp/bin/gulp.js --dist packages",
         "dev:backend-mix": "node ./node_modules/gulp/bin/gulp.js backend-mix-server --dist packages",
         "prepublish": "npm run build",
