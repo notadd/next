@@ -3,6 +3,7 @@ const nodemon = require("gulp-nodemon");
 const rename = require("gulp-rename");
 const sequence = require("gulp-sequence");
 const ts = require("@notadd/gulp-typescript");
+const tslint = require("gulp-tslint");
 
 const packages = {
     "backend-mix": ts.createProject("src/backend-mix/tsconfig.json"),
@@ -69,6 +70,13 @@ modules.forEach(module => {
         } else {
             return packages[module]
                 .src()
+                .pipe(tslint({
+                    formatter: "verbose",
+                }))
+                .pipe(tslint.report({
+                    emitError: false,
+                    summarizeFailureOutput: true,
+                }))
                 .pipe(packages[module]())
                 .pipe(gulp.dest(`${dist}/${module}`));
         }
