@@ -6,7 +6,6 @@ const ts = require("@notadd/gulp-typescript");
 const tslint = require("gulp-tslint");
 
 const packages = {
-    "backend-mix": ts.createProject("src/backend-mix/tsconfig.json"),
     authentication: ts.createProject("src/authentication/tsconfig.json"),
     backend: ts.createProject("src/backend/tsconfig.json"),
     core: ts.createProject("src/core/tsconfig.json"),
@@ -22,9 +21,7 @@ const packages = {
     workflow: ts.createProject("src/workflow/tsconfig.json"),
 };
 
-const modules = Object.keys(packages).concat([
-    "react-scripts"
-]);
+const modules = Object.keys(packages);
 const source = "src";
 const distId = process.argv.indexOf("--dist");
 const dist = distId < 0 ? "node_modules/@notadd" : process.argv[distId + 1];
@@ -62,24 +59,17 @@ gulp.task("backend-mix-server", function () {
 
 modules.forEach(module => {
     gulp.task(module, () => {
-        if (module === "react-scripts") {
-            return gulp.src([
-                `${source}/${module}/**/*.js`,
-                `${source}/${module}/*.js`,
-            ]).pipe(gulp.dest(`${dist}/${module}`));
-        } else {
-            return packages[module]
-                .src()
-                .pipe(tslint({
-                    formatter: "verbose",
-                }))
-                .pipe(tslint.report({
-                    emitError: false,
-                    summarizeFailureOutput: true,
-                }))
-                .pipe(packages[module]())
-                .pipe(gulp.dest(`${dist}/${module}`));
-        }
+        return packages[module]
+            .src()
+            .pipe(tslint({
+                formatter: "verbose",
+            }))
+            .pipe(tslint.report({
+                emitError: false,
+                summarizeFailureOutput: true,
+            }))
+            .pipe(packages[module]())
+            .pipe(gulp.dest(`${dist}/${module}`));
     });
 });
 
@@ -93,33 +83,8 @@ gulp.task("watch", function () {
 
 function tasks() {
     modules.forEach(module => {
-        if (module === "react-scripts") {
-            watchAny(source, module);
-        } else if (module === "backend-mix") {
-            watchMedia(source, module);
-            watchTypescript(source, module);
-        } else {
-            watchGraphql(source, module);
-            watchTypescript(source, module);
-        }
-    });
-}
-
-function watchAny(source, module) {
-    gulp.watch(
-        [
-            `${source}/${module}/**/*.*`,
-            `${source}/${module}/*.*`,
-        ],
-        [
-            module,
-        ]
-    ).on("change", function (event) {
-        console.log("File " + event.path + " was " + event.type + ", running tasks...");
-        gulp.src([
-            `${source}/${module}/**/*.*`,
-            `${source}/${module}/*.*`,
-        ]).pipe(gulp.dest(`${dist}/${module}`));
+        watchGraphql(source, module);
+        watchTypescript(source, module);
     });
 }
 
@@ -140,48 +105,6 @@ function watchGraphql(source, module) {
         ]).pipe(rename(function (path) {
             path.basename = path.basename.replace(".original", ".types");
         })).pipe(gulp.dest(`${dist}/${module}`));
-    });
-}
-
-function watchMedia(source, module) {
-    gulp.watch(
-        [
-            `${source}/${module}/**/*.css`,
-            `${source}/${module}/*.css`,
-            `${source}/${module}/**/*.eot`,
-            `${source}/${module}/*.eot`,
-            `${source}/${module}/**/*.ijmap`,
-            `${source}/${module}/*.ijmap`,
-            `${source}/${module}/**/*.jpg`,
-            `${source}/${module}/*.jpg`,
-            `${source}/${module}/**/*.jpeg`,
-            `${source}/${module}/*.jpeg`,
-            `${source}/${module}/**/*.png`,
-            `${source}/${module}/*.png`,
-            `${source}/${module}/**/*.svg`,
-            `${source}/${module}/*.svg`,
-            `${source}/${module}/**/*.ttf`,
-            `${source}/${module}/*.ttf`,
-            `${source}/${module}/**/*.woff2`,
-            `${source}/${module}/*.woff2`,
-        ],
-        [
-            module,
-        ]
-    ).on("change", function (event) {
-        console.log("File " + event.path + " was " + event.type + ", running tasks...");
-        gulp.src([
-            `${source}/${module}/**/*.css`,
-            `${source}/${module}/*.css`,
-            `${source}/${module}/**/*.jpg`,
-            `${source}/${module}/*.jpg`,
-            `${source}/${module}/**/*.jpeg`,
-            `${source}/${module}/*.jpeg`,
-            `${source}/${module}/**/*.png`,
-            `${source}/${module}/*.png`,
-            `${source}/${module}/**/*.svg`,
-            `${source}/${module}/*.svg`,
-        ]).pipe(gulp.dest(`${dist}/${module}`));
     });
 }
 
