@@ -9,8 +9,14 @@ import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
 
 export class ServerStarter {
+    /**
+     * @type { INestApplication }
+     */
     protected instance: INestApplication;
 
+    /**
+     * @type { Logger }
+     */
     protected logger = new Logger("NotaddFactory", true);
 
     public check() {

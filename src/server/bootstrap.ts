@@ -1,3 +1,3 @@
-import { Server } from "./index";
+import { ServerStarter } from "./index";
 
-Server.start();
+(new ServerStarter()).start();
