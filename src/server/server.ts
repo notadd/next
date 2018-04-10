@@ -6,7 +6,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
-import { NotaddFactory } from "@notadd/core";
+import { notaddFactory } from "@notadd/core";
 
 export class ServerStarter {
     /**
@@ -71,7 +71,7 @@ export class ServerStarter {
                 ip.address();
         const address = `http://${host}:${port}`;
 
-        const application = await NotaddFactory.start(ApplicationModule, {
+        const application = await notaddFactory.start(ApplicationModule, {
             bodyParser: true,
             cors: true,
             logger: LogService,

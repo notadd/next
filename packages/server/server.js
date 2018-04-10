@@ -67,7 +67,7 @@ class ServerStarter {
                         :
                             ip.address();
             const address = `http://${host}:${port}`;
-            const application = yield core_1.NotaddFactory.start(modules_1.ApplicationModule, {
+            const application = yield core_1.notaddFactory.start(modules_1.ApplicationModule, {
                 bodyParser: true,
                 cors: true,
                 logger: services_1.LogService,
