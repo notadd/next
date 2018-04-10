@@ -3,17 +3,13 @@
     "rules": {
         "array-type": [
             true,
-            "array"
+            "generic"
         ],
         "ban-types": {
             "options": [
                 [
                     "Object",
                     "Avoid using the `Object` type. Did you mean `object`?"
-                ],
-                [
-                    "Function",
-                    "Avoid using the `Function` type. Prefer a specific function type, like `() => void`, or use `ts.AnyFunction`."
                 ],
                 [
                     "Boolean",
@@ -104,10 +100,7 @@
             "check-separator",
             "check-type"
         ],
-        "no-implicit-dependencies": [
-            true,
-            "dev"
-        ],
+        "no-implicit-dependencies": false,
         "object-literal-key-quotes": [
             true,
             "consistent-as-needed"
@@ -116,7 +109,8 @@
             true,
             "ban-keywords",
             "check-format",
-            "allow-leading-underscore"
+            "allow-leading-underscore",
+            "allow-pascal-case"
         ],
         "arrow-parens": false,
         "arrow-return-shorthand": false,
@@ -125,6 +119,7 @@
         "no-conditional-assignment": false,
         "no-console": false,
         "no-debugger": false,
+        "no-empty": false,
         "no-empty-interface": false,
         "no-eval": false,
         "no-object-literal-type-assertion": false,
@@ -158,6 +153,11 @@
         "no-unnecessary-type-assertion-2": false,
         "no-bom": false,
         "boolean-trivia": false,
-        "debug-assert": false
+        "debug-assert": false,
+        "no-unused-expression": [
+            true,
+            "allow-fast-null-checks"
+        ],
+        "prefer-for-of": false
     }
 }
