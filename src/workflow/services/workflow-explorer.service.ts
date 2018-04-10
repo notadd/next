@@ -9,9 +9,9 @@ import { WorkflowMetadata } from "../metadatas";
 
 @Component()
 export class WorkflowExplorerService {
-    private category: string = "category";
+    private category = "category";
 
-    private identification: string = "identification";
+    private identification = "identification";
 
     /**
      * @param { ModulesContainer } modulesContainer

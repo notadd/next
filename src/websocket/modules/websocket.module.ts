@@ -1,6 +1,5 @@
 import { EventGateway } from "../gateways";
 import { Module } from "@nestjs/common";
-import { MiddlewaresConsumer } from "@nestjs/common";
 
 @Module({
     components: [
@@ -8,6 +7,4 @@ import { MiddlewaresConsumer } from "@nestjs/common";
     ],
 })
 export class WebsocketModule {
-    configure(consumer: MiddlewaresConsumer) {
-    }
 }

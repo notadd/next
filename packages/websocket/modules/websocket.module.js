@@ -9,8 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const gateways_1 = require("../gateways");
 const common_1 = require("@nestjs/common");
 let WebsocketModule = class WebsocketModule {
-    configure(consumer) {
-    }
 };
 WebsocketModule = __decorate([
     common_1.Module({
