@@ -15,12 +15,10 @@ const graphql_1 = require("@nestjs/graphql");
 const apollo_server_express_1 = require("apollo-server-express");
 const factories_1 = require("../factories");
 const common_1 = require("@nestjs/common");
-const path_1 = require("path");
 let GraphqlModule = class GraphqlModule {
     constructor(graphQLFactory) {
         this.graphQLFactory = graphQLFactory;
         this.configuration = loaders_1.Configuration.loadGraphqlConfiguration();
-        this.configuration = require(path_1.join(process.cwd(), "configurations", "graphql.json"));
     }
     configure(consumer) {
         const schema = this.createSchema();
@@ -34,7 +32,8 @@ let GraphqlModule = class GraphqlModule {
             .forRoutes({ path: `/${this.configuration.endpoint}`, method: common_1.RequestMethod.ALL });
     }
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths("**/*.types.graphql");
+        const paths = this.configuration.paths.concat([]);
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths(paths);
         return this.graphQLFactory.createSchema({
             typeDefs,
             resolvers: {
