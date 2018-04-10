@@ -23,11 +23,11 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
     listen(callback?: () => void) {
         this.init();
         this.server.start(`${this.host}:${this.port}`);
-        callback && callback()
+        callback && callback();
     }
 
     close() {
-        this.server && this.server.forceShutdown()
+        this.server && this.server.forceShutdown();
     }
 
     private init(): void {
@@ -36,7 +36,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
                 return {
                     ...d,
                     rpc: this.wrapRpc(d.rpc),
-                }
+                };
             })
             .reduce((acc: { [index: string]: Function }, val: any) => {
                 acc[val.name] = val.rpc;
@@ -44,7 +44,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
                 return acc;
             }, {});
 
-        this.server[`add${this.serviceName}`](delegates)
+        this.server[`add${this.serviceName}`](delegates);
     }
 
     private wrapRpc(delegate: (...args: Array<any>) => Promise<any>) {
@@ -68,7 +68,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
                 });
             });
             return workedAround;
-        }
+        };
     }
 
     /**
