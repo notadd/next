@@ -27,7 +27,7 @@ let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             passReqToCallback: true,
             secretOrKey: "secret",
-        }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return yield this.verify(req, payload, next); }));
+        }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return this.verify(req, payload, next); }));
         this.service = service;
         passport.use(this);
     }
@@ -37,7 +37,7 @@ let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
             if (!isValid) {
                 return done("Unauthorized", false);
             }
-            done(null, payload);
+            done(undefined, payload);
         });
     }
 };

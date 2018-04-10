@@ -39,7 +39,7 @@ let AuthService = class AuthService {
             const token = jwt.sign(user, secretOrKey, { expiresIn });
             return {
                 expires: expiresIn,
-                token: token,
+                token,
             };
         });
     }

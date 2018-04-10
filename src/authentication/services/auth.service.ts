@@ -23,7 +23,7 @@ export class AuthService {
 
         return {
             expires: expiresIn,
-            token: token,
+            token,
         };
     }
 
