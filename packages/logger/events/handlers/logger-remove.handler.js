@@ -10,6 +10,7 @@ const cqrs_1 = require("@nestjs/cqrs");
 const logger_move_event_1 = require("../logger-move.event");
 let LoggerRemoveHandler = class LoggerRemoveHandler {
     handle(event) {
+        console.log(event);
     }
 };
 LoggerRemoveHandler = __decorate([

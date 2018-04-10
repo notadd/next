@@ -7,5 +7,6 @@ export class LoggerRemoveHandler implements IEventHandler<LoggerRemoveEvent> {
      * @param { LoggerRemoveEvent } event
      */
     handle(event: LoggerRemoveEvent) {
+        console.log(event);
     }
 }

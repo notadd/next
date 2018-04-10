@@ -7,5 +7,6 @@ export class LoggerListHandler implements IEventHandler<LoggerListEvent> {
      * @param { LoggerListEvent } event
      */
     handle(event: LoggerListEvent) {
+        console.log(event);
     }
 }

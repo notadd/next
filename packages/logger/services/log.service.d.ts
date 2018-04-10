@@ -6,8 +6,8 @@ export declare class LogService {
     private static contextEnv;
     private static readonly yellow;
     constructor(repository: Repository<Log>);
-    getLogs(): Promise<Log[]>;
-    getLogById(id: Number): Promise<Log | undefined>;
+    getLogs(): Promise<Array<Log>>;
+    getLogById(id: number): Promise<Log | undefined>;
     static log(message: string, context?: string, isTimeDiffEnabled?: boolean): void;
     static error(message: string, trace?: string, context?: string, isTimeDiffEnabled?: boolean): void;
     static warn(message: string, context?: string, isTimeDiffEnabled?: boolean): void;

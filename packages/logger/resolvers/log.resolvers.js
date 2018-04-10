@@ -27,12 +27,12 @@ let LogResolvers = class LogResolvers {
     }
     getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogs();
+            return this.service.getLogs();
         });
     }
     getLogById(obj, { id }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getLogById(id);
+            return this.service.getLogById(id);
         });
     }
 };

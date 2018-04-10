@@ -7,5 +7,6 @@ export class LoggerCreateHandler implements IEventHandler<LoggerCreateEvent> {
      * @param { LoggerCreateEvent } event
      */
     handle(event: LoggerCreateEvent) {
+        console.log(event);
     }
 }

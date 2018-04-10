@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var handlers_1 = require("./handlers");
-exports.CommandHandlers = handlers_1.CommandHandlers;
+exports.commandHandlers = handlers_1.commandHandlers;
 var logger_create_command_1 = require("./logger-create.command");
 exports.LoggerCreateCommand = logger_create_command_1.LoggerCreateCommand;
 var logger_list_command_1 = require("./logger-list.command");

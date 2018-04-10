@@ -35,15 +35,15 @@ let LogService = LogService_1 = class LogService {
     }
     getLogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository.find();
+            return this.repository.find();
         });
     }
     getLogById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.repository
+            return this.repository
                 .createQueryBuilder()
                 .where("id = :id", {
-                id: id,
+                id,
             })
                 .getOne();
         });

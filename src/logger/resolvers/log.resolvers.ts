@@ -11,13 +11,13 @@ export class LogResolvers {
 
     @Query()
     @UseGuards(UserGuard)
-    async getLogs(): Promise<Log[]> {
-        return await this.service.getLogs();
+    async getLogs(): Promise<Array<Log>> {
+        return this.service.getLogs();
     }
 
     @Query()
     @UseGuards(UserGuard)
     async getLogById(obj, { id }): Promise<Log | undefined> {
-        return await this.service.getLogById(id);
+        return this.service.getLogById(id);
     }
 }

@@ -26,10 +26,10 @@ export class LogService {
     }
 
     /**
-     * @returns { Promise<Log[]> }
+     * @returns { Promise<Array<Log>> }
      */
-    public async getLogs(): Promise<Log[]> {
-        return await this.repository.find();
+    public async getLogs(): Promise<Array<Log>> {
+        return this.repository.find();
     }
 
     /**
@@ -37,11 +37,11 @@ export class LogService {
      *
      * @returns { Promise<Log> }
      */
-    public async getLogById(id: Number): Promise<Log | undefined> {
-        return await this.repository
+    public async getLogById(id: number): Promise<Log | undefined> {
+        return this.repository
             .createQueryBuilder()
             .where("id = :id", {
-                id: id,
+                id,
             })
             .getOne();
     }
@@ -67,7 +67,7 @@ export class LogService {
     private static printMessage(
         message: string,
         color: (msg: string) => string,
-        context: string = "",
+        context = "",
         isTimeDiffEnabled?: boolean,
     ) {
         if (LogService.contextEnv === NestEnvironment.TEST) {

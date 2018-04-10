@@ -10,6 +10,7 @@ const cqrs_1 = require("@nestjs/cqrs");
 const logger_create_event_1 = require("../logger-create.event");
 let LoggerCreateHandler = class LoggerCreateHandler {
     handle(event) {
+        console.log(event);
     }
 };
 LoggerCreateHandler = __decorate([
