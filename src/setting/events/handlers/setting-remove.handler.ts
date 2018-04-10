@@ -7,5 +7,6 @@ export class SettingRemoveHandler implements IEventHandler<SettingRemoveEvent> {
      * @param { SettingRemoveEvent } event
      */
     handle(event: SettingRemoveEvent) {
+        console.log(event);
     }
 }

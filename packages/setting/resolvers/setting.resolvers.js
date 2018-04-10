@@ -27,12 +27,12 @@ let SettingResolvers = class SettingResolvers {
     }
     getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getSettings();
+            return this.service.getSettings();
         });
     }
     getSettingByKey(object, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.service.getSettingByKey(args.key);
+            return this.service.getSettingByKey(args.key);
         });
     }
     removeSetting(obj, args) {

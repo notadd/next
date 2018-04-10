@@ -4,7 +4,7 @@ import { SettingRemoveHandler } from "./setting-remove.handler";
 /**
  * @type { [SettingRemoveHandler , SettingUpdateHandler] }
  */
-export const CommandHandlers = [
+export const commandHandlers = [
     SettingRemoveHandler,
     SettingUpdateHandler,
 ];

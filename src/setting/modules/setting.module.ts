@@ -1,6 +1,6 @@
 import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
-import { CommandHandlers } from "../commands/handlers";
-import { EventHandlers } from "../events/handlers";
+import { commandHandlers } from "../commands/handlers";
+import { eventHandlers } from "../events/handlers";
 import { MiddlewaresConsumer, Module, OnModuleInit } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Setting } from "../entities";
@@ -10,8 +10,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
     components: [
-        ...CommandHandlers,
-        ...EventHandlers,
+        ...commandHandlers,
+        ...eventHandlers,
         SettingResolvers,
         SettingService,
     ],
@@ -33,13 +33,10 @@ export class SettingModule implements OnModuleInit {
     ) {
     }
 
-    configure(consumer: MiddlewaresConsumer) {
-    }
-
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);
-        this.command.register(CommandHandlers);
+        this.command.register(commandHandlers);
         this.event.setModuleRef(this.moduleRef);
-        this.event.register(EventHandlers);
+        this.event.register(eventHandlers);
     }
 }

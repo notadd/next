@@ -4,7 +4,7 @@ import { Result } from "../../core/types";
 export declare class SettingResolvers {
     private readonly service;
     constructor(service: SettingService);
-    getSettings(): Promise<Setting[]>;
+    getSettings(): Promise<Array<Setting>>;
     getSettingByKey(object: any, args: {
         key: string;
     }): Promise<Setting | undefined>;

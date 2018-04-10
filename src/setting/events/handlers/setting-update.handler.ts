@@ -7,5 +7,6 @@ export class SettingUpdateHandler implements IEventHandler<SettingUpdateEvent> {
      * @param { SettingUpdateEvent } event
      */
     handle(event: SettingUpdateEvent) {
+        console.log(event);
     }
 }

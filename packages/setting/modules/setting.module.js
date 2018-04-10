@@ -24,20 +24,18 @@ let SettingModule = class SettingModule {
         this.command = command;
         this.event = event;
     }
-    configure(consumer) {
-    }
     onModuleInit() {
         this.command.setModuleRef(this.moduleRef);
-        this.command.register(handlers_1.CommandHandlers);
+        this.command.register(handlers_1.commandHandlers);
         this.event.setModuleRef(this.moduleRef);
-        this.event.register(handlers_2.EventHandlers);
+        this.event.register(handlers_2.eventHandlers);
     }
 };
 SettingModule = __decorate([
     common_1.Module({
         components: [
-            ...handlers_1.CommandHandlers,
-            ...handlers_2.EventHandlers,
+            ...handlers_1.commandHandlers,
+            ...handlers_2.eventHandlers,
             resolvers_1.SettingResolvers,
             services_1.SettingService,
         ],

@@ -1,3 +1,3 @@
-export { CommandHandlers } from "./handlers";
+export { commandHandlers } from "./handlers";
 export { SettingRemoveCommand } from "./setting-remove.command";
 export { SettingUpdateCommand } from "./setting-update.command";

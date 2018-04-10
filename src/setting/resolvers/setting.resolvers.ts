@@ -12,14 +12,14 @@ export class SettingResolvers {
 
     @Query()
     @UseGuards(UserGuard)
-    async getSettings(): Promise<Setting[]> {
-        return await this.service.getSettings();
+    async getSettings(): Promise<Array<Setting>> {
+        return this.service.getSettings();
     }
 
     @Query()
     @UseGuards(UserGuard)
     async getSettingByKey(object, args: { key: string }): Promise<Setting | undefined> {
-        return await this.service.getSettingByKey(args.key);
+        return this.service.getSettingByKey(args.key);
     }
 
     @Mutation()

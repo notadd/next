@@ -5,8 +5,9 @@ import { Setting } from "../entities";
 
 @Component()
 export class SettingService {
-    private isInitialized: boolean = false;
-    private settings: Setting[] = [];
+    private isInitialized = false;
+
+    private settings: Array<Setting> = [];
 
     /**
      * @param { Repository<Setting> } repository
@@ -23,9 +24,9 @@ export class SettingService {
             return defaultValue;
         }
         let result;
-        switch(typeof defaultValue) {
+        switch (typeof defaultValue) {
             case "boolean":
-                result = setting.value == "1";
+                result = setting.value === "1";
                 break;
             case "string":
                 result = setting.value;
@@ -42,9 +43,9 @@ export class SettingService {
     }
 
     /**
-     * @returns { Promise<Setting[]> }
+     * @returns { Promise<Array<Setting>> }
      */
-    public async getSettings(): Promise<Setting[]> {
+    public async getSettings(): Promise<Array<Setting>> {
         if (!this.isInitialized) {
             await this.initialize();
         }
@@ -63,7 +64,7 @@ export class SettingService {
         }
 
         return this.settings.find((setting: Setting) => {
-            return setting.key == key;
+            return setting.key === key;
         });
     }
 
@@ -73,8 +74,8 @@ export class SettingService {
      * @returns { Promise<Setting | undefined> }
      */
     public async removeSetting(key: string): Promise<Setting | undefined> {
-        let setting: Setting | undefined = await this.getSettingByKey(key);
-        if (typeof setting == "undefined") {
+        const setting: Setting | undefined = await this.getSettingByKey(key);
+        if (typeof setting === "undefined") {
             throw new Error(`Setting dot not exists with key ${key}`);
         } else {
             await this.repository.delete({
@@ -94,10 +95,10 @@ export class SettingService {
      */
     public async setSetting(key: string, value: string): Promise<Setting> {
         let setting: Setting | undefined = await this.getSettingByKey(key);
-        if (typeof setting == "undefined") {
+        if (typeof setting === "undefined") {
             setting = await this.repository.create({
-                key: key,
-                value: value,
+                key,
+                value,
             });
         } else {
             setting.value = value;

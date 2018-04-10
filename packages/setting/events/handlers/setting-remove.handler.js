@@ -10,6 +10,7 @@ const cqrs_1 = require("@nestjs/cqrs");
 const setting_remove_event_1 = require("../setting-remove.event");
 let SettingRemoveHandler = class SettingRemoveHandler {
     handle(event) {
+        console.log(event);
     }
 };
 SettingRemoveHandler = __decorate([

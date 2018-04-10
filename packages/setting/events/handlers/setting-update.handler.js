@@ -10,6 +10,7 @@ const cqrs_1 = require("@nestjs/cqrs");
 const setting_update_event_1 = require("../setting-update.event");
 let SettingUpdateHandler = class SettingUpdateHandler {
     handle(event) {
+        console.log(event);
     }
 };
 SettingUpdateHandler = __decorate([

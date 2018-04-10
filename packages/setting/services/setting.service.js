@@ -39,7 +39,7 @@ let SettingService = class SettingService {
             let result;
             switch (typeof defaultValue) {
                 case "boolean":
-                    result = setting.value == "1";
+                    result = setting.value === "1";
                     break;
                 case "string":
                     result = setting.value;
@@ -68,14 +68,14 @@ let SettingService = class SettingService {
                 yield this.initialize();
             }
             return this.settings.find((setting) => {
-                return setting.key == key;
+                return setting.key === key;
             });
         });
     }
     removeSetting(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            let setting = yield this.getSettingByKey(key);
-            if (typeof setting == "undefined") {
+            const setting = yield this.getSettingByKey(key);
+            if (typeof setting === "undefined") {
                 throw new Error(`Setting dot not exists with key ${key}`);
             }
             else {
@@ -90,10 +90,10 @@ let SettingService = class SettingService {
     setSetting(key, value) {
         return __awaiter(this, void 0, void 0, function* () {
             let setting = yield this.getSettingByKey(key);
-            if (typeof setting == "undefined") {
+            if (typeof setting === "undefined") {
                 setting = yield this.repository.create({
-                    key: key,
-                    value: value,
+                    key,
+                    value,
                 });
             }
             else {
