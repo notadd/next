@@ -53,7 +53,7 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
                 delegate(...args)
             ) as Observable<any>;
 
-            const workedAround = Observable.create((observer: Observer<any>) => {
+            return  Observable.create((observer: Observer<any>) => {
                 return response$.subscribe({
                     next(value: any) {
                         if (value && value.error && value instanceof Observable) {
@@ -67,7 +67,6 @@ export class GrpcMicroservice extends Server implements CustomTransportStrategy 
                     complete: observer.complete.bind(observer),
                 });
             });
-            return workedAround;
         };
     }
 

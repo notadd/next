@@ -112,5 +112,3 @@ export class ServerStarter {
         }
     }
 }
-
-export const Server = new ServerStarter();

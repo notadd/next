@@ -191,8 +191,8 @@ function addAdministrationUser(username, email, password, database) {
         yield connection.synchronize(false);
         const repository = connection.getRepository(user_entity_1.User);
         const user = repository.create({
-            username: username,
-            email: email,
+            username,
+            email,
             password: crypto_1.createHmac("sha256", password).digest("hex"),
         });
         yield repository.save(user);

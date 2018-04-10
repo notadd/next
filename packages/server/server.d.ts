@@ -6,4 +6,3 @@ export declare class ServerStarter {
     check(): void;
     start(): Promise<void>;
 }
-export declare const Server: ServerStarter;

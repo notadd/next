@@ -107,4 +107,3 @@ class ServerStarter {
     }
 }
 exports.ServerStarter = ServerStarter;
-exports.Server = new ServerStarter();

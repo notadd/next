@@ -186,8 +186,8 @@ async function addAdministrationUser(username: string, email: string, password: 
     await connection.synchronize(false);
     const repository = connection.getRepository(User);
     const user = repository.create({
-        username: username,
-        email: email,
+        username,
+        email,
         password: createHmac("sha256", password).digest("hex"),
     });
     await repository.save(user);

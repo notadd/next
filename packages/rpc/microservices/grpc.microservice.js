@@ -33,7 +33,7 @@ class GrpcMicroservice extends microservices_1.Server {
     wrapRpc(delegate) {
         return (...args) => {
             const response$ = this.transformToObservable(delegate(...args));
-            const workedAround = rxjs_1.Observable.create((observer) => {
+            return rxjs_1.Observable.create((observer) => {
                 return response$.subscribe({
                     next(value) {
                         if (value && value.error && value instanceof rxjs_1.Observable) {
@@ -47,7 +47,6 @@ class GrpcMicroservice extends microservices_1.Server {
                     complete: observer.complete.bind(observer),
                 });
             });
-            return workedAround;
         };
     }
     getGRPCDelegates() {
