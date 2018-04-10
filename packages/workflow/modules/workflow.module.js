@@ -21,7 +21,6 @@ const common_1 = require("@nestjs/common");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const services_1 = require("../services");
-const services_2 = require("../services");
 let WorkflowModule = class WorkflowModule {
     constructor(workflowExplorerService, workflowService) {
         this.workflowExplorerService = workflowExplorerService;
@@ -39,16 +38,16 @@ WorkflowModule = __decorate([
         components: [
             metadata_scanner_1.MetadataScanner,
             services_1.WorkflowExplorerService,
-            services_2.WorkflowService,
+            services_1.WorkflowService,
         ],
         exports: [
-            services_2.WorkflowService,
+            services_1.WorkflowService,
         ],
         imports: [
             setting_module_1.SettingModule,
         ],
     }),
     __metadata("design:paramtypes", [services_1.WorkflowExplorerService,
-        services_2.WorkflowService])
+        services_1.WorkflowService])
 ], WorkflowModule);
 exports.WorkflowModule = WorkflowModule;

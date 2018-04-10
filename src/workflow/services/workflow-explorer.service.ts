@@ -61,7 +61,7 @@ export class WorkflowExplorerService {
 
             return [
                 workflowMeta,
-            ]
+            ];
         } else {
             return [];
         }
