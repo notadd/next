@@ -1,6 +1,6 @@
 {
     "name": "@notadd/internationalization",
-    "version": "2.3.23",
+    "version": "2.3.25",
     "description": "Notadd Workflow Package.",
     "main": "main.js",
     "scripts": {
