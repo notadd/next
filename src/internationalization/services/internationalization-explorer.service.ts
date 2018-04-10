@@ -8,7 +8,7 @@ import { PHRASE_DEFINITION } from "../constants";
 
 @Component()
 export class InternationalizationExplorerService {
-    private metadata: string = PHRASE_DEFINITION;
+    private metadata = PHRASE_DEFINITION;
 
     constructor(
         private readonly modulesContainer: ModulesContainer,
@@ -26,6 +26,7 @@ export class InternationalizationExplorerService {
      * @param instance
      * @param prototype
      * @param { string } methodName
+     *
      * @returns { DashboardMetadata }
      */
     protected extractMetadata(instance, prototype, methodName: string): PhraseMetadata {
@@ -34,7 +35,7 @@ export class InternationalizationExplorerService {
         return {
             name: Reflect.getMetadata(this.metadata, callback),
             methodName,
-        }
+        };
     }
 
     public filterPhrases(instance: Injectable): Array<PhraseMetadata> {
@@ -64,7 +65,7 @@ export class InternationalizationExplorerService {
      * @param { (instance: any) => Array<PhraseMetadata> } callback
      * @returns { any }
      */
-    protected flatMap(components: Map<any, any>[], callback: (instance: any) => Array<PhraseMetadata>) {
+    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<PhraseMetadata>) {
         return flattenDeep(
             components.map(component =>
                 [ ...component.values() ].map(({ instance }) => callback(instance)),
