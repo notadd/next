@@ -1,10 +1,10 @@
 export declare function ctx(compiler: any, options: any): {
     state: boolean;
-    webpackStats: null;
+    webpackStats: undefined;
     callbacks: never[];
     options: any;
     compiler: any;
-    watching: null;
+    watching: undefined;
     forceRebuild: boolean;
     log: {
         error: FunctionConstructor;

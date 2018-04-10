@@ -1,4 +1,4 @@
-export type Result = {
+export interface Result {
     code?: number;
     message: string;
-};
+}

@@ -4,11 +4,11 @@ const weblog = require("webpack-log");
 function ctx(compiler, options) {
     const context = {
         state: false,
-        webpackStats: null,
+        webpackStats: undefined,
         callbacks: [],
         options,
         compiler,
-        watching: null,
+        watching: undefined,
         forceRebuild: false,
         log: {
             error: Function,

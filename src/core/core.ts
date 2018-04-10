@@ -30,5 +30,3 @@ export class CoreFactory {
         return new ModuleLoader();
     }
 }
-
-export const Core = new CoreFactory();

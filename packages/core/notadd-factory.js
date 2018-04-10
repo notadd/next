@@ -21,9 +21,9 @@ class NotaddFactoryStatic extends nest_factory_1.NestFactoryStatic {
     |_| |_|\\___/ \\__\\__,_|\\__,_|\\__,_|
 
         `);
-            return yield _super("create").call(this, module, options);
+            return _super("create").call(this, module, options);
         });
     }
 }
 exports.NotaddFactoryStatic = NotaddFactoryStatic;
-exports.NotaddFactory = new NotaddFactoryStatic();
+exports.notaddFactory = new NotaddFactoryStatic();

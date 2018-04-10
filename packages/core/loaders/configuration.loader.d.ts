@@ -1,5 +1,4 @@
-import { ApplicationConfiguration } from "../configurations";
-import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
+import { ApplicationConfiguration, DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { Logger } from "@nestjs/common";
 import { SwaggerConfiguration } from "../configurations/swagger.configuration";
 export declare class ConfigurationLoader {

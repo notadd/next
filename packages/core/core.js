@@ -17,4 +17,3 @@ class CoreFactory {
     }
 }
 exports.CoreFactory = CoreFactory;
-exports.Core = new CoreFactory();

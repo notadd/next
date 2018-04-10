@@ -1,6 +1,5 @@
-import { ApplicationConfiguration } from "../configurations";
+import { ApplicationConfiguration, DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { ConfigurationPath } from "../paths";
-import { DatabaseConfiguration, GraphqlConfiguration, ServerConfiguration } from "../configurations";
 import { existsSync } from "fs";
 import { Json } from "./json.loader";
 import { Logger } from "@nestjs/common";

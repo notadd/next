@@ -13,8 +13,8 @@ export class NotaddFactoryStatic extends NestFactoryStatic {
 
         `);
 
-        return await super.create(module, options);
+        return super.create(module, options);
     }
 }
 
-export const NotaddFactory = new NotaddFactoryStatic();
+export const notaddFactory = new NotaddFactoryStatic();

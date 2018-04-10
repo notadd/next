@@ -6,4 +6,3 @@ export declare class CoreFactory {
     readonly extension: ExtensionLoader;
     readonly module: ModuleLoader;
 }
-export declare const Core: CoreFactory;

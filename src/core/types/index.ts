@@ -1,1 +1,1 @@
-export { Result } from "./result.type";
+export { Result } from "../interfaces/result.interface";
