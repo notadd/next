@@ -3,5 +3,14 @@
     "ide": {
         "enable": true,
         "endpoint": "graphiql"
-    }
+    },
+    "paths": [
+        "node_modules/@notadd/authentication/**/*.types.graphql",
+        "node_modules/@notadd/graphql/**/*.types.graphql",
+        "node_modules/@notadd/injection/**/*.types.graphql",
+        "node_modules/@notadd/internationalization/**/*.types.graphql",
+        "node_modules/@notadd/logger/**/*.types.graphql",
+        "node_modules/@notadd/setting/**/*.types.graphql",
+        "node_modules/@notadd/user/**/*.types.graphql"
+    ]
 }
