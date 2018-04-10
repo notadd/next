@@ -5,6 +5,6 @@ export declare class GraphqlFactory {
     constructor(resolversExplorerService: ResolversExplorerService);
     createSchema(schemaDefinition?: IExecutableSchemaDefinition): any;
     createDelegates(): (mergeInfo: MergeInfo) => any;
-    mergeTypesByPaths(...pathsToTypes: Array<string>): string;
+    mergeTypesByPaths(pathsToTypes: Array<string>): string;
     private loadFiles(pattern);
 }

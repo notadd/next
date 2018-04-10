@@ -23,7 +23,6 @@ export class GraphqlModule {
      * @param { GraphqlFactory } graphQLFactory
      */
     constructor(private readonly graphQLFactory: GraphqlFactory) {
-        this.configuration = require(join(process.cwd(), "configurations", "graphql.json"));
     }
 
     /**
@@ -42,7 +41,9 @@ export class GraphqlModule {
     }
 
     createSchema() {
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths("**/*.types.graphql");
+        const paths: Array<string> = this.configuration.paths.concat([
+        ]);
+        const typeDefs = this.graphQLFactory.mergeTypesByPaths(paths);
 
         return this.graphQLFactory.createSchema({
             typeDefs,

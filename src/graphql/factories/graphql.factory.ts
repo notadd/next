@@ -30,14 +30,17 @@ export class GraphqlFactory {
         return this.resolversExplorerService.exploreDelegates();
     }
 
-    public mergeTypesByPaths(...pathsToTypes: Array<string>): string {
-        return mergeTypes(
-            ...pathsToTypes.map(pattern => this.loadFiles(pattern)),
-        );
+    public mergeTypesByPaths(pathsToTypes: Array<string>): string {
+        const types = pathsToTypes.map(pattern => this.loadFiles(pattern));
+
+        return mergeTypes(types.map(item => {
+            return Array.isArray(item) ? item.join("\n") : item;
+        }));
     }
 
     private loadFiles(pattern: string): Array<any> {
         const paths = glob.sync(pattern);
+
         return paths.map(path => fs.readFileSync(path, "utf8"));
     }
 }

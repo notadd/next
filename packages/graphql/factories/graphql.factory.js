@@ -27,8 +27,11 @@ let GraphqlFactory = class GraphqlFactory {
     createDelegates() {
         return this.resolversExplorerService.exploreDelegates();
     }
-    mergeTypesByPaths(...pathsToTypes) {
-        return merge_graphql_schemas_1.mergeTypes(...pathsToTypes.map(pattern => this.loadFiles(pattern)));
+    mergeTypesByPaths(pathsToTypes) {
+        const types = pathsToTypes.map(pattern => this.loadFiles(pattern));
+        return merge_graphql_schemas_1.mergeTypes(types.map(item => {
+            return Array.isArray(item) ? item.join("\n") : item;
+        }));
     }
     loadFiles(pattern) {
         const paths = glob.sync(pattern);
