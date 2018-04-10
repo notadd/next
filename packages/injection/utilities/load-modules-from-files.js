@@ -7,7 +7,7 @@ const loaders_1 = require("@notadd/core/loaders");
 function loadModulesFromFiles() {
     const file = path_1.join(process.cwd(), "storages", "caches", "module.json");
     if (fs_1.existsSync(file)) {
-        let caches = loaders_1.Json.load(file);
+        const caches = loaders_1.Json.load(file);
         return import_classes_from_directories_1.importClassesFromDirectories(caches.enabled ? caches.enabled : []);
     }
     else {

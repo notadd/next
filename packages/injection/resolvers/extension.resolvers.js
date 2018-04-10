@@ -27,22 +27,22 @@ let ExtensionResolvers = class ExtensionResolvers {
     }
     getExtension(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.getExtension(args.identification);
+            return this.extensionService.getExtension(args.identification);
         });
     }
     getExtensions(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.getExtensions(args.filters);
+            return this.extensionService.getExtensions(args.filters);
         });
     }
     installExtension(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.installExtension(args.identification);
+            return this.extensionService.installExtension(args.identification);
         });
     }
     uninstallExtension(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.extensionService.uninstallExtension(args.identification);
+            return this.extensionService.uninstallExtension(args.identification);
         });
     }
 };

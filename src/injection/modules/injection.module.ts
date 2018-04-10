@@ -1,11 +1,11 @@
 import { AddonModule } from "./addon.module";
 import { AddonSagas, ExtensionSagas, ModuleSagas } from "../sagas";
 import { CommandBus, CQRSModule, EventBus } from "@nestjs/cqrs";
-import { CommandHandlers } from "../commands/handlers";
+import { commandHandlers } from "../commands/handlers";
 import { ConfigurationPage } from "../pages";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards";
-import { EventHandlers } from "../events/handlers";
+import { eventHandlers } from "../events/handlers";
 import { ExtensionModule } from "./extension.module";
 import { forwardRef, Module } from "@nestjs/common";
 import { InjectionService } from "../services";
@@ -19,8 +19,8 @@ import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } fr
 
 @Module({
     components: [
-        ...CommandHandlers,
-        ...EventHandlers,
+        ...commandHandlers,
+        ...eventHandlers,
         AddonSagas,
         ConfigurationPage,
         DeveloperDashboard,
@@ -59,8 +59,8 @@ export class InjectionModule implements OnModuleInit {
     onModuleInit() {
         this.command$.setModuleRef(this.moduleRef);
         this.event$.setModuleRef(this.moduleRef);
-        this.event$.register(EventHandlers);
-        this.command$.register(CommandHandlers);
+        this.event$.register(eventHandlers);
+        this.command$.register(commandHandlers);
         this.event$.combineSagas([
         ]);
     }

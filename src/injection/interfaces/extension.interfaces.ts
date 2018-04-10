@@ -5,9 +5,9 @@ import { Injection } from "./injection.interface";
 export interface Extension extends Injection {
     authors?: Array<Author>;
     description?: string;
-    enabled: boolean,
+    enabled: boolean;
     identification: string;
-    installed: boolean,
+    installed: boolean;
     name: string;
     shell?: ExtensionShellMetadata;
     version: string;

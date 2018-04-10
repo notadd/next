@@ -1,4 +1,4 @@
 export class ExtensionShellMetadata {
-    install?: string = "";
-    uninstall?: string = "";
+    install ? = "";
+    uninstall ? = "";
 }

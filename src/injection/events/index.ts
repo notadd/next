@@ -4,7 +4,7 @@ export { AddonAfterUninstallEvent } from "./addon-after-uninstall.event";
 export { AddonBeforeEnableEvent } from "./addon-before-enable.event";
 export { AddonBeforeInstallEvent } from "./addon-before-install.event";
 export { AddonBeforeUninstallEvent } from "./addon-before-uninstall.event";
-export { EventHandlers } from "./handlers";
+export { eventHandlers } from "./handlers";
 export { ExtensionAfterInstallEvent } from "./extension-after-install.event";
 export { ExtensionAfterUninstallEvent } from "./extension-after-uninstall.event";
 export { ExtensionBeforeInstallEvent } from "./extension-before-install.event";

@@ -7,7 +7,7 @@ import { Json } from "@notadd/core/loaders";
 export function loadAddonsFromFiles(): Array<Function> {
     const file = join(process.cwd(), "storages", "caches", "addon.json");
     if (existsSync(file)) {
-        let caches = Json.load<AddonCache>(file);
+        const caches = Json.load<AddonCache>(file);
 
         return importClassesFromDirectories(caches.enabled ? caches.enabled : []);
     } else {

@@ -13,4 +13,4 @@ export declare class InjectionLoader {
     protected loadInjectionsFromCache(): void;
     protected writeCachesToFile(path: string, data: any): void;
 }
-export declare const Injection: InjectionLoader;
+export declare const injection: InjectionLoader;

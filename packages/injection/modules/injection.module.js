@@ -38,16 +38,16 @@ let InjectionModule = class InjectionModule {
     onModuleInit() {
         this.command$.setModuleRef(this.moduleRef);
         this.event$.setModuleRef(this.moduleRef);
-        this.event$.register(handlers_2.EventHandlers);
-        this.command$.register(handlers_1.CommandHandlers);
+        this.event$.register(handlers_2.eventHandlers);
+        this.command$.register(handlers_1.commandHandlers);
         this.event$.combineSagas([]);
     }
 };
 InjectionModule = __decorate([
     common_1.Module({
         components: [
-            ...handlers_1.CommandHandlers,
-            ...handlers_2.EventHandlers,
+            ...handlers_1.commandHandlers,
+            ...handlers_2.eventHandlers,
             sagas_1.AddonSagas,
             pages_1.ConfigurationPage,
             dashboards_1.DeveloperDashboard,

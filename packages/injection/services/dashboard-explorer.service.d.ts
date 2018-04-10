@@ -10,5 +10,5 @@ export declare class DashboardExplorerService {
     explore(): any;
     protected extractMetadata(instance: any, prototype: any, methodName: string): DashboardMetadata;
     protected filterDashboards(instance: Injectable): Array<DashboardMetadata>;
-    protected flatMap(components: Map<any, any>[], callback: (instance: any) => Array<DashboardMetadata>): any;
+    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<DashboardMetadata>): any;
 }

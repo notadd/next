@@ -1,6 +1,5 @@
 import { existsSync } from "fs";
-import { Extension as ExtensionInterface, Injection } from "../interfaces";
-import { ExtensionCache } from "../interfaces";
+import { ExtensionCache, Extension as ExtensionInterface, Injection } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
@@ -37,7 +36,7 @@ export class ExtensionLoader extends InjectionLoader {
         if (!this.cacheForExtensions.length) {
             this.loadExtensionsFromCache();
         }
-        for(let i = 0; i < this.cacheForExtensions.length; i ++) {
+        for (let i = 0; i < this.cacheForExtensions.length; i ++) {
             const extension = this.cacheForExtensions[i];
             const identification = extension.identification;
             extension.enabled = await setting.get(`extension.${identification}.enabled`, false);
@@ -58,18 +57,19 @@ export class ExtensionLoader extends InjectionLoader {
                 return InjectionType.Addon === Reflect.getMetadata("__injection_type__", injection.target);
             }).map((injection: Injection) => {
                 const identification = Reflect.getMetadata("identification", injection.target);
+
                 return {
                     authors: Reflect.getMetadata("authors", injection.target),
                     description: Reflect.getMetadata("description", injection.target),
                     enabled: false,
-                    identification: identification,
+                    identification,
                     installed: false,
                     location: injection.location,
                     name: Reflect.getMetadata("name", injection.target),
                     shell: Reflect.getMetadata("shell", injection.target),
                     target: injection.target,
                     version: Reflect.getMetadata("version", injection.target),
-                }
+                };
             });
     }
 
@@ -93,4 +93,4 @@ export class ExtensionLoader extends InjectionLoader {
     }
 }
 
-export const Extension = new ExtensionLoader();
+export const extension = new ExtensionLoader();

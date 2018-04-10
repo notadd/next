@@ -1,5 +1,4 @@
-import { Addon as AddonInterface } from "../interfaces";
-import { AddonCache } from "../interfaces";
+import { AddonCache, Addon as AddonInterface } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { SettingService } from "@notadd/setting/services";
 export declare class AddonLoader extends InjectionLoader {
@@ -13,4 +12,4 @@ export declare class AddonLoader extends InjectionLoader {
     protected loadAddonsFromCache(): void;
     protected syncCachesToFile(): void;
 }
-export declare const Addon: AddonLoader;
+export declare const addon: AddonLoader;

@@ -19,7 +19,7 @@ let PageService = class PageService {
     }
     getPage(identification) {
         return this.pages.find(page => {
-            return page.identification == identification;
+            return page.identification === identification;
         });
     }
     getPages() {

@@ -11,7 +11,9 @@ function importInjectionsFromDirectories(directories, formats = [".js", ".ts"]) 
         return formats.indexOf(platform_tools_1.PlatformTools.pathExtname(file)) !== -1 && dtsExtension !== ".d.ts";
     })
         .map(file => {
-        let target = () => { };
+        let target = () => {
+            return;
+        };
         const imported = platform_tools_1.PlatformTools.load(platform_tools_1.PlatformTools.pathResolve(file));
         if (typeof imported === "object") {
             Object.keys(imported).forEach(key => {
@@ -22,7 +24,7 @@ function importInjectionsFromDirectories(directories, formats = [".js", ".ts"]) 
         }
         return {
             location: file,
-            target: target,
+            target,
         };
     });
 }

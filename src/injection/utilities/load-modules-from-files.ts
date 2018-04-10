@@ -7,7 +7,7 @@ import { ModuleCache } from "../interfaces";
 export function loadModulesFromFiles(): Array<Function> {
     const file = join(process.cwd(), "storages", "caches", "module.json");
     if (existsSync(file)) {
-        let caches = Json.load<ModuleCache>(file);
+        const caches = Json.load<ModuleCache>(file);
 
         return importClassesFromDirectories(caches.enabled ? caches.enabled : []);
     } else {

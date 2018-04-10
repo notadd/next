@@ -27,32 +27,32 @@ let ModuleResolvers = class ModuleResolvers {
     }
     disableModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.disableModule(args.identification);
+            return this.moduleService.disableModule(args.identification);
         });
     }
     enableModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.enableModule(args.identification);
+            return this.moduleService.enableModule(args.identification);
         });
     }
     getModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.getModule(args.identification);
+            return this.moduleService.getModule(args.identification);
         });
     }
     getModules(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.getModules(args.filters);
+            return this.moduleService.getModules(args.filters);
         });
     }
     installModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.installModule(args.identification);
+            return this.moduleService.installModule(args.identification);
         });
     }
     uninstallModule(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.moduleService.uninstallModule(args.identification);
+            return this.moduleService.uninstallModule(args.identification);
         });
     }
 };

@@ -3,14 +3,14 @@ import { MongoDriver } from "typeorm/driver/mongodb/MongoDriver";
 import { MongoSchemaBuilder as SchemaBuilder } from "typeorm/schema-builder/MongoSchemaBuilder";
 
 export class MongoSchemaBuilder extends SchemaBuilder {
-    protected metadatas: EntityMetadata[];
+    protected metadatas: Array<EntityMetadata>;
 
     /**
      * @returns { Promise<void> }
      */
     async build(): Promise<void> {
         const queryRunner = (this.connection.driver as MongoDriver).createQueryRunner();
-        const promises: Promise<any>[] = [];
+        const promises: Array<Promise<any>> = [];
         this.metadatas.forEach(metadata => {
             metadata.indices.forEach(index => {
                 const options = { name: index.name, unique: index.isUnique, sparse: index.isSparse };
@@ -21,9 +21,9 @@ export class MongoSchemaBuilder extends SchemaBuilder {
     }
 
     /**
-     * @param { EntityMetadata[] } metadatas
+     * @param { Array<EntityMetadata> } metadatas
      */
-    public setMetadatas(metadatas: EntityMetadata[]) {
+    public setMetadatas(metadatas: Array<EntityMetadata>) {
         this.metadatas = metadatas;
     }
 }

@@ -1,7 +1,7 @@
 import { EntityMetadata } from "typeorm/metadata/EntityMetadata";
 import { MongoSchemaBuilder as SchemaBuilder } from "typeorm/schema-builder/MongoSchemaBuilder";
 export declare class MongoSchemaBuilder extends SchemaBuilder {
-    protected metadatas: EntityMetadata[];
+    protected metadatas: Array<EntityMetadata>;
     build(): Promise<void>;
-    setMetadatas(metadatas: EntityMetadata[]): void;
+    setMetadatas(metadatas: Array<EntityMetadata>): void;
 }

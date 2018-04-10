@@ -19,7 +19,7 @@ export class ExtensionResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getExtension(context, args: { identification: string }): Promise<Extension | undefined> {
-        return await this.extensionService.getExtension(args.identification);
+        return this.extensionService.getExtension(args.identification);
     }
 
     /**
@@ -31,7 +31,7 @@ export class ExtensionResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getExtensions(context, args: { filters: any }): Promise<Array<Extension>> {
-        return await this.extensionService.getExtensions(args.filters);
+        return this.extensionService.getExtensions(args.filters);
     }
 
     /**
@@ -43,7 +43,7 @@ export class ExtensionResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async installExtension(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.extensionService.installExtension(args.identification);
+        return this.extensionService.installExtension(args.identification);
     }
 
     /**
@@ -55,6 +55,6 @@ export class ExtensionResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async uninstallExtension(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.extensionService.uninstallExtension(args.identification);
+        return this.extensionService.uninstallExtension(args.identification);
     }
 }

@@ -59,7 +59,7 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
                 authors: Reflect.getMetadata("authors", injection.target),
                 description: Reflect.getMetadata("description", injection.target),
                 enabled: false,
-                identification: identification,
+                identification,
                 installed: false,
                 location: injection.location,
                 name: Reflect.getMetadata("name", injection.target),
@@ -89,4 +89,4 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
     }
 }
 exports.ExtensionLoader = ExtensionLoader;
-exports.Extension = new ExtensionLoader();
+exports.extension = new ExtensionLoader();

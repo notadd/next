@@ -15,7 +15,7 @@ import { ModuleAfterEnableEventHandler } from "./module-after-enable.event.handl
 import { ModuleAfterInstallEventHandler } from "./module-after-install.event.handler";
 import { ModuleAfterUninstallEventHandler } from "./module-after-uninstall.event.handler";
 
-export const EventHandlers = [
+export const eventHandlers = [
     AddonAfterEnableEventHandler,
     AddonAfterInstallEventHandler,
     AddonAfterUninstallEventHandler,

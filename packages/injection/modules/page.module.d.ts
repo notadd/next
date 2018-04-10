@@ -1,6 +1,5 @@
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
-import { PageService } from "../services";
-import { PageExplorerService } from "../services";
+import { PageExplorerService, PageService } from "../services";
 export declare class PageModule implements OnModuleInit {
     private readonly pageExplorerService;
     private readonly pageService;

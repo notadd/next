@@ -5,7 +5,7 @@ import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class PageService {
-    private initialized: boolean = false;
+    private initialized = false;
 
     private pages: Array<Page> = [];
 
@@ -22,7 +22,7 @@ export class PageService {
      */
     public getPage(identification: string): Page | undefined {
         return this.pages.find(page => {
-            return page.identification == identification;
+            return page.identification === identification;
         });
     }
 

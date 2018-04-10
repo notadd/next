@@ -26,7 +26,7 @@ class SchemaBuilder {
         const connectionMetadataBuilder = new ConnectionMetadataBuilder_1.ConnectionMetadataBuilder(this.connection);
         const entityMetadataValidator = new EntityMetadataValidator_1.EntityMetadataValidator();
         const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths, []);
-        Object.assign(this, { entityMetadatas: entityMetadatas });
+        Object.assign(this, { entityMetadatas });
         entityMetadataValidator.validateMany(this.entityMetadatas, this.connection.driver);
     }
     drop() {
@@ -38,8 +38,9 @@ class SchemaBuilder {
             if (this.connection.driver instanceof SqlServerDriver_1.SqlServerDriver || this.connection.driver instanceof MysqlDriver_1.MysqlDriver) {
                 const databases = this.connection.driver.database ? [this.connection.driver.database] : [];
                 this.entityMetadatas.forEach(metadata => {
-                    if (metadata.database && databases.indexOf(metadata.database) === -1)
+                    if (metadata.database && databases.indexOf(metadata.database) === -1) {
                         databases.push(metadata.database);
+                    }
                 });
                 yield typeorm_1.PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(schemas, database));
             }

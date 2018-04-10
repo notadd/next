@@ -8,7 +8,7 @@ const extension_install_command_handler_1 = require("./extension-install.command
 const module_uninstall_command_handler_1 = require("./module-uninstall.command.handler");
 const module_enable_command_handler_1 = require("./module-enable.command.handler");
 const module_install_command_handler_1 = require("./module-install.command.handler");
-exports.CommandHandlers = [
+exports.commandHandlers = [
     addon_enable_command_handler_1.AddonEnableCommandHandler,
     addon_install_command_handler_1.AddonInstallCommandHandler,
     addon_uninstall_command_handler_1.AddonUninstallCommandHandler,

@@ -82,7 +82,7 @@ export class ModuleService {
         if (filter && typeof filter.installed !== "undefined") {
             if (filter.installed) {
                 return this.loader.modules.filter(module => {
-                    return module.installed == true;
+                    return module.installed === true;
                 });
             } else {
                 return this.loader.modules.filter(module => {
@@ -92,11 +92,11 @@ export class ModuleService {
         } else if (filter && typeof filter.enabled !== "undefined") {
             if (filter.enabled) {
                 return this.loader.modules.filter(module => {
-                    return module.installed == true && module.enabled == true;
+                    return module.installed === true && module.enabled === true;
                 });
             } else {
                 return this.loader.modules.filter(module => {
-                    return module.installed == true &&!module.enabled;
+                    return module.installed === true && !module.enabled;
                 });
             }
         } else {

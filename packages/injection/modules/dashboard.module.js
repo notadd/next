@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const resolvers_1 = require("../resolvers");
-const services_2 = require("../services");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const common_1 = require("@nestjs/common");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
@@ -27,7 +26,7 @@ let DashboardModule = class DashboardModule {
 DashboardModule = __decorate([
     common_1.Module({
         components: [
-            services_2.DashboardExplorerService,
+            services_1.DashboardExplorerService,
             resolvers_1.DashboardResolvers,
             services_1.DashboardService,
             metadata_scanner_1.MetadataScanner,
@@ -36,7 +35,7 @@ DashboardModule = __decorate([
             setting_module_1.SettingModule,
         ],
     }),
-    __metadata("design:paramtypes", [services_2.DashboardExplorerService,
+    __metadata("design:paramtypes", [services_1.DashboardExplorerService,
         services_1.DashboardService])
 ], DashboardModule);
 exports.DashboardModule = DashboardModule;

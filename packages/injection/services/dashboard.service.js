@@ -18,7 +18,7 @@ let DashboardService = class DashboardService {
         this.dashboards = [];
     }
     getDashboard(name) {
-        return this.dashboards.find(dashboard => dashboard.name == name);
+        return this.dashboards.find(dashboard => dashboard.name === name);
     }
     getDashboards() {
         return this.dashboards;

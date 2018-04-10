@@ -50,4 +50,4 @@ class InjectionLoader {
     }
 }
 exports.InjectionLoader = InjectionLoader;
-exports.Injection = new InjectionLoader();
+exports.injection = new InjectionLoader();

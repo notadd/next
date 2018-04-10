@@ -34,7 +34,7 @@ export class ExtensionService {
      *
      * @returns { Promise<Array<Extension>> }
      */
-    public async getExtensions(filter: { enabled?:boolean, installed?: boolean }): Promise<Array<Extension>> {
+    public async getExtensions(filter: { enabled?: boolean, installed?: boolean }): Promise<Array<Extension>> {
         if (filter && typeof filter.enabled !== "undefined") {
             if (filter.enabled) {
                 return this.loader.extensions.filter(extension => {
@@ -45,7 +45,7 @@ export class ExtensionService {
                     return !extension.enabled;
                 });
             }
-        } else if(filter && typeof filter.installed !== "undefined") {
+        } else if (filter && typeof filter.installed !== "undefined") {
             if (filter.installed) {
                 return this.loader.extensions.filter(extension => {
                     return extension.installed === true;

@@ -1,19 +1,19 @@
 import { PlatformTools } from "./platform-tools";
 
 /**
- * @param { string[] } directories
- * @param { (string | string)[] } formats
+ * @param { Array<string> } directories
+ * @param { Array<string> } formats
  *
- * @returns { T[] }
+ * @returns { Array<T> }
  */
-export function importClassesFromDirectories<T>(directories: string[], formats = [ ".js", ".ts"]): T[] {
+export function importClassesFromDirectories<T>(directories: Array<string>, formats = [ ".js", ".ts"]): Array<T> {
     /**
      * @param exported
-     * @param { T[] } allLoaded
+     * @param { Array<T> } allLoaded
      *
-     * @returns { T[] }
+     * @returns { Array<T> }
      */
-    function loadFileClasses<T>(exported: any, allLoaded: T[]) {
+    function loadFileClasses<T>(exported: any, allLoaded: Array<T>) {
         if (typeof exported === "function") {
             allLoaded.push(exported);
         } else if (Array.isArray(exported)) {
@@ -27,7 +27,7 @@ export function importClassesFromDirectories<T>(directories: string[], formats =
 
     const allFiles = directories.reduce((allDirs, dir) => {
         return allDirs.concat(PlatformTools.load("glob").sync(PlatformTools.pathNormalize(dir)));
-    }, [] as string[]);
+    }, [] as Array<string>);
 
     const dirs = allFiles
         .filter(file => {

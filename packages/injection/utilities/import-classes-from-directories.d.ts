@@ -1,1 +1,1 @@
-export declare function importClassesFromDirectories<T>(directories: string[], formats?: string[]): T[];
+export declare function importClassesFromDirectories<T>(directories: Array<string>, formats?: string[]): Array<T>;

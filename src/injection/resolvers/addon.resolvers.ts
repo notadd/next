@@ -19,7 +19,7 @@ export class AddonResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async disableAddon(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.addonService.disableAddon(args.identification);
+        return this.addonService.disableAddon(args.identification);
     }
 
     /**
@@ -31,7 +31,7 @@ export class AddonResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async enableAddon(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.addonService.enableAddon(args.identification);
+        return this.addonService.enableAddon(args.identification);
     }
 
     /**
@@ -43,7 +43,7 @@ export class AddonResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getAddon(context, args: { identification: string }): Promise<Addon | undefined> {
-        return await this.addonService.getAddon(args.identification);
+        return this.addonService.getAddon(args.identification);
     }
 
     /**
@@ -55,7 +55,7 @@ export class AddonResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getAddons(context, args: { filters: any }): Promise<Array<Addon>> {
-        return await this.addonService.getAddons(args.filters);
+        return this.addonService.getAddons(args.filters);
     }
 
     /**
@@ -67,7 +67,7 @@ export class AddonResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async installAddon(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.addonService.installAddon(args.identification);
+        return this.addonService.installAddon(args.identification);
     }
 
     /**
@@ -79,6 +79,6 @@ export class AddonResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async uninstallAddon(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.addonService.uninstallAddon(args.identification);
+        return this.addonService.uninstallAddon(args.identification);
     }
 }

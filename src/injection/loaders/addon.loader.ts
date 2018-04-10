@@ -1,5 +1,4 @@
-import { Addon as AddonInterface, Injection } from "../interfaces";
-import { AddonCache } from "../interfaces";
+import { AddonCache, Addon as AddonInterface, Injection } from "../interfaces";
 import { existsSync } from "fs";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
@@ -37,7 +36,7 @@ export class AddonLoader extends InjectionLoader {
         if (!this.cacheForAddons.length) {
             this.loadAddonsFromCache();
         }
-        for(let i = 0; i < this.cacheForAddons.length; i ++) {
+        for (let i = 0; i < this.cacheForAddons.length; i ++) {
             const addon = this.cacheForAddons[i];
             const identification = addon.identification;
             addon.enabled = await setting.get(`addon.${identification}.enabled`, false);
@@ -92,4 +91,4 @@ export class AddonLoader extends InjectionLoader {
     }
 }
 
-export const Addon = new AddonLoader();
+export const addon = new AddonLoader();

@@ -8,7 +8,7 @@ import { RdbmsSchemaBuilder } from "./rdbms-schema.builder";
 import { SqlServerDriver } from "typeorm/driver/sqlserver/SqlServerDriver";
 
 export class SchemaBuilder {
-    private readonly entityMetadatas: EntityMetadata[] = [];
+    private readonly entityMetadatas: Array<EntityMetadata> = [];
 
     /**
      * @returns { Connection }
@@ -24,7 +24,7 @@ export class SchemaBuilder {
         const connectionMetadataBuilder = new ConnectionMetadataBuilder(this.connection);
         const entityMetadataValidator = new EntityMetadataValidator();
         const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths,  []);
-        Object.assign(this, { entityMetadatas: entityMetadatas });
+        Object.assign(this, { entityMetadatas });
         entityMetadataValidator.validateMany(this.entityMetadatas, this.connection.driver);
     }
 
@@ -35,11 +35,12 @@ export class SchemaBuilder {
             .map(metadata => metadata.schema!);
 
         if (this.connection.driver instanceof SqlServerDriver || this.connection.driver instanceof MysqlDriver) {
-            const databases: string[] = this.connection.driver.database ? [this.connection.driver.database] : [];
+            const databases: Array<string> = this.connection.driver.database ? [this.connection.driver.database] : [];
 
             this.entityMetadatas.forEach(metadata => {
-                if (metadata.database && databases.indexOf(metadata.database) === -1)
+                if (metadata.database && databases.indexOf(metadata.database) === -1) {
                     databases.push(metadata.database);
+                }
             });
 
             await PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(schemas, database));

@@ -1,5 +1,4 @@
-import { Dashboard } from "../interfaces";
-import { DashboardMetadata } from "../interfaces";
+import { Dashboard, DashboardMetadata } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 export declare class DashboardService {
     private readonly settingService;

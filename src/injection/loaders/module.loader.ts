@@ -32,7 +32,7 @@ export class ModuleLoader extends InjectionLoader {
         if (!this.cacheForModules.length) {
             this.loadModulesFromCaches();
         }
-        for(let i = 0; i < this.cacheForModules.length; i ++) {
+        for (let i = 0; i < this.cacheForModules.length; i ++) {
             const module = this.cacheForModules[i];
             const identification = module.identification;
             module.enabled = await setting.get(`module.${identification}.enabled`, false);
@@ -63,7 +63,7 @@ export class ModuleLoader extends InjectionLoader {
                     authors: Reflect.getMetadata("authors", injection.target),
                     description: Reflect.getMetadata("description", injection.target),
                     enabled: false,
-                    identification: identification,
+                    identification,
                     installed: false,
                     location: injection.location,
                     name: Reflect.getMetadata("name", injection.target),
@@ -94,4 +94,4 @@ export class ModuleLoader extends InjectionLoader {
     }
 }
 
-export const Module = new ModuleLoader();
+export const module = new ModuleLoader();

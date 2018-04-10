@@ -4,14 +4,14 @@ import { INJECTION_TYPE } from "../constants";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
 
 export function Module(obj: {
-    authors?: Author[],
+    authors?: Array<Author>,
     description?: string,
-    exports?: any[],
+    exports?: Array<any>,
     identification: string,
-    imports?: any[],
-    components?: any[],
-    controllers?: any[],
-    modules?: any[],
+    imports?: Array<any>,
+    components?: Array<any>,
+    controllers?: Array<any>,
+    modules?: Array<any>,
     name: string,
     version: string,
 }): ClassDecorator {

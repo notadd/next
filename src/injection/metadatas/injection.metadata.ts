@@ -1,7 +1,7 @@
 export class InjectionMetadata {
-    enabled: boolean = false;
+    enabled = false;
     identification: string;
-    installed: boolean = false;
+    installed = false;
     module: any;
     type: string;
 }

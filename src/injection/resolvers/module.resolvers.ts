@@ -19,7 +19,7 @@ export class ModuleResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async disableModule(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.moduleService.disableModule(args.identification);
+        return this.moduleService.disableModule(args.identification);
     }
 
     /**
@@ -31,7 +31,7 @@ export class ModuleResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async enableModule(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.moduleService.enableModule(args.identification);
+        return this.moduleService.enableModule(args.identification);
     }
 
     /**
@@ -43,7 +43,7 @@ export class ModuleResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getModule(context, args: { identification: string }): Promise<Module | undefined> {
-        return await this.moduleService.getModule(args.identification);
+        return this.moduleService.getModule(args.identification);
     }
 
     /**
@@ -55,7 +55,7 @@ export class ModuleResolvers {
     @Query()
     @UseGuards(UserGuard)
     public async getModules(context, args: { filters: any }): Promise<Array<Module>> {
-        return await this.moduleService.getModules(args.filters);
+        return this.moduleService.getModules(args.filters);
     }
 
     /**
@@ -67,7 +67,7 @@ export class ModuleResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async installModule(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.moduleService.installModule(args.identification);
+        return this.moduleService.installModule(args.identification);
     }
 
     /**
@@ -79,6 +79,6 @@ export class ModuleResolvers {
     @Mutation()
     @UseGuards(UserGuard)
     public async uninstallModule(context, args: { identification: string }): Promise<Result | undefined> {
-        return await this.moduleService.uninstallModule(args.identification);
+        return this.moduleService.uninstallModule(args.identification);
     }
 }

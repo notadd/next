@@ -1,8 +1,7 @@
 import { Module } from "@nestjs/common";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { PageService } from "../services";
-import { PageExplorerService } from "../services";
+import { PageExplorerService, PageService } from "../services";
 import { PageResolvers } from "../resolvers";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 

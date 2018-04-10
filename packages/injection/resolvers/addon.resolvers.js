@@ -27,32 +27,32 @@ let AddonResolvers = class AddonResolvers {
     }
     disableAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.disableAddon(args.identification);
+            return this.addonService.disableAddon(args.identification);
         });
     }
     enableAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.enableAddon(args.identification);
+            return this.addonService.enableAddon(args.identification);
         });
     }
     getAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.getAddon(args.identification);
+            return this.addonService.getAddon(args.identification);
         });
     }
     getAddons(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.getAddons(args.filters);
+            return this.addonService.getAddons(args.filters);
         });
     }
     installAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.installAddon(args.identification);
+            return this.addonService.installAddon(args.identification);
         });
     }
     uninstallAddon(context, args) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.addonService.uninstallAddon(args.identification);
+            return this.addonService.uninstallAddon(args.identification);
         });
     }
 };

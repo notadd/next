@@ -7,7 +7,7 @@ import { ModuleUninstallCommandHandler } from "./module-uninstall.command.handle
 import { ModuleEnableCommandHandler } from "./module-enable.command.handler";
 import { ModuleInstallCommandHandler } from "./module-install.command.handler";
 
-export const CommandHandlers = [
+export const commandHandlers = [
     AddonEnableCommandHandler,
     AddonInstallCommandHandler,
     AddonUninstallCommandHandler,

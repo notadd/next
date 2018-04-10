@@ -88,4 +88,4 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
     }
 }
 exports.AddonLoader = AddonLoader;
-exports.Addon = new AddonLoader();
+exports.addon = new AddonLoader();

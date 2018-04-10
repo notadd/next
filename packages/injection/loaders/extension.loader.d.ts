@@ -1,5 +1,4 @@
-import { Extension as ExtensionInterface } from "../interfaces";
-import { ExtensionCache } from "../interfaces";
+import { ExtensionCache, Extension as ExtensionInterface } from "../interfaces";
 import { InjectionLoader } from "./injection.loader";
 import { SettingService } from "@notadd/setting/services";
 export declare class ExtensionLoader extends InjectionLoader {
@@ -13,4 +12,4 @@ export declare class ExtensionLoader extends InjectionLoader {
     protected loadExtensionsFromCache(): void;
     protected syncCachesToFile(): void;
 }
-export declare const Extension: ExtensionLoader;
+export declare const extension: ExtensionLoader;

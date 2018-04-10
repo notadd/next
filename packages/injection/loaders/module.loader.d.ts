@@ -12,4 +12,4 @@ export declare class ModuleLoader extends InjectionLoader {
     protected loadModulesFromCaches(): void;
     protected syncCachesToFile(): void;
 }
-export declare const Module: ModuleLoader;
+export declare const module: ModuleLoader;

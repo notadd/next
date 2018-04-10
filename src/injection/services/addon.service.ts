@@ -48,7 +48,7 @@ export class AddonService {
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
-        if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+        if (!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
                 throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
@@ -111,7 +111,7 @@ export class AddonService {
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
-        if(await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+        if (await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
             throw new Error(`Addon [${addon.identification}] has been installed!`);
         }
         await this.syncSchema(addon);
@@ -133,7 +133,7 @@ export class AddonService {
         if (!addon) {
             throw new Error("Addon do not exists!");
         }
-        if(!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
+        if (!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
             throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
         // await this.dropSchema(addon);

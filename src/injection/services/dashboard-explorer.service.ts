@@ -8,7 +8,7 @@ import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 
 @Component()
 export class DashboardExplorerService {
-    private metadata: string = DASHBOARD_NAME_METADATA;
+    private metadata = DASHBOARD_NAME_METADATA;
 
     /**
      * @param { ModulesContainer } modulesContainer
@@ -41,7 +41,7 @@ export class DashboardExplorerService {
         return {
             name: Reflect.getMetadata(this.metadata, callback),
             methodName,
-        }
+        };
     }
 
     /**
@@ -75,7 +75,7 @@ export class DashboardExplorerService {
      * @param { (instance: any) => Array<DashboardMetadata> } callback
      * @returns { any }
      */
-    protected flatMap(components: Map<any, any>[], callback: (instance: any) => Array<DashboardMetadata>) {
+    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<DashboardMetadata>) {
         return flattenDeep(
             components.map(component =>
                 [ ...component.values() ].map(({ instance }) => callback(instance)),

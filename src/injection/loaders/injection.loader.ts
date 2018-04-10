@@ -61,4 +61,4 @@ export class InjectionLoader {
     }
 }
 
-export const Injection = new InjectionLoader();
+export const injection = new InjectionLoader();

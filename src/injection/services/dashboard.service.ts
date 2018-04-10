@@ -1,11 +1,10 @@
 import { Component } from "@nestjs/common";
-import { Dashboard } from "../interfaces";
-import { DashboardMetadata } from "../interfaces";
+import { Dashboard, DashboardMetadata } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
 @Component()
 export class DashboardService {
-    private initialized: boolean = false;
+    private initialized = false;
 
     private dashboards: Array<Dashboard> = [];
 
@@ -21,7 +20,7 @@ export class DashboardService {
      * @returns { Dashboard | undefined }
      */
     public getDashboard(name: string): Dashboard | undefined {
-        return this.dashboards.find(dashboard => dashboard.name == name);
+        return this.dashboards.find(dashboard => dashboard.name === name);
     }
 
     /**
