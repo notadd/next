@@ -13,7 +13,7 @@ import { ModuleModule } from "./module.module";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { PageModule } from "./page.module";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
-import { UserModule } from "@notadd/user/modules/user.module";
+import { UserModule } from "@notadd/user";
 import { ModuleRef } from "@nestjs/core";
 import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } from "../utilities";
 

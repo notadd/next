@@ -23,7 +23,7 @@ const services_1 = require("../services");
 const module_module_1 = require("./module.module");
 const page_module_1 = require("./page.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
-const user_module_1 = require("@notadd/user/modules/user.module");
+const user_1 = require("@notadd/user");
 const core_1 = require("@nestjs/core");
 const utilities_1 = require("../utilities");
 let InjectionModule = class InjectionModule {
@@ -69,7 +69,7 @@ InjectionModule = __decorate([
             dashboard_module_1.DashboardModule,
             page_module_1.PageModule,
             setting_module_1.SettingModule,
-            user_module_1.UserModule,
+            user_1.UserModule,
         ],
     }),
     __metadata("design:paramtypes", [sagas_1.AddonSagas,

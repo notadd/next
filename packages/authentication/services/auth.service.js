@@ -51,6 +51,7 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [typeof (_a = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _a || Object])
 ], AuthService);
 exports.AuthService = AuthService;
+var _a;
