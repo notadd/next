@@ -1,6 +1,6 @@
 {
     "name": "@notadd/authentication",
-    "version": "2.3.26",
+    "version": "2.3.27",
     "description": "Notadd Backend Package.",
     "main": "main.js",
     "scripts": {
