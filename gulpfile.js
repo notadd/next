@@ -16,7 +16,6 @@ const packages = {
     rpc: ts.createProject("src/rpc/tsconfig.json"),
     server: ts.createProject("src/server/tsconfig.json"),
     setting: ts.createProject("src/setting/tsconfig.json"),
-    user: ts.createProject("src/user/tsconfig.json"),
     websocket: ts.createProject("src/websocket/tsconfig.json"),
     workflow: ts.createProject("src/workflow/tsconfig.json"),
 };

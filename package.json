@@ -100,7 +100,6 @@
         "packages/rpc",
         "packages/server",
         "packages/setting",
-        "packages/user",
         "packages/websocket",
         "packages/workflow",
         "vendors/rxjs"
