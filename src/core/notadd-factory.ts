@@ -17,4 +17,4 @@ export class NotaddFactoryStatic extends NestFactoryStatic {
     }
 }
 
-export const notaddFactory = new NotaddFactoryStatic();
+export const NotaddFactory = new NotaddFactoryStatic();

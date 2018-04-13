@@ -26,4 +26,4 @@ class NotaddFactoryStatic extends nest_factory_1.NestFactoryStatic {
     }
 }
 exports.NotaddFactoryStatic = NotaddFactoryStatic;
-exports.notaddFactory = new NotaddFactoryStatic();
+exports.NotaddFactory = new NotaddFactoryStatic();
