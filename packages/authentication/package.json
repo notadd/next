@@ -17,6 +17,9 @@
     ],
     "author": "notadd",
     "license": "Apache-2.0",
+    "dependencies": {
+        "jsonwebtoken": "^8.2.1"
+    },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"
     },

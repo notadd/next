@@ -19,7 +19,8 @@
     "author": "notadd",
     "license": "Apache-2.0",
     "dependencies": {
-        "graphql-type-json": "^0.1.4"
+        "grpc": "^1.10.1",
+        "rxjs-grpc": "^0.1.7"
     },
     "bugs": {
         "url": "https://github.com/notadd/next/issues"
