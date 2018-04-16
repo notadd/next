@@ -15,7 +15,7 @@ const crypto_1 = require("crypto");
 const path_1 = require("path");
 const child_process_1 = require("child_process");
 const inquirer_1 = require("inquirer");
-const user_entity_1 = require("@notadd/user/entities/user.entity");
+const user_entity_1 = require("@notadd/user/model/user.entity");
 function install() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`
@@ -190,10 +190,16 @@ function addAdministrationUser(username, email, password, database) {
         const connection = yield typeorm_1.createConnection(database);
         yield connection.synchronize(false);
         const repository = connection.getRepository(user_entity_1.User);
+        const salt = crypto_1.createHash("sha256").update(new Date().toString()).digest("hex").slice(0, 10);
+        const organizations = [];
+        const passwordWithSalt = crypto_1.createHash("sha256").update(password + salt).digest("hex");
         const user = repository.create({
-            username,
-            email,
-            password: crypto_1.createHmac("sha256", password).digest("hex"),
+            userName: username,
+            password: passwordWithSalt,
+            salt,
+            status: true,
+            recycle: false,
+            organizations
         });
         yield repository.save(user);
         yield connection.close();

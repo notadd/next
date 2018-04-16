@@ -1,11 +1,11 @@
 import * as clc from "cli-color";
 import * as writeJsonFile from "write-json-file";
 import { createConnection } from "typeorm";
-import { createHmac } from "crypto";
+import { createHash } from "crypto";
 import { join } from "path";
 import { execSync } from "child_process";
 import { prompt } from "inquirer";
-import { User } from "@notadd/user/entities/user.entity";
+import { User } from "@notadd/user/model/user.entity";
 
 async function install() {
     console.log(`
@@ -185,10 +185,16 @@ async function addAdministrationUser(username: string, email: string, password: 
     const connection = await createConnection(database);
     await connection.synchronize(false);
     const repository = connection.getRepository(User);
+    const salt = createHash("sha256").update(new Date().toString()).digest("hex").slice(0, 10);
+    const organizations = [];
+    const passwordWithSalt = createHash("sha256").update(password + salt).digest("hex");
     const user = repository.create({
-        username,
-        email,
-        password: createHmac("sha256", password).digest("hex"),
+        userName: username,
+        password: passwordWithSalt,
+        salt,
+        status: true,
+        recycle: false,
+        organizations
     });
     await repository.save(user);
     await connection.close();
