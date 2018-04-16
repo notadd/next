@@ -51,6 +51,7 @@
         "@types/express": "^4.0.39",
         "@types/inquirer": "^0.0.36",
         "@types/ip": "^0.0.30",
+        "@types/jsonwebtoken": "^7.2.6",
         "@types/load-json-file": "^2.0.7",
         "@types/node": "^9.4.7",
         "@types/redis": "^0.12.36",
