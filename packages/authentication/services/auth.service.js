@@ -20,7 +20,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const common_1 = require("@nestjs/common");
 const crypto_1 = require("crypto");
-const user_service_1 = require("@notadd/user/services/user.service");
+const user_service_1 = require("@notadd/user/service/user.service");
 let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
@@ -51,7 +51,6 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     common_1.Component(),
-    __metadata("design:paramtypes", [typeof (_a = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _a || Object])
+    __metadata("design:paramtypes", [user_service_1.UserService])
 ], AuthService);
 exports.AuthService = AuthService;
-var _a;

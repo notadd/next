@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import { Component } from "@nestjs/common";
 import { createHmac } from "crypto";
-import { UserService } from "@notadd/user/services/user.service";
+import { UserService } from "@notadd/user/service/user.service";
 
 @Component()
 export class AuthService {
