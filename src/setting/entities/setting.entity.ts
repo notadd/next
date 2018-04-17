@@ -11,7 +11,6 @@ import { IsString } from "class-validator";
 export class Setting {
     @PrimaryColumn({
         length: 500,
-        type: "varchar",
     })
     @IsString()
     key: string;

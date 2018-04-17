@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as express from "express";
 import * as ip from "ip";
 import { ApplicationModule } from "./modules";

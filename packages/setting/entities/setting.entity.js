@@ -16,7 +16,6 @@ let Setting = class Setting {
 __decorate([
     typeorm_1.PrimaryColumn({
         length: 500,
-        type: "varchar",
     }),
     class_validator_1.IsString(),
     __metadata("design:type", String)

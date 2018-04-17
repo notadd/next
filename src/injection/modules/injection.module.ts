@@ -9,6 +9,7 @@ import { eventHandlers } from "../events/handlers";
 import { ExtensionModule } from "./extension.module";
 import { forwardRef, Module } from "@nestjs/common";
 import { InjectionService } from "../services";
+import { LocalModule } from "@notadd/addon-local/local.module";
 import { ModuleModule } from "./module.module";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { PageModule } from "./page.module";
@@ -40,6 +41,7 @@ import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } fr
         forwardRef(() => AddonModule),
         CQRSModule,
         DashboardModule,
+        LocalModule,
         PageModule,
         SettingModule,
         UserModule,

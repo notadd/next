@@ -12,9 +12,7 @@ export class Log {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({
-        type: "text",
-    })
+    @Column()
     @IsString()
     content: string;
 

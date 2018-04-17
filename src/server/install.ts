@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as clc from "cli-color";
 import * as writeJsonFile from "write-json-file";
 import { createConnection } from "typeorm";

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 const clc = require("cli-color");
 const writeJsonFile = require("write-json-file");
 const typeorm_1 = require("typeorm");

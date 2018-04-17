@@ -9,12 +9,12 @@ input ModuleFilter {
 
 type Query {
     # get a module by identification
-    getModule(identification: String): Module,
+    getModule(identification: String): ModuleInjection,
     # get all modules, can be fileted by identification, installed, and enabled
-    getModules(filters: ModuleFilter): [Module],
+    getModules(filters: ModuleFilter): [ModuleInjection],
 }
 
-type Module {
+type ModuleInjection {
     # authors info for module
     authors: [Author],
     # description info for module
