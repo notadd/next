@@ -5,6 +5,7 @@
         "endpoint": "graphiql"
     },
     "paths": [
+        "node_modules/@notadd/addon-local/**/*.types.graphql",
         "node_modules/@notadd/authentication/**/*.types.graphql",
         "node_modules/@notadd/graphql/**/*.types.graphql",
         "node_modules/@notadd/injection/**/*.types.graphql",
