@@ -5,7 +5,12 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./constants"));
 __export(require("./dashboards"));
-__export(require("./decorators"));
+var decorators_1 = require("./decorators");
+exports.Addon = decorators_1.Addon;
+exports.Dashboard = decorators_1.Dashboard;
+exports.Extension = decorators_1.Extension;
+exports.Module = decorators_1.Module;
+exports.Page = decorators_1.Page;
 __export(require("./metadatas"));
 __export(require("./modules"));
 __export(require("./pages"));

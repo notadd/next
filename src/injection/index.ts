@@ -1,6 +1,6 @@
 export * from "./constants";
 export * from "./dashboards";
-export * from "./decorators";
+export { Addon, Dashboard, Extension, Module, Page } from "./decorators";
 export * from "./metadatas";
 export * from "./modules";
 export * from "./pages";
