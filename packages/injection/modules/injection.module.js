@@ -20,6 +20,7 @@ const handlers_2 = require("../events/handlers");
 const extension_module_1 = require("./extension.module");
 const common_1 = require("@nestjs/common");
 const services_1 = require("../services");
+const local_module_1 = require("@notadd/addon-local/local.module");
 const module_module_1 = require("./module.module");
 const page_module_1 = require("./page.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
@@ -67,6 +68,7 @@ InjectionModule = __decorate([
             common_1.forwardRef(() => addon_module_1.AddonModule),
             cqrs_1.CQRSModule,
             dashboard_module_1.DashboardModule,
+            local_module_1.LocalModule,
             page_module_1.PageModule,
             setting_module_1.SettingModule,
             user_1.UserModule,

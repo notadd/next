@@ -29,6 +29,7 @@
         "@nestjs/testing": "^4.6.0",
         "@nestjs/typeorm": "^2.0.0",
         "@nestjs/websockets": "^4.6.0",
+        "@notadd/addon-local": "^2.0.6",
         "@notadd/authentication": "^2.3.27",
         "@notadd/backend": "^2.3.27",
         "@notadd/core": "^2.3.27",
