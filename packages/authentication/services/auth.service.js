@@ -27,7 +27,7 @@ let AuthService = class AuthService {
     }
     createToken(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield this.userService.getUserByUsername(username);
+            const user = yield this.userService.getUserByName(username);
             if (typeof user === "undefined") {
                 throw new Error("User Do not exists!");
             }

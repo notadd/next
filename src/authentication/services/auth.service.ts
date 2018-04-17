@@ -9,7 +9,7 @@ export class AuthService {
     }
 
     async createToken(username: string, password: string) {
-        const user = await this.userService.getUserByUsername(username);
+        const user = await this.userService.getUserByName(username);
         if (typeof user === "undefined") {
             throw new Error("User Do not exists!");
         }
