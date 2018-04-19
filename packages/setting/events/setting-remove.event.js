@@ -6,3 +6,5 @@ class SettingRemoveEvent {
     }
 }
 exports.SettingRemoveEvent = SettingRemoveEvent;
+
+//# sourceMappingURL=setting-remove.event.js.map

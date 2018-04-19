@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/page.interface.ts"],"names":[],"mappings":"","file":"page.interface.js","sourcesContent":["export interface Page {\n    description?: string;\n    form: any;\n    identification: string;\n    name: string;\n    schema: any;\n}\n"]}

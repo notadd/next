@@ -6,3 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./modules/application.module"));
 var server_1 = require("./server");
 exports.ServerStarter = server_1.ServerStarter;
+
+//# sourceMappingURL=index.js.map

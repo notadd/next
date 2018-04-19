@@ -17,3 +17,5 @@ ExtensionBeforeUninstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ExtensionBeforeUninstallEvent)
 ], ExtensionBeforeUninstallEventHandler);
 exports.ExtensionBeforeUninstallEventHandler = ExtensionBeforeUninstallEventHandler;
+
+//# sourceMappingURL=extension-before-uninstall.event.handler.js.map

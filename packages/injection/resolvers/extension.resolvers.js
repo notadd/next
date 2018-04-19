@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
@@ -25,25 +17,17 @@ let ExtensionResolvers = class ExtensionResolvers {
     constructor(extensionService) {
         this.extensionService = extensionService;
     }
-    getExtension(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.extensionService.getExtension(args.identification);
-        });
+    async getExtension(context, args) {
+        return this.extensionService.getExtension(args.identification);
     }
-    getExtensions(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.extensionService.getExtensions(args.filters);
-        });
+    async getExtensions(context, args) {
+        return this.extensionService.getExtensions(args.filters);
     }
-    installExtension(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.extensionService.installExtension(args.identification);
-        });
+    async installExtension(context, args) {
+        return this.extensionService.installExtension(args.identification);
     }
-    uninstallExtension(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.extensionService.uninstallExtension(args.identification);
-        });
+    async uninstallExtension(context, args) {
+        return this.extensionService.uninstallExtension(args.identification);
     }
 };
 __decorate([
@@ -79,3 +63,5 @@ ExtensionResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.ExtensionService])
 ], ExtensionResolvers);
 exports.ExtensionResolvers = ExtensionResolvers;
+
+//# sourceMappingURL=extension.resolvers.js.map

@@ -8,3 +8,5 @@ __export(require("./decorators"));
 __export(require("./notadd-factory"));
 var core_1 = require("./core");
 exports.CoreFactory = core_1.CoreFactory;
+
+//# sourceMappingURL=index.js.map

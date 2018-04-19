@@ -7,3 +7,5 @@ class AddonAfterEnableEvent {
     }
 }
 exports.AddonAfterEnableEvent = AddonAfterEnableEvent;
+
+//# sourceMappingURL=addon-after-enable.event.js.map

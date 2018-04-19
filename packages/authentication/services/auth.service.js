@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const common_1 = require("@nestjs/common");
@@ -25,28 +17,24 @@ let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
     }
-    createToken(username, password) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const user = yield this.userService.getUserByName(username);
-            if (typeof user === "undefined") {
-                throw new Error("User Do not exists!");
-            }
-            if (user.password !== crypto_1.createHmac("sha256", password).digest("hex")) {
-                throw new Error("Password is incorrect!");
-            }
-            const expiresIn = 60 * 60;
-            const secretOrKey = "secret";
-            const token = jwt.sign(user, secretOrKey, { expiresIn });
-            return {
-                expires: expiresIn,
-                token,
-            };
-        });
+    async createToken(username, password) {
+        const user = await this.userService.getUserByName(username);
+        if (typeof user === "undefined") {
+            throw new Error("User Do not exists!");
+        }
+        if (user.password !== crypto_1.createHmac("sha256", password).digest("hex")) {
+            throw new Error("Password is incorrect!");
+        }
+        const expiresIn = 60 * 60;
+        const secretOrKey = "secret";
+        const token = jwt.sign(user, secretOrKey, { expiresIn });
+        return {
+            expires: expiresIn,
+            token,
+        };
     }
-    validateUser(signedUser) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return true;
-        });
+    async validateUser(signedUser) {
+        return true;
     }
 };
 AuthService = __decorate([
@@ -54,3 +42,5 @@ AuthService = __decorate([
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], AuthService);
 exports.AuthService = AuthService;
+
+//# sourceMappingURL=auth.service.js.map

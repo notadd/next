@@ -17,3 +17,5 @@ SettingUpdateHandler = __decorate([
     cqrs_1.EventsHandler(setting_update_event_1.SettingUpdateEvent)
 ], SettingUpdateHandler);
 exports.SettingUpdateHandler = SettingUpdateHandler;
+
+//# sourceMappingURL=setting-update.handler.js.map

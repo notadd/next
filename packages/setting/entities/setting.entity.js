@@ -39,3 +39,5 @@ Setting = __decorate([
     typeorm_1.Entity("settings")
 ], Setting);
 exports.Setting = Setting;
+
+//# sourceMappingURL=setting.entity.js.map

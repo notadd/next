@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/injection.metadata.ts"],"names":[],"mappings":";;AAAA;IAAA;QACI,YAAO,GAAG,KAAK,CAAC;QAEhB,cAAS,GAAG,KAAK,CAAC;IAGtB,CAAC;CAAA;AAND,8CAMC","file":"injection.metadata.js","sourcesContent":["export class InjectionMetadata {\n    enabled = false;\n    identification: string;\n    installed = false;\n    module: any;\n    type: string;\n}\n"]}

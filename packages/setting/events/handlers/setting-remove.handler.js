@@ -17,3 +17,5 @@ SettingRemoveHandler = __decorate([
     cqrs_1.EventsHandler(setting_remove_event_1.SettingRemoveEvent)
 ], SettingRemoveHandler);
 exports.SettingRemoveHandler = SettingRemoveHandler;
+
+//# sourceMappingURL=setting-remove.handler.js.map

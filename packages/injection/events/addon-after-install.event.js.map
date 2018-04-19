@@ -1,0 +1,1 @@
+{"version":3,"sources":["events/addon-after-install.event.ts"],"names":[],"mappings":";;AAEA;CACC;AADD,wDACC","file":"addon-after-install.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class AddonAfterInstallEvent implements IEvent {\n}\n"]}

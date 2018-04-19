@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/webpack-configuration.interface.ts"],"names":[],"mappings":"","file":"webpack-configuration.interface.js","sourcesContent":["export interface WebpackConfiguration {\n    headers?: Array<string>;\n    index?: string;\n}\n"]}

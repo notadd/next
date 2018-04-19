@@ -13,3 +13,5 @@ EventGateway = __decorate([
     websockets_1.WebSocketGateway()
 ], EventGateway);
 exports.EventGateway = EventGateway;
+
+//# sourceMappingURL=event.gateway.js.map

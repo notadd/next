@@ -29,3 +29,5 @@ ModuleModule = __decorate([
     })
 ], ModuleModule);
 exports.ModuleModule = ModuleModule;
+
+//# sourceMappingURL=module.module.js.map

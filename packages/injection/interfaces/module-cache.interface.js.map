@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/module-cache.interface.ts"],"names":[],"mappings":";;AAAA;CAEC;AAFD,kCAEC","file":"module-cache.interface.js","sourcesContent":["export class ModuleCache {\n    enabled: Array<string>;\n}\n"]}

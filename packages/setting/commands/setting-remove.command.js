@@ -6,3 +6,5 @@ class SettingRemoveCommand {
     }
 }
 exports.SettingRemoveCommand = SettingRemoveCommand;
+
+//# sourceMappingURL=setting-remove.command.js.map

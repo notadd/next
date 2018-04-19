@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/page-schema.metadata.ts"],"names":[],"mappings":";;AAAA;CAGC;AAHD,gDAGC","file":"page-schema.metadata.js","sourcesContent":["export class PageSchemaMetadata {\n    callback?: Function;\n    name: string;\n}\n"]}

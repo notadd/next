@@ -11,14 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -30,85 +22,73 @@ let SettingService = class SettingService {
         this.isInitialized = false;
         this.settings = [];
     }
-    get(key, defaultValue) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const setting = yield this.getSettingByKey(key);
-            if (!setting) {
-                return defaultValue;
-            }
-            let result;
-            switch (typeof defaultValue) {
-                case "boolean":
-                    result = setting.value === "1";
-                    break;
-                case "string":
-                    result = setting.value;
-                    break;
-                case "number":
-                    result = Number(setting.value);
-                    break;
-                default:
-                    result = setting.value;
-                    break;
-            }
-            return result;
+    async get(key, defaultValue) {
+        const setting = await this.getSettingByKey(key);
+        if (!setting) {
+            return defaultValue;
+        }
+        let result;
+        switch (typeof defaultValue) {
+            case "boolean":
+                result = setting.value === "1";
+                break;
+            case "string":
+                result = setting.value;
+                break;
+            case "number":
+                result = Number(setting.value);
+                break;
+            default:
+                result = setting.value;
+                break;
+        }
+        return result;
+    }
+    async getSettings() {
+        if (!this.isInitialized) {
+            await this.initialize();
+        }
+        return this.settings;
+    }
+    async getSettingByKey(key) {
+        if (!this.isInitialized) {
+            await this.initialize();
+        }
+        return this.settings.find((setting) => {
+            return setting.key === key;
         });
     }
-    getSettings() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.isInitialized) {
-                yield this.initialize();
-            }
-            return this.settings;
-        });
-    }
-    getSettingByKey(key) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.isInitialized) {
-                yield this.initialize();
-            }
-            return this.settings.find((setting) => {
-                return setting.key === key;
+    async removeSetting(key) {
+        const setting = await this.getSettingByKey(key);
+        if (typeof setting === "undefined") {
+            throw new Error(`Setting dot not exists with key ${key}`);
+        }
+        else {
+            await this.repository.delete({
+                key: setting.key,
             });
-        });
+            await this.initialize();
+        }
+        return setting;
     }
-    removeSetting(key) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const setting = yield this.getSettingByKey(key);
-            if (typeof setting === "undefined") {
-                throw new Error(`Setting dot not exists with key ${key}`);
-            }
-            else {
-                yield this.repository.delete({
-                    key: setting.key,
-                });
-                yield this.initialize();
-            }
-            return setting;
-        });
+    async setSetting(key, value) {
+        let setting = await this.getSettingByKey(key);
+        if (typeof setting === "undefined") {
+            setting = await this.repository.create({
+                key,
+                value,
+            });
+        }
+        else {
+            setting.value = value;
+        }
+        await this.repository.save(setting);
+        await this.initialize();
+        return setting;
     }
-    setSetting(key, value) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let setting = yield this.getSettingByKey(key);
-            if (typeof setting === "undefined") {
-                setting = yield this.repository.create({
-                    key,
-                    value,
-                });
-            }
-            else {
-                setting.value = value;
-            }
-            yield this.repository.save(setting);
-            yield this.initialize();
-            return setting;
-        });
-    }
-    initialize() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.settings = yield this.repository.find();
-            this.isInitialized = true;
-        });
+    async initialize() {
+        this.settings = await this.repository.find();
+        this.isInitialized = true;
     }
 };
 SettingService = __decorate([
@@ -117,3 +97,5 @@ SettingService = __decorate([
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SettingService);
 exports.SettingService = SettingService;
+
+//# sourceMappingURL=setting.service.js.map

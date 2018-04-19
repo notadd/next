@@ -17,3 +17,5 @@ ExtensionAfterUninstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ExtensionAfterUninstallEvent)
 ], ExtensionAfterUninstallEventHandler);
 exports.ExtensionAfterUninstallEventHandler = ExtensionAfterUninstallEventHandler;
+
+//# sourceMappingURL=extension-after-uninstall.event.handler.js.map

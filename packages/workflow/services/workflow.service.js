@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const workflow_es_1 = require("workflow-es");
@@ -30,12 +22,10 @@ let WorkflowService = class WorkflowService {
     initialize(metadatas) {
         this.workflows = metadatas;
     }
-    start() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.workflows.forEach(workflow => {
-            });
-            yield this.host.start();
+    async start() {
+        this.workflows.forEach(workflow => {
         });
+        await this.host.start();
     }
 };
 WorkflowService = __decorate([
@@ -43,3 +33,5 @@ WorkflowService = __decorate([
     __metadata("design:paramtypes", [])
 ], WorkflowService);
 exports.WorkflowService = WorkflowService;
+
+//# sourceMappingURL=workflow.service.js.map

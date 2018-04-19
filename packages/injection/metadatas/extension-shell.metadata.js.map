@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/extension-shell.metadata.ts"],"names":[],"mappings":";;AAAA;IAAA;QACI,YAAO,GAAK,EAAE,CAAC;QACf,cAAS,GAAK,EAAE,CAAC;IACrB,CAAC;CAAA;AAHD,wDAGC","file":"extension-shell.metadata.js","sourcesContent":["export class ExtensionShellMetadata {\n    install ? = \"\";\n    uninstall ? = \"\";\n}\n"]}

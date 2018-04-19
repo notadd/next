@@ -1,0 +1,1 @@
+{"version":3,"sources":["builders/entity-metadata.builder.ts"],"names":[],"mappings":";;AAAA;CAEC;AAFD,sDAEC","file":"entity-metadata.builder.js","sourcesContent":["export class EntityMetadataBuilder {\n\n}\n"]}

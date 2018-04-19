@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/index.ts"],"names":[],"mappings":";;AAAA,2DAAyD;AAAhD,iDAAA,iBAAiB,CAAA","file":"index.js","sourcesContent":["export { ConfigurationPage } from \"./configuration.page\";\n"]}

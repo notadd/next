@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/injection.interface.ts"],"names":[],"mappings":"","file":"injection.interface.js","sourcesContent":["export interface Injection {\n    location: string;\n    target: Function;\n}\n"]}

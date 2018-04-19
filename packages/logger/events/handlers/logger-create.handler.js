@@ -17,3 +17,5 @@ LoggerCreateHandler = __decorate([
     cqrs_1.EventsHandler(logger_create_event_1.LoggerCreateEvent)
 ], LoggerCreateHandler);
 exports.LoggerCreateHandler = LoggerCreateHandler;
+
+//# sourceMappingURL=logger-create.handler.js.map

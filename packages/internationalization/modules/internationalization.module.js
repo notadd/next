@@ -35,3 +35,5 @@ InternationalizationModule = __decorate([
         services_1.InternationalizationService])
 ], InternationalizationModule);
 exports.InternationalizationModule = InternationalizationModule;
+
+//# sourceMappingURL=internationalization.module.js.map

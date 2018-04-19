@@ -45,3 +45,5 @@ SystemInformation = __decorate([
     common_1.Component()
 ], SystemInformation);
 exports.SystemInformation = SystemInformation;
+
+//# sourceMappingURL=system.information.js.map

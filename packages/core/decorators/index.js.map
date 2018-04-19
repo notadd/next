@@ -1,0 +1,1 @@
+{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;AAAA,iEAAsD;AAA7C,8CAAA,WAAW,CAAA","file":"index.js","sourcesContent":["export { Information } from \"./information.decorator\";\n"]}

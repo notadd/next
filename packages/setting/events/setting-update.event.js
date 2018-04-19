@@ -7,3 +7,5 @@ class SettingUpdateEvent {
     }
 }
 exports.SettingUpdateEvent = SettingUpdateEvent;
+
+//# sourceMappingURL=setting-update.event.js.map

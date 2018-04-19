@@ -1,0 +1,1 @@
+{"version":3,"sources":["constants/injection.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,aAAa,GAAG;IACzB,KAAK,EAAE,OAAO;IACd,SAAS,EAAE,WAAW;IACtB,MAAM,EAAE,QAAQ;CACnB,CAAC","file":"injection.constants.js","sourcesContent":["export const InjectionType = {\n    Addon: \"Addon\",\n    Extension: \"Extension\",\n    Module: \"Module\",\n};\n"]}

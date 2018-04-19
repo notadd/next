@@ -19,3 +19,5 @@ function getPackagePathByModule(module) {
     return getPath(path_1.dirname(module.location));
 }
 exports.getPackagePathByModule = getPackagePathByModule;
+
+//# sourceMappingURL=get-package-path-by-module.js.map

@@ -17,3 +17,5 @@ ModuleEnableCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.ModuleEnableCommand)
 ], ModuleEnableCommandHandler);
 exports.ModuleEnableCommandHandler = ModuleEnableCommandHandler;
+
+//# sourceMappingURL=module-enable.command.handler.js.map

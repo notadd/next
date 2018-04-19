@@ -17,3 +17,5 @@ AddonBeforeInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.AddonBeforeInstallEvent)
 ], AddonBeforeInstallEventHandler);
 exports.AddonBeforeInstallEventHandler = AddonBeforeInstallEventHandler;
+
+//# sourceMappingURL=addon-before-install.event.handler.js.map

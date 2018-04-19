@@ -17,3 +17,5 @@ AddonUninstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.AddonUninstallCommand)
 ], AddonUninstallCommandHandler);
 exports.AddonUninstallCommandHandler = AddonUninstallCommandHandler;
+
+//# sourceMappingURL=addon-uninstall.command.handler.js.map

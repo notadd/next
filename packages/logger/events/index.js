@@ -8,3 +8,5 @@ var logger_list_event_1 = require("./logger-list.event");
 exports.LoggerListEvent = logger_list_event_1.LoggerListEvent;
 var logger_move_event_1 = require("./logger-move.event");
 exports.LoggerRemoveEvent = logger_move_event_1.LoggerRemoveEvent;
+
+//# sourceMappingURL=index.js.map

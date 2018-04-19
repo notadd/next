@@ -1,0 +1,1 @@
+{"version":3,"sources":["entities/index.ts"],"names":[],"mappings":";;AAAA,mDAA2C;AAAlC,mCAAA,OAAO,CAAA","file":"index.js","sourcesContent":["export { Setting } from \"./setting.entity\";\n"]}

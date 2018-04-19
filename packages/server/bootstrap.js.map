@@ -1,0 +1,1 @@
+{"version":3,"sources":["bootstrap.ts"],"names":[],"mappings":";;AAAA,mCAAwC;AAExC,CAAC,IAAI,qBAAa,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC","file":"bootstrap.js","sourcesContent":["import { ServerStarter } from \"./index\";\n\n(new ServerStarter()).start();\n"]}

@@ -17,3 +17,5 @@ ModuleAfterUninstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ModuleAfterUninstallEvent)
 ], ModuleAfterUninstallEventHandler);
 exports.ModuleAfterUninstallEventHandler = ModuleAfterUninstallEventHandler;
+
+//# sourceMappingURL=module-after-uninstall.event.handler.js.map

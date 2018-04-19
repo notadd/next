@@ -1,0 +1,1 @@
+{"version":3,"sources":["events/module-after-enable.event.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,wDAEC","file":"module-after-enable.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class ModuleAfterEnableEvent implements IEvent {\n\n}\n"]}

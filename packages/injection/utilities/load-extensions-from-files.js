@@ -15,3 +15,5 @@ function loadExtensionsFromFiles() {
     }
 }
 exports.loadExtensionsFromFiles = loadExtensionsFromFiles;
+
+//# sourceMappingURL=load-extensions-from-files.js.map

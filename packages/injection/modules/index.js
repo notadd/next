@@ -12,3 +12,5 @@ var module_module_1 = require("./module.module");
 exports.ModuleModule = module_module_1.ModuleModule;
 var page_module_1 = require("./page.module");
 exports.PageModule = page_module_1.PageModule;
+
+//# sourceMappingURL=index.js.map

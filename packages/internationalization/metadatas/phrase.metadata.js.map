@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/phrase.metadata.ts"],"names":[],"mappings":";;AAAA;CAIC;AAJD,wCAIC","file":"phrase.metadata.js","sourcesContent":["export class PhraseMetadata {\n    callback?: Function;\n    methodName: string;\n    name: string;\n}\n"]}

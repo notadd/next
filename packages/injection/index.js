@@ -18,3 +18,5 @@ exports.Dashboard = decorators_1.Dashboard;
 exports.Extension = decorators_1.Extension;
 exports.Module = decorators_1.Module;
 exports.Page = decorators_1.Page;
+
+//# sourceMappingURL=index.js.map

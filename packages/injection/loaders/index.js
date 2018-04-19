@@ -12,3 +12,5 @@ exports.InjectionLoader = injection_loader_1.InjectionLoader;
 var module_loader_1 = require("./module.loader");
 exports.module = module_loader_1.module;
 exports.ModuleLoader = module_loader_1.ModuleLoader;
+
+//# sourceMappingURL=index.js.map

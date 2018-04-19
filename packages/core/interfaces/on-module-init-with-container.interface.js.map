@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/on-module-init-with-container.interface.ts"],"names":[],"mappings":"","file":"on-module-init-with-container.interface.js","sourcesContent":["import { NestContainer } from \"@nestjs/core/injector/container\";\n\nexport interface OnModuleInitWithContainer {\n    onModuleInitWithContainer(container: NestContainer): any;\n}\n"]}

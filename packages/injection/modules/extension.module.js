@@ -29,3 +29,5 @@ ExtensionModule = __decorate([
     })
 ], ExtensionModule);
 exports.ExtensionModule = ExtensionModule;
+
+//# sourceMappingURL=extension.module.js.map

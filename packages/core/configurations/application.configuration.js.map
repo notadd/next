@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/application.configuration.ts"],"names":[],"mappings":"","file":"application.configuration.js","sourcesContent":["export interface ApplicationConfiguration {\n    timezone: string;\n}\n"]}

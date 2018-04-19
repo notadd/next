@@ -13,3 +13,5 @@ ModuleSagas = __decorate([
     common_1.Component()
 ], ModuleSagas);
 exports.ModuleSagas = ModuleSagas;
+
+//# sourceMappingURL=module.sagas.js.map

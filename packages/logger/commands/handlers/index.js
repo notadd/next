@@ -8,3 +8,5 @@ exports.commandHandlers = [
     logger_list_handler_1.LoggerListHandler,
     logger_remove_handler_1.LoggerRemoveHandler,
 ];
+
+//# sourceMappingURL=index.js.map

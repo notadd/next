@@ -7,3 +7,5 @@ class SettingUpdateCommand {
     }
 }
 exports.SettingUpdateCommand = SettingUpdateCommand;
+
+//# sourceMappingURL=setting-update.command.js.map

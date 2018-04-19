@@ -17,3 +17,5 @@ ExtensionInstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.ExtensionInstallCommand)
 ], ExtensionInstallCommandHandler);
 exports.ExtensionInstallCommandHandler = ExtensionInstallCommandHandler;
+
+//# sourceMappingURL=extension-install.command.handler.js.map

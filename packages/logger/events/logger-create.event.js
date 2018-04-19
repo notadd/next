@@ -6,3 +6,5 @@ class LoggerCreateEvent {
     }
 }
 exports.LoggerCreateEvent = LoggerCreateEvent;
+
+//# sourceMappingURL=logger-create.event.js.map

@@ -70,3 +70,5 @@ class GrpcMicroservice extends microservices_1.Server {
     }
 }
 exports.GrpcMicroservice = GrpcMicroservice;
+
+//# sourceMappingURL=grpc.microservice.js.map

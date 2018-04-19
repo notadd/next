@@ -8,3 +8,5 @@ exports.ConfigurationPath = {
     server: path_1.join(process.cwd(), "configurations", "server.json"),
     swagger: path_1.join(process.cwd(), "configurations", "swagger.json"),
 };
+
+//# sourceMappingURL=configuration.path.js.map

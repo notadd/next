@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/graphql-ide.configuration.ts"],"names":[],"mappings":"","file":"graphql-ide.configuration.js","sourcesContent":["export interface GraphqlIdeConfiguration {\n    enable: boolean;\n    endpoint: string;\n}\n"]}

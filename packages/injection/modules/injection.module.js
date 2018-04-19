@@ -82,3 +82,5 @@ InjectionModule = __decorate([
         sagas_1.ModuleSagas])
 ], InjectionModule);
 exports.InjectionModule = InjectionModule;
+
+//# sourceMappingURL=injection.module.js.map

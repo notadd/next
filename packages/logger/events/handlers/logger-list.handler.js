@@ -17,3 +17,5 @@ LoggerListHandler = __decorate([
     cqrs_1.EventsHandler(logger_list_event_1.LoggerListEvent)
 ], LoggerListHandler);
 exports.LoggerListHandler = LoggerListHandler;
+
+//# sourceMappingURL=logger-list.handler.js.map

@@ -10,3 +10,5 @@ function Dashboard(name) {
     };
 }
 exports.Dashboard = Dashboard;
+
+//# sourceMappingURL=dashboard.decorator.js.map

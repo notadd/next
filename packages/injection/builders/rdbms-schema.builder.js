@@ -11,3 +11,5 @@ class RdbmsSchemaBuilder extends RdbmsSchemaBuilder_1.RdbmsSchemaBuilder {
     }
 }
 exports.RdbmsSchemaBuilder = RdbmsSchemaBuilder;
+
+//# sourceMappingURL=rdbms-schema.builder.js.map

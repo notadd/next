@@ -14,3 +14,5 @@ class TypeormLogger extends FileLogger_1.FileLogger {
     }
 }
 exports.TypeormLogger = TypeormLogger;
+
+//# sourceMappingURL=typeorm.logger.js.map

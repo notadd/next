@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/dashboard-metadata.interface.ts"],"names":[],"mappings":"","file":"dashboard-metadata.interface.js","sourcesContent":["export interface DashboardMetadata {\n    callback?: Function;\n    methodName: string;\n    name: string;\n}\n"]}

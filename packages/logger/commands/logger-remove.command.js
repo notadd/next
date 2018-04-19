@@ -6,3 +6,5 @@ class LoggerRemoveCommand {
     }
 }
 exports.LoggerRemoveCommand = LoggerRemoveCommand;
+
+//# sourceMappingURL=logger-remove.command.js.map

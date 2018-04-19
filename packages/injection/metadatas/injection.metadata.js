@@ -7,3 +7,5 @@ class InjectionMetadata {
     }
 }
 exports.InjectionMetadata = InjectionMetadata;
+
+//# sourceMappingURL=injection.metadata.js.map

@@ -8,3 +8,5 @@ var rdbms_schema_builder_1 = require("./rdbms-schema.builder");
 exports.RdbmsSchemaBuilder = rdbms_schema_builder_1.RdbmsSchemaBuilder;
 var schema_builder_1 = require("./schema.builder");
 exports.SchemaBuilder = schema_builder_1.SchemaBuilder;
+
+//# sourceMappingURL=index.js.map

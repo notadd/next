@@ -26,3 +26,5 @@ function importClassesFromDirectories(directories, formats = [".js", ".ts"]) {
     return loadFileClasses(dirs, []);
 }
 exports.importClassesFromDirectories = importClassesFromDirectories;
+
+//# sourceMappingURL=import-classes-from-directories.js.map

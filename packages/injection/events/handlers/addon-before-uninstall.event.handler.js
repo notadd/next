@@ -17,3 +17,5 @@ AddonBeforeUninstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.AddonBeforeUninstallEvent)
 ], AddonBeforeUninstallEventHandler);
 exports.AddonBeforeUninstallEventHandler = AddonBeforeUninstallEventHandler;
+
+//# sourceMappingURL=addon-before-uninstall.event.handler.js.map

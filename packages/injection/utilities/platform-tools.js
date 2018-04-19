@@ -27,3 +27,5 @@ class PlatformTools {
     }
 }
 exports.PlatformTools = PlatformTools;
+
+//# sourceMappingURL=platform-tools.js.map

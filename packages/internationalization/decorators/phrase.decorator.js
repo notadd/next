@@ -8,3 +8,5 @@ function Phrase(name) {
     };
 }
 exports.Phrase = Phrase;
+
+//# sourceMappingURL=phrase.decorator.js.map

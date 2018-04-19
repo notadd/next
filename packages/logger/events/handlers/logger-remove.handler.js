@@ -17,3 +17,5 @@ LoggerRemoveHandler = __decorate([
     cqrs_1.EventsHandler(logger_move_event_1.LoggerRemoveEvent)
 ], LoggerRemoveHandler);
 exports.LoggerRemoveHandler = LoggerRemoveHandler;
+
+//# sourceMappingURL=logger-remove.handler.js.map

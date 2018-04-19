@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/page-form.metadata.ts"],"names":[],"mappings":";;AAAA;CAGC;AAHD,4CAGC","file":"page-form.metadata.js","sourcesContent":["export class PageFormMetadata {\n    callback?: Function;\n    name: string;\n}\n"]}

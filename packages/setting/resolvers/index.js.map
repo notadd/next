@@ -1,0 +1,1 @@
+{"version":3,"sources":["resolvers/index.ts"],"names":[],"mappings":";;AAAA,yDAAuD;AAA9C,+CAAA,gBAAgB,CAAA","file":"index.js","sourcesContent":["export { SettingResolvers } from \"./setting.resolvers\";\n"]}

@@ -50,3 +50,5 @@ PageService = __decorate([
     __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], PageService);
 exports.PageService = PageService;
+
+//# sourceMappingURL=page.service.js.map

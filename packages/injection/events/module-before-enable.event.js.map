@@ -1,0 +1,1 @@
+{"version":3,"sources":["events/module-before-enable.event.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,0DAEC","file":"module-before-enable.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class ModuleBeforeEnableEvent implements IEvent {\n\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.ts"],"names":[],"mappings":";;;;;AAAA,kDAA6C;AAC7C,mCAAyC;AAAhC,iCAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export * from \"./modules/application.module\";\nexport { ServerStarter } from \"./server\";\n"]}

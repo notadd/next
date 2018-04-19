@@ -54,3 +54,5 @@ SettingModule = __decorate([
         cqrs_1.EventBus])
 ], SettingModule);
 exports.SettingModule = SettingModule;
+
+//# sourceMappingURL=setting.module.js.map

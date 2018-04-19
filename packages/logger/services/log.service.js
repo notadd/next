@@ -11,14 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const clc = require("cli-color");
 const os = require("os");
@@ -33,20 +25,16 @@ let LogService = LogService_1 = class LogService {
     constructor(repository) {
         this.repository = repository;
     }
-    getLogs() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.repository.find();
-        });
+    async getLogs() {
+        return this.repository.find();
     }
-    getLogById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.repository
-                .createQueryBuilder()
-                .where("id = :id", {
-                id,
-            })
-                .getOne();
-        });
+    async getLogById(id) {
+        return this.repository
+            .createQueryBuilder()
+            .where("id = :id", {
+            id,
+        })
+            .getOne();
     }
     static log(message, context = "", isTimeDiffEnabled = true) {
         this.printMessage(message, clc.green, context, isTimeDiffEnabled);
@@ -98,3 +86,5 @@ LogService = LogService_1 = __decorate([
 ], LogService);
 exports.LogService = LogService;
 var LogService_1;
+
+//# sourceMappingURL=log.service.js.map

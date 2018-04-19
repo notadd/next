@@ -29,3 +29,5 @@ AddonModule = __decorate([
     })
 ], AddonModule);
 exports.AddonModule = AddonModule;
+
+//# sourceMappingURL=addon.module.js.map

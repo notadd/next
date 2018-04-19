@@ -18,3 +18,5 @@ WebsocketModule = __decorate([
     })
 ], WebsocketModule);
 exports.WebsocketModule = WebsocketModule;
+
+//# sourceMappingURL=websocket.module.js.map

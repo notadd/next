@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
 const services_1 = require("../services");
@@ -27,18 +19,16 @@ let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             passReqToCallback: true,
             secretOrKey: "secret",
-        }, (req, payload, next) => __awaiter(this, void 0, void 0, function* () { return this.verify(req, payload, next); }));
+        }, async (req, payload, next) => this.verify(req, payload, next));
         this.service = service;
         passport.use(this);
     }
-    verify(req, payload, done) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const isValid = yield this.service.validateUser(payload);
-            if (!isValid) {
-                return done("Unauthorized", false);
-            }
-            done(undefined, payload);
-        });
+    async verify(req, payload, done) {
+        const isValid = await this.service.validateUser(payload);
+        if (!isValid) {
+            return done("Unauthorized", false);
+        }
+        done(undefined, payload);
     }
 };
 JwtStrategy = __decorate([
@@ -46,3 +36,5 @@ JwtStrategy = __decorate([
     __metadata("design:paramtypes", [services_1.AuthService])
 ], JwtStrategy);
 exports.JwtStrategy = JwtStrategy;
+
+//# sourceMappingURL=jwt.strategy.js.map

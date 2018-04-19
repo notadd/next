@@ -17,3 +17,5 @@ AddonBeforeEnableEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.AddonBeforeEnableEvent)
 ], AddonBeforeEnableEventHandler);
 exports.AddonBeforeEnableEventHandler = AddonBeforeEnableEventHandler;
+
+//# sourceMappingURL=addon-before-enable.event.handler.js.map

@@ -39,3 +39,5 @@ InternationalizationResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.InternationalizationService])
 ], InternationalizationResolvers);
 exports.InternationalizationResolvers = InternationalizationResolvers;
+
+//# sourceMappingURL=internationalization.resolvers.js.map

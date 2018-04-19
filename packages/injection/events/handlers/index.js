@@ -14,3 +14,5 @@ exports.eventHandlers = [
     addon_before_install_event_handler_1.AddonBeforeInstallEventHandler,
     addon_before_uninstall_event_handler_1.AddonBeforeUninstallEventHandler,
 ];
+
+//# sourceMappingURL=index.js.map

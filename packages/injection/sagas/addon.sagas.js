@@ -13,3 +13,5 @@ AddonSagas = __decorate([
     common_1.Component()
 ], AddonSagas);
 exports.AddonSagas = AddonSagas;
+
+//# sourceMappingURL=addon.sagas.js.map

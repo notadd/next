@@ -10,3 +10,5 @@ var module_resolvers_1 = require("./module.resolvers");
 exports.ModuleResolvers = module_resolvers_1.ModuleResolvers;
 var page_resolvers_1 = require("./page.resolvers");
 exports.PageResolvers = page_resolvers_1.PageResolvers;
+
+//# sourceMappingURL=index.js.map

@@ -17,3 +17,5 @@ AddonEnableCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.AddonEnableCommand)
 ], AddonEnableCommandHandler);
 exports.AddonEnableCommandHandler = AddonEnableCommandHandler;
+
+//# sourceMappingURL=addon-enable.command.handler.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/workflow.metadata.ts"],"names":[],"mappings":";;AAAA;CAIC;AAJD,4CAIC","file":"workflow.metadata.js","sourcesContent":["export class WorkflowMetadata {\n    category?: string;\n    identification: string;\n    target?: any;\n}\n"]}

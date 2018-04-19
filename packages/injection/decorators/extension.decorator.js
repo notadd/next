@@ -15,3 +15,5 @@ function Extension(obj) {
     };
 }
 exports.Extension = Extension;
+
+//# sourceMappingURL=extension.decorator.js.map

@@ -6,3 +6,5 @@ class LoggerRemoveEvent {
     }
 }
 exports.LoggerRemoveEvent = LoggerRemoveEvent;
+
+//# sourceMappingURL=logger-move.event.js.map

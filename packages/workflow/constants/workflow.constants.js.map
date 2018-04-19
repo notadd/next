@@ -1,0 +1,1 @@
+{"version":3,"sources":["constants/workflow.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,WAAW,GAAG,iBAAiB,CAAC;AAChC,QAAA,iBAAiB,GAAG,uBAAuB,CAAC","file":"workflow.constants.js","sourcesContent":["export const IS_WORKFLOW = \"__is_workflow__\";\nexport const WORKFLOW_CATEGORY = \"__workflow_category__\";\n"]}

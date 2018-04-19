@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/swagger.configuration.ts"],"names":[],"mappings":"","file":"swagger.configuration.js","sourcesContent":["export interface SwaggerConfiguration {\n    enable: boolean;\n    endpoint: string;\n}\n"]}

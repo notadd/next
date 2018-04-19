@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/dashboard.interface.ts"],"names":[],"mappings":"","file":"dashboard.interface.js","sourcesContent":["export interface Dashboard {\n    data: any;\n    name: string;\n}\n"]}

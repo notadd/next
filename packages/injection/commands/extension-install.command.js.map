@@ -1,0 +1,1 @@
+{"version":3,"sources":["commands/extension-install.command.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,0DAEC","file":"extension-install.command.js","sourcesContent":["import { ICommand } from \"@nestjs/cqrs\";\n\nexport class ExtensionInstallCommand implements ICommand {\n\n}\n"]}

@@ -51,3 +51,5 @@ class InjectionLoader {
 }
 exports.InjectionLoader = InjectionLoader;
 exports.injection = new InjectionLoader();
+
+//# sourceMappingURL=injection.loader.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["resolvers/index.ts"],"names":[],"mappings":";;AAAA,mFAAiF;AAAxE,yEAAA,6BAA6B,CAAA","file":"index.js","sourcesContent":["export { InternationalizationResolvers } from \"./internationalization.resolvers\";\n"]}

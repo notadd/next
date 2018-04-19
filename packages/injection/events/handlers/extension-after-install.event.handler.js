@@ -17,3 +17,5 @@ ExtensionAfterInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ExtensionAfterInstallEvent)
 ], ExtensionAfterInstallEventHandler);
 exports.ExtensionAfterInstallEventHandler = ExtensionAfterInstallEventHandler;
+
+//# sourceMappingURL=extension-after-install.event.handler.js.map

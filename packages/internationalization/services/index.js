@@ -4,3 +4,5 @@ var internationalization_explorer_service_1 = require("./internationalization-ex
 exports.InternationalizationExplorerService = internationalization_explorer_service_1.InternationalizationExplorerService;
 var internationalization_service_1 = require("./internationalization.service");
 exports.InternationalizationService = internationalization_service_1.InternationalizationService;
+
+//# sourceMappingURL=index.js.map

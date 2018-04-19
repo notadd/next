@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const services_1 = require("../services");
@@ -25,33 +17,25 @@ let SettingResolvers = class SettingResolvers {
     constructor(service) {
         this.service = service;
     }
-    getSettings() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getSettings();
-        });
+    async getSettings() {
+        return this.service.getSettings();
     }
-    getSettingByKey(object, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getSettingByKey(args.key);
-        });
+    async getSettingByKey(object, args) {
+        return this.service.getSettingByKey(args.key);
     }
-    removeSetting(obj, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.service.removeSetting(args.key);
-            return {
-                code: 200,
-                message: "Remove setting successfully!",
-            };
-        });
+    async removeSetting(obj, args) {
+        await this.service.removeSetting(args.key);
+        return {
+            code: 200,
+            message: "Remove setting successfully!",
+        };
     }
-    setSetting(obj, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.service.setSetting(args.key, args.value);
-            return {
-                code: 200,
-                message: "Set setting successfully!",
-            };
-        });
+    async setSetting(obj, args) {
+        await this.service.setSetting(args.key, args.value);
+        return {
+            code: 200,
+            message: "Set setting successfully!",
+        };
     }
 };
 __decorate([
@@ -87,3 +71,5 @@ SettingResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.SettingService])
 ], SettingResolvers);
 exports.SettingResolvers = SettingResolvers;
+
+//# sourceMappingURL=setting.resolvers.js.map

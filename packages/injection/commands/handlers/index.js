@@ -18,3 +18,5 @@ exports.commandHandlers = [
     module_install_command_handler_1.ModuleInstallCommandHandler,
     module_uninstall_command_handler_1.ModuleUninstallCommandHandler,
 ];
+
+//# sourceMappingURL=index.js.map

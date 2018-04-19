@@ -17,3 +17,5 @@ AddonAfterInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.AddonAfterInstallEvent)
 ], AddonAfterInstallEventHandler);
 exports.AddonAfterInstallEventHandler = AddonAfterInstallEventHandler;
+
+//# sourceMappingURL=addon-after-install.event.handler.js.map

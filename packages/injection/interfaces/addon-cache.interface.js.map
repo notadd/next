@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/addon-cache.interface.ts"],"names":[],"mappings":"","file":"addon-cache.interface.js","sourcesContent":["export interface AddonCache {\n    enabled: Array<string>;\n}\n"]}

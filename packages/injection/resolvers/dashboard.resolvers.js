@@ -39,3 +39,5 @@ DashboardResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.DashboardService])
 ], DashboardResolvers);
 exports.DashboardResolvers = DashboardResolvers;
+
+//# sourceMappingURL=dashboard.resolvers.js.map

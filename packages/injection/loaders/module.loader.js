@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const injection_loader_1 = require("./injection.loader");
@@ -28,21 +20,19 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
         this.cacheForModules.splice(0, this.cacheForModules.length);
         return this;
     }
-    syncWithSetting(setting) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.cacheForModules.length) {
-                this.loadModulesFromCaches();
-            }
-            for (let i = 0; i < this.cacheForModules.length; i++) {
-                const module = this.cacheForModules[i];
-                const identification = module.identification;
-                module.enabled = yield setting.get(`module.${identification}.enabled`, false);
-                module.installed = yield setting.get(`module.${identification}.installed`, false);
-                this.cacheForModules.splice(i, 1, module);
-            }
-            this.syncCachesToFile();
-            return this;
-        });
+    async syncWithSetting(setting) {
+        if (!this.cacheForModules.length) {
+            this.loadModulesFromCaches();
+        }
+        for (let i = 0; i < this.cacheForModules.length; i++) {
+            const module = this.cacheForModules[i];
+            const identification = module.identification;
+            module.enabled = await setting.get(`module.${identification}.enabled`, false);
+            module.installed = await setting.get(`module.${identification}.installed`, false);
+            this.cacheForModules.splice(i, 1, module);
+        }
+        this.syncCachesToFile();
+        return this;
     }
     loadCachesFromJson() {
         return this.loadCachesFromJsonFile(this.filePathForCache);
@@ -90,3 +80,5 @@ class ModuleLoader extends injection_loader_1.InjectionLoader {
 }
 exports.ModuleLoader = ModuleLoader;
 exports.module = new ModuleLoader();
+
+//# sourceMappingURL=module.loader.js.map

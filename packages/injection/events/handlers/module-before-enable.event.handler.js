@@ -17,3 +17,5 @@ ModuleBeforeEnableEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ModuleBeforeEnableEvent)
 ], ModuleBeforeEnableEventHandler);
 exports.ModuleBeforeEnableEventHandler = ModuleBeforeEnableEventHandler;
+
+//# sourceMappingURL=module-before-enable.event.handler.js.map

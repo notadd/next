@@ -17,3 +17,5 @@ ModuleBeforeUninstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ModuleBeforeUninstallEvent)
 ], ModuleBeforeUninstallEventHandler);
 exports.ModuleBeforeUninstallEventHandler = ModuleBeforeUninstallEventHandler;
+
+//# sourceMappingURL=module-before-uninstall.event.handler.js.map

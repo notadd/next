@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/result.interface.ts"],"names":[],"mappings":"","file":"result.interface.js","sourcesContent":["export interface Result {\n    code?: number;\n    message: string;\n}\n"]}

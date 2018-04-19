@@ -1,0 +1,1 @@
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,uDAAqD;AAA5C,6CAAA,eAAe,CAAA","file":"index.js","sourcesContent":["export { WebsocketModule } from \"./websocket.module\";\n"]}

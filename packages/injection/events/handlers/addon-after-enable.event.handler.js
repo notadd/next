@@ -18,3 +18,5 @@ AddonAfterEnableEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.AddonAfterEnableEvent)
 ], AddonAfterEnableEventHandler);
 exports.AddonAfterEnableEventHandler = AddonAfterEnableEventHandler;
+
+//# sourceMappingURL=addon-after-enable.event.handler.js.map

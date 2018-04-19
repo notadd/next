@@ -17,3 +17,5 @@ ModuleBeforeInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ModuleBeforeInstallEvent)
 ], ModuleBeforeInstallEventHandler);
 exports.ModuleBeforeInstallEventHandler = ModuleBeforeInstallEventHandler;
+
+//# sourceMappingURL=module-before-install.event.handler.js.map

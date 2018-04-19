@@ -15,3 +15,5 @@ function Addon(obj) {
     };
 }
 exports.Addon = Addon;
+
+//# sourceMappingURL=addon.decorator.js.map

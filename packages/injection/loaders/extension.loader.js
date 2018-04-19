@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const injection_loader_1 = require("./injection.loader");
@@ -31,21 +23,19 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
         return this;
     }
-    syncWithSetting(setting) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.cacheForExtensions.length) {
-                this.loadExtensionsFromCache();
-            }
-            for (let i = 0; i < this.cacheForExtensions.length; i++) {
-                const extension = this.cacheForExtensions[i];
-                const identification = extension.identification;
-                extension.enabled = yield setting.get(`extension.${identification}.enabled`, false);
-                extension.installed = yield setting.get(`extension.${identification}.installed`, false);
-                this.cacheForExtensions.splice(i, 1, extension);
-            }
-            this.syncCachesToFile();
-            return this;
-        });
+    async syncWithSetting(setting) {
+        if (!this.cacheForExtensions.length) {
+            this.loadExtensionsFromCache();
+        }
+        for (let i = 0; i < this.cacheForExtensions.length; i++) {
+            const extension = this.cacheForExtensions[i];
+            const identification = extension.identification;
+            extension.enabled = await setting.get(`extension.${identification}.enabled`, false);
+            extension.installed = await setting.get(`extension.${identification}.installed`, false);
+            this.cacheForExtensions.splice(i, 1, extension);
+        }
+        this.syncCachesToFile();
+        return this;
     }
     loadExtensionsFromCache() {
         this.cacheForExtensions.splice(0, this.cacheForExtensions.length);
@@ -90,3 +80,5 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
 }
 exports.ExtensionLoader = ExtensionLoader;
 exports.extension = new ExtensionLoader();
+
+//# sourceMappingURL=extension.loader.js.map

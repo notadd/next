@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
@@ -25,35 +17,23 @@ let ModuleResolvers = class ModuleResolvers {
     constructor(moduleService) {
         this.moduleService = moduleService;
     }
-    disableModule(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.disableModule(args.identification);
-        });
+    async disableModule(context, args) {
+        return this.moduleService.disableModule(args.identification);
     }
-    enableModule(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.enableModule(args.identification);
-        });
+    async enableModule(context, args) {
+        return this.moduleService.enableModule(args.identification);
     }
-    getModule(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.getModule(args.identification);
-        });
+    async getModule(context, args) {
+        return this.moduleService.getModule(args.identification);
     }
-    getModules(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.getModules(args.filters);
-        });
+    async getModules(context, args) {
+        return this.moduleService.getModules(args.filters);
     }
-    installModule(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.installModule(args.identification);
-        });
+    async installModule(context, args) {
+        return this.moduleService.installModule(args.identification);
     }
-    uninstallModule(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.moduleService.uninstallModule(args.identification);
-        });
+    async uninstallModule(context, args) {
+        return this.moduleService.uninstallModule(args.identification);
     }
 };
 __decorate([
@@ -103,3 +83,5 @@ ModuleResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.ModuleService])
 ], ModuleResolvers);
 exports.ModuleResolvers = ModuleResolvers;
+
+//# sourceMappingURL=module.resolvers.js.map

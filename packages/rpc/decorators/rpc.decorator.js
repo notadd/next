@@ -18,3 +18,5 @@ function Rpc() {
     };
 }
 exports.Rpc = Rpc;
+
+//# sourceMappingURL=rpc.decorator.js.map

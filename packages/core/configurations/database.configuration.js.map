@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/database.configuration.ts"],"names":[],"mappings":"","file":"database.configuration.js","sourcesContent":["import { ConnectionOptions } from \"typeorm\";\n\nexport type DatabaseConfiguration = ConnectionOptions;\n"]}

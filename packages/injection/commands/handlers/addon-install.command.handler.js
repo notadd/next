@@ -17,3 +17,5 @@ AddonInstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.AddonInstallCommand)
 ], AddonInstallCommandHandler);
 exports.AddonInstallCommandHandler = AddonInstallCommandHandler;
+
+//# sourceMappingURL=addon-install.command.handler.js.map

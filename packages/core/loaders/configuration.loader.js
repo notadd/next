@@ -54,3 +54,5 @@ class ConfigurationLoader {
 }
 exports.ConfigurationLoader = ConfigurationLoader;
 exports.Configuration = new ConfigurationLoader();
+
+//# sourceMappingURL=configuration.loader.js.map

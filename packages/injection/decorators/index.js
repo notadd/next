@@ -10,3 +10,5 @@ var module_decorator_1 = require("./module.decorator");
 exports.Module = module_decorator_1.Module;
 var page_decorator_1 = require("./page.decorator");
 exports.Page = page_decorator_1.Page;
+
+//# sourceMappingURL=index.js.map

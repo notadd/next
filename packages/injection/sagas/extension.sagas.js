@@ -13,3 +13,5 @@ ExtensionSagas = __decorate([
     common_1.Component()
 ], ExtensionSagas);
 exports.ExtensionSagas = ExtensionSagas;
+
+//# sourceMappingURL=extension.sagas.js.map

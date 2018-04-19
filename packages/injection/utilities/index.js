@@ -12,3 +12,5 @@ var load_modules_from_files_1 = require("./load-modules-from-files");
 exports.loadModulesFromFiles = load_modules_from_files_1.loadModulesFromFiles;
 var platform_tools_1 = require("./platform-tools");
 exports.PlatformTools = platform_tools_1.PlatformTools;
+
+//# sourceMappingURL=index.js.map

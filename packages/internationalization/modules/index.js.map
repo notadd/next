@@ -1,0 +1,1 @@
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,6EAA2E;AAAlE,mEAAA,0BAA0B,CAAA","file":"index.js","sourcesContent":["export { InternationalizationModule } from \"./internationalization.module\";\n"]}

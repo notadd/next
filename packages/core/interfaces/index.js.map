@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/index.ts"],"names":[],"mappings":"","file":"index.js","sourcesContent":["export { OnModuleInitWithContainer } from \"./on-module-init-with-container.interface\";\nexport { OnModuleInitWithInjection } from \"./on-module-init-with-injection.interface\";\n"]}

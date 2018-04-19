@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/index.ts"],"names":[],"mappings":";;AAAA,yDAAuD;AAA9C,+CAAA,gBAAgB,CAAA","file":"index.js","sourcesContent":["export { WorkflowMetadata } from \"./workflow.metadata\";\n"]}

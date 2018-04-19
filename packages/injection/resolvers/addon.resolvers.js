@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
@@ -25,35 +17,23 @@ let AddonResolvers = class AddonResolvers {
     constructor(addonService) {
         this.addonService = addonService;
     }
-    disableAddon(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.disableAddon(args.identification);
-        });
+    async disableAddon(context, args) {
+        return this.addonService.disableAddon(args.identification);
     }
-    enableAddon(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.enableAddon(args.identification);
-        });
+    async enableAddon(context, args) {
+        return this.addonService.enableAddon(args.identification);
     }
-    getAddon(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.getAddon(args.identification);
-        });
+    async getAddon(context, args) {
+        return this.addonService.getAddon(args.identification);
     }
-    getAddons(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.getAddons(args.filters);
-        });
+    async getAddons(context, args) {
+        return this.addonService.getAddons(args.filters);
     }
-    installAddon(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.installAddon(args.identification);
-        });
+    async installAddon(context, args) {
+        return this.addonService.installAddon(args.identification);
     }
-    uninstallAddon(context, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.addonService.uninstallAddon(args.identification);
-        });
+    async uninstallAddon(context, args) {
+        return this.addonService.uninstallAddon(args.identification);
     }
 };
 __decorate([
@@ -103,3 +83,5 @@ AddonResolvers = __decorate([
     __metadata("design:paramtypes", [services_1.AddonService])
 ], AddonResolvers);
 exports.AddonResolvers = AddonResolvers;
+
+//# sourceMappingURL=addon.resolvers.js.map

@@ -52,3 +52,5 @@ LoggerModule = __decorate([
         cqrs_1.EventBus])
 ], LoggerModule);
 exports.LoggerModule = LoggerModule;
+
+//# sourceMappingURL=logger.module.js.map

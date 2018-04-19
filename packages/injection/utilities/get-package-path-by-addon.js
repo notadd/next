@@ -19,3 +19,5 @@ function getPackagePathByAddon(addon) {
     return getPath(path_1.dirname(addon.location));
 }
 exports.getPackagePathByAddon = getPackagePathByAddon;
+
+//# sourceMappingURL=get-package-path-by-addon.js.map

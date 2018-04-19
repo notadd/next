@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/graphql.configuration.ts"],"names":[],"mappings":"","file":"graphql.configuration.js","sourcesContent":["import { GraphqlIdeConfiguration } from \"./graphql-ide.configuration\";\n\nexport interface GraphqlConfiguration {\n    endpoint: string;\n    ide: GraphqlIdeConfiguration;\n    paths: Array<string>;\n}\n"]}

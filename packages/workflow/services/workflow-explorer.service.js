@@ -56,3 +56,5 @@ WorkflowExplorerService = __decorate([
         setting_service_1.SettingService])
 ], WorkflowExplorerService);
 exports.WorkflowExplorerService = WorkflowExplorerService;
+
+//# sourceMappingURL=workflow-explorer.service.js.map

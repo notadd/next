@@ -53,3 +53,5 @@ DashboardExplorerService = __decorate([
         metadata_scanner_1.MetadataScanner])
 ], DashboardExplorerService);
 exports.DashboardExplorerService = DashboardExplorerService;
+
+//# sourceMappingURL=dashboard-explorer.service.js.map

@@ -39,3 +39,5 @@ PageModule = __decorate([
         services_1.PageService])
 ], PageModule);
 exports.PageModule = PageModule;
+
+//# sourceMappingURL=page.module.js.map

@@ -34,3 +34,5 @@ Log = __decorate([
     typeorm_1.Entity("logs")
 ], Log);
 exports.Log = Log;
+
+//# sourceMappingURL=log.entity.js.map

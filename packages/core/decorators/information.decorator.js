@@ -8,3 +8,5 @@ function Information(name) {
     };
 }
 exports.Information = Information;
+
+//# sourceMappingURL=information.decorator.js.map

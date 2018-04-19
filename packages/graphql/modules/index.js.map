@@ -1,0 +1,1 @@
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,mDAAiD;AAAxC,yCAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export { GraphqlModule } from \"./graphql.module\";\n"]}

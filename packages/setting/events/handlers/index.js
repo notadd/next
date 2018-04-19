@@ -6,3 +6,5 @@ exports.eventHandlers = [
     setting_remove_handler_1.SettingRemoveHandler,
     setting_update_handler_1.SettingUpdateHandler,
 ];
+
+//# sourceMappingURL=index.js.map

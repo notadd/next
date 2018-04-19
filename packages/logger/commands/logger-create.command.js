@@ -6,3 +6,5 @@ class LoggerCreateCommand {
     }
 }
 exports.LoggerCreateCommand = LoggerCreateCommand;
+
+//# sourceMappingURL=logger-create.command.js.map

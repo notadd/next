@@ -1,0 +1,1 @@
+{"version":3,"sources":["events/extension-after-uninstall.event.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,oEAEC","file":"extension-after-uninstall.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class ExtensionAfterUninstallEvent implements IEvent {\n\n}\n"]}

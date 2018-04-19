@@ -1,0 +1,1 @@
+{"version":3,"sources":["constants/system-information.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,kBAAkB,GAAG,wBAAwB,CAAC","file":"system-information.constants.js","sourcesContent":["export const SYSTEM_INFORMATION = \"__system_information__\";\n"]}

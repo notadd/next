@@ -17,3 +17,5 @@ ModuleUninstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.ModuleUninstallCommand)
 ], ModuleUninstallCommandHandler);
 exports.ModuleUninstallCommandHandler = ModuleUninstallCommandHandler;
+
+//# sourceMappingURL=module-uninstall.command.handler.js.map

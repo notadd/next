@@ -17,3 +17,5 @@ ModuleInstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.ModuleInstallCommand)
 ], ModuleInstallCommandHandler);
 exports.ModuleInstallCommandHandler = ModuleInstallCommandHandler;
+
+//# sourceMappingURL=module-install.command.handler.js.map

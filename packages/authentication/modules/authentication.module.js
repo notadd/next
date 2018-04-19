@@ -28,3 +28,5 @@ AuthenticationModule = __decorate([
     })
 ], AuthenticationModule);
 exports.AuthenticationModule = AuthenticationModule;
+
+//# sourceMappingURL=authentication.module.js.map

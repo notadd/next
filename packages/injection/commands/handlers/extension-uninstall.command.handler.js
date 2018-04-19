@@ -17,3 +17,5 @@ ExtensionUninstallCommandHandler = __decorate([
     cqrs_1.CommandHandler(_1.ExtensionUninstallCommand)
 ], ExtensionUninstallCommandHandler);
 exports.ExtensionUninstallCommandHandler = ExtensionUninstallCommandHandler;
+
+//# sourceMappingURL=extension-uninstall.command.handler.js.map

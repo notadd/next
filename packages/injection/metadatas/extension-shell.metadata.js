@@ -7,3 +7,5 @@ class ExtensionShellMetadata {
     }
 }
 exports.ExtensionShellMetadata = ExtensionShellMetadata;
+
+//# sourceMappingURL=extension-shell.metadata.js.map

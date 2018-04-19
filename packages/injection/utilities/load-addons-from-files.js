@@ -15,3 +15,5 @@ function loadAddonsFromFiles() {
     }
 }
 exports.loadAddonsFromFiles = loadAddonsFromFiles;
+
+//# sourceMappingURL=load-addons-from-files.js.map

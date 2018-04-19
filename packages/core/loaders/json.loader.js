@@ -12,3 +12,5 @@ class JsonLoader {
 }
 exports.JsonLoader = JsonLoader;
 exports.Json = new JsonLoader();
+
+//# sourceMappingURL=json.loader.js.map

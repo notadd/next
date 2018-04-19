@@ -34,3 +34,5 @@ var module_before_install_event_1 = require("./module-before-install.event");
 exports.ModuleBeforeInstallEvent = module_before_install_event_1.ModuleBeforeInstallEvent;
 var module_before_uninstall_event_1 = require("./module-before-uninstall.event");
 exports.ModuleBeforeUninstallEvent = module_before_uninstall_event_1.ModuleBeforeUninstallEvent;
+
+//# sourceMappingURL=index.js.map

@@ -29,3 +29,5 @@ function Schema() {
     };
 }
 exports.Schema = Schema;
+
+//# sourceMappingURL=page.decorator.js.map

@@ -17,3 +17,5 @@ ExtensionBeforeInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ExtensionBeforeInstallEvent)
 ], ExtensionBeforeInstallEventHandler);
 exports.ExtensionBeforeInstallEventHandler = ExtensionBeforeInstallEventHandler;
+
+//# sourceMappingURL=extension-before-install.event.handler.js.map

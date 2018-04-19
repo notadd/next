@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const injection_loader_1 = require("./injection.loader");
@@ -31,21 +23,19 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
         return this;
     }
-    syncWithSetting(setting) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.cacheForAddons.length) {
-                this.loadAddonsFromCache();
-            }
-            for (let i = 0; i < this.cacheForAddons.length; i++) {
-                const addon = this.cacheForAddons[i];
-                const identification = addon.identification;
-                addon.enabled = yield setting.get(`addon.${identification}.enabled`, false);
-                addon.installed = yield setting.get(`addon.${identification}.installed`, false);
-                this.cacheForAddons.splice(i, 1, addon);
-            }
-            this.syncCachesToFile();
-            return this;
-        });
+    async syncWithSetting(setting) {
+        if (!this.cacheForAddons.length) {
+            this.loadAddonsFromCache();
+        }
+        for (let i = 0; i < this.cacheForAddons.length; i++) {
+            const addon = this.cacheForAddons[i];
+            const identification = addon.identification;
+            addon.enabled = await setting.get(`addon.${identification}.enabled`, false);
+            addon.installed = await setting.get(`addon.${identification}.installed`, false);
+            this.cacheForAddons.splice(i, 1, addon);
+        }
+        this.syncCachesToFile();
+        return this;
     }
     loadAddonsFromCache() {
         this.cacheForAddons.splice(0, this.cacheForAddons.length);
@@ -89,3 +79,5 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
 }
 exports.AddonLoader = AddonLoader;
 exports.addon = new AddonLoader();
+
+//# sourceMappingURL=addon.loader.js.map

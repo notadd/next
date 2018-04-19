@@ -1,0 +1,1 @@
+{"version":3,"sources":["configurations/server-http.configuration.ts"],"names":[],"mappings":"","file":"server-http.configuration.js","sourcesContent":["export interface ServerHttpConfiguration {\n    host?: string;\n    port?: number;\n    protocol?: string;\n}\n"]}

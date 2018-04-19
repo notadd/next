@@ -17,3 +17,5 @@ ModuleAfterInstallEventHandler = __decorate([
     cqrs_1.EventsHandler(_1.ModuleAfterInstallEvent)
 ], ModuleAfterInstallEventHandler);
 exports.ModuleAfterInstallEventHandler = ModuleAfterInstallEventHandler;
+
+//# sourceMappingURL=module-after-install.event.handler.js.map

@@ -18,3 +18,5 @@ var module_install_command_1 = require("./module-install.command");
 exports.ModuleInstallCommand = module_install_command_1.ModuleInstallCommand;
 var module_uninstall_command_1 = require("./module-uninstall.command");
 exports.ModuleUninstallCommand = module_uninstall_command_1.ModuleUninstallCommand;
+
+//# sourceMappingURL=index.js.map

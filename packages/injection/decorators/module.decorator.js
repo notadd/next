@@ -15,3 +15,5 @@ function Module(obj) {
     };
 }
 exports.Module = Module;
+
+//# sourceMappingURL=module.decorator.js.map

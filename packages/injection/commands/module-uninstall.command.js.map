@@ -1,0 +1,1 @@
+{"version":3,"sources":["commands/module-uninstall.command.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,wDAEC","file":"module-uninstall.command.js","sourcesContent":["import { ICommand } from \"@nestjs/cqrs\";\n\nexport class ModuleUninstallCommand implements ICommand {\n\n}\n"]}

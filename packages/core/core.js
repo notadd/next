@@ -17,3 +17,5 @@ class CoreFactory {
     }
 }
 exports.CoreFactory = CoreFactory;
+
+//# sourceMappingURL=core.js.map
