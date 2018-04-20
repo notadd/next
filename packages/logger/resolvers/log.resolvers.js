@@ -18,6 +18,10 @@ let LogResolvers = class LogResolvers {
         this.service = service;
     }
     async getLogs() {
+        console.log(process.pid);
+        process.send && process.send({
+            action: "restart",
+        });
         return this.service.getLogs();
     }
     async getLogById(obj, { id }) {

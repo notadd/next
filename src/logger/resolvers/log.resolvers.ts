@@ -12,6 +12,11 @@ export class LogResolvers {
     @Query()
     @UseGuards(UserGuard)
     async getLogs(): Promise<Array<Log>> {
+        console.log(process.pid);
+        process.send && process.send({
+            action: "restart",
+        });
+
         return this.service.getLogs();
     }
 
