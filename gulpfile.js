@@ -37,23 +37,7 @@ gulp.task("default", function () {
             "storages/caches/graphql.json",
             "storages/caches/module.json",
         ],
-        ext: "js"
-    });
-});
-
-gulp.task("backend-mix-server", function () {
-    tasks();
-    nodemon({
-        script: "node_modules/@notadd/react-scripts/bin/react-scripts.js",
-        args: [
-            "start",
-            "--index",
-            "node_modules/@notadd/backend-mix/index.js",
-        ],
-        watch: [
-            "node_modules/@notadd/backend-mix/package.json",
-            "node_modules/@notadd/react-scripts/bin/react-scripts.js",
-        ],
+        ext: "js",
     });
 });
 
