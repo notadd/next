@@ -13,7 +13,8 @@ export class AuthService {
         if (typeof user === "undefined") {
             throw new Error("User Do not exists!");
         }
-        if (user.password !== createHmac("sha256", password).digest("hex")) {
+  
+        if (user.password !== createHmac("sha256",  password + user.salt).digest("hex")) {
             throw new Error("Password is incorrect!");
         }
 
