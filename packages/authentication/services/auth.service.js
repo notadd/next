@@ -22,7 +22,7 @@ let AuthService = class AuthService {
         if (typeof user === "undefined") {
             throw new Error("User Do not exists!");
         }
-        if (user.password !== crypto_1.createHmac("sha256", password).digest("hex")) {
+        if (user.password !== crypto_1.createHash("sha256").update(password + user.salt).digest("hex")) {
             throw new Error("Password is incorrect!");
         }
         const expiresIn = 60 * 60;
