@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passport = require("passport");
-const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
+const passport = require("passport");
 const passport_jwt_1 = require("passport-jwt");
+const services_1 = require("../services");
 let JwtStrategy = class JwtStrategy extends passport_jwt_1.Strategy {
     constructor(service) {
         super({
