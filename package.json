@@ -73,6 +73,7 @@
         "gulp-watch": "^4.3.11",
         "lerna": "^2.5.1",
         "nodemon": "^1.11.0",
+        "ts-loader": "^4.2.0",
         "tslint": "^5.9.1"
     },
     "engines": {
