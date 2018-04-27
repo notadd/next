@@ -19,6 +19,7 @@
     "author": "notadd",
     "license": "Apache-2.0",
     "dependencies": {
+        "@already/webpack-plugins": "^1.0.0",
         "inquirer": "^5.2.0",
         "ip": "^1.1.5",
         "load-json-file": "^4.0.0",

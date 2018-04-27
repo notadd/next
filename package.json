@@ -20,6 +20,7 @@
         "typescript": "^2.7.0"
     },
     "devDependencies": {
+        "@already/webpack-plugins": "^1.0.0",
         "@nestjs/common": "^4.6.0",
         "@nestjs/core": "^4.6.0",
         "@nestjs/cqrs": "^4.0.0",
