@@ -70,8 +70,9 @@ let LogService = LogService_1 = class LogService {
         LogService_1.prevTimestamp = Date.now();
     }
     static printStackTrace(trace) {
-        if (this.contextEnv === nest_environment_enum_1.NestEnvironment.TEST || !trace)
+        if (this.contextEnv === nest_environment_enum_1.NestEnvironment.TEST || !trace) {
             return;
+        }
         process.stdout.write(trace);
         process.stdout.write(`\n`);
     }
