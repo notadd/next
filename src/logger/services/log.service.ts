@@ -100,7 +100,9 @@ export class LogService {
     }
 
     private static printStackTrace(trace: string) {
-        if (this.contextEnv === NestEnvironment.TEST || !trace) return;
+        if (this.contextEnv === NestEnvironment.TEST || !trace) {
+            return;
+        }
 
         process.stdout.write(trace);
         process.stdout.write(`\n`);
