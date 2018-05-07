@@ -24,7 +24,11 @@ export class AuthService {
 
         const expiresIn = 60 * 60;
         const secretOrKey = "secret";
-        const token = jwt.sign(user, secretOrKey, { expiresIn });
+        const playload = {
+                id: user.id,
+                userName: user.userName,
+            };
+        const token = jwt.sign(playload, secretOrKey, { expiresIn });
 
         return {
             expires: expiresIn,
