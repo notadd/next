@@ -1,5 +1,10 @@
+// folders
 .idea/
 node_modules/
+coverage/
+.nyc_output/
+
+// files
 graphql.config.json
 graphql.schema.json
 lerna-debug.log
