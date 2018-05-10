@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const resolvers_1 = require("../resolvers");
 const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
-const strategies_1 = require("../strategies");
 const user_1 = require("@notadd/user");
 let AuthenticationModule = class AuthenticationModule {
     configure(consumer) {
@@ -17,10 +16,9 @@ let AuthenticationModule = class AuthenticationModule {
 };
 AuthenticationModule = __decorate([
     common_1.Module({
-        components: [
+        providers: [
             resolvers_1.AuthResolvers,
             services_1.AuthService,
-            strategies_1.JwtStrategy,
         ],
         imports: [
             common_1.forwardRef(() => user_1.UserModule),

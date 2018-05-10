@@ -1,12 +1,8 @@
-import {
-    CanActivate,
-    ExecutionContext,
-    Guard,
-} from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 
-@Guard()
+@Injectable()
 export class BackendGuard implements CanActivate {
-    canActivate(request: any, context: ExecutionContext): boolean {
+    canActivate(context: ExecutionContext): boolean {
         return true;
     }
 }

@@ -8,6 +8,5 @@ __export(require("./guards"));
 __export(require("./modules"));
 __export(require("./resolvers"));
 __export(require("./services"));
-__export(require("./strategies"));
 
 //# sourceMappingURL=index.js.map

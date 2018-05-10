@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 let BackendGuard = class BackendGuard {
-    canActivate(request, context) {
+    canActivate(context) {
         return true;
     }
 };
 BackendGuard = __decorate([
-    common_1.Guard()
+    common_1.Injectable()
 ], BackendGuard);
 exports.BackendGuard = BackendGuard;
 
