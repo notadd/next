@@ -14,7 +14,8 @@
         "prepublish": "npm run build",
         "publish": "node ./node_modules/lerna/bin/lerna.js publish -m \"chore(release): publish %s\"",
         "run:install": "node ./node_modules/@notadd/server/install.js",
-        "react-scripts": "./node_modules/.bin/react-scripts"
+        "react-scripts": "./node_modules/.bin/react-scripts",
+        "test": "nyc --require ts-node/register mocha src/**/*.spec.ts --reporter spec"
     },
     "dependencies": {
         "pg": "^7.4.1",
@@ -77,6 +78,7 @@
         "nodemon": "^1.11.0",
         "nyc": "^11.7.2",
         "ts-loader": "^4.2.0",
+        "ts-node": "^6.0.3",
         "tslint": "^5.9.1"
     },
     "engines": {
