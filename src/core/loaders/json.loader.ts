@@ -1,6 +1,4 @@
 import * as loadJsonFile from "load-json-file";
-import { dirname } from "path";
-import { existsSync } from "fs";
 import { Logger } from "@nestjs/common";
 
 export class JsonLoader {

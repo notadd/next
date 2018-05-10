@@ -1,1 +1,0 @@
-{"version":3,"sources":["types/index.ts"],"names":[],"mappings":"","file":"index.js","sourcesContent":["export { Result } from \"../interfaces/result.interface\";\n"]}
