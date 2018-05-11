@@ -12,7 +12,7 @@ let WebsocketModule = class WebsocketModule {
 };
 WebsocketModule = __decorate([
     common_1.Module({
-        components: [
+        providers: [
             gateways_1.EventGateway,
         ],
     })
