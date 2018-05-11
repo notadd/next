@@ -5,10 +5,6 @@ import { SettingService } from "../services";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
-    components: [
-        SettingResolvers,
-        SettingService,
-    ],
     exports: [
         SettingService,
     ],
@@ -16,6 +12,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
         TypeOrmModule.forFeature([
             Setting,
         ]),
+    ],
+    providers: [
+        SettingResolvers,
+        SettingService,
     ]
 })
 export class SettingModule {

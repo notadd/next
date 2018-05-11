@@ -92,7 +92,7 @@ let SettingService = class SettingService {
     }
 };
 SettingService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(entities_1.Setting)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SettingService);

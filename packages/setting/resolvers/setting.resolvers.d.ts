@@ -1,6 +1,6 @@
 import { Setting } from "../entities";
 import { SettingService } from "../services";
-import { Result } from "../../core/types";
+import { Result } from "@notadd/core/interfaces";
 export declare class SettingResolvers {
     private readonly service;
     constructor(service: SettingService);

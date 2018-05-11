@@ -3,7 +3,7 @@ import { Setting } from "../entities";
 import { SettingService } from "../services";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication";
-import { Result } from "../../core/types";
+import { Result } from "@notadd/core/interfaces";
 
 @Resolver("Setting")
 export class SettingResolvers {
