@@ -48,7 +48,7 @@ let InternationalizationExplorerService = class InternationalizationExplorerServ
     }
 };
 InternationalizationExplorerService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [injector_1.ModulesContainer,
         metadata_scanner_1.MetadataScanner])
 ], InternationalizationExplorerService);

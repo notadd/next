@@ -1,8 +1,8 @@
 import * as Polyglot from "node-polyglot";
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { PhraseMetadata } from "../metadatas";
 
-@Component()
+@Injectable()
 export class InternationalizationService {
     private metadatas: Array<PhraseMetadata>;
 

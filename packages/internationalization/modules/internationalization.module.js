@@ -24,7 +24,7 @@ let InternationalizationModule = class InternationalizationModule {
 };
 InternationalizationModule = __decorate([
     common_1.Module({
-        components: [
+        providers: [
             services_1.InternationalizationExplorerService,
             resolvers_1.InternationalizationResolvers,
             services_1.InternationalizationService,

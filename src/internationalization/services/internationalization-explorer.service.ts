@@ -1,12 +1,12 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 import { flattenDeep } from "lodash";
-import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { PhraseMetadata } from "../metadatas";
 import { PHRASE_DEFINITION } from "../constants";
 
-@Component()
+@Injectable()
 export class InternationalizationExplorerService {
     private metadata = PHRASE_DEFINITION;
 
@@ -38,7 +38,7 @@ export class InternationalizationExplorerService {
         };
     }
 
-    public filterPhrases(instance: Injectable): Array<PhraseMetadata> {
+    public filterPhrases(instance: InjectableInterface): Array<PhraseMetadata> {
         const prototype = Object.getPrototypeOf(instance);
         const components = this.metadataScanner.scanFromPrototype(
             instance,
@@ -51,7 +51,7 @@ export class InternationalizationExplorerService {
                 return dashboard.name && dashboard.methodName;
             })
             .map(dashboard => {
-                const callback = instance[dashboard.methodName].bind(instance);
+                const callback = instance[ dashboard.methodName ].bind(instance);
 
                 return {
                     callback,

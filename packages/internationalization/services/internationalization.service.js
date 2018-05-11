@@ -36,7 +36,7 @@ let InternationalizationService = class InternationalizationService {
     }
 };
 InternationalizationService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [])
 ], InternationalizationService);
 exports.InternationalizationService = InternationalizationService;
