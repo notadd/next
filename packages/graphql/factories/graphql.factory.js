@@ -19,9 +19,7 @@ let GraphqlFactory = class GraphqlFactory {
     constructor(resolversExplorerService) {
         this.resolversExplorerService = resolversExplorerService;
     }
-    createSchema(schemaDefinition = {
-        typeDefs: {},
-    }) {
+    createSchema(schemaDefinition) {
         return graphql_tools_1.makeExecutableSchema(Object.assign({}, schemaDefinition, { resolvers: Object.assign({}, this.resolversExplorerService.explore(), (schemaDefinition.resolvers || {})) }));
     }
     createDelegates() {
@@ -39,7 +37,7 @@ let GraphqlFactory = class GraphqlFactory {
     }
 };
 GraphqlFactory = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [resolvers_explorer_service_1.ResolversExplorerService])
 ], GraphqlFactory);
 exports.GraphqlFactory = GraphqlFactory;

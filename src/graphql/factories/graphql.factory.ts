@@ -1,27 +1,26 @@
 import * as fs from "fs";
 import * as glob from "glob";
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { IExecutableSchemaDefinition, MergeInfo } from "graphql-tools/dist/Interfaces";
 import { makeExecutableSchema } from "graphql-tools";
 import { mergeTypes } from "merge-graphql-schemas";
 import { ResolversExplorerService } from "@nestjs/graphql/resolvers-explorer.service";
 
-@Component()
+@Injectable()
 export class GraphqlFactory {
     constructor(
         private readonly resolversExplorerService: ResolversExplorerService,
     ) {
     }
 
-    public createSchema(schemaDefinition: IExecutableSchemaDefinition = {
-        typeDefs: {
-        },
-    }) {
+    public createSchema(schemaDefinition: IExecutableSchemaDefinition) {
         return makeExecutableSchema({
             ...schemaDefinition,
             resolvers: {
                 ...this.resolversExplorerService.explore(),
-                ...(schemaDefinition.resolvers || {}),
+                ...(
+                    schemaDefinition.resolvers || {}
+                ),
             },
         });
     }

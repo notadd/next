@@ -25,11 +25,11 @@ let GraphqlModule = class GraphqlModule {
         if (this.configuration.ide.enable) {
             consumer
                 .apply(apollo_server_express_1.graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
-                .forRoutes({ path: `/${this.configuration.ide.endpoint}`, method: common_1.RequestMethod.GET });
+                .forRoutes(this.configuration.ide.endpoint);
         }
         consumer
             .apply(apollo_server_express_1.graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes({ path: `/${this.configuration.endpoint}`, method: common_1.RequestMethod.ALL });
+            .forRoutes(this.configuration.endpoint);
     }
     createSchema() {
         const paths = this.configuration.paths.concat([]);
