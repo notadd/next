@@ -1,8 +1,8 @@
-import { Component } from "@nestjs/common";
 import { Information } from "@notadd/core/decorators/information.decorator";
+import { Injectable } from "@nestjs/common";
 import { platform, release } from "os";
 
-@Component()
+@Injectable()
 export class SystemInformation {
     @Information("node-version")
     public nodeVersion(): string {

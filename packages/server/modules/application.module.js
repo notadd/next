@@ -24,9 +24,6 @@ let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
     common_1.Module({
-        components: [
-            informations_1.SystemInformation,
-        ],
         imports: [
             typeorm_1.TypeOrmModule.forRoot(loaders_1.Configuration.loadDatabaseConfiguration()),
             modules_1.GraphqlModule,
@@ -39,6 +36,9 @@ ApplicationModule = __decorate([
             backend_1.BackendModule,
             user_1.UserModule,
             authentication_1.AuthenticationModule,
+        ],
+        providers: [
+            informations_1.SystemInformation,
         ],
     })
 ], ApplicationModule);

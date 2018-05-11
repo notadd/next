@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const information_decorator_1 = require("@notadd/core/decorators/information.decorator");
+const common_1 = require("@nestjs/common");
 const os_1 = require("os");
 let SystemInformation = class SystemInformation {
     nodeVersion() {
@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:returntype", String)
 ], SystemInformation.prototype, "systemRelease", null);
 SystemInformation = __decorate([
-    common_1.Component()
+    common_1.Injectable()
 ], SystemInformation);
 exports.SystemInformation = SystemInformation;
 

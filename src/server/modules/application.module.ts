@@ -15,9 +15,6 @@ import { WebsocketModule } from "@notadd/websocket";
 import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
 
 @Module({
-    components: [
-        SystemInformation,
-    ],
     imports: [
         TypeOrmModule.forRoot(Configuration.loadDatabaseConfiguration()),
         GraphqlModule,
@@ -30,6 +27,9 @@ import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
         BackendModule,
         UserModule,
         AuthenticationModule,
+    ],
+    providers: [
+        SystemInformation,
     ],
 })
 export class ApplicationModule {
