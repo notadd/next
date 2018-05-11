@@ -5,10 +5,6 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
-    components: [
-        LogResolvers,
-        LogService,
-    ],
     exports: [
         LogService,
     ],
@@ -16,6 +12,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
         TypeOrmModule.forFeature([
             Log,
         ]),
+    ],
+    providers: [
+        LogResolvers,
+        LogService,
     ],
 })
 export class LoggerModule {

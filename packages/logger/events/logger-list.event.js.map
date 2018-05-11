@@ -1,1 +1,0 @@
-{"version":3,"sources":["events/logger-list.event.ts"],"names":[],"mappings":";;AAEA;CACC;AADD,0CACC","file":"logger-list.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class LoggerListEvent implements IEvent {\n}\n"]}

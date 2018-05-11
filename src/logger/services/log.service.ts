@@ -1,14 +1,14 @@
 import * as clc from "cli-color";
 import * as os from "os";
 import { appendFileSync } from "fs";
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Log } from "../entities";
 import { NestEnvironment } from "@nestjs/common/enums/nest-environment.enum";
 import { Repository } from "typeorm";
 import { Configuration } from "@notadd/core/loaders";
 
-@Component()
+@Injectable()
 export class LogService {
     private static prevTimestamp = Date.now();
 

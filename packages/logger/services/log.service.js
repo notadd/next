@@ -81,7 +81,7 @@ LogService.prevTimestamp = Date.now();
 LogService.contextEnv = nest_environment_enum_1.NestEnvironment.RUN;
 LogService.yellow = clc.xterm(3);
 LogService = LogService_1 = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(entities_1.Log)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], LogService);
