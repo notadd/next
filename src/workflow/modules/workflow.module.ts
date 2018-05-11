@@ -1,4 +1,4 @@
-import { MiddlewaresConsumer, Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { WorkflowExplorerService, WorkflowService } from "../services";
@@ -28,9 +28,9 @@ export class WorkflowModule {
     }
 
     /**
-     * @param { MiddlewaresConsumer } consumer
+     * @param { MiddlewareConsumer } consumer
      */
-    async configure(consumer: MiddlewaresConsumer) {
+    async configure(consumer: MiddlewareConsumer) {
         this.workflowService.initialize(this.workflowExplorerService.explore());
         await this.workflowService.start();
     }

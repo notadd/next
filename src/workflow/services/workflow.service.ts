@@ -1,8 +1,8 @@
-import { Component } from "@nestjs/common";
 import { configureWorkflow, IWorkflowHost } from "workflow-es";
+import { Injectable } from "@nestjs/common";
 import { WorkflowMetadata } from "../metadatas";
 
-@Component()
+@Injectable()
 export class WorkflowService {
     private readonly host: IWorkflowHost;
 

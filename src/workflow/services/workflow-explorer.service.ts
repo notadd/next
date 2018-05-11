@@ -1,13 +1,13 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 import { flattenDeep } from "lodash";
-import { Injectable } from "@nestjs/common/interfaces";
 import { IS_WORKFLOW } from "../constants";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { WorkflowMetadata } from "../metadatas";
 
-@Component()
+@Injectable()
 export class WorkflowExplorerService {
     private category = "category";
 
@@ -49,7 +49,7 @@ export class WorkflowExplorerService {
      *
      * @returns { Array<WorkflowMetadata> }
      */
-    protected filterWorkflows(instance: Injectable, metatype: any): Array<WorkflowMetadata> {
+    protected filterWorkflows(instance: InjectableInterface, metatype: any): Array<WorkflowMetadata> {
         const isWorkflow: boolean = Reflect.getMetadata(IS_WORKFLOW, metatype);
         const workflowMeta: WorkflowMetadata = {
             category: Reflect.getMetadata(this.category, metatype),

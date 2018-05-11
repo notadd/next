@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common/interfaces";
+import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { SettingService } from "@notadd/setting/services/setting.service";
@@ -11,5 +11,5 @@ export declare class WorkflowExplorerService {
     private identification;
     constructor(modulesContainer: ModulesContainer, metadataScanner: MetadataScanner, settingService: SettingService);
     explore(): Array<WorkflowMetadata>;
-    protected filterWorkflows(instance: Injectable, metatype: any): Array<WorkflowMetadata>;
+    protected filterWorkflows(instance: InjectableInterface, metatype: any): Array<WorkflowMetadata>;
 }
