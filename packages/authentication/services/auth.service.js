@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const jwt = require("jsonwebtoken");
+const crypto_1 = require("crypto");
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("@notadd/user/service/user.service");
-const crypto_1 = require("crypto");
-const jwt = require("jsonwebtoken");
 let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
@@ -42,7 +42,7 @@ let AuthService = class AuthService {
     }
 };
 AuthService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], AuthService);
 exports.AuthService = AuthService;

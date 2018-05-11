@@ -6,7 +6,7 @@ export declare class PageExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;
     constructor(modulesContainer: ModulesContainer, metadataScanner: MetadataScanner);
-    explore(): any;
+    explore(): PageMetadata[][];
     protected extractMetadata(instance: any, prototype: any, methodName: string): {
         form: {
             callback: any;

@@ -1,9 +1,9 @@
-import { Component } from "@nestjs/common";
-import { UserService } from "@notadd/user/service/user.service";
-import { createHash } from "crypto";
 import * as jwt from "jsonwebtoken";
+import { createHash } from "crypto";
+import { Injectable } from "@nestjs/common";
+import { UserService } from "@notadd/user/service/user.service";
 
-@Component()
+@Injectable()
 export class AuthService {
     constructor(private readonly userService: UserService) {
     }
@@ -11,7 +11,7 @@ export class AuthService {
     /**
      * @param { string } username
      * @param { string } password
-     * @returns { Promise<{expires: number; token: string}> }
+     * @returns { Promise<{ expires: number; token: string }> }
      */
     async createToken(username: string, password: string) {
         const user = await this.userService.getUserByName(username);

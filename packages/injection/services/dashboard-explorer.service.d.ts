@@ -7,8 +7,8 @@ export declare class DashboardExplorerService {
     private readonly metadataScanner;
     private metadata;
     constructor(modulesContainer: ModulesContainer, metadataScanner: MetadataScanner);
-    explore(): any;
+    explore(): DashboardMetadata[][];
     protected extractMetadata(instance: any, prototype: any, methodName: string): DashboardMetadata;
     protected filterDashboards(instance: InjectableInterface): Array<DashboardMetadata>;
-    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<DashboardMetadata>): any;
+    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<DashboardMetadata>): DashboardMetadata[][];
 }

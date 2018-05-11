@@ -40,6 +40,7 @@
         "redis": "^2.7.1",
         "reflect-metadata": "^0.1.10",
         "rxjs": "^6.1.0",
+        "rxjs-compat": "^6.1.0",
         "socket.io": "^2.0.3",
         "typeorm": "^0.1.9",
         "write-json-file": "^2.3.0"
