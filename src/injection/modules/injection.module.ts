@@ -1,5 +1,4 @@
 import { AddonModule } from "./addon.module";
-import { AddonSagas, ExtensionSagas, ModuleSagas } from "../sagas";
 import { ConfigurationPage } from "../pages";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards";
@@ -14,14 +13,6 @@ import { UserModule } from "@notadd/user";
 import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } from "../utilities";
 
 @Module({
-    components: [
-        AddonSagas,
-        ConfigurationPage,
-        DeveloperDashboard,
-        ExtensionSagas,
-        InjectionService,
-        ModuleSagas,
-    ],
     exports: [
         InjectionService,
     ],
@@ -37,6 +28,11 @@ import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } fr
         PageModule,
         SettingModule,
         UserModule,
+    ],
+    providers: [
+        ConfigurationPage,
+        DeveloperDashboard,
+        InjectionService,
     ],
 })
 export class InjectionModule {

@@ -34,7 +34,7 @@ let DashboardService = class DashboardService {
     }
 };
 DashboardService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], DashboardService);
 exports.DashboardService = DashboardService;

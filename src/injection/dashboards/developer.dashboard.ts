@@ -1,7 +1,7 @@
-import { Component } from "@nestjs/common";
 import { Dashboard } from "../decorators";
+import { Injectable } from "@nestjs/common";
 
-@Component()
+@Injectable()
 export class DeveloperDashboard {
     @Dashboard("developers")
     public getDashboard() {

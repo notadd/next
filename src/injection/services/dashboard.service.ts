@@ -1,8 +1,8 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Dashboard, DashboardMetadata } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-@Component()
+@Injectable()
 export class DashboardService {
     private initialized = false;
 

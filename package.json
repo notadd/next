@@ -54,6 +54,7 @@
         "@types/ip": "^0.0.30",
         "@types/jsonwebtoken": "^7.2.7",
         "@types/load-json-file": "^2.0.7",
+        "@types/lodash": "^4.14.108",
         "@types/node": "^9.4.7",
         "@types/passport": "^0.4.5",
         "@types/passport-jwt": "^3.0.1",

@@ -1,12 +1,12 @@
-import { Component } from "@nestjs/common";
 import { DASHBOARD_NAME_METADATA } from "../constants";
 import { DashboardMetadata } from "../interfaces";
 import { flattenDeep } from "lodash";
-import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
+import { Injectable } from "@nestjs/common";
+import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 
-@Component()
+@Injectable()
 export class DashboardExplorerService {
     private metadata = DASHBOARD_NAME_METADATA;
 
@@ -48,7 +48,7 @@ export class DashboardExplorerService {
      * @param { Injectable } instance
      * @returns { Array<DashboardMetadata> }
      */
-    protected filterDashboards(instance: Injectable): Array<DashboardMetadata> {
+    protected filterDashboards(instance: InjectableInterface): Array<DashboardMetadata> {
         const prototype = Object.getPrototypeOf(instance);
         const components = this.metadataScanner.scanFromPrototype(
             instance,
@@ -61,7 +61,7 @@ export class DashboardExplorerService {
                 return dashboard.name && dashboard.methodName;
             })
             .map(dashboard => {
-                const callback = instance[dashboard.methodName].bind(instance);
+                const callback = instance[ dashboard.methodName ].bind(instance);
 
                 return {
                     callback,

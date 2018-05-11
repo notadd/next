@@ -1,13 +1,13 @@
 import { Addon } from "../interfaces";
 import { AddonLoader } from "../loaders";
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
 import { join } from "path";
-import { Result } from "@notadd/core/types/result.type";
+import { Result } from "@notadd/core/interfaces";
 import { SchemaBuilder } from "../builders";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-@Component()
+@Injectable()
 export class AddonService {
     protected loader: AddonLoader = new AddonLoader();
 
@@ -49,7 +49,7 @@ export class AddonService {
             throw new Error("Addon do not exists!");
         }
         if (!await this.settingService.get<boolean>(`addon.${addon.identification}.installed`, false)) {
-                throw new Error(`Addon [${addon.identification}] is not installed!`);
+            throw new Error(`Addon [${addon.identification}] is not installed!`);
         }
         await this.settingService.setSetting(`addon.${addon.identification}.enabled`, "1");
         await this.loader.refresh().syncWithSetting(this.settingService);
@@ -75,7 +75,7 @@ export class AddonService {
      *
      * @returns { Promise<Array<Addon>> }
      */
-    public async getAddons(filter: { enabled?: boolean, installed?: boolean}): Promise<Array<Addon>> {
+    public async getAddons(filter: { enabled?: boolean, installed?: boolean }): Promise<Array<Addon>> {
         if (filter && typeof filter.enabled !== "undefined") {
             if (filter.enabled) {
                 return this.loader.addons.filter(addon => {

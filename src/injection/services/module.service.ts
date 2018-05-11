@@ -1,13 +1,13 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { join } from "path";
 import { Module } from "../interfaces";
 import { ModuleLoader } from "../loaders";
-import { Result } from "@notadd/core/types/result.type";
+import { Result } from "@notadd/core/interfaces";
 import { SchemaBuilder } from "../builders";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-@Component()
+@Injectable()
 export class ModuleService {
     protected loader: ModuleLoader = new ModuleLoader();
 

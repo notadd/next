@@ -1,8 +1,8 @@
-import { Component } from "@nestjs/common";
 import { importInjectionsFromDirectories } from "../utilities";
+import { Injectable } from "@nestjs/common";
 import { Injection } from "../interfaces";
 
-@Component()
+@Injectable()
 export class InjectionService {
     private injections: Array<Injection> = [];
 

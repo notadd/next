@@ -1,1 +1,0 @@
-{"version":3,"sources":["events/addon-before-install.event.ts"],"names":[],"mappings":";;AAEA;CACC;AADD,0DACC","file":"addon-before-install.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class AddonBeforeInstallEvent implements IEvent {\n}\n"]}

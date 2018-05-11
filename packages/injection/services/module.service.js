@@ -136,7 +136,7 @@ let ModuleService = class ModuleService {
     }
 };
 ModuleService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], ModuleService);
 exports.ModuleService = ModuleService;

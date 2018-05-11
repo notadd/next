@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const decorators_1 = require("../decorators");
+const common_1 = require("@nestjs/common");
 let DeveloperDashboard = class DeveloperDashboard {
     getDashboard() {
         return [
@@ -28,7 +28,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], DeveloperDashboard.prototype, "getDashboard", null);
 DeveloperDashboard = __decorate([
-    common_1.Component()
+    common_1.Injectable()
 ], DeveloperDashboard);
 exports.DeveloperDashboard = DeveloperDashboard;
 

@@ -1,7 +1,7 @@
 import { Module } from "../interfaces";
 import { ModuleService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Result } from "@notadd/core/types/result.type";
+import { Result } from "@notadd/core/interfaces";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
 

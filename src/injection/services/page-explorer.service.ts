@@ -1,12 +1,12 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { flattenDeep } from "lodash";
-import { Injectable } from "@nestjs/common/interfaces";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
 import { PageMetadata } from "../metadatas";
+import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 
-@Component()
+@Injectable()
 export class PageExplorerService {
     /**
      * @param { ModulesContainer } modulesContainer
@@ -44,22 +44,22 @@ export class PageExplorerService {
 
         return {
             form: {
-                callback: instance[methodName].bind(instance),
+                callback: instance[ methodName ].bind(instance),
                 name: Reflect.getMetadata(PAGE_FORM, callback),
             },
             schema: {
-                callback: instance[methodName].bind(instance),
+                callback: instance[ methodName ].bind(instance),
                 name: Reflect.getMetadata(PAGE_SCHEMA, callback),
             },
         };
     }
 
     /**
-     * @param { Injectable } instance
+     * @param { InjectableInterface } instance
      * @param metatype
      * @returns { Array<PageMetadata> }
      */
-    protected filterPages(instance: Injectable, metatype: any): Array<PageMetadata> {
+    protected filterPages(instance: InjectableInterface, metatype: any): Array<PageMetadata> {
         const pageMetadata: PageMetadata = {
             description: Reflect.getMetadata(PAGE_DESCRIPTION, metatype),
             identification: Reflect.getMetadata(PAGE_IDENTIFICATION, metatype),

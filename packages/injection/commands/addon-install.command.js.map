@@ -1,1 +1,0 @@
-{"version":3,"sources":["commands/addon-install.command.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,kDAEC","file":"addon-install.command.js","sourcesContent":["import { ICommand } from \"@nestjs/cqrs\";\n\nexport class AddonInstallCommand implements ICommand {\n\n}\n"]}

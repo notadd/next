@@ -1,9 +1,9 @@
 import { Addon } from "../interfaces";
 import { AddonService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Result } from "@notadd/core/types/result.type";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
+import { Result } from "@notadd/core/interfaces";
 
 @Resolver("Addon")
 export class AddonResolvers {

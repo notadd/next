@@ -1,11 +1,11 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { execFileSync } from "child_process";
 import { Extension } from "../interfaces";
-import { Result } from "@notadd/core/types/result.type";
+import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { ExtensionLoader } from "../loaders";
 
-@Component()
+@Injectable()
 export class ExtensionService {
     protected loader: ExtensionLoader = new ExtensionLoader();
 

@@ -70,7 +70,7 @@ let PageExplorerService = class PageExplorerService {
     }
 };
 PageExplorerService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [injector_1.ModulesContainer,
         metadata_scanner_1.MetadataScanner])
 ], PageExplorerService);

@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const constants_1 = require("../constants");
 const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
+const common_1 = require("@nestjs/common");
 let DashboardExplorerService = class DashboardExplorerService {
     constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
@@ -48,7 +48,7 @@ let DashboardExplorerService = class DashboardExplorerService {
     }
 };
 DashboardExplorerService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [injector_1.ModulesContainer,
         metadata_scanner_1.MetadataScanner])
 ], DashboardExplorerService);

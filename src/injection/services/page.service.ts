@@ -1,9 +1,9 @@
-import { Component } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { PageMetadata } from "../metadatas";
 import { Page } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-@Component()
+@Injectable()
 export class PageService {
     private initialized = false;
 

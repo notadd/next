@@ -1,1 +1,0 @@
-{"version":3,"sources":["commands/addon-uninstall.command.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,sDAEC","file":"addon-uninstall.command.js","sourcesContent":["import { ICommand } from \"@nestjs/cqrs\";\n\nexport class AddonUninstallCommand implements ICommand {\n\n}\n"]}

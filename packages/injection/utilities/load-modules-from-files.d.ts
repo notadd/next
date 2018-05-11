@@ -1,1 +1,2 @@
-export declare function loadModulesFromFiles(): Array<Function>;
+import { Type } from "@nestjs/common";
+export declare function loadModulesFromFiles(): Array<Type<any>>;

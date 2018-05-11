@@ -1,6 +1,6 @@
 import { Module } from "../interfaces";
 import { ModuleService } from "../services";
-import { Result } from "@notadd/core/types/result.type";
+import { Result } from "@notadd/core/interfaces";
 export declare class ModuleResolvers {
     private readonly moduleService;
     constructor(moduleService: ModuleService);

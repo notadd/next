@@ -1,1 +1,0 @@
-{"version":3,"sources":["commands/module-install.command.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,oDAEC","file":"module-install.command.js","sourcesContent":["import { ICommand } from \"@nestjs/cqrs\";\n\nexport class ModuleInstallCommand implements ICommand {\n\n}\n"]}

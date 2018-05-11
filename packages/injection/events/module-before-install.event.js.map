@@ -1,1 +1,0 @@
-{"version":3,"sources":["events/module-before-install.event.ts"],"names":[],"mappings":";;AAEA;CAEC;AAFD,4DAEC","file":"module-before-install.event.js","sourcesContent":["import { IEvent } from \"@nestjs/cqrs\";\n\nexport class ModuleBeforeInstallEvent implements IEvent {\n\n}\n"]}

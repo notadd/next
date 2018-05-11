@@ -99,7 +99,7 @@ let ExtensionService = class ExtensionService {
     }
 };
 ExtensionService = __decorate([
-    common_1.Component(),
+    common_1.Injectable(),
     __metadata("design:paramtypes", [setting_service_1.SettingService])
 ], ExtensionService);
 exports.ExtensionService = ExtensionService;
