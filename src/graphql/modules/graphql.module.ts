@@ -2,49 +2,48 @@ import * as GraphQLJSON from "graphql-type-json";
 import { Configuration } from "@notadd/core/loaders";
 import { GraphQLModule } from "@nestjs/graphql";
 import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
-import { GraphqlFactory } from "../factories";
-import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { GraphqlConfiguration } from "@notadd/core/configurations/graphql.configuration";
+import { GraphqlFactory } from "../factories";
 
 @Module({
-    components: [
-        GraphqlFactory,
-    ],
     imports: [
         GraphQLModule,
+    ],
+    providers: [
+        GraphqlFactory,
     ],
 })
 export class GraphqlModule {
     private configuration: GraphqlConfiguration = Configuration.loadGraphqlConfiguration();
 
     /**
-     * @param { GraphqlFactory } graphQLFactory
+     * @param { GraphqlFactory } graphqlFactory
      */
-    constructor(private readonly graphQLFactory: GraphqlFactory) {
+    constructor(private readonly graphqlFactory: GraphqlFactory) {
     }
 
     /**
-     * @param { MiddlewaresConsumer } consumer
+     * @param { MiddlewareConsumer } consumer
      */
-    configure(consumer: MiddlewaresConsumer) {
+    configure(consumer: MiddlewareConsumer) {
         const schema = this.createSchema();
         if (this.configuration.ide.enable) {
             consumer
                 .apply(graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
-                .forRoutes(this.configuration.ide.endpoint);
+                .forRoutes(`/${this.configuration.ide.endpoint}`);
         }
         consumer
             .apply(graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes(this.configuration.endpoint);
+            .forRoutes(`/${this.configuration.endpoint}`);
     }
 
     createSchema() {
         const paths: Array<string> = this.configuration.paths.concat([
         ]);
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths(paths);
+        const typeDefs = this.graphqlFactory.mergeTypesFromPaths(paths);
 
-        return this.graphQLFactory.createSchema({
+        return this.graphqlFactory.createSchema({
             typeDefs,
             resolvers: {
                 Json: GraphQLJSON,

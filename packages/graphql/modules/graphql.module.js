@@ -13,11 +13,11 @@ const GraphQLJSON = require("graphql-type-json");
 const loaders_1 = require("@notadd/core/loaders");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_server_express_1 = require("apollo-server-express");
-const factories_1 = require("../factories");
 const common_1 = require("@nestjs/common");
+const factories_1 = require("../factories");
 let GraphqlModule = class GraphqlModule {
-    constructor(graphQLFactory) {
-        this.graphQLFactory = graphQLFactory;
+    constructor(graphqlFactory) {
+        this.graphqlFactory = graphqlFactory;
         this.configuration = loaders_1.Configuration.loadGraphqlConfiguration();
     }
     configure(consumer) {
@@ -25,16 +25,16 @@ let GraphqlModule = class GraphqlModule {
         if (this.configuration.ide.enable) {
             consumer
                 .apply(apollo_server_express_1.graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
-                .forRoutes(this.configuration.ide.endpoint);
+                .forRoutes(`/${this.configuration.ide.endpoint}`);
         }
         consumer
             .apply(apollo_server_express_1.graphqlExpress(req => ({ schema, rootValue: req })))
-            .forRoutes(this.configuration.endpoint);
+            .forRoutes(`/${this.configuration.endpoint}`);
     }
     createSchema() {
         const paths = this.configuration.paths.concat([]);
-        const typeDefs = this.graphQLFactory.mergeTypesByPaths(paths);
-        return this.graphQLFactory.createSchema({
+        const typeDefs = this.graphqlFactory.mergeTypesFromPaths(paths);
+        return this.graphqlFactory.createSchema({
             typeDefs,
             resolvers: {
                 Json: GraphQLJSON,
@@ -44,11 +44,11 @@ let GraphqlModule = class GraphqlModule {
 };
 GraphqlModule = __decorate([
     common_1.Module({
-        components: [
-            factories_1.GraphqlFactory,
-        ],
         imports: [
             graphql_1.GraphQLModule,
+        ],
+        providers: [
+            factories_1.GraphqlFactory,
         ],
     }),
     __metadata("design:paramtypes", [factories_1.GraphqlFactory])

@@ -1,9 +1,9 @@
+import { MiddlewareConsumer } from "@nestjs/common";
 import { GraphqlFactory } from "../factories";
-import { MiddlewaresConsumer } from "@nestjs/common/interfaces/middlewares";
 export declare class GraphqlModule {
-    private readonly graphQLFactory;
+    private readonly graphqlFactory;
     private configuration;
-    constructor(graphQLFactory: GraphqlFactory);
-    configure(consumer: MiddlewaresConsumer): void;
+    constructor(graphqlFactory: GraphqlFactory);
+    configure(consumer: MiddlewareConsumer): void;
     createSchema(): any;
 }
