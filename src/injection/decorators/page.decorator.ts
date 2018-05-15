@@ -8,20 +8,20 @@ export function Form(): MethodDecorator {
     };
 }
 
-export function Page(obj: {
+export function Page(metadata: {
     description?: string,
     identification?: string,
     name?: string,
 }): ClassDecorator {
     return (target: any) => {
-        if (obj.description && obj.hasOwnProperty("description")) {
-            Reflect.defineMetadata(PAGE_DESCRIPTION, obj.description, target);
+        if (metadata.description && metadata.hasOwnProperty("description")) {
+            Reflect.defineMetadata(PAGE_DESCRIPTION, metadata.description, target);
         }
-        if (obj.identification && obj.hasOwnProperty("identification")) {
-            Reflect.defineMetadata(PAGE_IDENTIFICATION, obj.identification, target);
+        if (metadata.identification && metadata.hasOwnProperty("identification")) {
+            Reflect.defineMetadata(PAGE_IDENTIFICATION, metadata.identification, target);
         }
-        if (obj.name && obj.hasOwnProperty("name")) {
-            Reflect.defineMetadata(PAGE_NAME, obj.name, target);
+        if (metadata.name && metadata.hasOwnProperty("name")) {
+            Reflect.defineMetadata(PAGE_NAME, metadata.name, target);
         }
     };
 }

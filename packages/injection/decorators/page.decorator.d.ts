@@ -1,6 +1,6 @@
 import "reflect-metadata";
 export declare function Form(): MethodDecorator;
-export declare function Page(obj: {
+export declare function Page(metadata: {
     description?: string;
     identification?: string;
     name?: string;

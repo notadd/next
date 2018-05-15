@@ -9,16 +9,16 @@ function Form() {
     };
 }
 exports.Form = Form;
-function Page(obj) {
+function Page(metadata) {
     return (target) => {
-        if (obj.description && obj.hasOwnProperty("description")) {
-            Reflect.defineMetadata(constants_1.PAGE_DESCRIPTION, obj.description, target);
+        if (metadata.description && metadata.hasOwnProperty("description")) {
+            Reflect.defineMetadata(constants_1.PAGE_DESCRIPTION, metadata.description, target);
         }
-        if (obj.identification && obj.hasOwnProperty("identification")) {
-            Reflect.defineMetadata(constants_1.PAGE_IDENTIFICATION, obj.identification, target);
+        if (metadata.identification && metadata.hasOwnProperty("identification")) {
+            Reflect.defineMetadata(constants_1.PAGE_IDENTIFICATION, metadata.identification, target);
         }
-        if (obj.name && obj.hasOwnProperty("name")) {
-            Reflect.defineMetadata(constants_1.PAGE_NAME, obj.name, target);
+        if (metadata.name && metadata.hasOwnProperty("name")) {
+            Reflect.defineMetadata(constants_1.PAGE_NAME, metadata.name, target);
         }
     };
 }
