@@ -1,6 +1,6 @@
 {
     "name": "@notadd/injection",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "description": "Notadd Injection Package.",
     "main": "main.js",
     "scripts": {
