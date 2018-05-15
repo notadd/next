@@ -6,14 +6,14 @@ import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
-    components: [
+    imports: [
+        SettingModule,
+    ],
+    providers: [
         DashboardExplorerService,
         DashboardResolvers,
         DashboardService,
         MetadataScanner,
-    ],
-    imports: [
-        SettingModule,
     ],
 })
 export class DashboardModule implements OnModuleInit {

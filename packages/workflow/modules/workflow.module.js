@@ -25,16 +25,16 @@ let WorkflowModule = class WorkflowModule {
 };
 WorkflowModule = __decorate([
     common_1.Module({
-        components: [
-            metadata_scanner_1.MetadataScanner,
-            services_1.WorkflowExplorerService,
-            services_1.WorkflowService,
-        ],
         exports: [
             services_1.WorkflowService,
         ],
         imports: [
             setting_module_1.SettingModule,
+        ],
+        providers: [
+            metadata_scanner_1.MetadataScanner,
+            services_1.WorkflowExplorerService,
+            services_1.WorkflowService,
         ],
     }),
     __metadata("design:paramtypes", [services_1.WorkflowExplorerService,

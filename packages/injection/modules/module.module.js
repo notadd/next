@@ -15,16 +15,16 @@ let ModuleModule = class ModuleModule {
 };
 ModuleModule = __decorate([
     common_1.Module({
-        components: [
-            resolvers_1.ModuleResolvers,
-            services_1.ModuleService,
-        ],
         exports: [
             services_1.ModuleService,
         ],
         imports: [
             common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
+        ],
+        providers: [
+            resolvers_1.ModuleResolvers,
+            services_1.ModuleService,
         ],
     })
 ], ModuleModule);

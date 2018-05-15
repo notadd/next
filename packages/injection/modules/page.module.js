@@ -25,14 +25,14 @@ let PageModule = class PageModule {
 };
 PageModule = __decorate([
     common_1.Module({
-        components: [
+        imports: [
+            setting_module_1.SettingModule,
+        ],
+        providers: [
             metadata_scanner_1.MetadataScanner,
             services_1.PageExplorerService,
             resolvers_1.PageResolvers,
             services_1.PageService,
-        ],
-        imports: [
-            setting_module_1.SettingModule,
         ],
     }),
     __metadata("design:paramtypes", [services_1.PageExplorerService,

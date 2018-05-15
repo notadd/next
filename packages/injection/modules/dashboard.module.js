@@ -25,14 +25,14 @@ let DashboardModule = class DashboardModule {
 };
 DashboardModule = __decorate([
     common_1.Module({
-        components: [
+        imports: [
+            setting_module_1.SettingModule,
+        ],
+        providers: [
             services_1.DashboardExplorerService,
             resolvers_1.DashboardResolvers,
             services_1.DashboardService,
             metadata_scanner_1.MetadataScanner,
-        ],
-        imports: [
-            setting_module_1.SettingModule,
         ],
     }),
     __metadata("design:paramtypes", [services_1.DashboardExplorerService,

@@ -4,16 +4,16 @@ import { SettingModule } from "@notadd/setting/modules/setting.module";
 import { WorkflowExplorerService, WorkflowService } from "../services";
 
 @Module({
-    components: [
-        MetadataScanner,
-        WorkflowExplorerService,
-        WorkflowService,
-    ],
     exports: [
         WorkflowService,
     ],
     imports: [
         SettingModule,
+    ],
+    providers: [
+        MetadataScanner,
+        WorkflowExplorerService,
+        WorkflowService,
     ],
 })
 export class WorkflowModule {

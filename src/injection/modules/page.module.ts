@@ -6,14 +6,14 @@ import { PageResolvers } from "../resolvers";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
-    components: [
+    imports: [
+        SettingModule,
+    ],
+    providers: [
         MetadataScanner,
         PageExplorerService,
         PageResolvers,
         PageService,
-    ],
-    imports: [
-        SettingModule,
     ],
 })
 export class PageModule implements OnModuleInit {

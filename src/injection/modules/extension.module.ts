@@ -5,16 +5,16 @@ import { InjectionModule } from "./injection.module";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 @Module({
-    components: [
-        ExtensionResolvers,
-        ExtensionService,
-    ],
     exports: [
         ExtensionService,
     ],
     imports: [
         forwardRef(() => InjectionModule),
         SettingModule,
+    ],
+    providers: [
+        ExtensionResolvers,
+        ExtensionService,
     ],
 })
 export class ExtensionModule {
