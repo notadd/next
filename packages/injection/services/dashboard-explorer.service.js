@@ -35,16 +35,16 @@ let DashboardExplorerService = class DashboardExplorerService {
         const prototype = Object.getPrototypeOf(instance);
         const components = this.metadataScanner.scanFromPrototype(instance, prototype, name => this.extractMetadata(instance, prototype, name));
         return components
-            .filter(dashboard => {
-            return dashboard.name && dashboard.methodName;
-        })
+            .filter(dashboard => dashboard.name && dashboard.methodName)
             .map(dashboard => {
             const callback = instance[dashboard.methodName].bind(instance);
             return Object.assign({ callback }, dashboard);
         });
     }
     flatMap(components, callback) {
-        return lodash_1.flattenDeep(components.map(component => [...component.values()].map(({ instance }) => callback(instance))));
+        return lodash_1.flattenDeep(components.map(component => {
+            return [...component.values()].map(({ instance }) => callback(instance));
+        }));
     }
 };
 DashboardExplorerService = __decorate([

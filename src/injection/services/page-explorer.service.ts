@@ -5,6 +5,7 @@ import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
 import { PageMetadata } from "../metadatas";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
+import { DashboardMetadata } from "../interfaces";
 
 @Injectable()
 export class PageExplorerService {
@@ -18,12 +19,12 @@ export class PageExplorerService {
     ) {
     }
 
-    public explore() {
+    public explore(): Array<PageMetadata> {
         const components = [
             ...this.modulesContainer.values(),
         ].map(module => module.components);
 
-        return flattenDeep(
+        return flattenDeep<PageMetadata>(
             components.map(component =>
                 [
                     ...component.values(),

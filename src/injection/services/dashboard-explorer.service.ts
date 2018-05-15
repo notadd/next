@@ -23,7 +23,7 @@ export class DashboardExplorerService {
     /**
      * @returns { any }
      */
-    public explore() {
+    public explore(): Array<DashboardMetadata> {
         const components = [ ...this.modulesContainer.values() ].map(module => module.components);
 
         return this.flatMap(components, instance => this.filterDashboards(instance));
@@ -57,10 +57,8 @@ export class DashboardExplorerService {
         );
 
         return components
-            .filter(dashboard => {
-                return dashboard.name && dashboard.methodName;
-            })
-            .map(dashboard => {
+            .filter(dashboard => dashboard.name && dashboard.methodName)
+            .map<DashboardMetadata>(dashboard => {
                 const callback = instance[ dashboard.methodName ].bind(instance);
 
                 return {
@@ -73,13 +71,16 @@ export class DashboardExplorerService {
     /**
      * @param { Map<any, any>[] } components
      * @param { (instance: any) => Array<DashboardMetadata> } callback
-     * @returns { any }
+     * @returns { Array<DashboardMetadata> }
      */
-    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<DashboardMetadata>) {
-        return flattenDeep(
-            components.map(component =>
-                [ ...component.values() ].map(({ instance }) => callback(instance)),
-            ),
+    protected flatMap(
+        components: Array<Map<any, any>>,
+        callback: (instance: any) => Array<DashboardMetadata>,
+    ): Array<DashboardMetadata> {
+        return flattenDeep<DashboardMetadata>(
+            components.map(component => {
+                return [ ...component.values() ].map(({ instance }) => callback(instance));
+            }),
         );
     }
 }
