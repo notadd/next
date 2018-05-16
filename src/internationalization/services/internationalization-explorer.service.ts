@@ -66,7 +66,7 @@ export class InternationalizationExplorerService {
      * @returns { any }
      */
     protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<PhraseMetadata>) {
-        return flattenDeep(
+        return flattenDeep<PhraseMetadata>(
             components.map(component =>
                 [ ...component.values() ].map(({ instance }) => callback(instance)),
             ),

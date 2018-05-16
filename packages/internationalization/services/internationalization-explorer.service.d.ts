@@ -10,5 +10,5 @@ export declare class InternationalizationExplorerService {
     explore(): Array<PhraseMetadata>;
     protected extractMetadata(instance: any, prototype: any, methodName: string): PhraseMetadata;
     filterPhrases(instance: InjectableInterface): Array<PhraseMetadata>;
-    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<PhraseMetadata>): PhraseMetadata[][];
+    protected flatMap(components: Array<Map<any, any>>, callback: (instance: any) => Array<PhraseMetadata>): PhraseMetadata[];
 }
