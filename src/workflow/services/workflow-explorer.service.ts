@@ -33,7 +33,7 @@ export class WorkflowExplorerService {
             ...this.modulesContainer.values(),
         ].map(module => module.components);
 
-        return flattenDeep(
+        return flattenDeep<WorkflowMetadata>(
             components.map(component =>
                 [
                     ...component.values(),
