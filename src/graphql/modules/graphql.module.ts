@@ -1,10 +1,10 @@
 import * as GraphQLJSON from "graphql-type-json";
 import { Configuration } from "@notadd/core/loaders";
 import { GraphQLModule } from "@nestjs/graphql";
-import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { GraphqlConfiguration } from "@notadd/core/configurations/graphql.configuration";
 import { GraphqlFactory } from "../factories";
+import { graphiqlServer, graphqlServer } from "../servers";
 
 @Module({
     imports: [
@@ -30,11 +30,11 @@ export class GraphqlModule {
         const schema = this.createSchema();
         if (this.configuration.ide.enable) {
             consumer
-                .apply(graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
+                .apply(graphiqlServer({ endpointURL: `/${this.configuration.endpoint}` }))
                 .forRoutes(`/${this.configuration.ide.endpoint}`);
         }
         consumer
-            .apply(graphqlExpress(req => ({ schema, rootValue: req })))
+            .apply(graphqlServer({ schema }))
             .forRoutes(`/${this.configuration.endpoint}`);
     }
 
