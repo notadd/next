@@ -5,7 +5,6 @@ import { GraphqlModule } from "@notadd/graphql/modules";
 import { InjectionModule } from "@notadd/injection";
 import { InternationalizationModule } from "@notadd/internationalization/modules";
 import { LoggerModule } from "@notadd/logger";
-import { mergeTypes } from "merge-graphql-schemas";
 import { Module } from "@nestjs/common";
 import { SettingModule } from "@notadd/setting";
 import { SystemInformation } from "../informations";

@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import * as express from "express";
 import * as ip from "ip";
+import * as serveStatic from "serve-static";
 import { ApplicationModule } from "./modules";
 import { Configuration } from "@notadd/core/loaders";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+// import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
@@ -52,7 +52,7 @@ export class ServerStarter {
 
         const graphqlConfiguration = Configuration.loadGraphqlConfiguration();
         const serverConfiguration = Configuration.loadServerConfiguration();
-        const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
+        // const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
 
         let index = process.argv.indexOf("--port");
         const port = index > -1
@@ -80,28 +80,31 @@ export class ServerStarter {
             cors: true,
             logger: LogService,
         });
-        application.use(express.static(process.cwd() + "/public/"));
+        application.use("/", serveStatic(`${process.cwd()}/public`));
         application.useGlobalPipes(new ValidationPipe());
 
-        if (swaggerConfiguration.enable) {
-            const options = new DocumentBuilder()
-                .setTitle("Notadd")
-                .setDescription("API document for Notadd.")
-                .setVersion("2.0")
-                .addBearerAuth()
-                .build();
+        // if (swaggerConfiguration.enable) {
+        //     const options = new DocumentBuilder()
+        //         .setTitle("Notadd")
+        //         .setDescription("API document for Notadd.")
+        //         .setVersion("2.0")
+        //         .addBearerAuth()
+        //         .build();
+        //
+        //     const document = SwaggerModule.createDocument(application, options);
+        //
+        //     SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
+        // }
 
-            const document = SwaggerModule.createDocument(application, options);
-
-            SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
-        }
         const callback = () => {
             if (graphqlConfiguration.ide.enable) {
                 this.logger.log(`Graphql IDE Server on: ${address}/graphiql`);
             }
-            if (swaggerConfiguration.enable) {
-                this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
-            }
+
+            // if (swaggerConfiguration.enable) {
+            //     this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
+            // }
+
             this.logger.log(`Server on: ${address}`);
         };
 
@@ -112,7 +115,7 @@ export class ServerStarter {
         } else if (serverConfiguration.http.host && serverConfiguration.http.host !== "*") {
             await application.listen(port, serverConfiguration.http.host, callback);
         } else {
-            await application.listen(port, callback);
+            await application.listen(port, "0.0.0.0", callback);
         }
     }
 }
