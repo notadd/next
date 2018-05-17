@@ -59,6 +59,7 @@
         "@types/passport-jwt": "^3.0.1",
         "@types/redis": "^0.12.36",
         "@types/reflect-metadata": "0.0.5",
+        "@types/serve-static": "^1.13.2",
         "@types/socket.io": "^1.4.29",
         "@types/tapable": "^1.0.0",
         "@types/webpack": "^4.1.4",
