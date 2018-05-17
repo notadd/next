@@ -4,7 +4,7 @@ const RdbmsSchemaBuilder_1 = require("typeorm/schema-builder/RdbmsSchemaBuilder"
 class RdbmsSchemaBuilder extends RdbmsSchemaBuilder_1.RdbmsSchemaBuilder {
     get entityToSyncMetadatas() {
         return this.metadatas
-            .filter(metadata => !metadata.skipSync && metadata.tableType !== "single-table-child");
+            .filter(metadata => metadata.synchronize && metadata.tableType !== "entity-child");
     }
     setMetadatas(metadatas) {
         this.metadatas = metadatas;

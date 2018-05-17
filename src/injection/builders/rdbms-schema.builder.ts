@@ -9,7 +9,7 @@ export class RdbmsSchemaBuilder extends SchemaBuilder {
      */
     protected get entityToSyncMetadatas(): Array<EntityMetadata> {
         return this.metadatas
-            .filter(metadata => !metadata.skipSync && metadata.tableType !== "single-table-child");
+            .filter(metadata => metadata.synchronize && metadata.tableType !== "entity-child");
     }
 
     /**

@@ -23,16 +23,13 @@ export class SchemaBuilder {
     public buildMetadatas(paths: Array<string>): void {
         const connectionMetadataBuilder = new ConnectionMetadataBuilder(this.connection);
         const entityMetadataValidator = new EntityMetadataValidator();
-        const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths,  []);
+        const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths);
         Object.assign(this, { entityMetadatas });
         entityMetadataValidator.validateMany(this.entityMetadatas, this.connection.driver);
     }
 
     public async drop() {
         const queryRunner = await this.connection.createQueryRunner("master");
-        const schemas = this.entityMetadatas
-            .filter(metadata => metadata.schema)
-            .map(metadata => metadata.schema!);
 
         if (this.connection.driver instanceof SqlServerDriver || this.connection.driver instanceof MysqlDriver) {
             const databases: Array<string> = this.connection.driver.database ? [this.connection.driver.database] : [];
@@ -43,9 +40,9 @@ export class SchemaBuilder {
                 }
             });
 
-            await PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(schemas, database));
+            await PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(database));
         } else {
-            await queryRunner.clearDatabase(schemas);
+            await queryRunner.clearDatabase();
         }
         await queryRunner.release();
     }

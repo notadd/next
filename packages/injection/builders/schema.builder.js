@@ -17,15 +17,12 @@ class SchemaBuilder {
     buildMetadatas(paths) {
         const connectionMetadataBuilder = new ConnectionMetadataBuilder_1.ConnectionMetadataBuilder(this.connection);
         const entityMetadataValidator = new EntityMetadataValidator_1.EntityMetadataValidator();
-        const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths, []);
+        const entityMetadatas = connectionMetadataBuilder.buildEntityMetadatas(paths);
         Object.assign(this, { entityMetadatas });
         entityMetadataValidator.validateMany(this.entityMetadatas, this.connection.driver);
     }
     async drop() {
         const queryRunner = await this.connection.createQueryRunner("master");
-        const schemas = this.entityMetadatas
-            .filter(metadata => metadata.schema)
-            .map(metadata => metadata.schema);
         if (this.connection.driver instanceof SqlServerDriver_1.SqlServerDriver || this.connection.driver instanceof MysqlDriver_1.MysqlDriver) {
             const databases = this.connection.driver.database ? [this.connection.driver.database] : [];
             this.entityMetadatas.forEach(metadata => {
@@ -33,10 +30,10 @@ class SchemaBuilder {
                     databases.push(metadata.database);
                 }
             });
-            await typeorm_1.PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(schemas, database));
+            await typeorm_1.PromiseUtils.runInSequence(databases, database => queryRunner.clearDatabase(database));
         }
         else {
-            await queryRunner.clearDatabase(schemas);
+            await queryRunner.clearDatabase();
         }
         await queryRunner.release();
     }
