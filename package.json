@@ -47,7 +47,6 @@
         "@notadd/workflow": "~2.4.0",
         "@types/autoprefixer": "^6.7.3",
         "@types/cli-color": "^0.3.29",
-        "@types/express": "^4.0.39",
         "@types/glob": "^5.0.35",
         "@types/graphql-type-json": "^0.1.2",
         "@types/inquirer": "^0.0.36",

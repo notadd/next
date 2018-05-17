@@ -1,9 +1,10 @@
 import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-application-options.interface";
 import { NestFactoryStatic } from "@nestjs/core/nest-factory";
+import { FastifyAdapter } from "@nestjs/core";
 
 export class NotaddFactoryStatic extends NestFactoryStatic {
-    public async start(module: any, options: NestApplicationOptions): Promise<INestApplication> {
+    public async start(module: any, httpServer: FastifyAdapter, options: NestApplicationOptions): Promise<INestApplication> {
         console.log(`
                  _            _     _
      _ __   ___ | |_ __ _  __| | __| |
@@ -13,7 +14,7 @@ export class NotaddFactoryStatic extends NestFactoryStatic {
 
         `);
 
-        return super.create(module, options);
+        return super.create(module, httpServer, options);
     }
 }
 

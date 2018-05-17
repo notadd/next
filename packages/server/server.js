@@ -9,6 +9,7 @@ const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
+const core_2 = require("@nestjs/core");
 class ServerStarter {
     constructor() {
         this.logger = new common_1.Logger("NotaddFactory", true);
@@ -59,7 +60,8 @@ class ServerStarter {
                     :
                         ip.address();
         const address = `http://${host}:${port}`;
-        const application = await core_1.NotaddFactory.start(modules_1.ApplicationModule, {
+        const adapter = new core_2.FastifyAdapter();
+        const application = await core_1.NotaddFactory.start(modules_1.ApplicationModule, adapter, {
             bodyParser: true,
             cors: true,
             logger: services_1.LogService,

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const nest_factory_1 = require("@nestjs/core/nest-factory");
 class NotaddFactoryStatic extends nest_factory_1.NestFactoryStatic {
-    async start(module, options) {
+    async start(module, httpServer, options) {
         console.log(`
                  _            _     _
      _ __   ___ | |_ __ _  __| | __| |
@@ -11,7 +11,7 @@ class NotaddFactoryStatic extends nest_factory_1.NestFactoryStatic {
     |_| |_|\\___/ \\__\\__,_|\\__,_|\\__,_|
 
         `);
-        return super.create(module, options);
+        return super.create(module, httpServer, options);
     }
 }
 exports.NotaddFactoryStatic = NotaddFactoryStatic;

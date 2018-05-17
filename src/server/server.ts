@@ -8,6 +8,7 @@ import { INestApplication } from "@nestjs/common/interfaces/nest-application.int
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
 import { NotaddFactory } from "@notadd/core";
+import { FastifyAdapter } from "@nestjs/core";
 
 export class ServerStarter {
     /**
@@ -72,7 +73,9 @@ export class ServerStarter {
                 ip.address();
         const address = `http://${host}:${port}`;
 
-        const application = await NotaddFactory.start(ApplicationModule, {
+        const adapter = new FastifyAdapter();
+
+        const application = await NotaddFactory.start(ApplicationModule, adapter, {
             bodyParser: true,
             cors: true,
             logger: LogService,
