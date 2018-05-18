@@ -14,7 +14,8 @@ const loaders_1 = require("@notadd/core/loaders");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const factories_1 = require("../factories");
-const servers_1 = require("../servers");
+const bodyParse = require("body-parser");
+const apollo_server_express_1 = require("apollo-server-express");
 let GraphqlModule = class GraphqlModule {
     constructor(graphqlFactory) {
         this.graphqlFactory = graphqlFactory;
@@ -24,11 +25,13 @@ let GraphqlModule = class GraphqlModule {
         const schema = this.createSchema();
         if (this.configuration.ide.enable) {
             consumer
-                .apply(servers_1.graphiqlServer({ endpointURL: `/${this.configuration.endpoint}` }))
+                .apply(apollo_server_express_1.graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
                 .forRoutes(`/${this.configuration.ide.endpoint}`);
         }
         consumer
-            .apply(servers_1.graphqlServer({ schema }))
+            .apply(bodyParse.json())
+            .forRoutes(`/${this.configuration.endpoint}`)
+            .apply(apollo_server_express_1.graphqlExpress(req => ({ schema, rootValue: req })))
             .forRoutes(`/${this.configuration.endpoint}`);
     }
     createSchema() {

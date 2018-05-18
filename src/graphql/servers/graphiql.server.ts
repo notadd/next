@@ -4,13 +4,13 @@ import { IncomingMessage, ServerResponse } from "http";
 import { RequestHandler } from "@nestjs/common/interfaces/http/http-server.interface";
 
 export function graphiqlServer(options: GraphiQL.GraphiQLData): RequestHandler {
-    return (req: Partial<IncomingMessage>, res: ServerResponse | any, next: any) => {
-        const query = req.url && url.parse(req.url, true).query;
-        GraphiQL.resolveGraphiQLString(query, options, req).then(
+    return (request: Partial<IncomingMessage> | any, response: ServerResponse | any, next: any) => {
+        const query = request.url && url.parse(request.url, true).query;
+        GraphiQL.resolveGraphiQLString(query, options, request).then(
             graphiqlString => {
-                res.setHeader("Content-Type", "text/html");
-                res.write(graphiqlString);
-                res.end();
+                response.setHeader("Content-Type", "text/html");
+                response.write(graphiqlString);
+                response.end();
             },
             error => next(error),
         );

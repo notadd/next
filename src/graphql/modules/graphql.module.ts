@@ -4,7 +4,8 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { GraphqlConfiguration } from "@notadd/core/configurations/graphql.configuration";
 import { GraphqlFactory } from "../factories";
-import { graphiqlServer, graphqlServer } from "../servers";
+import * as bodyParse from "body-parser";
+import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
 
 @Module({
     imports: [
@@ -30,11 +31,13 @@ export class GraphqlModule {
         const schema = this.createSchema();
         if (this.configuration.ide.enable) {
             consumer
-                .apply(graphiqlServer({ endpointURL: `/${this.configuration.endpoint}` }))
+                .apply(graphiqlExpress({ endpointURL: `/${this.configuration.endpoint}` }))
                 .forRoutes(`/${this.configuration.ide.endpoint}`);
         }
         consumer
-            .apply(graphqlServer({ schema }))
+            .apply(bodyParse.json())
+            .forRoutes(`/${this.configuration.endpoint}`)
+            .apply(graphqlExpress(req => ({ schema, rootValue: req })))
             .forRoutes(`/${this.configuration.endpoint}`);
     }
 
