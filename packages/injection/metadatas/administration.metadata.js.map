@@ -1,0 +1,1 @@
+{"version":3,"sources":["metadatas/administration.metadata.ts"],"names":[],"mappings":"","file":"administration.metadata.js","sourcesContent":["import { Navigation } from \"../interfaces/navigation.interface\";\n\nexport interface AdministrationMetadata {\n    dashboard?: Array<string>;\n    navigations?: Array<Navigation>;\n}\n"]}

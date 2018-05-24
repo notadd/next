@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/menu.interface.ts"],"names":[],"mappings":"","file":"menu.interface.js","sourcesContent":["export interface Menu {\n    id: string;\n    title: string;\n    type: \"collapse\" | \"item\";\n    icon?: string;\n    children?: Array<Menu>;\n}\n"]}

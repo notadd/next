@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/navigation.interface.ts"],"names":[],"mappings":"","file":"navigation.interface.js","sourcesContent":["import { Menu } from \"./menu.interface\";\n\nexport interface Navigation {\n    identification: string;\n    menus: Array<Menu>;\n    text: string;\n    tooltip?: string;\n}\n"]}
