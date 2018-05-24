@@ -1,0 +1,1 @@
+{"version":3,"sources":["interfaces/assets.ts"],"names":[],"mappings":"","file":"assets.js","sourcesContent":["export interface Assets {\n    scripts: Array<string>;\n    stylesheets: Array<string>;\n}\n"]}

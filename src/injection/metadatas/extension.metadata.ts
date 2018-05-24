@@ -1,16 +1,6 @@
 import { ExtensionShellMetadata } from "./index";
-import { Author } from "../interfaces";
+import { InjectionMetadata } from "./injection.metadata";
 
-export interface ExtensionMetadata {
-    authors?: Array<Author>;
-    description?: string;
-    exports?: Array<any>;
-    identification: string;
-    imports?: Array<any>;
-    components?: Array<any>;
-    controllers?: Array<any>;
-    modules?: Array<any>;
-    name: string;
+export interface ExtensionMetadata extends InjectionMetadata {
     shell?: ExtensionShellMetadata;
-    version: string;
 }
