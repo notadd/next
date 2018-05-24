@@ -1,0 +1,1 @@
+{"version":3,"sources":["constants/administration.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,uBAAuB,GAAG,6BAA6B,CAAC","file":"administration.constants.js","sourcesContent":["export const ADMINISTRATION_METADATA = \"__administration_metadata__\";\n"]}
