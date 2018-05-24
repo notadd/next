@@ -10,10 +10,12 @@ export function Administration(metadata?: AdministrationMetadata): ClassDecorato
             return descriptor;
         } else {
             if (metadata) {
-                Reflect.defineMetadata(ADMINISTRATION_METADATA, target.name, metadata);
+                Reflect.defineMetadata(ADMINISTRATION_METADATA, metadata, metadata);
             } else {
                 throw new Error("While using decorator on a class, metadata must be set!");
             }
+
+            return target;
         }
     };
 }

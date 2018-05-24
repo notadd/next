@@ -10,11 +10,12 @@ function Administration(metadata) {
         }
         else {
             if (metadata) {
-                Reflect.defineMetadata(constants_1.ADMINISTRATION_METADATA, target.name, metadata);
+                Reflect.defineMetadata(constants_1.ADMINISTRATION_METADATA, metadata, metadata);
             }
             else {
                 throw new Error("While using decorator on a class, metadata must be set!");
             }
+            return target;
         }
     };
 }
