@@ -28,6 +28,6 @@ export function Page(metadata: {
 
 export function Schema(): MethodDecorator {
     return (target: object, key?, descriptor?) => {
-        ReflectMetadata(PAGE_SCHEMA, key)(target, key, descriptor);
+        return ReflectMetadata(PAGE_SCHEMA, key)(target, key, descriptor);
     };
 }

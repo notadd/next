@@ -18,7 +18,7 @@ let DashboardExplorerService = class DashboardExplorerService {
     constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
-        this.metadata = constants_1.DASHBOARD_NAME_METADATA;
+        this.metadata = constants_1.DASHBOARD_METADATA;
     }
     explore() {
         const components = [...this.modulesContainer.values()].map(module => module.components);

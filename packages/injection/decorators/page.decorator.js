@@ -25,7 +25,7 @@ function Page(metadata) {
 exports.Page = Page;
 function Schema() {
     return (target, key, descriptor) => {
-        common_1.ReflectMetadata(constants_1.PAGE_SCHEMA, key)(target, key, descriptor);
+        return common_1.ReflectMetadata(constants_1.PAGE_SCHEMA, key)(target, key, descriptor);
     };
 }
 exports.Schema = Schema;

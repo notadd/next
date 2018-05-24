@@ -1,2 +1,1 @@
-export const DASHBOARD_DATA_METADATA = "dashboard:data";
-export const DASHBOARD_NAME_METADATA = "dashboard:name";
+export const DASHBOARD_METADATA = "dashboard:data";

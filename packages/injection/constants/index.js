@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var dashboard_constants_1 = require("./dashboard.constants");
-exports.DASHBOARD_DATA_METADATA = dashboard_constants_1.DASHBOARD_DATA_METADATA;
-exports.DASHBOARD_NAME_METADATA = dashboard_constants_1.DASHBOARD_NAME_METADATA;
+exports.DASHBOARD_METADATA = dashboard_constants_1.DASHBOARD_METADATA;
 var injection_constants_1 = require("./injection.constants");
 exports.INJECTION_TYPE = injection_constants_1.INJECTION_TYPE;
 var page_constants_1 = require("./page.constants");

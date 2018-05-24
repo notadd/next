@@ -1,1 +1,1 @@
-{"version":3,"sources":["constants/dashboard.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,uBAAuB,GAAG,gBAAgB,CAAC;AAC3C,QAAA,uBAAuB,GAAG,gBAAgB,CAAC","file":"dashboard.constants.js","sourcesContent":["export const DASHBOARD_DATA_METADATA = \"dashboard:data\";\nexport const DASHBOARD_NAME_METADATA = \"dashboard:name\";\n"]}
+{"version":3,"sources":["constants/dashboard.constants.ts"],"names":[],"mappings":";;AAAa,QAAA,kBAAkB,GAAG,gBAAgB,CAAC","file":"dashboard.constants.js","sourcesContent":["export const DASHBOARD_METADATA = \"dashboard:data\";\n"]}

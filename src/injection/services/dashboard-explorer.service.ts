@@ -1,4 +1,4 @@
-import { DASHBOARD_NAME_METADATA } from "../constants";
+import { DASHBOARD_METADATA } from "../constants";
 import { DashboardMetadata } from "../interfaces";
 import { flattenDeep } from "lodash";
 import { ModulesContainer } from "@nestjs/core/injector";
@@ -8,7 +8,7 @@ import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 
 @Injectable()
 export class DashboardExplorerService {
-    private metadata = DASHBOARD_NAME_METADATA;
+    private metadata = DASHBOARD_METADATA;
 
     /**
      * @param { ModulesContainer } modulesContainer
