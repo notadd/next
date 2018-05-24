@@ -13,6 +13,7 @@ class InjectionLoader {
         this.logger = new common_1.Logger("Injection");
         this.patterns = [
             "**/*.injection.js",
+            "**/*.module.js",
         ];
         this.loadInjectionsFromCache();
     }

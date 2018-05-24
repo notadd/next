@@ -15,6 +15,7 @@ export class InjectionLoader {
 
     protected patterns = [
         "**/*.injection.js",
+        "**/*.module.js",
     ];
 
     public get injections(): Array<InjectionInterface> {
