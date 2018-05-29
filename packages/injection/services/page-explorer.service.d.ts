@@ -1,7 +1,7 @@
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { PageMetadata } from "../metadatas";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
+import { PageMetadata } from "../metadatas/page.metadata";
 export declare class PageExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;

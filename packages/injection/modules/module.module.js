@@ -7,24 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const injection_module_1 = require("./injection.module");
-const resolvers_1 = require("../resolvers");
-const services_1 = require("../services");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const module_service_1 = require("../services/module.service");
+const module_resolvers_1 = require("../resolvers/module.resolvers");
 let ModuleModule = class ModuleModule {
 };
 ModuleModule = __decorate([
     common_1.Module({
         exports: [
-            services_1.ModuleService,
+            module_service_1.ModuleService,
         ],
         imports: [
-            common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],
         providers: [
-            resolvers_1.ModuleResolvers,
-            services_1.ModuleService,
+            module_resolvers_1.ModuleResolvers,
+            module_service_1.ModuleService,
         ],
     })
 ], ModuleModule);

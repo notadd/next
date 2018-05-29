@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var addon_loader_1 = require("./addon.loader");
-exports.addon = addon_loader_1.addon;
+exports.Addon = addon_loader_1.Addon;
 exports.AddonLoader = addon_loader_1.AddonLoader;
 var extension_loader_1 = require("./extension.loader");
-exports.extension = extension_loader_1.extension;
+exports.Extension = extension_loader_1.Extension;
 exports.ExtensionLoader = extension_loader_1.ExtensionLoader;
 var injection_loader_1 = require("./injection.loader");
 exports.injection = injection_loader_1.injection;

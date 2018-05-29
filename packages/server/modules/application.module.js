@@ -6,7 +6,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const authentication_1 = require("@notadd/authentication");
 const backend_1 = require("@notadd/backend");
 const loaders_1 = require("@notadd/core/loaders");
 const modules_1 = require("@notadd/graphql/modules");
@@ -20,6 +19,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("@notadd/user");
 const websocket_1 = require("@notadd/websocket");
 const workflow_module_1 = require("@notadd/workflow/modules/workflow.module");
+const local_module_1 = require("@notadd/addon-local/local.module");
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
@@ -31,11 +31,11 @@ ApplicationModule = __decorate([
             modules_2.InternationalizationModule,
             logger_1.LoggerModule,
             setting_1.SettingModule,
-            injection_1.InjectionModule,
             workflow_module_1.WorkflowModule,
             backend_1.BackendModule,
             user_1.UserModule,
-            authentication_1.AuthenticationModule,
+            local_module_1.LocalModule,
+            injection_1.InjectionModule,
         ],
         providers: [
             informations_1.SystemInformation,

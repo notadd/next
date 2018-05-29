@@ -1,6 +1,7 @@
-import { Module as ModuleInterface, ModuleCache } from "../interfaces";
-import { InjectionLoader } from "./injection.loader";
 import { SettingService } from "@notadd/setting/services";
+import { InjectionLoader } from "./injection.loader";
+import { Module as ModuleInterface } from "../interfaces/module.interface";
+import { ModuleCache } from "../interfaces/module-cache.interface";
 export declare class ModuleLoader extends InjectionLoader {
     protected cacheForModules: Array<ModuleInterface>;
     protected filePathForCache: string;

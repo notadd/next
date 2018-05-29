@@ -1,6 +1,6 @@
-import { Author } from "./";
 import { ExtensionShellMetadata } from "../metadatas";
 import { Injection } from "./injection.interface";
+import { Author } from "./author.interface";
 
 export interface Extension extends Injection {
     authors?: Array<Author>;

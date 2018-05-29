@@ -1,9 +1,10 @@
-import { Extension } from "../interfaces";
-import { ExtensionService } from "../services";
 import { Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Result } from "@notadd/core/interfaces";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
+
+import { Extension } from "../interfaces/extension.interfaces";
+import { ExtensionService } from "../services/extension.service";
 
 @Resolver("Extension")
 export class ExtensionResolvers {

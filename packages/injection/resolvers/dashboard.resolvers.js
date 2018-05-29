@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
+const dashboard_service_1 = require("../services/dashboard.service");
 let DashboardResolvers = class DashboardResolvers {
     constructor(dashboardService) {
         this.dashboardService = dashboardService;
@@ -36,7 +36,7 @@ __decorate([
 ], DashboardResolvers.prototype, "getDashboards", null);
 DashboardResolvers = __decorate([
     graphql_1.Resolver("Dashboard"),
-    __metadata("design:paramtypes", [services_1.DashboardService])
+    __metadata("design:paramtypes", [dashboard_service_1.DashboardService])
 ], DashboardResolvers);
 exports.DashboardResolvers = DashboardResolvers;
 

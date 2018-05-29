@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const utilities_1 = require("../utilities");
 const common_1 = require("@nestjs/common");
+const utilities_1 = require("../utilities");
 let InjectionService = class InjectionService {
     constructor() {
         this.injections = [];

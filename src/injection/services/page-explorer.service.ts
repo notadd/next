@@ -2,10 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { flattenDeep } from "lodash";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
-import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
-import { PageMetadata } from "../metadatas";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
-import { DashboardMetadata } from "../interfaces";
+
+import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants/page.constants";
+import { PageMetadata } from "../metadatas/page.metadata";
 
 @Injectable()
 export class PageExplorerService {

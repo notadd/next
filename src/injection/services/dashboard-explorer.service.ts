@@ -1,10 +1,11 @@
-import { DASHBOARD_METADATA } from "../constants";
-import { DashboardMetadata } from "../interfaces";
 import { flattenDeep } from "lodash";
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { Injectable } from "@nestjs/common";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
+
+import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
+import { DASHBOARD_METADATA } from "../constants/dashboard.constants";
 
 @Injectable()
 export class DashboardExplorerService {

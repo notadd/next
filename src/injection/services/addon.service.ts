@@ -1,11 +1,12 @@
-import { Addon } from "../interfaces";
-import { AddonLoader } from "../loaders";
 import { Injectable } from "@nestjs/common";
-import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
-import { join } from "path";
 import { Result } from "@notadd/core/interfaces";
-import { SchemaBuilder } from "../builders";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { join } from "path";
+
+import { Addon } from "../interfaces/addon.interface";
+import { AddonLoader } from "../loaders/addon.loader";
+import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
+import { SchemaBuilder } from "../builders/schema.builder";
 
 @Injectable()
 export class AddonService {

@@ -1,5 +1,6 @@
-import { Dashboard } from "../decorators";
 import { Injectable } from "@nestjs/common";
+
+import { Dashboard } from "../decorators/dashboard.decorator";
 
 @Injectable()
 export class DeveloperDashboard {

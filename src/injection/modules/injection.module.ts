@@ -1,21 +1,17 @@
+import { forwardRef, Module } from "@nestjs/common";
+
 import { AddonModule } from "./addon.module";
-import { ConfigurationPage } from "../pages";
 import { DashboardModule } from "./dashboard.module";
 import { DeveloperDashboard } from "../dashboards";
 import { ExtensionModule } from "./extension.module";
-import { forwardRef, Module } from "@nestjs/common";
-import { InjectionService } from "../services";
-import { LocalModule } from "@notadd/addon-local/local.module";
 import { ModuleModule } from "./module.module";
 import { PageModule } from "./page.module";
-import { SettingModule } from "@notadd/setting/modules/setting.module";
-import { UserModule } from "@notadd/user";
-import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } from "../utilities";
+import { ConfigurationPage } from "../pages/configuration.page";
+import { loadExtensionsFromFiles } from "../utilities/load-extensions-from-files";
+import { loadModulesFromFiles } from "../utilities/load-modules-from-files";
+import { loadAddonsFromFiles } from "../utilities/load-addons-from-files";
 
 @Module({
-    exports: [
-        InjectionService,
-    ],
     imports: [
         ...loadExtensionsFromFiles(),
         ...loadModulesFromFiles(),
@@ -24,15 +20,11 @@ import { loadAddonsFromFiles, loadExtensionsFromFiles, loadModulesFromFiles } fr
         forwardRef(() => ModuleModule),
         forwardRef(() => AddonModule),
         DashboardModule,
-        LocalModule,
         PageModule,
-        SettingModule,
-        UserModule,
     ],
     providers: [
         ConfigurationPage,
         DeveloperDashboard,
-        InjectionService,
     ],
 })
 export class InjectionModule {

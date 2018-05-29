@@ -1,5 +1,5 @@
-import { Author } from "./";
 import { Injection } from "./injection.interface";
+import { Author } from "./author.interface";
 export interface Module extends Injection {
     authors?: Array<Author>;
     description?: string;

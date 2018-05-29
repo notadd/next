@@ -1,15 +1,14 @@
-import { AddonResolvers } from "../resolvers";
-import { AddonService } from "../services";
-import { forwardRef, Module } from "@nestjs/common";
-import { InjectionModule } from "./injection.module";
+import { Module } from "@nestjs/common";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
+
+import { AddonResolvers } from "../resolvers/addon.resolvers";
+import { AddonService } from "../services/addon.service";
 
 @Module({
     exports: [
         AddonService,
     ],
     imports: [
-        forwardRef(() => InjectionModule),
         SettingModule,
     ],
     providers: [

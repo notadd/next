@@ -1,8 +1,11 @@
 import { existsSync } from "fs";
-import { Injection, Module as ModuleInterface, ModuleCache } from "../interfaces";
-import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
+
+import { InjectionLoader } from "./injection.loader";
+import { Injection } from "../interfaces/injection.interface";
+import { Module as ModuleInterface } from "../interfaces/module.interface";
+import { ModuleCache } from "../interfaces/module-cache.interface";
 
 export class ModuleLoader extends InjectionLoader {
     protected cacheForModules: Array<ModuleInterface> = [];
@@ -32,8 +35,8 @@ export class ModuleLoader extends InjectionLoader {
         if (!this.cacheForModules.length) {
             this.loadModulesFromCaches();
         }
-        for (let i = 0; i < this.cacheForModules.length; i ++) {
-            const module = this.cacheForModules[i];
+        for (let i = 0; i < this.cacheForModules.length; i++) {
+            const module = this.cacheForModules[ i ];
             const identification = module.identification;
             module.enabled = await setting.get(`module.${identification}.enabled`, false);
             module.installed = await setting.get(`module.${identification}.installed`, false);

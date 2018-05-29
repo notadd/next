@@ -9,16 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const constants_1 = require("../constants");
 const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const common_1 = require("@nestjs/common");
+const dashboard_constants_1 = require("../constants/dashboard.constants");
 let DashboardExplorerService = class DashboardExplorerService {
     constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
-        this.metadata = constants_1.DASHBOARD_METADATA;
+        this.metadata = dashboard_constants_1.DASHBOARD_METADATA;
     }
     explore() {
         const components = [...this.modulesContainer.values()].map(module => module.components);

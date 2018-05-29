@@ -1,10 +1,11 @@
 import * as writeJsonToFile from "write-json-file";
 import { dirname } from "path";
 import { existsSync } from "fs";
-import { importInjectionsFromDirectories } from "../utilities";
-import { Injection as InjectionInterface } from "../interfaces";
 import { Logger } from "@nestjs/common";
 import { Json } from "@notadd/core/loaders";
+
+import { importInjectionsFromDirectories } from "../utilities/import-injections-from-directories";
+import { Injection as InjectionInterface } from "../interfaces/injection.interface";
 
 export class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface> = [];

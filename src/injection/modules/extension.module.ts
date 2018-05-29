@@ -1,20 +1,19 @@
-import { ExtensionResolvers } from "../resolvers";
-import { ExtensionService } from "../services";
-import { forwardRef, Module } from "@nestjs/common";
-import { InjectionModule } from "./injection.module";
+import { Module } from "@nestjs/common";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
+
+import { ExtensionService } from "../services/extension.service";
+import { ExtensionResolvers } from "../resolvers/extension.resolvers";
 
 @Module({
     exports: [
         ExtensionService,
     ],
     imports: [
-        forwardRef(() => InjectionModule),
         SettingModule,
     ],
     providers: [
-        ExtensionResolvers,
         ExtensionService,
+        ExtensionResolvers,
     ],
 })
 export class ExtensionModule {

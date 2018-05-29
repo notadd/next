@@ -1,5 +1,5 @@
-import { Injection as InjectionInterface } from "../interfaces";
 import { Logger } from "@nestjs/common";
+import { Injection as InjectionInterface } from "../interfaces/injection.interface";
 export declare class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface>;
     protected filePathForCache: string;

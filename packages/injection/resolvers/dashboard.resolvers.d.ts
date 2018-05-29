@@ -1,5 +1,5 @@
-import { Dashboard } from "../interfaces";
-import { DashboardService } from "../services";
+import { Dashboard } from "../interfaces/dashboard.interface";
+import { DashboardService } from "../services/dashboard.service";
 export declare class DashboardResolvers {
     private readonly dashboardService;
     constructor(dashboardService: DashboardService);

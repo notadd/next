@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { PageMetadata } from "../metadatas";
-import { Page } from "../interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
+
+import { PageMetadata } from "../metadatas/page.metadata";
+import { Page } from "../interfaces/page.interface";
 
 @Injectable()
 export class PageService {

@@ -1,8 +1,9 @@
-import { AuthDto } from "../dtos";
-import { AuthService } from "../services";
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+
+import { AuthDto } from "../dtos";
 import { UserGuard } from "../guards";
+import { AuthService } from "../services/auth.service";
 
 @Resolver("Auth")
 export class AuthResolvers {

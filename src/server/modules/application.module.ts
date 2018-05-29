@@ -12,6 +12,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from "@notadd/user";
 import { WebsocketModule } from "@notadd/websocket";
 import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
+import { LocalModule } from "@notadd/addon-local/local.module";
 
 @Module({
     imports: [
@@ -21,11 +22,12 @@ import { WorkflowModule } from "@notadd/workflow/modules/workflow.module";
         InternationalizationModule,
         LoggerModule,
         SettingModule,
-        InjectionModule,
         WorkflowModule,
         BackendModule,
         UserModule,
-        AuthenticationModule,
+        LocalModule,
+        InjectionModule,
+        // AuthenticationModule,
     ],
     providers: [
         SystemInformation,

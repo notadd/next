@@ -6,25 +6,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const resolvers_1 = require("../resolvers");
-const services_1 = require("../services");
 const common_1 = require("@nestjs/common");
-const injection_module_1 = require("./injection.module");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
+const addon_resolvers_1 = require("../resolvers/addon.resolvers");
+const addon_service_1 = require("../services/addon.service");
 let AddonModule = class AddonModule {
 };
 AddonModule = __decorate([
     common_1.Module({
         exports: [
-            services_1.AddonService,
+            addon_service_1.AddonService,
         ],
         imports: [
-            common_1.forwardRef(() => injection_module_1.InjectionModule),
             setting_module_1.SettingModule,
         ],
         providers: [
-            resolvers_1.AddonResolvers,
-            services_1.AddonService,
+            addon_resolvers_1.AddonResolvers,
+            addon_service_1.AddonService,
         ],
     })
 ], AddonModule);

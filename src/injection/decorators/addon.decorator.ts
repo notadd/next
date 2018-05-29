@@ -1,7 +1,8 @@
 import "reflect-metadata";
 import { InjectionType } from "@notadd/core/constants/injection.constants";
-import { INJECTION_TYPE } from "../constants";
+
 import { AddonMetadata } from "../metadatas/addon.metadata";
+import { INJECTION_TYPE } from "../constants/injection.constants";
 
 export function Addon(metadata: AddonMetadata): ClassDecorator {
     metadata.modules = metadata.imports && !metadata.modules ? metadata.imports : metadata.modules;

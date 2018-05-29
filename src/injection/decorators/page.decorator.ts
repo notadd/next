@@ -1,6 +1,7 @@
 import "reflect-metadata";
-import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
 import { ReflectMetadata } from "@nestjs/common";
+
+import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants/page.constants";
 
 export function Form(): MethodDecorator {
     return (target: object, key?, descriptor?) => {

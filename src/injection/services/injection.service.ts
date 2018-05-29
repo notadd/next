@@ -1,5 +1,6 @@
-import { importInjectionsFromDirectories } from "../utilities";
 import { Injectable } from "@nestjs/common";
+
+import { importInjectionsFromDirectories } from "../utilities";
 import { Injection } from "../interfaces";
 
 @Injectable()

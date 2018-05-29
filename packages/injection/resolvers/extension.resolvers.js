@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const services_1 = require("../services");
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const user_guard_1 = require("@notadd/authentication/guards/user.guard");
+const extension_service_1 = require("../services/extension.service");
 let ExtensionResolvers = class ExtensionResolvers {
     constructor(extensionService) {
         this.extensionService = extensionService;
@@ -60,7 +60,7 @@ __decorate([
 ], ExtensionResolvers.prototype, "uninstallExtension", null);
 ExtensionResolvers = __decorate([
     graphql_1.Resolver("Extension"),
-    __metadata("design:paramtypes", [services_1.ExtensionService])
+    __metadata("design:paramtypes", [extension_service_1.ExtensionService])
 ], ExtensionResolvers);
 exports.ExtensionResolvers = ExtensionResolvers;
 

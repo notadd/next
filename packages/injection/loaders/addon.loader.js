@@ -78,6 +78,6 @@ class AddonLoader extends injection_loader_1.InjectionLoader {
     }
 }
 exports.AddonLoader = AddonLoader;
-exports.addon = new AddonLoader();
+exports.Addon = new AddonLoader();
 
 //# sourceMappingURL=addon.loader.js.map

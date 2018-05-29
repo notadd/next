@@ -1,6 +1,6 @@
-import { Extension } from "../interfaces";
-import { ExtensionService } from "../services";
 import { Result } from "@notadd/core/interfaces";
+import { Extension } from "../interfaces/extension.interfaces";
+import { ExtensionService } from "../services/extension.service";
 export declare class ExtensionResolvers {
     private readonly extensionService;
     constructor(extensionService: ExtensionService);

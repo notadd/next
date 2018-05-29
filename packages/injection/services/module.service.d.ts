@@ -1,7 +1,7 @@
-import { Module } from "../interfaces";
-import { ModuleLoader } from "../loaders";
 import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
+import { Module } from "../interfaces/module.interface";
+import { ModuleLoader } from "../loaders/module.loader";
 export declare class ModuleService {
     private readonly settingService;
     protected loader: ModuleLoader;

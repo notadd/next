@@ -1,6 +1,7 @@
 import { dirname, join } from "path";
 import { existsSync } from "fs";
-import { Module } from "../interfaces";
+
+import { Module } from "../interfaces/module.interface";
 
 export function getPackagePathByModule(module: Module): string {
     function getPath(base: string) {

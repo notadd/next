@@ -79,6 +79,6 @@ class ExtensionLoader extends injection_loader_1.InjectionLoader {
     }
 }
 exports.ExtensionLoader = ExtensionLoader;
-exports.extension = new ExtensionLoader();
+exports.Extension = new ExtensionLoader();
 
 //# sourceMappingURL=extension.loader.js.map

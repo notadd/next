@@ -1,6 +1,6 @@
-import { Addon } from "../interfaces";
-import { AddonService } from "../services";
 import { Result } from "@notadd/core/interfaces";
+import { AddonService } from "../services/addon.service";
+import { Addon } from "../interfaces/addon.interface";
 export declare class AddonResolvers {
     private readonly addonService;
     constructor(addonService: AddonService);

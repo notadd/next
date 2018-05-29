@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const writeJsonToFile = require("write-json-file");
 const path_1 = require("path");
 const fs_1 = require("fs");
-const utilities_1 = require("../utilities");
 const common_1 = require("@nestjs/common");
 const loaders_1 = require("@notadd/core/loaders");
+const import_injections_from_directories_1 = require("../utilities/import-injections-from-directories");
 class InjectionLoader {
     constructor() {
         this.cacheForInjections = [];
@@ -38,7 +38,7 @@ class InjectionLoader {
         return loaders_1.Json.load(path);
     }
     loadInjectionsFromCache() {
-        this.cacheForInjections = utilities_1.importInjectionsFromDirectories(this.patterns);
+        this.cacheForInjections = import_injections_from_directories_1.importInjectionsFromDirectories(this.patterns);
     }
     writeCachesToFile(path, data) {
         if (fs_1.existsSync(path_1.dirname(path))) {

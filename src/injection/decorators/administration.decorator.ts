@@ -1,6 +1,7 @@
 import "reflect-metadata";
-import { AdministrationMetadata } from "../metadatas/administration.metadata";
 import { ADMINISTRATION_METADATA } from "@notadd/core/constants";
+
+import { AdministrationMetadata } from "../metadatas/administration.metadata";
 
 export function Administration(metadata?: AdministrationMetadata): ClassDecorator {
     return (target: any, key?, descriptor?) => {

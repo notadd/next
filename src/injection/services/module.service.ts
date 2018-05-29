@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
 import { join } from "path";
-import { Module } from "../interfaces";
-import { ModuleLoader } from "../loaders";
 import { Result } from "@notadd/core/interfaces";
-import { SchemaBuilder } from "../builders";
 import { SettingService } from "@notadd/setting/services/setting.service";
+
+import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
+import { Module } from "../interfaces/module.interface";
+import { ModuleLoader } from "../loaders/module.loader";
+import { SchemaBuilder } from "../builders/schema.builder";
 
 @Injectable()
 export class ModuleService {

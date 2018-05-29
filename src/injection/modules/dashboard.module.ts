@@ -1,9 +1,11 @@
-import { DashboardExplorerService, DashboardService } from "../services";
-import { DashboardResolvers } from "../resolvers";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { Module } from "@nestjs/common";
 import { OnModuleInit } from "@nestjs/common/interfaces/modules";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
+
+import { DashboardExplorerService } from "../services/dashboard-explorer.service";
+import { DashboardResolvers } from "../resolvers/dashboard.resolvers";
+import { DashboardService } from "../services/dashboard.service";
 
 @Module({
     imports: [

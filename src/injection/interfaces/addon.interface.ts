@@ -1,4 +1,4 @@
-import { Author } from "../interfaces";
+import { Author } from "./author.interface";
 import { Injection } from "./injection.interface";
 
 export interface Addon extends Injection {

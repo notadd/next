@@ -1,4 +1,4 @@
-import { Author } from "../interfaces";
+import { Author } from "../interfaces/author.interface";
 export interface InjectionMetadata {
     authors?: Array<Author>;
     components?: Array<any>;
