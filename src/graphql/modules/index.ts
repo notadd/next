@@ -1,1 +1,1 @@
-export { GraphqlModule } from "./graphql.module";
+export * from "./graphql.module";

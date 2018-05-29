@@ -1,1 +1,1 @@
-{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;AAAA,uDAA4C;AAAnC,oCAAA,MAAM,CAAA","file":"index.js","sourcesContent":["export { Phrase } from \"./phrase.decorator\";\n"]}
+{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;;;;AAAA,wCAAmC","file":"index.js","sourcesContent":["export * from \"./phrase.decorator\";\n"]}

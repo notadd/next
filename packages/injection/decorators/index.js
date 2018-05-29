@@ -1,14 +1,12 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var addon_decorator_1 = require("./addon.decorator");
-exports.Addon = addon_decorator_1.Addon;
-var dashboard_decorator_1 = require("./dashboard.decorator");
-exports.Dashboard = dashboard_decorator_1.Dashboard;
-var extension_decorator_1 = require("./extension.decorator");
-exports.Extension = extension_decorator_1.Extension;
-var module_decorator_1 = require("./module.decorator");
-exports.Module = module_decorator_1.Module;
-var page_decorator_1 = require("./page.decorator");
-exports.Page = page_decorator_1.Page;
+__export(require("./addon.decorator"));
+__export(require("./dashboard.decorator"));
+__export(require("./extension.decorator"));
+__export(require("./module.decorator"));
+__export(require("./page.decorator"));
 
 //# sourceMappingURL=index.js.map

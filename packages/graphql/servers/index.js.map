@@ -1,1 +1,1 @@
-{"version":3,"sources":["servers/index.ts"],"names":[],"mappings":";;AAAA,qDAAmD;AAA1C,2CAAA,cAAc,CAAA;AACvB,mDAAiD;AAAxC,yCAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export { graphiqlServer } from \"./graphiql.server\";\nexport { graphqlServer } from \"./graphql.server\";\n"]}
+{"version":3,"sources":["servers/index.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC;AAClC,sCAAiC","file":"index.js","sourcesContent":["export * from \"./graphiql.server\";\nexport * from \"./graphql.server\";\n"]}

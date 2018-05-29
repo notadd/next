@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
-const injection_loader_1 = require("./injection.loader");
 const constants_1 = require("@notadd/core/constants");
+const injection_loader_1 = require("./injection.loader");
 class ExtensionLoader extends injection_loader_1.InjectionLoader {
     constructor() {
         super();

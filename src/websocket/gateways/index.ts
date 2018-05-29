@@ -1,1 +1,1 @@
-export { EventGateway } from "./event.gateway";
+export * from "./event.gateway";

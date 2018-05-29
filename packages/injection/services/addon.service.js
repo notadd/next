@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
 const path_1 = require("path");
-const addon_loader_1 = require("../loaders/addon.loader");
-const get_package_path_by_addon_1 = require("../utilities/get-package-path-by-addon");
-const schema_builder_1 = require("../builders/schema.builder");
+const loaders_1 = require("../loaders");
+const utilities_1 = require("../utilities");
+const builders_1 = require("../builders");
 let AddonService = class AddonService {
     constructor(settingService) {
         this.settingService = settingService;
-        this.loader = new addon_loader_1.AddonLoader();
+        this.loader = new loaders_1.AddonLoader();
         this.loader.syncWithSetting(this.settingService);
     }
     async disableAddon(identification) {
@@ -110,9 +110,9 @@ let AddonService = class AddonService {
         };
     }
     async dropSchema(addon) {
-        const path = get_package_path_by_addon_1.getPackagePathByAddon(addon);
+        const path = utilities_1.getPackagePathByAddon(addon);
         if (path.length) {
-            const builder = new schema_builder_1.SchemaBuilder();
+            const builder = new builders_1.SchemaBuilder();
             builder.buildMetadatas([
                 path_1.join(path, "*/*.entity.js"),
                 path_1.join(path, "**/*.entity.js"),
@@ -121,9 +121,9 @@ let AddonService = class AddonService {
         }
     }
     async syncSchema(addon) {
-        const path = get_package_path_by_addon_1.getPackagePathByAddon(addon);
+        const path = utilities_1.getPackagePathByAddon(addon);
         if (path.length) {
-            const builder = new schema_builder_1.SchemaBuilder();
+            const builder = new builders_1.SchemaBuilder();
             builder.buildMetadatas([
                 path_1.join(path, "*/*.entity.js"),
                 path_1.join(path, "**/*.entity.js"),

@@ -1,8 +1,8 @@
 import { forwardRef, MiddlewareConsumer, Module } from "@nestjs/common";
 import { UserModule } from "@notadd/user";
 
-import { AuthResolvers } from "../resolvers/auth.resolvers";
-import { AuthService } from "../services/auth.service";
+import { AuthResolvers } from "../resolvers";
+import { AuthService } from "../services";
 
 @Module({
     providers: [

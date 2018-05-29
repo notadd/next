@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var event_gateway_1 = require("./event.gateway");
-exports.EventGateway = event_gateway_1.EventGateway;
+__export(require("./event.gateway"));
 
 //# sourceMappingURL=index.js.map

@@ -1,1 +1,1 @@
-{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,2DAAyD;AAAhD,iDAAA,iBAAiB,CAAA","file":"index.js","sourcesContent":["export { ApplicationModule } from \"./application.module\";\n"]}
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;;;;AAAA,0CAAqC","file":"index.js","sourcesContent":["export * from \"./application.module\";\n"]}

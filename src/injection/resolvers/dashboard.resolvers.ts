@@ -1,6 +1,6 @@
 import { Query, Resolver } from "@nestjs/graphql";
 
-import { Dashboard } from "../interfaces/dashboard.interface";
+import { Dashboard } from "../interfaces";
 import { DashboardService } from "../services/dashboard.service";
 
 @Resolver("Dashboard")

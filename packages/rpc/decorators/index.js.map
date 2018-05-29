@@ -1,1 +1,1 @@
-{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;AAAA,iDAAsC;AAA7B,8BAAA,GAAG,CAAA","file":"index.js","sourcesContent":["export { Rpc } from \"./rpc.decorator\";\n"]}
+{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;;;;AAAA,qCAAgC","file":"index.js","sourcesContent":["export * from \"./rpc.decorator\";\n"]}

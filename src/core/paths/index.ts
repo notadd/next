@@ -1,1 +1,1 @@
-export { ConfigurationPath } from "./configuration.path";
+export * from "./configuration.path";

@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-import { Dashboard } from "../interfaces/dashboard.interface";
-import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
+import { Dashboard, DashboardMetadata } from "../interfaces";
 
 @Injectable()
 export class DashboardService {

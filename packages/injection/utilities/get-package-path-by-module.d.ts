@@ -1,2 +1,2 @@
-import { Module } from "../interfaces/module.interface";
+import { Module } from "../interfaces";
 export declare function getPackagePathByModule(module: Module): string;

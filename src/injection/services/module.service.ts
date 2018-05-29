@@ -3,10 +3,10 @@ import { join } from "path";
 import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-import { getPackagePathByModule } from "../utilities/get-package-path-by-module";
-import { Module } from "../interfaces/module.interface";
-import { ModuleLoader } from "../loaders/module.loader";
-import { SchemaBuilder } from "../builders/schema.builder";
+import { getPackagePathByModule } from "../utilities";
+import { Module } from "../interfaces";
+import { ModuleLoader } from "../loaders";
+import { SchemaBuilder } from "../builders";
 
 @Injectable()
 export class ModuleService {

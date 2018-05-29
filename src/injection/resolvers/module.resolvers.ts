@@ -3,7 +3,7 @@ import { Result } from "@notadd/core/interfaces";
 import { UseGuards } from "@nestjs/common";
 import { UserGuard } from "@notadd/authentication/guards/user.guard";
 
-import { Module } from "../interfaces/module.interface";
+import { Module } from "../interfaces";
 import { ModuleService } from "../services/module.service";
 
 @Resolver("Module")

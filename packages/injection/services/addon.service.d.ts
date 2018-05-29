@@ -1,7 +1,7 @@
 import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { Addon } from "../interfaces/addon.interface";
-import { AddonLoader } from "../loaders/addon.loader";
+import { Addon } from "../interfaces";
+import { AddonLoader } from "../loaders";
 export declare class AddonService {
     private readonly settingService;
     protected loader: AddonLoader;

@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const user_1 = require("@notadd/user");
-const auth_resolvers_1 = require("../resolvers/auth.resolvers");
-const auth_service_1 = require("../services/auth.service");
+const resolvers_1 = require("../resolvers");
+const services_1 = require("../services");
 let AuthenticationModule = class AuthenticationModule {
     configure(consumer) {
     }
@@ -17,8 +17,8 @@ let AuthenticationModule = class AuthenticationModule {
 AuthenticationModule = __decorate([
     common_1.Module({
         providers: [
-            auth_resolvers_1.AuthResolvers,
-            auth_service_1.AuthService,
+            resolvers_1.AuthResolvers,
+            services_1.AuthService,
         ],
         imports: [
             common_1.forwardRef(() => user_1.UserModule),

@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const child_process_1 = require("child_process");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const extension_loader_1 = require("../loaders/extension.loader");
+const loaders_1 = require("../loaders");
 let ExtensionService = class ExtensionService {
     constructor(settingService) {
         this.settingService = settingService;
-        this.loader = new extension_loader_1.ExtensionLoader();
+        this.loader = new loaders_1.ExtensionLoader();
         this.loader.syncWithSetting(this.settingService);
     }
     async getExtension(identification) {

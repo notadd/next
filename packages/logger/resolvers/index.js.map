@@ -1,1 +1,1 @@
-{"version":3,"sources":["resolvers/index.ts"],"names":[],"mappings":";;AAAA,iDAA+C;AAAtC,uCAAA,YAAY,CAAA","file":"index.js","sourcesContent":["export { LogResolvers } from \"./log.resolvers\";\n"]}
+{"version":3,"sources":["resolvers/index.ts"],"names":[],"mappings":";;;;;AAAA,qCAAgC","file":"index.js","sourcesContent":["export * from \"./log.resolvers\";\n"]}

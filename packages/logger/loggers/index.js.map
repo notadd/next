@@ -1,1 +1,1 @@
-{"version":3,"sources":["loggers/index.ts"],"names":[],"mappings":";;AAAA,mDAAiD;AAAxC,yCAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export { TypeormLogger } from \"./typeorm.logger\";\n"]}
+{"version":3,"sources":["loggers/index.ts"],"names":[],"mappings":";;;;;AAAA,sCAAiC","file":"index.js","sourcesContent":["export * from \"./typeorm.logger\";\n"]}

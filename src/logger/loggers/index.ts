@@ -1,1 +1,1 @@
-export { TypeormLogger } from "./typeorm.logger";
+export * from "./typeorm.logger";

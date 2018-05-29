@@ -1,10 +1,9 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var configuration_loader_1 = require("./configuration.loader");
-exports.Configuration = configuration_loader_1.Configuration;
-exports.ConfigurationLoader = configuration_loader_1.ConfigurationLoader;
-var json_loader_1 = require("./json.loader");
-exports.Json = json_loader_1.Json;
-exports.JsonLoader = json_loader_1.JsonLoader;
+__export(require("./configuration.loader"));
+__export(require("./json.loader"));
 
 //# sourceMappingURL=index.js.map

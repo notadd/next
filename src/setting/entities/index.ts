@@ -1,1 +1,1 @@
-export { Setting } from "./setting.entity";
+export * from "./setting.entity";

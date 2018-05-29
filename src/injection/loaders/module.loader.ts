@@ -3,9 +3,8 @@ import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
 
 import { InjectionLoader } from "./injection.loader";
-import { Injection } from "../interfaces/injection.interface";
+import { Injection, ModuleCache } from "../interfaces";
 import { Module as ModuleInterface } from "../interfaces/module.interface";
-import { ModuleCache } from "../interfaces/module-cache.interface";
 
 export class ModuleLoader extends InjectionLoader {
     protected cacheForModules: Array<ModuleInterface> = [];

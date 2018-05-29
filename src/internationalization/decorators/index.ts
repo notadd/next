@@ -1,1 +1,1 @@
-export { Phrase } from "./phrase.decorator";
+export * from "./phrase.decorator";

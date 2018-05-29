@@ -3,7 +3,7 @@ import { UseGuards } from "@nestjs/common";
 
 import { AuthDto } from "../dtos";
 import { UserGuard } from "../guards";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services";
 
 @Resolver("Auth")
 export class AuthResolvers {

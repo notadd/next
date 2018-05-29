@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var websocket_module_1 = require("./websocket.module");
-exports.WebsocketModule = websocket_module_1.WebsocketModule;
+__export(require("./websocket.module"));
 
 //# sourceMappingURL=index.js.map

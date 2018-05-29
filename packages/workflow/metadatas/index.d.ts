@@ -1,1 +1,1 @@
-export { WorkflowMetadata } from "./workflow.metadata";
+export * from "./workflow.metadata";

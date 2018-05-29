@@ -13,18 +13,16 @@ const dashboards_1 = require("../dashboards");
 const extension_module_1 = require("./extension.module");
 const module_module_1 = require("./module.module");
 const page_module_1 = require("./page.module");
-const configuration_page_1 = require("../pages/configuration.page");
-const load_extensions_from_files_1 = require("../utilities/load-extensions-from-files");
-const load_modules_from_files_1 = require("../utilities/load-modules-from-files");
-const load_addons_from_files_1 = require("../utilities/load-addons-from-files");
+const pages_1 = require("../pages");
+const utilities_1 = require("../utilities");
 let InjectionModule = class InjectionModule {
 };
 InjectionModule = __decorate([
     common_1.Module({
         imports: [
-            ...load_extensions_from_files_1.loadExtensionsFromFiles(),
-            ...load_modules_from_files_1.loadModulesFromFiles(),
-            ...load_addons_from_files_1.loadAddonsFromFiles(),
+            ...utilities_1.loadExtensionsFromFiles(),
+            ...utilities_1.loadModulesFromFiles(),
+            ...utilities_1.loadAddonsFromFiles(),
             common_1.forwardRef(() => extension_module_1.ExtensionModule),
             common_1.forwardRef(() => module_module_1.ModuleModule),
             common_1.forwardRef(() => addon_module_1.AddonModule),
@@ -32,7 +30,7 @@ InjectionModule = __decorate([
             page_module_1.PageModule,
         ],
         providers: [
-            configuration_page_1.ConfigurationPage,
+            pages_1.ConfigurationPage,
             dashboards_1.DeveloperDashboard,
         ],
     })

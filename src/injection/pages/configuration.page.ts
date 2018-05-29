@@ -1,4 +1,4 @@
-import { Form, Page, Schema } from "../decorators/page.decorator";
+import { Form, Page, Schema } from "../decorators";
 
 @Page({
     description: "",

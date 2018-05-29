@@ -1,1 +1,1 @@
-export { SystemInformation } from "./system.information";
+export * from "./system.information";

@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var workflow_module_1 = require("./workflow.module");
-exports.WorkflowModule = workflow_module_1.WorkflowModule;
+__export(require("./workflow.module"));
 
 //# sourceMappingURL=index.js.map

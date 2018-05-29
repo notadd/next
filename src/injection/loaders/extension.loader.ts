@@ -1,10 +1,9 @@
 import { existsSync } from "fs";
-import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
-import { ExtensionCache } from "../interfaces/extension-cache.interface";
-import { Injection } from "../interfaces/injection.interface";
-import { Extension as ExtensionInterface } from "../interfaces/extension.interfaces";
+
+import { InjectionLoader } from "./injection.loader";
+import { ExtensionCache, Extension as ExtensionInterface, Injection } from "../interfaces";
 
 export class ExtensionLoader extends InjectionLoader {
     protected cacheForExtensions: Array<ExtensionInterface> = [];

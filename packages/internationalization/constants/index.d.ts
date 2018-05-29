@@ -1,1 +1,1 @@
-export { PHRASE_DEFINITION } from "./phrase.constants";
+export * from "./phrase.constants";

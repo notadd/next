@@ -1,4 +1,4 @@
-export { EntityMetadataBuilder } from "./entity-metadata.builder";
-export { MongoSchemaBuilder } from "./mongo-schema.builder";
-export { RdbmsSchemaBuilder } from "./rdbms-schema.builder";
-export { SchemaBuilder } from "./schema.builder";
+export * from "./entity-metadata.builder";
+export * from "./mongo-schema.builder";
+export * from "./rdbms-schema.builder";
+export * from "./schema.builder";

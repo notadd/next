@@ -1,3 +1,3 @@
 import "reflect-metadata";
-import { AddonMetadata } from "../metadatas/addon.metadata";
+import { AddonMetadata } from "../metadatas";
 export declare function Addon(metadata: AddonMetadata): ClassDecorator;

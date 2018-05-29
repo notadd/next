@@ -1,1 +1,1 @@
-{"version":3,"sources":["constants/index.ts"],"names":[],"mappings":";;AAAA,uDAAuD;AAA9C,+CAAA,iBAAiB,CAAA","file":"index.js","sourcesContent":["export { PHRASE_DEFINITION } from \"./phrase.constants\";\n"]}
+{"version":3,"sources":["constants/index.ts"],"names":[],"mappings":";;;;;AAAA,wCAAmC","file":"index.js","sourcesContent":["export * from \"./phrase.constants\";\n"]}

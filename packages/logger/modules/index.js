@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var logger_module_1 = require("./logger.module");
-exports.LoggerModule = logger_module_1.LoggerModule;
+__export(require("./logger.module"));
 
 //# sourceMappingURL=index.js.map

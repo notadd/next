@@ -1,1 +1,1 @@
-{"version":3,"sources":["factories/index.ts"],"names":[],"mappings":";;AAAA,qDAAmD;AAA1C,2CAAA,cAAc,CAAA","file":"index.js","sourcesContent":["export { GraphqlFactory } from \"./graphql.factory\";\n"]}
+{"version":3,"sources":["factories/index.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"index.js","sourcesContent":["export * from \"./graphql.factory\";\n"]}

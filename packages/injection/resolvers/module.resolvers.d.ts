@@ -1,5 +1,5 @@
 import { Result } from "@notadd/core/interfaces";
-import { Module } from "../interfaces/module.interface";
+import { Module } from "../interfaces";
 import { ModuleService } from "../services/module.service";
 export declare class ModuleResolvers {
     private readonly moduleService;

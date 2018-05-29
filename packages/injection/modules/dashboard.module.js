@@ -31,8 +31,8 @@ DashboardModule = __decorate([
         ],
         providers: [
             dashboard_explorer_service_1.DashboardExplorerService,
-            dashboard_resolvers_1.DashboardResolvers,
             dashboard_service_1.DashboardService,
+            dashboard_resolvers_1.DashboardResolvers,
             metadata_scanner_1.MetadataScanner,
         ],
     }),

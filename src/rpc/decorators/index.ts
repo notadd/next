@@ -1,1 +1,1 @@
-export { Rpc } from "./rpc.decorator";
+export * from "./rpc.decorator";

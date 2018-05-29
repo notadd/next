@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { ReflectMetadata } from "@nestjs/common";
 
-import { DASHBOARD_METADATA } from "../constants/dashboard.constants";
+import { DASHBOARD_METADATA } from "../constants";
 
 export function Dashboard(name?: string): MethodDecorator {
     return (target: object, key?, descriptor?) => {

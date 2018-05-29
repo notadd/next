@@ -1,8 +1,9 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var internationalization_explorer_service_1 = require("./internationalization-explorer.service");
-exports.InternationalizationExplorerService = internationalization_explorer_service_1.InternationalizationExplorerService;
-var internationalization_service_1 = require("./internationalization.service");
-exports.InternationalizationService = internationalization_service_1.InternationalizationService;
+__export(require("./internationalization-explorer.service"));
+__export(require("./internationalization.service"));
 
 //# sourceMappingURL=index.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["loaders/index.ts"],"names":[],"mappings":";;;;;AAAA,mCAA8B","file":"index.js","sourcesContent":["export * from \"./path.loader\";\n"]}

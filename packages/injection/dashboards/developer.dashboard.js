@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const dashboard_decorator_1 = require("../decorators/dashboard.decorator");
+const decorators_1 = require("../decorators");
 let DeveloperDashboard = class DeveloperDashboard {
     getDashboard() {
         return [
@@ -22,7 +22,7 @@ let DeveloperDashboard = class DeveloperDashboard {
     }
 };
 __decorate([
-    dashboard_decorator_1.Dashboard("developers"),
+    decorators_1.Dashboard("developers"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

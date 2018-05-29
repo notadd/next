@@ -13,12 +13,12 @@ const lodash_1 = require("lodash");
 const injector_1 = require("@nestjs/core/injector");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const common_1 = require("@nestjs/common");
-const dashboard_constants_1 = require("../constants/dashboard.constants");
+const constants_1 = require("../constants");
 let DashboardExplorerService = class DashboardExplorerService {
     constructor(modulesContainer, metadataScanner) {
         this.modulesContainer = modulesContainer;
         this.metadataScanner = metadataScanner;
-        this.metadata = dashboard_constants_1.DASHBOARD_METADATA;
+        this.metadata = constants_1.DASHBOARD_METADATA;
     }
     explore() {
         const components = [...this.modulesContainer.values()].map(module => module.components);

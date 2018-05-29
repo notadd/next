@@ -1,7 +1,7 @@
 import { dirname, join } from "path";
 import { existsSync } from "fs";
 
-import { Addon } from "../interfaces/addon.interface";
+import { Addon } from "../interfaces";
 
 export function getPackagePathByAddon(addon: Addon): string {
     function getPath(base: string) {

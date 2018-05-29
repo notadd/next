@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var internationalization_resolvers_1 = require("./internationalization.resolvers");
-exports.InternationalizationResolvers = internationalization_resolvers_1.InternationalizationResolvers;
+__export(require("./internationalization.resolvers"));
 
 //# sourceMappingURL=index.js.map

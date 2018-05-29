@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var setting_service_1 = require("./setting.service");
-exports.SettingService = setting_service_1.SettingService;
+__export(require("./setting.service"));
 
 //# sourceMappingURL=index.js.map

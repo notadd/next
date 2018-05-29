@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var phrase_decorator_1 = require("./phrase.decorator");
-exports.Phrase = phrase_decorator_1.Phrase;
+__export(require("./phrase.decorator"));
 
 //# sourceMappingURL=index.js.map

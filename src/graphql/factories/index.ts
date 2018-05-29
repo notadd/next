@@ -1,1 +1,1 @@
-export { GraphqlFactory } from "./graphql.factory";
+export * from "./graphql.factory";

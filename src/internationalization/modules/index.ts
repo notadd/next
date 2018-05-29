@@ -1,1 +1,1 @@
-export { InternationalizationModule } from "./internationalization.module";
+export * from "./internationalization.module";

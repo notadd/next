@@ -1,7 +1,7 @@
 import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
-import { Extension } from "../interfaces/extension.interfaces";
-import { ExtensionLoader } from "../loaders/extension.loader";
+import { Extension } from "../interfaces";
+import { ExtensionLoader } from "../loaders";
 export declare class ExtensionService {
     private readonly settingService;
     protected loader: ExtensionLoader;

@@ -1,7 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var workflow_constants_1 = require("./workflow.constants");
-exports.IS_WORKFLOW = workflow_constants_1.IS_WORKFLOW;
-exports.WORKFLOW_CATEGORY = workflow_constants_1.WORKFLOW_CATEGORY;
+__export(require("./workflow.constants"));
 
 //# sourceMappingURL=index.js.map

@@ -3,10 +3,10 @@ import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 import { join } from "path";
 
-import { Addon } from "../interfaces/addon.interface";
-import { AddonLoader } from "../loaders/addon.loader";
-import { getPackagePathByAddon } from "../utilities/get-package-path-by-addon";
-import { SchemaBuilder } from "../builders/schema.builder";
+import { Addon } from "../interfaces";
+import { AddonLoader } from "../loaders";
+import { getPackagePathByAddon } from "../utilities";
+import { SchemaBuilder } from "../builders";
 
 @Injectable()
 export class AddonService {

@@ -3,7 +3,7 @@ import { join } from "path";
 import { Json } from "@notadd/core/loaders";
 import { Type } from "@nestjs/common";
 
-import { AddonCache } from "../interfaces/addon-cache.interface";
+import { AddonCache } from "../interfaces";
 import { importClassesFromDirectories } from "./import-classes-from-directories";
 
 export function loadAddonsFromFiles(): Array<Type<any>> {

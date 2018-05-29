@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var configuration_page_1 = require("./configuration.page");
-exports.ConfigurationPage = configuration_page_1.ConfigurationPage;
+__export(require("./configuration.page"));
 
 //# sourceMappingURL=index.js.map

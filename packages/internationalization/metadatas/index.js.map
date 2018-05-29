@@ -1,1 +1,1 @@
-{"version":3,"sources":["metadatas/index.ts"],"names":[],"mappings":";;AAAA,qDAAmD;AAA1C,2CAAA,cAAc,CAAA","file":"index.js","sourcesContent":["export { PhraseMetadata } from \"./phrase.metadata\";\n"]}
+{"version":3,"sources":["metadatas/index.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"index.js","sourcesContent":["export * from \"./phrase.metadata\";\n"]}

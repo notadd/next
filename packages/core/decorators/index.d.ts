@@ -1,1 +1,1 @@
-export { Information } from "./information.decorator";
+export * from "./information.decorator";

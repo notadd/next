@@ -6,10 +6,8 @@ import { DeveloperDashboard } from "../dashboards";
 import { ExtensionModule } from "./extension.module";
 import { ModuleModule } from "./module.module";
 import { PageModule } from "./page.module";
-import { ConfigurationPage } from "../pages/configuration.page";
-import { loadExtensionsFromFiles } from "../utilities/load-extensions-from-files";
-import { loadModulesFromFiles } from "../utilities/load-modules-from-files";
-import { loadAddonsFromFiles } from "../utilities/load-addons-from-files";
+import { ConfigurationPage } from "../pages";
+import { loadExtensionsFromFiles, loadModulesFromFiles, loadAddonsFromFiles } from "../utilities";
 
 @Module({
     imports: [

@@ -1,7 +1,7 @@
 import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
-import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
+import { DashboardMetadata } from "../interfaces";
 export declare class DashboardExplorerService {
     private readonly modulesContainer;
     private readonly metadataScanner;

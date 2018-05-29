@@ -4,8 +4,8 @@ import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { Injectable } from "@nestjs/common";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 
-import { DashboardMetadata } from "../interfaces/dashboard-metadata.interface";
-import { DASHBOARD_METADATA } from "../constants/dashboard.constants";
+import { DashboardMetadata } from "../interfaces";
+import { DASHBOARD_METADATA } from "../constants";
 
 @Injectable()
 export class DashboardExplorerService {

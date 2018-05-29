@@ -1,4 +1,4 @@
-import { Navigation } from "../interfaces/navigation.interface";
+import { Navigation } from "../interfaces";
 
 export interface AdministrationMetadata {
     dashboard?: Array<string>;

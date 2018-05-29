@@ -1,1 +1,1 @@
-{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,mDAAiD;AAAxC,yCAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export { BackendModule } from \"./backend.module\";\n"]}
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;;;;AAAA,sCAAiC","file":"index.js","sourcesContent":["export * from \"./backend.module\";\n"]}

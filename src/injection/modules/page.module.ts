@@ -4,8 +4,8 @@ import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { SettingModule } from "@notadd/setting/modules/setting.module";
 
 import { PageExplorerService } from "../services/page-explorer.service";
-import { PageService } from "../services/page.service";
 import { PageResolvers } from "../resolvers/page.resolvers";
+import { PageService } from "../services/page.service";
 
 @Module({
     imports: [

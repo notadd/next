@@ -13,8 +13,8 @@ import { DashboardService } from "../services/dashboard.service";
     ],
     providers: [
         DashboardExplorerService,
-        DashboardResolvers,
         DashboardService,
+        DashboardResolvers,
         MetadataScanner,
     ],
 })

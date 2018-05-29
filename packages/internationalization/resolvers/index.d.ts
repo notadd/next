@@ -1,1 +1,1 @@
-export { InternationalizationResolvers } from "./internationalization.resolvers";
+export * from "./internationalization.resolvers";

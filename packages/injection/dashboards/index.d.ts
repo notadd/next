@@ -1,1 +1,1 @@
-export { DeveloperDashboard } from "./developer.dashboard";
+export * from "./developer.dashboard";

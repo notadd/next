@@ -1,2 +1,2 @@
-export { graphiqlServer } from "./graphiql.server";
-export { graphqlServer } from "./graphql.server";
+export * from "./graphiql.server";
+export * from "./graphql.server";

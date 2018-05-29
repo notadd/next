@@ -1,1 +1,1 @@
-{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,iEAA+D;AAAtD,uDAAA,oBAAoB,CAAA","file":"index.js","sourcesContent":["export { AuthenticationModule } from \"./authentication.module\";\n"]}
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;;;;AAAA,6CAAwC","file":"index.js","sourcesContent":["export * from \"./authentication.module\";\n"]}

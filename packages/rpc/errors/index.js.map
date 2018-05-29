@@ -1,1 +1,1 @@
-{"version":3,"sources":["errors/index.ts"],"names":[],"mappings":";;AAAA,qDAAkD;AAAzC,0CAAA,aAAa,CAAA","file":"index.js","sourcesContent":["export { makeGrpcError } from \"./make-grpc.error\";\n"]}
+{"version":3,"sources":["errors/index.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"index.js","sourcesContent":["export * from \"./make-grpc.error\";\n"]}

@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var make_grpc_error_1 = require("./make-grpc.error");
-exports.makeGrpcError = make_grpc_error_1.makeGrpcError;
+__export(require("./make-grpc.error"));
 
 //# sourceMappingURL=index.js.map

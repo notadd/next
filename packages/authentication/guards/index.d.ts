@@ -1,2 +1,2 @@
-export { BackendGuard } from "./backend.guard";
-export { UserGuard } from "./user.guard";
+export * from "./backend.guard";
+export * from "./user.guard";

@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var developer_dashboard_1 = require("./developer.dashboard");
-exports.DeveloperDashboard = developer_dashboard_1.DeveloperDashboard;
+__export(require("./developer.dashboard"));
 
 //# sourceMappingURL=index.js.map

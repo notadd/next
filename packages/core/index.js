@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./constants"));
 __export(require("./decorators"));
 __export(require("./notadd-factory"));
-var core_1 = require("./core");
-exports.CoreFactory = core_1.CoreFactory;
+__export(require("./core"));
 
 //# sourceMappingURL=index.js.map

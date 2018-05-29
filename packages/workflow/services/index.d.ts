@@ -1,2 +1,2 @@
-export { WorkflowExplorerService } from "./workflow-explorer.service";
-export { WorkflowService } from "./workflow.service";
+export * from "./workflow-explorer.service";
+export * from "./workflow.service";

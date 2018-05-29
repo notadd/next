@@ -1,2 +1,2 @@
-export { Category } from  "./workflow-category.decorator";
-export { Workflow } from "./workflow.decorator";
+export * from  "./workflow-category.decorator";
+export * from "./workflow.decorator";

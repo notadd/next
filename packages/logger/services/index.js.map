@@ -1,1 +1,1 @@
-{"version":3,"sources":["services/index.ts"],"names":[],"mappings":";;AAAA,6CAA2C;AAAlC,mCAAA,UAAU,CAAA","file":"index.js","sourcesContent":["export { LogService } from \"./log.service\";\n"]}
+{"version":3,"sources":["services/index.ts"],"names":[],"mappings":";;;;;AAAA,mCAA8B","file":"index.js","sourcesContent":["export * from \"./log.service\";\n"]}

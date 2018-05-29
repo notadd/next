@@ -1,4 +1,9 @@
-export { ExtensionShellMetadata } from "./extension-shell.metadata";
-export { PageMetadata } from "./page.metadata";
-export { PageFormMetadata } from "./page-form.metadata";
-export { PageSchemaMetadata } from "./page-schema.metadata";
+export * from "./addon.metadata";
+export * from "./administration.metadata";
+export * from "./extension.metadata";
+export * from "./extension-shell.metadata";
+export * from "./injection.metadata";
+export * from "./module.metadata";
+export * from "./page.metadata";
+export * from "./page-form.metadata";
+export * from "./page-schema.metadata";

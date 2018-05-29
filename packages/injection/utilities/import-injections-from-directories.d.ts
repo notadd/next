@@ -1,2 +1,2 @@
-import { Injection } from "../interfaces/injection.interface";
+import { Injection } from "../interfaces";
 export declare function importInjectionsFromDirectories(directories: Array<string>, formats?: string[]): Array<Injection>;

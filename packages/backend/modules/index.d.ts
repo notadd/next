@@ -1,1 +1,1 @@
-export { BackendModule } from "./backend.module";
+export * from "./backend.module";

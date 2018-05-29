@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var module_cache_interface_1 = require("./module-cache.interface");
-exports.ModuleCache = module_cache_interface_1.ModuleCache;
+__export(require("./module-cache.interface"));
 
 //# sourceMappingURL=index.js.map

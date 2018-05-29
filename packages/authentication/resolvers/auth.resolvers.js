@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("@nestjs/graphql");
 const common_1 = require("@nestjs/common");
 const guards_1 = require("../guards");
-const auth_service_1 = require("../services/auth.service");
+const services_1 = require("../services");
 let AuthResolvers = class AuthResolvers {
     constructor(service) {
         this.service = service;
@@ -30,7 +30,7 @@ __decorate([
 ], AuthResolvers.prototype, "getAuthToken", null);
 AuthResolvers = __decorate([
     graphql_1.Resolver("Auth"),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
+    __metadata("design:paramtypes", [services_1.AuthService])
 ], AuthResolvers);
 exports.AuthResolvers = AuthResolvers;
 

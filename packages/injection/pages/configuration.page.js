@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const page_decorator_1 = require("../decorators/page.decorator");
+const decorators_1 = require("../decorators");
 let ConfigurationPage = class ConfigurationPage {
     form() {
         return [];
@@ -19,19 +19,19 @@ let ConfigurationPage = class ConfigurationPage {
     }
 };
 __decorate([
-    page_decorator_1.Form(),
+    decorators_1.Form(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ConfigurationPage.prototype, "form", null);
 __decorate([
-    page_decorator_1.Schema(),
+    decorators_1.Schema(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ConfigurationPage.prototype, "schema", null);
 ConfigurationPage = __decorate([
-    page_decorator_1.Page({
+    decorators_1.Page({
         description: "",
         identification: "configuration",
         name: "Configuration Page",

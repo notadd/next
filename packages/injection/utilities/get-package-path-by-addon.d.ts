@@ -1,2 +1,2 @@
-import { Addon } from "../interfaces/addon.interface";
+import { Addon } from "../interfaces";
 export declare function getPackagePathByAddon(addon: Addon): string;

@@ -1,4 +1,4 @@
-import { Assets } from "../interfaces/assets";
+import { Assets } from "../interfaces";
 import { InjectionMetadata } from "./injection.metadata";
 export interface ModuleMetadata extends InjectionMetadata {
     assets?: Assets;

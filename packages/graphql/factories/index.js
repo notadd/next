@@ -1,6 +1,8 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var graphql_factory_1 = require("./graphql.factory");
-exports.GraphqlFactory = graphql_factory_1.GraphqlFactory;
+__export(require("./graphql.factory"));
 
 //# sourceMappingURL=index.js.map

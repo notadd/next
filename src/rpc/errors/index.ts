@@ -1,1 +1,1 @@
-export { makeGrpcError } from "./make-grpc.error";
+export * from "./make-grpc.error";

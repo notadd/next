@@ -1,1 +1,1 @@
-{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;AAAA,qDAAmD;AAA1C,2CAAA,cAAc,CAAA","file":"index.js","sourcesContent":["export { WorkflowModule } from \"./workflow.module\";\n"]}
+{"version":3,"sources":["modules/index.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"index.js","sourcesContent":["export * from \"./workflow.module\";\n"]}

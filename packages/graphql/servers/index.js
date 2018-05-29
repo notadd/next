@@ -1,8 +1,9 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var graphiql_server_1 = require("./graphiql.server");
-exports.graphiqlServer = graphiql_server_1.graphiqlServer;
-var graphql_server_1 = require("./graphql.server");
-exports.graphqlServer = graphql_server_1.graphqlServer;
+__export(require("./graphiql.server"));
+__export(require("./graphql.server"));
 
 //# sourceMappingURL=index.js.map

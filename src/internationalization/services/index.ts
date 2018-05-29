@@ -1,2 +1,2 @@
-export { InternationalizationExplorerService } from "./internationalization-explorer.service";
-export { InternationalizationService } from "./internationalization.service";
+export * from "./internationalization-explorer.service";
+export * from "./internationalization.service";

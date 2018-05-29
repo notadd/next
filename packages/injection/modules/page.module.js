@@ -13,8 +13,8 @@ const common_1 = require("@nestjs/common");
 const metadata_scanner_1 = require("@nestjs/core/metadata-scanner");
 const setting_module_1 = require("@notadd/setting/modules/setting.module");
 const page_explorer_service_1 = require("../services/page-explorer.service");
-const page_service_1 = require("../services/page.service");
 const page_resolvers_1 = require("../resolvers/page.resolvers");
+const page_service_1 = require("../services/page.service");
 let PageModule = class PageModule {
     constructor(pageExplorerService, pageService) {
         this.pageExplorerService = pageExplorerService;

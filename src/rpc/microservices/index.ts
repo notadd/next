@@ -1,1 +1,1 @@
-export { GrpcMicroservice } from "./grpc.microservice";
+export * from "./grpc.microservice";

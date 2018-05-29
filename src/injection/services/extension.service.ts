@@ -3,8 +3,8 @@ import { execFileSync } from "child_process";
 import { Result } from "@notadd/core/interfaces";
 import { SettingService } from "@notadd/setting/services/setting.service";
 
-import { Extension } from "../interfaces/extension.interfaces";
-import { ExtensionLoader } from "../loaders/extension.loader";
+import { Extension } from "../interfaces";
+import { ExtensionLoader } from "../loaders";
 
 @Injectable()
 export class ExtensionService {

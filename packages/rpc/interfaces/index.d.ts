@@ -1,1 +1,1 @@
-export { GrpcServerConfig } from "./grpc-service-config.interface";
+export * from "./grpc-service-config.interface";

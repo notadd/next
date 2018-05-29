@@ -1,1 +1,1 @@
-export { PhraseMetadata } from "./phrase.metadata";
+export * from "./phrase.metadata";

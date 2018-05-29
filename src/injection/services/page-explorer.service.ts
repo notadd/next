@@ -4,8 +4,8 @@ import { ModulesContainer } from "@nestjs/core/injector";
 import { MetadataScanner } from "@nestjs/core/metadata-scanner";
 import { Injectable as InjectableInterface } from "@nestjs/common/interfaces";
 
-import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants/page.constants";
-import { PageMetadata } from "../metadatas/page.metadata";
+import { PAGE_DESCRIPTION, PAGE_FORM, PAGE_IDENTIFICATION, PAGE_NAME, PAGE_SCHEMA } from "../constants";
+import { PageMetadata } from "../metadatas";
 
 @Injectable()
 export class PageExplorerService {

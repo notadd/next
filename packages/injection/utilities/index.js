@@ -1,16 +1,15 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var import_classes_from_directories_1 = require("./import-classes-from-directories");
-exports.importClassesFromDirectories = import_classes_from_directories_1.importClassesFromDirectories;
-var import_injections_from_directories_1 = require("./import-injections-from-directories");
-exports.importInjectionsFromDirectories = import_injections_from_directories_1.importInjectionsFromDirectories;
-var load_addons_from_files_1 = require("./load-addons-from-files");
-exports.loadAddonsFromFiles = load_addons_from_files_1.loadAddonsFromFiles;
-var load_extensions_from_files_1 = require("./load-extensions-from-files");
-exports.loadExtensionsFromFiles = load_extensions_from_files_1.loadExtensionsFromFiles;
-var load_modules_from_files_1 = require("./load-modules-from-files");
-exports.loadModulesFromFiles = load_modules_from_files_1.loadModulesFromFiles;
-var platform_tools_1 = require("./platform-tools");
-exports.PlatformTools = platform_tools_1.PlatformTools;
+__export(require("./get-package-path-by-addon"));
+__export(require("./get-package-path-by-module"));
+__export(require("./import-classes-from-directories"));
+__export(require("./import-injections-from-directories"));
+__export(require("./load-addons-from-files"));
+__export(require("./load-extensions-from-files"));
+__export(require("./load-modules-from-files"));
+__export(require("./platform-tools"));
 
 //# sourceMappingURL=index.js.map

@@ -4,7 +4,7 @@ import { Json } from "@notadd/core/loaders";
 import { Type } from "@nestjs/common";
 
 import { importClassesFromDirectories } from "./import-classes-from-directories";
-import { ExtensionCache } from "../interfaces/extension-cache.interface";
+import { ExtensionCache } from "../interfaces";
 
 export function loadExtensionsFromFiles(): Array<Type<any>> {
     const file = join(process.cwd(), "storages", "caches", "extension.json");

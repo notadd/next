@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const path_1 = require("path");
 const setting_service_1 = require("@notadd/setting/services/setting.service");
-const get_package_path_by_module_1 = require("../utilities/get-package-path-by-module");
-const module_loader_1 = require("../loaders/module.loader");
-const schema_builder_1 = require("../builders/schema.builder");
+const utilities_1 = require("../utilities");
+const loaders_1 = require("../loaders");
+const builders_1 = require("../builders");
 let ModuleService = class ModuleService {
     constructor(settingService) {
         this.settingService = settingService;
-        this.loader = new module_loader_1.ModuleLoader();
+        this.loader = new loaders_1.ModuleLoader();
         this.loader.syncWithSetting(this.settingService);
     }
     async disableModule(identification) {
@@ -113,9 +113,9 @@ let ModuleService = class ModuleService {
         };
     }
     async dropSchema(module) {
-        const path = get_package_path_by_module_1.getPackagePathByModule(module);
+        const path = utilities_1.getPackagePathByModule(module);
         if (path.length) {
-            const builder = new schema_builder_1.SchemaBuilder();
+            const builder = new builders_1.SchemaBuilder();
             builder.buildMetadatas([
                 path_1.join(path, "*/*.entity.js"),
                 path_1.join(path, "**/*.entity.js"),
@@ -124,9 +124,9 @@ let ModuleService = class ModuleService {
         }
     }
     async syncSchema(module) {
-        const path = get_package_path_by_module_1.getPackagePathByModule(module);
+        const path = utilities_1.getPackagePathByModule(module);
         if (path.length) {
-            const builder = new schema_builder_1.SchemaBuilder();
+            const builder = new builders_1.SchemaBuilder();
             builder.buildMetadatas([
                 path_1.join(path, "*/*.entity.js"),
                 path_1.join(path, "**/*.entity.js"),

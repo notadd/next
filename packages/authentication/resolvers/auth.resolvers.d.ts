@@ -1,5 +1,5 @@
 import { AuthDto } from "../dtos";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services";
 export declare class AuthResolvers {
     private readonly service;
     constructor(service: AuthService);

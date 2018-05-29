@@ -2,9 +2,7 @@ import { existsSync } from "fs";
 import { InjectionLoader } from "./injection.loader";
 import { InjectionType } from "@notadd/core/constants";
 import { SettingService } from "@notadd/setting/services";
-import { AddonCache } from "../interfaces/addon-cache.interface";
-import { Injection } from "../interfaces/injection.interface";
-import { Addon as AddonInterface } from "../interfaces/addon.interface";
+import { AddonCache, Addon as AddonInterface, Injection } from "../interfaces";
 
 export class AddonLoader extends InjectionLoader {
     protected cacheForAddons: Array<AddonInterface> = [];

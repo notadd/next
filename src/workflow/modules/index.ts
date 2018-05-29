@@ -1,1 +1,1 @@
-export { WorkflowModule } from "./workflow.module";
+export * from "./workflow.module";

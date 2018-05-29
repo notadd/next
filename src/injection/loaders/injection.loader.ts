@@ -4,8 +4,8 @@ import { existsSync } from "fs";
 import { Logger } from "@nestjs/common";
 import { Json } from "@notadd/core/loaders";
 
-import { importInjectionsFromDirectories } from "../utilities/import-injections-from-directories";
-import { Injection as InjectionInterface } from "../interfaces/injection.interface";
+import { importInjectionsFromDirectories } from "../utilities";
+import { Injection as InjectionInterface } from "../interfaces";
 
 export class InjectionLoader {
     protected cacheForInjections: Array<InjectionInterface> = [];

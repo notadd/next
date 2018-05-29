@@ -1,8 +1,9 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var workflow_category_decorator_1 = require("./workflow-category.decorator");
-exports.Category = workflow_category_decorator_1.Category;
-var workflow_decorator_1 = require("./workflow.decorator");
-exports.Workflow = workflow_decorator_1.Workflow;
+__export(require("./workflow-category.decorator"));
+__export(require("./workflow.decorator"));
 
 //# sourceMappingURL=index.js.map
