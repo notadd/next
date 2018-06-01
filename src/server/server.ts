@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import * as express from "express";
 import * as ip from "ip";
 import * as serveStatic from "serve-static";
 import { ApplicationModule } from "./modules";
@@ -73,14 +74,24 @@ export class ServerStarter {
                 ip.address();
         const address = `http://${host}:${port}`;
 
-        const adapter = new FastifyAdapter();
+        let application: INestApplication;
+        if (serverConfiguration.adapter === "fastify") {
+            const adapter = new FastifyAdapter();
 
-        const application = await NotaddFactory.start(ApplicationModule, adapter, {
-            bodyParser: true,
-            cors: true,
-            logger: LogService,
-        });
-        application.use("/", serveStatic(`${process.cwd()}/public`));
+            application = await NotaddFactory.start(ApplicationModule, adapter, {
+                bodyParser: true,
+                cors: true,
+                logger: LogService,
+            });
+            application.use("/", serveStatic(`${process.cwd()}/public`));
+        } else {
+            application = await NotaddFactory.startWithExpress(ApplicationModule, {
+                bodyParser: true,
+                cors: true,
+                logger: LogService,
+            });
+            application.use(express.static(process.cwd() + "/public/"));
+        }
         application.useGlobalPipes(new ValidationPipe());
 
         // if (swaggerConfiguration.enable) {

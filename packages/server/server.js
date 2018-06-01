@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+const express = require("express");
 const ip = require("ip");
 const serveStatic = require("serve-static");
 const modules_1 = require("./modules");
@@ -58,13 +59,24 @@ class ServerStarter {
                     :
                         ip.address();
         const address = `http://${host}:${port}`;
-        const adapter = new core_2.FastifyAdapter();
-        const application = await core_1.NotaddFactory.start(modules_1.ApplicationModule, adapter, {
-            bodyParser: true,
-            cors: true,
-            logger: services_1.LogService,
-        });
-        application.use("/", serveStatic(`${process.cwd()}/public`));
+        let application;
+        if (serverConfiguration.adapter === "fastify") {
+            const adapter = new core_2.FastifyAdapter();
+            application = await core_1.NotaddFactory.start(modules_1.ApplicationModule, adapter, {
+                bodyParser: true,
+                cors: true,
+                logger: services_1.LogService,
+            });
+            application.use("/", serveStatic(`${process.cwd()}/public`));
+        }
+        else {
+            application = await core_1.NotaddFactory.startWithExpress(modules_1.ApplicationModule, {
+                bodyParser: true,
+                cors: true,
+                logger: services_1.LogService,
+            });
+            application.use(express.static(process.cwd() + "/public/"));
+        }
         application.useGlobalPipes(new common_1.ValidationPipe());
         const callback = () => {
             if (graphqlConfiguration.ide.enable) {

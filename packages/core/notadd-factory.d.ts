@@ -1,8 +1,9 @@
-import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-application-options.interface";
-import { NestFactoryStatic } from "@nestjs/core/nest-factory";
+import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { FastifyAdapter } from "@nestjs/core";
+import { NestFactoryStatic } from "@nestjs/core/nest-factory";
 export declare class NotaddFactoryStatic extends NestFactoryStatic {
-    start(module: any, httpServer: FastifyAdapter, options: NestApplicationOptions): Promise<INestApplication>;
+    startWithFastify(module: any, httpServer: FastifyAdapter, options: NestApplicationOptions): Promise<INestApplication>;
+    startWithExpress(module: any, options: NestApplicationOptions): Promise<INestApplication>;
 }
 export declare const NotaddFactory: NotaddFactoryStatic;
