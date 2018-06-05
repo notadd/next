@@ -53,7 +53,6 @@ export class ServerStarter {
 
         const graphqlConfiguration = Configuration.loadGraphqlConfiguration();
         const serverConfiguration = Configuration.loadServerConfiguration();
-        // const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
 
         let index = process.argv.indexOf("--port");
         const port = index > -1
@@ -78,7 +77,7 @@ export class ServerStarter {
         if (serverConfiguration.adapter === "fastify") {
             const adapter = new FastifyAdapter();
 
-            application = await NotaddFactory.start(ApplicationModule, adapter, {
+            application = await NotaddFactory.startWithFastify(ApplicationModule, adapter, {
                 bodyParser: true,
                 cors: true,
                 logger: LogService,
@@ -94,6 +93,8 @@ export class ServerStarter {
         }
         application.useGlobalPipes(new ValidationPipe());
 
+        // const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
+        //
         // if (swaggerConfiguration.enable) {
         //     const options = new DocumentBuilder()
         //         .setTitle("Notadd")

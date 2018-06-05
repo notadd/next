@@ -62,7 +62,7 @@ class ServerStarter {
         let application;
         if (serverConfiguration.adapter === "fastify") {
             const adapter = new core_2.FastifyAdapter();
-            application = await core_1.NotaddFactory.start(modules_1.ApplicationModule, adapter, {
+            application = await core_1.NotaddFactory.startWithFastify(modules_1.ApplicationModule, adapter, {
                 bodyParser: true,
                 cors: true,
                 logger: services_1.LogService,
