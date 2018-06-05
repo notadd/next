@@ -8,7 +8,7 @@ export declare class GrpcMicroservice extends Server implements CustomTransportS
     constructor(server: any, config: GrpcServerConfig);
     listen(callback?: () => void): void;
     close(): void;
-    private init();
-    private wrapRpc(delegate);
-    private getGRPCDelegates();
+    private init;
+    private wrapRpc;
+    private getGRPCDelegates;
 }

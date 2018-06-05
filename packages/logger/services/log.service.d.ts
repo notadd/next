@@ -11,7 +11,7 @@ export declare class LogService {
     static log(message: string, context?: string, isTimeDiffEnabled?: boolean): void;
     static error(message: string, trace?: string, context?: string, isTimeDiffEnabled?: boolean): void;
     static warn(message: string, context?: string, isTimeDiffEnabled?: boolean): void;
-    private static printMessage(message, color, context?, isTimeDiffEnabled?);
-    private static printTimestamp(isTimeDiffEnabled?);
-    private static printStackTrace(trace);
+    private static printMessage;
+    private static printTimestamp;
+    private static printStackTrace;
 }

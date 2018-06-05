@@ -4,7 +4,7 @@ import * as ip from "ip";
 import * as serveStatic from "serve-static";
 import { ApplicationModule } from "./modules";
 import { Configuration } from "@notadd/core/loaders";
-// import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { LogService } from "@notadd/logger/services";
@@ -93,29 +93,29 @@ export class ServerStarter {
         }
         application.useGlobalPipes(new ValidationPipe());
 
-        // const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
-        //
-        // if (swaggerConfiguration.enable) {
-        //     const options = new DocumentBuilder()
-        //         .setTitle("Notadd")
-        //         .setDescription("API document for Notadd.")
-        //         .setVersion("2.0")
-        //         .addBearerAuth()
-        //         .build();
-        //
-        //     const document = SwaggerModule.createDocument(application, options);
-        //
-        //     SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
-        // }
+        const swaggerConfiguration = Configuration.loadSwaggerConfiguration();
+
+        if (serverConfiguration.adapter !== "fastify" && swaggerConfiguration.enable) {
+            const options = new DocumentBuilder()
+                .setTitle("Notadd")
+                .setDescription("API document for Notadd.")
+                .setVersion("2.0")
+                .addBearerAuth()
+                .build();
+
+            const document = SwaggerModule.createDocument(application, options);
+
+            SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
+        }
 
         const callback = () => {
             if (graphqlConfiguration.ide.enable) {
                 this.logger.log(`Graphql IDE Server on: ${address}/graphiql`);
             }
 
-            // if (swaggerConfiguration.enable) {
-            //     this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
-            // }
+            if (serverConfiguration.adapter !== "fastify" && swaggerConfiguration.enable) {
+                this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
+            }
 
             this.logger.log(`Server on: ${address}`);
         };

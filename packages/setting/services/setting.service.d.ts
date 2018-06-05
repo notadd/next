@@ -10,5 +10,5 @@ export declare class SettingService {
     getSettingByKey(key: string): Promise<Setting | undefined>;
     removeSetting(key: string): Promise<Setting | undefined>;
     setSetting(key: string, value: string): Promise<Setting>;
-    private initialize();
+    private initialize;
 }

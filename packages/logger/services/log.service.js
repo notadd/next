@@ -12,6 +12,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var LogService_1;
+"use strict";
 const clc = require("cli-color");
 const os = require("os");
 const fs_1 = require("fs");
@@ -86,6 +88,5 @@ LogService = LogService_1 = __decorate([
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], LogService);
 exports.LogService = LogService;
-var LogService_1;
 
 //# sourceMappingURL=log.service.js.map

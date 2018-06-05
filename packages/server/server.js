@@ -6,6 +6,7 @@ const ip = require("ip");
 const serveStatic = require("serve-static");
 const modules_1 = require("./modules");
 const loaders_1 = require("@notadd/core/loaders");
+const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const services_1 = require("@notadd/logger/services");
 const core_1 = require("@notadd/core");
@@ -78,9 +79,23 @@ class ServerStarter {
             application.use(express.static(process.cwd() + "/public/"));
         }
         application.useGlobalPipes(new common_1.ValidationPipe());
+        const swaggerConfiguration = loaders_1.Configuration.loadSwaggerConfiguration();
+        if (serverConfiguration.adapter !== "fastify" && swaggerConfiguration.enable) {
+            const options = new swagger_1.DocumentBuilder()
+                .setTitle("Notadd")
+                .setDescription("API document for Notadd.")
+                .setVersion("2.0")
+                .addBearerAuth()
+                .build();
+            const document = swagger_1.SwaggerModule.createDocument(application, options);
+            swagger_1.SwaggerModule.setup(`/${swaggerConfiguration.endpoint}`, application, document);
+        }
         const callback = () => {
             if (graphqlConfiguration.ide.enable) {
                 this.logger.log(`Graphql IDE Server on: ${address}/graphiql`);
+            }
+            if (serverConfiguration.adapter !== "fastify" && swaggerConfiguration.enable) {
+                this.logger.log(`Swagger Server on: ${address}/${swaggerConfiguration.endpoint}`);
             }
             this.logger.log(`Server on: ${address}`);
         };
