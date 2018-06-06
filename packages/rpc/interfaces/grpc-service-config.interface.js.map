@@ -1,1 +1,0 @@
-{"version":3,"sources":["interfaces/grpc-service-config.interface.ts"],"names":[],"mappings":"","file":"grpc-service-config.interface.js","sourcesContent":["export interface GrpcServerConfig {\n    host: string;\n    port: number;\n    serviceName: string;\n}\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;;;;AAAA,qCAAgC","file":"index.js","sourcesContent":["export * from \"./rpc.decorator\";\n"]}

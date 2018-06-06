@@ -14,7 +14,6 @@ const packages = {
     injection: ts.createProject("src/injection/tsconfig.json"),
     internationalization: ts.createProject("src/internationalization/tsconfig.json"),
     logger: ts.createProject("src/logger/tsconfig.json"),
-    rpc: ts.createProject("src/rpc/tsconfig.json"),
     server: ts.createProject("src/server/tsconfig.json"),
     setting: ts.createProject("src/setting/tsconfig.json"),
     websocket: ts.createProject("src/websocket/tsconfig.json"),
@@ -33,7 +32,7 @@ gulp.task("default", function () {
         watch: [
             "ormconfig.yml",
             "packages/",
-            "storages/caches/addon.json",
+            'storages/caches/addon.json',
             "storages/caches/graphql.json",
             "storages/caches/module.json",
         ],

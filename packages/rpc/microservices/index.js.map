@@ -1,1 +1,0 @@
-{"version":3,"sources":["microservices/index.ts"],"names":[],"mappings":";;;;;AAAA,yCAAoC","file":"index.js","sourcesContent":["export * from \"./grpc.microservice\";\n"]}
