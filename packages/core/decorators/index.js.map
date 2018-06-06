@@ -1,1 +1,1 @@
-{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;;;;AAAA,6CAAwC","file":"index.js","sourcesContent":["export * from \"./information.decorator\";\n"]}
+{"version":3,"sources":["decorators/index.ts"],"names":[],"mappings":";;;;;AAAA,8CAAyC;AACzC,6CAAwC","file":"index.js","sourcesContent":["export * from \"./grpc-gateway.decorator\";\nexport * from \"./information.decorator\";\n"]}
