@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
+const common_1 = require("@nestjs/common");
+const core_1 = require("@nestjs/core");
+const swagger_1 = require("@nestjs/swagger");
+const core_2 = require("@notadd/core");
+const loaders_1 = require("@notadd/core/loaders");
+const services_1 = require("@notadd/logger/services");
 const express = require("express");
 const ip = require("ip");
+require("reflect-metadata");
 const serveStatic = require("serve-static");
 const modules_1 = require("./modules");
-const loaders_1 = require("@notadd/core/loaders");
-const swagger_1 = require("@nestjs/swagger");
-const common_1 = require("@nestjs/common");
-const services_1 = require("@notadd/logger/services");
-const core_1 = require("@notadd/core");
-const core_2 = require("@nestjs/core");
 class ServerStarter {
     constructor() {
         this.logger = new common_1.Logger("NotaddFactory", true);
@@ -62,8 +62,8 @@ class ServerStarter {
         const address = `http://${host}:${port}`;
         let application;
         if (serverConfiguration.adapter === "fastify") {
-            const adapter = new core_2.FastifyAdapter();
-            application = await core_1.NotaddFactory.startWithFastify(modules_1.ApplicationModule, adapter, {
+            const adapter = new core_1.FastifyAdapter();
+            application = await core_2.NotaddFactory.startWithFastify(modules_1.ApplicationModule, adapter, {
                 bodyParser: true,
                 cors: true,
                 logger: services_1.LogService,
@@ -71,7 +71,7 @@ class ServerStarter {
             application.use("/", serveStatic(`${process.cwd()}/public`));
         }
         else {
-            application = await core_1.NotaddFactory.startWithExpress(modules_1.ApplicationModule, {
+            application = await core_2.NotaddFactory.startWithExpress(modules_1.ApplicationModule, {
                 bodyParser: true,
                 cors: true,
                 logger: services_1.LogService,

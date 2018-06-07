@@ -1,15 +1,16 @@
-import "reflect-metadata";
+import { Logger, ValidationPipe } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
+import { FastifyAdapter } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { NotaddFactory } from "@notadd/core";
+import { Configuration } from "@notadd/core/loaders";
+import { LogService } from "@notadd/logger/services";
 import * as express from "express";
 import * as ip from "ip";
+import "reflect-metadata";
 import * as serveStatic from "serve-static";
+
 import { ApplicationModule } from "./modules";
-import { Configuration } from "@notadd/core/loaders";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
-import { Logger, ValidationPipe } from "@nestjs/common";
-import { LogService } from "@notadd/logger/services";
-import { NotaddFactory } from "@notadd/core";
-import { FastifyAdapter } from "@nestjs/core";
 
 export class ServerStarter {
     /**
@@ -56,12 +57,12 @@ export class ServerStarter {
 
         let index = process.argv.indexOf("--port");
         const port = index > -1
-            ? parseInt(process.argv[ index + 1 ])
+            ? parseInt(process.argv[index + 1])
             : serverConfiguration.http.port ? serverConfiguration.http.port : 3000;
         index = process.argv.indexOf("--host");
         const host = index > -1
             ?
-            process.argv[ index + 1 ]
+            process.argv[index + 1]
             :
             serverConfiguration.http.host
                 ? (
@@ -123,7 +124,7 @@ export class ServerStarter {
         index = process.argv.indexOf("--host");
 
         if (index > -1) {
-            await application.listen(port, process.argv[ index + 1 ], callback);
+            await application.listen(port, process.argv[index + 1], callback);
         } else if (serverConfiguration.http.host && serverConfiguration.http.host !== "*") {
             await application.listen(port, serverConfiguration.http.host, callback);
         } else {
